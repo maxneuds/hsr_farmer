@@ -51,13 +51,16 @@ class Bot:
         cmd = f'input swipe {bot_left[0]} {bot_left[1]} {mid[0]} {mid[1]} 1500 & input swipe {top_right[0]} {top_right[1]} {mid[0]} {mid[1]} 1500'
         await self.dev.shell(cmd)
 
-    async def use_teleporter(self, x, y):
+    async def use_teleporter(self, x, y, confirm=False):
         logger(f'use teleporter: {x},{y}')
         await aio.sleep(0.1)
         await self.dev.shell(f'input tap {x} {y}')
-        await aio.sleep(1)
+        await aio.sleep(1.25)
+        if confirm == True:
+            await self.dev.shell(f'input tap {int(self.xy.width*1200/2400)} {int(self.xy.height*700/1080)}')
+            await aio.sleep(1.25)
         await self.dev.shell(f'input tap {int(self.xy.width*0.83)} {int(self.xy.height*0.9)}')
-        await self.wait_for_onmap(min_duration=3)
+        await self.wait_for_onmap(min_duration=1)
 
     async def switch_map(self, y_percentage, open_map=True, scroll_down=False):
         logger('switch map')
@@ -86,10 +89,6 @@ class Bot:
 
     async def switch_world(self, world):
         logger('switch to world:')
-        # open star rail map
-        await self.open_star_rail_map()
-        # get screenshot
-        screen = await self.adb.get_screen(dev=self.dev)
         # select correct matching template
         if world == 'herta_space_station':
             logger('Herta Space Station')
@@ -103,6 +102,10 @@ class Bot:
         if world == 'penacony':
             logger('Penacony')
             target = cv.imread('res/penacony.png', cv.IMREAD_COLOR)
+        # open star rail map
+        await self.open_star_rail_map()
+        # get screenshot
+        screen = await self.adb.get_screen(dev=self.dev)
         # find match
         result = cv.matchTemplate(screen, target, cv.TM_CCOEFF_NORMED)
         min_val, max_val, min_loc, max_loc = cv.minMaxLoc(result)
@@ -120,7 +123,7 @@ class Bot:
         await self.dev.shell(f'input tap {self.xy.attack[0]} {self.xy.attack[1]}')
         await aio.sleep(0.1)
 
-    async def wait_for_onmap(self, min_duration=15):
+    async def wait_for_onmap(self, min_duration=15, debug=False):
         logger('wait for fight to end...')
         await aio.sleep(min_duration)
         img_menu = cv.imread('res/edges_menu.png', cv.IMREAD_GRAYSCALE)
@@ -128,7 +131,10 @@ class Bot:
         img_sprint = cv.imread('res/edges_sprint.png', cv.IMREAD_GRAYSCALE)
         check = 0
         while check < 1:
-            screen = await self.adb.get_screen(dev=self.dev, custom_msg='still in fight...')
+            if debug:
+                screen = await self.adb.get_screen(dev=self.dev, custom_msg='still in fight...')
+            else:
+                screen = await self.adb.get_screen(dev=self.dev, custom_msg=None)
             screen = cv.cvtColor(screen, cv.COLOR_BGR2GRAY)
             screen = cv.Canny(screen, 400, 500)
             screen_menu = screen[0:int(self.xy.height*0.2), int(self.xy.width*0.60):int(self.xy.width*0.975)]
@@ -146,4 +152,4 @@ class Bot:
                     check += 1
             if check > 0:
                 await aio.sleep(1)
-                logger('out of fight')
+                logger('...out of fight')

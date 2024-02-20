@@ -30,6 +30,8 @@ class ADB:
     async def get_screen(self, dev, custom_msg=False, debug=False):
         if custom_msg == False:
             logger('get screenshot from device')
+        elif custom_msg == None:
+            pass
         else:
             logger(custom_msg)
         # get screen from device

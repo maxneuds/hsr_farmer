@@ -141,6 +141,7 @@ class World:
         logger('farm: Alchemy Comission')
         await self.bot.switch_map(0.745)
         # group 1
+        logger('### group 1 ###')
         cmd = f'input swipe {int(self.xy.width*0.5)} {int(self.xy.height*0.85)} {int(self.xy.width*0.5)} {int(self.xy.height*0.15)} 1500'
         await self.bot.dev.shell(cmd)
         await aio.sleep(2)
@@ -150,6 +151,7 @@ class World:
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         # group 2
+        logger('### group 2 ###')
         await self.bot.open_map()
         await self.bot.use_teleporter(int(self.xy.width*0.3758), int(self.xy.height*0.71944))
         await self.bot.move('s', 5500)
@@ -157,6 +159,7 @@ class World:
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         # group 3
+        logger('### group 3 ###')
         await self.bot.open_map()
         await self.bot.use_teleporter(int(self.xy.width*0.27), int(self.xy.height*0.2315))
         await self.bot.move('w', 1500)
@@ -166,6 +169,7 @@ class World:
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         # group 4
+        logger('### group 4 ###')
         await self.bot.open_map()
         await self.bot.use_teleporter(int(self.xy.width*0.3721), int(self.xy.height*0.3574))
         await self.bot.move('w', 2500)
@@ -175,6 +179,7 @@ class World:
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         # group 5
+        logger('### group 4, part 2 ###')
         await self.bot.move('w', 1500)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
@@ -300,6 +305,7 @@ class World:
     async def farm_scalegorge_waterscape(self):
         await self.bot.switch_map(0.85, open_map=False, scroll_down=True)
         # group 1
+        logger('### group 1 ###')
         cmd = f'input swipe {int(self.xy.width*0.6)} {int(self.xy.height*0.5)} {int(self.xy.width*0.4)} {int(self.xy.height*0.5)} 1000'
         await self.bot.dev.shell(cmd)
         await aio.sleep(2)
@@ -311,6 +317,7 @@ class World:
         await self.bot.attack()
         await self.bot.wait_for_onmap(min_duration=90)
         # group 2
+        logger('### group 2 ###')
         await self.bot.open_map()
         cmd = f'input swipe {int(self.xy.width*0.2)} {int(self.xy.height*0.5)} {int(self.xy.width*0.6)} {int(self.xy.height*0.5)} 1000'
         await self.bot.dev.shell(cmd)
@@ -321,14 +328,18 @@ class World:
         await self.bot.move('w', 6500)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        # group 3 | check this
+        # group 2, part 2
+        logger('### group 2, part 2 ###')
         await self.bot.move('w', 1500)
         await self.bot.move('nw', 2500)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        # group 4 | check this
-        await self.bot.wait_for_onmap(min_duration=60)
+        # group 2, part 3 | stability: another attack
+        logger('### group 2, part3 ###')
+        await self.bot.attack()
+        await self.bot.wait_for_onmap()
         # group 5
+        logger('### group 5 ###')
         await self.bot.open_map()
         await self.bot.use_teleporter(int(self.xy.width*0.2433), int(self.xy.height*0.6306))
         await self.bot.move('s', 10500)
@@ -336,6 +347,7 @@ class World:
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         # group 6
+        logger('### group 6 ###')
         await self.bot.open_map()
         await self.bot.use_teleporter(int(self.xy.width*0.40125), int(self.xy.height*0.70648))
         await self.bot.move('s', 7100)
@@ -343,6 +355,7 @@ class World:
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         # group 7
+        logger('### group 7 ###')
         await self.bot.open_map()
         await self.bot.use_teleporter(int(self.xy.width*0.3104), int(self.xy.height*0.642))
         await self.bot.move('s', 1600)
@@ -355,11 +368,13 @@ class World:
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         # group 8 | attack misses
+        logger('### group 8 ###')
         await self.bot.move('e', 1500)
         await self.bot.move('s', 500)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         # group 9
+        logger('### group 9 ###')
         await self.bot.open_map()
         await self.bot.use_teleporter(int(self.xy.width*0.5533), int(self.xy.height*0.2583))
         await self.bot.move('s', 3000)
@@ -367,6 +382,7 @@ class World:
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         # group 10
+        logger('### group 10 ###')
         await self.bot.open_map()
         await self.bot.use_teleporter(int(self.xy.width*0.37875), int(self.xy.height*0.6083))
         await self.bot.move('s', 3000)
@@ -376,6 +392,7 @@ class World:
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         # group 11
+        logger('### group 11 ###')
         await self.bot.open_map()
         await self.bot.use_teleporter(int(self.xy.width*0.33), int(self.xy.height*0.1083))
         await self.bot.move('w', 3000)
@@ -384,4 +401,5 @@ class World:
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         # group 12 | check this again
+        logger('### group 12 ###')
         await self.bot.wait_for_onmap()

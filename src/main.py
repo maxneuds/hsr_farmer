@@ -37,14 +37,14 @@ async def main():
     bot = Bot(adb=adb, dev=dev, xy=xy)
     # load worlds
     herta_space_station = Herta_Space_Station(bot=bot, xy=xy)
-    the_xianzhou_luofu = The_Xianzhou_Luofu(bot=bot, xy=xy)
     penacony = Penacony(bot=bot, xy=xy)
+    the_xianzhou_luofu = The_Xianzhou_Luofu(bot=bot, xy=xy)
     jarilo_vi = JariloVI(bot=bot, xy=xy)
     # farm worlds
-    # await herta_space_station.farm()
-    # await the_xianzhou_luofu.farm()
+    await herta_space_station.farm()
     # await penacony.farm()
-    await jarilo_vi.farm()
+    # await the_xianzhou_luofu.farm()
+    # await jarilo_vi.farm()
 
     # await adb.get_screen(dev=dev, debug=True)
     # await self.bot.adb.get_screen(dev=dev, debug=True)
