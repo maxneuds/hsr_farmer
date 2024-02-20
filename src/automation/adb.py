@@ -40,6 +40,14 @@ class ADB:
         screenshot = cv.imdecode(np.frombuffer(bytes(im_byte_array), np.uint8), cv.IMREAD_COLOR)
         if debug == True:
             cv.imshow('debug', screenshot)
+            cv.setMouseCallback('debug', self.click_event)
             cv.waitKey(0)
             cv.destroyAllWindows()
         return(screenshot)
+
+    # function to display the coordinates of
+    # of the points clicked on the image
+    def click_event(self, event, x, y, flags, params):
+        # checking for left mouse clicks
+        if event == cv.EVENT_LBUTTONDOWN:
+            print(f'{x},{y}')

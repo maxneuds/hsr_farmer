@@ -35,10 +35,13 @@ class Bot:
             cmd = f'input swipe {self.xy.vjoy[direction][0]} {self.xy.vjoy[direction][1]} {self.xy.vjoy[direction][0]} {self.xy.vjoy[direction][1]} {duration}'
             await self.dev.shell(cmd)
 
-    async def open_map(self):
+    async def open_map(self, penacony=False):
         logger('open map')
         await aio.sleep(0.1)
         await self.dev.shell(f'input tap {self.xy.map[0]} {self.xy.map[1]}')
+        await aio.sleep(2)
+        if penacony == True:
+            await self.dev.shell(f'input tap {int(self.xy.width*2135/2400)} {int(self.xy.height*138/1080)}')
         await aio.sleep(2)
 
     # doesn't work
@@ -85,7 +88,7 @@ class Bot:
         logger('open star rail map')
         await aio.sleep(0.1)
         await self.dev.shell(f'input tap {self.xy.star_rail_map[0]} {self.xy.star_rail_map[1]}')
-        await aio.sleep(1)
+        await aio.sleep(1.5)
 
     async def switch_world(self, world):
         logger('switch to world:')
