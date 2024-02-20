@@ -171,6 +171,7 @@ class World:
         # await self.bot.move('e', 3000)
         # await self.bot.attack()
         # await self.bot.wait_for_onmap()
+        # TODO: also map the last group
 
     async def farm_childs_dream(self):
         await self.bot.switch_map(891/1080)

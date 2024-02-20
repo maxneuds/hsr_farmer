@@ -15,16 +15,11 @@ class World:
 
     async def farm(self):
         logger('Farm: Jarilo-VI')
-        # await self.bot.switch_world('jarilo_vi')
+        await self.bot.switch_world('jarilo_vi')
         # farm locations
-        await self.farm_next()
-
-    async def farm_next(self):
-
-        # await self.bot.adb.get_screen(dev=self.bot.dev, debug=True)
-        pass
+        await self.farm_outlying_snow_plains()
 
     async def farm_outlying_snow_plains(self):
         await self.bot.switch_map(505/1080, open_map=False)
-        await self.bot.use_teleporter(int(self.xy.width*1604/2400), int(self.xy.height*593/1080))
-        # group 1
+        logger('### group 1 ###')
+        # await self.bot.use_teleporter(int(self.xy.width*1604/2400), int(self.xy.height*593/1080))

@@ -1,20 +1,6 @@
-
 import asyncio as aio
+import subprocess
 from datetime import datetime as dt
-
-
-# from time import sleep
-# from mss import mss
-# from difflib import get_close_matches
-# import pytesseract as tes
-# import numpy as np
-# import cv2 as cv
-# import re
-# from ppadb.client_async import ClientAsync as AdbClient
-# # from asyncio import sleep, run, subprocess, create_subprocess_shell
-
-
-# from worlds.herta_space_station import World as herta_space_station
 from automation.bot import Bot
 from automation.adb import ADB
 from automation.xy import OnePlus7T
@@ -30,6 +16,11 @@ def logger(msg):
 # logger(f'Screensize: {self.width} x {self.height}')
 
 async def main():
+    # try to connect to device
+    try:
+        subprocess.run('adb connect 10.1.11.3:5555', shell=True, check=True)
+    except subprocess.CalledProcessError as e:
+        logger(f'Error executing command: {e}')
     # initialize bot
     xy = OnePlus7T()
     adb = ADB()
@@ -42,9 +33,9 @@ async def main():
     jarilo_vi = JariloVI(bot=bot, xy=xy)
     # farm worlds
     # await herta_space_station.farm()
-    await penacony.farm()
+    # await penacony.farm()
     # await the_xianzhou_luofu.farm()
-    # await jarilo_vi.farm()
+    await jarilo_vi.farm()
 
     # await adb.get_screen(dev=dev, debug=True)
     # await self.bot.adb.get_screen(dev=dev, debug=True)
