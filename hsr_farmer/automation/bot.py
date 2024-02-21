@@ -120,6 +120,16 @@ class Bot:
         await self.dev.shell(f'input swipe {top_left[0] + int(w/2)} {top_left[1] + int(h/2)} {top_left[0] + int(w/2)} {top_left[1] + int(h/2)} 200')
         await aio.sleep(2)
 
+    async def interact(self):
+        await aio.sleep(1)
+        await self.action_tap(int(self.xy.width*1600/2400), int(self.xy.height*650/1080))
+        await self.wait_for_onmap(min_duration=2)
+
+    async def action_button(self):
+        await aio.sleep(1)
+        await self.action_tap(int(self.xy.width*1580/2400), int(self.xy.height*933/1080))
+        await self.wait_for_onmap(min_duration=2)
+
     async def attack(self):
         logger('action: attack')
         await aio.sleep(0.1)

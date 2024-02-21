@@ -33,10 +33,11 @@ async def main():
     jarilo_vi = JariloVI(bot=bot, xy=xy)
     # farm worlds
     # await herta_space_station.farm()
-    await the_xianzhou_luofu.farm()
+    # await the_xianzhou_luofu.farm()
     # await jarilo_vi.farm()
     # await penacony.farm()
 
+    # await self.bot.adb.get_screen(dev=self.bot.dev, debug=True)
     # await adb.get_screen(dev=dev, debug=True)
     # await self.bot.adb.get_screen(dev=dev, debug=True)
 
