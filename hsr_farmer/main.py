@@ -32,10 +32,11 @@ async def main():
     the_xianzhou_luofu = The_Xianzhou_Luofu(bot=bot, xy=xy)
     jarilo_vi = JariloVI(bot=bot, xy=xy)
     # farm worlds
-    # await herta_space_station.farm()
-    # await the_xianzhou_luofu.farm()
-    # await jarilo_vi.farm()
-    # await penacony.farm()
+    await herta_space_station.farm() # status: done & checked
+    await penacony.farm() # status: done
+    await the_xianzhou_luofu.farm() # status: 5/7
+    await jarilo_vi.farm() # status: 1/x
+    # total mapped xp: 55k/100k
 
     # await self.bot.adb.get_screen(dev=self.bot.dev, debug=True)
     # await adb.get_screen(dev=dev, debug=True)
