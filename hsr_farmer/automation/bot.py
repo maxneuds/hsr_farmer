@@ -1,5 +1,6 @@
 import asyncio as aio
 import cv2 as cv
+import numpy as np
 from datetime import datetime as dt
 
 def logger(msg):
@@ -34,6 +35,13 @@ class Bot:
         else:
             cmd = f'input swipe {self.xy.vjoy[direction][0]} {self.xy.vjoy[direction][1]} {self.xy.vjoy[direction][0]} {self.xy.vjoy[direction][1]} {duration}'
             await self.dev.shell(cmd)
+
+    async def movepi(self, direction, duration):
+        logger(f'move {direction} pi for {duration/1000} seconds')
+        x = self.xy.vjoy['center'][0] + self.xy.vjoy['r'] * np.cos(direction*np.pi)
+        y = self.xy.vjoy['center'][1] - self.xy.vjoy['r'] * np.sin(direction*np.pi)
+        cmd = f'input swipe {x} {y} {x} {y} {duration}'
+        await self.dev.shell(cmd)
 
     async def open_map(self, penacony=False):
         logger('open map')

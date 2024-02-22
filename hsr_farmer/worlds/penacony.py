@@ -1,6 +1,7 @@
 import asyncio as aio
 from automation.bot import Bot
 from datetime import datetime as dt
+import sys
 
 def logger(msg):
     dt_now = dt.now().strftime('%H:%M:%S')
@@ -57,7 +58,7 @@ class World:
         await self.bot.move('n', 3000)
         await self.bot.move('nw', 1000)
         await self.bot.attack()
-        await self.bot.wait_for_onmap(min_duration=30) # stability: in case attack misses
+        await self.bot.wait_for_onmap()
         logger('### group 4 ###')
         await self.bot.move('n', 500)
         await self.bot.move('nw', 3000)
@@ -66,9 +67,12 @@ class World:
         logger('### group 4, part 2 ###') # stability: aggro pull
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 6 ###')
+
+        logger('### group 5 ###')
         await self.bot.open_map()
-        await self.bot.use_teleporter(int(self.xy.width*662/2400), int(self.xy.height*877/1080))
+        await self.bot.use_teleporter(int(self.xy.width*662/2400), int(self.xy.height*877/1080)) # error
+        logger('### DEBUG MONITOR ###')
+        sys.exit()
         await self.bot.move('ne', 500)
         await self.bot.move('e', 1800)
         await self.bot.sleep(1)
@@ -77,12 +81,13 @@ class World:
         await self.bot.move('n', 6000)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 6, part 2 ###') # stability: in case of other monster is missed
+        logger('### group 5, part 2 ###') # stability: in case of other monster is missed
         await aio.sleep(1)
         await self.bot.move('nw', 200)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 7 ###')
+
+        logger('### group 6 ###')
         await self.bot.open_map()
         await self.bot.use_teleporter(int(self.xy.width*974/2400), int(self.xy.height*849/1080))
         await self.bot.move('ne', 500)
@@ -95,7 +100,7 @@ class World:
         await self.bot.move('e', 1500)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 8 ###')
+        logger('### group 7 ###')
         await self.bot.open_map()
         cmd = f'input swipe {int(self.xy.width*0.5)} {int(self.xy.height*0.5)} {int(self.xy.width*0.8)} {int(self.xy.height*0.5)} 1500'
         await self.bot.dev.shell(cmd)
@@ -105,10 +110,10 @@ class World:
         await self.bot.move('n', 4800)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 8, par 2 ###') # stability: roamer
+        logger('### group 7, par 2 ###') # stability: roamer
         await self.bot.attack()
         await self.bot.wait_for_onmap(min_duration=10)
-        logger('### group 9 ###')
+        logger('### group 8 ###')
         await self.bot.open_map()
         await self.bot.use_teleporter(int(self.xy.width*1022/2400), int(self.xy.height*771/1080))
         await self.bot.move('w', 2500)
@@ -243,7 +248,6 @@ class World:
         cmd = f'input swipe {int(self.xy.width*0.5)} {int(self.xy.height*0.3)} {int(self.xy.width*0.5)} {int(self.xy.height*0.7)} 1500'
         await self.bot.dev.shell(cmd)
         await aio.sleep(3)
-        await self.bot.adb.get_screen(dev=self.bot.dev, debug=True)
         await self.bot.use_teleporter(int(self.xy.width*1066/2400), int(self.xy.height*267/1080))
         await self.bot.move('n', 7400)
         await self.bot.move('w', 500)
