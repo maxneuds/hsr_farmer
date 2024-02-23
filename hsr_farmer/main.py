@@ -30,19 +30,18 @@ async def main():
     herta_space_station = Herta_Space_Station(bot=bot, xy=xy)
     penacony = Penacony(bot=bot, xy=xy)
     the_xianzhou_luofu = The_Xianzhou_Luofu(bot=bot, xy=xy)
-    jarilo_vi = JariloVI(bot=bot, xy=xy)
+    jarilo_vi = JariloVI(bot=bot, xy=xy) # finetune needed
     # farm worlds
-    await herta_space_station.farm() # status: 4/4 checked & stable
-    await penacony.farm() # status: 3/3 debug/fix needed in reverie
-    await the_xianzhou_luofu.farm() # status: 7/7 debug/fix needed in divination
-    await jarilo_vi.farm() # status: 5/7,
+    await herta_space_station.farm() # status: 4/4 checked & stable (7128/7560? XP)
+    await penacony.farm() # status: 3/3 check & little adjustment needed (23652/30992 XP)
+    await the_xianzhou_luofu.farm() # status: 7/7 check & bug fix needed 106422 (39788/42164 XP)
+    await jarilo_vi.farm() # status: 7/7 (19440/19440 XP)
     # xp before: 75642 (swan)
-    # xp after:
-    # total mapped xp: 67k/100k
+    # xp after: 165650
+    # total mapped xp: 90k/100k
 
     # await self.bot.adb.get_screen(dev=self.bot.dev, debug=True)
     # await adb.get_screen(dev=dev, debug=True)
-    # await self.bot.adb.get_screen(dev=dev, debug=True)
 
 if __name__ == '__main__':
     aio.run(main())

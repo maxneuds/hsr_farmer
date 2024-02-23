@@ -197,6 +197,7 @@ class World:
         logger('### group 8 ###')
         await self.bot.open_map()
         await self.bot.use_teleporter(int(self.xy.width*1524/2400), int(self.xy.height*475/1080))
+        sys.exit() # check this
         await self.bot.movepi(0.25, 2500)
         await self.bot.movepi(0.16, 6000)
         await self.bot.movepi(0.27, 700)
@@ -233,12 +234,9 @@ class World:
         await self.bot.switch_map(449/1080)
         logger('### group 1 ###')
         await self.bot.use_teleporter(int(self.xy.width*1446/2400), int(self.xy.height*898/1080))
-        # logger('### DEBUG MONITOR ###') # pathing broke, probably because of roamers
-        # sys.exit()
         await self.bot.move('s', 23000)
         await self.bot.move('sw', 2000)
         await self.bot.attack()
-        await self.bot.sleep(0.5)
         await self.bot.wait_for_onmap()
         logger('### group 2 ###')
         await self.bot.move('n', 1400)
@@ -247,37 +245,22 @@ class World:
         await self.bot.move('sw', 2500)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 2, part 2 ###') # stability: roamer
+        logger('### group 2, part 2 ###') # roamer
         await self.bot.move('ne', 1000)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 3 ###') # pathing bug here
-        await self.bot.move('ne', 1300)
-        await self.bot.move('e', 3000)
-        await self.bot.move('se', 1500)
-        await self.bot.move('e', 5000)
-        await self.bot.move('ne', 1700)
-        await self.bot.move('e', 2600)
-        await self.bot.move('s', 1500)
-        await self.bot.sleep(60)
-        await self.bot.move('sw', 900) # problem might be here
-        await self.bot.sleep(60)
-        await self.bot.move('s', 3300)
-        await self.bot.sleep(60)
-        await self.bot.move('se', 3000)
-        await self.bot.attack()
-        await self.bot.wait_for_onmap()
+        # logger('### group 3 ###') # removed, unstable path
         logger('### group 4 ###')
         await self.bot.open_map()
-        cmd = f'input swipe {int(self.xy.width*0.3)} {int(self.xy.height*0.5)} {int(self.xy.width*0.5)} {int(self.xy.height*0.5)} 1500'
+        cmd = f'input swipe {int(self.xy.width*0.3)} {int(self.xy.height*0.5)} {int(self.xy.width*0.6)} {int(self.xy.height*0.5)} 1500'
         await self.bot.dev.shell(cmd)
         await aio.sleep(3)
-        await self.bot.use_teleporter(int(self.xy.width*719/2400), int(self.xy.height*550/1080))
+        await self.bot.use_teleporter(int(self.xy.width*483/2400), int(self.xy.height*329/1080))
         await self.bot.move('s', 3500)
         await self.bot.move('se', 3700)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 4, part 2 ###') # stability: roamer
+        logger('### group 4, part 2 ###') # roamer
         await self.bot.move('se', 2000)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
@@ -290,7 +273,7 @@ class World:
         await self.bot.move('w', 750)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 5, part 2 ###') # stability: roamer
+        logger('### group 5, part 2 ###') # roamer
         await self.bot.move('w', 1000)
         await self.bot.move('sw', 1000)
         await self.bot.attack()
@@ -370,9 +353,7 @@ class World:
         await self.bot.move('n', 5400)
         await self.bot.move('e', 6000)
         await self.bot.attack()
-        await self.bot.wait_for_onmap(min_duration=45)
-        # debug
-        sys.exit()
+        await self.bot.wait_for_onmap()
         logger('### group 2 ###')
         await self.bot.open_map()
         await self.bot.use_teleporter(int(self.xy.width*0.3333), int(self.xy.height*0.6685))
@@ -381,7 +362,7 @@ class World:
         await self.bot.sleep(2)
         await self.bot.move('s', 500)
         await self.bot.attack()
-        await self.bot.wait_for_onmap(min_duration=30)
+        await self.bot.wait_for_onmap()
         logger('### group 3 ###')
         await self.bot.open_map()
         await self.bot.use_teleporter(int(self.xy.width*0.4358), int(self.xy.height*0.78056))
@@ -392,6 +373,7 @@ class World:
         await self.bot.sleep(2)
         await self.bot.move('s', 100)
         await self.bot.attack()
+        await self.bot.wait_for_onmap()
         logger('### group 4 ###')
         await self.bot.open_map()
         cmd = f'input swipe {int(self.xy.width*0.4)} {int(self.xy.height*0.5)} {int(self.xy.width*0.6)} {int(self.xy.height*0.5)} 1500'

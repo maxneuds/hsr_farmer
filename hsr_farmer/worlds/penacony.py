@@ -67,29 +67,25 @@ class World:
         logger('### group 4, part 2 ###') # stability: aggro pull
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-
         logger('### group 5 ###')
         await self.bot.open_map()
-        await self.bot.use_teleporter(int(self.xy.width*662/2400), int(self.xy.height*877/1080)) # error
-        logger('### DEBUG MONITOR ###')
-        sys.exit()
+        await self.bot.use_teleporter(int(self.xy.width*662/2400), int(self.xy.height*877/1080))
         await self.bot.move('ne', 500)
         await self.bot.move('e', 1800)
         await self.bot.sleep(1)
         await self.bot.action_tap(int(self.xy.width*1500/2400), int(self.xy.height*640/1080))
         await self.bot.wait_for_onmap(min_duration=3)
-        await self.bot.move('n', 6000)
+        await self.bot.movepi(0.51, 5500)
         await self.bot.attack()
-        await self.bot.wait_for_onmap()
+        # await self.bot.wait_for_onmap()
         logger('### group 5, part 2 ###') # stability: in case of other monster is missed
         await aio.sleep(1)
         await self.bot.move('nw', 200)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-
         logger('### group 6 ###')
         await self.bot.open_map()
-        await self.bot.use_teleporter(int(self.xy.width*974/2400), int(self.xy.height*849/1080))
+        await self.bot.use_teleporter(int(self.xy.width*987/2400), int(self.xy.height*845/1080))
         await self.bot.move('ne', 500)
         await self.bot.move('e', 1800)
         await self.bot.sleep(1)
@@ -110,7 +106,7 @@ class World:
         await self.bot.move('n', 4800)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 7, par 2 ###') # stability: roamer
+        logger('### group 7, par 2 ###') # roamer
         await self.bot.attack()
         await self.bot.wait_for_onmap(min_duration=10)
         logger('### group 8 ###')
@@ -124,10 +120,10 @@ class World:
         await self.bot.move('sw', 2500)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 9, part 2 ###') # stability: roamers
+        logger('### group 9, part 2 ###') # roamers
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 9, part 3 ###') # stability: roamers
+        logger('### group 9, part 3 ###') # roamers
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         logger('### group 10 ###')
@@ -203,7 +199,7 @@ class World:
         await self.bot.move('sw', 1200)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 13, part 2 ###') # stability: roamer
+        logger('### group 13, part 2 ###') # roamer
         await self.bot.move('sw', 500)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
@@ -281,15 +277,18 @@ class World:
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         logger('### group 17 ###')
-        await self.bot.sleep(0.5)
+        sys.exit()
         await self.bot.move('se', 500)
         await self.bot.move('e', 2500)
         await self.bot.action_button()
         await self.bot.move('e', 2000)
-        await self.bot.move('ne', 1000)
+        await self.bot.move('ne', 2000) # far away
+        # await self.bot.move('ne', 1000)
         await self.bot.attack()
+        await self.bot.wait_for_onmap()
         logger('### return to normal map ###')
         await self.bot.open_map(penacony=True)
+        await self.bot.adb.get_screen(dev=self.bot.dev, debug=True)
         await self.bot.use_teleporter(int(self.xy.width*850/2400), int(self.xy.height*600/1080))
 
     async def farm_childs_dream(self):
