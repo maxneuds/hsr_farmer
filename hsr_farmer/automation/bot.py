@@ -1,12 +1,15 @@
 import asyncio as aio
 import cv2 as cv
 import numpy as np
+import sys
 from datetime import datetime as dt
+from time import time
 
 def logger(msg):
     dt_now = dt.now().strftime('%H:%M:%S')
     print(f'[{dt_now}] {msg}')
 
+class PathError(Exception): pass
 
 class Bot:
     def __init__(self, adb, dev, xy):
@@ -47,10 +50,10 @@ class Bot:
         logger('open map')
         await aio.sleep(0.1)
         await self.dev.shell(f'input tap {self.xy.map[0]} {self.xy.map[1]}')
-        await aio.sleep(2)
+        await aio.sleep(3)
         if penacony == True:
             await self.dev.shell(f'input tap {int(self.xy.width*2135/2400)} {int(self.xy.height*138/1080)}')
-        await aio.sleep(2)
+            await aio.sleep(3)
 
     # doesn't work
     async def zoom_map(self):
@@ -71,14 +74,64 @@ class Bot:
             await self.dev.shell(f'input tap {int(self.xy.width*1200/2400)} {int(self.xy.height*700/1080)}')
             await aio.sleep(1.25)
         await self.dev.shell(f'input tap {int(self.xy.width*0.83)} {int(self.xy.height*0.9)}')
-        await self.wait_for_onmap(min_duration=1)
+        await self.wait_for_onmap(min_duration=1, mapexit=True)
+
+    async def use_teleporter_new(self, x, y, move_x=0, move_y=0, move_spd=1000, open_map=True, confirm=False, debug=False):
+        # open map
+        if open_map:
+            await self.open_map()
+        logger(f'use teleporter: {int(self.xy.width*x)},{int(self.xy.height*y)}; move map by {move_x},{move_y}')
+        # zoom map to max
+        for _ in range(20):
+            await self.dev.shell(f'input tap {self.xy.width*783/2400} {self.xy.height*993/1080}')
+            await aio.sleep(0.075)
+        await aio.sleep(0.5)
+        # move map
+        if move_x or move_y > 0:
+            cmd = f'input swipe {int(self.xy.width*0.45)} {int(self.xy.height*0.5)} {int(self.xy.width*(0.45+move_x))} {int(self.xy.height*(0.5+move_y))} {move_spd}'
+            await self.dev.shell(cmd)
+            await aio.sleep(3)
+        # debug: send screenshot
+        if debug:
+            await self.adb.get_screen(dev=self.dev, debug=True)
+            sys.exit()
+        # tap teleporter
+        await self.dev.shell(f'input tap {int(self.xy.width*x)} {int(self.xy.height*y)}')
+        await aio.sleep(1.25)
+        # confirm teleporter if other landmark is close
+        if confirm == True:
+            await self.dev.shell(f'input tap {int(self.xy.width*1200/2400)} {int(self.xy.height*700/1080)}')
+            await aio.sleep(1.25)
+        # teleport
+        await self.dev.shell(f'input tap {int(self.xy.width*0.83)} {int(self.xy.height*0.9)}')
+        await self.wait_for_onmap(min_duration=1, mapexit=True)
+
+    async def switch_map_new(self, y_percentage, scroll_down=False, open_map=True, debug=False):
+        logger('switch map')
+        if open_map:
+            await self.open_map()
+        x = int(self.xy.width*0.8)
+        if scroll_down:
+            y1 = int(self.xy.height*0.8)
+            y2 = int(self.xy.height*0.2)
+        else:
+            y1 = int(self.xy.height*0.2)
+            y2 = int(self.xy.height*0.8)
+        cmd = f'input swipe {x} {y1} {x} {y2} 250'
+        await self.dev.shell(cmd)
+        await self.sleep(3)
+        if debug:
+            await self.adb.get_screen(dev=self.dev, debug=True)
+            sys.exit()
+        await self.action_tap(int(self.xy.width*0.8), int(self.xy.height*y_percentage))
+        await aio.sleep(2)
 
     async def switch_map(self, y_percentage, open_map=True, scroll_down=False):
         logger('switch map')
         if open_map:
             await self.open_map()
         if scroll_down:
-            cmd = f'input swipe {int(self.xy.width*0.8)} {int(self.xy.height*0.8)} {int(self.xy.width*0.8)} {int(self.xy.height*0.3)} 1500'
+            cmd = f'input swipe {int(self.xy.width*0.8)} {int(self.xy.height*0.8)} {int(self.xy.width*0.8)} {int(self.xy.height*0.3)} 250'
             await self.dev.shell(cmd)
             await self.sleep(3)
         await self.action_tap(int(self.xy.width*0.8), int(self.xy.height*y_percentage))
@@ -144,13 +197,14 @@ class Bot:
         await self.dev.shell(f'input tap {self.xy.attack[0]} {self.xy.attack[1]}')
         await aio.sleep(0.1)
 
-    async def wait_for_onmap(self, min_duration=15, debug=False):
+    async def wait_for_onmap(self, min_duration=15, mapexit=False, debug=False):
         logger('wait for fight to end...')
         await aio.sleep(min_duration)
         img_menu = cv.imread('res/edges_menu.png', cv.IMREAD_GRAYSCALE)
         img_chat = cv.imread('res/edges_chat.png', cv.IMREAD_GRAYSCALE)
         img_sprint = cv.imread('res/edges_sprint.png', cv.IMREAD_GRAYSCALE)
         check = 0
+        time_start = time()
         while check < 1:
             if debug:
                 screen = await self.adb.get_screen(dev=self.dev, custom_msg='still in fight...')
@@ -174,3 +228,6 @@ class Bot:
             if check > 0:
                 await aio.sleep(1)
                 logger('...out of fight')
+            time_running = time()
+            if mapexit and (time_running - time_start > 400):
+                raise PathError

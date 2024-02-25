@@ -21,27 +21,62 @@ async def main():
         subprocess.run('adb connect 10.1.11.3:5555', shell=True, check=True)
     except subprocess.CalledProcessError as e:
         logger(f'Error executing command: {e}')
+
+    ###
     # initialize bot
+    ###
     xy = OnePlus7T()
     adb = ADB()
     dev = await adb.get_dev()
     bot = Bot(adb=adb, dev=dev, xy=xy)
+
+    ###
     # load worlds
+    ###
     herta_space_station = Herta_Space_Station(bot=bot, xy=xy)
     penacony = Penacony(bot=bot, xy=xy)
     the_xianzhou_luofu = The_Xianzhou_Luofu(bot=bot, xy=xy)
     jarilo_vi = JariloVI(bot=bot, xy=xy) # finetune needed
-    # farm worlds
-    await herta_space_station.farm() # status: 4/4 checked & stable (7128/7560? XP)
-    await penacony.farm() # status: 3/3 check & little adjustment needed (23652/30992 XP)
-    await the_xianzhou_luofu.farm() # status: 7/7 check & bug fix needed 106422 (39788/42164 XP)
-    await jarilo_vi.farm() # status: 7/7 (19440/19440 XP)
-    # xp before: 75642 (swan)
-    # xp after: 165650
+
+    # xp before: 165650 (swan)
+    # xp after:
     # total mapped xp: 90k/100k
 
-    # await self.bot.adb.get_screen(dev=self.bot.dev, debug=True)
-    # await adb.get_screen(dev=dev, debug=True)
+    ###
+    # farm worlds
+    ###
+    # logger('Farm: Herta Space Station') # 4/4 (7128/7128) 68600 (sampo)
+    # await bot.switch_world('herta_space_station')
+    # await herta_space_station.farm_base_zone() # checked (432/432)
+    # await herta_space_station.farm_storage_zone() # checked (2592/2592)
+    # await herta_space_station.farm_supply_zone() # checked (2484/2484)
+    # await herta_space_station.farm_seclusion_zone() # checked (1620/1620)
+
+    # logger('Farm: Penacony') # 3/3 (/30560 [17820])
+    # await bot.switch_world('penacony')
+    # await penacony.farm_dreams_edge() # checked (7668/9612 [7668]) 75728 83396
+    # await penacony.farm_childs_dream() # checked (4664/5832 [2376]) 83396 88040
+    await penacony.farm_reverie_dreamscape() # modified (/15552 [6912]) 88040
+
+    # logger('Farm: The Xianzhou Luofu')
+    # await bot.switch_world('the_xianzhou_luofu') # checked (/xxx)
+    # await the_xianzhou_luofu.farm_scalegorge_waterscape() # checked (/4752)
+    # await the_xianzhou_luofu.farm_alchemy_commission() # checked (/6480 [6156])
+    # await the_xianzhou_luofu.farm_fyxestroll_garden() # checked (/4644)
+    # await the_xianzhou_luofu.farm_artisan_commission() # checked (/9548)
+    # await the_xianzhou_luofu.farm_divination_commission() # checked (/5832)
+    # await the_xianzhou_luofu.farm_stargazer_navalia() # checked (/6264)
+    # await the_xianzhou_luofu.farm_cloudford() # checked (/4644)
+
+    # logger('Farm: Jarilo-VI')
+    # await bot.switch_world('jarilo_vi')
+    # await jarilo_vi.farm_outlying_snow_plains() # checked (/2052)
+    # await jarilo_vi.farm_backwater_pass() # checked (/3024)
+    # await jarilo_vi.farm_corridor() # finetune needed # checked (/3672)
+    # await jarilo_vi.farm_everwinter_hill() # check needed # checked (/1404)
+    # await jarilo_vi.farm_great_mine() # checked & verified # checked (/4536)
+    # await jarilo_vi.farm_rivet_town() # checked (/2160)
+    # await jarilo_vi.farm_robot_settlement() # checked (/2592)
 
 if __name__ == '__main__':
     aio.run(main())

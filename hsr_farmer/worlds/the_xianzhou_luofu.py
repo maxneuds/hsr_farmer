@@ -7,24 +7,13 @@ def logger(msg):
     dt_now = dt.now().strftime('%H:%M:%S')
     print(f'[{dt_now}] {msg}')
 
+# await self.bot.adb.get_screen(dev=self.bot.dev, debug=True)
 
 class World:
     def __init__(self, bot, xy):
         # initialize bot
         self.bot = bot
         self.xy = xy
-
-    async def farm(self):
-        logger('Farm: The Xianzhou Luofu')
-        await self.bot.switch_world('the_xianzhou_luofu')
-        # farm locations
-        await self.farm_scalegorge_waterscape()
-        await self.farm_alchemy_commission()
-        await self.farm_fyxestroll_garden()
-        await self.farm_artisan_commission()
-        await self.farm_divination_commission()
-        await self.farm_stargazer_navalia()
-        await self.farm_cloudford()
 
     async def farm_cloudford(self):
         await self.bot.switch_map(511/1080)
@@ -197,7 +186,6 @@ class World:
         logger('### group 8 ###')
         await self.bot.open_map()
         await self.bot.use_teleporter(int(self.xy.width*1524/2400), int(self.xy.height*475/1080))
-        sys.exit() # check this
         await self.bot.movepi(0.25, 2500)
         await self.bot.movepi(0.16, 6000)
         await self.bot.movepi(0.27, 700)
@@ -205,28 +193,36 @@ class World:
         await self.bot.movepi(1.05, 2200)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 8 ###')
+        logger('### group 9 ###') # roamer
         await self.bot.movepi(1.07, 5000)
-        await self.bot.movepi(1.17, 2700)
+        await self.bot.movepi(1.17, 3000)
         await self.bot.movepi(0.6, 3000)
-        await self.bot.movepi(0.25, 2000)
-        await self.bot.movepi(0.2, 1000)
+        await self.bot.movepi(0.3, 2000)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 8, part 2 ###') # stability: roamer
-        await self.bot.attack()
-        await self.bot.wait_for_onmap()
-        logger('### group 9 ###')
-        await self.bot.movepi(0.9, 2300)
-        await self.bot.movepi(0.8, 900)
+        logger('### group 9, part 2 ###') # roamer
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         logger('### group 10 ###')
-        await self.bot.movepi(0.9, 300)
-        await self.bot.movepi(1.1, 1000)
-        await self.bot.movepi(1.2, 2200)
-        await self.bot.movepi(0.6, 2100)
-        await self.bot.movepi(0.2, 500)
+        await self.bot.open_map()
+        await self.bot.use_teleporter(int(self.xy.width*1007/2400), int(self.xy.height*258/1080))
+        await self.bot.movepi(0.25, 2500)
+        await self.bot.movepi(0.16, 6000)
+        await self.bot.movepi(0.27, 700)
+        await self.bot.movepi(0.52, 400)
+        await self.bot.movepi(1.05, 2200)
+        await self.bot.movepi(1.07, 5000)
+        await self.bot.movepi(1.17, 2900)
+        await self.bot.movepi(0.62, 6600)
+        await self.bot.attack()
+        await self.bot.wait_for_onmap()
+        logger('### group 11 ###')
+        await self.bot.movepi(1.2, 2400)
+        await self.bot.movepi(0.9, 100)
+        await self.bot.attack()
+        await self.bot.sleep(1)
+        await self.bot.movepi(0.6, 1900)
+        await self.bot.movepi(0.2, 400)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
 
@@ -390,7 +386,7 @@ class World:
         await self.bot.move('w', 4000)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 7 ###')
+        logger('### group 7 ###') # Problem
         await self.bot.open_map()
         await self.bot.use_teleporter(int(self.xy.width*1173/2400), int(self.xy.height*656/1080))
         await self.bot.move('n', 7000)

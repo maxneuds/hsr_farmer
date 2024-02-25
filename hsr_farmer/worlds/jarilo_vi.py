@@ -7,24 +7,13 @@ def logger(msg):
     dt_now = dt.now().strftime('%H:%M:%S')
     print(f'[{dt_now}] {msg}')
 
+# await self.bot.adb.get_screen(dev=self.bot.dev, debug=True)
 
 class World:
     def __init__(self, bot, xy):
         # initialize bot
         self.bot = bot
         self.xy = xy
-
-    async def farm(self):
-        logger('Farm: Jarilo-VI')
-        await self.bot.switch_world('jarilo_vi')
-        # farm locations
-        await self.farm_outlying_snow_plains()
-        await self.farm_backwater_pass()
-        await self.farm_corridor() # finetune needed
-        await self.farm_everwinter_hill() # check needed
-        await self.farm_great_mine() # checked & verified
-        await self.farm_rivet_town()
-        await self.farm_robot_settlement()
 
     async def farm_robot_settlement(self):
         await self.bot.switch_map(925/1080)
@@ -238,65 +227,65 @@ class World:
         await self.bot.wait_for_onmap()
 
     async def farm_corridor(self):
-        await self.bot.switch_map(866/1080)
-        logger('### group 1 ###')
-        cmd = f'input swipe {int(self.xy.width*0.5)} {int(self.xy.height*0.8)} {int(self.xy.width*0.5)} {int(self.xy.height*0.2)} 1500'
-        await self.bot.dev.shell(cmd)
-        await aio.sleep(3)
-        await self.bot.use_teleporter(int(self.xy.width*966/2400), int(self.xy.height*745/1080))
-        await self.bot.movepi(1.5, 5000)
-        await self.bot.movepi(1, 3500)
-        await self.bot.attack()
-        await self.bot.wait_for_onmap()
-        logger('### group 2 ###')
-        await self.bot.movepi(1.51, 6000)
-        await self.bot.attack()
-        await self.bot.wait_for_onmap()
-        logger('### group 2 ###')
-        await self.bot.open_map()
-        await self.bot.use_teleporter(int(self.xy.width*1270/2400), int(self.xy.height*670/1080))
-        await self.bot.movepi(1.5, 5000)
-        await self.bot.movepi(1, 3500)
-        await self.bot.movepi(1.51, 6000)
-        await self.bot.movepi(1.6, 2000)
-        await self.bot.movepi(1.5, 4300)
-        await self.bot.attack()
-        await self.bot.sleep(0.5)
-        await self.bot.movepi(0, 7300)
-        await self.bot.movepi(0.5, 3500)
-        await self.bot.attack()
-        await self.bot.wait_for_onmap()
-        logger('### group 4 ###')
-        await self.bot.open_map()
-        cmd = f'input swipe {int(self.xy.width*0.5)} {int(self.xy.height*0.2)} {int(self.xy.width*0.5)} {int(self.xy.height*0.7)} 1500'
-        await self.bot.dev.shell(cmd)
-        await aio.sleep(3)
-        await self.bot.use_teleporter(int(self.xy.width*1131/2400), int(self.xy.height*242/1080))
-        await self.bot.movepi(0.375, 5000)
-        await self.bot.attack()
-        await self.bot.wait_for_onmap()
-        logger('### group 4, part 2 ###') # roamer
-        await self.bot.movepi(0.6, 1500)
-        await self.bot.attack()
-        await self.bot.wait_for_onmap()
-        logger('### group 5 ###')
-        await self.bot.open_map()
-        cmd = f'input swipe {int(self.xy.width*0.5)} {int(self.xy.height*0.2)} {int(self.xy.width*0.5)} {int(self.xy.height*0.7)} 1500'
-        await self.bot.dev.shell(cmd)
-        await aio.sleep(3)
-        await self.bot.use_teleporter(int(self.xy.width*1046/2400), int(self.xy.height*528/1080))
-        await self.bot.movepi(1, 1000)
-        await self.bot.movepi(0.75, 1550)
-        await self.bot.attack()
-        await self.bot.sleep(0.5)
-        await self.bot.movepi(0.5, 1500)
-        await self.bot.movepi(1, 3600)
-        await self.bot.movepi(0.48, 5500)
-        await self.bot.attack()
-        await self.bot.sleep(0.5)
-        await self.bot.wait_for_onmap()
-        logger('### group 6 ###') # adjustment needed
-        sys.exit()
+        # await self.bot.switch_map(866/1080)
+        # logger('### group 1 ###')
+        # cmd = f'input swipe {int(self.xy.width*0.5)} {int(self.xy.height*0.8)} {int(self.xy.width*0.5)} {int(self.xy.height*0.2)} 1500'
+        # await self.bot.dev.shell(cmd)
+        # await aio.sleep(3)
+        # await self.bot.use_teleporter(int(self.xy.width*966/2400), int(self.xy.height*745/1080))
+        # await self.bot.movepi(1.5, 5000)
+        # await self.bot.movepi(1, 3500)
+        # await self.bot.attack()
+        # await self.bot.wait_for_onmap()``
+        # logger('### group 2 ###')
+        # await self.bot.movepi(1.51, 6000)
+        # await self.bot.attack()
+        # await self.bot.wait_for_onmap()
+        # logger('### group 2 ###')
+        # await self.bot.open_map()
+        # await self.bot.use_teleporter(int(self.xy.width*1270/2400), int(self.xy.height*670/1080))
+        # await self.bot.movepi(1.5, 5000)
+        # await self.bot.movepi(1, 3500)
+        # await self.bot.movepi(1.51, 6000)
+        # await self.bot.movepi(1.6, 2000)
+        # await self.bot.movepi(1.5, 4300)
+        # await self.bot.attack()
+        # await self.bot.sleep(0.5)
+        # await self.bot.movepi(0, 7300)
+        # await self.bot.movepi(0.5, 3500)
+        # await self.bot.attack()
+        # await self.bot.wait_for_onmap()
+        # logger('### group 4 ###')
+        # await self.bot.open_map()
+        # cmd = f'input swipe {int(self.xy.width*0.5)} {int(self.xy.height*0.2)} {int(self.xy.width*0.5)} {int(self.xy.height*0.7)} 1500'
+        # await self.bot.dev.shell(cmd)
+        # await aio.sleep(3)
+        # await self.bot.use_teleporter(int(self.xy.width*1131/2400), int(self.xy.height*242/1080))
+        # await self.bot.movepi(0.375, 5000)
+        # await self.bot.attack()
+        # await self.bot.wait_for_onmap()
+        # logger('### group 4, part 2 ###') # roamer
+        # await self.bot.movepi(0.6, 1500)
+        # await self.bot.attack()
+        # await self.bot.wait_for_onmap()
+        # logger('### group 5 ###')
+        # await self.bot.open_map()
+        # cmd = f'input swipe {int(self.xy.width*0.5)} {int(self.xy.height*0.2)} {int(self.xy.width*0.5)} {int(self.xy.height*0.7)} 1500'
+        # await self.bot.dev.shell(cmd)
+        # await aio.sleep(3)
+        # await self.bot.use_teleporter(int(self.xy.width*1046/2400), int(self.xy.height*528/1080))
+        # await self.bot.movepi(1, 1000)
+        # await self.bot.movepi(0.75, 1550)
+        # await self.bot.attack()
+        # await self.bot.sleep(0.5)
+        # await self.bot.movepi(0.5, 1500)
+        # await self.bot.movepi(1, 3600)
+        # await self.bot.movepi(0.48, 5500)
+        # await self.bot.attack()
+        # await self.bot.sleep(0.5)
+        # await self.bot.wait_for_onmap()
+        # logger('### group 6 ###') # adjustment needed
+        # sys.exit()
         await self.bot.movepi(0.249, 5900)
         await self.bot.attack()
         await self.bot.wait_for_onmap(min_duration=30)

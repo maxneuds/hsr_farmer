@@ -6,21 +6,13 @@ def logger(msg):
     dt_now = dt.now().strftime('%H:%M:%S')
     print(f'[{dt_now}] {msg}')
 
+# await self.bot.adb.get_screen(dev=self.bot.dev, debug=True)
 
 class World:
     def __init__(self, bot, xy):
         # initialize bot
         self.bot = bot
         self.xy = xy
-
-    async def farm(self):
-        logger('Farm: Herta Space Station')
-        await self.bot.switch_world('herta_space_station')
-        # farm locations
-        await self.farm_base_zone()
-        await self.farm_storage_zone()
-        await self.farm_supply_zone()
-        await self.farm_seclusion_zone()
 
     async def farm_seclusion_zone(self):
         await self.bot.switch_map(869/1080)
@@ -126,7 +118,7 @@ class World:
         await self.bot.move('s', 5200)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 2 ###')
+        logger('### group 2 ###') # roamer
         await self.bot.open_map()
         await self.bot.use_teleporter(int(self.xy.width*955/2400), int(self.xy.height*342/1080))
         await self.bot.move('s', 6000)
@@ -134,6 +126,7 @@ class World:
         await self.bot.move('n', 6300)
         await self.bot.move('w', 2400)
         await self.bot.move('s', 3800)
+        await self.bot.movepi(1.25, 500)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         logger('### group 3 ###')
