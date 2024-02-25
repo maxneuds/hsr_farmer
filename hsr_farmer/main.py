@@ -40,7 +40,7 @@ async def main():
 
     # xp before: 165650 (swan)
     # xp after:
-    # total mapped xp: 90k/100k
+    # totalalchemy mapped xp: 90k/100k
 
     ###
     # farm worlds
