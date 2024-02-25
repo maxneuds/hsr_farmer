@@ -52,16 +52,16 @@ async def main():
     # await herta_space_station.farm_supply_zone() # checked (2484/2484)
     # await herta_space_station.farm_seclusion_zone() # checked (1620/1620)
 
-    # logger('Farm: Penacony') # 3/3 (/30560 [17820])
+    # logger('Farm: Penacony') # 3/3 (24300/30560 [17820])
     # await bot.switch_world('penacony')
-    # await penacony.farm_dreams_edge() # checked (7668/9612 [7668]) 75728 83396
-    # await penacony.farm_childs_dream() # checked (4664/5832 [2376]) 83396 88040
-    await penacony.farm_reverie_dreamscape() # modified (/15552 [6912]) 88040
+    # await penacony.farm_dreams_edge() # checked (7668/9612 [7668])
+    # await penacony.farm_childs_dream() # checked (4664/5832 [2376])
+    # await penacony.farm_reverie_dreamscape() # modified (11988/15552 [6912])
 
     # logger('Farm: The Xianzhou Luofu')
-    # await bot.switch_world('the_xianzhou_luofu') # checked (/xxx)
-    # await the_xianzhou_luofu.farm_scalegorge_waterscape() # checked (/4752)
-    # await the_xianzhou_luofu.farm_alchemy_commission() # checked (/6480 [6156])
+    # await bot.switch_world('the_xianzhou_luofu')
+    # await the_xianzhou_luofu.farm_scalegorge_waterscape() # checked (4752/4752) 100028
+    await the_xianzhou_luofu.farm_alchemy_commission() # checked (/6480 [6156]) 104780
     # await the_xianzhou_luofu.farm_fyxestroll_garden() # checked (/4644)
     # await the_xianzhou_luofu.farm_artisan_commission() # checked (/9548)
     # await the_xianzhou_luofu.farm_divination_commission() # checked (/5832)

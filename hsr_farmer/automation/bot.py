@@ -87,7 +87,7 @@ class Bot:
             await aio.sleep(0.075)
         await aio.sleep(0.5)
         # move map
-        if move_x or move_y > 0:
+        if move_x != 0 or move_y != 0:
             cmd = f'input swipe {int(self.xy.width*0.45)} {int(self.xy.height*0.5)} {int(self.xy.width*(0.45+move_x))} {int(self.xy.height*(0.5+move_y))} {move_spd}'
             await self.dev.shell(cmd)
             await aio.sleep(3)

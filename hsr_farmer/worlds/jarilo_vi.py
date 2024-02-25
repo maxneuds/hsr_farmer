@@ -7,8 +7,6 @@ def logger(msg):
     dt_now = dt.now().strftime('%H:%M:%S')
     print(f'[{dt_now}] {msg}')
 
-# await self.bot.adb.get_screen(dev=self.bot.dev, debug=True)
-
 class World:
     def __init__(self, bot, xy):
         # initialize bot
