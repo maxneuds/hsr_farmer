@@ -65,18 +65,7 @@ class Bot:
         cmd = f'input swipe {bot_left[0]} {bot_left[1]} {mid[0]} {mid[1]} 1500 & input swipe {top_right[0]} {top_right[1]} {mid[0]} {mid[1]} 1500'
         await self.dev.shell(cmd)
 
-    async def use_teleporter(self, x, y, confirm=False):
-        logger(f'use teleporter: {x},{y}')
-        await aio.sleep(0.1)
-        await self.dev.shell(f'input tap {x} {y}')
-        await aio.sleep(1.25)
-        if confirm == True:
-            await self.dev.shell(f'input tap {int(self.xy.width*1200/2400)} {int(self.xy.height*700/1080)}')
-            await aio.sleep(1.25)
-        await self.dev.shell(f'input tap {int(self.xy.width*0.83)} {int(self.xy.height*0.9)}')
-        await self.wait_for_onmap(min_duration=1, mapexit=True)
-
-    async def use_teleporter_new(self, x, y, move_x=0, move_y=0, move_spd=1000, open_map=True, confirm=False, debug=False):
+    async def use_teleporter(self, x, y, move_x=0, move_y=0, move_spd=1000, open_map=True, confirm=False, debug=False):
         # open map
         if open_map:
             await self.open_map()
@@ -101,12 +90,12 @@ class Bot:
         # confirm teleporter if other landmark is close
         if confirm == True:
             await self.dev.shell(f'input tap {int(self.xy.width*1200/2400)} {int(self.xy.height*700/1080)}')
-            await aio.sleep(1.25)
+            await aio.sleep(1.5)
         # teleport
         await self.dev.shell(f'input tap {int(self.xy.width*0.83)} {int(self.xy.height*0.9)}')
         await self.wait_for_onmap(min_duration=1, mapexit=True)
 
-    async def switch_map_new(self, y_percentage, scroll_down=False, open_map=True, debug=False):
+    async def switch_map(self, y_percentage, scroll_down=False, open_map=True, debug=False):
         logger('switch map')
         if open_map:
             await self.open_map()
@@ -115,7 +104,7 @@ class Bot:
             y1 = int(self.xy.height*0.8)
             y2 = int(self.xy.height*0.2)
         else:
-            y1 = int(self.xy.height*0.2)
+            y1 = int(self.xy.height*0.3)
             y2 = int(self.xy.height*0.8)
         cmd = f'input swipe {x} {y1} {x} {y2} 250'
         await self.dev.shell(cmd)
@@ -123,17 +112,6 @@ class Bot:
         if debug:
             await self.adb.get_screen(dev=self.dev, debug=True)
             sys.exit()
-        await self.action_tap(int(self.xy.width*0.8), int(self.xy.height*y_percentage))
-        await aio.sleep(2)
-
-    async def switch_map(self, y_percentage, open_map=True, scroll_down=False):
-        logger('switch map')
-        if open_map:
-            await self.open_map()
-        if scroll_down:
-            cmd = f'input swipe {int(self.xy.width*0.8)} {int(self.xy.height*0.8)} {int(self.xy.width*0.8)} {int(self.xy.height*0.3)} 250'
-            await self.dev.shell(cmd)
-            await self.sleep(3)
         await self.action_tap(int(self.xy.width*0.8), int(self.xy.height*y_percentage))
         await aio.sleep(2)
 

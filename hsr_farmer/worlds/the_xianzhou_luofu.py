@@ -14,9 +14,10 @@ class World:
         self.xy = xy
 
     async def farm_cloudford(self):
+        logger('farm: Cloudford')
         await self.bot.switch_map(511/1080)
-        await self.bot.use_teleporter(int(self.xy.width*910/2400), int(self.xy.height*510/1080))
         logger('### group 1 ###')
+        await self.bot.use_teleporter(926/2400, 519/1080, open_map=False) # Trove of Verdure
         await self.bot.movepi(1.75, 2300)
         await self.bot.movepi(1.5, 4000)
         await self.bot.movepi(1.75, 2300)
@@ -24,13 +25,12 @@ class World:
         await self.bot.movepi(1.7, 4000)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 2, part 2 ###') # stability: roamer
+        logger('### group 2, part 2 ###') # roamer
         await self.bot.movepi(0.5, 2000)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         logger('### group 2 ###')
-        await self.bot.open_map()
-        await self.bot.use_teleporter(int(self.xy.width*732/2400), int(self.xy.height*753/1080))
+        await self.bot.use_teleporter(928/2400, 681/1080) # Trove of Verdure
         await self.bot.movepi(0.4, 7000)
         await self.bot.movepi(0.08, 3000)
         await self.bot.movepi(0, 2200)
@@ -42,8 +42,7 @@ class World:
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         logger('### group 3 ###')
-        await self.bot.open_map()
-        await self.bot.use_teleporter(int(self.xy.width*987/2400), int(self.xy.height*807/1080))
+        await self.bot.use_teleporter(924/2400, 716/1080) # Trove of Verdure
         await self.bot.movepi(0.75, 2100)
         await self.bot.movepi(1.0, 7400)
         await self.bot.attack()
@@ -53,8 +52,7 @@ class World:
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         logger('### group 4 ###')
-        await self.bot.open_map()
-        await self.bot.use_teleporter(int(self.xy.width*1017/2400), int(self.xy.height*236/1080))
+        await self.bot.use_teleporter(926/2400, 339/1080) # Trove of Verdure
         await self.bot.movepi(0.75, 2100)
         await self.bot.movepi(1.0, 7400)
         await self.bot.movepi(1.25, 1200)
@@ -65,13 +63,12 @@ class World:
         await self.bot.movepi(1.0, 2200)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 3, part 4 ###') # roamer
-        await self.bot.movepi(0, 1000)
+        logger('### group 4, part 2 ###') # roamer
+        await self.bot.movepi(0.0, 1000)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         logger('### group 5 ###')
-        await self.bot.open_map()
-        await self.bot.use_teleporter(int(self.xy.width*1050/2400), int(self.xy.height*740/1080))
+        await self.bot.use_teleporter(971/2400, 670/1080) # Skiff Boarding Area
         await self.bot.movepi(0, 9500)
         await self.bot.movepi(0.5, 500)
         await self.bot.movepi(0.75, 1500)
@@ -79,15 +76,13 @@ class World:
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         logger('### group 6 ###')
-        await self.bot.open_map()
-        await self.bot.use_teleporter(int(self.xy.width*1162/2400), int(self.xy.height*456/1080))
+        await self.bot.use_teleporter(975/2400, 531/1080) # Skiff Boarding Area
         await self.bot.movepi(0, 9700)
         await self.bot.movepi(1.5, 2300)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         logger('### group 7 ###')
-        await self.bot.open_map()
-        await self.bot.use_teleporter(int(self.xy.width*923/2400), int(self.xy.height*315/1080))
+        await self.bot.use_teleporter(812/2400, 388/1080) # Bud of Memories
         await self.bot.movepi(1.5, 2900)
         await self.bot.movepi(1.8, 1400)
         await self.bot.attack()
@@ -97,17 +92,10 @@ class World:
         await self.bot.wait_for_onmap()
 
     async def farm_stargazer_navalia(self):
-        await self.bot.open_map()
-        cmd = f'input swipe {int(self.xy.width*0.8)} {int(self.xy.height*0.5)} {int(self.xy.width*0.5)} {int(self.xy.height*0.8)} 1500'
-        await self.bot.dev.shell(cmd)
-        await aio.sleep(3)
-        await self.bot.action_tap(int(self.xy.width*1944/2400), int(self.xy.height*501/1080))
-        await aio.sleep(1)
-        cmd = f'input swipe {int(self.xy.width*0.5)} {int(self.xy.height*0.5)} {int(self.xy.width*0.5)} {int(self.xy.height*0.3)} 1500'
-        await self.bot.dev.shell(cmd)
-        await aio.sleep(3)
-        await self.bot.use_teleporter(int(self.xy.width*1267/2400), int(self.xy.height*889/1080))
+        logger('farm: Stargazer Navalia')
+        await self.bot.switch_map(629/1080)
         logger('### group 1 ###')
+        await self.bot.use_teleporter(1162/2400, 914/1080, open_map=False) # Stagnant Shadow
         await self.bot.move('se', 1000)
         await self.bot.move('e', 6000)
         await self.bot.move('se', 1000)
@@ -133,12 +121,11 @@ class World:
         await self.bot.move('s', 4000)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 3, part 2 ###') # stability: roamer
+        logger('### group 3, part 2 ###') # roamer; TODO: probably not needed
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         logger('### group 4 ###')
-        await self.bot.open_map()
-        await self.bot.use_teleporter(int(self.xy.width*1058/2400), int(self.xy.height*131/1080))
+        await self.bot.use_teleporter(854/2400, 262/1080) # Ship Nursery
         await self.bot.move('nw', 750)
         await self.bot.move('n', 750)
         await self.bot.move('ne', 750)
@@ -147,8 +134,7 @@ class World:
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         logger('### group 5 ###')
-        await self.bot.open_map()
-        await self.bot.use_teleporter(int(self.xy.width*1067/2400), int(self.xy.height*580/1080))
+        await self.bot.use_teleporter(855/2400, 565/1080) # Ship Nursery
         await self.bot.move('nw', 750)
         await self.bot.move('n', 750)
         await self.bot.move('ne', 750)
@@ -165,25 +151,26 @@ class World:
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         logger('### group 6 ###')
-        await self.bot.open_map()
-        await self.bot.use_teleporter(int(self.xy.width*1100/2400), int(self.xy.height*190/1080))
+        await self.bot.use_teleporter(876/2400, 310/1080) # Cavern of Corrosion
         await self.bot.move('se', 3700)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 6 ###')
-        await self.bot.open_map()
-        await self.bot.use_teleporter(int(self.xy.width*828/2400), int(self.xy.height*794/1080))
+        logger('### group 7 ###')
+        await self.bot.use_teleporter(856/2400, 708/1080) # Ship Nursery
         await self.bot.move('s', 600)
         await self.bot.move('e', 11000)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 7 ###')
-        await self.bot.move('s', 3900)
+        logger('### group 7, part 2 ###')
+        await self.bot.move('s', 1500)
+        await self.bot.attack()
+        await self.bot.wait_for_onmap()
+        logger('### group 7, part 3 ###')
+        await self.bot.move('s', 2500)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         logger('### group 8 ###')
-        await self.bot.open_map()
-        await self.bot.use_teleporter(int(self.xy.width*1524/2400), int(self.xy.height*475/1080))
+        await self.bot.use_teleporter(1329/2400, 496/1080) # Astral Cottage
         await self.bot.movepi(0.25, 2500)
         await self.bot.movepi(0.16, 6000)
         await self.bot.movepi(0.27, 700)
@@ -202,8 +189,7 @@ class World:
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         logger('### group 10 ###')
-        await self.bot.open_map()
-        await self.bot.use_teleporter(int(self.xy.width*1007/2400), int(self.xy.height*258/1080))
+        await self.bot.use_teleporter(1237/2400, 354/1080, confirm=True) # Astral Cottage
         await self.bot.movepi(0.25, 2500)
         await self.bot.movepi(0.16, 6000)
         await self.bot.movepi(0.27, 700)
@@ -225,9 +211,10 @@ class World:
         await self.bot.wait_for_onmap()
 
     async def farm_divination_commission(self):
-        await self.bot.switch_map(449/1080)
+        logger('farm: Divination Commission')
+        await self.bot.switch_map(447/1080, scroll_down=True)
         logger('### group 1 ###')
-        await self.bot.use_teleporter(int(self.xy.width*1446/2400), int(self.xy.height*898/1080))
+        await self.bot.use_teleporter(1280/2400, 777/1080, open_map=False) # Conclave Hall
         await self.bot.move('s', 23000)
         await self.bot.move('sw', 2000)
         await self.bot.attack()
@@ -243,13 +230,20 @@ class World:
         await self.bot.move('ne', 1000)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        # logger('### group 3 ###') # removed, unstable path
+        logger('### group 3 ###')
+        await self.bot.use_teleporter(1088/2400, 857/1080, move_y=-0.2) # Conclave Hall
+        await self.bot.movepi(1.5, 24000)
+        await self.bot.movepi(0.0, 4000)
+        await self.bot.movepi(0.25, 1600)
+        await self.bot.movepi(0.0, 2500)
+        await self.bot.movepi(1.5, 1000)
+        await self.bot.movepi(1.25, 1000)
+        await self.bot.movepi(1.5, 3500)
+        await self.bot.movepi(1.75, 3000)
+        await self.bot.attack()
+        await self.bot.wait_for_onmap()
         logger('### group 4 ###')
-        await self.bot.open_map()
-        cmd = f'input swipe {int(self.xy.width*0.3)} {int(self.xy.height*0.5)} {int(self.xy.width*0.6)} {int(self.xy.height*0.5)} 1500'
-        await self.bot.dev.shell(cmd)
-        await aio.sleep(3)
-        await self.bot.use_teleporter(int(self.xy.width*483/2400), int(self.xy.height*329/1080))
+        await self.bot.use_teleporter(449/2400, 547/1080) # Spatial Terminal
         await self.bot.move('s', 3500)
         await self.bot.move('se', 3700)
         await self.bot.attack()
@@ -259,8 +253,7 @@ class World:
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         logger('### group 5 ###')
-        await self.bot.open_map()
-        await self.bot.use_teleporter(int(self.xy.width*1010/2400), int(self.xy.height*290/1080))
+        await self.bot.use_teleporter(771/2400, 474/1080, debug=True) # Spatial Terminal
         await self.bot.move('s', 3500)
         await self.bot.move('se', 5700)
         await self.bot.move('sw', 3000)
@@ -273,8 +266,7 @@ class World:
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         logger('### group 6 ###')
-        await self.bot.open_map()
-        await self.bot.use_teleporter(int(self.xy.width*1010/2400), int(self.xy.height*335/1080))
+        await self.bot.use_teleporter(742/2400, 370/1080)
         await self.bot.move('s', 3500)
         await self.bot.move('se', 11200)
         await self.bot.move('e', 4000)
@@ -287,31 +279,25 @@ class World:
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         logger('### group 7 ###')
-        await self.bot.open_map()
-        cmd = f'input swipe {int(self.xy.width*0.5)} {int(self.xy.height*0.5)} {int(self.xy.width*0.5)} {int(self.xy.height*0.2)} 1500'
-        await self.bot.dev.shell(cmd)
-        await aio.sleep(3)
-        await self.bot.use_teleporter(int(self.xy.width*1363/2400), int(self.xy.height*833/1080))
+        await self.bot.use_teleporter(1226/2400, 844/1080, move_y=-0.1) # Bud of Aether
         await self.bot.move('sw', 3000)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 7 ###')
-        await self.bot.open_map()
-        await self.bot.use_teleporter(int(self.xy.width*471/2400), int(self.xy.height*800/1080))
+        logger('### group 7 ###') # TODO: bad fight order
+        await self.bot.use_teleporter(633/2400, 721/1080, confirm=True) # Fortuna Augurstead
         await self.bot.move('n', 4000)
         await self.bot.move('nw', 1000)
         await self.bot.move('w', 1500)
         await self.bot.move('nw', 2000)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 7, part 2 ###') # stability: roamer
+        logger('### group 7, part 2 ###') # roamer
         await self.bot.wait_for_onmap()
         await self.bot.move('e', 100)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         logger('### group 8 ###')
-        await self.bot.open_map()
-        await self.bot.use_teleporter(int(self.xy.width*725/2400), int(self.xy.height*676/1080))
+        await self.bot.use_teleporter(801/2400, 721/1080, confirm=True) # Fortuna Augurstead
         await self.bot.move('n', 4000)
         await self.bot.move('nw', 1000)
         await self.bot.move('w', 1500)
@@ -320,16 +306,12 @@ class World:
         await self.bot.move('n', 1000)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 8, part 2 ###') # stability: roamer
+        logger('### group 8, part 2 ###') # roamer
         await self.bot.move('w', 2000)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         logger('### group 9 ###')
-        await self.bot.open_map()
-        cmd = f'input swipe {int(self.xy.width*0.5)} {int(self.xy.height*0.5)} {int(self.xy.width*0.5)} {int(self.xy.height*0.3)} 1500'
-        await self.bot.dev.shell(cmd)
-        await aio.sleep(3)
-        await self.bot.use_teleporter(int(self.xy.width*685/2400), int(self.xy.height*865/1080))
+        await self.bot.use_teleporter(779/2400, 911/1080, confirm=True) # Fortuna Augurstead
         await self.bot.move('n', 4000)
         await self.bot.move('nw', 1000)
         await self.bot.move('w', 1500)
@@ -340,17 +322,17 @@ class World:
         await self.bot.attack()
         await self.bot.wait_for_onmap()
 
-    async def farm_artisan_commission(self):
-        await self.bot.switch_map(0.5231)
+    async def farm_artisanship_commission(self):
+        logger('farm: Artisanship Commission')
+        await self.bot.switch_map(576/1080, scroll_down=True)
         logger('### group 1 ###')
-        await self.bot.use_teleporter(int(self.xy.width*0.5121), int(self.xy.height*0.10926))
+        await self.bot.use_teleporter(1139/2400, 252/1080, open_map=False) # Passage of the Finery Foundry
         await self.bot.move('n', 5400)
         await self.bot.move('e', 6000)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         logger('### group 2 ###')
-        await self.bot.open_map()
-        await self.bot.use_teleporter(int(self.xy.width*0.3333), int(self.xy.height*0.6685))
+        await self.bot.use_teleporter(934/2400, 659/1080) # Passage of the Finery Foundry
         await self.bot.move('n', 9500)
         await self.bot.move('w', 1000)
         await self.bot.sleep(2)
@@ -358,8 +340,7 @@ class World:
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         logger('### group 3 ###')
-        await self.bot.open_map()
-        await self.bot.use_teleporter(int(self.xy.width*0.4358), int(self.xy.height*0.78056))
+        await self.bot.use_teleporter(1016/2400, 735/1080) # Passage of the Finery Foundry
         await self.bot.move('n', 10700)
         await self.bot.move('e', 3900)
         await self.bot.move('n', 5800)
@@ -369,24 +350,18 @@ class World:
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         logger('### group 4 ###')
-        await self.bot.open_map()
-        cmd = f'input swipe {int(self.xy.width*0.4)} {int(self.xy.height*0.5)} {int(self.xy.width*0.6)} {int(self.xy.height*0.5)} 1500'
-        await self.bot.dev.shell(cmd)
-        await aio.sleep(3)
-        await self.bot.use_teleporter(int(self.xy.width*0.27917), int(self.xy.height*0.812))
-        logger('### group 5 ###')
+        await self.bot.use_teleporter(484/2400, 759/1080) # Passage to the Sapientia Academe
         await self.bot.move('n', 7000)
         await self.bot.move('ne', 500)
         await self.bot.move('e', 5200)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 6 ###')
+        logger('### group 4, part 2 ###') # TODO: attack misses
         await self.bot.move('w', 4000)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 7 ###') # Problem
-        await self.bot.open_map()
-        await self.bot.use_teleporter(int(self.xy.width*1173/2400), int(self.xy.height*656/1080))
+        logger('### group 5 ###')
+        await self.bot.use_teleporter(896/2400, 614/1080) # Passage to the Sapientia Academe
         await self.bot.move('n', 7000)
         await self.bot.move('ne', 500)
         await self.bot.move('e', 6000)
@@ -394,29 +369,25 @@ class World:
         await self.bot.move('s', 750)
         await self.bot.move('w', 4500)
         await self.bot.move('s', 750)
-        await self.bot.move('e', 2000)
-        await self.bot.move('se', 2200)
+        await self.bot.movepi(1.72, 2800)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 7, part 2 ###')
-        await self.bot.move('w', 1200)
+        logger('### group 5, part 2 ###')
+        await self.bot.movepi(0.3, 1300)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        # TODO: check this part (8-10)
-        logger('### group 8 ###')
-        await self.bot.open_map()
-        await self.bot.use_teleporter(int(self.xy.width*1047/2400), int(self.xy.height*781/1080))
+        logger('### group 6 ###')
+        await self.bot.use_teleporter(895/2400, 700/1080) # Passage to the Sapientia Academe
         await self.bot.move('sw', 3000)
         await self.bot.move('w', 8000)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 8, part 2 ###')
+        logger('### group 6, part 2 ###')
         await self.bot.move('s', 1500)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 9 ###')
-        await self.bot.open_map()
-        await self.bot.use_teleporter(int(self.xy.width*810/2400), int(self.xy.height*247/1080))
+        logger('### group 7 ###')
+        await self.bot.use_teleporter(863/2400, 346/1080) # Passage to the Sapientia Academe
         await self.bot.move('sw', 3000)
         await self.bot.move('w', 8000)
         await self.bot.move('s', 1500)
@@ -425,16 +396,12 @@ class World:
         await self.bot.move('w', 500)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 10 ###')
-        await self.bot.move('w', 3000)
+        logger('### group 8 ###')
+        await self.bot.move('w', 2800)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 11 ###')
-        await self.bot.open_map()
-        cmd = f'input swipe {int(self.xy.width*0.5)} {int(self.xy.height*0.3)} {int(self.xy.width*0.5)} {int(self.xy.height*0.6)} 1500'
-        await self.bot.dev.shell(cmd)
-        await aio.sleep(3)
-        await self.bot.use_teleporter(int(self.xy.width*880/2400), int(self.xy.height*232/1080))
+        logger('### group 9 ###')
+        await self.bot.use_teleporter(893/2400, 109/1080) # Passage to the Sapientia Academe
         await self.bot.move('sw', 3000)
         await self.bot.move('w', 8000)
         await self.bot.move('s', 1500)
@@ -448,21 +415,17 @@ class World:
         await self.bot.move('w', 8000)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 11, part 2 ###') # stability: roamer
+        logger('### group 9, part 2 ###') # roamer; TODO: far away
         await self.bot.move('w', 2000)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 12 ###')
+        logger('### group 10 ###')
         await self.bot.move('w', 2000)
         await self.bot.move('sw', 1000)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 13 ###')
-        await self.bot.open_map()
-        cmd = f'input swipe {int(self.xy.width*0.5)} {int(self.xy.height*0.4)} {int(self.xy.width*0.4)} {int(self.xy.height*0.6)} 1500'
-        await self.bot.dev.shell(cmd)
-        await aio.sleep(3)
-        await self.bot.use_teleporter(int(self.xy.width*1326/2400), int(self.xy.height*267/1080))
+        logger('### group 11 ###')
+        await self.bot.use_teleporter(1266/2400, 213/1080) # Creation Furnace
         await self.bot.move('w', 1000)
         await self.bot.move('s', 900)
         await self.bot.move('e', 1800)
@@ -472,19 +435,17 @@ class World:
         await self.bot.move('se', 300)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 13, part 2 ###') # stability: roamer
+        logger('### group 12, part 2 ###') # roamer; TODO: monster far away
         await self.bot.move('e', 500)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        # TODO: optimize, monster far away
-        logger('### group 13, part 3 ###') # stability: roamer
+        logger('### group 12, part 3 ###') # roamer; TODO: monster far away
         await self.bot.move('ne', 1500)
         await self.bot.move('e', 2000)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 14 ###')
-        await self.bot.open_map()
-        await self.bot.use_teleporter(int(self.xy.width*980/2400), int(self.xy.height*216/1080))
+        logger('### group 13 ###')
+        await self.bot.use_teleporter(975/2400, 319/1080) # Creation Furnace
         await self.bot.move('w', 1000)
         await self.bot.move('s', 900)
         await self.bot.move('e', 1800)
@@ -497,15 +458,16 @@ class World:
         await self.bot.move('w', 500)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 14, part 2 ###')
+        logger('### group 13, part 2 ###') # TODO: monster far awaz
         await self.bot.move('nw', 1000)
         await self.bot.attack()
         await self.bot.wait_for_onmap(min_duration=20)
 
     async def farm_fyxestroll_garden(self):
-        await self.bot.switch_map(0.6296)
-        # group 1
-        await self.bot.use_teleporter(int(self.xy.width*0.2825), int(self.xy.height*0.40926))
+        logger('farm: Fyxestroll Garden')
+        await self.bot.switch_map(688/1080, scroll_down=True)
+        logger('### group 1 ###')
+        await self.bot.use_teleporter(771/2400, 474/1080, open_map=False) # Cavern of Corrosion
         await self.bot.move('s', 1000)
         await self.bot.move('e', 4000)
         await self.bot.move('s', 500)
@@ -515,9 +477,8 @@ class World:
         await self.bot.move('n', 500)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        # group 2
-        await self.bot.open_map()
-        await self.bot.use_teleporter(int(self.xy.width*0.4417), int(self.xy.height*0.699))
+        logger('### group 2 ###')
+        await self.bot.use_teleporter(845/2400, 685/1080) # Cavern of Corrosion
         await self.bot.move('s', 1000)
         await self.bot.move('e', 4000)
         await self.bot.move('se', 2500)
@@ -526,23 +487,23 @@ class World:
         await self.bot.move('n', 1100)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        # group 3
+        logger('### group 3 ###')
         await self.bot.move('e', 750)
         await self.bot.move('ne', 1100)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        # group 4
-        await self.bot.open_map()
-        await self.bot.use_teleporter(int(self.xy.width*0.3183), int(self.xy.height*0.7704))
-        await self.bot.move('s', 5000)
+        logger('### group 4 ###')
+        await self.bot.use_teleporter(580/2400, 727/1080) # Locufox Forest Backdoor
+        await self.bot.movepi(1.5, 4700)
+        await self.bot.movepi(1.25, 500)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        # group 5 | check this
+        logger('### group 5 ###')
+        await self.bot.movepi(0.19, 1100)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        # group 6
-        await self.bot.open_map()
-        await self.bot.use_teleporter(int(self.xy.width*0.3183), int(self.xy.height*0.3537))
+        logger('### group 6 ###')
+        await self.bot.use_teleporter(579/2400, 439/1080) # Locufox Forest Backdoor
         await self.bot.move('s', 6500)
         await self.bot.move('se', 2000)
         await self.bot.move('s', 1000)
@@ -555,12 +516,8 @@ class World:
         await self.bot.move('w', 1800)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        # group 7
-        await self.bot.open_map()
-        cmd = f'input swipe {int(self.xy.width*0.5)} {int(self.xy.height*0.2)} {int(self.xy.width*0.5)} {int(self.xy.height*0.6)} 1500'
-        await self.bot.dev.shell(cmd)
-        await aio.sleep(3)
-        await self.bot.use_teleporter(int(self.xy.width*0.31875), int(self.xy.height*0.46759))
+        logger('### group 7 ###')
+        await self.bot.use_teleporter(579/2400, 203/1080) # Locufox Forest Backdoor
         await self.bot.move('s', 6500)
         await self.bot.move('se', 2000)
         await self.bot.move('s', 1000)
@@ -573,71 +530,61 @@ class World:
         await self.bot.move('se', 1000)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        # group 8
+        logger('### group 8 ###')
         await self.bot.move('s', 4000)
         await self.bot.move('w', 3000)
         await self.bot.attack()
         await self.bot.wait_for_onmap(min_duration=30)
 
     async def farm_alchemy_commission(self):
-        # logger('farm: Alchemy Comission')
-        # await self.bot.switch_map_new(810/1080, scroll_down=True)
-        # logger('### group 1 ###')
-        # await self.bot.use_teleporter_new(907/2400, 875/1080, open_map=False, move_y=-0.3)
-        # await self.bot.move('s', 5500)
-        # await self.bot.move('sw', 2000)
-        # await self.bot.attack()
-        # await self.bot.wait_for_onmap()
-        # logger('### group 2 ###')
-        await self.bot.use_teleporter_new(1641/2400, 530/1080, debug=True)
-        sys.exit()
+        logger('farm: Alchemy Comission')
+        await self.bot.switch_map(810/1080, scroll_down=True)
+        logger('### group 1 ###')
+        await self.bot.use_teleporter(907/2400, 875/1080, open_map=False, move_y=-0.3) # Cavern of Corrosion
+        await self.bot.move('s', 5500)
+        await self.bot.move('sw', 2000)
+        await self.bot.attack()
+        await self.bot.wait_for_onmap()
+        logger('### group 2 ###')
+        await self.bot.use_teleporter(921/2400, 701/1080) # Cavern of Corrosion
         await self.bot.move('s', 5500)
         await self.bot.move('sw', 8000)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         logger('### group 3 ###')
-        await self.bot.open_map()
-        await self.bot.use_teleporter(int(self.xy.width*0.27), int(self.xy.height*0.2315))
+        await self.bot.use_teleporter(753/2400, 345/1080) # Bud of Nihility
         await self.bot.move('w', 1500)
         await self.bot.move('n', 4000)
         await self.bot.move('w', 500)
         await self.bot.move('n', 500)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        # group 4
-        logger('### group 4 ###')
-        await self.bot.open_map()
-        await self.bot.use_teleporter(int(self.xy.width*0.3721), int(self.xy.height*0.3574))
+        logger('### group 4 ###') # roamer
+        await self.bot.use_teleporter(914/2400, 439/1080) # Bud of Nihility
         await self.bot.move('w', 2500)
         await self.bot.move('n', 3000)
         await self.bot.move('w', 5000)
         await self.bot.move('s', 2500)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        # group 5
-        logger('### group 4, part 2 ###')
+        logger('### group 4, part 2 ###') # roamer
         await self.bot.move('w', 1500)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        # group 6
-        await self.bot.open_map()
-        await self.bot.use_teleporter(int(self.xy.width*0.2717), int(self.xy.height*0.4898))
-        await self.bot.move('w', 500)
-        await self.bot.move('s', 5000)
-        await self.bot.move('w', 4000)
-        await self.bot.move('s', 2000)
-        await self.bot.move('e', 5000)
-        await self.bot.move('s', 750)
-        await self.bot.move('e', 1800)
+        logger('### group 4, part 3 ###') # roamer
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        # group 7
-        await self.bot.move('s', 100)
+        logger('### group 5 ###')
+        await self.bot.use_teleporter(1025/2400, 220/1080, confirm=True)
+        await self.bot.movepi(1.37, 14000)
+        await self.bot.movepi(1.86, 5500)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        # group 8
-        await self.bot.open_map()
-        await self.bot.use_teleporter(int(self.xy.width*0.6025), int(self.xy.height*0.3102))
+        logger('### group 5, part 2 ###') # roamer
+        await self.bot.attack()
+        await self.bot.wait_for_onmap()
+        logger('### group 6 ###')
+        await self.bot.use_teleporter(1280/2400, 426/1080, confirm=True)
         await self.bot.move('n', 1500)
         await self.bot.move('nw', 6500)
         await self.bot.move('w', 6000)
@@ -647,11 +594,35 @@ class World:
         await self.bot.move('w', 500)
         await self.bot.move('sw', 500)
         await self.bot.attack()
+        await self.bot.wait_for_onmap() # 2/3
+        await self.bot.wait_for_onmap() # 1/3 roamer
+        logger('### group 7 ###') # roamer
+        await self.bot.use_teleporter(596/2400, 695/1080)
+        await self.bot.movepi(0.5, 10000)
+        await self.bot.movepi(0.75, 2000)
+        await self.bot.movepi(1.0, 2000)
+        await self.bot.attack()
+        await self.bot.sleep(0.5)
+        await self.bot.movepi(0.0, 400)
+        await self.bot.movepi(1.5, 4000)
+        await self.bot.movepi(1.0, 1300)
+        await self.bot.movepi(0.5, 500)
+        await self.bot.attack()
+        await self.bot.wait_for_onmap(min_duration=30)
+        logger('### group 7, part 2 ###')
+        await self.bot.movepi(0.5, 1000)
+        await self.bot.attack()
         await self.bot.wait_for_onmap()
-        await self.bot.wait_for_onmap() # stability: in case of only 2/3
-        # group 9
-        await self.bot.open_map()
-        await self.bot.use_teleporter(int(self.xy.width*0.25833), int(self.xy.height*0.475))
+        logger('### group 8 ###')
+        # await self.bot.use_teleporter(839/2400, 304/1080)
+        await self.bot.movepi(0.5, 6700)
+        await self.bot.movepi(0.0, 3500)
+        await self.bot.movepi(1.5, 3600)
+        await self.bot.movepi(0.0, 4000)
+        await self.bot.attack()
+        await self.bot.wait_for_onmap()
+        logger('### group 9 ###') # TODO: improve pathing with movepi
+        await self.bot.use_teleporter(1000/2400, 270/1080)
         await self.bot.move('n', 1500)
         await self.bot.move('w', 500)
         await self.bot.move('n', 1500)
@@ -667,9 +638,8 @@ class World:
         await self.bot.move('e', 1000)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        # group 10
-        await self.bot.open_map()
-        await self.bot.use_teleporter(int(self.xy.width*0.5479), int(self.xy.height*0.48796))
+        logger('### group 10 ###')
+        await self.bot.use_teleporter(1000/2400, 530/1080)
         await self.bot.move('n', 1500)
         await self.bot.move('w', 500)
         await self.bot.move('n', 1500)
@@ -694,12 +664,11 @@ class World:
         await self.bot.move('s', 1200)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        # group 11
+        logger('### group 10, part 2 ###')
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        # group 12
-        await self.bot.open_map()
-        await self.bot.use_teleporter(int(self.xy.width*0.5833), int(self.xy.height*0.6852))
+        logger('### group 11 ###')
+        await self.bot.use_teleporter(1004/2400, 675/1080)
         await self.bot.move('n', 1500)
         await self.bot.move('w', 500)
         await self.bot.move('n', 1500)
@@ -733,15 +702,14 @@ class World:
         await self.bot.move('w', 2250)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        # group 12, part 2
-        await self.bot.move('w', 250)
+        logger('### group 11, part 2 ###')
         await self.bot.attack()
         await self.bot.wait_for_onmap()
 
     async def farm_scalegorge_waterscape(self):
-        await self.bot.switch_map_new(0.85, open_map=False, scroll_down=True)
+        await self.bot.switch_map(0.85, open_map=False, scroll_down=True)
         logger('### group 1 ###')
-        await self.bot.use_teleporter_new(1641/2400, 530/1080, open_map=False)
+        await self.bot.use_teleporter(1641/2400, 530/1080, open_map=False)
         await self.bot.move('s', 4400)
         await self.bot.move('e', 2000)
         await self.bot.move('n', 3300)
@@ -749,7 +717,7 @@ class World:
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         logger('### group 2 ###')
-        await self.bot.use_teleporter_new(357/2400, 612/1080)
+        await self.bot.use_teleporter(357/2400, 612/1080)
         await self.bot.move('w', 5400)
         await self.bot.move('s', 1300)
         await self.bot.move('w', 6500)
@@ -765,19 +733,19 @@ class World:
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         logger('### group 3 ###')
-        await self.bot.use_teleporter_new(693/2400, 695/1080) # Bud of Destruction
+        await self.bot.use_teleporter(693/2400, 695/1080) # Bud of Destruction
         await self.bot.move('s', 10500)
         await self.bot.move('e', 333)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         logger('### group 4 ###')
-        await self.bot.use_teleporter_new(962/2400, 692/1080) # Bud of Destruction
+        await self.bot.use_teleporter(962/2400, 692/1080) # Bud of Destruction
         await self.bot.move('s', 7100)
         await self.bot.move('w', 9000)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         logger('### group 5 ###')
-        await self.bot.use_teleporter_new(816/2400, 695/1080) # Bud of Destruction
+        await self.bot.use_teleporter(816/2400, 695/1080) # Bud of Destruction
         await self.bot.move('s', 1600)
         await self.bot.move('e', 3000)
         for _ in range(12):
@@ -793,20 +761,20 @@ class World:
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         logger('### group 7 ###')
-        await self.bot.use_teleporter_new(1196/2400, 361/1080) # Palace Ruin Depths
+        await self.bot.use_teleporter(1196/2400, 361/1080) # Palace Ruin Depths
         await self.bot.move('s', 3000)
         await self.bot.move('e', 6300)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         logger('### group 8 ###')
-        await self.bot.use_teleporter_new(926/2400, 618/1080)
+        await self.bot.use_teleporter(926/2400, 618/1080)
         await self.bot.move('s', 3000)
         await self.bot.move('e', 3500)
         await self.bot.move('s', 7000)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         logger('### group 9 ###')
-        await self.bot.use_teleporter_new(848/2400, 257/1080) # Stagnant Shadow
+        await self.bot.use_teleporter(848/2400, 257/1080) # Stagnant Shadow
         await self.bot.move('w', 3000)
         await self.bot.move('n', 750)
         await self.bot.move('w', 6500)
