@@ -176,7 +176,7 @@ class Bot:
         await aio.sleep(0.1)
 
     async def wait_for_onmap(self, min_duration=15, mapexit=False, debug=False):
-        logger('wait for fight to end...')
+        logger('wait for fight to end')
         await aio.sleep(min_duration)
         img_menu = cv.imread('res/edges_menu.png', cv.IMREAD_GRAYSCALE)
         img_chat = cv.imread('res/edges_chat.png', cv.IMREAD_GRAYSCALE)
@@ -185,7 +185,7 @@ class Bot:
         time_start = time()
         while check < 1:
             if debug:
-                screen = await self.adb.get_screen(dev=self.dev, custom_msg='still in fight...')
+                screen = await self.adb.get_screen(dev=self.dev, custom_msg='still in fight')
             else:
                 screen = await self.adb.get_screen(dev=self.dev, custom_msg=None)
             screen = cv.cvtColor(screen, cv.COLOR_BGR2GRAY)
@@ -205,7 +205,7 @@ class Bot:
                     check += 1
             if check > 0:
                 await aio.sleep(1)
-                logger('...out of fight')
+                logger('out of fight')
             time_running = time()
             if mapexit and (time_running - time_start > 400):
                 raise PathError

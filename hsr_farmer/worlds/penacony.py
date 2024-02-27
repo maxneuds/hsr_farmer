@@ -50,8 +50,7 @@ class World:
         await self.bot.wait_for_onmap()
         logger('### group 4 ###')
         await self.bot.open_map(penacony=True)
-        await self.bot.use_teleporter(1135/2400, 258/1080,
-                                          move_y=0.4, open_map=False, confirm=True)
+        await self.bot.use_teleporter(1334/2400, 363/1080, move_x=-0.2, move_y=0.2, open_map=False)
         await self.bot.move('n', 2800)
         await self.bot.move('w', 28000)
         await self.bot.move('nw', 1000)
@@ -61,8 +60,7 @@ class World:
         await self.bot.wait_for_onmap()
         logger('### group 5 ###')
         await self.bot.open_map(penacony=True)
-        await self.bot.use_teleporter(1135/2400, 258/1080,
-                                          move_y=0.4, open_map=False, confirm=True)
+        await self.bot.use_teleporter(1356/2400, 352/1080, move_x=-0.2, move_y=0.2, open_map=False)
         await self.bot.movepi(0.5, 2800)
         await self.bot.movepi(1.0, 28000)
         await self.bot.movepi(1.1, 700)
@@ -76,8 +74,7 @@ class World:
         await self.bot.wait_for_onmap()
         logger('### group 6 ###')
         await self.bot.open_map(penacony=True)
-        await self.bot.use_teleporter(1134/2400, 273/1080,
-                                          move_y=0.4, move_spd=700, open_map=False, confirm=True)
+        await self.bot.use_teleporter(1369/2400, 347/1080, move_x=-0.2, move_y=0.2, open_map=False)
         await self.bot.movepi(0.5, 2800)
         await self.bot.movepi(1.0, 13000)
         await self.bot.movepi(0.5, 3000)

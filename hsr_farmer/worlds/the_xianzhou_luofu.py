@@ -253,7 +253,7 @@ class World:
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         logger('### group 5 ###')
-        await self.bot.use_teleporter(771/2400, 474/1080, debug=True) # Spatial Terminal
+        await self.bot.use_teleporter(742/2400, 369/1080) # Spatial Terminal
         await self.bot.move('s', 3500)
         await self.bot.move('se', 5700)
         await self.bot.move('sw', 3000)
@@ -517,7 +517,7 @@ class World:
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         logger('### group 7 ###')
-        await self.bot.use_teleporter(579/2400, 203/1080) # Locufox Forest Backdoor
+        await self.bot.use_teleporter(581/2400, 319/1080, move_y=0.1) # Locufox Forest Backdoor
         await self.bot.move('s', 6500)
         await self.bot.move('se', 2000)
         await self.bot.move('s', 1000)
@@ -614,7 +614,7 @@ class World:
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         logger('### group 8 ###')
-        # await self.bot.use_teleporter(839/2400, 304/1080)
+        await self.bot.use_teleporter(839/2400, 304/1080) # Elixir Research Terrace
         await self.bot.movepi(0.5, 6700)
         await self.bot.movepi(0.0, 3500)
         await self.bot.movepi(1.5, 3600)

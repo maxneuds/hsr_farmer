@@ -44,30 +44,28 @@ async def main():
     ###
     # farm worlds
     ###
-    # logger('Farm: Herta Space Station') # 4/4 (7128/7128)
-    # await bot.switch_world('herta_space_station')
-    # await herta_space_station.farm_base_zone() # modified (432/432)
-    # await herta_space_station.farm_storage_zone() # modified (2592/2592)
-    # await herta_space_station.farm_supply_zone() # modified (2484/2484)
-    # await herta_space_station.farm_seclusion_zone() # modified (1620/1620)
+    logger('Farm: Herta Space Station') # 4/4 (7128/7128)
+    await bot.switch_world('herta_space_station')
+    await herta_space_station.farm_base_zone() # modified (432/432)
+    await herta_space_station.farm_storage_zone() # modified (2592/2592)
+    await herta_space_station.farm_supply_zone() # modified (2484/2484)
+    await herta_space_station.farm_seclusion_zone() # modified (1620/1620)
 
-    # logger('Farm: Penacony') # 3/3 (24300/30560 [17820])
-    # await bot.switch_world('penacony')
-    # await penacony.farm_dreams_edge() # modified (7668/9612 [7668])
-    # await penacony.farm_childs_dream() # modified (4664/5832 [2376])
+    logger('Farm: Penacony') # 3/3 (24300/30560 [17820])
+    await bot.switch_world('penacony')
+    await penacony.farm_dreams_edge() # modified (7668/9612 [7668])
+    await penacony.farm_childs_dream() # modified (4664/5832 [2376])
     await penacony.farm_reverie_dreamscape() # modified (11988/15552 [6912])
 
-    logger('Farm: The Xianzhou Luofu') # 7/7 (42164/42164)
+    logger('Farm: The Xianzhou Luofu') # 7/7 (42164/42596)
     await bot.switch_world('the_xianzhou_luofu')
-    await the_xianzhou_luofu.farm_scalegorge_waterscape() # modified (4752/4752)
-
+    await the_xianzhou_luofu.farm_scalegorge_waterscape() # checked (4752/4752)
+    await the_xianzhou_luofu.farm_alchemy_commission() # modified (6912/6912)
+    await the_xianzhou_luofu.farm_fyxestroll_garden() # modified (4644/4644)
     await the_xianzhou_luofu.farm_artisanship_commission() # modified (9548/9548)
     await the_xianzhou_luofu.farm_divination_commission() # modified (/5832)
     await the_xianzhou_luofu.farm_stargazer_navalia() # modified (6264/6264)
     await the_xianzhou_luofu.farm_cloudford() # modified (4644/4644)
-
-    # await the_xianzhou_luofu.farm_alchemy_commission() # modified (/6480 [6156]) ?
-    # await the_xianzhou_luofu.farm_fyxestroll_garden() # modified (/4644) ?
 
     logger('Farm: Jarilo-VI') # 7/7 (19440/19440)
     await bot.switch_world('jarilo_vi')
