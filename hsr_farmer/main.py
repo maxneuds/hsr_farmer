@@ -29,7 +29,7 @@ async def main():
     xy = OnePlus7T()
     adb = ADB()
     dev = await adb.get_dev()
-    bot = Bot(adb=adb, dev=dev, xy=xy)
+    bot = Bot(adb=adb, dev=dev, xy=xy, character_speed=1.00) # movement animatiopn speed base value: Acheron (Bronya)
 
     ###
     # load worlds
@@ -42,41 +42,43 @@ async def main():
     # total mapped xp: 93k/100k
     # time: 4h30
 
+    # TODO: Switch character to Bronya
+
     ###
     # farm worlds
-    ###
-    logger('Farm: Herta Space Station') # 4/4 (7128/7128)
-    await bot.switch_world('herta_space_station')
-    await herta_space_station.farm_base_zone() # verified (432/432)
-    await herta_space_station.farm_storage_zone() # verified (2592/2592)
-    await herta_space_station.farm_supply_zone() # verified (2484/2484)
-    await herta_space_station.farm_seclusion_zone() # verified (1620/1620)
+    # ###
+    # logger('\n\nFarm: Herta Space Station\n') # 4/4 (7128/7128)
+    # await bot.switch_world('herta_space_station')
+    # await herta_space_station.farm_base_zone() # unchecked (432/432)
+    # await herta_space_station.farm_storage_zone() # unchecked (2592/2592)
+    # await herta_space_station.farm_supply_zone() # unchecked (2484/2484)
+    # await herta_space_station.farm_seclusion_zone() # unchecked (1620/1620)
 
-    logger('Farm: Penacony') # 3/3 (24300/30560 [17820])
-    await bot.switch_world('penacony')
-    await penacony.farm_dreams_edge() # verified (7668/9612 [7668])
-    await penacony.farm_childs_dream() # verified (4664/5832 [2376])
-    await penacony.farm_reverie_dreamscape() # verified (11988/15552 [6912])
+    # logger('\n\nFarm: Penacony\n') # 3/3 (24300/30560 [17820])
+    # await bot.switch_world('penacony')
+    # await penacony.farm_dreams_edge() # unchecked (7668/9612 [7668])
+    # await penacony.farm_childs_dream() # unchecked (4664/5832 [2376])
+    # await penacony.farm_reverie_dreamscape() # unchecked (11988/15552 [6912])
 
-    logger('Farm: The Xianzhou Luofu') # 7/7 (42164/42596)
-    await bot.switch_world('the_xianzhou_luofu')
-    await the_xianzhou_luofu.farm_scalegorge_waterscape() # checked (4752/4752)
-    await the_xianzhou_luofu.farm_alchemy_commission() # verified (6912/6912)
-    await the_xianzhou_luofu.farm_fyxestroll_garden() # verified (4644/4644)
-    await the_xianzhou_luofu.farm_artisanship_commission() # verified (9548/9548)
-    await the_xianzhou_luofu.farm_divination_commission() # verified (/5832)
-    await the_xianzhou_luofu.farm_stargazer_navalia() # verified (6264/6264)
-    await the_xianzhou_luofu.farm_cloudford() # verified (4644/4644)
+    # logger('\n\nFarm: The Xianzhou Luofu\n') # 7/7 (42164/42596)
+    # await bot.switch_world('the_xianzhou_luofu')
+    # await the_xianzhou_luofu.farm_scalegorge_waterscape() # checked (4752/4752)
+    # await the_xianzhou_luofu.farm_alchemy_commission() # modified (6912/6912)
+    # await the_xianzhou_luofu.farm_fyxestroll_garden() # checked (4644/4644)
+    # await the_xianzhou_luofu.farm_artisanship_commission() # checked (9548/9548)
+    # await the_xianzhou_luofu.farm_divination_commission() # checked (/5832)
+    # await the_xianzhou_luofu.farm_stargazer_navalia() # modified (6264/6264)
+    # await the_xianzhou_luofu.farm_cloudford() # checked (4644/4644)
 
-    logger('Farm: Jarilo-VI') # 7/7 (19440/19440)
-    await bot.switch_world('jarilo_vi')
-    await jarilo_vi.farm_outlying_snow_plains() # verified (2052/2052)
-    await jarilo_vi.farm_backwater_pass() # verified (3024/3024)
-    await jarilo_vi.farm_corridor() # verified (3672/3672)
-    await jarilo_vi.farm_everwinter_hill() # verified (1404/1404)
-    await jarilo_vi.farm_great_mine() # verified  (4536/4536)
-    await jarilo_vi.farm_rivet_town() # verified (2160/2160)
-    await jarilo_vi.farm_robot_settlement() # verified (2592/2592)
+    # logger('\n\nFarm: Jarilo-VI\n') # 7/7 (19440/19440)
+    # await bot.switch_world('jarilo_vi')
+    # await jarilo_vi.farm_outlying_snow_plains() # checked (2052/2052)
+    # await jarilo_vi.farm_backwater_pass() # checked (3024/3024)
+    # await jarilo_vi.farm_corridor() # checked (3672/3672)
+    # await jarilo_vi.farm_everwinter_hill() # checked (1404/1404)
+    # await jarilo_vi.farm_great_mine() # checked  (4536/4536)
+    # await jarilo_vi.farm_rivet_town() # checked (2160/2160)
+    # await jarilo_vi.farm_robot_settlement() # checked (2592/2592)
 
 if __name__ == '__main__':
     aio.run(main())

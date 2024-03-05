@@ -12,10 +12,11 @@ def logger(msg):
 class PathError(Exception): pass
 
 class Bot:
-    def __init__(self, adb, dev, xy):
+    def __init__(self, adb, dev, xy, character_speed=1):
         self.adb = adb
         self.dev = dev
         self.xy = xy
+        self.character_speed = character_speed
 
     async def sleep(self, duration):
         logger(f'sleep for {duration} seconds...')
@@ -43,7 +44,7 @@ class Bot:
         logger(f'move {direction} pi for {duration/1000} seconds')
         x = self.xy.vjoy['center'][0] + self.xy.vjoy['r'] * np.cos(direction*np.pi)
         y = self.xy.vjoy['center'][1] - self.xy.vjoy['r'] * np.sin(direction*np.pi)
-        cmd = f'input swipe {x} {y} {x} {y} {duration}'
+        cmd = f'input swipe {x} {y} {x} {y} {int(duration*self.character_speed)}'
         await self.dev.shell(cmd)
 
     async def open_map(self, penacony=False):
