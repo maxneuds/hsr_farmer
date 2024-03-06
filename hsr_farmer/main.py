@@ -47,18 +47,18 @@ async def main():
     ###
     # farm worlds
     # ###
-    # logger('\n\nFarm: Herta Space Station\n') # 4/4 (7128/7128)
+    # logger('\n\nFarm: Herta Space Station\n') # 4/4 (7128/7128) 
     # await bot.switch_world('herta_space_station')
-    # await herta_space_station.farm_base_zone() # unchecked (432/432)
-    # await herta_space_station.farm_storage_zone() # unchecked (2592/2592)
-    # await herta_space_station.farm_supply_zone() # unchecked (2484/2484)
-    # await herta_space_station.farm_seclusion_zone() # unchecked (1620/1620)
+    # await herta_space_station.farm_base_zone() # checked (432/432)
+    # await herta_space_station.farm_storage_zone() # checked (2592/2592)
+    # await herta_space_station.farm_supply_zone() # checked (2484/2484)
+    # await herta_space_station.farm_seclusion_zone() # checked (1620/1620)
 
-    # logger('\n\nFarm: Penacony\n') # 3/3 (24300/30560 [17820])
+    logger('\n\nFarm: Penacony\n') # 3/3 (24300/30560 [17820])
     # await bot.switch_world('penacony')
-    # await penacony.farm_dreams_edge() # unchecked (7668/9612 [7668])
-    # await penacony.farm_childs_dream() # unchecked (4664/5832 [2376])
-    # await penacony.farm_reverie_dreamscape() # unchecked (11988/15552 [6912])
+    # await penacony.farm_dreams_edge() # checked (7668/9612 [7668])
+    # await penacony.farm_childs_dream() # checked (4664/5832 [2376])
+    await penacony.farm_reverie_dreamscape() # unchecked (11988/15552 [6912]) 21132
 
     # logger('\n\nFarm: The Xianzhou Luofu\n') # 7/7 (42164/42596)
     # await bot.switch_world('the_xianzhou_luofu')
