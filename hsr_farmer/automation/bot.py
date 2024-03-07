@@ -51,32 +51,35 @@ class Bot:
         logger('open map')
         await aio.sleep(0.1)
         await self.dev.shell(f'input tap {self.xy.map[0]} {self.xy.map[1]}')
-        await aio.sleep(3)
+        await aio.sleep(2.5)
+        await self.check_map_zoom_level() # in case of map already open, already done by the previous instance
         if penacony == True:
             await self.dev.shell(f'input tap {int(self.xy.width*2135/2400)} {int(self.xy.height*138/1080)}')
-            await aio.sleep(3)
-
-    # doesn't work
-    async def zoom_map(self):
-        logger('zoom map')
-        await aio.sleep(0.1)
-        bot_left = (int(self.xy.width*0.2), int(self.xy.height*0.8))
-        top_right = (int(self.xy.width*0.6), int(self.xy.height*0.2))
-        mid = (int(self.xy.width*0.4), int(self.xy.height*0.5))
-        cmd = f'input swipe {bot_left[0]} {bot_left[1]} {mid[0]} {mid[1]} 1500 & input swipe {top_right[0]} {top_right[1]} {mid[0]} {mid[1]} 1500'
-        await self.dev.shell(cmd)
+            await aio.sleep(2.5)
+        
+    async def check_map_zoom_level(self):
+        logger('check map zoom level')
+        img_zoombar_min = cv.imread('res/zoombar_min.png', cv.IMREAD_COLOR)
+        screen = await self.adb.get_screen(dev=self.dev, custom_msg=None)
+        screen_zoombar = screen[int(self.xy.height*965/1080):int(self.xy.height*1015/1080), int(self.xy.width*780/2400):int(self.xy.width*1250/2400)]
+        matches = cv.matchTemplate(screen_zoombar, img_zoombar_min, cv.TM_CCOEFF_NORMED)
+        min_val, max_val, min_loc, max_loc = cv.minMaxLoc(matches)
+        if max_val < 0.95: # map isn't on min zoom, change zoom level
+            logger('zoom map to min')
+            for _ in range(20):
+                await self.dev.shell(f'input tap {self.xy.width*783/2400} {self.xy.height*993/1080}')
+                await aio.sleep(0.075)
+            await aio.sleep(0.1)
+            logger('re-open map')
+            await self.dev.shell(f'input keyevent 4')
+            await aio.sleep(2.5)
+            await self.open_map()
 
     async def use_teleporter(self, x, y, move_x=0, move_y=0, move_spd=1000, open_map=True, confirm=False, debug=False):
         # open map
         if open_map:
             await self.open_map()
-        logger(f'use teleporter: {int(self.xy.width*x)},{int(self.xy.height*y)}; move map by {move_x},{move_y}')
-        # zoom map to max
-        for _ in range(20):
-            await self.dev.shell(f'input tap {self.xy.width*783/2400} {self.xy.height*993/1080}')
-            await aio.sleep(0.075)
-        await aio.sleep(0.5)
-        # move map
+        logger(f'use teleporter: {int(self.xy.width*x)},{int(self.xy.height*y)}; move map by {move_x},{move_y}')# move map
         if move_x != 0 or move_y != 0:
             cmd = f'input swipe {int(self.xy.width*0.45)} {int(self.xy.height*0.5)} {int(self.xy.width*(0.45+move_x))} {int(self.xy.height*(0.5+move_y))} {move_spd}'
             await self.dev.shell(cmd)
@@ -109,7 +112,7 @@ class Bot:
             y2 = int(self.xy.height*0.8)
         cmd = f'input swipe {x} {y1} {x} {y2} 250'
         await self.dev.shell(cmd)
-        await self.sleep(3)
+        await aio.sleep(3)
         if debug:
             await self.adb.get_screen(dev=self.dev, debug=True)
             sys.exit()
