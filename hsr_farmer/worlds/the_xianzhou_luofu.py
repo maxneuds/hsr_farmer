@@ -123,7 +123,7 @@ class World:
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         logger('### group 3 ###')
-        await self.bot.use_teleporter(957/2400, 364/1080, debug=True) # Ship Nursery - The Burgeoning
+        await self.bot.use_teleporter(955/2400, 366/1080) # Ship Nursery - The Burgeoning
         await self.bot.movepi(0.95, 2000)
         await self.bot.movepi(0.65, 1900)
         await self.bot.movepi(1.0, 1800)
@@ -376,12 +376,12 @@ class World:
         await self.bot.movepi(0.00, 5300)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 4, part 2 ###') # TODO: attack misses
-        await self.bot.movepi(1.0, 4000)
+        logger('### group 4, part 2 ###')
+        await self.bot.movepi(1.0, 3700)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         logger('### group 5 ###')
-        await self.bot.use_teleporter(896/2400, 614/1080) # Passage to the Sapientia Academe
+        await self.bot.use_teleporter(895/2400, 622/1080) # Passage to the Sapientia Academe
         await self.bot.movepi(0.5, 7100)
         await self.bot.movepi(0.25, 500)
         await self.bot.movepi(0.00, 6100)
@@ -435,53 +435,50 @@ class World:
         await self.bot.movepi(1.0, 8000)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 9, part 2 ###') # roamer; TODO: far away
-        await self.bot.movepi(1.0, 2000)
+        logger('### group 9, part 2 ###') # roamer
+        await self.bot.movepi(1.0, 3000)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         logger('### group 10 ###')
-        await self.bot.movepi(1.0, 2000)
-        await self.bot.movepi(1.25, 1000)
+        await self.bot.movepi(1.18, 1800)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         logger('### group 11 ###')
-        await self.bot.use_teleporter(1266/2400, 213/1080) # Creation Furnace
-        await self.bot.movepi(1.0, 1000)
+        await self.bot.use_teleporter(1265/2400, 213/1080) # Creation Furnace
+        await self.bot.movepi(1.0, 1100)
         await self.bot.movepi(1.5, 900)
         await self.bot.movepi(0.00, 1800)
         await self.bot.movepi(0.5, 2500)
-        await self.bot.movepi(0.00, 3200)
+        await self.bot.movepi(0.00, 3300)
         await self.bot.movepi(1.5, 3000)
-        await self.bot.movepi(1.75, 300)
+        await self.bot.movepi(1.75, 1000)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 12, part 2 ###') # roamer; TODO: monster far away
-        await self.bot.movepi(0.00, 500)
+        logger('### group 12, part 2 ###') # roamer
         await self.bot.attack()
-        await self.bot.wait_for_onmap()
-        logger('### group 12, part 3 ###') # roamer; TODO: monster far away
-        await self.bot.movepi(0.25, 1500)
-        await self.bot.movepi(0.00, 2000)
+        await self.bot.wait_for_onmap(min_duration=5)
+        logger('### group 12, part 3 ###') # roamer
+        await self.bot.movepi(0.15, 3800)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
         logger('### group 13 ###')
-        await self.bot.use_teleporter(975/2400, 319/1080) # Creation Furnace
-        await self.bot.movepi(1.0, 1000)
+        await self.bot.use_teleporter(966/2400, 315/1080) # Creation Furnace
+        await self.bot.movepi(1.0, 1100)
         await self.bot.movepi(1.5, 900)
         await self.bot.movepi(0.00, 1800)
         await self.bot.movepi(0.5, 2500)
-        await self.bot.movepi(0.00, 3200)
+        await self.bot.movepi(0.00, 3300)
         await self.bot.movepi(1.5, 3000)
         await self.bot.movepi(1.75, 1000)
         await self.bot.movepi(0.25, 4500)
-        await self.bot.movepi(0.5, 5500)
-        await self.bot.movepi(1.0, 500)
+        await self.bot.movepi(0.5, 5700)
+        await self.bot.movepi(1.05, 1000)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 13, part 2 ###') # TODO: monster far awaz
-        await self.bot.movepi(0.75, 1000)
+        logger('### group 13, part 2 ###')
+        await self.bot.movepi(0.6, 1800)
         await self.bot.attack()
-        await self.bot.wait_for_onmap(min_duration=20)
+        await self.bot.wait_for_onmap()
 
     async def farm_fyxestroll_garden(self):
         logger('farm: Fyxestroll Garden')
@@ -638,7 +635,7 @@ class World:
         logger('### group 7, part 2 ###')
         await self.bot.movepi(1.25, 500)
         await self.bot.attack()
-        # await self.bot.wait_for_onmap()
+        await self.bot.wait_for_onmap()
         logger('### group 8 ###')
         await self.bot.use_teleporter(839/2400, 304/1080) # Elixir Research Terrace
         await self.bot.movepi(0.5, 6900)

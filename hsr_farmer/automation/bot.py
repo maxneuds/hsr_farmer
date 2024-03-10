@@ -52,28 +52,31 @@ class Bot:
         await aio.sleep(0.1)
         await self.dev.shell(f'input tap {self.xy.map[0]} {self.xy.map[1]}')
         await aio.sleep(2.5)
-        await self.check_map_zoom_level() # in case of map already open, already done by the previous instance
         if penacony == True:
             await self.dev.shell(f'input tap {int(self.xy.width*2135/2400)} {int(self.xy.height*138/1080)}')
             await aio.sleep(2.5)
+        await self.check_map_zoom_level(penacony=penacony) # in case of map already open, already done by the previous instance
         
-    async def check_map_zoom_level(self):
+    async def check_map_zoom_level(self, penacony=False):
         logger('check map zoom level')
-        img_zoombar_min = cv.imread('res/zoombar_min.png', cv.IMREAD_COLOR)
         screen = await self.adb.get_screen(dev=self.dev, custom_msg=None)
+        # img_zoombar_min = cv.imread('res/zoombar_min_penacony.png', cv.IMREAD_COLOR)
+        # screen_zoombar = screen[int(self.xy.height*980/1080):int(self.xy.height*1000/1080), int(self.xy.width*1054/2400):int(self.xy.width*1078/2400)]
+        img_zoombar_min = cv.imread('res/zoombar_min.png', cv.IMREAD_COLOR)
         screen_zoombar = screen[int(self.xy.height*965/1080):int(self.xy.height*1015/1080), int(self.xy.width*780/2400):int(self.xy.width*1250/2400)]
         matches = cv.matchTemplate(screen_zoombar, img_zoombar_min, cv.TM_CCOEFF_NORMED)
         min_val, max_val, min_loc, max_loc = cv.minMaxLoc(matches)
         if max_val < 0.95: # map isn't on min zoom, change zoom level
             logger('zoom map to min')
             for _ in range(20):
+                # await self.dev.shell(f'input tap {self.xy.width*1000/2400} {self.xy.height*990/1080}') # penacony
                 await self.dev.shell(f'input tap {self.xy.width*783/2400} {self.xy.height*993/1080}')
                 await aio.sleep(0.075)
             await aio.sleep(0.1)
             logger('re-open map')
             await self.dev.shell(f'input keyevent 4')
             await aio.sleep(2.5)
-            await self.open_map()
+            await self.open_map(penacony=penacony)
 
     async def use_teleporter(self, x, y, move_x=0, move_y=0, move_spd=1000, open_map=True, confirm=False, debug=False):
         # open map
