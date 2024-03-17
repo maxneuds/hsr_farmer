@@ -191,12 +191,18 @@ class Bot:
         check = 0
         time_start = time()
         while check < 1:
-            if debug:
-                screen = await self.adb.get_screen(dev=self.dev, custom_msg='still in fight')
-            else:
-                screen = await self.adb.get_screen(dev=self.dev, custom_msg=None)
-            screen = cv.cvtColor(screen, cv.COLOR_BGR2GRAY)
-            screen = cv.Canny(screen, 400, 500)
+            success = False
+            while not success:
+                try:
+                    if debug:
+                        screen = await self.adb.get_screen(dev=self.dev, custom_msg='still in fight')
+                    else:
+                        screen = await self.adb.get_screen(dev=self.dev, custom_msg=None)
+                    screen = cv.cvtColor(screen, cv.COLOR_BGR2GRAY)
+                    screen = cv.Canny(screen, 400, 500)
+                    success = True
+                except:
+                    pass
             screen_menu = screen[0:int(self.xy.height*0.2), int(self.xy.width*0.60):int(self.xy.width*0.975)]
             screen_chat = screen[int(self.xy.height*0.85):int(self.xy.height*0.975), int(self.xy.width*0.025):int(self.xy.width*0.075)]
             screen_sprint = screen[int(self.xy.height*0.775):int(self.xy.height*0.925), int(self.xy.width*0.875):int(self.xy.width*0.95)]
@@ -208,7 +214,7 @@ class Bot:
             for i in images:
                 result = cv.matchTemplate(i[0], i[1], cv.TM_CCOEFF_NORMED)
                 min_val, max_val, min_loc, max_loc = cv.minMaxLoc(result)
-                if max_val > 0.8:
+                if max_val > 0.9:
                     check += 1
             if check > 0:
                 await aio.sleep(1)

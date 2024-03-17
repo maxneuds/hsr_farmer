@@ -1,5 +1,6 @@
 import asyncio as aio
 import subprocess
+import streamlit as st
 from sys import exit
 from datetime import datetime as dt
 from automation.bot import Bot
@@ -48,12 +49,12 @@ async def main():
     # farm worlds
     # ###
     
-    logger('\n\nFarm: Herta Space Station\n') # 4/4 (7128/7128) checked
+    logger('\n\nFarm: Herta Space Station\n') # 4/4 (7128/7128) verified
     await bot.switch_world('herta_space_station')
     await herta_space_station.farm_base_zone() # verified (432/432)
     await herta_space_station.farm_storage_zone() # verified (2592/2592)
     await herta_space_station.farm_supply_zone() # verified (2484/2484)
-    await herta_space_station.farm_seclusion_zone() # checked (1620/1620)
+    await herta_space_station.farm_seclusion_zone() # verified (1620/1620)
     
     logger('\n\nFarm: Jarilo-VI\n') # 7/7 (19440/19440) verified
     await bot.switch_world('jarilo_vi')
@@ -64,6 +65,12 @@ async def main():
     await jarilo_vi.farm_great_mine() # verified  (4536/4536)
     await jarilo_vi.farm_rivet_town() # verified (2160/2160)
     await jarilo_vi.farm_robot_settlement() # verified (2592/2592)
+
+    logger('\n\nFarm: Penacony\n') # 3/3 (26460/30560 [17820]) verified
+    await bot.switch_world('penacony')
+    await penacony.farm_dreams_edge() # verified (7668/9612 [7668])
+    await penacony.farm_childs_dream() # verified (5508/5832 [2376])
+    await penacony.farm_reverie_dreamscape() # verified (13284/15552 [6912])
     
     logger('\n\nFarm: The Xianzhou Luofu\n') # 7/7 (42596/42596) verified
     await bot.switch_world('the_xianzhou_luofu')
@@ -74,12 +81,6 @@ async def main():
     await the_xianzhou_luofu.farm_divination_commission() # verified (6000/6000)
     await the_xianzhou_luofu.farm_stargazer_navalia() # verified (6264/6264)
     await the_xianzhou_luofu.farm_cloudford() # verified (4644/4644)
-
-    logger('\n\nFarm: Penacony\n') # 3/3 (26460/30560 [17820]) modified
-    await bot.switch_world('penacony')
-    await penacony.farm_dreams_edge() # verified (7668/9612 [7668])
-    await penacony.farm_childs_dream() # modified (5508/5832 [2376])
-    await penacony.farm_reverie_dreamscape() # modified (13284/15552 [6912])
     
     logger('\n\nEnd: Return to the Express\n')
     await astral_express.parlor_car()
@@ -90,3 +91,7 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         print("\nCtrl+C detected. Exiting gracefully.")
         exit()
+    # st.title('HSR Farmer')
+    # st.selectbox('Startmap:', ('Base Zone', 'Storage Zone'))
+    # st.button('Reset', type='primary')
+    # st.write('Hello')

@@ -15,6 +15,7 @@ mss = "^9.0.1"
 pyautogui = "^0.9.54"
 pure-python-adb = "^0.3.0.dev0"
 aiofiles = "^23.2.1"
+streamlit = "^1.32.0"
 
 
 [tool.poetry.group.dev.dependencies]

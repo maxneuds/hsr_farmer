@@ -239,6 +239,8 @@ class World:
         await self.bot.movepi(0, 7300)
         await self.bot.movepi(0.5, 3500)
         await self.bot.attack()
+        await self.bot.sleep(0.5) # in case attack misses
+        await self.bot.attack()
         await self.bot.wait_for_onmap()
         logger('### group 4 ###')
         await self.bot.use_teleporter(869/2400, 258/1080, move_y=0.2) # Command Center

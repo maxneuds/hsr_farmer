@@ -724,11 +724,11 @@ class World:
         await self.bot.movepi(0.75, 2500)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 2, part3 ###') # roamer, can be improved
-        await self.bot.movepi(1.8, 1500)
+        logger('### group 2, part 3 ###') # roamer, can be improved
+        await self.bot.movepi(1.4, 1500)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 3 ###')
+        logger('### group 3 ###') # move changed, not sure if teleport still works
         await self.bot.use_teleporter(693/2400, 695/1080) # Bud of Destruction
         await self.bot.movepi(1.5, 10800)
         await self.bot.movepi(0.00, 333)

@@ -251,7 +251,7 @@ class World:
         await self.bot.wait_for_onmap()
         logger('### group 16 ###')
         await self.bot.open_map(penacony=True)
-        await self.bot.use_teleporter(348/2400, 526/1080, open_map=False, move_y=0.30) # VIP Lounge Corridor
+        await self.bot.use_teleporter(981/2400, 148/1080, open_map=False, move_y=0.30) # VIP Lounge Corridor
         await self.bot.movepi(1.25, 1200)
         await self.bot.movepi(1, 5500)
         await self.bot.movepi(0.9, 2000)
