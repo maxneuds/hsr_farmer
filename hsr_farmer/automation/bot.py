@@ -4,6 +4,7 @@ import numpy as np
 import sys
 from datetime import datetime as dt
 from time import time
+from skimage.metrics import structural_similarity as compare_ssim
 
 def logger(msg):
     dt_now = dt.now().strftime('%H:%M:%S')
@@ -184,10 +185,13 @@ class Bot:
 
     async def wait_for_onmap(self, min_duration=15, mapexit=False, debug=False):
         logger('wait for fight to end')
-        await aio.sleep(min_duration)
-        img_menu = cv.imread('res/edges_menu.png', cv.IMREAD_GRAYSCALE)
-        img_chat = cv.imread('res/edges_chat.png', cv.IMREAD_GRAYSCALE)
-        img_sprint = cv.imread('res/edges_sprint.png', cv.IMREAD_GRAYSCALE)
+        if not debug:
+            await aio.sleep(min_duration)
+        img_warp= cv.imread('res/bw_warp.png', cv.IMREAD_GRAYSCALE)
+        img_party= cv.imread('res/bw_party.png', cv.IMREAD_GRAYSCALE)
+        img_mission= cv.imread('res/bw_mission.png', cv.IMREAD_GRAYSCALE)
+        img_chat = cv.imread('res/bw_chat.png', cv.IMREAD_GRAYSCALE)
+        img_sprint = cv.imread('res/bw_sprint.png', cv.IMREAD_GRAYSCALE)
         check = 0
         time_start = time()
         while check < 1:
@@ -199,24 +203,40 @@ class Bot:
                     else:
                         screen = await self.adb.get_screen(dev=self.dev, custom_msg=None)
                     screen = cv.cvtColor(screen, cv.COLOR_BGR2GRAY)
-                    screen = cv.Canny(screen, 400, 500)
+                    # screen_edges = cv.Canny(screen, 400, 500)
+                    _, screen_bw = cv.threshold(screen, 200, 255, cv.THRESH_BINARY)
                     success = True
                 except:
                     pass
-            screen_menu = screen[0:int(self.xy.height*0.2), int(self.xy.width*0.60):int(self.xy.width*0.975)]
-            screen_chat = screen[int(self.xy.height*0.85):int(self.xy.height*0.975), int(self.xy.width*0.025):int(self.xy.width*0.075)]
-            screen_sprint = screen[int(self.xy.height*0.775):int(self.xy.height*0.925), int(self.xy.width*0.875):int(self.xy.width*0.95)]
+            screen_warp = screen_bw[int(self.xy.height*0.03):int(self.xy.height*0.08), int(self.xy.width*0.75):int(self.xy.width*0.773)]
+            screen_party = screen_bw[int(self.xy.height*0.03):int(self.xy.height*0.08), int(self.xy.width*0.88):int(self.xy.width*0.9)]
+            screen_mission = screen_bw[int(self.xy.height*0.248):int(self.xy.height*0.31), int(self.xy.width*0.04):int(self.xy.width*0.062)]
+            screen_chat = screen_bw[int(self.xy.height*0.868):int(self.xy.height*0.925), int(self.xy.width*0.04):int(self.xy.width*0.068)]
+            screen_sprint = screen_bw[int(self.xy.height*0.815):int(self.xy.height*0.885), int(self.xy.width*0.88):int(self.xy.width*0.915)]
+            if debug:
+                # sc = screen_mission
+                # si = img_mission
+                # print(si.shape)
+                # print(sc.shape)
+                # ssi = compare_ssim(sc, si)
+                # print(ssi)
+                # cv.imwrite('img.png', sc)
+                # cv.imshow('debug', sc)
+                # cv.waitKey(0)
+                # cv.destroyAllWindows()
+                exit()
             images = [
-                (screen_menu, img_menu),
+                (screen_warp, img_warp),
+                (screen_party, img_party),
+                (screen_mission, img_mission),
                 (screen_chat, img_chat),
                 (screen_sprint, img_sprint)
             ]
             for i in images:
-                result = cv.matchTemplate(i[0], i[1], cv.TM_CCOEFF_NORMED)
-                min_val, max_val, min_loc, max_loc = cv.minMaxLoc(result)
-                if max_val > 0.9:
+                ssi = compare_ssim(i[0], i[1])
+                if ssi > 0.95:
                     check += 1
-            if check > 0:
+            if check > 2:
                 await aio.sleep(1)
                 logger('out of fight')
             time_running = time()
