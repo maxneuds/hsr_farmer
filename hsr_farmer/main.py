@@ -1,6 +1,4 @@
 import asyncio as aio
-import subprocess
-import streamlit as st
 from sys import exit
 from datetime import datetime as dt
 from automation.bot import Bot
@@ -12,24 +10,21 @@ from worlds.the_xianzhou_luofu import World as The_Xianzhou_Luofu
 from worlds.penacony import World as Penacony
 from worlds.jarilo_vi import World as JariloVI
 
+
+DEVICE = '10.1.11.3:5555'
+
+
 def logger(msg):
     dt_now = dt.now().strftime('%H:%M:%S')
     print(f'[{dt_now}] {msg}')
 
-# logger(f'Screensize: {self.width} x {self.height}')
-
 async def main():
-    # try to connect to device
-    try:
-        subprocess.run('adb connect 10.1.11.3:5555', shell=True, check=True)
-    except subprocess.CalledProcessError as e:
-        logger(f'Error executing command: {e}')
 
     ###
     # initialize bot
     ###
     xy = OnePlus7T()
-    adb = ADB()
+    adb = ADB(DEVICE)
     dev = await adb.get_dev()
     bot = Bot(adb=adb, dev=dev, xy=xy, character_speed=1.00) # movement animatiopn speed base value: Acheron (Bronya)
 
@@ -91,7 +86,5 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         print("\nCtrl+C detected. Exiting gracefully.")
         exit()
-    # st.title('HSR Farmer')
-    # st.selectbox('Startmap:', ('Base Zone', 'Storage Zone'))
-    # st.button('Reset', type='primary')
-    # st.write('Hello')
+
+

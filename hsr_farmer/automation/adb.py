@@ -1,24 +1,41 @@
 import asyncio as aio
 import cv2 as cv
 import numpy as np
+import subprocess
 from ppadb.client_async import ClientAsync as AdbClient
 from datetime import datetime as dt
+
+
+DEVICE = '10.1.11.3:5555'
+DEVICE = 'usb'
+
 
 def logger(msg):
     dt_now = dt.now().strftime('%H:%M:%S')
     print(f'[{dt_now}] {msg}')
 
-
 class ADB:
-    def __init__(self):
-        pass
+    def __init__(self, device='usb'):
+        logger('try to disconnect from all devices')
+        try:
+            subprocess.run('adb disconnect', shell=True, check=True)
+        except subprocess.CalledProcessError as e:
+            logger(f'Error executing command: {e}')
+        logger('try to connect to device')
+        try:
+            if device == 'usb':
+                subprocess.run('adb devices', shell=True, check=True)
+            else:
+                subprocess.run(f'adb connect {device}', shell=True, check=True)
+        except subprocess.CalledProcessError as e:
+            logger(f'Error executing command: {e}')
 
     async def get_dev(self):
         logger('get device connection to adb')
         client = AdbClient(host='127.0.0.1', port=5037)
         devices = await client.devices()
         dev = devices[0]
-        print(f'Connected to: {dev.serial}')
+        logger(f'Connected to: {dev.serial}')
         return dev
 
     async def get_screensize(self, dev):
