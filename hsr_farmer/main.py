@@ -60,12 +60,6 @@ async def main():
     await jarilo_vi.farm_great_mine() # verified  (4536/4536)
     await jarilo_vi.farm_rivet_town() # verified (2160/2160)
     await jarilo_vi.farm_robot_settlement() # verified (2592/2592)
-
-    logger('\n\nFarm: Penacony\n') # 3/3 (26460/30560 [17820]) verified
-    await bot.switch_world('penacony')
-    await penacony.farm_dreams_edge() # verified (7668/9612 [7668])
-    await penacony.farm_childs_dream() # verified (5508/5832 [2376])
-    await penacony.farm_reverie_dreamscape() # verified (13284/15552 [6912])
     
     logger('\n\nFarm: The Xianzhou Luofu\n') # 7/7 (42596/42596) verified
     await bot.switch_world('the_xianzhou_luofu')
@@ -76,6 +70,12 @@ async def main():
     await the_xianzhou_luofu.farm_divination_commission() # verified (6000/6000)
     await the_xianzhou_luofu.farm_stargazer_navalia() # verified (6264/6264)
     await the_xianzhou_luofu.farm_cloudford() # verified (4644/4644)
+    
+    logger('\n\nFarm: Penacony\n') # 3/3 (26460/30560 [17820]) verified
+    await bot.switch_world('penacony')
+    await penacony.farm_dreams_edge() # verified (7668/9612 [7668])
+    await penacony.farm_childs_dream() # verified (5508/5832 [2376])
+    await penacony.farm_reverie_dreamscape() # verified (13284/15552 [6912])
     
     logger('\n\nEnd: Return to the Express\n')
     await astral_express.parlor_car()
