@@ -1,5 +1,4 @@
 import asyncio as aio
-import subprocess
 import streamlit as st
 from sys import exit
 from datetime import datetime as dt
@@ -14,20 +13,16 @@ from worlds.penacony import World as Penacony
 from worlds.jarilo_vi import World as JariloVI
 
 
-# logger(f'Screensize: {self.width} x {self.height}')
+DEVICE = '10.1.11.3:5555'
+
 
 async def main():
-    # try to connect to device
-    try:
-        subprocess.run('adb connect 10.1.11.3:5555', shell=True, check=True)
-    except subprocess.CalledProcessError as e:
-        logger.error(f'Error executing command: {e}')
 
     ###
     # initialize bot
     ###
     xy = OnePlus7T()
-    adb = ADB()
+    adb = ADB(DEVICE)
     dev = await adb.get_dev()
     bot = Bot(adb=adb, dev=dev, xy=xy, character_speed=1.00) # movement animatiopn speed base value: Acheron (Bronya)
 
