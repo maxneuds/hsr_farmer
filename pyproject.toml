@@ -17,6 +17,7 @@ pure-python-adb = "^0.3.0.dev0"
 aiofiles = "^23.2.1"
 streamlit = "^1.32.0"
 scikit-image = "^0.22.0"
+pyyaml = "^6.0.1"
 
 
 [tool.poetry.group.dev.dependencies]

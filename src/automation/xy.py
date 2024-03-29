@@ -9,6 +9,7 @@ class OnePlus7T():
         self.sprint = (int(w*2145/2400), int(h*925/1080))
         self.attack = (int(w*1965/2400), int(h*825/1080))
         self.skill = (int(w*1765/2400), int(h*925/1080))
+        self.technique = (int(w*1816/2400), int(h*926/1080))
         self.vjoy = {}
         self.vjoy['r'] = 150
         self.vjoy['center'] = (int(w*440/2400), int(h*839/1080))

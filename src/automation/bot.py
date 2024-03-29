@@ -2,13 +2,10 @@ import asyncio as aio
 import cv2 as cv
 import numpy as np
 import sys
+from logger import logger
 from datetime import datetime as dt
 from time import time
 from skimage.metrics import structural_similarity as compare_ssim
-
-def logger(msg):
-    dt_now = dt.now().strftime('%H:%M:%S')
-    print(f'[{dt_now}] {msg}')
 
 class PathError(Exception): pass
 
@@ -20,11 +17,11 @@ class Bot:
         self.character_speed = character_speed
 
     async def sleep(self, duration):
-        logger(f'sleep for {duration} seconds...')
+        logger.info(f'sleep for {duration} seconds...')
         await aio.sleep(duration)
 
     async def action_tap(self, x, y):
-        logger(f'action: tap {x},{y}')
+        logger.info(f'action: tap {x},{y}')
         await aio.sleep(0.1)
         await self.dev.shell(f'input tap {x} {y}')
         await aio.sleep(0.1)
@@ -34,22 +31,22 @@ class Bot:
         await self.dev.shell(f'input tap {self.xy.sprint[0]} {self.xy.sprint[1]}')
 
     async def move(self, direction, duration):
-        logger(f'move {direction} for {duration/1000} seconds')
+        logger.info(f'move {direction} for {duration/1000} seconds')
         if direction not in self.xy.vjoy:
-            logger('bad direction')
+            logger.error('bad direction')
         else:
             cmd = f'input swipe {self.xy.vjoy[direction][0]} {self.xy.vjoy[direction][1]} {self.xy.vjoy[direction][0]} {self.xy.vjoy[direction][1]} {duration}'
             await self.dev.shell(cmd)
 
     async def movepi(self, direction, duration):
-        logger(f'move {direction} pi for {duration/1000} seconds')
+        logger.info(f'move {direction} pi for {duration/1000} seconds')
         x = self.xy.vjoy['center'][0] + self.xy.vjoy['r'] * np.cos(direction*np.pi)
         y = self.xy.vjoy['center'][1] - self.xy.vjoy['r'] * np.sin(direction*np.pi)
         cmd = f'input swipe {x} {y} {x} {y} {int(duration*self.character_speed)}'
         await self.dev.shell(cmd)
 
     async def open_map(self, penacony=False):
-        logger('open map')
+        logger.info('open map')
         await aio.sleep(0.1)
         await self.dev.shell(f'input tap {self.xy.map[0]} {self.xy.map[1]}')
         await aio.sleep(2.5)
@@ -59,7 +56,7 @@ class Bot:
         await self.check_map_zoom_level(penacony=penacony) # in case of map already open, already done by the previous instance
         
     async def check_map_zoom_level(self, penacony=False):
-        logger('check map zoom level')
+        logger.info('check map zoom level')
         screen = await self.adb.get_screen(dev=self.dev, custom_msg=None)
         # img_zoombar_min = cv.imread('res/zoombar_min_penacony.png', cv.IMREAD_COLOR)
         # screen_zoombar = screen[int(self.xy.height*980/1080):int(self.xy.height*1000/1080), int(self.xy.width*1054/2400):int(self.xy.width*1078/2400)]
@@ -68,13 +65,13 @@ class Bot:
         matches = cv.matchTemplate(screen_zoombar, img_zoombar_min, cv.TM_CCOEFF_NORMED)
         min_val, max_val, min_loc, max_loc = cv.minMaxLoc(matches)
         if max_val < 0.95: # map isn't on min zoom, change zoom level
-            logger('zoom map to min')
+            logger.info('zoom map to min')
             for _ in range(20):
                 # await self.dev.shell(f'input tap {self.xy.width*1000/2400} {self.xy.height*990/1080}') # penacony
                 await self.dev.shell(f'input tap {self.xy.width*783/2400} {self.xy.height*993/1080}')
                 await aio.sleep(0.075)
             await aio.sleep(0.1)
-            logger('re-open map')
+            logger.info('re-open map')
             await self.dev.shell(f'input keyevent 4')
             await aio.sleep(2.5)
             await self.open_map(penacony=penacony)
@@ -83,7 +80,7 @@ class Bot:
         # open map
         if open_map:
             await self.open_map()
-        logger(f'use teleporter: {int(self.xy.width*x)},{int(self.xy.height*y)}; move map by {move_x},{move_y}')# move map
+        logger.info(f'use teleporter: {int(self.xy.width*x)},{int(self.xy.height*y)}; move map by {move_x},{move_y}')# move map
         if move_x != 0 or move_y != 0:
             cmd = f'input swipe {int(self.xy.width*0.45)} {int(self.xy.height*0.5)} {int(self.xy.width*(0.45+move_x))} {int(self.xy.height*(0.5+move_y))} {move_spd}'
             await self.dev.shell(cmd)
@@ -104,7 +101,7 @@ class Bot:
         await self.wait_for_onmap(min_duration=1, mapexit=True)
 
     async def switch_map(self, y_percentage, scroll_down=False, open_map=True, debug=False):
-        logger('switch map')
+        logger.info('switch map')
         if open_map:
             await self.open_map()
         x = int(self.xy.width*0.8)
@@ -124,7 +121,7 @@ class Bot:
         await aio.sleep(2)
 
     async def swipe_locations_up(self):
-        logger('swipe locations up')
+        logger.info('swipe locations up')
         await aio.sleep(0.1)
         cmd = f'input swipe {int(self.xy.width*0.8)} {self.xy.height-200} {int(self.xy.width*0.8)} {self.xy.height-700} 150'
         await self.dev.shell(cmd)
@@ -132,26 +129,27 @@ class Bot:
 
     async def open_star_rail_map(self):
         await self.open_map()
-        logger('open star rail map')
+        logger.info('open star rail map')
         await aio.sleep(0.1)
         await self.dev.shell(f'input tap {self.xy.star_rail_map[0]} {self.xy.star_rail_map[1]}')
         await aio.sleep(1.5)
 
     async def switch_world(self, world):
-        logger('switch to world:')
+        logger.info('###')
         # select correct matching template
         if world == 'herta_space_station':
-            logger('Herta Space Station')
+            logger.info('### Herta Space Station ###')
             target = cv.imread('res/herta_space_station.png', cv.IMREAD_COLOR)
         if world == 'jarilo_vi':
-            logger('Jarilo-VI')
+            logger.info('### Jarilo-VI ###')
             target = cv.imread('res/jarilo-vi.png', cv.IMREAD_COLOR)
         if world == 'the_xianzhou_luofu':
-            logger('The Xianzhou Luofu')
+            logger.info('### The Xianzhou Luofu ###')
             target = cv.imread('res/the_xianzhou_luofu.png', cv.IMREAD_COLOR)
         if world == 'penacony':
-            logger('Penacony')
+            logger.info('### Penacony ###')
             target = cv.imread('res/penacony.png', cv.IMREAD_COLOR)
+        logger.info('###')
         # open star rail map
         await self.open_star_rail_map()
         # get screenshot
@@ -178,13 +176,19 @@ class Bot:
         await self.wait_for_onmap(min_duration=2)
 
     async def attack(self):
-        logger('action: attack')
-        await aio.sleep(0.1)
+        logger.info('action: attack')
+        await aio.sleep(0.05)
         await self.dev.shell(f'input tap {self.xy.attack[0]} {self.xy.attack[1]}')
-        await aio.sleep(0.1)
+        await aio.sleep(0.5)
+
+    async def technique(self):
+        logger.info('action: technique')
+        await aio.sleep(0.05)
+        await self.dev.shell(f'input tap {self.xy.technique[0]} {self.xy.technique[1]}')
+        await aio.sleep(0.5)
 
     async def wait_for_onmap(self, min_duration=15, mapexit=False, debug=False):
-        logger('wait for fight to end')
+        logger.info('wait for fight to end')
         if not debug:
             await aio.sleep(min_duration)
         img_warp= cv.imread('res/bw_warp.png', cv.IMREAD_GRAYSCALE)
@@ -238,7 +242,7 @@ class Bot:
                     check += 1
             if check > 2:
                 await aio.sleep(1)
-                logger('out of fight')
+                logger.info('out of fight')
             time_running = time()
             if mapexit and (time_running - time_start > 400):
                 raise PathError

@@ -8,10 +8,9 @@ def logger(msg):
     print(f'[{dt_now}] {msg}')
 
 class World:
-    def __init__(self, bot, xy):
+    def __init__(self, bot):
         # initialize bot
         self.bot = bot
-        self.xy = xy
 
     async def parlor_car(self):
         logger('\nreturn: palor car\n')

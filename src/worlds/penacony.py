@@ -1,11 +1,8 @@
 import asyncio as aio
+from logger import logger
 from automation.bot import Bot
 from datetime import datetime as dt
 from sys import exit
-
-def logger(msg):
-    dt_now = dt.now().strftime('%H:%M:%S')
-    print(f'[{dt_now}] {msg}')
 
 class World:
     def __init__(self, bot, xy):
@@ -13,9 +10,42 @@ class World:
         self.bot = bot
         self.xy = xy
 
+    # await self.bot.technique()
+    
+    
+    class Clock_Studios_Theme_Park:
+        def __init__(self):
+            pass
+        async def teleport(self):
+            logger.info('---')
+            logger.info('--- Map: Golden Hour')
+            logger.info('---')
+            await self.bot.switch_map(650/1080, open_map=False)
+            await self.bot.use_teleporter(487/2400, 516/1080, open_map=False)  # Theme Park Entrance
+    
+    class Golden_Hour:
+        def __init__(self):
+            pass
+        async def teleport(self):
+            logger.info('---')
+            logger.info('--- Map: Golden Hour')
+            logger.info('---')
+            await self.bot.switch_map(650/1080, open_map=False)
+            await self.bot.use_teleporter(487/2400, 516/1080, open_map=False)  # Sweet Corner
+        async def grab_technique_points(self):
+            logger.info('grab Technique Points')
+            await self.bot.movepi(1.6, 5000)
+            await self.bot.movepi(1.25, 3000)
+            await self.bot.attack()
+
+    async def switch(self):
+        # await self.bot.switch_world('penacony')
+        # await self.Golden_Hour.teleport(self)
+        await self.Golden_Hour.grab_technique_points(self)
+
     async def farm_reverie_dreamscape(self):
         await self.bot.switch_map(925/1080, scroll_down=True)
-        logger('### group 1 ###') # roamer
+        logger.info('### group 1 ###') # roamer
         await self.bot.use_teleporter(1238/2400, 462/1080, move_x = -0.25, move_y = 0.3, open_map=False, confirm=True)  # Platinum Guest Room
         await self.bot.movepi(0.5, 2800)
         await self.bot.movepi(1.0, 13000)
@@ -24,16 +54,16 @@ class World:
         await self.bot.attack()
         await self.bot.sleep(0.5)
         await self.bot.wait_for_onmap()
-        logger('### group 1, part 2 ###') # aggro pull
+        logger.info('### group 1, part 2 ###') # aggro pull
         await self.bot.movepi(0.74, 2700)
         await self.bot.movepi(0.66, 900)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 1, part 3 ###') # aggro pull
+        logger.info('### group 1, part 3 ###') # aggro pull
         await self.bot.movepi(1.75, 200)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 2 ###')
+        logger.info('### group 2 ###')
         await self.bot.use_teleporter(1245/2400, 325/1080, move_y = 0.2, confirm=True) # Platinum Guest Room
         await self.bot.movepi(0.5, 2800)
         await self.bot.movepi(1.0, 5000)
@@ -45,14 +75,14 @@ class World:
         await self.bot.movepi(0.56, 6500)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 3 ###')
+        logger.info('### group 3 ###')
         await self.bot.use_teleporter(1361/2400, 169/1080, confirm=True) # Platinum Guest Room
         await self.bot.movepi(0.5, 2800)
         await self.bot.movepi(1.0, 28000)
         await self.bot.movepi(1.25, 1200)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 4 ###')
+        logger.info('### group 4 ###')
         await self.bot.open_map(penacony=True)
         await self.bot.use_teleporter(1619/2400, 355/1080, move_x=-0.1, move_y=0.2, open_map=False) # Platinum Guest Room
         await self.bot.movepi(0.5, 2800)
@@ -62,7 +92,7 @@ class World:
         await self.bot.movepi(0.75, 750)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 5 ###')
+        logger.info('### group 5 ###')
         await self.bot.open_map(penacony=True)
         await self.bot.use_teleporter(1628/2400, 347/1080, move_x=-0.1, move_y=0.2, open_map=False) # Platinum Guest Room
         await self.bot.movepi(0.5, 2800)
@@ -76,7 +106,7 @@ class World:
         await self.bot.movepi(0.0, 2000)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 6 ###')
+        logger.info('### group 6 ###')
         await self.bot.open_map(penacony=True)
         await self.bot.use_teleporter(1620/2400, 352/1080, move_x=-0.1, move_y=0.2, open_map=False) # Platinum Guest Room
         await self.bot.movepi(0.5, 2800)
@@ -88,36 +118,36 @@ class World:
         await self.bot.movepi(0.9, 2300)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 6, part 2 ###') # roamer
+        logger.info('### group 6, part 2 ###') # roamer
         await self.bot.movepi(0.9, 1000)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 7 ###')
+        logger.info('### group 7 ###')
         await self.bot.use_teleporter(687/2400, 666/1080, move_x=0.2)
         await self.bot.movepi(1.0, 2500)
         await self.bot.movepi(0.5, 4800)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 7, part 2 ###') # roamer
+        logger.info('### group 7, part 2 ###') # roamer
         await self.bot.attack()
         await self.bot.wait_for_onmap(min_duration=3)
-        logger('### group 8 ###')
+        logger.info('### group 8 ###')
         await self.bot.use_teleporter(754/2400, 160/1080)
         await self.bot.movepi(1.25, 1200)
         await self.bot.movepi(1, 8200)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 9 ###')
+        logger.info('### group 9 ###')
         await self.bot.use_teleporter(990/2400, 250/1080)
         await self.bot.movepi(1.25, 1200)
         await self.bot.movepi(1, 5500)
         await self.bot.movepi(0.92, 4400)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 9, part 2 ###') # roamer
+        logger.info('### group 9, part 2 ###') # roamer
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 10 ###') # roamer
+        logger.info('### group 10 ###') # roamer
         await self.bot.use_teleporter(1020/2400, 200/1080)
         await self.bot.movepi(1.25, 1200)
         await self.bot.movepi(1, 5500)
@@ -125,7 +155,7 @@ class World:
         await self.bot.movepi(0.5, 1500)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 11 ###')
+        logger.info('### group 11 ###')
         await self.bot.use_teleporter(1100/2400, 245/1080) # VIP Lounge Corridor
         await self.bot.movepi(1.25, 1200)
         await self.bot.movepi(1, 5500)
@@ -141,11 +171,11 @@ class World:
         await self.bot.movepi(0.5, 500)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 11, part 2 ###')
+        logger.info('### group 11, part 2 ###')
         await self.bot.movepi(1.25, 1500)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 12 ###')
+        logger.info('### group 12 ###')
         await self.bot.open_map(penacony=True)
         await self.bot.use_teleporter(980/2400, 230/1080, open_map=False, move_y=0.35) # VIP Lounge Corridor
         await self.bot.movepi(1.25, 1200)
@@ -169,7 +199,7 @@ class World:
         await self.bot.movepi(1.3, 1500)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 13 ###')
+        logger.info('### group 13 ###')
         await self.bot.open_map(penacony=True)
         await self.bot.use_teleporter(980/2400, 215/1080, open_map=False, move_y=0.35) # VIP Lounge Corridor
         await self.bot.movepi(1.25, 1200)
@@ -194,7 +224,7 @@ class World:
         await self.bot.movepi(0.5, 3000)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 14 ###')
+        logger.info('### group 14 ###')
         await self.bot.open_map(penacony=True)
         await self.bot.use_teleporter(980/2400, 220/1080, open_map=False, move_y=0.35) # VIP Lounge Corridor
         await self.bot.movepi(1.25, 1200)
@@ -220,7 +250,7 @@ class World:
         await self.bot.movepi(0.26, 1300)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 15 ###')
+        logger.info('### group 15 ###')
         await self.bot.open_map(penacony=True)
         await self.bot.use_teleporter(980/2400, 200/1080, open_map=False, move_y=0.35) # VIP Lounge Corridor
         await self.bot.movepi(1.25, 1200)
@@ -249,7 +279,7 @@ class World:
         await self.bot.sleep(0.3) # in case destrucible is hit
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 16 ###')
+        logger.info('### group 16 ###')
         await self.bot.open_map(penacony=True)
         await self.bot.use_teleporter(981/2400, 148/1080, open_map=False, move_y=0.30) # VIP Lounge Corridor
         await self.bot.movepi(1.25, 1200)
@@ -278,7 +308,7 @@ class World:
         await self.bot.movepi(0.2, 1200)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 17 ###')
+        logger.info('### group 17 ###')
         await self.bot.open_map(penacony=True)
         await self.bot.use_teleporter(895/2400, 133/1080, move_y=1.0, open_map=False) # Dreamjolt Hostelry
         await self.bot.movepi(0.5, 7500)
@@ -289,7 +319,7 @@ class World:
         await self.bot.movepi(1.0, 500)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 18 ###')
+        logger.info('### group 18 ###')
         await self.bot.open_map(penacony=True)
         await self.bot.use_teleporter(1015/2400, 155/1080, open_map=False, move_y=0.1) # Dreamjolt Hostelry
         await self.bot.movepi(0.5, 7500)
@@ -307,7 +337,7 @@ class World:
         await self.bot.movepi(1.70, 2700)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 19 ###') # roamer
+        logger.info('### group 19 ###') # roamer
         await self.bot.open_map(penacony=True)
         await self.bot.use_teleporter(1015/2400, 213/1080, open_map=False, move_y=0.15) # Dreamjolt Hostelry
         await self.bot.movepi(0.5, 7500)
@@ -343,7 +373,7 @@ class World:
         await self.bot.movepi(0.00, 3200)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 20 ###')
+        logger.info('### group 20 ###')
         await self.bot.open_map(penacony=True)
         await self.bot.use_teleporter(1015/2400, 220/1080, open_map=False, move_y=0.15) # Dreamjolt Hostelry
         await self.bot.movepi(0.5, 7500)
@@ -380,7 +410,7 @@ class World:
         await self.bot.movepi(0.19, 2100)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 21 ###')
+        logger.info('### group 21 ###')
         await self.bot.open_map(penacony=True)
         await self.bot.use_teleporter(1100/2400, 815/1080, open_map=False, move_y=-0.1) # VIP Lounge Corridor
         await self.bot.movepi(0.5, 1500)
@@ -388,7 +418,7 @@ class World:
         await self.bot.movepi(0.5, 2000)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 22 ###') # roamer
+        logger.info('### group 22 ###') # roamer
         await self.bot.use_teleporter(1100/2400, 450/1080) # VIP Lounge Corridor
         await self.bot.movepi(0.5, 1500)
         await self.bot.movepi(1.0, 2500)
@@ -396,7 +426,7 @@ class World:
         await self.bot.movepi(0.00, 2500)
         await self.bot.attack() # TODO: For Acheron, kill with skill and grab energy afterwards
         await self.bot.wait_for_onmap()
-        logger('### group 23 ###')
+        logger.info('### group 23 ###')
         await self.bot.use_teleporter(871/2400, 164/1080) # Monitoring Room
         await self.bot.movepi(0.5, 1000)
         await self.bot.movepi(0.25, 4700)
@@ -405,15 +435,15 @@ class World:
         await self.bot.movepi(1.25, 1200)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 23, part 2 ###') # roamer
+        logger.info('### group 23, part 2 ###') # roamer
         await self.bot.movepi(1.2, 1000)
         await self.bot.attack()
         await self.bot.wait_for_onmap(min_duration=3)
 
     async def farm_childs_dream(self):
-        logger('farm: Childs Dream')
+        logger.info('farm: Childs Dream')
         await self.bot.switch_map(895/1080)
-        logger('### group 1 ###')
+        logger.info('### group 1 ###')
         await self.bot.use_teleporter(1011/2400, 378/1080, open_map=False) # Corridor of Memories
         await self.bot.movepi(0.25, 2000)
         await self.bot.movepi(0.00, 2000)
@@ -422,14 +452,14 @@ class World:
         await self.bot.movepi(0.00, 250)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 2 ###')
+        logger.info('### group 2 ###')
         await self.bot.use_teleporter(1011/2400, 620/1080) # Corridor of Memories
         await self.bot.movepi(1.5, 9300)
         await self.bot.movepi(1.0, 5500)
         await self.bot.movepi(1.25, 1700)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 3 ###')
+        logger.info('### group 3 ###')
         await self.bot.open_map(penacony=True)
         await self.bot.use_teleporter(1010/2400, 267/1080, open_map=False) # Corridor of Memories
         await self.bot.movepi(1.5, 9300)
@@ -438,11 +468,11 @@ class World:
         await self.bot.movepi(1.5, 8000)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 3, part 2 ###')
+        logger.info('### group 3, part 2 ###')
         await self.bot.movepi(1.6, 1000)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 4 ###')
+        logger.info('### group 4 ###')
         await self.bot.open_map(penacony=True)
         await self.bot.use_teleporter(1010/2400, 267/1080, open_map=False) # Corridor of Memories
         await self.bot.movepi(1.5, 9300)
@@ -467,14 +497,14 @@ class World:
         await self.bot.movepi(0.5, 4000)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 5 ###')
+        logger.info('### group 5 ###')
         await self.bot.open_map(penacony=True)
         await self.bot.use_teleporter(960/2400, 788/1080, open_map=False) # Eddying Dreamscape
         await self.bot.movepi(1.5, 3500)
         await self.bot.movepi(1.75, 250)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 6 ###')
+        logger.info('### group 6 ###')
         await self.bot.use_teleporter(960/2400, 600/1080) # Bud of Aether
         await self.bot.movepi(1.25, 500)
         await self.bot.movepi(1.5, 2100)
@@ -495,7 +525,7 @@ class World:
         await self.bot.movepi(1.25, 500)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 7 ###') # TODO: grab energy after teleport, then use south teleporter
+        logger.info('### group 7 ###') # TODO: grab energy after teleport, then use south teleporter
         await self.bot.open_map(penacony=True)
         await self.bot.use_teleporter(960/2400, 464/1080, open_map=False) # Eddying Dreamscape
         await self.bot.movepi(1.5, 14500)
@@ -503,14 +533,14 @@ class World:
         await self.bot.wait_for_onmap()
 
     async def farm_dreams_edge(self):
-        logger('farm: Dreams Edge')
+        logger.info('farm: Dreams Edge')
         await self.bot.switch_map(775/1080)
-        logger('### group 1 ###')
+        logger.info('### group 1 ###')
         await self.bot.use_teleporter(1445/2400, 113/1080, open_map=False) # Dreamweaver Plaza
         await self.bot.movepi(0.00, 4000)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 2 ###')
+        logger.info('### group 2 ###')
         await self.bot.use_teleporter(1076/2400, 515/1080) # Dreamweaver Plaza
         await self.bot.movepi(0.25, 1500)
         await self.bot.movepi(0.5, 4500)
@@ -518,7 +548,7 @@ class World:
         await self.bot.movepi(0.5, 5500)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 3 ###')
+        logger.info('### group 3 ###')
         await self.bot.use_teleporter(1092/2400, 261/1080) # Dreamweaver Plaza
         await self.bot.movepi(0.25, 1500)
         await self.bot.movepi(0.5, 4500)
@@ -526,31 +556,31 @@ class World:
         await self.bot.movepi(0.5, 11250)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 3, part 2 ###') # roamer
+        logger.info('### group 3, part 2 ###') # roamer
         await self.bot.movepi(0.00, 250)
         await self.bot.attack()
         await self.bot.wait_for_onmap(min_duration=5)
-        logger('### group 4 ###')
+        logger.info('### group 4 ###')
         await self.bot.use_teleporter(551/2400, 928/1080) # Rooftop Garden
         await self.bot.movepi(0.5, 3000)
         await self.bot.movepi(0.75, 500)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 4, part 2 ###')
+        logger.info('### group 4, part 2 ###')
         await self.bot.movepi(1.0, 500)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 5 ###')
+        logger.info('### group 5 ###')
         await self.bot.use_teleporter(1012/2400, 484/1080) # Rooftop Garden
         await self.bot.movepi(0.5, 3500)
         await self.bot.movepi(0.00, 2750)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 5, part 2 ###')
+        logger.info('### group 5, part 2 ###')
         await self.bot.movepi(0.5, 1500)
         await self.bot.attack()
         await self.bot.wait_for_onmap(min_duration=5)
-        logger('### group 6 ###')
+        logger.info('### group 6 ###')
         await self.bot.use_teleporter(1052/2400, 569/1080) # Rooftop Garden
         await self.bot.movepi(0.5, 5000)
         await self.bot.movepi(0.75, 1500)
@@ -558,24 +588,24 @@ class World:
         await self.bot.movepi(0.95, 2700)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 7 ###')
+        logger.info('### group 7 ###')
         await self.bot.use_teleporter(380/2400, 492/1080) # Bud of Memories
         await self.bot.movepi(1.5, 1500)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 8 ###')
+        logger.info('### group 8 ###')
         await self.bot.use_teleporter(656/2400, 556/1080) # Bud of Memories
         await self.bot.movepi(1.25, 2750)
         await self.bot.movepi(0.75, 1500)
         await self.bot.movepi(1.0, 1500)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 9 ###')
+        logger.info('### group 9 ###')
         await self.bot.use_teleporter(656/2400, 256/1080, move_y=0.2) # Front Observation Deck
         await self.bot.movepi(0.5, 5000)
         await self.bot.attack()
         await self.bot.wait_for_onmap()
-        logger('### group 10 ###')
+        logger.info('### group 10 ###')
         await self.bot.use_teleporter(1007/2400, 213/1080, move_y=0.5, confirm=True) # THe Family's
         await self.bot.movepi(0.25, 3000)
         await self.bot.movepi(0.5, 8500)

@@ -3,22 +3,18 @@ import cv2 as cv
 import numpy as np
 from ppadb.client_async import ClientAsync as AdbClient
 from datetime import datetime as dt
-
-def logger(msg):
-    dt_now = dt.now().strftime('%H:%M:%S')
-    print(f'[{dt_now}] {msg}')
-
+from logger import logger
 
 class ADB:
     def __init__(self):
         pass
 
     async def get_dev(self):
-        logger('get device connection to adb')
+        logger.info('get device connection to adb')
         client = AdbClient(host='127.0.0.1', port=5037)
         devices = await client.devices()
         dev = devices[0]
-        print(f'Connected to: {dev.serial}')
+        logger.info(f'Connected to: {dev.serial}')
         return dev
 
     async def get_screensize(self, dev):
@@ -29,11 +25,11 @@ class ADB:
 
     async def get_screen(self, dev, custom_msg=False, debug=False):
         if custom_msg == False:
-            logger('get screenshot from device')
+            logger.info('get screenshot from device')
         elif custom_msg == None:
             pass
         else:
-            logger(custom_msg)
+            logger.info(custom_msg)
         # get screen from device
         im_byte_array = await dev.screencap()
         # convert to cv image
@@ -50,4 +46,4 @@ class ADB:
     def click_event(self, event, x, y, flags, params):
         # checking for left mouse clicks
         if event == cv.EVENT_LBUTTONDOWN:
-            print(f'{x},{y}')
+            logger.debug(f'{x},{y}')
