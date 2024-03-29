@@ -65,11 +65,11 @@ async def main():
     await bot.switch_world('the_xianzhou_luofu')
     await the_xianzhou_luofu.farm_scalegorge_waterscape() # verified (4752/4752)
     await the_xianzhou_luofu.farm_alchemy_commission() # verified (6912/6912)
-    await the_xianzhou_luofu.farm_fyxestroll_garden() # verified (4644/4644)
     await the_xianzhou_luofu.farm_artisanship_commission() # verified (9548/9548)
     await the_xianzhou_luofu.farm_divination_commission() # verified (6000/6000)
     await the_xianzhou_luofu.farm_stargazer_navalia() # verified (6264/6264)
     await the_xianzhou_luofu.farm_cloudford() # verified (4644/4644)
+    # await the_xianzhou_luofu.farm_fyxestroll_garden() # verified (4644/4644)
     
     logger('\n\nFarm: Penacony\n') # 3/3 (26460/30560 [17820]) verified
     await bot.switch_world('penacony')
