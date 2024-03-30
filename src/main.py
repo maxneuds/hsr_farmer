@@ -32,7 +32,7 @@ async def main():
     # astral_express = Astral_Express(bot=bot)
     # herta_space_station = Herta_Space_Station(bot=bot)
     penacony = Penacony(bot=bot, xy=xy)
-    # the_xianzhou_luofu = The_Xianzhou_Luofu(bot=bot, xy=xy)
+    the_xianzhou_luofu = The_Xianzhou_Luofu(bot=bot)
     # jarilo_vi = JariloVI(bot=bot, xy=xy)
 
     # total mapped xp: 95'624/100k
@@ -43,7 +43,7 @@ async def main():
     # ###
     
     # 3/5 (26460/???) verified
-    await penacony.switch()
+    # await penacony.switch()
     # await penacony.farm_dreams_edge() # verified (7668/9612 [7668])
     # await penacony.farm_childs_dream() # verified (5508/5832 [2376])
     # await penacony.farm_reverie_dreamscape() # verified (13284/15552 [6912])
@@ -67,15 +67,15 @@ async def main():
 
     
     
-    # logger('\n\nFarm: The Xianzhou Luofu\n') # 7/7 (42596/42596) verified
-    # await bot.switch_world('the_xianzhou_luofu')
+    # 7/7 (42596/42596) verified
+    # await the_xianzhou_luofu.switch()
+    # await the_xianzhou_luofu.farm_cloudford() # verified (4644/4644)
+    await the_xianzhou_luofu.farm_fyxestroll_garden() # verified (4644/4644)
     # await the_xianzhou_luofu.farm_scalegorge_waterscape() # verified (4752/4752)
     # await the_xianzhou_luofu.farm_alchemy_commission() # verified (6912/6912)
-    # await the_xianzhou_luofu.farm_fyxestroll_garden() # verified (4644/4644)
     # await the_xianzhou_luofu.farm_artisanship_commission() # verified (9548/9548)
     # await the_xianzhou_luofu.farm_divination_commission() # verified (6000/6000)
     # await the_xianzhou_luofu.farm_stargazer_navalia() # verified (6264/6264)
-    # await the_xianzhou_luofu.farm_cloudford() # verified (4644/4644)
     
     # logger('\n\nEnd: Return to the Express\n')
     # await astral_express.parlor_car()
@@ -84,7 +84,7 @@ if __name__ == '__main__':
     try:
         aio.run(main())
     except KeyboardInterrupt:
-        print("\nCtrl+C detected. Exiting gracefully.")
+        print('Ctrl+C detected. Exiting gracefully.')
         exit()
     # st.title('HSR Farmer')
     # st.selectbox('Startmap:', ('Base Zone', 'Storage Zone'))

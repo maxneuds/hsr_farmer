@@ -39,8 +39,8 @@ class World:
             await self.bot.attack()
 
     async def switch(self):
-        # await self.bot.switch_world('penacony')
-        # await self.Golden_Hour.teleport(self)
+        await self.bot.switch_world('penacony')
+        await self.Golden_Hour.teleport(self)
         await self.Golden_Hour.grab_technique_points(self)
 
     async def farm_reverie_dreamscape(self):

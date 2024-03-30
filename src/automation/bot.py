@@ -76,15 +76,22 @@ class Bot:
             await aio.sleep(2.5)
             await self.open_map(penacony=penacony)
 
-    async def use_teleporter(self, x, y, move_x=0, move_y=0, move_spd=1000, open_map=True, confirm=False, debug=False):
+    async def use_teleporter(self, x, y, move_x=0, move_y=0, move_spd=500, open_map=True, confirm=False, debug=False):
         # open map
         if open_map:
             await self.open_map()
-        logger.info(f'use teleporter: {int(self.xy.width*x)},{int(self.xy.height*y)}; move map by {move_x},{move_y}')# move map
-        if move_x != 0 or move_y != 0:
-            cmd = f'input swipe {int(self.xy.width*0.45)} {int(self.xy.height*0.5)} {int(self.xy.width*(0.45+move_x))} {int(self.xy.height*(0.5+move_y))} {move_spd}'
+        logger.info(f'reset map to bot right corner')
+        for _ in range(3):
+            cmd = f'input swipe {int(self.xy.width*0.6)} {int(self.xy.height*0.8)} {int(self.xy.width*(0))} {int(self.xy.height*(0))} {500}'
             await self.dev.shell(cmd)
-            await aio.sleep(3)
+            await aio.sleep(1)
+        await aio.sleep(1)
+        logger.info(f'use teleporter: {int(self.xy.width*x)},{int(self.xy.height*y)}')
+        if move_x != 0 or move_y != 0:
+            logger.info(f'move map by {move_x},{move_y}')
+            cmd = f'input swipe {int(self.xy.width*0.3)} {int(self.xy.height*0.1)} {int(self.xy.width*(0.3+0.65*(move_x/10)))} {int(self.xy.height*(0.1+0.85*(move_y/10)))} {move_spd}'
+            await self.dev.shell(cmd)
+            await aio.sleep(2)
         # debug: send screenshot
         if debug:
             await self.adb.get_screen(dev=self.dev, debug=True)
@@ -175,6 +182,13 @@ class Bot:
         await self.action_tap(int(self.xy.width*1580/2400), int(self.xy.height*933/1080))
         await self.wait_for_onmap(min_duration=2)
 
+    async def attack_technique(self, count=10):
+        logger.info('action: attack')
+        await aio.sleep(0.05)
+        for _ in range(count):
+            await self.technique()
+        await self.wait_for_onmap(min_duration=3)
+
     async def attack(self):
         logger.info('action: attack')
         await aio.sleep(0.05)
@@ -186,8 +200,30 @@ class Bot:
         await aio.sleep(0.05)
         await self.dev.shell(f'input tap {self.xy.technique[0]} {self.xy.technique[1]}')
         await aio.sleep(0.5)
+        
+    async def restore_tp(self, n=1):
+        logger.info('action: restore TP using food, make sure it is faved first')
+        await aio.sleep(0.05)
+        logger.info('open inventory')
+        await self.dev.shell(f'input tap {self.xy.inventory[0]} {self.xy.inventory[1]}')
+        await aio.sleep(2)
+        logger.info('open food menu')
+        await self.dev.shell(f'input tap {self.xy.food_menu[0]} {self.xy.food_menu[1]}')
+        await aio.sleep(1)
+        logger.info('select fav food')
+        await self.dev.shell(f'input tap {self.xy.food_fav[0]} {self.xy.food_fav[1]}')
+        await aio.sleep(0.5)
+        logger.info(f'eat food {n} times')
+        for _ in range(n):
+            await self.action_tap(int(self.xy.width*2008/2400), int(self.xy.height*990/1080))
+            await aio.sleep(1)
+            await self.action_tap(int(self.xy.width*1461/2400), int(self.xy.height*824/1080))
+            await aio.sleep(2)
+        logger.info(f'exit to map')
+        await self.dev.shell(f'input keyevent 4')
+        await self.wait_for_onmap(min_duration=2)
 
-    async def wait_for_onmap(self, min_duration=15, mapexit=False, debug=False):
+    async def wait_for_onmap(self, min_duration=5, mapexit=False, debug=False):
         logger.info('wait for fight to end')
         if not debug:
             await aio.sleep(min_duration)

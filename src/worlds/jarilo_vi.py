@@ -12,6 +12,8 @@ class World:
         # initialize bot
         self.bot = bot
         self.xy = xy
+        
+    # TODO: destroy objects for technique point materials
 
     async def farm_robot_settlement(self):
         logger('farm: Robot Settlement')
