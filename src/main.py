@@ -31,7 +31,7 @@ async def main():
     ###
     # astral_express = Astral_Express(bot=bot)
     # herta_space_station = Herta_Space_Station(bot=bot)
-    penacony = Penacony(bot=bot, xy=xy)
+    penacony = Penacony(bot=bot)
     the_xianzhou_luofu = The_Xianzhou_Luofu(bot=bot)
     # jarilo_vi = JariloVI(bot=bot, xy=xy)
 
@@ -42,8 +42,10 @@ async def main():
     # farm worlds
     # ###
     
-    # 3/5 (26460/???) verified
+    # 3/5 (26460/???)
     # await penacony.switch()
+    await penacony.farm_clock_studios_theme_park() # 147290
+    
     # await penacony.farm_dreams_edge() # verified (7668/9612 [7668])
     # await penacony.farm_childs_dream() # verified (5508/5832 [2376])
     # await penacony.farm_reverie_dreamscape() # verified (13284/15552 [6912])
@@ -69,8 +71,9 @@ async def main():
     
     # 7/7 (42596/42596) verified
     # await the_xianzhou_luofu.switch()
+    # await the_xianzhou_luofu.farm_fyxestroll_garden() # verified (4644/4644)
+    
     # await the_xianzhou_luofu.farm_cloudford() # verified (4644/4644)
-    await the_xianzhou_luofu.farm_fyxestroll_garden() # verified (4644/4644)
     # await the_xianzhou_luofu.farm_scalegorge_waterscape() # verified (4752/4752)
     # await the_xianzhou_luofu.farm_alchemy_commission() # verified (6912/6912)
     # await the_xianzhou_luofu.farm_artisanship_commission() # verified (9548/9548)
