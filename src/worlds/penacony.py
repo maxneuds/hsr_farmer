@@ -12,7 +12,8 @@ class World:
         await self.bot.switch_world('penacony')
         await self.Golden_Hour.teleport(self)
         await self.Golden_Hour.grab_technique_points(self)
-    
+
+
     class Golden_Hour:
         def __init__(self, bot):
             self.bot = bot
@@ -27,6 +28,7 @@ class World:
             await self.bot.movepi(1.6, 5000)
             await self.bot.movepi(1.25, 3000)
             await self.bot.attack()
+
 
     async def farm_clock_studios_theme_park(self):
         x = self.Clock_Studios_Theme_Park(bot=self.bot)
@@ -45,8 +47,6 @@ class World:
         await x.path_12()
         await x.path_13()
         await x.path_14()
-        # await x.path_15()
-        # await x.path_16()
     class Clock_Studios_Theme_Park:
         def __init__(self, bot):
             self.bot = bot
@@ -58,15 +58,6 @@ class World:
             await self.bot.use_teleporter(1209/2400, 276/1080, move_x=1, move_y=6, open_map=False, confirm=True)  # Theme Park Entrance
         async def path_1(self):
             logger.info('### Path 1 ###')
-            await self.bot.use_teleporter(1209/2400, 276/1080, move_x=1, move_y=6, confirm=True)  # Theme Park Entrance
-            await self.bot.movepi(0.7, 8300)
-            await self.bot.movepi(0.5, 12800)
-            await self.bot.movepi(0.8, 1800)
-            await self.bot.attack() # +2 TP
-            await self.bot.movepi(0.7, 800)
-            await self.bot.attack_technique(4)
-        async def path_2(self):
-            logger.info('### Path 3 ###')
             await self.bot.use_teleporter(1209/2400, 276/1080, move_x=1, move_y=6, confirm=True)  # Theme Park Entrance
             await self.bot.movepi(0.36, 6000)
             await self.bot.movepi(0.2, 2600)
@@ -82,8 +73,8 @@ class World:
             await self.bot.movepi(1.7, 2000)
             await self.bot.movepi(1.6, 900)
             await self.bot.attack_technique(2)
-        async def path_3(self):
-            logger.info('### Path 4 ###')
+        async def path_2(self):
+            logger.info('### Path 2 ###')
             await self.bot.use_teleporter(1209/2400, 276/1080, move_x=1, move_y=6, confirm=True)  # Theme Park Entrance
             await self.bot.movepi(0.36, 6000)
             await self.bot.movepi(0.2, 2600)
@@ -102,10 +93,19 @@ class World:
             await self.bot.movepi(1.2, 600)
             await self.bot.movepi(0.7, 3200)
             await self.bot.movepi(0.5, 2500)
-            await self.bot.attack_technique(2) # -1 TP
+            await self.bot.attack_technique(2)
+        async def path_3(self):
+            logger.info('### Path 3 ###')
+            await self.bot.use_teleporter(1209/2400, 276/1080, move_x=1, move_y=6, confirm=True)  # Theme Park Entrance
+            await self.bot.movepi(0.7, 8300)
+            await self.bot.movepi(0.5, 12800)
+            await self.bot.movepi(0.8, 1800)
+            await self.bot.attack() # +2 TP
+            await self.bot.movepi(0.7, 800)
+            await self.bot.attack_technique(4)
         async def path_4(self):
             logger.info('### Path 4 ###')
-            await self.bot.use_teleporter(693/2400, 184/1080, move_x=1, move_y=1)  # Bud of Preservation
+            await self.bot.use_teleporter(1100/2400, 423/1080, move_x=3, move_y=3)  # Bud of Preservation
             await self.bot.movepi(1.7, 2500)
             await self.bot.attack() # +2 TP
         async def path_5(self):
@@ -117,8 +117,9 @@ class World:
             logger.info('### Path 6 ###')
             await self.bot.use_teleporter(539/2400, 455/1080, move_x=1, move_y=1)  # Hanu Gang Place
             await self.bot.movepi(0.75, 4500)
-            await self.bot.movepi(0.99, 1500)
-            await self.bot.attack_technique(3)
+            await self.bot.movepi(0.99, 1800)
+            await self.bot.movepi(0.5, 300)
+            await self.bot.attack_technique(8)
         async def path_7(self):
             logger.info('### Path 7 ###')
             await self.bot.use_teleporter(539/2400, 455/1080, move_x=1, move_y=1)  # Hanu Gang Place
@@ -126,7 +127,7 @@ class World:
             await self.bot.movepi(0.99, 2000)
             await self.bot.movepi(0.7, 2000)
             await self.bot.attack_technique(2)
-            await self.bot.movepi(1.45, 2200)
+            await self.bot.movepi(1.5, 1000)
             await self.bot.attack_technique(5)
             await self.bot.restore_tp(n=2) # +4 TP
         async def path_8(self):
@@ -136,8 +137,8 @@ class World:
             await self.bot.movepi(0.01, 5500)
             await self.bot.movepi(0.5, 500)
             await self.bot.attack() # items
-            await self.bot.movepi(0.52, 4400)
-            await self.bot.attack_technique(4)
+            await self.bot.movepi(0.52, 4500)
+            await self.bot.attack_technique(5)
             await self.bot.restore_tp(n=1) # +2 TP
         async def path_9(self):
             logger.info('### Path 9 ###')
@@ -166,7 +167,7 @@ class World:
             await self.bot.attack()
             await self.bot.movepi(0.4, 1000)
             await self.bot.movepi(0.5, 1500)
-            await self.bot.attack_technique(15)
+            await self.bot.attack_technique(10)
         async def path_13(self):
             logger.info('### Path 13 ###') # roamer
             await self.bot.use_teleporter(490/2400, 633/1080, move_x=1, move_y=1, corner='topright')  # Hamster Ball Park
@@ -185,25 +186,107 @@ class World:
             await self.bot.movepi(0.2, 1000)
             await self.bot.movepi(0.05, 700)
             await self.bot.attack_technique(15)
-               
-        # async def path_14(self):
-        #     logger.info('### Path 14 ###') # roamer
-        #     await self.bot.use_teleporter(490/2400, 633/1080, move_x=1, move_y=1, corner='topright')  # Hamster Ball Park
-        #     await self.bot.movepi(0.45, 5000)
-        #     await self.bot.movepi(0.3, 2000)
-        #     await self.bot.movepi(0.4, 1500)
-        #     await self.bot.movepi(0.3, 2000)
-        #     await self.bot.movepi(0.09, 1000)
-        #     await self.bot.attack_technique(5)
-        #     await self.bot.movepi(0.3, 1000)
-        # async def path_15(self):
-        #     logger.info('### Path 15 ###') # roamer
-        #     await self.bot.use_teleporter(490/2400, 633/1080, move_x=1, move_y=1, corner='topright')  # Hamster Ball Park
-        #     await self.bot.movepi(0.45, 5000)
-        #     await self.bot.movepi(0.3, 2000)
-        #     await self.bot.movepi(0.4, 1500)
-        #     await self.bot.movepi(0.3, 1500)
-        #     await self.bot.attack_technique(5)
+
+
+    async def farm_dreams_edge(self):
+        x = self.Dreams_Edge(bot=self.bot)
+        await x.teleport()
+        await x.path_1()
+        await x.path_2()
+        await x.path_3()
+        await x.path_4()
+        await x.path_5()
+        await x.path_6()
+        await x.path_7()
+        await x.path_8()
+        await x.path_9()
+        await x.path_10()
+        await x.path_99()
+    class Dreams_Edge:
+        def __init__(self, bot):
+            self.bot = bot
+        async def teleport(self):
+            logger.info('---')
+            logger.info("--- Map: Dream's Edge")
+            logger.info('---')
+            await self.bot.switch_map(771/1080, scroll_down=False)
+            await self.bot.use_teleporter(543/2400, 503/1080, move_x=3, move_y=1, corner='topright', open_map=False, confirm=True) # The Family's Construction Authority
+        async def path_1(self):
+            logger.info('### Path 1 ###')
+            # await self.bot.use_teleporter(543/2400, 503/1080, move_x=3, move_y=1, corner='topright', confirm=True) # The Family's Construction Authority
+            await self.bot.movepi(0.25, 3000)
+            await self.bot.movepi(0.5, 8500)
+            await self.bot.attack() # +2 TP
+            await self.bot.movepi(1.05, 5800)
+            await self.bot.attack_technique(5)
+            await self.bot.restore_tp(n=1) # +2 TP
+        async def path_2(self):
+            logger.info('### Path 2 ###')
+            await self.bot.use_teleporter(933/2400, 535/1080, move_x=0, move_y=5, corner='topright') # Dreamweaver Plaza
+            await self.bot.movepi(1.97, 4000)
+            await self.bot.attack_technique(2)
+        async def path_3(self):
+            logger.info('### Path 3 ###')
+            await self.bot.use_teleporter(933/2400, 535/1080, move_x=0, move_y=5, corner='topright') # Dreamweaver Plaza
+            await self.bot.movepi(0.25, 1500)
+            await self.bot.movepi(0.5, 4500)
+            await self.bot.movepi(0.00, 3700)
+            await self.bot.movepi(0.49, 5500)
+            await self.bot.attack_technique(4)
+            await self.bot.restore_tp(n=1) # +2 TP
+        async def path_4(self):
+            logger.info('### Path 4 ###')
+            await self.bot.use_teleporter(933/2400, 535/1080, move_x=0, move_y=5, corner='topright') # Dreamweaver Plaza
+            await self.bot.movepi(0.25, 1500)
+            await self.bot.movepi(0.5, 4500)
+            await self.bot.movepi(0.00, 3700)
+            await self.bot.movepi(0.5, 11000)
+            await self.bot.attack_technique(8)
+            await self.bot.restore_tp(n=2) # +4 TP
+        async def path_5(self):
+            logger.info('### Path 5 ###')
+            await self.bot.use_teleporter(1156/2400, 373/1080, move_x=4, move_y=4, corner='botright') # Rooftop Garden
+            await self.bot.movepi(0.5, 3000)
+            await self.bot.movepi(0.75, 500)
+            await self.bot.attack_technique(10)
+            await self.bot.restore_tp(n=1) # +2 TP
+        async def path_6(self):
+            logger.info('### Path 6 ###')
+            await self.bot.use_teleporter(1156/2400, 373/1080, move_x=4, move_y=4, corner='botright') # Rooftop Garden
+            await self.bot.movepi(0.5, 3500)
+            await self.bot.movepi(0.00, 2750)
+            await self.bot.attack_technique(15)
+            await self.bot.restore_tp(n=1) # +2 TP
+        async def path_7(self):
+            logger.info('### Path 7 ###')
+            await self.bot.use_teleporter(1156/2400, 373/1080, move_x=4, move_y=4, corner='botright') # Rooftop Garden
+            await self.bot.movepi(0.5, 5000)
+            await self.bot.movepi(0.75, 1500)
+            await self.bot.movepi(0.5, 3000)
+            await self.bot.movepi(0.95, 2200)
+            await self.bot.attack_technique(5)
+            await self.bot.restore_tp(n=1) # +2 TP
+        async def path_8(self):
+            logger.info('### Path 8 ###')
+            await self.bot.use_teleporter(658/2400, 742/1080, move_x=4, move_y=7, corner='botleft') # Bud of Memories
+            await self.bot.movepi(1.5, 1500)
+            await self.bot.attack_technique(4)
+        async def path_9(self):
+            logger.info('### Path 9 ###')
+            await self.bot.use_teleporter(658/2400, 742/1080, move_x=4, move_y=7, corner='botleft') # Bud of Memories
+            await self.bot.movepi(1.25, 2750)
+            await self.bot.movepi(0.75, 1500)
+            await self.bot.movepi(1.0, 1500)
+            await self.bot.attack_technique(4)
+            await self.bot.restore_tp(n=1) # +2 TP
+        async def path_10(self):
+            logger.info('### Path 10 ###')
+            await self.bot.use_teleporter(655/2400, 299/1080, move_x=0, move_y=7, corner='botleft') # Front Observation Deck
+            await self.bot.movepi(0.5, 4800)
+            await self.bot.attack_technique(15)
+            await self.bot.restore_tp(n=1) # +2 TP
+
+
 
     async def farm_reverie_dreamscape(self):
         await self.bot.switch_map(925/1080, scroll_down=True)
@@ -692,83 +775,4 @@ class World:
         await self.bot.attack()
         await self.bot.wait_for_onmap()
 
-    async def farm_dreams_edge(self):
-        logger.info('farm: Dreams Edge')
-        await self.bot.switch_map(775/1080)
-        logger.info('### group 1 ###')
-        await self.bot.use_teleporter(1445/2400, 113/1080, open_map=False) # Dreamweaver Plaza
-        await self.bot.movepi(0.00, 4000)
-        await self.bot.attack()
-        await self.bot.wait_for_onmap()
-        logger.info('### group 2 ###')
-        await self.bot.use_teleporter(1076/2400, 515/1080) # Dreamweaver Plaza
-        await self.bot.movepi(0.25, 1500)
-        await self.bot.movepi(0.5, 4500)
-        await self.bot.movepi(0.00, 3700)
-        await self.bot.movepi(0.5, 5500)
-        await self.bot.attack()
-        await self.bot.wait_for_onmap()
-        logger.info('### group 3 ###')
-        await self.bot.use_teleporter(1092/2400, 261/1080) # Dreamweaver Plaza
-        await self.bot.movepi(0.25, 1500)
-        await self.bot.movepi(0.5, 4500)
-        await self.bot.movepi(0.00, 3700)
-        await self.bot.movepi(0.5, 11250)
-        await self.bot.attack()
-        await self.bot.wait_for_onmap()
-        logger.info('### group 3, part 2 ###') # roamer
-        await self.bot.movepi(0.00, 250)
-        await self.bot.attack()
-        await self.bot.wait_for_onmap(min_duration=5)
-        logger.info('### group 4 ###')
-        await self.bot.use_teleporter(551/2400, 928/1080) # Rooftop Garden
-        await self.bot.movepi(0.5, 3000)
-        await self.bot.movepi(0.75, 500)
-        await self.bot.attack()
-        await self.bot.wait_for_onmap()
-        logger.info('### group 4, part 2 ###')
-        await self.bot.movepi(1.0, 500)
-        await self.bot.attack()
-        await self.bot.wait_for_onmap()
-        logger.info('### group 5 ###')
-        await self.bot.use_teleporter(1012/2400, 484/1080) # Rooftop Garden
-        await self.bot.movepi(0.5, 3500)
-        await self.bot.movepi(0.00, 2750)
-        await self.bot.attack()
-        await self.bot.wait_for_onmap()
-        logger.info('### group 5, part 2 ###')
-        await self.bot.movepi(0.5, 1500)
-        await self.bot.attack()
-        await self.bot.wait_for_onmap(min_duration=5)
-        logger.info('### group 6 ###')
-        await self.bot.use_teleporter(1052/2400, 569/1080) # Rooftop Garden
-        await self.bot.movepi(0.5, 5000)
-        await self.bot.movepi(0.75, 1500)
-        await self.bot.movepi(0.5, 3000)
-        await self.bot.movepi(0.95, 2700)
-        await self.bot.attack()
-        await self.bot.wait_for_onmap()
-        logger.info('### group 7 ###')
-        await self.bot.use_teleporter(380/2400, 492/1080) # Bud of Memories
-        await self.bot.movepi(1.5, 1500)
-        await self.bot.attack()
-        await self.bot.wait_for_onmap()
-        logger.info('### group 8 ###')
-        await self.bot.use_teleporter(656/2400, 556/1080) # Bud of Memories
-        await self.bot.movepi(1.25, 2750)
-        await self.bot.movepi(0.75, 1500)
-        await self.bot.movepi(1.0, 1500)
-        await self.bot.attack()
-        await self.bot.wait_for_onmap()
-        logger.info('### group 9 ###')
-        await self.bot.use_teleporter(656/2400, 256/1080, move_y=0.2) # Front Observation Deck
-        await self.bot.movepi(0.5, 5000)
-        await self.bot.attack()
-        await self.bot.wait_for_onmap()
-        logger.info('### group 10 ###')
-        await self.bot.use_teleporter(1007/2400, 213/1080, move_y=0.5, confirm=True) # THe Family's
-        await self.bot.movepi(0.25, 3000)
-        await self.bot.movepi(0.5, 8500)
-        await self.bot.movepi(1.0, 6000)
-        await self.bot.attack()
-        await self.bot.wait_for_onmap()
+    

@@ -42,11 +42,10 @@ async def main():
     # farm worlds
     # ###
     
-    # 3/5 (26460/???)
+    # 4/5 (26460/???)
     # await penacony.switch()
-    await penacony.farm_clock_studios_theme_park() # 147290
-    
-    # await penacony.farm_dreams_edge() # verified (7668/9612 [7668])
+    # await penacony.farm_clock_studios_theme_park() # (7648/7648)
+    await penacony.farm_dreams_edge() # verified (7668/9612 [7668])
     # await penacony.farm_childs_dream() # verified (5508/5832 [2376])
     # await penacony.farm_reverie_dreamscape() # verified (13284/15552 [6912])
     

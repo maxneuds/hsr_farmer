@@ -3,8 +3,8 @@ import cv2 as cv
 import numpy as np
 import sys
 from logger import logger
-from datetime import datetime as dt
-from time import time
+from datetime import datetime as dt, timedelta
+import time
 from skimage.metrics import structural_similarity as compare_ssim
 
 class PathError(Exception): pass
@@ -73,10 +73,11 @@ class Bot:
             await aio.sleep(0.1)
             logger.info('re-open map')
             await self.dev.shell(f'input keyevent 4')
-            await aio.sleep(2.5)
+            await self.sleep(2.5)
             await self.open_map(penacony=penacony)
 
     async def use_teleporter(self, x, y, move_x=0, move_y=0, move_spd=500, corner='botright', open_map=True, confirm=False, debug=False):
+        logger.info(f'use teleporter: {int(self.xy.width*x)},{int(self.xy.height*y)}')
         # open map
         if open_map:
             await self.open_map()
@@ -84,16 +85,19 @@ class Bot:
         for _ in range(3):
             if corner == 'topright':
                 cmd = f'input swipe {int(self.xy.width*0.6)} {int(self.xy.height*0.1)} {int(self.xy.width*(0))} {int(self.xy.height*(0.9))} {500}'
+            if corner == 'botleft':
+                cmd = f'input swipe {int(self.xy.width*0.1)} {int(self.xy.height*0.8)} {int(self.xy.width*(0.7))} {int(self.xy.height*(0))} {500}'
             else:
                 cmd = f'input swipe {int(self.xy.width*0.6)} {int(self.xy.height*0.8)} {int(self.xy.width*(0))} {int(self.xy.height*(0))} {500}'
             await self.dev.shell(cmd)
             await aio.sleep(1)
         await aio.sleep(1)
-        logger.info(f'use teleporter: {int(self.xy.width*x)},{int(self.xy.height*y)}')
         if move_x != 0 or move_y != 0:
             logger.info(f'move map by {move_x},{move_y}')
             if corner == 'topright':
                 cmd = f'input swipe {int(self.xy.width*0.3)} {int(self.xy.height*0.9)} {int(self.xy.width*(0.3+0.65*(move_x/10)))} {int(self.xy.height*(0.9-0.85*(move_y/10)))} {move_spd}'
+            if corner == 'botleft':
+                cmd = f'input swipe {int(self.xy.width*0.65)} {int(self.xy.height*0.1)} {int(self.xy.width*(0.65-0.6*(move_x/10)))} {int(self.xy.height*(0.1+0.85*(move_y/10)))} {move_spd}'
             else:
                 cmd = f'input swipe {int(self.xy.width*0.3)} {int(self.xy.height*0.1)} {int(self.xy.width*(0.3+0.65*(move_x/10)))} {int(self.xy.height*(0.1+0.85*(move_y/10)))} {move_spd}'
             await self.dev.shell(cmd)
@@ -103,6 +107,7 @@ class Bot:
             await self.adb.get_screen(dev=self.dev, debug=True)
             sys.exit()
         # tap teleporter
+        logger.info(f'tap teleporter: {int(self.xy.width*x)},{int(self.xy.height*y)}')
         await self.dev.shell(f'input tap {int(self.xy.width*x)} {int(self.xy.height*y)}')
         await aio.sleep(1.25)
         # confirm teleporter if other landmark is close
@@ -111,7 +116,13 @@ class Bot:
             await aio.sleep(1.5)
         # teleport
         await self.dev.shell(f'input tap {int(self.xy.width*0.83)} {int(self.xy.height*0.9)}')
-        await self.wait_for_onmap(min_duration=1, mapexit=True)
+        check = await self.wait_for_onmap(min_duration=1, no_fight=True)
+        if check == 'stuck': # retry
+            logger.error(f'telport failed. Try again')
+            await self.dev.shell(f'input keyevent 4')
+            await self.wait_for_onmap(min_duration=1, no_fight=True)
+            # retry
+            await self.use_teleporter(x, y, move_x=move_x, move_y=move_y, move_spd=move_spd, corner=corner, open_map=open_map, confirm=confirm, debug=False)
 
     async def switch_map(self, y_percentage, scroll_down=False, open_map=True, debug=False):
         logger.info('switch map')
@@ -177,38 +188,7 @@ class Bot:
         # tap planet
         await self.dev.shell(f'input swipe {top_left[0] + int(w/2)} {top_left[1] + int(h/2)} {top_left[0] + int(w/2)} {top_left[1] + int(h/2)} 200')
         await aio.sleep(2)
-
-    async def interact(self):
-        await aio.sleep(1)
-        await self.action_tap(int(self.xy.width*1600/2400), int(self.xy.height*650/1080))
-        await self.wait_for_onmap(min_duration=2)
-
-    async def action_button(self):
-        await aio.sleep(1)
-        await self.action_tap(int(self.xy.width*1580/2400), int(self.xy.height*933/1080))
-        await self.wait_for_onmap(min_duration=2)
-
-    async def attack_technique(self, count=2):
-        logger.info('action: attack')
-        for _ in range(count):
-            await self.action_technique()
-        check = await self.wait_for_onmap(min_duration=1)
-        if check == 'food':
-            # had to eat food, repeat
-            await self.attack_technique(count=count)
     
-    async def attack(self):
-        logger.info('action: attack')
-        await aio.sleep(0.05)
-        await self.dev.shell(f'input tap {self.xy.attack[0]} {self.xy.attack[1]}')
-        await aio.sleep(0.5)
-
-    async def action_technique(self):
-        logger.info('action: technique')
-        await aio.sleep(0.05)
-        await self.dev.shell(f'input tap {self.xy.technique[0]} {self.xy.technique[1]}')
-        await aio.sleep(0.25)
-        
     async def restore_tp(self, n=1):
         logger.info('action: restore TP using food, make sure it is faved first')
         await aio.sleep(0.05)
@@ -231,8 +211,39 @@ class Bot:
         await self.dev.shell(f'input keyevent 4')
         await self.wait_for_onmap(min_duration=2)
 
-    async def wait_for_onmap(self, min_duration=5, mapexit=False, debug=False):
-        logger.info('wait for fight to end')
+    async def interact(self):
+        await aio.sleep(1)
+        await self.action_tap(int(self.xy.width*1600/2400), int(self.xy.height*650/1080))
+        await self.wait_for_onmap(min_duration=2)
+
+    async def action_button(self):
+        await aio.sleep(1)
+        await self.action_tap(int(self.xy.width*1580/2400), int(self.xy.height*933/1080))
+        await self.wait_for_onmap(min_duration=2)
+    
+    async def attack(self):
+        logger.info('action: attack')
+        await aio.sleep(0.05)
+        await self.dev.shell(f'input tap {self.xy.attack[0]} {self.xy.attack[1]}')
+        await aio.sleep(0.5)
+
+    async def action_technique(self):
+        logger.info('action: technique')
+        await aio.sleep(0.05)
+        await self.dev.shell(f'input tap {self.xy.technique[0]} {self.xy.technique[1]}')
+        await aio.sleep(0.3)
+
+    async def attack_technique(self, count=2):
+        logger.info(f'action: attack with technique {count} times')
+        for _ in range(count):
+            await self.action_technique()
+        check = await self.wait_for_onmap(min_duration=3)
+        if check == 'food':
+            # had to eat food, repeat
+            await self.attack_technique(count=count)
+
+    async def wait_for_onmap(self, min_duration=5, no_fight=False, debug=False):
+        logger.info('wait/check for character on map')
         if not debug:
             await aio.sleep(min_duration)
         img_warp= cv.imread('res/bw_warp.png', cv.IMREAD_GRAYSCALE)
@@ -243,9 +254,16 @@ class Bot:
         img_tpfood = cv.imread('res/food_tp.png', cv.IMREAD_COLOR)
         img_exit = cv.imread('res/exit.png', cv.IMREAD_COLOR)
         check_return = 0
-        time_start = time()
-        while check_return < 1:
-            try: # catch KeyboardInterrupt
+        time_start = time.perf_counter()
+        try: # catch KeyboardInterrupt
+            while True:
+                time_running = timedelta(seconds=time.perf_counter() - time_start)
+                if no_fight == True and (time_running.seconds > 10):
+                    logger.debug('character stuck returning to map')
+                    return('stuck')
+                elif time_running.seconds > 300:
+                    logger.debug('character stuck returning to map')
+                    return('stuck')
                 success = False
                 while not success:
                     try:
@@ -309,12 +327,9 @@ class Bot:
                         await self.action_technique()
                     return('food')
                 elif check_return > 2: # back to map, continue
-                    await self.sleep(0.5)
-                    logger.info('out of fight')
+                    logger.info('character on map: continue')
+                    await aio.sleep(0.5)
                     return(True)
-                time_running = time()
-                if mapexit and (time_running - time_start > 400):
-                    raise PathError
-            except KeyboardInterrupt:
-                logger.debug('Ctrl+C detected. Exiting gracefully.')
-                exit()
+        except KeyboardInterrupt:
+            logger.debug('Ctrl+C detected. Exiting gracefully.')
+            exit()
