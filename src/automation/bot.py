@@ -76,20 +76,26 @@ class Bot:
             await aio.sleep(2.5)
             await self.open_map(penacony=penacony)
 
-    async def use_teleporter(self, x, y, move_x=0, move_y=0, move_spd=500, open_map=True, confirm=False, debug=False):
+    async def use_teleporter(self, x, y, move_x=0, move_y=0, move_spd=500, corner='botright', open_map=True, confirm=False, debug=False):
         # open map
         if open_map:
             await self.open_map()
-        logger.info(f'reset map to bot right corner')
+        logger.info(f'reset map to corner [default: botright]')
         for _ in range(3):
-            cmd = f'input swipe {int(self.xy.width*0.6)} {int(self.xy.height*0.8)} {int(self.xy.width*(0))} {int(self.xy.height*(0))} {500}'
+            if corner == 'topright':
+                cmd = f'input swipe {int(self.xy.width*0.6)} {int(self.xy.height*0.1)} {int(self.xy.width*(0))} {int(self.xy.height*(0.9))} {500}'
+            else:
+                cmd = f'input swipe {int(self.xy.width*0.6)} {int(self.xy.height*0.8)} {int(self.xy.width*(0))} {int(self.xy.height*(0))} {500}'
             await self.dev.shell(cmd)
             await aio.sleep(1)
         await aio.sleep(1)
         logger.info(f'use teleporter: {int(self.xy.width*x)},{int(self.xy.height*y)}')
         if move_x != 0 or move_y != 0:
             logger.info(f'move map by {move_x},{move_y}')
-            cmd = f'input swipe {int(self.xy.width*0.3)} {int(self.xy.height*0.1)} {int(self.xy.width*(0.3+0.65*(move_x/10)))} {int(self.xy.height*(0.1+0.85*(move_y/10)))} {move_spd}'
+            if corner == 'topright':
+                cmd = f'input swipe {int(self.xy.width*0.3)} {int(self.xy.height*0.9)} {int(self.xy.width*(0.3+0.65*(move_x/10)))} {int(self.xy.height*(0.9-0.85*(move_y/10)))} {move_spd}'
+            else:
+                cmd = f'input swipe {int(self.xy.width*0.3)} {int(self.xy.height*0.1)} {int(self.xy.width*(0.3+0.65*(move_x/10)))} {int(self.xy.height*(0.1+0.85*(move_y/10)))} {move_spd}'
             await self.dev.shell(cmd)
             await aio.sleep(2)
         # debug: send screenshot
@@ -182,24 +188,26 @@ class Bot:
         await self.action_tap(int(self.xy.width*1580/2400), int(self.xy.height*933/1080))
         await self.wait_for_onmap(min_duration=2)
 
-    async def attack_technique(self, count=10):
+    async def attack_technique(self, count=2):
         logger.info('action: attack')
-        await aio.sleep(0.05)
         for _ in range(count):
-            await self.technique()
-        await self.wait_for_onmap(min_duration=3)
-
+            await self.action_technique()
+        check = await self.wait_for_onmap(min_duration=1)
+        if check == 'food':
+            # had to eat food, repeat
+            await self.attack_technique(count=count)
+    
     async def attack(self):
         logger.info('action: attack')
         await aio.sleep(0.05)
         await self.dev.shell(f'input tap {self.xy.attack[0]} {self.xy.attack[1]}')
         await aio.sleep(0.5)
 
-    async def technique(self):
+    async def action_technique(self):
         logger.info('action: technique')
         await aio.sleep(0.05)
         await self.dev.shell(f'input tap {self.xy.technique[0]} {self.xy.technique[1]}')
-        await aio.sleep(0.5)
+        await aio.sleep(0.25)
         
     async def restore_tp(self, n=1):
         logger.info('action: restore TP using food, make sure it is faved first')
@@ -232,53 +240,81 @@ class Bot:
         img_mission= cv.imread('res/bw_mission.png', cv.IMREAD_GRAYSCALE)
         img_chat = cv.imread('res/bw_chat.png', cv.IMREAD_GRAYSCALE)
         img_sprint = cv.imread('res/bw_sprint.png', cv.IMREAD_GRAYSCALE)
-        check = 0
+        img_tpfood = cv.imread('res/food_tp.png', cv.IMREAD_COLOR)
+        img_exit = cv.imread('res/exit.png', cv.IMREAD_COLOR)
+        check_return = 0
         time_start = time()
-        while check < 1:
-            success = False
-            while not success:
-                try:
-                    if debug:
-                        screen = await self.adb.get_screen(dev=self.dev, custom_msg='still in fight')
-                    else:
-                        screen = await self.adb.get_screen(dev=self.dev, custom_msg=None)
-                    screen = cv.cvtColor(screen, cv.COLOR_BGR2GRAY)
-                    # screen_edges = cv.Canny(screen, 400, 500)
-                    _, screen_bw = cv.threshold(screen, 200, 255, cv.THRESH_BINARY)
-                    success = True
-                except:
-                    pass
-            screen_warp = screen_bw[int(self.xy.height*0.03):int(self.xy.height*0.08), int(self.xy.width*0.75):int(self.xy.width*0.773)]
-            screen_party = screen_bw[int(self.xy.height*0.03):int(self.xy.height*0.08), int(self.xy.width*0.88):int(self.xy.width*0.9)]
-            screen_mission = screen_bw[int(self.xy.height*0.248):int(self.xy.height*0.31), int(self.xy.width*0.04):int(self.xy.width*0.062)]
-            screen_chat = screen_bw[int(self.xy.height*0.868):int(self.xy.height*0.925), int(self.xy.width*0.04):int(self.xy.width*0.068)]
-            screen_sprint = screen_bw[int(self.xy.height*0.815):int(self.xy.height*0.885), int(self.xy.width*0.88):int(self.xy.width*0.915)]
-            if debug:
-                # sc = screen_mission
-                # si = img_mission
-                # print(si.shape)
-                # print(sc.shape)
-                # ssi = compare_ssim(sc, si)
-                # print(ssi)
-                # cv.imwrite('img.png', sc)
-                # cv.imshow('debug', sc)
-                # cv.waitKey(0)
-                # cv.destroyAllWindows()
+        while check_return < 1:
+            try: # catch KeyboardInterrupt
+                success = False
+                while not success:
+                    try:
+                        if debug:
+                            screen = await self.adb.get_screen(dev=self.dev, custom_msg='still in fight')
+                        else:
+                            screen = await self.adb.get_screen(dev=self.dev, custom_msg=None)
+                        screen_bw = cv.cvtColor(screen, cv.COLOR_BGR2GRAY)
+                        # screen_edges = cv.Canny(screen, 400, 500)
+                        _, screen_bw = cv.threshold(screen_bw, 200, 255, cv.THRESH_BINARY)
+                        success = True
+                    except:
+                        pass
+                screen_warp = screen_bw[int(self.xy.height*0.03):int(self.xy.height*0.08), int(self.xy.width*0.75):int(self.xy.width*0.773)]
+                screen_party = screen_bw[int(self.xy.height*0.03):int(self.xy.height*0.08), int(self.xy.width*0.88):int(self.xy.width*0.9)]
+                screen_mission = screen_bw[int(self.xy.height*0.248):int(self.xy.height*0.31), int(self.xy.width*0.04):int(self.xy.width*0.062)]
+                screen_chat = screen_bw[int(self.xy.height*0.868):int(self.xy.height*0.925), int(self.xy.width*0.04):int(self.xy.width*0.068)]
+                screen_sprint = screen_bw[int(self.xy.height*0.815):int(self.xy.height*0.885), int(self.xy.width*0.88):int(self.xy.width*0.915)]
+                screen_exit = screen[int(self.xy.height*0.34):int(self.xy.height*0.66), int(self.xy.width*0.33):int(self.xy.width*0.67)]
+                # debug = True
+                if debug:
+                    # sc = screen_exit
+                    # si = img_mission
+                    # print(si.shape)
+                    # print(sc.shape)
+                    # cv.imwrite('img.png', sc)
+                    # ssi = compare_ssim(sc, si)
+                    # print(ssi)
+                    # cv.imshow('debug', sc)
+                    # cv.waitKey(0)
+                    # cv.destroyAllWindows()
+                    exit()
+                check_images = [
+                    (screen_warp, img_warp),
+                    (screen_party, img_party),
+                    (screen_mission, img_mission),
+                    (screen_chat, img_chat),
+                    (screen_sprint, img_sprint)
+                ]
+                for i in check_images:
+                    ssi = compare_ssim(i[0], i[1])
+                    if ssi > 0.95:
+                        check_return += 1
+                # check for food window (not enough TP) and in case of 0 eat food
+                result_food = cv.matchTemplate(screen, img_tpfood, cv.TM_CCOEFF_NORMED)
+                _, max_val_food, _, max_loc_food = cv.minMaxLoc(result_food)
+                # check for mistake (exit window)
+                result_exit = cv.matchTemplate(screen_exit, img_exit, cv.TM_CCOEFF_NORMED)
+                _, max_val_exit, _, _ = cv.minMaxLoc(result_exit)
+                if max_val_exit > 0.95:
+                    logger.info('exit window found: cancel')
+                    await self.dev.shell(f'input keyevent 4')
+                    await self.sleep(0.5)
+                elif max_val_food > 0.95: # food menu found, eat TP food
+                    logger.info('food menu found: eat TP food')
+                    top_left = max_loc_food
+                    await self.action_tap(top_left[0]+5, top_left[1]+5)
+                    await self.action_tap(int(self.xy.width*1470/2400), int(self.xy.height*885/1080))
+                    await self.dev.shell(f'input keyevent 4')
+                    for _ in range(4): # directly continue attacking
+                        await self.action_technique()
+                    return('food')
+                elif check_return > 2: # back to map, continue
+                    await self.sleep(0.5)
+                    logger.info('out of fight')
+                    return(True)
+                time_running = time()
+                if mapexit and (time_running - time_start > 400):
+                    raise PathError
+            except KeyboardInterrupt:
+                logger.debug('Ctrl+C detected. Exiting gracefully.')
                 exit()
-            images = [
-                (screen_warp, img_warp),
-                (screen_party, img_party),
-                (screen_mission, img_mission),
-                (screen_chat, img_chat),
-                (screen_sprint, img_sprint)
-            ]
-            for i in images:
-                ssi = compare_ssim(i[0], i[1])
-                if ssi > 0.95:
-                    check += 1
-            if check > 2:
-                await aio.sleep(1)
-                logger.info('out of fight')
-            time_running = time()
-            if mapexit and (time_running - time_start > 400):
-                raise PathError

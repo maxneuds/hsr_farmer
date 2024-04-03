@@ -36,7 +36,7 @@ class ADB:
         h, w = hxw.split('x')
         return(int(h), int(w))
 
-    async def get_screen(self, dev, custom_msg=False, debug=False):
+    async def get_screen(self, dev, custom_msg=None, debug=False):
         if custom_msg == False:
             logger.info('get screenshot from device')
         elif custom_msg == None:

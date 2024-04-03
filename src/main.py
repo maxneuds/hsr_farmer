@@ -87,7 +87,7 @@ if __name__ == '__main__':
     try:
         aio.run(main())
     except KeyboardInterrupt:
-        print('Ctrl+C detected. Exiting gracefully.')
+        logger.debug('Ctrl+C detected. Exiting gracefully.')
         exit()
     # st.title('HSR Farmer')
     # st.selectbox('Startmap:', ('Base Zone', 'Storage Zone'))

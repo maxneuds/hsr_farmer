@@ -144,6 +144,7 @@ class World:
         await x.path_5()
         await x.path_6()
         await x.path_7()
+        await x.atk()
     class Fyxestroll_Garden:
         def __init__(self, bot):
             self.bot = bot
@@ -159,7 +160,7 @@ class World:
             await self.bot.movepi(1.75, 2100)
             await self.bot.movepi(0.05, 2800)
             await self.bot.movepi(1.8, 2500)
-            await self.bot.attack_technique() # -1 TP
+            await self.bot.attack_technique(5)
         async def path_2(self):
             logger.info('### Path 2 ###')
             await self.bot.use_teleporter(697/2400, 153/1080, move_x=0, move_y=0)  # Path of Darkness
@@ -168,7 +169,7 @@ class World:
             await self.bot.movepi(1.8, 2500)
             await self.bot.movepi(0.224, 4100)
             await self.bot.movepi(0.61, 500)
-            await self.bot.attack_technique(5) # -2 TP
+            await self.bot.attack_technique(5)
         async def path_3(self):
             logger.info('### Path 3 ###')
             await self.bot.use_teleporter(697/2400, 153/1080, move_x=0, move_y=0)  # Path of Darkness
@@ -179,28 +180,27 @@ class World:
             await self.bot.movepi(1.8, 2300)
             await self.bot.movepi(0.23, 6000)
             await self.bot.movepi(1.95, 700)
-            await self.bot.attack_technique(5) # -2 TP
-            await self.bot.restore_tp(n=1) # +2 TP
+            await self.bot.attack_technique(5)
         async def path_4(self):
             logger.info('### Path 4 ###') # roamer
             await self.bot.use_teleporter(579/2400, 368/1080, move_x=1, move_y=2)  # Locufox Forest Backdoor
             await self.bot.movepi(1.5, 4400)
             await self.bot.movepi(1.95, 600)
-            await self.bot.attack_technique(5) # -2 TP
+            await self.bot.attack_technique(5)
             await self.bot.movepi(1.0, 200)
-            await self.bot.attack_technique(10) # -1 TP
-            await self.bot.restore_tp(n=2) # +4 TP
+            await self.bot.attack_technique(10)
+            await self.bot.restore_tp(n=2)
         async def path_5(self):
             logger.info('### Path 5 ###')
             await self.bot.use_teleporter(412/2400, 603/1080, move_x=0, move_y=0)  # Bud of Abundance
             await self.bot.movepi(1.49, 3900)
-            await self.bot.attack_technique(2) # -1 TP
+            await self.bot.attack_technique(2)
         async def path_6(self):
             logger.info('### Path 6 ###') # roamer
             await self.bot.use_teleporter(412/2400, 603/1080, move_x=0, move_y=0)  # Bud of Abundance
             await self.bot.movepi(0.9, 4000)
             await self.bot.movepi(1.2, 3000)
-            await self.bot.attack_technique(10) # -1 TP
+            await self.bot.attack_technique(10)
         async def path_7(self):
             logger.info('### Path 7 ###')
             await self.bot.use_teleporter(412/2400, 603/1080, move_x=0, move_y=0)  # Bud of Abundance
@@ -212,8 +212,7 @@ class World:
             await self.bot.sleep(0.5)
             await self.bot.movepi(1.2, 1500)
             await self.bot.movepi(0.7, 1000)
-            await self.bot.attack_technique(5) # -1 TP
-            await self.bot.restore_tp(n=1) # +2 TP
+            await self.bot.attack_technique(5)
 
 
     # async def farm_stargazer_navalia(self):
