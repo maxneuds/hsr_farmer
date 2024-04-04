@@ -51,6 +51,7 @@ class Bot:
         await self.dev.shell(f'input tap {self.xy.map[0]} {self.xy.map[1]}')
         await aio.sleep(2.5)
         if penacony == True:
+            logger.info('exit special map')
             await self.dev.shell(f'input tap {int(self.xy.width*2135/2400)} {int(self.xy.height*138/1080)}')
             await aio.sleep(2.5)
         await self.check_map_zoom_level(penacony=penacony) # in case of map already open, already done by the previous instance
@@ -78,19 +79,19 @@ class Bot:
 
     async def use_teleporter(self, x, y, move_x=0, move_y=0, move_spd=500, corner='botright', open_map=True, penacony=False, confirm=False, debug=False):
         logger.info(f'use teleporter: {int(self.xy.width*x)},{int(self.xy.height*y)}')
-        # open map
-        if open_map:
-            if penacony:
+        if open_map == True:
+            # check if penacony special map (submap)
+            if penacony == True:
                 await self.open_map(penacony=True)
             else:
                 await self.open_map()
-        logger.info(f'reset map to corner [default: botright]')
+        logger.info(f'move map to corner: {corner}')
         for _ in range(3):
             if corner == 'topright':
                 cmd = f'input swipe {int(self.xy.width*0.6)} {int(self.xy.height*0.1)} {int(self.xy.width*(0))} {int(self.xy.height*(0.9))} {500}'
             elif corner == 'botleft':
                 cmd = f'input swipe {int(self.xy.width*0.1)} {int(self.xy.height*0.8)} {int(self.xy.width*(0.7))} {int(self.xy.height*(0))} {500}'
-            else:
+            elif corner == f'botright':
                 cmd = f'input swipe {int(self.xy.width*0.6)} {int(self.xy.height*0.8)} {int(self.xy.width*(0))} {int(self.xy.height*(0))} {500}'
             await self.dev.shell(cmd)
             await aio.sleep(1)
@@ -101,7 +102,7 @@ class Bot:
                 cmd = f'input swipe {int(self.xy.width*0.3)} {int(self.xy.height*0.9)} {int(self.xy.width*(0.3+0.65*(move_x/10)))} {int(self.xy.height*(0.9-0.85*(move_y/10)))} {move_spd}'
             elif corner == 'botleft':
                 cmd = f'input swipe {int(self.xy.width*0.65)} {int(self.xy.height*0.1)} {int(self.xy.width*(0.65-0.6*(move_x/10)))} {int(self.xy.height*(0.1+0.85*(move_y/10)))} {move_spd}'
-            else:
+            elif corner == f'botright':
                 cmd = f'input swipe {int(self.xy.width*0.3)} {int(self.xy.height*0.1)} {int(self.xy.width*(0.3+0.65*(move_x/10)))} {int(self.xy.height*(0.1+0.85*(move_y/10)))} {move_spd}'
             await self.dev.shell(cmd)
             await aio.sleep(2)
@@ -123,29 +124,14 @@ class Bot:
         if check == 'stuck': # retry
             logger.error(f'telport failed. Try again')
             await self.dev.shell(f'input keyevent 4')
-            await self.wait_for_onmap(min_duration=1, no_fight=True)
+            await self.wait_for_onmap(min_duration=2, no_fight=True)
             # retry
-            await self.use_teleporter(x, y, move_x=move_x, move_y=move_y, move_spd=move_spd, corner=corner, open_map=open_map, confirm=confirm, penacony=penacony, debug=False)
-
-    async def switch_map(self, y_percentage, scroll_down=False, open_map=True, debug=False):
-        logger.info('switch map')
-        if open_map:
-            await self.open_map()
-        x = int(self.xy.width*0.8)
-        if scroll_down:
-            y1 = int(self.xy.height*0.8)
-            y2 = int(self.xy.height*0.2)
+            if open_map == True:
+                await self.use_teleporter(x, y, move_x=move_x, move_y=move_y, move_spd=move_spd, corner=corner, open_map=open_map, confirm=confirm, penacony=penacony, debug=False)
+            else:
+                return(False)
         else:
-            y1 = int(self.xy.height*0.3)
-            y2 = int(self.xy.height*0.8)
-        cmd = f'input swipe {x} {y1} {x} {y2} 250'
-        await self.dev.shell(cmd)
-        await aio.sleep(3)
-        if debug:
-            await self.adb.get_screen(dev=self.dev, debug=True)
-            sys.exit()
-        await self.action_tap(int(self.xy.width*0.8), int(self.xy.height*y_percentage))
-        await aio.sleep(2)
+            return(True)
 
     async def swipe_locations_up(self):
         logger.info('swipe locations up')
@@ -162,21 +148,22 @@ class Bot:
         await aio.sleep(1.5)
 
     async def switch_world(self, world):
-        logger.info('###')
         # select correct matching template
         if world == 'herta_space_station':
-            logger.info('### Herta Space Station ###')
+            logger.info('switch world: Herta Space Station')
             target = cv.imread('res/herta_space_station.png', cv.IMREAD_COLOR)
-        if world == 'jarilo_vi':
-            logger.info('### Jarilo-VI ###')
+        elif world == 'jarilo_vi':
+            logger.info('switch world: Jarilo-VI')
             target = cv.imread('res/jarilo-vi.png', cv.IMREAD_COLOR)
-        if world == 'the_xianzhou_luofu':
-            logger.info('### The Xianzhou Luofu ###')
+        elif world == 'the_xianzhou_luofu':
+            logger.info('switch world: The Xianzhou Luofu')
             target = cv.imread('res/the_xianzhou_luofu.png', cv.IMREAD_COLOR)
-        if world == 'penacony':
-            logger.info('### Penacony ###')
+        elif world == 'penacony':
+            logger.info('switch world: Penacony')
             target = cv.imread('res/penacony.png', cv.IMREAD_COLOR)
-        logger.info('###')
+        else:
+            logger.debug('Error: no world selected')
+            exit()
         # open star rail map
         await self.open_star_rail_map()
         # get screenshot
@@ -191,6 +178,30 @@ class Bot:
         # tap planet
         await self.dev.shell(f'input swipe {top_left[0] + int(w/2)} {top_left[1] + int(h/2)} {top_left[0] + int(w/2)} {top_left[1] + int(h/2)} 200')
         await aio.sleep(2)
+    
+    async def switch_map(self, y_list, world, x, y, scroll_down=False, corner='botright', move_x=0, move_y=0, confirm=False, debug=False):
+        logger.info('switch map')
+        await self.switch_world(world=world)
+        logger.info('scroll location list')
+        x_list = int(self.xy.width*0.8)
+        if scroll_down:
+            y1 = int(self.xy.height*0.8)
+            y2 = int(self.xy.height*0.2)
+        else:
+            y1 = int(self.xy.height*0.3)
+            y2 = int(self.xy.height*0.8)
+        cmd = f'input swipe {x_list} {y1} {x_list} {y2} 250'
+        await self.dev.shell(cmd)
+        await aio.sleep(3)
+        if debug:
+            await self.adb.get_screen(dev=self.dev, debug=debug)
+        logger.info('tap location')
+        await self.action_tap(x_list, int(self.xy.height*y_list))
+        await aio.sleep(2)
+        check = await self.use_teleporter(x, y, corner=corner, move_x=move_x, move_y=move_y, confirm=confirm, open_map=False, debug=debug)
+        if check == False:
+            logger.warning('map change failed: retry')
+            await self.switch_map(y_list=y_list, x=x, y=y, scroll_down=scroll_down, corner=corner, move_x=move_x, move_y=move_y, confirm=confirm, debug=debug)
     
     async def restore_tp(self, n=1):
         logger.info('action: restore TP using food, make sure it is faved first')
@@ -212,7 +223,7 @@ class Bot:
             await aio.sleep(2)
         logger.info(f'exit to map')
         await self.dev.shell(f'input keyevent 4')
-        await self.wait_for_onmap(min_duration=2)
+        await self.wait_for_onmap(min_duration=3)
 
     async def interact(self):
         await aio.sleep(1)
@@ -325,6 +336,7 @@ class Bot:
                     top_left = max_loc_food
                     await self.action_tap(top_left[0]+5, top_left[1]+5)
                     await self.action_tap(int(self.xy.width*1470/2400), int(self.xy.height*885/1080))
+                    await aio.sleep(2)
                     await self.dev.shell(f'input keyevent 4')
                     for _ in range(4): # directly continue attacking
                         await self.action_technique()

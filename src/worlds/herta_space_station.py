@@ -1,24 +1,42 @@
 import asyncio as aio
+from logger import logger
 from automation.bot import Bot
 from datetime import datetime as dt
 from sys import exit
 
-def logger(msg):
-    dt_now = dt.now().strftime('%H:%M:%S')
-    print(f'[{dt_now}] {msg}')
-
 class World:
     def __init__(self, bot):
-        # initialize bot
         self.bot = bot
+
+    
+    async def farm_seclusion_zone(self):
+        x = self.Seclusion_Zone(bot=self.bot)
+        # await x.teleport()
+        # await x.path_1()
+        # await x.path_2()
+        # await x.path_3()
+        # await x.path_4()
+        # await x.path_5()
+        # await x.path_6()
+        # await x.path_7()
+        # await x.path_8()
+        await x.path_99()
     class Seclusion_Zone:
+        def __init__(self, bot):
+            self.bot = bot
         async def teleport(self):
-            logger('\nfarm: Seclusion Zone\n')
-            await self.bot.switch_map(864/1080)
-        def __init__(self):
-            # add route
-            pass
-            
+            logger.info('---')
+            logger.info("--- Map: Seclusion Zone")
+            logger.info('---')
+            await self.bot.switch_map(y_list=863/1080, world='herta_space_station', scroll_down=True,
+                                      x=1079/2400, y=376/1080, move_x=0, move_y=1) # Incubator
+            await self.bot.movepi(0.0, 2700)
+            await self.bot.attack() # +2 TP
+        async def path_99(self):
+            logger.info('### Path 1 ###')
+            await self.bot.use_teleporter(1097/2400, 285/1080, move_x=0, move_y=3, corner='botright') # Breeding Ground
+            # await self.bot.attack_technique(4)
+            # await self.bot.restore_tp(n=1) # +2 TP
 
     # async def farm_seclusion_zone(self):
         

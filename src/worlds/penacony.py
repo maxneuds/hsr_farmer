@@ -7,27 +7,6 @@ from sys import exit
 class World:
     def __init__(self, bot):
         self.bot = bot
-    
-    async def switch(self):
-        await self.bot.switch_world('penacony')
-        await self.Golden_Hour.teleport(self)
-        await self.Golden_Hour.grab_technique_points(self)
-
-
-    class Golden_Hour:
-        def __init__(self, bot):
-            self.bot = bot
-        async def teleport(self):
-            logger.info('---')
-            logger.info('--- Map: Golden Hour')
-            logger.info('---')
-            await self.bot.switch_map(650/1080, open_map=False)
-            await self.bot.use_teleporter(588/2400, 356/1080, move_x=4, move_y=3, open_map=False)  # Sweet Corner
-        async def grab_technique_points(self):
-            logger.info('grab Technique Points')
-            await self.bot.movepi(1.6, 5000)
-            await self.bot.movepi(1.25, 3000)
-            await self.bot.attack()
 
 
     async def farm_dewlight_pavilion(self):
@@ -49,7 +28,7 @@ class World:
             logger.info('---')
             logger.info("--- Map: Dewlight Pavilion")
             logger.info('---')
-            # await self.bot.switch_map(808/1080, scroll_down=True)
+            # await self.bot.switch_map(y=808/1080, world='penacony', scroll_down=True)
             # await self.bot.use_teleporter(801/2400, 569/1080, move_x=0, move_y=0, corner='botright', open_map=False) # Reception Counter
             await self.bot.movepi(0.67, 3600)
             await self.bot.attack()
@@ -61,21 +40,23 @@ class World:
 
     async def farm_clock_studios_theme_park(self):
         x = self.Clock_Studios_Theme_Park(bot=self.bot)
-        await x.teleport()
-        await x.path_1()
-        await x.path_2()
-        await x.path_3()
-        await x.path_4()
-        await x.path_5()
-        await x.path_6()
-        await x.path_7()
-        await x.path_8()
-        await x.path_9()
-        await x.path_10()
-        await x.path_11()
-        await x.path_12()
+        # await x.teleport()
+        # await x.path_1()
+        # await x.path_2()
+        # await x.path_3()
+        # exit() # check
+        # await x.path_4()
+        # await x.path_5()
+        # await x.path_6()
+        # await x.path_7()
+        # await x.path_8()
+        # await x.path_9()
+        # await x.path_10()
+        # await x.path_11()
+        # exit() # first clear back monsters
+        # await x.path_12()
+        # exit() # redo this, come from back
         await x.path_13()
-        await x.path_14()
     class Clock_Studios_Theme_Park:
         def __init__(self, bot):
             self.bot = bot
@@ -83,8 +64,10 @@ class World:
             logger.info('---')
             logger.info('--- Map: Clock Studios Theme Park')
             logger.info('---')
-            await self.bot.switch_map(925/1080, scroll_down=True)
-            await self.bot.use_teleporter(1209/2400, 276/1080, move_x=1, move_y=6, open_map=False, confirm=True)  # Theme Park Entrance
+            await self.bot.switch_map(y_list=925/1080, world='penacony', scroll_down=True,
+                                      x=1100/2400, y=423/1080, move_x=3, move_y=3) # Bud of Preservation
+            await self.bot.movepi(1.7, 2500)
+            await self.bot.attack() # +2 TP
         async def path_1(self):
             logger.info('### Path 1 ###')
             await self.bot.use_teleporter(1209/2400, 276/1080, move_x=1, move_y=6, confirm=True)  # Theme Park Entrance
@@ -133,34 +116,31 @@ class World:
             await self.bot.movepi(0.7, 800)
             await self.bot.attack_technique(4)
         async def path_4(self):
-            logger.info('### Path 4 ###')
-            await self.bot.use_teleporter(1100/2400, 423/1080, move_x=3, move_y=3)  # Bud of Preservation
-            await self.bot.movepi(1.7, 2500)
-            await self.bot.attack() # +2 TP
-        async def path_5(self):
-            logger.info('### Path 5 ###') # roamer
+            logger.info('### Path 4 ###') # roamer
             await self.bot.use_teleporter(539/2400, 455/1080, move_x=1, move_y=1)  # Hanu Gang Place
-            await self.bot.movepi(0.75, 4200)
+            await self.bot.movepi(0.7, 4400)
+            await self.bot.movepi(1.0, 800)
             await self.bot.attack_technique(5)
-        async def path_6(self):
-            logger.info('### Path 6 ###')
+        async def path_5(self):
+            logger.info('### Path 5 ###')
             await self.bot.use_teleporter(539/2400, 455/1080, move_x=1, move_y=1)  # Hanu Gang Place
             await self.bot.movepi(0.75, 4500)
             await self.bot.movepi(0.99, 1800)
             await self.bot.movepi(0.5, 300)
             await self.bot.attack_technique(8)
-        async def path_7(self):
-            logger.info('### Path 7 ###')
+            await self.bot.restore_tp(n=1) # +2 TP
+        async def path_6(self):
+            logger.info('### Path 6 ###')
             await self.bot.use_teleporter(539/2400, 455/1080, move_x=1, move_y=1)  # Hanu Gang Place
             await self.bot.movepi(0.75, 4500)
             await self.bot.movepi(0.99, 2000)
             await self.bot.movepi(0.7, 2000)
             await self.bot.attack_technique(2)
             await self.bot.movepi(1.5, 1000)
-            await self.bot.attack_technique(5)
+            await self.bot.attack_technique(10)
             await self.bot.restore_tp(n=2) # +4 TP
-        async def path_8(self):
-            logger.info('### Path 8 ###')
+        async def path_7(self):
+            logger.info('### Path 7 ###')
             await self.bot.use_teleporter(539/2400, 455/1080, move_x=1, move_y=1)  # Hanu Gang Place
             await self.bot.movepi(0.49, 7000)
             await self.bot.movepi(0.01, 5500)
@@ -169,27 +149,27 @@ class World:
             await self.bot.movepi(0.52, 4500)
             await self.bot.attack_technique(5)
             await self.bot.restore_tp(n=1) # +2 TP
-        async def path_9(self):
-            logger.info('### Path 9 ###')
+        async def path_8(self):
+            logger.info('### Path 8 ###')
             await self.bot.use_teleporter(539/2400, 455/1080, move_x=1, move_y=1)  # Hanu Gang Place
             await self.bot.movepi(0.00, 5000)
             await self.bot.movepi(1.47, 4000)
-            await self.bot.attack_technique(4)
-        async def path_10(self):
-            logger.info('### Path 10 ###') # roamer
+            await self.bot.attack_technique(3)
+        async def path_9(self):
+            logger.info('### Path 9 ###') # roamer
             await self.bot.use_teleporter(490/2400, 633/1080, move_x=1, move_y=1, corner='topright')  # Hamster Ball Park
             await self.bot.movepi(1.55, 3500)
             await self.bot.movepi(1.35, 1500)
             await self.bot.movepi(1.2, 1000)
             await self.bot.attack_technique(8)
             await self.bot.restore_tp(n=1) # +2 TP
-        async def path_11(self):
-            logger.info('### Path 11 ###') # roamer
+        async def path_10(self):
+            logger.info('### Path 10 ###')
             await self.bot.use_teleporter(490/2400, 633/1080, move_x=1, move_y=1, corner='topright')  # Hamster Ball Park
             await self.bot.movepi(1.58, 7000)
             await self.bot.attack_technique(2)
-        async def path_12(self):
-            logger.info('### Path 12 ###')
+        async def path_11(self):
+            logger.info('### Path 11 ###')
             await self.bot.use_teleporter(490/2400, 633/1080, move_x=1, move_y=1, corner='topright')  # Hamster Ball Park
             await self.bot.movepi(0.2, 3000)
             await self.bot.movepi(1.98, 4500)
@@ -197,24 +177,29 @@ class World:
             await self.bot.movepi(0.4, 1000)
             await self.bot.movepi(0.5, 1500)
             await self.bot.attack_technique(10)
-        async def path_13(self):
-            logger.info('### Path 13 ###') # roamer
-            await self.bot.use_teleporter(490/2400, 633/1080, move_x=1, move_y=1, corner='topright')  # Hamster Ball Park
-            await self.bot.movepi(0.45, 5000)
-            await self.bot.movepi(0.3, 2000)
-            await self.bot.movepi(0.4, 1500)
-            await self.bot.attack_technique(4)
-        async def path_14(self):
-            logger.info('### Path 14 ###')
-            await self.bot.use_teleporter(490/2400, 633/1080, move_x=1, move_y=1, corner='topright')  # Hamster Ball Park
             await self.bot.restore_tp(n=1) # +2 TP
+        async def path_12(self):
+            logger.info('### Path 12 ###') # roamer
+            await self.bot.use_teleporter(490/2400, 633/1080, move_x=1, move_y=1, corner='topright')  # Hamster Ball Park
             await self.bot.movepi(0.51, 3000)
             await self.bot.movepi(0.6, 3100)
             await self.bot.movepi(0.57, 2600)
             await self.bot.movepi(0.4, 500)
-            await self.bot.movepi(0.2, 1000)
-            await self.bot.movepi(0.05, 700)
-            await self.bot.attack_technique(15)
+            await self.bot.movepi(0.3, 1100)
+            await self.bot.movepi(1.9, 200)
+            exit() # check stand facing in correct direction
+            await self.bot.attack_technique(2)
+            await self.bot.restore_tp(n=1) # +2 TP
+        async def path_13(self):
+            logger.info('### Path 13 ###') # roamer
+            # await self.bot.use_teleporter(490/2400, 633/1080, move_x=1, move_y=1, corner='topright')  # Hamster Ball Park
+            await self.bot.movepi(0.51, 3000)
+            await self.bot.movepi(0.6, 3100)
+            await self.bot.movepi(0.57, 2200)
+            await self.bot.attack()
+            await self.bot.movepi(0.0, 300)
+            await self.bot.attack_technique(10)
+            await self.bot.restore_tp(n=1) # +2 TP
 
 
     async def farm_dreams_edge(self):
@@ -224,12 +209,19 @@ class World:
         await x.path_2()
         await x.path_3()
         await x.path_4()
+        exit() # check 5-7
         await x.path_5()
         await x.path_6()
         await x.path_7()
         await x.path_8()
         await x.path_9()
         await x.path_10()
+        exit() # check catch all + energy
+        await x.path_11()
+        # this worked, but ugly
+        # await self.bot.movepi(0.5, 4800)
+        # # await self.bot.attack_technique(15)
+        # # await self.bot.restore_tp(n=1) # +2 TP
     class Dreams_Edge:
         def __init__(self, bot):
             self.bot = bot
@@ -237,8 +229,8 @@ class World:
             logger.info('---')
             logger.info("--- Map: Dream's Edge")
             logger.info('---')
-            await self.bot.switch_map(771/1080, scroll_down=False)
-            await self.bot.use_teleporter(543/2400, 503/1080, move_x=3, move_y=1, corner='topright', open_map=False, confirm=True) # The Family's Construction Authority
+            await self.bot.switch_map(y_list=771/1080, world='penacony', scroll_down=False,
+                                      x=543/2400, y=503/1080, move_x=3, move_y=1, corner='topright', confirm=True) # The Family's Construction Authority
         async def path_1(self):
             logger.info('### Path 1 ###')
             await self.bot.use_teleporter(543/2400, 503/1080, move_x=3, move_y=1, corner='topright', confirm=True) # The Family's Construction Authority
@@ -270,23 +262,33 @@ class World:
             await self.bot.movepi(0.00, 3700)
             await self.bot.movepi(0.5, 11000)
             await self.bot.attack_technique(8)
-            await self.bot.restore_tp(n=2) # +4 TP
         async def path_5(self):
             logger.info('### Path 5 ###')
             await self.bot.use_teleporter(1156/2400, 373/1080, move_x=4, move_y=4, corner='botright') # Rooftop Garden
-            await self.bot.movepi(0.5, 3000)
-            await self.bot.movepi(0.75, 500)
-            await self.bot.attack_technique(10)
+            await self.bot.movepi(0.9, 1000)
+            await self.bot.attack() # +2 TP
+            await self.bot.movepi(1.0, 1600)
+            await self.bot.movepi(0.5, 2600)
+            await self.bot.movepi(0.9, 200)
+            await self.bot.movepi(0.1, 200)
+            await self.bot.attack_technique(8)
             await self.bot.restore_tp(n=1) # +2 TP
         async def path_6(self):
             logger.info('### Path 6 ###')
             await self.bot.use_teleporter(1156/2400, 373/1080, move_x=4, move_y=4, corner='botright') # Rooftop Garden
             await self.bot.movepi(0.5, 3500)
-            await self.bot.movepi(0.00, 2750)
-            await self.bot.attack_technique(15)
-            await self.bot.restore_tp(n=1) # +2 TP
+            await self.bot.movepi(0.00, 2600)
+            await self.bot.attack_technique(6)
         async def path_7(self):
             logger.info('### Path 7 ###')
+            await self.bot.use_teleporter(1156/2400, 373/1080, move_x=4, move_y=4, corner='botright') # Rooftop Garden
+            await self.bot.restore_tp(n=1) # +2 TP
+            await self.bot.movepi(0.5, 3500)
+            await self.bot.movepi(0.00, 2800)
+            await self.bot.movepi(0.5, 500)
+            await self.bot.attack_technique(10)
+        async def path_8(self):
+            logger.info('### Path 8 ###')
             await self.bot.use_teleporter(1156/2400, 373/1080, move_x=4, move_y=4, corner='botright') # Rooftop Garden
             await self.bot.movepi(0.5, 5000)
             await self.bot.movepi(0.75, 1500)
@@ -294,25 +296,27 @@ class World:
             await self.bot.movepi(0.95, 2200)
             await self.bot.attack_technique(5)
             await self.bot.restore_tp(n=1) # +2 TP
-        async def path_8(self):
-            logger.info('### Path 8 ###')
-            await self.bot.use_teleporter(658/2400, 742/1080, move_x=4, move_y=7, corner='botleft') # Bud of Memories
-            await self.bot.movepi(1.5, 1500)
-            await self.bot.attack_technique(4)
         async def path_9(self):
             logger.info('### Path 9 ###')
-            await self.bot.use_teleporter(658/2400, 742/1080, move_x=4, move_y=7, corner='botleft') # Bud of Memories
+            await self.bot.use_teleporter(658/2400, 738/1080, move_x=0, move_y=7, corner='botleft') # Bud of Memories
+            await self.bot.movepi(1.5, 1500)
+            await self.bot.attack_technique(4)
+        async def path_10(self):
+            logger.info('### Path 10 ###')
+            await self.bot.use_teleporter(658/2400, 738/1080, move_x=0, move_y=7, corner='botleft') # Bud of Memories
             await self.bot.movepi(1.25, 2750)
             await self.bot.movepi(0.75, 1500)
             await self.bot.movepi(1.0, 1500)
             await self.bot.attack_technique(4)
             await self.bot.restore_tp(n=1) # +2 TP
-        async def path_10(self):
-            logger.info('### Path 10 ###')
-            await self.bot.use_teleporter(655/2400, 299/1080, move_x=0, move_y=7, corner='botleft') # Front Observation Deck
-            await self.bot.movepi(0.5, 4800)
-            await self.bot.attack_technique(15)
-            await self.bot.restore_tp(n=1) # +2 TP
+        async def path_11(self):
+            logger.info('### Path 11 ###')
+            await self.bot.use_teleporter(655/2400, 293/1080, move_x=0, move_y=7, corner='botleft') # Front Observation Deck
+            await self.bot.movepi(0.5, 2500)
+            await self.bot.movepi(0.7, 3000)
+            await self.bot.movepi(0.0, 200)
+            # await self.bot.attack_technique(12)
+            # await self.bot.restore_tp(n=1) # +2 TP
 
 
     async def farm_childs_dream(self):
@@ -320,6 +324,7 @@ class World:
         await x.teleport()
         await x.path_1()
         await x.path_2()
+        exit() # check for correct positions after attacks
         await x.path_3()
         await x.path_4()
         await x.path_5()
@@ -333,8 +338,8 @@ class World:
             logger.info('---')
             logger.info("--- Map: Childs's Dream")
             logger.info('---')
-            await self.bot.switch_map(893/1080, scroll_down=False)
-            await self.bot.use_teleporter(1010/2400, 304/1080, move_x=0, move_y=4, corner='botright', open_map=False) # Corridor of Memories
+            await self.bot.switch_map(y_list=893/1080, world='penacony', scroll_down=False,
+                                      x=1010/2400, y=304/1080, move_x=0, move_y=4, corner='botright', confirm=False) # Corridor of Memories
         async def path_1(self):
             logger.info('### Path 1 ###')
             await self.bot.use_teleporter(1010/2400, 304/1080, move_x=0, move_y=4, corner='botright') # Corridor of Memories
@@ -351,18 +356,19 @@ class World:
             await self.bot.movepi(1.5, 9300)
             await self.bot.movepi(1.0, 5500)
             await self.bot.movepi(1.25, 1700)
-            await self.bot.attack_technique(8)
+            await self.bot.attack_technique(5)
             await self.bot.restore_tp(n=1) # +2 TP
         async def path_3(self):
             logger.info('### Path 3 ###')
             await self.bot.use_teleporter(1010/2400, 304/1080, move_x=0, move_y=4, corner='botright', penacony=True) # Corridor of Memories
             await self.bot.movepi(1.5, 9300)
             await self.bot.movepi(1.0, 5500)
+            exit() # destroy object here
             await self.bot.movepi(1.2, 1100)
             await self.bot.movepi(1.5, 6300)
             await self.bot.attack_technique(10)
             await self.bot.restore_tp(n=2) # +4 TP
-        async def path_99(self):
+        async def path_4(self):
             logger.info('### Path 4 ###')
             await self.bot.use_teleporter(1010/2400, 304/1080, move_x=0, move_y=4, corner='botright', penacony=True) # Corridor of Memories
             await self.bot.movepi(1.5, 9300)
@@ -371,6 +377,7 @@ class World:
             await self.bot.movepi(1.5, 7200)
             await self.bot.interact()
             await self.bot.movepi(1.5, 1700)
+            exit() # destroy object here
             await self.bot.movepi(1.0, 2000)
             await self.bot.action_button()
             await self.bot.movepi(1.0, 2600)
@@ -392,7 +399,7 @@ class World:
             await self.bot.use_teleporter(1010/2400, 304/1080, move_x=0, move_y=4, corner='botright', penacony=True) # Corridor of Memories
             await self.bot.movepi(1.5, 9300)
             await self.bot.movepi(1.0, 6500)
-            await self.bot.attack()
+            exit() # remove attack here
             await self.bot.movepi(1.6, 1400)
             await self.bot.movepi(1.5, 6900)
             await self.bot.interact()
@@ -401,8 +408,9 @@ class World:
             await self.bot.action_button()
             await self.bot.movepi(1.0, 2600)
             await self.bot.movepi(0.5, 2000)
+            exit()
             await self.bot.attack()
-            await self.bot.movepi(0.8, 1700)
+            await self.bot.movepi(0.9, 1800)
             await self.bot.movepi(0.5, 1400)
             await self.bot.action_button()
             await self.bot.movepi(0.46, 4700)
@@ -475,7 +483,7 @@ class World:
             logger.info('---')
             logger.info("--- Map: The Reverie (Dreamscape)")
             logger.info('---')
-            await self.bot.switch_map(681/1080, scroll_down=True)
+            await self.bot.switch_map(y=681/1080, world='penacony', scroll_down=True)
             await self.bot.use_teleporter(1165/2400, 429/1080, move_x=0, move_y=5, corner='botright', open_map=False) # Path of Dreamdive
             await self.bot.movepi(1.6, 800) # +2 TP
             await self.bot.attack()
@@ -902,5 +910,28 @@ class World:
         await self.bot.movepi(1.2, 1000)
         await self.bot.attack()
         await self.bot.wait_for_onmap(min_duration=3)
+
+    async def farm_golden_hour(self):
+        x = self.Golden_Hour(bot=self.bot)
+        await x.teleport()
+        await x.path_1()
+    class Golden_Hour:
+        def __init__(self, bot):
+            self.bot = bot
+        async def teleport(self):
+            logger.info('---')
+            logger.info('--- Map: Golden Hour')
+            logger.info('---')
+            await self.bot.switch_map(y_list=650/1080, world='penacony',
+                                      x=588/2400, y=356/1080, move_x=4, move_y=3,) # Sweet Corner
+            await self.bot.movepi(1.6, 5000)
+            await self.bot.movepi(1.25, 3000)
+            await self.bot.attack()
+        async def path_1(self):
+            logger.info('### Path 1 ###')
+            await self.bot.use_teleporter(815/2400, 245/1080, corner='botright', move_x=0, move_y=2) # Oti Mall
+            await self.bot.movepi(0.7, 2000)
+            await self.bot.movepi(0.9, 4400)
+            await self.bot.attack()
 
     

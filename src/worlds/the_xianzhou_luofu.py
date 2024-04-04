@@ -9,24 +9,6 @@ class World:
     def __init__(self, bot):
         # initialize bot
         self.bot = bot
-    async def switch(self):
-        await self.bot.switch_world('the_xianzhou_luofu')
-        await self.Central_Starskiff_Haven.teleport(self)
-        # await self.Cloudford.grab_technique_points(self)
-    
-    class Central_Starskiff_Haven:
-        def __init__(self):
-            pass
-        async def teleport(self):
-            logger.info('---')
-            logger.info('--- Map: Central Starskiff Haven')
-            logger.info('---')
-            await self.bot.switch_map(393/1080, open_map=False)
-            await self.bot.use_teleporter(803/2400, 133/1080, open_map=False, move_x=0, move_y=0)  # Starskiff Jetty
-        # async def grab_technique_points(self): # TODO: find something
-        #     logger.info('grab Technique Points')
-        #     await self.bot.movepi(0.45, 8000)
-        #     await self.bot.attack()
     
     async def farm_cloudford(self):
         x = self.Cloudford(bot=self.bot)
@@ -140,11 +122,11 @@ class World:
         await x.path_1()
         await x.path_2()
         await x.path_3()
+        exit() # double check path 4
         await x.path_4()
         await x.path_5()
         await x.path_6()
         await x.path_7()
-        await x.atk()
     class Fyxestroll_Garden:
         def __init__(self, bot):
             self.bot = bot
@@ -152,8 +134,10 @@ class World:
             logger.info('---')
             logger.info('--- Map: Fyxestroll Garden')
             logger.info('---')
-            await self.bot.switch_map(688/1080, scroll_down=True)
-            await self.bot.use_teleporter(931/2400, 383/1080, open_map=False, move_x=0, move_y=0)  # Verdant Terrace Entrance
+            await self.bot.switch_map(y_list=688/1080, world='the_xianzhou_luofu', scroll_down=True,
+                                      x=510/2400, y=423/1080, move_x=0, move_y=0, corner='botleft', confirm=False) # Shape of Perdition
+            await self.bot.movepi(0.95, 2500)
+            await self.bot.attack() # +2 TP
         async def path_1(self):
             logger.info('### Path 1 ###') # roamer
             await self.bot.use_teleporter(697/2400, 153/1080, move_x=0, move_y=0)  # Path of Darkness
@@ -181,15 +165,16 @@ class World:
             await self.bot.movepi(0.23, 6000)
             await self.bot.movepi(1.95, 700)
             await self.bot.attack_technique(5)
+            await self.bot.restore_tp(n=1) # +2 TP
         async def path_4(self):
             logger.info('### Path 4 ###') # roamer
             await self.bot.use_teleporter(579/2400, 368/1080, move_x=1, move_y=2)  # Locufox Forest Backdoor
             await self.bot.movepi(1.5, 4400)
             await self.bot.movepi(1.95, 600)
-            await self.bot.attack_technique(5)
-            await self.bot.movepi(1.0, 200)
-            await self.bot.attack_technique(10)
-            await self.bot.restore_tp(n=2)
+            await self.bot.attack_technique(4)
+            await self.bot.movepi(0.9, 1500)
+            await self.bot.attack_technique(4)
+            await self.bot.restore_tp(n=2) # +4 TP
         async def path_5(self):
             logger.info('### Path 5 ###')
             await self.bot.use_teleporter(412/2400, 603/1080, move_x=0, move_y=0)  # Bud of Abundance
