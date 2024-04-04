@@ -89,10 +89,15 @@ class Bot:
         for _ in range(3):
             if corner == 'topright':
                 cmd = f'input swipe {int(self.xy.width*0.6)} {int(self.xy.height*0.1)} {int(self.xy.width*(0))} {int(self.xy.height*(0.9))} {500}'
+            elif corner == 'topleft':
+                cmd = f'input swipe {int(self.xy.width*0.1)} {int(self.xy.height*0.1)} {int(self.xy.width*(0.7))} {int(self.xy.height*(0.9))} {500}'
             elif corner == 'botleft':
                 cmd = f'input swipe {int(self.xy.width*0.1)} {int(self.xy.height*0.8)} {int(self.xy.width*(0.7))} {int(self.xy.height*(0))} {500}'
             elif corner == f'botright':
                 cmd = f'input swipe {int(self.xy.width*0.6)} {int(self.xy.height*0.8)} {int(self.xy.width*(0))} {int(self.xy.height*(0))} {500}'
+            else:
+                logger.debug('bad corner given')
+                exit()
             await self.dev.shell(cmd)
             await aio.sleep(1)
         await aio.sleep(1)
@@ -100,6 +105,8 @@ class Bot:
             logger.info(f'move map by {move_x},{move_y}')
             if corner == 'topright':
                 cmd = f'input swipe {int(self.xy.width*0.3)} {int(self.xy.height*0.9)} {int(self.xy.width*(0.3+0.65*(move_x/10)))} {int(self.xy.height*(0.9-0.85*(move_y/10)))} {move_spd}'
+            if corner == 'topleft':
+                cmd = f'input swipe {int(self.xy.width*0.65)} {int(self.xy.height*0.9)} {int(self.xy.width*(0.65-0.6*(move_x/10)))} {int(self.xy.height*(0.9-0.85*(move_y/10)))} {move_spd}'
             elif corner == 'botleft':
                 cmd = f'input swipe {int(self.xy.width*0.65)} {int(self.xy.height*0.1)} {int(self.xy.width*(0.65-0.6*(move_x/10)))} {int(self.xy.height*(0.1+0.85*(move_y/10)))} {move_spd}'
             elif corner == f'botright':
@@ -201,7 +208,7 @@ class Bot:
         check = await self.use_teleporter(x, y, corner=corner, move_x=move_x, move_y=move_y, confirm=confirm, open_map=False, debug=debug)
         if check == False:
             logger.warning('map change failed: retry')
-            await self.switch_map(y_list=y_list, x=x, y=y, scroll_down=scroll_down, corner=corner, move_x=move_x, move_y=move_y, confirm=confirm, debug=debug)
+            await self.switch_map(y_list=y_list, world=world, x=x, y=y, scroll_down=scroll_down, corner=corner, move_x=move_x, move_y=move_y, confirm=confirm, debug=debug)
     
     async def restore_tp(self, n=1):
         logger.info('action: restore TP using food, make sure it is faved first')

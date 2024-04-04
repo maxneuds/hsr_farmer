@@ -29,11 +29,11 @@ async def main():
     ###
     # load worlds
     ###
-    # astral_express = Astral_Express(bot=bot)
+    astral_express = Astral_Express(bot=bot)
     herta_space_station = Herta_Space_Station(bot=bot)
     penacony = Penacony(bot=bot)
     the_xianzhou_luofu = The_Xianzhou_Luofu(bot=bot)
-    # jarilo_vi = JariloVI(bot=bot, xy=xy)
+    jarilo_vi = JariloVI(bot=bot)
 
     # total mapped xp: 95'624/100k
     # time: 4h30
@@ -44,8 +44,11 @@ async def main():
     
     ### DONE
     
-    # 0/4 Herta Space Station (7128/7128)
-    await herta_space_station.farm_seclusion_zone() # (1620/1620)
+    # 4/4 Herta Space Station (7128/7128)
+    # await herta_space_station.farm_seclusion_zone() # (1620/1620)
+    # await herta_space_station.farm_storage_zone() # (2592/2592)
+    # await herta_space_station.farm_base_zone() # (432/432)
+    # await herta_space_station.farm_supply_zone() # (2484/2484)
     
     # 1/7 Xianzhou Luofu (42596/42596) verified
     # await the_xianzhou_luofu.farm_fyxestroll_garden() # (4644/4644) # done 2.0
@@ -58,13 +61,11 @@ async def main():
     
     # 0/7 Jarilo-VI (19440/19440)
     
+    # 1/1 Astral Express
+    # await astral_express.parlor_car()
+    
     
     ### TODO
-    
-    
-    # await herta_space_station.farm_storage_zone() # (2592/2592)
-    # await herta_space_station.farm_supply_zone() # (2484/2484)
-    # await herta_space_station.farm_base_zone() # (432/432)
     
     # await penacony.farm_the_reverie_dreamscape() # (13284/15552 [6912])
     # await penacony.farm_dewlight_pavilion() # (???/??? [???])
@@ -85,8 +86,6 @@ async def main():
     # await the_xianzhou_luofu.farm_stargazer_navalia() # verified (6264/6264)
     
     
-    # logger('\n\nEnd: Return to the Express\n')
-    # await astral_express.parlor_car()
     
 
 if __name__ == '__main__':
