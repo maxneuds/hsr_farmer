@@ -76,16 +76,19 @@ class Bot:
             await self.sleep(2.5)
             await self.open_map(penacony=penacony)
 
-    async def use_teleporter(self, x, y, move_x=0, move_y=0, move_spd=500, corner='botright', open_map=True, confirm=False, debug=False):
+    async def use_teleporter(self, x, y, move_x=0, move_y=0, move_spd=500, corner='botright', open_map=True, penacony=False, confirm=False, debug=False):
         logger.info(f'use teleporter: {int(self.xy.width*x)},{int(self.xy.height*y)}')
         # open map
         if open_map:
-            await self.open_map()
+            if penacony:
+                await self.open_map(penacony=True)
+            else:
+                await self.open_map()
         logger.info(f'reset map to corner [default: botright]')
         for _ in range(3):
             if corner == 'topright':
                 cmd = f'input swipe {int(self.xy.width*0.6)} {int(self.xy.height*0.1)} {int(self.xy.width*(0))} {int(self.xy.height*(0.9))} {500}'
-            if corner == 'botleft':
+            elif corner == 'botleft':
                 cmd = f'input swipe {int(self.xy.width*0.1)} {int(self.xy.height*0.8)} {int(self.xy.width*(0.7))} {int(self.xy.height*(0))} {500}'
             else:
                 cmd = f'input swipe {int(self.xy.width*0.6)} {int(self.xy.height*0.8)} {int(self.xy.width*(0))} {int(self.xy.height*(0))} {500}'
@@ -96,7 +99,7 @@ class Bot:
             logger.info(f'move map by {move_x},{move_y}')
             if corner == 'topright':
                 cmd = f'input swipe {int(self.xy.width*0.3)} {int(self.xy.height*0.9)} {int(self.xy.width*(0.3+0.65*(move_x/10)))} {int(self.xy.height*(0.9-0.85*(move_y/10)))} {move_spd}'
-            if corner == 'botleft':
+            elif corner == 'botleft':
                 cmd = f'input swipe {int(self.xy.width*0.65)} {int(self.xy.height*0.1)} {int(self.xy.width*(0.65-0.6*(move_x/10)))} {int(self.xy.height*(0.1+0.85*(move_y/10)))} {move_spd}'
             else:
                 cmd = f'input swipe {int(self.xy.width*0.3)} {int(self.xy.height*0.1)} {int(self.xy.width*(0.3+0.65*(move_x/10)))} {int(self.xy.height*(0.1+0.85*(move_y/10)))} {move_spd}'
@@ -122,7 +125,7 @@ class Bot:
             await self.dev.shell(f'input keyevent 4')
             await self.wait_for_onmap(min_duration=1, no_fight=True)
             # retry
-            await self.use_teleporter(x, y, move_x=move_x, move_y=move_y, move_spd=move_spd, corner=corner, open_map=open_map, confirm=confirm, debug=False)
+            await self.use_teleporter(x, y, move_x=move_x, move_y=move_y, move_spd=move_spd, corner=corner, open_map=open_map, confirm=confirm, penacony=penacony, debug=False)
 
     async def switch_map(self, y_percentage, scroll_down=False, open_map=True, debug=False):
         logger.info('switch map')
