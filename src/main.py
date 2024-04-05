@@ -45,13 +45,13 @@ async def main():
     ### DONE
     
     # 4/4 Herta Space Station (7128/7128)
-    # await herta_space_station.farm_seclusion_zone() # (1620/1620)
-    # await herta_space_station.farm_storage_zone() # (2592/2592)
-    # await herta_space_station.farm_base_zone() # (432/432)
-    # await herta_space_station.farm_supply_zone() # (2484/2484)
+    # await herta_space_station.farm_seclusion_zone() # (1620/1620) done 1.0
+    # await herta_space_station.farm_storage_zone() # (2592/2592) check 1.0
+    # await herta_space_station.farm_base_zone() # (432/432) 160632 check 1.0
+    await herta_space_station.farm_supply_zone() # (2484/2484) check 1.0
     
     # 1/7 Xianzhou Luofu (42596/42596) verified
-    # await the_xianzhou_luofu.farm_fyxestroll_garden() # (4644/4644) # done 2.0
+    # await the_xianzhou_luofu.farm_fyxestroll_garden() # (4644/4644) # done 2.0 163.548
     
     # 3/5 Penacony (26460/???)
     # await penacony.farm_dreams_edge() # (7668/9612 [7668]) done 2.0
