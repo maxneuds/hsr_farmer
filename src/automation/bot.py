@@ -90,7 +90,7 @@ class Bot:
             if corner == 'topright':
                 cmd = f'input swipe {int(self.xy.width*0.6)} {int(self.xy.height*0.1)} {int(self.xy.width*(0))} {int(self.xy.height*(0.9))} {500}'
             elif corner == 'topleft':
-                cmd = f'input swipe {int(self.xy.width*0.1)} {int(self.xy.height*0.1)} {int(self.xy.width*(0.7))} {int(self.xy.height*(0.9))} {500}'
+                cmd = f'input swipe {int(self.xy.width*0.1)} {int(self.xy.height*0.2)} {int(self.xy.width*(0.7))} {int(self.xy.height*(0.9))} {500}'
             elif corner == 'botleft':
                 cmd = f'input swipe {int(self.xy.width*0.1)} {int(self.xy.height*0.8)} {int(self.xy.width*(0.7))} {int(self.xy.height*(0))} {500}'
             elif corner == f'botright':
@@ -123,6 +123,7 @@ class Bot:
         await aio.sleep(1.25)
         # confirm teleporter if other landmark is close
         if confirm == True:
+            logger.info(f'confirm teleporter selection')
             await self.dev.shell(f'input tap {int(self.xy.width*1200/2400)} {int(self.xy.height*700/1080)}')
             await aio.sleep(1.5)
         # teleport
@@ -242,11 +243,12 @@ class Bot:
         await self.action_tap(int(self.xy.width*1580/2400), int(self.xy.height*933/1080))
         await self.wait_for_onmap(min_duration=2)
     
-    async def attack(self):
+    async def attack(self, count=1):
         logger.info('action: attack')
         await aio.sleep(0.05)
-        await self.dev.shell(f'input tap {self.xy.attack[0]} {self.xy.attack[1]}')
-        await aio.sleep(0.5)
+        for _ in range(count):
+            await self.dev.shell(f'input tap {self.xy.attack[0]} {self.xy.attack[1]}')
+            await aio.sleep(0.6)
 
     async def action_technique(self):
         logger.info('action: technique')
@@ -254,14 +256,15 @@ class Bot:
         await self.dev.shell(f'input tap {self.xy.technique[0]} {self.xy.technique[1]}')
         await aio.sleep(0.3)
 
-    async def attack_technique(self, count=2):
+    async def attack_technique(self, count=2, wait=True):
         logger.info(f'action: attack with technique {count} times')
         for _ in range(count):
             await self.action_technique()
-        check = await self.wait_for_onmap(min_duration=3)
-        if check == 'food':
-            # had to eat food, repeat
-            await self.attack_technique(count=count)
+        if wait == True:
+            check = await self.wait_for_onmap(min_duration=3)
+            if check == 'food':
+                # had to eat food, repeat
+                await self.attack_technique(count=count)
 
     async def wait_for_onmap(self, min_duration=5, no_fight=False, debug=False):
         logger.info('wait/check for character on map')

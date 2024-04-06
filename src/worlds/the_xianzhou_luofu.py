@@ -122,7 +122,7 @@ class World:
         await x.path_1()
         await x.path_2()
         await x.path_3()
-        exit() # double check path 4
+        exit() # check path 4
         await x.path_4()
         await x.path_5()
         await x.path_6()
@@ -152,7 +152,7 @@ class World:
             await self.bot.movepi(0.05, 2800)
             await self.bot.movepi(1.8, 2500)
             await self.bot.movepi(0.224, 4100)
-            await self.bot.movepi(0.61, 500)
+            await self.bot.movepi(0.61, 700)
             await self.bot.attack_technique(5)
         async def path_3(self):
             logger.info('### Path 3 ###')
@@ -172,8 +172,9 @@ class World:
             await self.bot.movepi(1.5, 4400)
             await self.bot.movepi(1.95, 600)
             await self.bot.attack_technique(4)
-            await self.bot.movepi(0.9, 1500)
-            await self.bot.attack_technique(4)
+            await self.bot.movepi(1.0, 1000)
+            await self.bot.movepi(1.1, 500)
+            await self.bot.attack_technique(6)
             await self.bot.restore_tp(n=2) # +4 TP
         async def path_5(self):
             logger.info('### Path 5 ###')
