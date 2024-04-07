@@ -54,9 +54,9 @@ async def main():
     # await the_xianzhou_luofu.farm_fyxestroll_garden() # (4644/4644) # check 1.0
     
     # 3/5 Penacony (26460/???)
-    # await penacony.farm_dreams_edge() # (7668/9612 [7668]) check 1.0
+    await penacony.farm_dreams_edge() # (7668/9612 [7668]) check 1.0
     # await penacony.farm_childs_dream() # (5832/5832) check 1.0 181.692
-    await penacony.farm_clock_studios_theme_park() # (7648/7648) done 3.0
+    # await penacony.farm_clock_studios_theme_park() # (7648/7648) done 3.0
     # await penacony.farm_golden_hour() # (TP) done 1.0
     
     # 0/7 Jarilo-VI (19440/19440)
