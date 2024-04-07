@@ -40,21 +40,21 @@ class World:
 
     async def farm_clock_studios_theme_park(self):
         x = self.Clock_Studios_Theme_Park(bot=self.bot)
-        await x.teleport()
-        await x.path_0()
-        await x.path_1()
-        await x.path_2()
-        await x.path_3()
-        await x.path_4()
-        await x.path_5()
-        await x.path_6()
-        await x.path_7()
-        await x.path_8()
-        await x.path_9()
-        await x.path_10()
-        await x.path_11()
-        await x.path_12()
-        await x.path_13()
+        # await x.teleport()
+        # await x.path_0()
+        # await x.path_1()
+        # await x.path_2()
+        # await x.path_3()
+        # await x.path_4()
+        # await x.path_5()
+        # await x.path_6()
+        # await x.path_7()
+        # await x.path_8()
+        # await x.path_9()
+        # await x.path_10()
+        # await x.path_11()
+        # await x.path_12()
+        # await x.path_13()
         await x.path_14()
     class Clock_Studios_Theme_Park:
         def __init__(self, bot):
@@ -206,8 +206,16 @@ class World:
             await self.bot.movepi(0.0, 1000)
             await self.bot.attack_technique(4, wait=False)
             await self.bot.movepi(1.8, 2000)
-            await self.bot.restore_tp(n=1) # +2 TP
         async def path_14(self):
+            logger.info('### Path 14 ###') # TP regeneration
+            await self.bot.use_teleporter(490/2400, 633/1080, move_x=1, move_y=1, corner='topright') # Hamster Ball Park
+            await self.bot.movepi(0.25, 2000)
+            await self.bot.movepi(0.05, 9000)
+            await self.bot.attack()
+            await self.bot.movepi(1.55, 6000)
+            await self.bot.movepi(0.05, 600)
+            await self.bot.attack() # +2 TP
+        async def path_15(self):
             logger.info('### Path 14 ###') # roamer
             await self.bot.use_teleporter(490/2400, 633/1080, move_x=1, move_y=1, corner='topright') # Hamster Ball Park
             await self.bot.movepi(0.51, 3000)
@@ -335,13 +343,13 @@ class World:
 
     async def farm_childs_dream(self):
         x = self.Childs_Dream(bot=self.bot)
-        # await x.teleport()
-        # await x.path_1()
-        # await x.path_2()
-        # await x.path_3()
-        # await x.path_4()
-        # await x.path_5()
-        # await x.path_6()
+        await x.teleport()
+        await x.path_1()
+        await x.path_2()
+        await x.path_3()
+        await x.path_4()
+        await x.path_5()
+        await x.path_6()
         await x.path_7()
         await x.path_8()
     class Childs_Dream:
