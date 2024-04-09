@@ -24,7 +24,7 @@ async def main():
     xy = OnePlus7T()
     adb = ADB(DEVICE)
     dev = await adb.get_dev()
-    bot = Bot(adb=adb, dev=dev, xy=xy, character_speed=1.00) # movement animatiopn speed base value: Acheron (Bronya)
+    bot = Bot(adb=adb, dev=dev, xy=xy)
 
     ###
     # load worlds
@@ -45,21 +45,23 @@ async def main():
     ### DONE
     
     # 4/4 Herta Space Station (7128/7128)
-    # await herta_space_station.farm_seclusion_zone() # (1620/1620) done 1.0
+    # await herta_space_station.farm_seclusion_zone() # (1620/1620) check 1.0
     # await herta_space_station.farm_storage_zone() # (2592/2592) check 1.0
-    # await herta_space_station.farm_base_zone() # (432/432) 160632 check 1.0
+    # await herta_space_station.farm_base_zone() # (432/432) check 1.0
     # await herta_space_station.farm_supply_zone() # (2484/2484) check 1.0
     
-    # 1/7 Xianzhou Luofu (42596/42596)
-    # await the_xianzhou_luofu.farm_fyxestroll_garden() # (4644/4644) # check 1.0
+    # 0/7 Jarilo-VI (19440/19440)
     
     # 3/5 Penacony (26460/???)
     # await penacony.farm_dreams_edge() # (7668/9612 [7668]) check 1.0
     # await penacony.farm_childs_dream() # (5832/5832) check 1.0
-    await penacony.farm_clock_studios_theme_park() # (7648/7648) done 3.0
-    # await penacony.farm_golden_hour() # (TP) done 1.0
+    # await penacony.farm_the_reverie_dreamscape() # (13284/15552 [6912]) done 1.0
+    # await penacony.farm_clock_studios_theme_park() # (7648/7648) check 1.0
+    # await penacony.restock_golden_hour() # (TP) done 1.0
     
-    # 0/7 Jarilo-VI (19440/19440)
+    # 1/7 Xianzhou Luofu (42596/42596)
+    await the_xianzhou_luofu.restock_starskiff_haven()
+    # await the_xianzhou_luofu.farm_fyxestroll_garden() # (4644/4644) # check 1.0
     
     # 1/1 Astral Express
     # await astral_express.parlor_car()
@@ -67,7 +69,6 @@ async def main():
     
     ### TODO
     
-    # await penacony.farm_the_reverie_dreamscape() # (13284/15552 [6912])
     # await penacony.farm_dewlight_pavilion() # (???/??? [???])
     
     # await jarilo_vi.farm_outlying_snow_plains() # (2052/2052)

@@ -10,11 +10,10 @@ from skimage.metrics import structural_similarity as compare_ssim
 class PathError(Exception): pass
 
 class Bot:
-    def __init__(self, adb, dev, xy, character_speed=1):
+    def __init__(self, adb, dev, xy):
         self.adb = adb
         self.dev = dev
         self.xy = xy
-        self.character_speed = character_speed
 
     async def sleep(self, duration):
         logger.info(f'sleep for {duration} seconds...')
@@ -42,25 +41,67 @@ class Bot:
         logger.info(f'move {direction} pi for {duration/1000} seconds')
         x = self.xy.vjoy['center'][0] + self.xy.vjoy['r'] * np.cos(direction*np.pi)
         y = self.xy.vjoy['center'][1] - self.xy.vjoy['r'] * np.sin(direction*np.pi)
-        cmd = f'input swipe {x} {y} {x} {y} {int(duration*self.character_speed)}'
+        cmd = f'input swipe {x} {y} {x} {y} {int(duration)}'
         await self.dev.shell(cmd)
 
-    async def open_map(self, penacony=False):
+    async def open_map(self, debug=False):
         logger.info('open map')
         await aio.sleep(0.1)
         await self.dev.shell(f'input tap {self.xy.map[0]} {self.xy.map[1]}')
-        await aio.sleep(2.5)
-        if penacony == True:
-            logger.info('exit special map')
-            await self.dev.shell(f'input tap {int(self.xy.width*2135/2400)} {int(self.xy.height*138/1080)}')
-            await aio.sleep(2.5)
-        await self.check_map_zoom_level(penacony=penacony) # in case of map already open, already done by the previous instance
+        logger.info('wait for map and check type (normal or special)')   
+        try: # catch KeyboardInterrupt
+            img_back = cv.imread('res/bw_map_back.png', cv.IMREAD_GRAYSCALE)
+            img_starrail = cv.imread('res/bw_map_starrail.png', cv.IMREAD_GRAYSCALE)
+            time_start = time.perf_counter()
+            check_map = False
+            while not check_map:
+                success = False
+                while not success:
+                    try:
+                        if debug:
+                            await aio.sleep(2.5)
+                            screen = await self.adb.get_screen(dev=self.dev, custom_msg='debug')
+                        else:
+                            screen = await self.adb.get_screen(dev=self.dev, custom_msg=None)
+                        screen = cv.cvtColor(screen, cv.COLOR_BGR2GRAY)
+                        # _, screen = cv.threshold(screen, 240, 255, cv.THRESH_OTSU | cv.THRESH_BINARY_INV)
+                        _, screen = cv.threshold(screen, 240, 255, cv.THRESH_BINARY)
+                        success = True
+                    except:
+                        pass
+                screen_map_button = screen[int(self.xy.height*0.1):int(self.xy.height*0.18), int(self.xy.width*0.75):int(self.xy.width*0.92)]
+                if debug == True:
+                    cv.imwrite('debug.png', screen_map_button)
+                    cv.imshow('debug', screen_map_button)
+                    cv.waitKey(0)
+                    cv.destroyAllWindows()
+                    exit()
+                # check for special map
+                result_button_starrail = cv.matchTemplate(screen, img_starrail, cv.TM_CCOEFF_NORMED)
+                _, max_val_starrail, _, _ = cv.minMaxLoc(result_button_starrail)
+                result_button_back = cv.matchTemplate(screen, img_back, cv.TM_CCOEFF_NORMED)
+                _, max_val_back, _, _ = cv.minMaxLoc(result_button_back)
+                if max_val_back > 0.95:
+                    logger.info('exit special map')
+                    await self.dev.shell(f'input tap {int(self.xy.width*2135/2400)} {int(self.xy.height*138/1080)}')
+                elif max_val_starrail > 0.95:
+                    logger.info('map open')
+                    check_map = True
+                    return('normal')
+                else:
+                    time_running = timedelta(seconds=time.perf_counter() - time_start)
+                    if time_running.seconds > 10:
+                        logger.error('open map not detected')
+                        return(False)
+                    await aio.sleep(0.1)
+        except KeyboardInterrupt:
+            logger.debug('Ctrl+C detected. Exiting gracefully.')
+            exit()
+        await self.check_map_zoom_level()
         
-    async def check_map_zoom_level(self, penacony=False):
+    async def check_map_zoom_level(self):
         logger.info('check map zoom level')
         screen = await self.adb.get_screen(dev=self.dev, custom_msg=None)
-        # img_zoombar_min = cv.imread('res/zoombar_min_penacony.png', cv.IMREAD_COLOR)
-        # screen_zoombar = screen[int(self.xy.height*980/1080):int(self.xy.height*1000/1080), int(self.xy.width*1054/2400):int(self.xy.width*1078/2400)]
         img_zoombar_min = cv.imread('res/zoombar_min.png', cv.IMREAD_COLOR)
         screen_zoombar = screen[int(self.xy.height*965/1080):int(self.xy.height*1015/1080), int(self.xy.width*780/2400):int(self.xy.width*1250/2400)]
         matches = cv.matchTemplate(screen_zoombar, img_zoombar_min, cv.TM_CCOEFF_NORMED)
@@ -68,23 +109,14 @@ class Bot:
         if max_val < 0.95: # map isn't on min zoom, change zoom level
             logger.info('zoom map to min')
             for _ in range(20):
-                # await self.dev.shell(f'input tap {self.xy.width*1000/2400} {self.xy.height*990/1080}') # penacony
                 await self.dev.shell(f'input tap {self.xy.width*783/2400} {self.xy.height*993/1080}')
                 await aio.sleep(0.075)
             await aio.sleep(0.1)
-            logger.info('re-open map')
-            await self.dev.shell(f'input keyevent 4')
-            await self.sleep(2.5)
-            await self.open_map(penacony=penacony)
 
-    async def use_teleporter(self, x, y, move_x=0, move_y=0, move_spd=500, corner='botright', open_map=True, penacony=False, confirm=False, debug=False):
+    async def use_teleporter(self, x, y, move_x=0, move_y=0, move_spd=500, corner='botright', open_map=True, confirm=False, debug=False):
         logger.info(f'use teleporter: {int(self.xy.width*x)},{int(self.xy.height*y)}')
         if open_map == True:
-            # check if penacony special map (submap)
-            if penacony == True:
-                await self.open_map(penacony=True)
-            else:
-                await self.open_map()
+            await self.open_map()
         logger.info(f'move map to corner: {corner}')
         for _ in range(3):
             if corner == 'topright':
@@ -135,7 +167,7 @@ class Bot:
             await self.wait_for_onmap(min_duration=2, no_fight=True)
             # retry
             if open_map == True:
-                await self.use_teleporter(x, y, move_x=move_x, move_y=move_y, move_spd=move_spd, corner=corner, open_map=open_map, confirm=confirm, penacony=penacony, debug=False)
+                await self.use_teleporter(x, y, move_x=move_x, move_y=move_y, move_spd=move_spd, corner=corner, open_map=open_map, confirm=confirm, debug=False)
             else:
                 return(False)
         else:
@@ -243,6 +275,24 @@ class Bot:
         await self.action_tap(int(self.xy.width*1580/2400), int(self.xy.height*933/1080))
         await self.wait_for_onmap(min_duration=2)
     
+    async def chat_initiate(self):
+        logger.info(f'chat: initiate')
+        await aio.sleep(0.2)
+        await self.action_tap(int(self.xy.width*1458/2400), int(self.xy.height*640/1080))
+        await aio.sleep(1)
+    
+    async def shop_exit(self):
+        logger.info(f'shop: exit')
+        await self.dev.shell(f'input keyevent 4')
+        await self.wait_for_onmap(min_duration=2)
+        
+    async def chat_advance(self):
+        logger.info(f'chat: advance')
+        await self.action_tap(int(self.xy.width*1200/2400), int(self.xy.height*1000/1080))
+        await aio.sleep(0.2)
+        await self.action_tap(int(self.xy.width*1200/2400), int(self.xy.height*1000/1080))
+        await aio.sleep(1)
+    
     async def attack(self, count=1):
         logger.info('action: attack')
         await aio.sleep(0.05)
@@ -265,6 +315,110 @@ class Bot:
             if check == 'food':
                 # had to eat food, repeat
                 await self.attack_technique(count=count)
+                
+    async def buy_item(self, name, debug=False):
+        logger.info(f'buy: {name}')
+        try: # catch KeyboardInterrupt
+            time_start = time.perf_counter()
+            while True:
+                # get screen
+                success = False
+                while not success:
+                    try:
+                        screen = await self.adb.get_screen(dev=self.dev, custom_msg=None)
+                        success = True
+                        if debug == True:
+                            cv.imwrite('debug.png', screen)
+                            cv.imshow('debug', screen)
+                            cv.waitKey(0)
+                            cv.destroyAllWindows()
+                            exit()
+                    except:
+                        pass
+                # load match template
+                im_item = cv.imread(f'res/item_{name}.png', cv.IMREAD_COLOR)
+                result_food = cv.matchTemplate(screen, im_item, cv.TM_CCOEFF_NORMED)
+                _, max_val, _, max_loc = cv.minMaxLoc(result_food)
+                if max_val > 0.90:
+                    top_left = max_loc
+                    await self.action_tap(top_left[0]+10, top_left[1]+10)
+                    await aio.sleep(2)
+                    await self.action_tap(int(self.xy.width*1808/2400), int(self.xy.height*657/1080)) # buy all
+                    await aio.sleep(2)
+                    await self.action_tap(int(self.xy.width*1393/2400), int(self.xy.height*787/1080)) # confirm
+                    await aio.sleep(2)
+                    await self.dev.shell(f'input keyevent 4')
+                    await aio.sleep(2)
+                    return(True)
+                else:
+                    time_running = timedelta(seconds=time.perf_counter() - time_start)
+                    if time_running.seconds > 10:
+                        logger.error('item: {name} not found')
+                        exit()
+        except KeyboardInterrupt:
+            logger.debug('Ctrl+C detected. Exiting gracefully.')
+            exit()
+            
+    async def open_phone(self):
+        await self.action_tap(int(self.xy.phone[0]), int(self.xy.phone[1]))
+        await aio.sleep(3)
+            
+    async def craft_item(self, name, debug=False):
+        logger.info(f'craft: {name}')
+        if debug == True:
+            screen = await self.adb.get_screen(dev=self.dev, debug=True)
+        im_item = cv.imread(f'res/item_{name}.png', cv.IMREAD_COLOR)
+        # open phone
+        await self.open_phone()
+        # tap "Synthesize"
+        await self.action_tap(int(self.xy.width*1933/2400), int(self.xy.height*612/1080))
+        await aio.sleep(3)
+        # select items
+        await self.action_tap(int(self.xy.width*152/2400), int(self.xy.height*178/1080))
+        await aio.sleep(2)
+        # select recipe
+        count = 0
+        search_recipe = True
+        while search_recipe == True:
+            logger.info(f'looking for recipe: {name}')
+            # get screen
+            success = False
+            while not success:
+                try:
+                    screen = await self.adb.get_screen(dev=self.dev, custom_msg=None)
+                    success = True
+                except:
+                    pass
+            im_item = cv.imread(f'res/item_{name}.png', cv.IMREAD_COLOR)
+            result_food = cv.matchTemplate(screen, im_item, cv.TM_CCOEFF_NORMED)
+            _, max_val, _, max_loc = cv.minMaxLoc(result_food)
+            if max_val > 0.90: # recipe found
+                top_left = max_loc
+                await self.action_tap(top_left[0]+10, top_left[1]+10)
+                await aio.sleep(2)
+                await self.action_tap(int(self.xy.width*1863/2400), int(self.xy.height*869/1080)) # craft all
+                await aio.sleep(2)
+                await self.action_tap(int(self.xy.width*1550/2400), int(self.xy.height*989/1080)) # Synthesize
+                await aio.sleep(3)
+                await self.action_tap(int(self.xy.width*1393/2400), int(self.xy.height*737/1080)) # confirm
+                await aio.sleep(5)
+                # return to map
+                for _ in range(3):
+                    await self.dev.shell(f'input keyevent 4')
+                    await aio.sleep(3)
+                search_recipe = False
+                return(True)
+            else:
+                count += 1
+                if count > 9:
+                    logger.error('recipe not found')
+                    search_recipe = False
+                    exit()
+                # swipe up
+                x = int(self.xy.width*492/2400)
+                cmd = f'input swipe {x} {int(self.xy.height*600/1080)} {x} {int(self.xy.height*300/1080)} {500}'
+                await self.dev.shell(cmd)
+                await aio.sleep(0.5)
 
     async def wait_for_onmap(self, min_duration=5, no_fight=False, debug=False):
         logger.info('wait/check for character on map')

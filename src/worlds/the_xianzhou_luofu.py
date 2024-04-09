@@ -1,4 +1,5 @@
 import asyncio as aio
+import cv2 as cv
 from logger import logger
 from automation.bot import Bot
 from datetime import datetime as dt
@@ -9,11 +10,54 @@ class World:
     def __init__(self, bot):
         # initialize bot
         self.bot = bot
-    
+
+
+    async def restock_starskiff_haven(self):
+        x = self.Central_Starskiff_Haven(bot=self.bot)
+        # await x.teleport()
+        await x.shop_salesby()
+
     async def farm_cloudford(self):
         x = self.Cloudford(bot=self.bot)
         await x.teleport()
         await x.grab_technique_points()
+    
+    async def farm_fyxestroll_garden(self):
+        x = self.Fyxestroll_Garden(bot=self.bot)
+        await x.teleport()
+        await x.path_1()
+        await x.path_2()
+        await x.path_3()
+        await x.path_4()
+        await x.path_5()
+        await x.path_6()
+        await x.path_7()
+
+
+    class Central_Starskiff_Haven:
+        def __init__(self, bot):
+            self.bot = bot
+        async def teleport(self):
+            logger.info('---')
+            logger.info('--- Map: Central Starskiff Haven')
+            logger.info('---')
+            await self.bot.switch_map(y_list=388/1080, world='the_xianzhou_luofu', scroll_down=False,
+                                      x=803/2400, y=654/1080, corner='topleft', move_x=0, move_y=0) # Starskiff Jetty
+            await self.bot.movepi(0.0, 6000)
+            await self.bot.movepi(1.5, 7200)
+            await self.bot.movepi(1.7, 1000)
+        async def shop_salesby(self):
+            await self.bot.chat_initiate()
+            for _ in range(2):
+                await self.bot.chat_advance()
+            await self.bot.action_tap(int(self.bot.xy.width*1654/2400), int(self.bot.xy.height*484/1080))
+            await aio.sleep(1)
+            await self.bot.chat_advance()
+            await self.bot.buy_item('gaseous_liquid')
+            await self.bot.buy_item('seed')
+            await self.bot.craft_item('trick_snack')
+            
+
     class Cloudford:
         def __init__(self, bot):
             self.bot = bot
@@ -116,17 +160,6 @@ class World:
     #     await self.bot.attack()
     #     await self.bot.wait_for_onmap()
     
-    async def farm_fyxestroll_garden(self):
-        x = self.Fyxestroll_Garden(bot=self.bot)
-        await x.teleport()
-        await x.path_1()
-        await x.path_2()
-        await x.path_3()
-        exit() # check path 4
-        await x.path_4()
-        await x.path_5()
-        await x.path_6()
-        await x.path_7()
     class Fyxestroll_Garden:
         def __init__(self, bot):
             self.bot = bot
@@ -171,10 +204,10 @@ class World:
             await self.bot.use_teleporter(579/2400, 368/1080, move_x=1, move_y=2)  # Locufox Forest Backdoor
             await self.bot.movepi(1.5, 4400)
             await self.bot.movepi(1.95, 600)
-            await self.bot.attack_technique(4)
+            await self.bot.attack_technique(3, wait=False)
             await self.bot.movepi(1.0, 1000)
-            await self.bot.movepi(1.1, 500)
-            await self.bot.attack_technique(6)
+            await self.bot.movepi(1.2, 500)
+            await self.bot.attack_technique(4)
             await self.bot.restore_tp(n=2) # +4 TP
         async def path_5(self):
             logger.info('### Path 5 ###')

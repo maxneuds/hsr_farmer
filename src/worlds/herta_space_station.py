@@ -14,6 +14,39 @@ class World:
         await x.teleport()
         await x.path_1()
         await x.path_2()
+    
+    async def farm_storage_zone(self):
+        x = self.Storage_Zone(bot=self.bot)
+        await x.teleport()
+        await x.path_1()
+        await x.path_2()
+        await x.path_3()
+        await x.path_4()
+        await x.path_5()
+        await x.path_6()
+        await x.path_7()
+        await x.path_8()
+        await x.path_9()
+    
+    async def farm_supply_zone(self):
+        x = self.Supply_Zone(bot=self.bot)
+        await x.teleport()
+        await x.path_1()
+        await x.path_2()
+        await x.path_3()
+        await x.path_4()
+        await x.path_5()
+        await x.path_6()
+        await x.path_7()
+    
+    async def farm_seclusion_zone(self):
+        x = self.Seclusion_Zone(bot=self.bot)
+        await x.teleport()
+        await x.path_1()
+        await x.path_2()
+        await x.path_3()
+
+
     class Base_Zone:
         def __init__(self, bot):
             self.bot = bot
@@ -36,19 +69,6 @@ class World:
             await self.bot.movepi(1.51, 7700)
             await self.bot.attack_technique(4)
 
-
-    async def farm_storage_zone(self):
-        x = self.Storage_Zone(bot=self.bot)
-        await x.teleport()
-        await x.path_1()
-        await x.path_2()
-        await x.path_3()
-        await x.path_4()
-        await x.path_5()
-        await x.path_6()
-        await x.path_7()
-        await x.path_8()
-        await x.path_9()
     class Storage_Zone:
         def __init__(self, bot):
             self.bot = bot
@@ -120,17 +140,6 @@ class World:
             await self.bot.movepi(1.05, 3000)
             await self.bot.attack_technique(8)
 
-
-    async def farm_supply_zone(self):
-        x = self.Supply_Zone(bot=self.bot)
-        # await x.teleport()
-        # await x.path_1()
-        # await x.path_2()
-        # await x.path_3()
-        # await x.path_4()
-        # await x.path_5()
-        # await x.path_6()
-        await x.path_7()
     class Supply_Zone:
         def __init__(self, bot):
             self.bot = bot
@@ -191,13 +200,6 @@ class World:
             await self.bot.movepi(0.1, 800)
             await self.bot.attack() # +2 TP
 
-    
-    async def farm_seclusion_zone(self):
-        x = self.Seclusion_Zone(bot=self.bot)
-        await x.teleport()
-        await x.path_1()
-        await x.path_2()
-        await x.path_3()
     class Seclusion_Zone:
         def __init__(self, bot):
             self.bot = bot

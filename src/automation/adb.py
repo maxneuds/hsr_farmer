@@ -49,6 +49,7 @@ class ADB:
         screenshot = cv.imdecode(np.frombuffer(bytes(im_byte_array), np.uint8), cv.IMREAD_COLOR)
         if debug == True:
             cv.imshow('debug', screenshot)
+            cv.imwrite('debug.png', screenshot)
             cv.setMouseCallback('debug', self.click_event)
             cv.waitKey(0)
             cv.destroyAllWindows()
