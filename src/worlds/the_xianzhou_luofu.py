@@ -19,8 +19,8 @@ class World:
 
     async def farm_cloudford(self):
         x = self.Cloudford(bot=self.bot)
-        await x.teleport()
-        await x.grab_technique_points()
+        # await x.teleport()
+        await x.path_99()
     
     async def farm_fyxestroll_garden(self):
         x = self.Fyxestroll_Garden(bot=self.bot)
@@ -65,32 +65,27 @@ class World:
             logger.info('---')
             logger.info('--- Map: Cloudford')
             logger.info('---')
-            await self.bot.switch_map(511/1080)
-            await self.bot.use_teleporter(925/2400, 258/1080, open_map=False, move_x=0, move_y=4)  # Trove of Verdure
-        async def grab_technique_points(self):
-            logger.info('grab Technique Points')
-            await self.bot.use_teleporter(925/2400, 258/1080, move_x=0, move_y=4)  # Trove of Verdure
+            await self.bot.switch_map(y_list=500/1080, world='the_xianzhou_luofu', scroll_down=False,
+                                      x=925/2400, y=663/1080, corner='topleft', move_x=0, move_y=5) # Trove of Verdure
             await self.bot.movepi(0.4, 8000)
             await self.bot.movepi(0.5, 3000)
             await self.bot.movepi(0.37, 2300)
             await self.bot.attack()
+        async def path_99(self):
+            logger.info('### Path 11 ###')
+            await self.bot.use_teleporter(925/2400, 663/1080, move_x=0, move_y=5, corner='topleft') # Trove of Verdure
+            await self.bot.movepi(1.75, 2300)
+            await self.bot.movepi(1.5, 4000)
+            await self.bot.movepi(1.75, 2400)
+            await self.bot.attack() # items
+            await self.bot.movepi(1.5, 10000)
+            await self.bot.movepi(1.7, 4000)
+            await self.bot.attack_technique(1, wait=False)
+            await self.bot.movepi(0.51, 2000)
+            await self.bot.attack_technique(3)
+            
 
      # async def farm_cloudford(self):
-    #     logger.info('farm: Cloudford')
-    #     await self.bot.switch_map(511/1080)
-    #     logger.info('### group 1 ###')
-    #     await self.bot.use_teleporter(926/2400, 519/1080, open_map=False) # Trove of Verdure
-    #     await self.bot.movepi(1.75, 2300)
-    #     await self.bot.movepi(1.5, 4000)
-    #     await self.bot.movepi(1.75, 2300)
-    #     await self.bot.movepi(1.5, 10000)
-    #     await self.bot.movepi(1.7, 4000)
-    #     await self.bot.attack()
-    #     await self.bot.wait_for_onmap()
-    #     logger.info('### group 2, part 2 ###') # roamer
-    #     await self.bot.movepi(0.5, 1000)
-    #     await self.bot.attack()
-    #     await self.bot.wait_for_onmap()
     #     logger.info('### group 2 ###')
     #     await self.bot.use_teleporter(1130/2400, 207/1080) # Cargo Lane
     #     await self.bot.movepi(0.46, 8800)
@@ -208,7 +203,7 @@ class World:
             await self.bot.movepi(1.0, 1000)
             await self.bot.movepi(1.2, 500)
             await self.bot.attack_technique(4)
-            await self.bot.restore_tp(n=2) # +4 TP
+            await self.bot.restore_tp(n=1) # +2 TP
         async def path_5(self):
             logger.info('### Path 5 ###')
             await self.bot.use_teleporter(412/2400, 603/1080, move_x=0, move_y=0)  # Bud of Abundance
