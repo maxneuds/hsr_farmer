@@ -44,7 +44,7 @@ class Bot:
         cmd = f'input swipe {x} {y} {x} {y} {int(duration)}'
         await self.dev.shell(cmd)
 
-    async def open_map(self, debug=False):
+    async def open_map(self, special_exit=True, debug=False):
         logger.info('open map')
         await aio.sleep(0.1)
         await self.dev.shell(f'input tap {self.xy.map[0]} {self.xy.map[1]}')
@@ -81,23 +81,26 @@ class Bot:
                 _, max_val_starrail, _, _ = cv.minMaxLoc(result_button_starrail)
                 result_button_back = cv.matchTemplate(screen, img_back, cv.TM_CCOEFF_NORMED)
                 _, max_val_back, _, _ = cv.minMaxLoc(result_button_back)
-                if max_val_back > 0.95:
+                if max_val_back > 0.95 and special_exit:
                     logger.info('exit special map')
                     await self.dev.shell(f'input tap {int(self.xy.width*2135/2400)} {int(self.xy.height*138/1080)}')
                 elif max_val_starrail > 0.95:
-                    logger.info('map open')
+                    logger.info('map is open')
                     check_map = True
-                    return('normal')
+                    if special_exit == True:
+                        await self.check_map_zoom_level()
+                    return(True)
                 else:
                     time_running = timedelta(seconds=time.perf_counter() - time_start)
                     if time_running.seconds > 10:
                         logger.error('open map not detected')
                         return(False)
+                    elif special_exit == False:
+                        check_map = True
                     await aio.sleep(0.1)
         except KeyboardInterrupt:
             logger.debug('Ctrl+C detected. Exiting gracefully.')
             exit()
-        await self.check_map_zoom_level()
         
     async def check_map_zoom_level(self):
         logger.info('check map zoom level')
@@ -113,10 +116,10 @@ class Bot:
                 await aio.sleep(0.075)
             await aio.sleep(0.1)
 
-    async def use_teleporter(self, x, y, move_x=0, move_y=0, move_spd=500, corner='botright', open_map=True, confirm=False, debug=False):
+    async def use_teleporter(self, x, y, move_x=0, move_y=0, move_spd=500, corner='botright', open_map=True, confirm=False, special_exit=True, debug=False):
         logger.info(f'use teleporter: {int(self.xy.width*x)},{int(self.xy.height*y)}')
         if open_map == True:
-            await self.open_map()
+            await self.open_map(special_exit=special_exit)
         logger.info(f'move map to corner: {corner}')
         for _ in range(3):
             if corner == 'topright':
@@ -167,7 +170,7 @@ class Bot:
             await self.wait_for_onmap(min_duration=2, no_fight=True)
             # retry
             if open_map == True:
-                await self.use_teleporter(x, y, move_x=move_x, move_y=move_y, move_spd=move_spd, corner=corner, open_map=open_map, confirm=confirm, debug=False)
+                await self.use_teleporter(x, y, move_x=move_x, move_y=move_y, move_spd=move_spd, corner=corner, open_map=open_map, confirm=confirm, special_exit=special_exit, debug=False)
             else:
                 return(False)
         else:

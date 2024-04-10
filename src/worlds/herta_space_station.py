@@ -17,16 +17,15 @@ class World:
     
     async def farm_storage_zone(self):
         x = self.Storage_Zone(bot=self.bot)
-        await x.teleport()
-        await x.path_1()
-        await x.path_2()
-        await x.path_3()
+        # await x.teleport()
+        # await x.path_1()
+        # await x.path_2()
+        # await x.path_3()
         await x.path_4()
         await x.path_5()
         await x.path_6()
         await x.path_7()
         await x.path_8()
-        await x.path_9()
     
     async def farm_supply_zone(self):
         x = self.Supply_Zone(bot=self.bot)
@@ -61,8 +60,8 @@ class World:
         async def path_1(self):
             logger.info('### Path 1 ###')
             await self.bot.use_teleporter(x=1044/2400, y=405/1080, corner='topright', move_x=0, move_y=0) # Monitoring Room
-            await self.bot.movepi(1.5, 3000)
-            await self.bot.attack_technique(10)
+            await self.bot.movepi(1.5, 2600)
+            await self.bot.attack_technique(6)
         async def path_2(self):
             logger.info('### Path 2 ###')
             await self.bot.use_teleporter(x=1044/2400, y=405/1080, corner='topright', move_x=0, move_y=0) # Monitoring Room
@@ -99,40 +98,36 @@ class World:
             await self.bot.use_teleporter(576/2400, 569/1080, move_x=0, move_y=0, corner='botright') # Outside the Control Center
             await self.bot.movepi(1.5, 200)
             await self.bot.attack_technique(10)
-        async def path_4(self): # TODO: can be done in the next path
+        async def path_4(self):
             logger.info('### Path 4 ###')
             await self.bot.use_teleporter(576/2400, 569/1080, move_x=0, move_y=0, corner='botright') # Outside the Control Center
-            await self.bot.movepi(0.49, 2500)
-            await self.bot.attack()
+            await self.bot.movepi(0.49, 2100)
+            await self.bot.attack() # +2 TP
+            await self.bot.movepi(0.68, 2200)
+            await self.bot.movepi(1.0, 1700)
+            await self.bot.attack_technique(4)
         async def path_5(self):
             logger.info('### Path 5 ###')
-            await self.bot.use_teleporter(576/2400, 569/1080, move_x=0, move_y=0, corner='botright') # Outside the Control Center
-            await self.bot.movepi(0.55, 2700)
-            await self.bot.movepi(0.6, 1500)
-            await self.bot.movepi(1.0, 1800)
-            await self.bot.attack_technique(4)
-        async def path_6(self):
-            logger.info('### Path 6 ###')
             await self.bot.use_teleporter(1068/2400, 647/1080, move_x=0, move_y=0, corner='botright') # Special Purpose Lab
             await self.bot.movepi(1.3, 1900)
             await self.bot.movepi(1.0, 4500)
             await self.bot.movepi(0.61, 6500)
             await self.bot.movepi(0.1, 200)
             await self.bot.attack_technique(8)
-        async def path_7(self):
-            logger.info('### Path 7 ###')
+        async def path_6(self):
+            logger.info('### Path 6 ###')
             await self.bot.use_teleporter(895/2400, 530/1080, move_x=0, move_y=0, corner='botright', confirm=True) # Courtyard
             await self.bot.movepi(0.35, 2000)
             await self.bot.attack() # +2 TP
-        async def path_8(self):
-            logger.info('### Path 8 ###')
+        async def path_7(self):
+            logger.info('### Path 7 ###')
             await self.bot.use_teleporter(895/2400, 530/1080, move_x=0, move_y=0, corner='botright', confirm=True) # Courtyard
             await self.bot.movepi(1.5, 1500)
             await self.bot.movepi(1.75, 500)
             await self.bot.attack_technique(10)
             await self.bot.restore_tp(n=1) # +2 TP
-        async def path_9(self):
-            logger.info('### Path 9 ###')
+        async def path_8(self):
+            logger.info('### Path 8 ###')
             await self.bot.use_teleporter(895/2400, 530/1080, move_x=0, move_y=0, corner='botright', confirm=True) # Courtyard
             await self.bot.movepi(1.19, 2400)
             await self.bot.movepi(0.7, 1500)
@@ -240,7 +235,7 @@ class World:
             await self.bot.movepi(1.8, 1500)
             await self.bot.attack()
             await self.bot.movepi(1.75, 3500)
-            await self.bot.movepi(1.35, 2900)
+            await self.bot.movepi(1.35, 3000)
             await self.bot.movepi(1.8, 2400)
             await self.bot.attack()
             await self.bot.movepi(1.68, 6100)

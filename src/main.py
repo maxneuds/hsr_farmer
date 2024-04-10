@@ -52,15 +52,16 @@ async def main():
     
     # 0/7 Jarilo-VI (19440/19440)
     
-    # 3/5 Penacony (26460/???)
+    # 4/5 Penacony (26460/???)
     # await penacony.farm_dreams_edge() # (7668/9612 [7668]) check 1.0
     # await penacony.farm_childs_dream() # (5832/5832) check 1.0
     # await penacony.farm_the_reverie_dreamscape() # (13284/15552 [6912]) done 1.0
+    # await penacony.farm_dewlight_pavilion() # (???/??? [???]) done 1.0
     # await penacony.farm_clock_studios_theme_park() # (7648/7648) check 1.0
     # await penacony.restock_golden_hour() # (TP) done 1.0
     
     # 1/7 Xianzhou Luofu (42596/42596)
-    await the_xianzhou_luofu.restock_starskiff_haven()
+    # await the_xianzhou_luofu.restock_starskiff_haven()
     # await the_xianzhou_luofu.farm_fyxestroll_garden() # (4644/4644) # check 1.0
     
     # 1/1 Astral Express
@@ -69,7 +70,6 @@ async def main():
     
     ### TODO
     
-    # await penacony.farm_dewlight_pavilion() # (???/??? [???])
     
     # await jarilo_vi.farm_outlying_snow_plains() # (2052/2052)
     # await jarilo_vi.farm_backwater_pass() # (3024/3024)

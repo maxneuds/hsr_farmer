@@ -14,7 +14,7 @@ class World:
 
     async def restock_starskiff_haven(self):
         x = self.Central_Starskiff_Haven(bot=self.bot)
-        # await x.teleport()
+        await x.teleport()
         await x.shop_salesby()
 
     async def farm_cloudford(self):
