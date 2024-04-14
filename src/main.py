@@ -1,69 +1,54 @@
 import asyncio as aio
-import streamlit as st
+# import streamlit as st
 from sys import exit
-from datetime import datetime as dt
 from logger import logger
 from automation.bot import Bot
 from automation.adb import ADB
 from automation.xy import OnePlus7T
-from worlds.astral_express import World as Astral_Express
-from worlds.herta_space_station import World as Herta_Space_Station
-from worlds.the_xianzhou_luofu import World as The_Xianzhou_Luofu
-from worlds.penacony import World as Penacony
-from worlds.jarilo_vi import World as JariloVI
-
+from farmer.penacony import Penacony
+from farmer.the_xianzhou_luofu import The_Xianzhou_Luofu
+from farmer.herta_space_station import Herta_Space_Station
 
 DEVICE = '10.1.11.3:5555'
 
-
 async def main():
-
-    ###
     # initialize bot
-    ###
     xy = OnePlus7T()
     adb = ADB(DEVICE)
     dev = await adb.get_dev()
     bot = Bot(adb=adb, dev=dev, xy=xy)
-
-    ###
-    # load worlds
-    ###
-    astral_express = Astral_Express(bot=bot)
-    herta_space_station = Herta_Space_Station(bot=bot)
-    penacony = Penacony(bot=bot)
-    the_xianzhou_luofu = The_Xianzhou_Luofu(bot=bot)
-    jarilo_vi = JariloVI(bot=bot)
-
-    # total mapped xp: 95'624/100k
-    # time: 4h30
-
-    ###
-    # farm worlds
-    # ###
     
-    ### DONE
+    # load worlds
+    # astral_express = Astral_Express(bot=bot)
+    herta_space_station = Herta_Space_Station(bot=bot)
+    # jarilo_vi = JariloVI(bot=bot)
+    the_xianzhou_luofu = The_Xianzhou_Luofu(bot=bot)
+    penacony = Penacony(bot=bot)
     
     # 4/4 Herta Space Station (7128/7128)
-    # await herta_space_station.farm_seclusion_zone() # (1620/1620) check 1.0
-    # await herta_space_station.farm_storage_zone() # (2592/2592) check 1.0
-    # await herta_space_station.farm_base_zone() # (432/432) check 1.0
-    # await herta_space_station.farm_supply_zone() # (2484/2484) check 1.0
+    # await herta_space_station.farm_seclusion_zone() # (1620/1620)
+    # await herta_space_station.farm_base_zone() # (432/432) #
+    # await herta_space_station.farm_storage_zone() # (2592/2592)
+    # await herta_space_station.farm_supply_zone() # (2484/2484)
     
     # 0/7 Jarilo-VI (19440/19440)
+    # await jarilo_vi.farm_outlying_snow_plains() # (2052/2052) done 1.0
+    # await jarilo_vi.farm_backwater_pass() # (3024/3024) in progress
+    # await jarilo_vi.farm_silvermane_guard() # in progress
     
     # 4/5 Penacony (26460/???)
-    # await penacony.farm_dreams_edge() # (7668/9612 [7668]) check 1.0
-    # await penacony.farm_childs_dream() # (5832/5832) check 1.0
-    # await penacony.farm_the_reverie_dreamscape() # (13284/15552 [6912]) done 1.0
-    # await penacony.farm_dewlight_pavilion() # (???/??? [???]) done 1.0
-    # await penacony.farm_clock_studios_theme_park() # (7648/7648) check 1.0
-    # await penacony.restock_golden_hour() # (TP) done 1.0
+    # await penacony.farm_dreams_edge() # (7668/9612)
+    # await penacony.farm_childs_dream() # (5832/5832)
+    # await penacony.farm_the_reverie_dreamscape() # (14148/15552)
+    # await penacony.farm_dewlight_pavilion() # (11448/11448)
+    # await penacony.farm_golden_hour() # (TP)
+    # await penacony.farm_clock_studios_theme_park() # (7648/7648) 77.776
     
     # 1/7 Xianzhou Luofu (42596/42596)
-    # await the_xianzhou_luofu.restock_starskiff_haven()
-    await the_xianzhou_luofu.farm_cloudford() # (4644/4644) # in progress
-    # await the_xianzhou_luofu.farm_fyxestroll_garden() # (4644/4644) # check 1.0
+    # await the_xianzhou_luofu.farm_starskiff_haven()
+    # await the_xianzhou_luofu.farm_cloudford() # (4644/4644) # in progress
+    # await the_xianzhou_luofu.farm_fyxestroll_garden() # (4644/4644) # check 2.0
+    # await herta_space_station.farm_tp()
     
     # 1/1 Astral Express
     # await astral_express.parlor_car()
@@ -72,8 +57,6 @@ async def main():
     ### TODO
     
     
-    # await jarilo_vi.farm_outlying_snow_plains() # (2052/2052)
-    # await jarilo_vi.farm_backwater_pass() # (3024/3024)
     # await jarilo_vi.farm_corridor() # (3672/3672)
     # await jarilo_vi.farm_everwinter_hill() # (1404/1404)
     # await jarilo_vi.farm_great_mine() #  (4536/4536)
@@ -88,7 +71,6 @@ async def main():
     # await the_xianzhou_luofu.farm_stargazer_navalia() # verified (6264/6264)
     
     
-    
 
 if __name__ == '__main__':
     try:
@@ -100,3 +82,4 @@ if __name__ == '__main__':
     # st.selectbox('Startmap:', ('Base Zone', 'Storage Zone'))
     # st.button('Reset', type='primary')
     # st.write('Hello')
+

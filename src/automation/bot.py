@@ -18,6 +18,10 @@ class Bot:
     async def sleep(self, duration):
         logger.info(f'sleep for {duration} seconds...')
         await aio.sleep(duration)
+    
+    async def action_back(self):
+        logger.info('send back button')
+        await self.dev.shell(f'input keyevent 4')
 
     async def action_tap(self, x, y):
         logger.info(f'action: tap {x},{y}')
@@ -29,13 +33,10 @@ class Bot:
         await aio.sleep(0.1)
         await self.dev.shell(f'input tap {self.xy.sprint[0]} {self.xy.sprint[1]}')
 
-    async def move(self, direction, duration):
-        logger.info(f'move {direction} for {duration/1000} seconds')
-        if direction not in self.xy.vjoy:
-            logger.error('bad direction')
-        else:
-            cmd = f'input swipe {self.xy.vjoy[direction][0]} {self.xy.vjoy[direction][1]} {self.xy.vjoy[direction][0]} {self.xy.vjoy[direction][1]} {duration}'
-            await self.dev.shell(cmd)
+    async def position_fixing(self, direction, duration):
+        logger.info(f'position fixing: move {direction} pi for {duration/1000} seconds')
+        await self.movepi(direction=direction, duration=duration)
+        await self.sleep(0.5)
 
     async def movepi(self, direction, duration):
         logger.info(f'move {direction} pi for {duration/1000} seconds')
@@ -166,7 +167,7 @@ class Bot:
         check = await self.wait_for_onmap(min_duration=1, no_fight=True)
         if check == 'stuck': # retry
             logger.error(f'telport failed. Try again')
-            await self.dev.shell(f'input keyevent 4')
+            await self.action_back()
             await self.wait_for_onmap(min_duration=2, no_fight=True)
             # retry
             if open_map == True:
@@ -265,13 +266,16 @@ class Bot:
             await self.action_tap(int(self.xy.width*1461/2400), int(self.xy.height*824/1080))
             await aio.sleep(2)
         logger.info(f'exit to map')
-        await self.dev.shell(f'input keyevent 4')
+        await self.action_back()
         await self.wait_for_onmap(min_duration=3)
 
-    async def interact(self):
+    async def interact(self, check_on_map=True):
         await aio.sleep(1)
         await self.action_tap(int(self.xy.width*1600/2400), int(self.xy.height*650/1080))
-        await self.wait_for_onmap(min_duration=2)
+        if check_on_map == True:
+            await self.wait_for_onmap(min_duration=2)
+        else:
+            await self.sleep(5)
 
     async def action_button(self):
         await aio.sleep(1)
@@ -286,8 +290,8 @@ class Bot:
     
     async def shop_exit(self):
         logger.info(f'shop: exit')
-        await self.dev.shell(f'input keyevent 4')
-        await self.wait_for_onmap(min_duration=2)
+        await self.action_back()
+        await self.wait_for_onmap(min_duration=2, no_fight=True)
         
     async def chat_advance(self):
         logger.info(f'chat: advance')
@@ -350,7 +354,7 @@ class Bot:
                     await aio.sleep(2)
                     await self.action_tap(int(self.xy.width*1393/2400), int(self.xy.height*787/1080)) # confirm
                     await aio.sleep(2)
-                    await self.dev.shell(f'input keyevent 4')
+                    await self.action_back()
                     await aio.sleep(2)
                     return(True)
                 else:
@@ -405,9 +409,9 @@ class Bot:
                 await aio.sleep(3)
                 await self.action_tap(int(self.xy.width*1393/2400), int(self.xy.height*737/1080)) # confirm
                 await aio.sleep(5)
-                # return to map
+                logger.info('return to map')
                 for _ in range(3):
-                    await self.dev.shell(f'input keyevent 4')
+                    await self.action_back()
                     await aio.sleep(3)
                 search_recipe = False
                 return(True)
@@ -496,7 +500,7 @@ class Bot:
                 _, max_val_exit, _, _ = cv.minMaxLoc(result_exit)
                 if max_val_exit > 0.95:
                     logger.info('exit window found: cancel')
-                    await self.dev.shell(f'input keyevent 4')
+                    await self.action_back()
                     await self.sleep(0.5)
                 elif max_val_food > 0.95: # food menu found, eat TP food
                     logger.info('food menu found: eat TP food')
@@ -504,7 +508,7 @@ class Bot:
                     await self.action_tap(top_left[0]+5, top_left[1]+5)
                     await self.action_tap(int(self.xy.width*1470/2400), int(self.xy.height*885/1080))
                     await aio.sleep(2)
-                    await self.dev.shell(f'input keyevent 4')
+                    await self.action_back()
                     for _ in range(4): # directly continue attacking
                         await self.action_technique()
                     return('food')

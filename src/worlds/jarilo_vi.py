@@ -8,6 +8,158 @@ class World:
     def __init__(self, bot):
         self.bot = bot
 
+    async def farm_outlying_snow_plains(self):
+        x = self.Outlying_Snow_Plains(bot=self.bot)
+        await x.teleport()
+        await x.path_1()
+        await x.path_2()
+    class Outlying_Snow_Plains:
+        def __init__(self, bot):
+            self.bot = bot
+        async def teleport(self):
+            logger.info('---')
+            logger.info("--- Map: Outlying Snow Plains")
+            logger.info('---')
+            await self.bot.switch_map(y_list=508/1080, world='jarilo_vi', scroll_down=False,
+                                      x=1079/2400, y=430/1080, corner='botright', move_x=0, move_y=0, confirm=True) # Bud of Memories
+            await self.bot.movepi(1.3, 3000)
+            await self.bot.attack_technique(2, wait=False) # +2 TP
+            await self.bot.movepi(1.1, 1000)
+            await self.bot.attack_technique(10)
+        async def path_1(self):
+            logger_set_path(1)
+            await self.bot.use_teleporter(x=998/2400, y=338/1080, corner='botright', move_x=0, move_y=0, confirm=True) # Long Slope
+            await self.bot.movepi(0.21, 2100)
+            await self.bot.attack()
+            await self.bot.movepi(1.2, 6300)
+            await self.bot.attack()
+            await self.bot.movepi(0.95, 4700)
+            await self.bot.attack_technique(2)
+        async def path_2(self):
+            logger_set_path(2)
+            await self.bot.use_teleporter(x=998/2400, y=338/1080, corner='botright', move_x=0, move_y=0, confirm=True) # Long Slope
+            await self.bot.movepi(0.61, 2900)
+            await self.bot.attack() # +2 TP
+            await self.bot.movepi(0.58, 5400)
+            await self.bot.attack() # +2 TP
+            await self.bot.movepi(0.65, 9000)
+            await self.bot.attack_technique(2, wait=False) # items
+            await self.bot.movepi(1.00, 1000)
+            await self.bot.movepi(0.6, 100)
+            await self.bot.attack_technique(3, wait=False)
+            await self.bot.restore_tp(n=1) # +2 TP
+            exit() # improve path
+            await self.bot.movepi(1.4, 5500)
+            await self.bot.attack_technique(6, wait=False)
+            await self.bot.movepi(0.64, 4400)
+            await self.bot.attack_technique(1, wait=False)
+            await self.bot.movepi(0.42, 5200)
+            await self.bot.attack_technique(2)
+    
+    async def farm_backwater_pass(self):
+        x = self.Backwater_Pass(bot=self.bot)
+        # await x.teleport()
+        # await x.path_1()
+        await x.path_99()
+    class Backwater_Pass:
+        def __init__(self, bot):
+            self.bot = bot
+        async def teleport(self):
+            logger.info('---')
+            logger.info("--- Map: Backwater Pass")
+            await self.bot.switch_map(y_list=629/1080, world='jarilo_vi', scroll_down=False,
+                                      x=829/2400, y=273/1080, corner='botright', move_x=0, move_y=0) # Transport Hub
+            await self.bot.movepi(0.8, 700)
+            await self.bot.attack() # +2 TP
+            await self.bot.movepi(1.53, 5000)
+            await self.bot.movepi(1.1, 300)
+            await self.bot.attack() # items
+            await self.bot.movepi(1.5, 700)
+            await self.bot.movepi(1.03, 2300)
+            await self.bot.attack() # items
+            await self.bot.movepi(0.97, 2500)
+            await self.bot.attack_technique(4)
+        async def path_99(self):
+            logger_set_path(1)
+            await self.bot.use_teleporter(x=829/2400, y=273/1080, corner='botright', move_x=0, move_y=0) # Transport Hub
+            await self.bot.movepi(1.5, 6000)
+            await self.bot.movepi(1.75, 3000)
+            await self.bot.movepi(0.4, 300)
+            await self.bot.attack_technique(4, wait=False)
+            await self.bot.movepi(0.3, 1500)
+            await self.bot.attack_technique(4, wait=False)
+            exit() # check rest
+            await self.bot.movepi(0.4, 1000)
+            await self.bot.attack_technique(4)
+        async def path_99(self):
+            logger_set_path(1)
+            await self.bot.use_teleporter(x=907/2400, y=753/1080, corner='topright', move_x=0, move_y=1, confirm=True) # Bud of Abundance
+            # await self.bot.use_teleporter(x=945/2400, y=715/1080, corner='topright', move_x=0, move_y=1, confirm=True) # Leisure Plaza
+            # await self.bot.use_teleporter(x=830/2400, y=360/1080, corner='topright', move_x=0, move_y=1) # Bud of Aether
+            
+    # async def farm_backwater_pass(self):
+    #     logger('### group 2 ###')
+    #     await self.bot.use_teleporter(846/2400, 386/1080) # Transport Hub
+    #     await self.bot.movepi(1.5, 6000)
+    #     await self.bot.movepi(1.75, 3000)
+    #     await self.bot.attack()
+    #     await self.bot.wait_for_onmap()
+    #     logger('### group 2, part 2 ###') # roamer
+    #     await self.bot.movepi(1.5, 500)
+    #     await self.bot.movepi(0.00, 2000)
+    #     await self.bot.attack()
+    #     await self.bot.wait_for_onmap()
+    #     logger('### group 3 ###')
+    #     await self.bot.movepi(0.00, 7500)
+    #     await self.bot.movepi(0.5, 3600)
+    #     await self.bot.attack()
+    #     await self.bot.wait_for_onmap()
+    #     logger('### group 4 ###')
+    #     await self.bot.use_teleporter(978/2400, 341/1080, confirm=True)
+    #     await self.bot.movepi(1.5, 6000)
+    #     await self.bot.attack()
+    #     await self.bot.wait_for_onmap()
+    #     logger('### group 5 ###')
+    #     await self.bot.movepi(1.5, 2500)
+    #     await self.bot.movepi(1.75, 1500)
+    #     await self.bot.attack()
+    #     await self.bot.wait_for_onmap()
+
+            
+
+    async def farm_silvermane_guard(self):
+        x = self.Silvermane_Guard(bot=self.bot)
+        # await x.teleport()
+        # await x.path_1()
+        await x.path_99()
+    class Silvermane_Guard:
+        def __init__(self, bot):
+            self.bot = bot
+        async def teleport(self):
+            logger.info('---')
+            logger.info("--- Map: Silvermane Guard Restricted Zone")
+            logger.info('---')
+            await self.bot.switch_map(y_list=750/1080, world='jarilo_vi', scroll_down=False,
+                                      x=659/2400, y=648/1080, corner='botright', move_x=0, move_y=0, confirm=True) # Energy Hub
+            await self.bot.movepi(1.5, 1200)
+            await self.bot.movepi(1.05, 1200)
+            await self.bot.attack() # items
+        async def path_99(self):
+            logger_set_path(1)
+            await self.bot.use_teleporter(x=659/2400, y=648/1080, corner='botright', move_x=0, move_y=0, confirm=True) # Energy Hub
+            await self.bot.movepi(0.5, 2500)
+            await self.bot.movepi(0.72, 5200)
+            await self.bot.attack()
+            await self.bot.movepi(0.75, 3900)
+            await self.bot.movepi(1.24, 6300)
+            await self.bot.attack()
+            await self.bot.movepi(0.6, 3300)
+            await self.bot.movepi(0.3, 2500)
+            await self.bot.movepi(0.0, 1100)
+            await self.bot.attack()
+            await self.bot.movepi(1.2, 1000)
+            await self.bot.movepi(0.75, 7000)
+            await self.bot.attack()
 
     async def farm_rivet_town(self):
         x = self.Rivet_Town(bot=self.bot)
@@ -26,7 +178,7 @@ class World:
             await self.bot.movepi(0.9, 700)
             await self.bot.attack() # +2 TP
         async def path_99(self):
-            logger.info('### Path 1 ###')
+            logger_set_path(1)
             # await self.bot.use_teleporter(x=1044/2400, y=405/1080, corner='topright', move_x=0, move_y=0, debug=True) #
             # await self.bot.movepi(1.5, 3800)
             # await self.bot.attack_technique(10)
@@ -311,69 +463,4 @@ class World:
     #     await self.bot.attack()
     #     await self.bot.sleep(1)
 
-    # async def farm_backwater_pass(self):
-    #     logger('farm: Backwater Pass')
-    #     await self.bot.switch_map(629/1080)
-    #     logger('### group 1 ###')
-    #     await self.bot.use_teleporter(948/2400, 773/1080, open_map=False) # Transport Hub
-    #     await self.bot.movepi(1.5, 5500)
-    #     await self.bot.movepi(1.0, 6000)
-    #     await self.bot.attack()
-    #     await self.bot.wait_for_onmap()
-    #     logger('### group 2 ###')
-    #     await self.bot.use_teleporter(846/2400, 386/1080) # Transport Hub
-    #     await self.bot.movepi(1.5, 6000)
-    #     await self.bot.movepi(1.75, 3000)
-    #     await self.bot.attack()
-    #     await self.bot.wait_for_onmap()
-    #     logger('### group 2, part 2 ###') # roamer
-    #     await self.bot.movepi(1.5, 500)
-    #     await self.bot.movepi(0.00, 2000)
-    #     await self.bot.attack()
-    #     await self.bot.wait_for_onmap()
-    #     logger('### group 3 ###')
-    #     await self.bot.movepi(0.00, 7500)
-    #     await self.bot.movepi(0.5, 3600)
-    #     await self.bot.attack()
-    #     await self.bot.wait_for_onmap()
-    #     logger('### group 4 ###')
-    #     await self.bot.use_teleporter(978/2400, 341/1080, confirm=True)
-    #     await self.bot.movepi(1.5, 6000)
-    #     await self.bot.attack()
-    #     await self.bot.wait_for_onmap()
-    #     logger('### group 5 ###')
-    #     await self.bot.movepi(1.5, 2500)
-    #     await self.bot.movepi(1.75, 1500)
-    #     await self.bot.attack()
-    #     await self.bot.wait_for_onmap()
-
-    # async def farm_outlying_snow_plains(self):
-    #     logger('farm: Outlying Snow Plains')
-    #     await self.bot.switch_map(510/1080, open_map=False)
-    #     logger('### group 1 ###') # roamer
-    #     await self.bot.use_teleporter(1386/2400, 576/1080, open_map=False) # Bud of Memories
-    #     await self.bot.movepi(1.25, 3000)
-    #     await self.bot.movepi(1.0, 3000)
-    #     await self.bot.movepi(1.25, 2000)
-    #     await self.bot.attack()
-    #     await self.bot.wait_for_onmap(min_duration=20)
-    #     logger('### group 2 ###')
-    #     await self.bot.use_teleporter(998/2400, 338/1080, confirm=True) # Long Slope
-    #     await self.bot.movepi(1.0, 2500)
-    #     await self.bot.movepi(1.25, 3000)
-    #     await self.bot.movepi(1.0, 4000)
-    #     await self.bot.attack()
-    #     await self.bot.wait_for_onmap()
-    #     logger('### group 3 ###')
-    #     await self.bot.use_teleporter(953/2400, 260/1080) # Bud of The Hunt
-    #     await self.bot.movepi(1.25, 1500)
-    #     await self.bot.movepi(1.0, 6000)
-    #     await self.bot.movepi(1.25, 3000)
-    #     await self.bot.movepi(1.0, 4100)
-    #     await self.bot.attack()
-    #     await self.bot.wait_for_onmap()
-    #     logger('### group 4 ###')
-    #     await self.bot.movepi(0.5, 3000)
-    #     await self.bot.movepi(0.75, 1200)
-    #     await self.bot.attack()
-    #     await self.bot.wait_for_onmap()
+    
