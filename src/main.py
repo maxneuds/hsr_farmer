@@ -8,6 +8,7 @@ from automation.xy import OnePlus7T
 from farmer.penacony import Penacony
 from farmer.the_xianzhou_luofu import The_Xianzhou_Luofu
 from farmer.herta_space_station import Herta_Space_Station
+from farmer.jarilo_vi import Jarilo_VI
 
 DEVICE = '10.1.11.3:5555'
 
@@ -21,7 +22,7 @@ async def main():
     # load worlds
     # astral_express = Astral_Express(bot=bot)
     herta_space_station = Herta_Space_Station(bot=bot)
-    # jarilo_vi = JariloVI(bot=bot)
+    jarilo_vi = Jarilo_VI(bot=bot)
     the_xianzhou_luofu = The_Xianzhou_Luofu(bot=bot)
     penacony = Penacony(bot=bot)
     
@@ -32,8 +33,8 @@ async def main():
     # await herta_space_station.farm_supply_zone() # (2484/2484)
     
     # 0/7 Jarilo-VI (19440/19440)
-    # await jarilo_vi.farm_outlying_snow_plains() # (2052/2052) done 1.0
-    # await jarilo_vi.farm_backwater_pass() # (3024/3024) in progress
+    # await jarilo_vi.farm_outlying_snow_plains() # (2052/2052)
+    await jarilo_vi.farm_backwater_pass() # (3024/3024) in progress
     # await jarilo_vi.farm_silvermane_guard() # in progress
     
     # 4/5 Penacony (26460/???)
