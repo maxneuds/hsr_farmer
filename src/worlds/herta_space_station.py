@@ -18,6 +18,7 @@ class Base_Zone:
         await self.bot.movepi(1.5, 2600)
         await self.bot.attack_technique(3)
     async def path_1(self):
+        logger_set_path(1)
         await self.bot.use_teleporter(x=1044/2400, y=405/1080, corner='topright', move_x=0, move_y=0) # Monitoring Room
         await self.bot.movepi(1.48, 6300)
         await self.bot.attack() # items
@@ -224,6 +225,7 @@ class Seclusion_Zone:
         await self.bot.movepi(0.00, 1700)
         await self.bot.movepi(1.8, 1400)
         await self.bot.attack()
+        # TODO: integrate path 4 using positing fixing
     async def path_4(self):
         logger_set_path(4)
         await self.bot.use_teleporter(919/2400, 563/1080, move_x=0, move_y=0, corner='botright') # Pharmaceutical Room

@@ -28,14 +28,15 @@ async def main():
     
     # 4/4 Herta Space Station (7128/7128)
     # await herta_space_station.farm_seclusion_zone() # (1620/1620)
-    # await herta_space_station.farm_base_zone() # (432/432) #
+    # await herta_space_station.farm_base_zone() # (432/432)
     # await herta_space_station.farm_storage_zone() # (2592/2592)
     # await herta_space_station.farm_supply_zone() # (2484/2484)
     
-    # 0/7 Jarilo-VI (19440/19440)
-    # await jarilo_vi.farm_outlying_snow_plains() # (2052/2052)
-    await jarilo_vi.farm_backwater_pass() # (3024/3024) in progress
-    # await jarilo_vi.farm_silvermane_guard() # in progress
+    # 2/7 Jarilo-VI (19440/19440)
+    # await jarilo_vi.farm_outlying_snow_plains() # (2052/2052) check1
+    # await jarilo_vi.farm_backwater_pass() # (3024/3024) done1
+    # await jarilo_vi.farm_silvermane_guard() # (TP)
+    await jarilo_vi.farm_corridor() # (3672/3672) done0
     
     # 4/5 Penacony (26460/???)
     # await penacony.farm_dreams_edge() # (7668/9612)
@@ -48,7 +49,7 @@ async def main():
     # 1/7 Xianzhou Luofu (42596/42596)
     # await the_xianzhou_luofu.farm_starskiff_haven()
     # await the_xianzhou_luofu.farm_cloudford() # (4644/4644) # in progress
-    # await the_xianzhou_luofu.farm_fyxestroll_garden() # (4644/4644) # check 2.0
+    # await the_xianzhou_luofu.farm_fyxestroll_garden() # (4644/4644)
     # await herta_space_station.farm_tp()
     
     # 1/1 Astral Express
@@ -57,8 +58,6 @@ async def main():
     
     ### TODO
     
-    
-    # await jarilo_vi.farm_corridor() # (3672/3672)
     # await jarilo_vi.farm_everwinter_hill() # (1404/1404)
     # await jarilo_vi.farm_great_mine() #  (4536/4536)
     # await jarilo_vi.farm_rivet_town() # (2160/2160)

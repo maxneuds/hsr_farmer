@@ -225,6 +225,8 @@ class Bot:
     
     async def switch_map(self, y_list, world, x, y, scroll_down=False, corner='botright', move_x=0, move_y=0, confirm=False, debug=False):
         logger.info('switch map')
+        if debug == False:
+            await self.sleep(3) # make sure character is ready for map switch
         await self.switch_world(world=world)
         logger.info('scroll location list')
         x_list = int(self.xy.width*0.8)
@@ -299,7 +301,7 @@ class Bot:
         await aio.sleep(0.2)
         await self.action_tap(int(self.xy.width*1200/2400), int(self.xy.height*1000/1080))
         await aio.sleep(1)
-    
+
     async def attack(self, count=1):
         logger.info('action: attack')
         await aio.sleep(0.05)
@@ -318,7 +320,7 @@ class Bot:
         for _ in range(count):
             await self.action_technique()
         if wait == True:
-            check = await self.wait_for_onmap(min_duration=3)
+            check = await self.wait_for_onmap(min_duration=4)
             if check == 'food':
                 # had to eat food, repeat
                 await self.attack_technique(count=count)
