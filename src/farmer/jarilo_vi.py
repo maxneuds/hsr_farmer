@@ -30,9 +30,15 @@ class Jarilo_VI:
         await self.silvermane_guard.teleport()
     
     async def farm_corridor(self):
-        # exit() # check if good
-        # await self.corridor.teleport()
-        await self.corridor.path_x()
+        await self.corridor.teleport()
+        exit() # check all
+        await self.corridor.path_1()
+        await self.corridor.path_2()
+        await self.corridor.path_3()
+        await self.corridor.path_4()
+        await self.corridor.path_5()
+        await self.corridor.path_6()
+        await self.corridor.path_7()
     
     async def farm_great_mine(self):
         pass

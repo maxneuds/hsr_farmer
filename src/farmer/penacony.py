@@ -23,7 +23,6 @@ class Penacony:
         await self.dreams_edge.path_3()
         await self.dreams_edge.path_4()
         await self.dreams_edge.path_5()
-        exit() # check
         await self.dreams_edge.path_6()
         await self.dreams_edge.path_7()
         await self.dreams_edge.path_8()
@@ -75,32 +74,34 @@ class Penacony:
         await self.dewlight_pavilion.path_2()
         await self.dewlight_pavilion.path_3()
         await self.dewlight_pavilion.path_4()
-        exit() # TODO: 5-7 into 1 path using corner position fixing
+        exit() # check
         await self.dewlight_pavilion.path_5()
         await self.dewlight_pavilion.path_6()
+        exit() # check
         await self.dewlight_pavilion.path_7()
+        exit() # check
         await self.dewlight_pavilion.path_8()
+        exit() # check
         await self.dewlight_pavilion.path_9()
         await self.dewlight_pavilion.path_10()
+        exit() # check
         await self.dewlight_pavilion.path_11()
+        exit() # check
         await self.dewlight_pavilion.path_12()
         await self.dewlight_pavilion.path_13()
-        exit() # check for kill
-        await self.dewlight_pavilion.path_14()
-        await self.dewlight_pavilion.path_15()
         exit () # next for kill
-        await self.dewlight_pavilion.path_16()
+        await self.dewlight_pavilion.path_14()
 
     async def farm_clock_studios_theme_park(self):
-        await self.clock_studios_theme_park.teleport()
-        await self.clock_studios_theme_park.path_0()
-        await self.clock_studios_theme_park.path_1()
-        await self.clock_studios_theme_park.path_2()
-        await self.clock_studios_theme_park.path_3()
-        await self.clock_studios_theme_park.path_4()
-        await self.clock_studios_theme_park.path_5()
-        await self.clock_studios_theme_park.path_6()
-        await self.clock_studios_theme_park.path_7()
+        # await self.clock_studios_theme_park.teleport()
+        # await self.clock_studios_theme_park.path_0()
+        # await self.clock_studios_theme_park.path_1()
+        # await self.clock_studios_theme_park.path_2()
+        # await self.clock_studios_theme_park.path_3()
+        # await self.clock_studios_theme_park.path_4()
+        # await self.clock_studios_theme_park.path_5()
+        # await self.clock_studios_theme_park.path_6()
+        # await self.clock_studios_theme_park.path_7()
         await self.clock_studios_theme_park.path_8()
         await self.clock_studios_theme_park.path_9()
         await self.clock_studios_theme_park.path_10()

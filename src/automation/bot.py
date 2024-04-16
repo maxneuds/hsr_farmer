@@ -95,7 +95,7 @@ class Bot:
                     time_running = timedelta(seconds=time.perf_counter() - time_start)
                     if time_running.seconds > 10:
                         logger.error('open map not detected')
-                        return(False)
+                        exit()
                     elif special_exit == False:
                         check_map = True
                     await aio.sleep(0.1)

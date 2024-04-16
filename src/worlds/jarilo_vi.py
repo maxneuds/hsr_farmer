@@ -38,9 +38,9 @@ class Outlying_Snow_Plains:
         await self.bot.attack_technique(3)
         await self.bot.restore_tp(n=1) # +2 TP
         exit() # this could be better
-        await self.bot.movepi(1.4, 5500)
+        await self.bot.movepi(1.4, 5600)
         await self.bot.attack_technique(4, wait=False)
-        await self.bot.position_fixing(0.9, 2500)
+        await self.bot.position_fixing(0.9, 2500) # useless
         await self.bot.movepi(0.2, 1000)
         await self.bot.movepi(0.61, 4800)
         await self.bot.attack()
@@ -83,7 +83,9 @@ class Backwater_Pass:
         await self.bot.movepi(0.3, 300)
         await self.bot.attack_technique(4, wait=False)
         await self.bot.movepi(0.1, 500)
-        await self.bot.attack_technique(9)
+        await self.bot.attack_technique(8, wait=False)
+        await self.bot.movepi(0.6, 1200)
+        await self.bot.attack_technique(2) # items
     async def path_2(self):
         logger_set_path(2)
         await self.bot.use_teleporter(x=945/2400, y=715/1080, corner='topright', move_x=0, move_y=1, confirm=True) # Leisure Plaza
@@ -119,11 +121,12 @@ class Backwater_Pass:
         await self.bot.movepi(1.3, 2300)
         await self.bot.attack_technique(3, wait=False)
         for _ in range(3):
-            await self.bot.movepi(1.4, 700)
+            await self.bot.movepi(1.4, 500)
             await self.bot.attack_technique(2, wait=False)
         for _ in range(3):
-            await self.bot.movepi(1.1, 700)
+            await self.bot.movepi(1.1, 500)
             await self.bot.attack_technique(2, wait=False)
+        await self.wait_for_onmap(min_duration=3, no_fight=True)    
     async def path_4(self):
         logger_set_path(4)
         await self.bot.use_teleporter(x=829/2400, y=273/1080, corner='botright', move_x=0, move_y=0) # Transport Hub
@@ -178,86 +181,136 @@ class Corridor:
         await self.bot.switch_map(y_list=869/1080, world='jarilo_vi', scroll_down=False,
                                         x=869/2400, y=351/1080, corner='botright', move_x=0, move_y=3) # Command Center
         await self.bot.movepi(0.3, 4700)
-        # await self.bot.attack() # items
-        await self.bot.sleep(0.3)
+        await self.bot.attack() # items
         await self.bot.movepi(1.0, 700)
         await self.bot.movepi(0.5, 300)
         await self.bot.attack_technique(2, wait=False)
         await self.bot.movepi(0.6, 700)
         await self.bot.attack_technique(4)
-    async def path_x(self):
+    async def path_1(self): # roamer
         logger_set_path(1)
-        await self.bot.use_teleporter(x=829/2400, y=273/1080, corner='botright', move_x=0, move_y=0) # Transport Hub
-        
-# async def farm_corridor(self): # TODO: do battle 4 first
-#     logger('farm: Corridor of Fading Echoes')
-#     await self.bot.switch_map(869/1080)
-#     logger('### group 1 ###') # roamer
-#     await self.bot.use_teleporter(963/2400, 781/1080, open_map=False, move_y=-0.3) # Ancient Battlefield: Frontline
-#     await self.bot.movepi(1.5, 5000)
-#     await self.bot.movepi(1, 4500)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger('### group 2 ###')
-#     await self.bot.use_teleporter(963/2400, 645/1080) # Ancient Battlefield Frontline
-#     await self.bot.movepi(1.5, 5000)
-#     await self.bot.movepi(1, 3500)
-#     await self.bot.movepi(1.51, 6000)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger('### group 3 ###')
-#     await self.bot.use_teleporter(963/2400, 622/1080) # Ancient Battlefield Frontline
-#     await self.bot.movepi(1.5, 5000)
-#     await self.bot.movepi(1, 3500)
-#     await self.bot.movepi(1.51, 6000)
-#     await self.bot.movepi(1.6, 2000)
-#     await self.bot.movepi(1.5, 4300)
-#     await self.bot.attack()
-#     await self.bot.sleep(0.5)
-#     await self.bot.movepi(0, 7300)
-#     await self.bot.movepi(0.5, 3500)
-#     await self.bot.attack()
-#     await self.bot.sleep(0.5) # in case attack misses
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger('### group 5 ###') # shitty roamer
-#     await self.bot.use_teleporter(909/2400, 136/1080) # Stagnant Shadow
-#     await self.bot.movepi(1, 1000)
-#     await self.bot.movepi(0.75, 1550)
-#     await self.bot.attack()
-#     await self.bot.sleep(0.5)
-#     await self.bot.movepi(0.5, 1500)
-#     await self.bot.movepi(1, 3600)
-#     await self.bot.movepi(0.5, 5500)
-#     await self.bot.movepi(0.25, 3500)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger('### group 6 ###') # shitty roamer
-#     await self.bot.use_teleporter(909/2400, 600/1080) # Stagnant Shadow
-#     await self.bot.movepi(1, 1000)
-#     await self.bot.movepi(0.75, 1550)
-#     await self.bot.movepi(0.5, 1500)
-#     await self.bot.movepi(1, 3800)
-#     await self.bot.movepi(0.5, 5500)
-#     await self.bot.movepi(0.25, 6500)
-#     await self.bot.movepi(1.75, 3000)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap(min_duration=45)
-#     logger('### group 7 ###') # roamer
-#     await self.bot.use_teleporter(908/2400, 510/1080) # Stagnant Shadow
-#     await self.bot.movepi(1.2, 1800)
-#     await self.bot.movepi(1, 8700)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap(min_duration=30)
-#     logger('### group 8 ###')
-#     await self.bot.use_teleporter(1071/2400, 261/1080) # Cavern of Corrosion
-#     await self.bot.movepi(1.78, 7000)
-#     await self.bot.movepi(1.6, 1000)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     await self.bot.movepi(0.9, 1000)
-#     await self.bot.attack()
-#     await self.bot.sleep(1)
+        await self.bot.use_teleporter(x=962/2400, y=502/1080, corner='botright', move_x=0, move_y=0) # Ancient Battlefield: Frontline
+        await self.bot.movepi(0.7, 1000)
+        await self.bot.attack() # items
+        await self.bot.movepi(1.6, 1500)
+        await self.bot.movepi(1.5, 4100)
+        await self.bot.movepi(1.0, 1000)
+        await self.bot.attack_technique(10)
+    async def path_2(self): # roamer
+        logger_set_path(2)
+        await self.bot.use_teleporter(x=962/2400, y=502/1080, corner='botright', move_x=0, move_y=0) # Ancient Battlefield: Frontline
+        await self.bot.movepi(1.5, 5000)
+        await self.bot.movepi(1.6, 2400)
+        await self.bot.attack() # items
+        await self.bot.position_fixing(0.9, 2500)
+        await self.bot.movepi(1.8, 4000)
+        await self.bot.movepi(1.7, 2000)
+        await self.bot.movepi(1.8, 700)
+        await self.bot.movepi(1.4, 300)
+        await self.bot.movepi(1.5, 1000)
+        await self.bot.attack_technique(2, wait=False)
+        await self.bot.movepi(1.3, 700)
+        for _ in range(4):
+            await self.bot.movepi(1.5, 500)
+            await self.bot.attack_technique(2, wait=False)
+        await self.bot.movepi(0.7, 700)
+        for _ in range(3):
+            await self.bot.movepi(1.5, 500)
+            await self.bot.attack_technique(2, wait=False)
+    async def path_3(self):
+        logger_set_path(3)
+        await self.bot.use_teleporter(x=962/2400, y=502/1080, corner='botright', move_x=0, move_y=0) # Ancient Battlefield: Frontline
+        await self.bot.movepi(1.5, 5000)
+        await self.bot.movepi(1, 3500)
+        await self.bot.movepi(1.51, 6000)
+        await self.bot.attack_technique(3, wait=False)
+        await self.bot.movepi(0.3, 4000)
+        await self.bot.attack() # items
+        await self.bot.position_fixing(0.25, 1000)
+        await self.bot.movepi(1.5, 1000)
+        await self.bot.movepi(1.3, 1200)
+        await self.bot.movepi(1.5, 500)
+        await self.bot.movepi(1.4, 1000)
+        await self.bot.movepi(1.5, 500)
+        await self.bot.movepi(1.6, 1500)
+        await self.bot.movepi(1.47, 3600)
+        await self.bot.attack() # +2 TP
+        await self.bot.movepi(1.6, 700)
+        await self.bot.movepi(1.4, 1000)
+        await self.bot.attack() # items
+    async def path_4(self): # roamer
+        logger_set_path(4)
+        await self.bot.use_teleporter(x=908/2400, y=706/1080, corner='topright', move_x=0, move_y=3) # Stagnant Shadow
+        await self.bot.movepi(1.2, 1800)
+        await self.bot.movepi(1.0, 6000)
+        await self.bot.movepi(1.1, 1500)
+        await self.bot.attack() # items
+        await self.bot.movepi(0.2, 800)
+        await self.bot.movepi(1.0, 1500)
+        await self.bot.attack_technique(2, wait=False)
+        for _ in range(3):
+            await self.bot.movepi(0.65, 500)
+            await self.bot.attack_technique(2, wait=False)
+        await self.wait_for_onmap(min_duration=3, no_fight=True)
+    async def path_4(self): # roamer
+        logger_set_path(4)
+        await self.bot.use_teleporter(x=908/2400, y=706/1080, corner='topright', move_x=0, move_y=3) # Stagnant Shadow
+        await self.bot.movepi(1, 1000)
+        await self.bot.movepi(0.72, 2000)
+        await self.bot.attack() # +2 TP
+        await self.bot.movepi(0.21, 2400)
+        await self.bot.attack() # items
+        await self.bot.movepi(1.1, 700)
+        await self.bot.movepi(1.0, 5000)
+        await self.bot.movepi(0.5, 4500)
+        await self.bot.attack_technique(2, wait=False)
+        for _ in range(6):
+            await self.bot.movepi(0.25, 500)
+            await self.bot.attack_technique(2, wait=False)
+    async def path_5(self): # roamer
+        logger_set_path(5)
+        await self.bot.use_teleporter(x=908/2400, y=706/1080, corner='topright', move_x=0, move_y=3) # Stagnant Shadow
+        await self.bot.movepi(1, 1000)
+        await self.bot.movepi(0.75, 1550)
+        await self.bot.movepi(0.5, 1500)
+        await self.bot.movepi(1, 3800)
+        await self.bot.movepi(0.5, 5500)
+        await self.bot.movepi(0.25, 6500)
+        await self.bot.movepi(1.75, 500)
+        for _ in range(2):
+            await self.bot.movepi(1.75, 500)
+            await self.bot.attack_technique(2, wait=False)
+        await self.bot.movepi(1.0, 500)
+        await self.bot.attack_technique(2, wait=False)
+        for _ in range(2):
+            await self.bot.movepi(1.6, 500)
+            await self.bot.attack_technique(2, wait=False)
+        for _ in range(3):
+            await self.bot.movepi(1.1, 500)
+            await self.bot.attack_technique(2, wait=False)
+    async def path_6(self): # roamer
+        logger_set_path(6)
+        await self.bot.use_teleporter(x=1212/2400, y=444/1080, corner='topright', move_x=0, move_y=3) # Fortified Zone
+        await self.bot.movepi(0.15, 700)
+        await self.bot.attack() # items
+        await self.bot.movepi(0.6, 500)
+        await self.bot.movepi(0.5, 500)
+        await self.bot.movepi(0.2, 1200)
+        await self.bot.movepi(0.5, 3000)
+        await self.bot.movepi(0.39, 1700)
+        await self.bot.attack() # items
+        await self.bot.movepi(0.55, 2500)
+        await self.bot.attack_technique(3, wait=False)
+        await self.bot.movepi(1.3, 500)
+        await self.bot.attack_technique(2, wait=False)
+        await self.bot.movepi(0.3, 500)
+        await self.bot.movepi(0.5, 100)
+        await self.bot.attack_technique(2, wait=False)
+    async def path_7(self): # roamer
+        logger_set_path(7)
+        await self.bot.use_teleporter(x=1072/2400, y=209/1080, corner='topright', move_x=0, move_y=3) # Cavern of Corrosion
+        await self.bot.movepi(1.45, 1900)
+        await self.bot.attack()
 
 
 class Everwinter_Hill:

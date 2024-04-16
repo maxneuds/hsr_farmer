@@ -116,7 +116,7 @@ class Supply_Zone:
         logger.info('---')
         if tp_restore == True:
             logger.info('restore tp path')
-            await self.bot.switch_map(y_list=630/1080, world='herta_space_station', scroll_down=False,
+            await self.bot.switch_map(y_list=745/1080, world='herta_space_station', scroll_down=False,
                                     x=1315/2400, y=434/1080, corner='botright', move_x=0, move_y=0) # Destruction's Beginning
             await self.bot.movepi(0.1, 800)
             await self.bot.attack() # +2 TP
