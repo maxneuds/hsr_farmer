@@ -35,8 +35,10 @@ async def main():
     # 3/7 Jarilo-VI (19440/19440)
     # await jarilo_vi.farm_outlying_snow_plains() # (2052/2052) done2
     # await jarilo_vi.farm_backwater_pass() # (3024/3024) done1
-    await jarilo_vi.farm_corridor() # (3672/3672) done1
-    # await jarilo_vi.farm_silvermane_guard() # (TP)
+    # await jarilo_vi.farm_corridor() # (3672/3672) done1
+    # await jarilo_vi.farm_everwinter_hill() # (1404/1404) done1
+    # await jarilo_vi.silvermane_guard.teleport(tp_restore=0) # (TP)
+    await jarilo_vi.farm_great_mine() # (4536/4536)
 
     # 1/7 Xianzhou Luofu (42596/42596)
     # await the_xianzhou_luofu.farm_starskiff_haven()
@@ -61,8 +63,6 @@ async def main():
 
     ### TODO
 
-    # await jarilo_vi.farm_everwinter_hill() # (1404/1404)
-    # await jarilo_vi.farm_great_mine() #  (4536/4536)
     # await jarilo_vi.farm_rivet_town() # (2160/2160)
     # await jarilo_vi.farm_robot_settlement() # (2592/2592)
 

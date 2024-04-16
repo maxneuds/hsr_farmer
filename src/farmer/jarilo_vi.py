@@ -39,12 +39,20 @@ class Jarilo_VI:
         await self.corridor.path_5()
         await self.corridor.path_6()
         await self.corridor.path_7()
-    
-    async def farm_great_mine(self):
-        pass
 
     async def farm_everwinter_hill(self):
-        pass
+        exit() # check tele
+        await self.everwinter_hill.teleport()
+        exit() # check kill all
+        await self.everwinter_hill.path_1()
+    
+    async def farm_great_mine(self):
+        # await self.great_mine.teleport()
+        # await self.corridor.path_1()
+        # await self.corridor.path_2()
+        # exit() # check kill / path
+        # await self.corridor.path_3()
+        await self.great_mine.path_x()
     
     async def farm_rivet_town(self):
         pass
