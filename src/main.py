@@ -33,12 +33,14 @@ async def main():
     # await herta_space_station.farm_supply_zone() # (2484/2484)
 
     # 3/7 Jarilo-VI (19440/19440)
-    # await jarilo_vi.farm_outlying_snow_plains() # (2052/2052) done2
+    # await jarilo_vi.farm_outlying_snow_plains() # (2052/2052) check0
     # await jarilo_vi.farm_backwater_pass() # (3024/3024) done1
     # await jarilo_vi.farm_corridor() # (3672/3672) done1
     # await jarilo_vi.farm_everwinter_hill() # (1404/1404) done1
-    # await jarilo_vi.silvermane_guard.teleport(tp_restore=0) # (TP)
-    await jarilo_vi.farm_great_mine() # (4536/4536)
+    # await jarilo_vi.silvermane_guard.teleport(tp_restore=0) # (+2TP)
+    # await jarilo_vi.farm_great_mine() # (4536/4536) done0
+    # await jarilo_vi.silvermane_guard.teleport(tp_restore=1) # (+2TP)
+    # await jarilo_vi.farm_rivet_town() # (2160/2160)
 
     # 1/7 Xianzhou Luofu (42596/42596)
     # await the_xianzhou_luofu.farm_starskiff_haven()
@@ -51,7 +53,7 @@ async def main():
     # await penacony.farm_childs_dream() # (5832/5832)
     # await penacony.farm_the_reverie_dreamscape() # (14580/15552) TODO: rework, position_fixing
     # await penacony.farm_dewlight_pavilion() # (11448/11448)
-    # await penacony.farm_golden_hour() # (TP)
+    # await penacony.farm_golden_hour() # (+5TP)
     # await penacony.farm_clock_studios_theme_park() # (7648/7648) 239.432
 
     # 1/1 Astral Express
@@ -63,7 +65,6 @@ async def main():
 
     ### TODO
 
-    # await jarilo_vi.farm_rivet_town() # (2160/2160)
     # await jarilo_vi.farm_robot_settlement() # (2592/2592)
 
     # await the_xianzhou_luofu.farm_cloudford() # verified (4644/4644)

@@ -29,6 +29,7 @@ class Base_Zone:
         await self.bot.movepi(1.2, 2000)
         await self.bot.movepi(1.4, 1500)
         await self.bot.attack() # items
+        await self.bot.wait_for_onmap(min_duration=3, no_fight=True)
 
 class Storage_Zone:
     def __init__(self, bot):

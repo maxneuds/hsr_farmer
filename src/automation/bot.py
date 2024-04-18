@@ -320,7 +320,7 @@ class Bot:
         for _ in range(count):
             await self.action_technique()
         if wait == True:
-            check = await self.wait_for_onmap(min_duration=4)
+            check = await self.wait_for_onmap(min_duration=5)
             if check == 'food':
                 # had to eat food, repeat
                 await self.attack_technique(count=count)
