@@ -49,12 +49,12 @@ async def main():
     # await herta_space_station.farm_tp()
 
     # 5/5 Penacony (47176/50092)
-    # await penacony.farm_dreams_edge() # (7668/9612)
-    # await penacony.farm_childs_dream() # (5832/5832)
-    # await penacony.farm_the_reverie_dreamscape() # (14580/15552) TODO: rework, position_fixing
-    # await penacony.farm_dewlight_pavilion() # (11448/11448)
-    # await penacony.farm_golden_hour() # (+5TP)
-    # await penacony.farm_clock_studios_theme_park() # (7648/7648) 239.432
+    await penacony.farm_dreams_edge() # (7668/9612)
+    await penacony.farm_childs_dream() # (5832/5832)
+    await penacony.farm_the_reverie_dreamscape() # (14580/15552) TODO: rework, position_fixing
+    await penacony.farm_dewlight_pavilion() # (11448/11448)
+    await penacony.farm_golden_hour() # (+5TP)
+    await penacony.farm_clock_studios_theme_park() # (7648/7648) 239.432
 
     # 1/1 Astral Express
     # await astral_express.parlor_car()

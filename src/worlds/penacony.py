@@ -83,9 +83,9 @@ class Dreams_Edge:
         await self.bot.movepi(0.00, 2500)
         await self.bot.movepi(1.90, 1400)
         await self.bot.attack_technique(3, wait=False)
-        await self.bot.movepi(0.9, 900)
-        await self.bot.movepi(0.5, 200)
-        await self.bot.attack_technique(8)
+        await self.bot.movepi(0.9, 1100)
+        await self.bot.movepi(0.5, 1500)
+        await self.bot.attack_technique(4)
         await self.bot.restore_tp(n=1) # +2 TP
     async def path_7(self):
         logger_set_path(7)
@@ -108,6 +108,7 @@ class Dreams_Edge:
         await self.bot.movepi(0.75, 1500)
         await self.bot.movepi(1.0, 1500)
         await self.bot.attack_technique(4)
+        await self.bot.restore_tp(n=1) # +2 TP
     async def path_10(self):
         logger_set_path(10)
         await self.bot.use_teleporter(909/2400, 345/1080, move_x=0, move_y=7, corner='botleft') # Shape of Roast
