@@ -564,6 +564,7 @@ class Rivet_Town:
         for _ in range(6):
             await self.bot.movepi(0.75, 300)
             await self.bot.attack_technique(2, wait=False)
+        await self.bot.attack_technique(1)
     async def path_3(self):
         logger_set_path(3)
         await self.bot.use_teleporter(x=1017/2400, y=744/1080, corner='botright', move_x=0, move_y=0, confirm=True) # Entrance
@@ -574,41 +575,6 @@ class Rivet_Town:
         await self.bot.attack() # +2 TP
         
 
-# async def farm_rivet_town(self):
-#     logger('farm: Rivet Town')
-#     await self.bot.switch_map(807/1080, scroll_down=True)
-#     logger('### group 1 ###')
-#     await self.bot.use_teleporter(1001/2400, 281/1080, open_map=False) # Orphanage
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger('### group 2 ###')
-#     await self.bot.use_teleporter(999/2400, 394/1080) # Orphanage
-#     await self.bot.movepi(1.6, 1500)
-#     await self.bot.movepi(1.25, 1000)
-#     await self.bot.movepi(1.1, 1000)
-#     await self.bot.movepi(1.0, 2800)
-#     await self.bot.movepi(0.58, 5000)
-#     await self.bot.movepi(0.50, 8000)
-#     await self.bot.movepi(1.0, 1500)
-#     await self.bot.movepi(0.5, 4000)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger('### group 3 ###')
-#     await self.bot.use_teleporter(1016/2400, 775/1080, confirm=True)
-#     await self.bot.movepi(0.5, 2500)
-#     await self.bot.movepi(0.0, 2400)
-#     await self.bot.movepi(0.25, 500)
-#     await self.bot.movepi(0.75, 700)
-#     await self.bot.movepi(1.0, 7800)
-#     await self.bot.movepi(0.5, 2400)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger('### group 4 ###') # roamer
-#     await self.bot.movepi(0.7, 4000)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-    
-
 class Robot_Settlement:
     def __init__(self, bot):
         self.bot = bot
@@ -617,66 +583,93 @@ class Robot_Settlement:
         logger.info('---')
         logger.info("--- Map: Robot Settlement")
         logger.info('---')
-
-
-# async def farm_robot_settlement(self):
-#     logger('farm: Robot Settlement')
-#     await self.bot.switch_map(927/1080, scroll_down=True)
-#     logger('### group 1 ###')
-#     await self.bot.use_teleporter(626/2400, 678/1080, open_map=False) # Bud of Harmony
-#     await self.bot.movepi(1.75, 1700)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger('### group 2 ###')
-#     await self.bot.use_teleporter(766/2400, 533/1080) # Energy Conversion Station
-#     await self.bot.movepi(1.75, 1900)
-#     await self.bot.movepi(1.95, 3500)
-#     await self.bot.movepi(1.75, 1200)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     await self.bot.movepi(0.0, 800)
-#     await self.bot.attack()
-#     await self.bot.sleep(1)
-#     logger('### group 3 ###')
-#     await self.bot.use_teleporter(767/2400, 682/1080) # Energy Conversion Station
-#     await self.bot.movepi(1.75, 1900)
-#     await self.bot.movepi(1.95, 1400)
-#     await self.bot.movepi(1.4, 4000)
-#     await self.bot.movepi(1.5, 2000)
-#     await self.bot.movepi(1.37, 5000)
-#     await self.bot.movepi(1.5, 1300)
-#     await self.bot.movepi(1.3, 1600)
-#     await self.bot.movepi(1.5, 800)
-#     await self.bot.movepi(1.25, 300)
-#     await self.bot.attack()
-#     await self.bot.sleep(0.5)
-#     await self.bot.movepi(1.6, 2300)
-#     await self.bot.movepi(1.4, 1000)
-#     await self.bot.movepi(1.25, 2100)
-#     await self.bot.attack()
-#     await self.bot.sleep(1.0)
-#     await self.bot.movepi(1.25, 700)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger('### group 4 ###')
-#     await self.bot.use_teleporter(768/2400, 576/1080) # Energy Conversion Station
-#     await self.bot.movepi(1.75, 1900)
-#     await self.bot.movepi(1.95, 1400)
-#     await self.bot.movepi(1.4, 4000)
-#     await self.bot.movepi(1.5, 2000)
-#     await self.bot.movepi(1.37, 5000)
-#     await self.bot.movepi(1.5, 1300)
-#     await self.bot.movepi(1.3, 1600)
-#     await self.bot.movepi(1.5, 800)
-#     await self.bot.movepi(1.25, 300)
-#     await self.bot.movepi(1.6, 2400)
-#     await self.bot.movepi(1.88, 1400)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger('### group 4, part 2 ###')
-#     await self.bot.movepi(1.75, 1200)
-#     await self.bot.movepi(0.4, 1800)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
+        await self.bot.switch_map(y_list=927/1080, world='jarilo_vi', scroll_down=True,
+                                    x=944/2400, y=268/1080, corner='botleft', move_x=0, move_y=3) # Vagrant Camp
+        await self.bot.movepi(0.5, 1500)
+        await self.bot.movepi(0.72, 3450)
+        await self.bot.attack() # items
+        await self.bot.movepi(0.33, 5450)
+        await self.bot.attack() # items
+        await self.bot.movepi(1.6, 900)
+        await self.bot.movepi(0.2, 600)
+        await self.bot.movepi(0.0, 3600)
+        await self.bot.movepi(0.4, 500)
+        await self.bot.attack() # items
+        await self.bot.movepi(0.5, 1000)
+        await self.bot.position_fixing(0.75, 1500)
+        await self.bot.movepi(1.6, 3000)
+        await self.bot.attack() # items
+        await self.bot.movepi(1.4, 4000)
+        await self.bot.movepi(1.05, 2000)
+        await self.bot.movepi(1.0, 100)
+        await self.bot.attack() # items
+    async def path_1(self):
+        logger_set_path(1)
+        await self.bot.use_teleporter(x=625/2400, y=757/1080, corner='botright', move_x=0, move_y=3) # Bud of Harmony
+        await self.bot.movepi(1.7, 1700)
+        await self.bot.attack_technique(3)
+    async def path_x(self):
+        logger_set_path(2)
+        await self.bot.use_teleporter(x=765/2400, y=371/1080, corner='botright', move_x=0, move_y=0) # Energy Conversation Station
+        await self.bot.movepi(1.7, 900)
+        await self.bot.movepi(1.9, 1200)
+        await self.bot.movepi(0.0, 500)
+        await self.bot.attack() # items
+        await self.bot.movepi(1.9, 2000)
+        await self.bot.movepi(0.0, 1000)
+        for _ in range(3):
+            await self.bot.movepi(0.0, 300)
+            await self.bot.attack_technique(2, wait=False)
+        for _ in range(3):
+            await self.bot.movepi(1.5, 300)
+            await self.bot.attack_technique(2, wait=False)
+        await self.bot.attack_technique(1) # +2 TP
+    async def path_3(self):
+        logger_set_path(3)
+        await self.bot.use_teleporter(x=765/2400, y=371/1080, corner='botright', move_x=0, move_y=0) # Energy Conversation Station
+        await self.bot.movepi(1.75, 1900)
+        await self.bot.movepi(1.95, 1400)
+        await self.bot.movepi(1.4, 4900)
+        await self.bot.movepi(1.1, 300)
+        await self.bot.attack() # items
+        await self.bot.movepi(0.7, 2000)
+        await self.bot.position_fixing(0.75, 1500)
+        await self.bot.movepi(1.6, 1000)
+        await self.bot.movepi(1.5, 2000)
+        await self.bot.movepi(1.3, 1500)
+        await self.bot.movepi(1.5, 1900)
+        await self.bot.movepi(1.4, 1500)
+        await self.bot.movepi(1.2, 1000)
+        await self.bot.movepi(1.3, 1900)
+        await self.bot.attack() # +2 TP
+        await self.bot.position_fixing(1.25, 1500)
+        await self.bot.movepi(0.0, 400)
+        await self.bot.movepi(1.6, 2300)
+        await self.bot.movepi(1.4, 1000)
+        await self.bot.movepi(1.25, 2000)
+        await self.bot.movepi(1.5, 100)
+        await self.bot.attack_technique(3)
+        await self.bot.movepi(1.75, 2000)
+        exit() # check path
+        await self.bot.position_fixing(1.75, 1500)
+        await self.bot.movepi(0.55, 1500)
+        await self.bot.movepi(0.2, 2500)
+        await self.bot.movepi(0.1, 1500)
+        await self.bot.attack_technique(1, wait=False)
+        await self.bot.movepi(0.1, 700)
+        await self.bot.movepi(0.5, 500)
+        await self.bot.attack_technique(5, wait=False)
+        exit()
+        await self.bot.movepi(0.75, 1500)
+        await self.bot.position_fixing(0.75, 1500)
+        await self.bot.movepi(1.5, 2900)
+        await self.bot.attack_technique(2, wait=False)
+        await self.bot.movepi(1.6, 1500)
+        await self.bot.attack_technique(2) # +2 TP
+    async def path_4(self):
+        logger_set_path(4)
+        await self.bot.use_teleporter(x=942/2400, y=346/1080, corner='botright', move_x=0, move_y=0) # Svarog's Base
+        await self.bot.movepi(1.6, 2300)
+        await self.bot.attack() # +2 TP
 
 

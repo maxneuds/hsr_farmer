@@ -32,7 +32,7 @@ async def main():
     # await herta_space_station.farm_storage_zone() # (2592/2592)
     # await herta_space_station.farm_supply_zone() # (2484/2484)
 
-    # 3/7 Jarilo-VI (19440/19440)
+    # 7/7 Jarilo-VI (19440/19440)
     # await jarilo_vi.farm_outlying_snow_plains() # (2052/2052) check0
     # await jarilo_vi.farm_backwater_pass() # (3024/3024) done1
     # await jarilo_vi.farm_corridor() # (3672/3672) done1
@@ -40,7 +40,8 @@ async def main():
     # await jarilo_vi.silvermane_guard.teleport(tp_restore=0) # (+2TP)
     # await jarilo_vi.farm_great_mine() # (4536/4536) done0
     # await jarilo_vi.silvermane_guard.teleport(tp_restore=1) # (+2TP)
-    await jarilo_vi.farm_rivet_town() # (2160/2160)
+    # await jarilo_vi.farm_rivet_town() # (2160/2160) done1
+    # await jarilo_vi.farm_robot_settlement() # (2592/2592) done 1
 
     # 1/7 Xianzhou Luofu (42596/42596)
     # await the_xianzhou_luofu.farm_starskiff_haven()
@@ -65,7 +66,6 @@ async def main():
 
     ### TODO
 
-    # await jarilo_vi.farm_robot_settlement() # (2592/2592)
 
     # await the_xianzhou_luofu.farm_cloudford() # verified (4644/4644)
     # await the_xianzhou_luofu.farm_scalegorge_waterscape() # verified (4752/4752)

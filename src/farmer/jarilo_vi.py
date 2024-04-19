@@ -11,7 +11,7 @@ class Jarilo_VI:
         self.everwinter_hill = jarilo_vi.Everwinter_Hill(bot)
         self.great_mine = jarilo_vi.Great_Mine(bot)
         self.rivet_town = jarilo_vi.Rivet_Town(bot)
-        self.silvermane_guard = jarilo_vi.Silvermane_Guard(bot)
+        self.robot_settlement = jarilo_vi.Robot_Settlement(bot)
 
     async def farm_outlying_snow_plains(self):
         await self.outlying_snow_plains.teleport()
@@ -62,7 +62,11 @@ class Jarilo_VI:
         await self.rivet_town.path_3()
 
     async def farm_robot_settlement(self):
-        pass
+        await self.robot_settlement.teleport()
+        await self.robot_settlement.path_1()
+        await self.robot_settlement.path_2()
+        await self.robot_settlement.path_3()
+        await self.robot_settlement.path_4()
 
 
     
