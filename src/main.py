@@ -26,7 +26,7 @@ async def main():
     the_xianzhou_luofu = The_Xianzhou_Luofu(bot=bot)
     penacony = Penacony(bot=bot)
 
-    # 4/4 Herta Space Station (7128/7128)
+    # 4/4 Herta Space Station (7128/7128) # monitor until end of base zone, always stuck at base zone
     # await herta_space_station.farm_seclusion_zone() # (1620/1620)
     # await herta_space_station.farm_base_zone() # (432/432)
     # await herta_space_station.farm_storage_zone() # (2592/2592)
@@ -40,7 +40,7 @@ async def main():
     # await jarilo_vi.silvermane_guard.teleport(tp_restore=0) # (+2TP)
     # await jarilo_vi.farm_great_mine() # (4536/4536) done0
     # await jarilo_vi.silvermane_guard.teleport(tp_restore=1) # (+2TP)
-    # await jarilo_vi.farm_rivet_town() # (2160/2160)
+    await jarilo_vi.farm_rivet_town() # (2160/2160)
 
     # 1/7 Xianzhou Luofu (42596/42596)
     # await the_xianzhou_luofu.farm_starskiff_haven()
@@ -49,12 +49,12 @@ async def main():
     # await herta_space_station.farm_tp()
 
     # 5/5 Penacony (47176/50092)
-    await penacony.farm_dreams_edge() # (7668/9612)
-    await penacony.farm_childs_dream() # (5832/5832)
-    await penacony.farm_the_reverie_dreamscape() # (14580/15552) TODO: rework, position_fixing
-    await penacony.farm_dewlight_pavilion() # (11448/11448)
-    await penacony.farm_golden_hour() # (+5TP)
-    await penacony.farm_clock_studios_theme_park() # (7648/7648) 239.432
+    # await penacony.farm_dreams_edge() # (7668/9612)
+    # await penacony.farm_childs_dream() # (5832/5832)
+    # await penacony.farm_the_reverie_dreamscape() # (14580/15552) TODO: rework, position_fixing
+    # await penacony.farm_dewlight_pavilion() # (11448/11448)
+    # await penacony.golden_hour.teleport(tp_restore=0) # (+2TP)
+    # await penacony.farm_clock_studios_theme_park() # (7648/7648) 239.432
 
     # 1/1 Astral Express
     # await astral_express.parlor_car()

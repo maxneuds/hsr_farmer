@@ -41,8 +41,9 @@ class Outlying_Snow_Plains:
         exit() # check
         await self.bot.movepi(1.4, 5600)
         await self.bot.attack_technique(3, wait=False)
-        await self.bot.movepi(1.1, 2000)
-        await self.bot.position_fixing(0.75, 2500) # useless
+        await self.bot.movepi(1.5, 500)
+        await self.bot.movepi(1.2, 1500)
+        await self.bot.position_fixing(0.75, 2500)
         await self.bot.movepi(0.2, 1000)
         await self.bot.movepi(0.61, 4800)
         await self.bot.attack()
@@ -330,7 +331,7 @@ class Corridor:
         await self.bot.attack_technique(2)
     async def path_7(self): # roamer
         logger_set_path(7)
-        # await self.bot.use_teleporter(x=1072/2400, y=209/1080, corner='topright', move_x=0, move_y=3) # Cavern of Corrosion
+        await self.bot.use_teleporter(x=1072/2400, y=209/1080, corner='topright', move_x=0, move_y=3) # Cavern of Corrosion
         await self.bot.movepi(1.45, 1900)
         await self.bot.attack() # items
         await self.bot.movepi(0.35, 1700)
@@ -343,7 +344,7 @@ class Everwinter_Hill:
     def __init__(self, bot):
         self.bot = bot
     async def teleport(self):
-        logger.info('Teleport')
+        logger_set_path('Teleport')
         logger.info('---')
         logger.info("--- Map: Everwinter Hill")
         logger.info('---')
@@ -378,7 +379,7 @@ class Great_Mine:
     def __init__(self, bot):
         self.bot = bot
     async def teleport(self):
-        logger.info('Teleport')
+        logger_set_path('Teleport')
         logger.info('---')
         logger.info("--- Map: Great Mine")
         logger.info('---')
@@ -433,7 +434,7 @@ class Great_Mine:
         await self.bot.attack_technique(2, wait=False)
         await self.bot.movepi(1.0, 500)
         await self.bot.attack_technique(4)
-    async def path_x(self): # roamer
+    async def path_4(self): # roamer
         logger_set_path(4)
         await self.bot.use_teleporter(x=912/2400, y=755/1080, corner='botright', move_x=0, move_y=0) # Main Mine Shaft
         await self.bot.movepi(1.02, 2700)
@@ -447,11 +448,14 @@ class Great_Mine:
         await self.bot.movepi(0.49, 800)
         await self.bot.movepi(0.85, 2300)
         await self.bot.attack_technique(1, wait=False)
-        await self.bot.movepi(0.95, 1000)
-        await self.bot.movepi(0.4, 1500)
-        await self.bot.movepi(0.25, 3000)
-        await self.bot.position_fixing(0.25, 1000)
-        await self.bot.movepi(1.75, 2000)
+        await self.bot.movepi(1.3, 700)
+        await self.bot.attack_technique(1, wait=False) # items
+        exit() # improve
+        await self.bot.movepi(1.8, 2000)
+        await self.bot.position_fixing(1.6, 1500)
+        await self.bot.movepi(0.5, 2000)
+        await self.bot.movepi(0.1, 2000)
+        await self.bot.movepi(1.85, 3000)
         await self.bot.movepi(1.9, 1000)
         await self.bot.movepi(0.0, 600)
         await self.bot.movepi(0.25, 600)
@@ -475,7 +479,7 @@ class Great_Mine:
             await self.bot.attack_technique(2, wait=False)
         await self.bot.attack_technique(1)
         await self.bot.restore_tp(n=1) # +2 TP
-    async def path_x(self):
+    async def path_6(self):
         logger_set_path(6)
         await self.bot.use_teleporter(x=951/2400, y=480/1080, corner='botright', move_x=0, move_y=0) # Shape of Spike
         await self.bot.movepi(0.8, 1500)
@@ -491,7 +495,7 @@ class Rivet_Town:
     def __init__(self, bot):
         self.bot = bot
     async def teleport(self):
-        logger.info('Teleport')
+        logger_set_path('Teleport')
         logger.info('---')
         logger.info("--- Map: Rivet Town")
         logger.info('---')
@@ -501,14 +505,74 @@ class Rivet_Town:
         await self.bot.attack() # +2 TP
     async def path_x(self):
         logger_set_path(1)
-        # await self.bot.use_teleporter(x=998/2400, y=393/1080, corner='topright', move_x=0, move_y=0) # Orphanage
+        await self.bot.use_teleporter(x=998/2400, y=393/1080, corner='topright', move_x=0, move_y=0) # Orphanage
         await self.bot.movepi(1.6, 1500)
         await self.bot.movepi(1.25, 1000)
         await self.bot.movepi(1.1, 1000)
         await self.bot.movepi(1.0, 2800)
         await self.bot.movepi(0.88, 1000)
         await self.bot.attack_technique(2)
-
+        await self.bot.movepi(0.9, 2000)
+        await self.bot.movepi(1.25, 2000)
+        await self.bot.position_fixing(1.25, 1500)
+        await self.bot.movepi(0.25, 2500)
+        await self.bot.movepi(0.5, 2900)
+        await self.bot.movepi(1.9, 600)
+        await self.bot.movepi(1.6, 200)
+        await self.bot.attack() # items
+        await self.bot.movepi(0.5, 1000)
+        await self.bot.movepi(0.25, 2300)
+        await self.bot.movepi(0.5, 100)
+        await self.bot.attack() # +2 TP
+        await self.bot.movepi(1.75, 3000)
+        await self.bot.position_fixing(1.75, 1500)
+        await self.bot.movepi(0.75, 1000)
+        await self.bot.movepi(1.1, 3000)
+        await self.bot.movepi(1.0, 400)
+        await self.bot.movepi(0.5, 4400)
+        await self.bot.movepi(0.98, 1900)
+        await self.bot.movepi(0.75, 1000)
+        await self.bot.position_fixing(0.75, 1500)
+        await self.bot.movepi(0.0, 2000)
+        await self.bot.movepi(0.5, 1900)
+        await self.bot.movepi(0.3, 2500)
+        await self.bot.movepi(0.5, 500)
+        await self.bot.attack() # items
+        await self.bot.position_fixing(0.5, 1500)
+        await self.bot.movepi(1.5, 700)
+        await self.bot.movepi(1.3, 2500)
+        await self.bot.movepi(0.9, 1300)
+        await self.bot.movepi(0.5, 300)
+        for _ in range(6):
+            await self.bot.movepi(0.5, 300)
+            await self.bot.attack_technique(2, wait=False)
+        await self.bot.movepi(0.1, 2500)
+        await self.bot.movepi(0.0, 3000)
+        await self.bot.attack() # +2 TP
+    async def path_2(self):
+        logger_set_path(2)
+        await self.bot.use_teleporter(x=1017/2400, y=744/1080, corner='botright', move_x=0, move_y=0, confirm=True) # Entrance
+        await self.bot.movepi(0.5, 2500)
+        await self.bot.movepi(0.0, 2400)
+        await self.bot.movepi(0.25, 500)
+        await self.bot.movepi(0.75, 700)
+        await self.bot.movepi(1.0, 7800)
+        await self.bot.movepi(0.5, 1900)
+        await self.bot.movepi(0.7, 300)
+        await self.bot.attack_technique(3, wait=False)
+        await self.bot.movepi(0.5, 1500)
+        for _ in range(6):
+            await self.bot.movepi(0.75, 300)
+            await self.bot.attack_technique(2, wait=False)
+    async def path_3(self):
+        logger_set_path(3)
+        await self.bot.use_teleporter(x=1017/2400, y=744/1080, corner='botright', move_x=0, move_y=0, confirm=True) # Entrance
+        await self.bot.movepi(0.69, 1800)
+        await self.bot.attack() # items
+        await self.bot.movepi(0.4, 200)
+        await self.bot.movepi(0.5, 1100)
+        await self.bot.attack() # +2 TP
+        
 
 # async def farm_rivet_town(self):
 #     logger('farm: Rivet Town')
@@ -549,7 +613,7 @@ class Robot_Settlement:
     def __init__(self, bot):
         self.bot = bot
     async def teleport(self):
-        logger.info('Teleport')
+        logger_set_path('Teleport')
         logger.info('---')
         logger.info("--- Map: Robot Settlement")
         logger.info('---')

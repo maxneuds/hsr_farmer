@@ -119,6 +119,7 @@ class Bot:
 
     async def use_teleporter(self, x, y, move_x=0, move_y=0, move_spd=500, corner='botright', open_map=True, confirm=False, special_exit=True, debug=False):
         logger.info(f'use teleporter: {int(self.xy.width*x)},{int(self.xy.height*y)}')
+        await aio.sleep(1)
         if open_map == True:
             await self.open_map(special_exit=special_exit)
         logger.info(f'move map to corner: {corner}')

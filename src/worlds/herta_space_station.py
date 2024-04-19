@@ -15,8 +15,8 @@ class Base_Zone:
         await self.bot.movepi(1.0, 1500)
         await self.bot.attack() # +2 TP
         await self.bot.movepi(0.0, 1800)
-        await self.bot.movepi(1.5, 2600)
-        await self.bot.attack_technique(3)
+        await self.bot.movepi(1.5, 2500)
+        await self.bot.attack_technique(6)
     async def path_1(self):
         logger_set_path(1)
         await self.bot.use_teleporter(x=1044/2400, y=405/1080, corner='topright', move_x=0, move_y=0) # Monitoring Room

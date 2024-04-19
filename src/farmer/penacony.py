@@ -11,10 +11,6 @@ class Penacony:
         self.the_reverie_dreamscape = penacony.The_Reverie_Dreamscape(bot)
         self.dewlight_pavilion = penacony.Dewlight_Pavilion(bot)
         self.clock_studios_theme_park = penacony.Clock_Studios_Theme_Park(bot)
-
-    async def farm_golden_hour(self):
-        await self.golden_hour.teleport()
-        await self.golden_hour.path_1()
     
     async def farm_dreams_edge(self):
         await self.dreams_edge.teleport()
@@ -74,22 +70,16 @@ class Penacony:
         await self.dewlight_pavilion.path_2()
         await self.dewlight_pavilion.path_3()
         await self.dewlight_pavilion.path_4()
-        exit() # check
+        exit() # check for kill
         await self.dewlight_pavilion.path_5()
         await self.dewlight_pavilion.path_6()
-        exit() # check
         await self.dewlight_pavilion.path_7()
-        exit() # check
         await self.dewlight_pavilion.path_8()
-        exit() # check
         await self.dewlight_pavilion.path_9()
         await self.dewlight_pavilion.path_10()
-        exit() # check
         await self.dewlight_pavilion.path_11()
-        exit() # check
         await self.dewlight_pavilion.path_12()
         await self.dewlight_pavilion.path_13()
-        exit () # next for kill
         await self.dewlight_pavilion.path_14()
 
     async def farm_clock_studios_theme_park(self):
