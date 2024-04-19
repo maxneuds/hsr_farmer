@@ -32,18 +32,12 @@ class Cloudford:
     def __init__(self, bot):
         self.bot = bot
     async def teleport(self):
+        logger_set_path('Teleport')
         logger.info('---')
         logger.info('--- Map: Cloudford')
         logger.info('---')
         await self.bot.switch_map(y_list=500/1080, world='the_xianzhou_luofu', scroll_down=False,
                                     x=925/2400, y=663/1080, corner='topleft', move_x=0, move_y=5) # Trove of Verdure
-        await self.bot.movepi(0.4, 8000)
-        await self.bot.movepi(0.5, 3000)
-        await self.bot.movepi(0.37, 2300)
-        await self.bot.attack()
-    async def path_99(self):
-        logger_set_path(1)
-        await self.bot.use_teleporter(925/2400, 663/1080, move_x=0, move_y=5, corner='topleft') # Trove of Verdure
         await self.bot.movepi(1.75, 2300)
         await self.bot.movepi(1.5, 4000)
         await self.bot.movepi(1.75, 2400)
@@ -51,15 +45,38 @@ class Cloudford:
         await self.bot.movepi(1.5, 10000)
         await self.bot.movepi(1.7, 4000)
         await self.bot.attack_technique(1, wait=False)
-        await self.bot.movepi(0.51, 2000)
+        await self.bot.movepi(0.6, 1500)
+        await self.bot.movepi(0.6, 200)
         await self.bot.attack_technique(3)
-    async def path_99(self):
-        logger_set_path(2)
-        # await self.bot.use_teleporter(1129/2400, 642/1080, move_x=0, move_y=1, corner='topright') # Cargo Lane
+    async def path_1(self): # roamer
+        logger_set_path(1)
+        await self.bot.use_teleporter(1129/2400, 642/1080, move_x=0, move_y=1, corner='topright') # Cargo Lane
         await self.bot.movepi(0.54, 5300)
-        await aio.sleep(0.3)
-        await self.bot.movepi(0.3, 3200)
+        await self.bot.attack() # items
+        await self.bot.movepi(0.3, 3500)
         await self.bot.movepi(0.0, 3000)
+        await self.bot.movepi(1.88, 2900)
+        await self.bot.attack() # +2 TP
+        await self.bot.movepi(0.5, 2600)
+        await self.bot.attack() # items
+        await self.bot.movepi(0.55, 2900)
+        for _ in range(2):
+            await self.bot.movepi(0.25, 300)
+            await self.bot.attack_technique(2, wait=False)
+        for _ in range(3):
+            await self.bot.movepi(0.0, 300)
+            await self.bot.attack_technique(2, wait=False)
+        await self.bot.attack_technique(1)
+    async def path_2(self):
+        logger_set_path(2)
+        await self.bot.use_teleporter(925/2400, 663/1080, move_x=0, move_y=5, corner='topleft') # Trove of Verdure
+        await self.bot.movepi(0.4, 8000)
+        await self.bot.movepi(0.5, 3000)
+        await self.bot.movepi(0.37, 2300)
+        await self.bot.attack()
+    async def path_x(self):
+        logger_set_path(3)
+        await self.bot.use_teleporter(925/2400, 663/1080, move_x=0, move_y=5, corner='topleft') # Trove of Verdure
         
 
     # async def farm_cloudford(self):

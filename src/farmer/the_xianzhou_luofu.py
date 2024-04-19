@@ -14,8 +14,8 @@ class The_Xianzhou_Luofu:
         await self.central_starskiff_haven.shop_salesby()
 
     async def farm_cloudford(self):
-        await self.cloudford.teleport()
-        await self.cloudford.path_99()
+        # await self.cloudford.teleport()
+        await self.cloudford.path_x()
 
     async def farm_fyxestroll_garden(self):
         await self.fyxestroll_garden.teleport()

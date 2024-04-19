@@ -45,7 +45,7 @@ async def main():
 
     # 1/7 Xianzhou Luofu (42596/42596)
     # await the_xianzhou_luofu.farm_starskiff_haven()
-    # await the_xianzhou_luofu.farm_cloudford() # (4644/4644) # in progress
+    await the_xianzhou_luofu.farm_cloudford() # (4644/4644) # in progress
     # await the_xianzhou_luofu.farm_fyxestroll_garden() # (4644/4644)
     # await herta_space_station.farm_tp()
 
