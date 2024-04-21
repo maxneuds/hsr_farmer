@@ -15,6 +15,8 @@ class The_Xianzhou_Luofu:
 
     async def farm_cloudford(self):
         # await self.cloudford.teleport()
+        # await self.cloudford.path_1()
+        # await self.cloudford.path_2()
         await self.cloudford.path_x()
 
     async def farm_fyxestroll_garden(self):

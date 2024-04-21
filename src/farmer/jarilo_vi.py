@@ -22,7 +22,6 @@ class Jarilo_VI:
         await self.backwater_pass.teleport()
         await self.backwater_pass.path_1()
         await self.backwater_pass.path_2()
-        exit() # check for kill all
         await self.backwater_pass.path_3()
         await self.backwater_pass.path_4()
     
@@ -36,7 +35,7 @@ class Jarilo_VI:
         await self.corridor.path_3()
         await self.corridor.path_4()
         await self.corridor.path_5()
-        await self.corridor.path_6() # TODO: can be better
+        await self.corridor.path_6()
         await self.corridor.path_7()
 
     async def farm_everwinter_hill(self):
@@ -48,7 +47,6 @@ class Jarilo_VI:
         await self.great_mine.path_1()
         await self.great_mine.path_2()
         await self.great_mine.path_3()
-        exit() # check paths
         await self.great_mine.path_4()
         await self.great_mine.path_5()
         await self.great_mine.path_6()
@@ -57,14 +55,13 @@ class Jarilo_VI:
     async def farm_rivet_town(self):
         await self.rivet_town.teleport()
         await self.rivet_town.path_1()
-        exit() # check path & kills
         await self.rivet_town.path_2()
         await self.rivet_town.path_3()
 
     async def farm_robot_settlement(self):
-        await self.robot_settlement.teleport()
-        await self.robot_settlement.path_1()
-        await self.robot_settlement.path_2()
+        # await self.robot_settlement.teleport()
+        # await self.robot_settlement.path_1()
+        # await self.robot_settlement.path_2()
         await self.robot_settlement.path_3()
         await self.robot_settlement.path_4()
 

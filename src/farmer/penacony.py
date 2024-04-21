@@ -62,7 +62,6 @@ class Penacony:
         await self.the_reverie_dreamscape.path_22()
         await self.the_reverie_dreamscape.path_23()
         await self.the_reverie_dreamscape.path_24()
-        await self.the_reverie_dreamscape.path_25()
 
     async def farm_dewlight_pavilion(self):
         await self.dewlight_pavilion.teleport()

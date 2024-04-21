@@ -74,34 +74,69 @@ class Cloudford:
         await self.bot.movepi(0.5, 3000)
         await self.bot.movepi(0.37, 2300)
         await self.bot.attack()
-    async def path_x(self):
+    async def path_3(self): # roamer
         logger_set_path(3)
         await self.bot.use_teleporter(925/2400, 663/1080, move_x=0, move_y=5, corner='topleft') # Trove of Verdure
+        exit() # check for get TP
+        await self.bot.movepi(0.75, 2100)
+        await self.bot.movepi(1.0, 7400)
+        await self.bot.attack_technique(2, wait=False)
+        await self.bot.movepi(1.75, 500)
+        await self.bot.attack_technique(2, wait=False)
+        for _ in range(3):
+            await self.bot.movepi(1.0, 500)
+            await self.bot.attack_technique(2, wait=False)
+        await self.bot.attack_technique(1)
+    async def path_4(self):
+        logger_set_path(4)
+        await self.bot.use_teleporter(973/2400, 532/1080, move_x=0, move_y=0, corner='botright') # Skiff Boarding Area
+        await self.bot.movepi(0, 9900)
+        await self.bot.movepi(1.5, 1900)
+        await self.bot.attack_technique(1, wait=False)
+        await self.bot.movepi(0.5, 2500)
+        await self.bot.movepi(0.75, 1900)
+        await self.bot.movepi(1, 1500)
+        await self.bot.attack_technique(7, wait=False)
+        await self.bot.movepi(0.75, 2000)
+        await self.bot.position_fixing(0.75, 1000)
+        await self.bot.movepi(1.75, 900)
+        await self.bot.movepi(0, 3500)
+        await self.bot.movepi(1.75, 400)
+        await self.bot.movepi(0, 2900)
+        await self.bot.attack() # +2TP
+    async def path_5(self): # roamer
+        logger_set_path(5)
+        await self.bot.use_teleporter(813/2400, 349/1080, move_x=0, move_y=0, corner='botright') # Bud of Memories
+        await self.bot.movepi(1.65, 2900)
+        await self.bot.movepi(1.8, 400)
+        await self.bot.attack_technique(1, wait=False)
+        await self.bot.movepi(1.25, 500)
+        await self.bot.attack_technique(4)
+    async def path_6(self):
+        logger_set_path(6)
+        await self.bot.use_teleporter(1163/2400, 530/1080, move_x=0, move_y=0, corner='botright') # Shape of Icicle
+        await self.bot.movepi(0.0, 1300)
+        await self.bot.attack() # +2TP
+        await self.bot.movepi(1.5, 1000)
+        await self.bot.attack() # items
+    async def path_7(self): # roamer
+        logger_set_path(7)
+        await self.bot.use_teleporter(813/2400, 349/1080, move_x=0, move_y=0, corner='botright') # Bud of Memories
+        await self.bot.movepi(1.65, 1700)
+        await self.bot.movepi(0.15, 3500)
+        await self.bot.movepi(1.6, 1200)
+        await self.bot.movepi(0.1, 300)
+        await self.bot.attack_technique(3, wait=False)
+        await self.bot.movepi(1.3, 500)
+        for _ in range(3):
+            await self.bot.movepi(0.7, 300)
+            await self.bot.attack_technique(2, wait=False)
+        await self.bot.attack_technique(2)
+        
+        
+        
         
 
-    # async def farm_cloudford(self):
-#     logger.info('### group 2 ###')
-#     await self.bot.use_teleporter(1130/2400, 207/1080) # Cargo Lane
-#     await self.bot.movepi(0.46, 8800)
-#     await self.bot.movepi(1.92, 6300)
-#     await self.bot.attack()
-#     await self.bot.sleep(0.5)
-#     await self.bot.movepi(0.6, 1000)
-#     await self.bot.movepi(0.5, 5000)
-#     await self.bot.movepi(0.25, 2000)
-#     await self.bot.movepi(0.0, 1500)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger.info('### group 2, part 2 ###') # roamer
-#     await self.bot.movepi(1, 1000)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger.info('### group 3 ###')
-#     await self.bot.use_teleporter(924/2400, 720/1080) # Trove of Verdure
-#     await self.bot.movepi(0.75, 2100)
-#     await self.bot.movepi(1.0, 7400)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
 #     logger.info('### group 3, part 2 ###') # roamer
 #     await self.bot.movepi(1.25, 1000)
 #     await self.bot.attack()
@@ -125,29 +160,6 @@ class Cloudford:
 #     await self.bot.movepi(0.0, 1000)
 #     await self.bot.attack()
 #     await self.bot.wait_for_onmap(min_duration=5)
-#     logger.info('### group 5 ###')
-#     await self.bot.use_teleporter(971/2400, 670/1080) # Skiff Boarding Area
-#     await self.bot.movepi(0, 9500)
-#     await self.bot.movepi(0.5, 500)
-#     await self.bot.movepi(0.75, 1500)
-#     await self.bot.movepi(1, 1500)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger.info('### group 6 ###')
-#     await self.bot.use_teleporter(975/2400, 531/1080) # Skiff Boarding Area
-#     await self.bot.movepi(0, 9700)
-#     await self.bot.movepi(1.5, 2300)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger.info('### group 7 ###')
-#     await self.bot.use_teleporter(812/2400, 388/1080) # Bud of Memories
-#     await self.bot.movepi(1.5, 2900)
-#     await self.bot.movepi(1.8, 1400)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger.info('### group 7, part 2 ###')
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
 
 class Fyxestroll_Garden:
     def __init__(self, bot):

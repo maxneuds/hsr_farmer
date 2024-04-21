@@ -12,9 +12,12 @@ class Base_Zone:
         logger.info('---')
         await self.bot.switch_map(y_list=508/1080, world='herta_space_station', scroll_down=True,
                                     x=1044/2400, y=405/1080, corner='topright', move_x=0, move_y=0) # Monitoring Room
-        await self.bot.movepi(1.0, 1500)
+        await self.bot.movepi(1.0, 1600)
         await self.bot.attack() # +2 TP
-        await self.bot.movepi(0.0, 1800)
+        await self.bot.movepi(1.25, 2000)
+        await self.bot.position_fixing(1.25, 1500)
+        await self.bot.movepi(0.25, 1000)
+        await self.bot.movepi(0.0, 1000)
         await self.bot.movepi(1.5, 2500)
         await self.bot.attack_technique(6)
     async def path_1(self):
@@ -62,8 +65,12 @@ class Storage_Zone:
         await self.bot.movepi(1.0, 3000)
         await self.bot.movepi(0.5, 6300)
         await self.bot.movepi(1.0, 2300)
-        await self.bot.movepi(1.5, 3500)
-        await self.bot.attack_technique(8)
+        await self.bot.movepi(1.5, 1500)
+        for _ in range(3):
+            await self.bot.movepi(1.5, 500)
+            await self.bot.attack_technique(2, wait=False)
+        await self.bot.movepi(1.1, 500)
+        await self.bot.attack_technique(2)
     async def path_3(self):
         logger_set_path(3)
         await self.bot.use_teleporter(576/2400, 569/1080, move_x=0, move_y=0, corner='botright') # Outside the Control Center
