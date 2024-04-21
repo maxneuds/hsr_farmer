@@ -42,7 +42,3 @@ class Herta_Space_Station:
         await self.seclusion_zone.path_3()
         await self.seclusion_zone.path_4()
 
-    async def farm_tp(self):
-        await self.supply_zone.teleport(tp_restore=True)
-        await self.storage_zone.teleport(tp_restore=True)
-

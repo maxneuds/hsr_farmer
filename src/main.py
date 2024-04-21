@@ -43,11 +43,12 @@ async def main():
     # await jarilo_vi.farm_rivet_town() # (2160/2160) check: path1, path2
     # await jarilo_vi.farm_robot_settlement() # (2592/2592) check: path3
 
-    # 1/7 Xianzhou Luofu (42596/42596)
+    # 2/7 Xianzhou Luofu (42596/42596)
     # await the_xianzhou_luofu.farm_starskiff_haven()
-    await the_xianzhou_luofu.farm_cloudford() # (4644/4644) check: all
+    # await the_xianzhou_luofu.farm_cloudford() # (4644/4644) check: all
+    # await herta_space_station.supply_zone.teleport(tp_restore=True) # (+2TP)
+    await the_xianzhou_luofu.farm_stargazer_navalia() # (6264/6264) TODO
     # await the_xianzhou_luofu.farm_fyxestroll_garden() # (4644/4644)
-    # await herta_space_station.farm_tp()
 
     # 5/5 Penacony (47176/50092)
     # await penacony.farm_dreams_edge() # (7668/9612)
@@ -63,17 +64,14 @@ async def main():
     # TOTAL XP: 116.340 / 119.256
     # TOTAL TIME: 
 
-
     ### TODO
 
-
-    # await the_xianzhou_luofu.farm_cloudford() # verified (4644/4644)
     # await the_xianzhou_luofu.farm_scalegorge_waterscape() # verified (4752/4752)
     # await the_xianzhou_luofu.farm_alchemy_commission() # verified (6912/6912)
     # await the_xianzhou_luofu.farm_artisanship_commission() # verified (9548/9548)
     # await the_xianzhou_luofu.farm_divination_commission() # verified (6000/6000)
-    # await the_xianzhou_luofu.farm_stargazer_navalia() # verified (6264/6264)
 
+    # await self.storage_zone.teleport(tp_restore=True) # (+2TP)
     # await penacony.golden_hour.teleport(tp_restore=1) # (+2TP)
     # await jarilo_vi.silvermane_guard.teleport(tp_restore=2) # (+2TP)
 

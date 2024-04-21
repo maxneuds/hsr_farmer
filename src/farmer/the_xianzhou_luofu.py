@@ -7,6 +7,7 @@ class The_Xianzhou_Luofu:
     def __init__(self, bot):
         self.central_starskiff_haven = the_xianzhou_luofu.Central_Starskiff_Haven(bot)
         self.cloudford = the_xianzhou_luofu.Cloudford(bot)
+        self.stargazer_navalia = the_xianzhou_luofu.Stargazer_Navalia(bot)
         self.fyxestroll_garden = the_xianzhou_luofu.Fyxestroll_Garden(bot)
 
     async def farm_starskiff_haven(self):
@@ -14,10 +15,18 @@ class The_Xianzhou_Luofu:
         await self.central_starskiff_haven.shop_salesby()
 
     async def farm_cloudford(self):
-        # await self.cloudford.teleport()
+        await self.cloudford.teleport()
         # await self.cloudford.path_1()
         # await self.cloudford.path_2()
-        await self.cloudford.path_x()
+        # await self.cloudford.path_3()
+        # await self.cloudford.path_4()
+        # await self.cloudford.path_5()
+        # await self.cloudford.path_6()
+        # await self.cloudford.path_7()
+    
+    async def farm_stargazer_navalia(self):
+        # await self.stargazer_navalia.teleport()
+        await self.stargazer_navalia.path_x()
 
     async def farm_fyxestroll_garden(self):
         await self.fyxestroll_garden.teleport()
