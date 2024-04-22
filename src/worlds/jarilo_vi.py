@@ -12,6 +12,7 @@ class Outlying_Snow_Plains:
         logger.info('---')
         await self.bot.switch_map(y_list=508/1080, world='jarilo_vi', scroll_down=False,
                                     x=1079/2400, y=430/1080, corner='botright', move_x=0, move_y=0) # Bud of Memories
+        exit()
         await self.bot.movepi(1.3, 3000)
         await self.bot.attack_technique(2, wait=False) # +2 TP
         await self.bot.movepi(1.1, 1000)
@@ -79,7 +80,7 @@ class Backwater_Pass:
         await self.bot.movepi(1.5, 2500)
         await self.bot.movepi(0.0, 2000)
         await self.bot.movepi(0.22, 2100)
-        await self.bot.attack() # items
+        await self.bot.attack() # +2TP
     async def path_1(self):
         logger_set_path(1)
         await self.bot.use_teleporter(x=829/2400, y=273/1080, corner='botright', move_x=0, move_y=0) # Transport Hub
@@ -126,7 +127,7 @@ class Backwater_Pass:
         await self.bot.movepi(1.29, 2400)
         await self.bot.attack_technique(3, wait=False)
         await self.bot.movepi(1.3, 500)
-        await self.bot.attack_technique(2, wait=False)
+        await self.bot.attack_technique(1, wait=False)
         for _ in range(2):
             await self.bot.movepi(1.0, 300)
             await self.bot.attack_technique(2, wait=False)
@@ -183,7 +184,11 @@ class Silvermane_Guard:
             await self.bot.attack() # items
         elif tp_restore == 2:
             await self.bot.switch_map(y_list=750/1080, world='jarilo_vi', scroll_down=False,
-                                        x=659/2400, y=648/1080, corner='topleft', move_x=0, move_y=1, debug=True) # Shape of Blaze
+                                        x=896/2400, y=669/1080, corner='topleft', move_x=0, move_y=1) # Shape of 
+            await self.bot.movepi(1.8, 600)
+            await self.bot.attack() # items
+            await self.bot.movepi(1.1, 800)
+            await self.bot.attack() # +2TP
         else:
             logger.debug('bad parameter')
             exit()
@@ -445,15 +450,15 @@ class Great_Mine:
         await self.bot.attack_technique(1, wait=False)
         await self.bot.movepi(1.5, 500)
         await self.bot.attack_technique(2, wait=False)
-        await self.bot.position_fixing(1.25, 1000)
+        await self.bot.position_fixing(1.25, 4000)
+        await self.bot.restore_tp(n=1) # +2 TP
         await self.bot.movepi(0.49, 800)
         await self.bot.movepi(0.85, 2300)
-        await self.bot.attack_technique(1)
-        await self.bot.restore_tp(n=1) # +2 TP
-        await self.bot.movepi(1.0, 700)
-        await self.bot.attack_technique(1, wait=False) # items
+        await self.bot.attack_technique(1, wait=False)
+        await self.bot.movepi(1.1, 700)
+        await self.bot.attack_technique(2, wait=False) # items
         await self.bot.movepi(1.8, 2000)
-        await self.bot.position_fixing(1.6, 1500)
+        await self.bot.position_fixing(1.75, 1500)
         await self.bot.movepi(0.5, 2000)
         await self.bot.movepi(0.1, 2000)
         await self.bot.movepi(1.85, 3000)
@@ -511,7 +516,7 @@ class Rivet_Town:
         await self.bot.movepi(1.1, 1000)
         await self.bot.movepi(1.0, 2800)
         await self.bot.movepi(0.88, 1000)
-        await self.bot.attack_technique(2)
+        await self.bot.attack_technique(2, wait=False)
         await self.bot.movepi(0.9, 2000)
         await self.bot.movepi(1.25, 2000)
         await self.bot.position_fixing(1.25, 1500)
@@ -552,7 +557,7 @@ class Rivet_Town:
         await self.bot.attack() # +2 TP
     async def path_2(self):
         logger_set_path(2)
-        # await self.bot.use_teleporter(x=1017/2400, y=744/1080, corner='botright', move_x=0, move_y=0, confirm=True) # Entrance
+        await self.bot.use_teleporter(x=1017/2400, y=744/1080, corner='botright', move_x=0, move_y=0, confirm=True) # Entrance
         await self.bot.movepi(0.5, 2500)
         await self.bot.movepi(0.0, 2400)
         await self.bot.movepi(0.25, 500)
@@ -561,7 +566,7 @@ class Rivet_Town:
         await self.bot.movepi(0.5, 1700)
         await self.bot.movepi(0.65, 300)
         await self.bot.attack_technique(4, wait=False)
-        await self.bot.movepi(0.5, 1500)
+        await self.bot.movepi(0.5, 1200)
         for _ in range(6):
             await self.bot.movepi(0.75, 300)
             await self.bot.attack_technique(2, wait=False)
@@ -600,7 +605,7 @@ class Robot_Settlement:
         await self.bot.position_fixing(0.75, 1500)
         await self.bot.movepi(1.6, 3000)
         await self.bot.attack() # items
-        await self.bot.movepi(1.4, 4000)
+        await self.bot.movepi(1.4, 3900)
         await self.bot.movepi(1.05, 2000)
         await self.bot.movepi(1.0, 100)
         await self.bot.attack() # items
@@ -644,16 +649,14 @@ class Robot_Settlement:
         await self.bot.movepi(1.3, 1900)
         await self.bot.attack() # +2 TP
         await self.bot.position_fixing(1.25, 1500)
-        exit()
         await self.bot.movepi(0.0, 400)
         await self.bot.movepi(1.6, 2300)
         await self.bot.movepi(1.4, 1000)
         await self.bot.movepi(1.25, 1800)
         await self.bot.movepi(1.5, 200)
         await self.bot.attack_technique(3)
-        exit()
         await self.bot.movepi(1.75, 2000)
-        await self.bot.position_fixing(1.75, 1500)
+        await self.bot.position_fixing(1.75, 1000)
         await self.bot.movepi(0.55, 1500)
         await self.bot.movepi(0.2, 2500)
         await self.bot.movepi(0.2, 1400)
@@ -662,9 +665,8 @@ class Robot_Settlement:
         await self.bot.movepi(0.1, 1200)
         await self.bot.movepi(0.6, 500)
         await self.bot.attack_technique(5, wait=False)
-        exit()
-        await self.bot.movepi(0.75, 1500)
-        await self.bot.position_fixing(0.75, 1500)
+        await self.bot.movepi(0.75, 1000)
+        await self.bot.position_fixing(0.75, 1000)
         await self.bot.movepi(1.5, 2900)
         await self.bot.attack_technique(2, wait=False)
         await self.bot.movepi(1.6, 1500)

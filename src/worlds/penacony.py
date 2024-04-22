@@ -16,7 +16,7 @@ class Golden_Hour:
             await self.bot.movepi(1.6, 5000)
             await self.bot.movepi(1.25, 3000)
             await self.bot.attack() # +2 TP
-        if tp_restore == 1:
+        elif tp_restore == 1:
             await self.bot.switch_map(y_list=650/1080, world='penacony',
                                         x=815/2400, y=245/1080, move_x=0, move_y=2) # Oti Mall
             await self.bot.movepi(0.7, 2000)
@@ -263,9 +263,9 @@ class The_Reverie_Dreamscape:
         logger.info('---')
         await self.bot.switch_map(y_list=681/1080, world='penacony', scroll_down=True,
                                     x=1164/2400, y=458/1080, move_x=0, move_y=5, corner='botright') # Path of Dreamdive
-        await self.bot.movepi(1.6, 800) # +2 TP
-        await self.bot.attack()
-    async def path_1(self):
+        await self.bot.movepi(1.6, 800)
+        await self.bot.attack() # +2TP
+    async def path_1(self): # TODO: get all in path 1 (combine 1+2)
         logger_set_path(1)
         await self.bot.use_teleporter(1133/2400, 634/1080, move_x=0, move_y=7, corner='topright', confirm=True) # Platinum Guest Room
         await self.bot.movepi(0.5, 2800)
@@ -340,7 +340,6 @@ class The_Reverie_Dreamscape:
     async def path_8(self):
         logger_set_path(8)
         await self.bot.use_teleporter(1133/2400, 634/1080, move_x=0, move_y=7, corner='topright', confirm=True) # Platinum Guest Room
-        exit() # redo 8 + 9 into 1 path
         await self.bot.movepi(0.5, 2800)
         await self.bot.movepi(1.0, 28000)
         await self.bot.movepi(1.1, 700)
@@ -748,7 +747,7 @@ class Dewlight_Pavilion:
         await self.bot.interact()
         await self.bot.movepi(1.8, 3550)
         await self.bot.movepi(1.5, 2350)
-        await self.bot.attack() # items
+        await self.bot.attack() # items # TODO problem here
         await self.bot.movepi(1.5, 1300)
         await self.bot.attack() # items
         await self.bot.movepi(0.0, 3200)
@@ -790,14 +789,13 @@ class Dewlight_Pavilion:
         await self.bot.movepi(1.1, 1250)
         await self.bot.movepi(1.0, 5500)
         await self.bot.attack() # items
-        exit()
         await self.bot.position_fixing(0.75, 1500)
         await self.bot.movepi(1.5, 1700)
         await self.bot.movepi(0.0, 1000)
         await self.bot.movepi(0.1, 600)
         await self.bot.movepi(0.25, 600)
-        await self.bot.movepi(1.5, 700)
-        await self.bot.movepi(1.4, 300)
+        await self.bot.movepi(1.5, 600)
+        await self.bot.movepi(1.4, 200)
         await self.bot.attack_technique(6, wait=False)
         await self.bot.movepi(1.75, 2000)
         await self.bot.position_fixing(1.75, 1000)

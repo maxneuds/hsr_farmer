@@ -33,29 +33,30 @@ async def main():
     # await herta_space_station.farm_supply_zone() # (2484/2484)
 
     # 7/7 Jarilo-VI (19440/19440)
-    # await jarilo_vi.farm_outlying_snow_plains() # (2052/2052) check: path2
+    # await jarilo_vi.farm_outlying_snow_plains() # (2052/2052) REDO for better TP management (last first)
     # await jarilo_vi.farm_backwater_pass() # (3024/3024) check: path3
+    # await jarilo_vi.silvermane_guard.teleport(tp_restore=0) # (+2TP)
     # await jarilo_vi.farm_corridor() # (3672/3672) check: teleport
     # await jarilo_vi.farm_everwinter_hill() # (1404/1404)
-    # await jarilo_vi.silvermane_guard.teleport(tp_restore=0) # (+2TP)
-    # await jarilo_vi.farm_great_mine() # (4536/4536) check: path2, path4
     # await jarilo_vi.silvermane_guard.teleport(tp_restore=1) # (+2TP)
-    # await jarilo_vi.farm_rivet_town() # (2160/2160) check: path1, path2
-    # await jarilo_vi.farm_robot_settlement() # (2592/2592) check: path3
+    # await jarilo_vi.farm_great_mine() # (4536/4536) check: path4
+    # await jarilo_vi.silvermane_guard.teleport(tp_restore=2) # (+2TP)
+    # await jarilo_vi.farm_rivet_town() # (2160/2160)
+    # await jarilo_vi.farm_robot_settlement() # (2592/2592)
 
     # 2/7 Xianzhou Luofu (42596/42596)
     # await the_xianzhou_luofu.farm_starskiff_haven()
-    # await the_xianzhou_luofu.farm_cloudford() # (4644/4644) check: all
+    # await the_xianzhou_luofu.farm_cloudford() # (4644/4644) check: path1
     # await herta_space_station.supply_zone.teleport(tp_restore=True) # (+2TP)
-    await the_xianzhou_luofu.farm_stargazer_navalia() # (6264/6264) TODO
+    # await the_xianzhou_luofu.farm_stargazer_navalia() # (6264/6264) TODO
     # await the_xianzhou_luofu.farm_fyxestroll_garden() # (4644/4644)
 
     # 5/5 Penacony (47176/50092)
     # await penacony.farm_dreams_edge() # (7668/9612)
     # await penacony.farm_childs_dream() # (5832/5832)
-    # await penacony.farm_the_reverie_dreamscape() # (14580/15552) TODO: rework with position_fixing
-    # await penacony.farm_dewlight_pavilion() # (11448/11448) check: path5
     # await penacony.golden_hour.teleport(tp_restore=0) # (+2TP)
+    # await penacony.farm_the_reverie_dreamscape() # (14580/15552) TODO: rework with position_fixing (Start:+2, Total:)
+    await penacony.farm_dewlight_pavilion() # (11448/11448) check: path5
     # await penacony.farm_clock_studios_theme_park() # (7648/7648)
 
     # 1/1 Astral Express
@@ -73,7 +74,6 @@ async def main():
 
     # await self.storage_zone.teleport(tp_restore=True) # (+2TP)
     # await penacony.golden_hour.teleport(tp_restore=1) # (+2TP)
-    # await jarilo_vi.silvermane_guard.teleport(tp_restore=2) # (+2TP)
 
 
 if __name__ == '__main__':

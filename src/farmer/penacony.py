@@ -45,6 +45,7 @@ class Penacony:
         await self.the_reverie_dreamscape.path_5()
         await self.the_reverie_dreamscape.path_6()
         await self.the_reverie_dreamscape.path_7()
+        exit() # redo 8 + 9 into 1 path
         await self.the_reverie_dreamscape.path_8()
         await self.the_reverie_dreamscape.path_9()
         await self.the_reverie_dreamscape.path_10()

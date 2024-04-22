@@ -66,11 +66,13 @@ class Storage_Zone:
         await self.bot.movepi(0.5, 6300)
         await self.bot.movepi(1.0, 2300)
         await self.bot.movepi(1.5, 1500)
-        for _ in range(3):
-            await self.bot.movepi(1.5, 500)
+        for _ in range(2):
+            await self.bot.movepi(1.5, 300)
             await self.bot.attack_technique(2, wait=False)
-        await self.bot.movepi(1.1, 500)
-        await self.bot.attack_technique(2)
+        for _ in range(2):
+            await self.bot.movepi(1.25, 300)
+            await self.bot.attack_technique(2, wait=False)
+        await self.bot.attack_technique(1)
     async def path_3(self):
         logger_set_path(3)
         await self.bot.use_teleporter(576/2400, 569/1080, move_x=0, move_y=0, corner='botright') # Outside the Control Center
@@ -140,49 +142,6 @@ class Supply_Zone:
         await self.bot.attack_technique(4)
     async def path_2(self):
         logger_set_path(2)
-        await self.bot.use_teleporter(x=510/2400, y=595/1080, corner='botleft', move_x=0, move_y=0, confirm=True) # Electrical Room
-        await self.bot.movepi(0.5, 7800)
-        await self.bot.movepi(1.0, 3700)
-        await self.bot.movepi(0.5, 2000)
-        await self.bot.attack_technique(5)
-    async def path_3(self):
-        logger_set_path(3)
-        await self.bot.use_teleporter(x=848/2400, y=376/1080, corner='botleft', move_x=0, move_y=0) # Spare Parts Warehouse
-        await self.bot.movepi(1.55, 2500)
-        await self.bot.attack() # +2 TP
-    async def path_4(self):
-        logger_set_path(4)
-        await self.bot.use_teleporter(x=848/2400, y=376/1080, corner='botleft', move_x=0, move_y=0) # Spare Parts Warehouse
-        await self.bot.movepi(0.5, 6300)
-        await self.bot.attack_technique(3)
-    async def path_5(self):
-        logger_set_path(5)
-        await self.bot.use_teleporter(x=893/2400, y=479/1080, corner='botleft', move_x=0, move_y=0) # Bud of Preservation
-        await self.bot.movepi(1.2, 700)
-        await self.bot.attack() # +2 TP
-        await self.bot.movepi(1.45, 3000)
-        await self.bot.interact()
-        await self.bot.wait_for_onmap(min_duration=2)
-        await self.bot.movepi(0.5, 500)
-        await self.bot.movepi(0.00, 5200)
-        await self.bot.attack_technique(3)
-    async def path_6(self):
-        logger_set_path(6)
-        await self.bot.use_teleporter(x=893/2400, y=479/1080, corner='botleft', move_x=0, move_y=0) # Bud of Preservation
-        await self.bot.movepi(1.65, 800)
-        await self.bot.attack() # items
-        await self.bot.movepi(1.1, 1000)
-        await self.bot.movepi(1.43, 2100)
-        await self.bot.interact()
-        await self.bot.wait_for_onmap(min_duration=2)
-        await self.bot.movepi(0.5, 500)
-        await self.bot.movepi(1.0, 5700)
-        await self.bot.movepi(0.5, 3900)
-        await self.bot.attack_technique(1, wait=False)
-        await self.bot.movepi(1.95, 1800)
-        await self.bot.attack_technique(2)
-    async def path_7(self):
-        logger_set_path(7)
         await self.bot.use_teleporter(x=1036/2400, y=583/1080, corner='botright', move_x=0, move_y=0) # Railway Platform
         await self.bot.movepi(0.4, 1500)
         await self.bot.attack() # items
@@ -192,6 +151,53 @@ class Supply_Zone:
         await self.bot.attack() # +2 TP
         await self.bot.movepi(0.59, 2200)
         await self.bot.attack() # items
+    async def path_3(self):
+        logger_set_path(3)
+        await self.bot.use_teleporter(x=510/2400, y=595/1080, corner='botleft', move_x=0, move_y=0, confirm=True) # Electrical Room
+        await self.bot.movepi(0.5, 7800)
+        await self.bot.movepi(1.0, 3700)
+        await self.bot.movepi(0.5, 2000)
+        await self.bot.attack_technique(5)
+    async def path_4(self):
+        logger_set_path(4)
+        await self.bot.use_teleporter(x=848/2400, y=376/1080, corner='botleft', move_x=0, move_y=0) # Spare Parts Warehouse
+        await self.bot.movepi(0.5, 6300)
+        await self.bot.attack_technique(3)
+    async def path_5(self):
+        logger_set_path(5)
+        await self.bot.use_teleporter(x=848/2400, y=376/1080, corner='botleft', move_x=0, move_y=0) # Spare Parts Warehouse
+        await self.bot.movepi(1.55, 2500)
+        await self.bot.attack() # +2 TP
+    async def path_6(self):
+        logger_set_path(6)
+        # await self.bot.use_teleporter(x=893/2400, y=479/1080, corner='botleft', move_x=0, move_y=0) # Bud of Preservation
+        await self.bot.movepi(1.65, 800)
+        await self.bot.attack() # items
+        await self.bot.movepi(1.1, 1000)
+        await self.bot.movepi(1.43, 2100)
+        await self.bot.interact()
+        await self.bot.wait_for_onmap(min_duration=2)
+        await self.bot.movepi(0.5, 500)
+        await self.bot.movepi(0.00, 5200)
+        await self.bot.attack_technique(3)
+    async def path_7(self):
+        logger_set_path(7)
+        await self.bot.use_teleporter(x=893/2400, y=479/1080, corner='botleft', move_x=0, move_y=0) # Bud of Preservation
+        await self.bot.movepi(1.4, 3300)
+        await self.bot.interact()
+        await self.bot.wait_for_onmap(min_duration=2)
+        await self.bot.movepi(0.5, 500)
+        await self.bot.movepi(1.0, 5700)
+        await self.bot.movepi(0.5, 3900)
+        await self.bot.attack_technique(1, wait=False)
+        await self.bot.movepi(1.95, 1800)
+        await self.bot.attack_technique(2)
+    async def path_8(self):
+        logger_set_path(8)
+        await self.bot.use_teleporter(x=893/2400, y=479/1080, corner='botleft', move_x=0, move_y=0) # Bud of Preservation
+        await self.bot.movepi(1.2, 700)
+        await self.bot.attack() # +2 TP
+    
 
 class Seclusion_Zone:
     def __init__(self, bot):

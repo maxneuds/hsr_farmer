@@ -16,13 +16,13 @@ class The_Xianzhou_Luofu:
 
     async def farm_cloudford(self):
         await self.cloudford.teleport()
-        # await self.cloudford.path_1()
-        # await self.cloudford.path_2()
-        # await self.cloudford.path_3()
-        # await self.cloudford.path_4()
-        # await self.cloudford.path_5()
-        # await self.cloudford.path_6()
-        # await self.cloudford.path_7()
+        await self.cloudford.path_1()
+        await self.cloudford.path_2()
+        await self.cloudford.path_3()
+        await self.cloudford.path_4()
+        await self.cloudford.path_5()
+        await self.cloudford.path_6()
+        await self.cloudford.path_7() # TODO: could be better
     
     async def farm_stargazer_navalia(self):
         # await self.stargazer_navalia.teleport()

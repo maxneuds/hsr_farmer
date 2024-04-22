@@ -59,9 +59,9 @@ class Jarilo_VI:
         await self.rivet_town.path_3()
 
     async def farm_robot_settlement(self):
-        # await self.robot_settlement.teleport()
-        # await self.robot_settlement.path_1()
-        # await self.robot_settlement.path_2()
+        await self.robot_settlement.teleport()
+        await self.robot_settlement.path_1()
+        await self.robot_settlement.path_2()
         await self.robot_settlement.path_3()
         await self.robot_settlement.path_4()
 

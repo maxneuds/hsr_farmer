@@ -45,8 +45,7 @@ class Cloudford:
         await self.bot.movepi(1.5, 10000)
         await self.bot.movepi(1.7, 4000)
         await self.bot.attack_technique(1, wait=False)
-        await self.bot.movepi(0.6, 1500)
-        await self.bot.movepi(0.6, 200)
+        await self.bot.movepi(0.62, 1500)
         await self.bot.attack_technique(3)
     async def path_1(self): # roamer
         logger_set_path(1)
@@ -59,12 +58,15 @@ class Cloudford:
         await self.bot.attack() # +2 TP
         await self.bot.movepi(0.5, 2600)
         await self.bot.attack() # items
-        await self.bot.movepi(0.55, 2900)
+        await self.bot.movepi(0.55, 2700)
         for _ in range(2):
             await self.bot.movepi(0.25, 300)
             await self.bot.attack_technique(2, wait=False)
         for _ in range(3):
             await self.bot.movepi(0.0, 300)
+            await self.bot.attack_technique(2, wait=False)
+        for _ in range(3):
+            await self.bot.movepi(1.1, 300)
             await self.bot.attack_technique(2, wait=False)
         await self.bot.attack_technique(1)
     async def path_2(self):
@@ -77,7 +79,6 @@ class Cloudford:
     async def path_3(self): # roamer
         logger_set_path(3)
         await self.bot.use_teleporter(925/2400, 663/1080, move_x=0, move_y=5, corner='topleft') # Trove of Verdure
-        exit() # check for get TP
         await self.bot.movepi(0.75, 2100)
         await self.bot.movepi(1.0, 7400)
         await self.bot.attack_technique(2, wait=False)
@@ -111,7 +112,7 @@ class Cloudford:
         await self.bot.movepi(1.8, 400)
         await self.bot.attack_technique(1, wait=False)
         await self.bot.movepi(1.25, 500)
-        await self.bot.attack_technique(4)
+        await self.bot.attack_technique(3)
     async def path_6(self):
         logger_set_path(6)
         await self.bot.use_teleporter(1163/2400, 530/1080, move_x=0, move_y=0, corner='botright') # Shape of Icicle
@@ -125,7 +126,7 @@ class Cloudford:
         await self.bot.movepi(1.65, 1700)
         await self.bot.movepi(0.15, 3500)
         await self.bot.movepi(1.6, 1200)
-        await self.bot.movepi(0.1, 300)
+        await self.bot.movepi(0.0, 200)
         await self.bot.attack_technique(3, wait=False)
         await self.bot.movepi(1.3, 500)
         for _ in range(3):
