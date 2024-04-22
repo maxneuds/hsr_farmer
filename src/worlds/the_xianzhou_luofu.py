@@ -44,9 +44,9 @@ class Cloudford:
         await self.bot.attack() # items
         await self.bot.movepi(1.5, 10000)
         await self.bot.movepi(1.7, 4000)
-        await self.bot.attack_technique(1, wait=False)
+        await self.bot.attack_technique(1, wait=False) # -1TP
         await self.bot.movepi(0.62, 1500)
-        await self.bot.attack_technique(3)
+        await self.bot.attack_technique(3) # -1TP
     async def path_1(self): # roamer
         logger_set_path(1)
         await self.bot.use_teleporter(1129/2400, 642/1080, move_x=0, move_y=1, corner='topright') # Cargo Lane
@@ -55,11 +55,11 @@ class Cloudford:
         await self.bot.movepi(0.3, 3500)
         await self.bot.movepi(0.0, 3000)
         await self.bot.movepi(1.88, 2900)
-        await self.bot.attack() # +2 TP
+        await self.bot.attack() # +2TP
         await self.bot.movepi(0.5, 2600)
         await self.bot.attack() # items
         await self.bot.movepi(0.55, 2700)
-        for _ in range(2):
+        for _ in range(2): # -2TP
             await self.bot.movepi(0.25, 300)
             await self.bot.attack_technique(2, wait=False)
         for _ in range(3):
@@ -75,29 +75,29 @@ class Cloudford:
         await self.bot.movepi(0.4, 8000)
         await self.bot.movepi(0.5, 3000)
         await self.bot.movepi(0.37, 2300)
-        await self.bot.attack()
+        await self.bot.attack() # +2TP
     async def path_3(self): # roamer
         logger_set_path(3)
         await self.bot.use_teleporter(925/2400, 663/1080, move_x=0, move_y=5, corner='topleft') # Trove of Verdure
         await self.bot.movepi(0.75, 2100)
         await self.bot.movepi(1.0, 7400)
-        await self.bot.attack_technique(2, wait=False)
+        await self.bot.attack_technique(2, wait=False) # -1TP
         await self.bot.movepi(1.75, 500)
-        await self.bot.attack_technique(2, wait=False)
+        await self.bot.attack_technique(2, wait=False) # -1TP
         for _ in range(3):
             await self.bot.movepi(1.0, 500)
             await self.bot.attack_technique(2, wait=False)
-        await self.bot.attack_technique(1)
+        await self.bot.attack_technique(1) # +2TP
     async def path_4(self):
         logger_set_path(4)
         await self.bot.use_teleporter(973/2400, 532/1080, move_x=0, move_y=0, corner='botright') # Skiff Boarding Area
         await self.bot.movepi(0, 9900)
         await self.bot.movepi(1.5, 1900)
-        await self.bot.attack_technique(1, wait=False)
+        await self.bot.attack_technique(1, wait=False) # -1TP
         await self.bot.movepi(0.5, 2500)
         await self.bot.movepi(0.75, 1900)
         await self.bot.movepi(1, 1500)
-        await self.bot.attack_technique(7, wait=False)
+        await self.bot.attack_technique(7, wait=False) # -1TP
         await self.bot.movepi(0.75, 2000)
         await self.bot.position_fixing(0.75, 1000)
         await self.bot.movepi(1.75, 900)
@@ -110,9 +110,9 @@ class Cloudford:
         await self.bot.use_teleporter(813/2400, 349/1080, move_x=0, move_y=0, corner='botright') # Bud of Memories
         await self.bot.movepi(1.65, 2900)
         await self.bot.movepi(1.8, 400)
-        await self.bot.attack_technique(1, wait=False)
+        await self.bot.attack_technique(1, wait=False) # -1TP
         await self.bot.movepi(1.25, 500)
-        await self.bot.attack_technique(3)
+        await self.bot.attack_technique(3) # -1TP
     async def path_6(self):
         logger_set_path(6)
         await self.bot.use_teleporter(1163/2400, 530/1080, move_x=0, move_y=0, corner='botright') # Shape of Icicle
@@ -127,7 +127,7 @@ class Cloudford:
         await self.bot.movepi(0.15, 3500)
         await self.bot.movepi(1.6, 1200)
         await self.bot.movepi(0.0, 200)
-        await self.bot.attack_technique(3, wait=False)
+        await self.bot.attack_technique(3, wait=False) # -3TP
         await self.bot.movepi(1.3, 500)
         for _ in range(3):
             await self.bot.movepi(0.7, 300)
@@ -140,82 +140,112 @@ class Stargazer_Navalia:
     async def teleport(self):
         logger_set_path('Teleport')
         logger.info('---')
-        logger.info('--- Map: Cloudford')
+        logger.info('--- Map: Stargazer Navalia')
         logger.info('---')
-        # await self.bot.switch_map(y_list=630/1080, world='the_xianzhou_luofu', scroll_down=False,
-                                    # x=768/2400, y=696/1080, corner='topright', move_x=0, move_y=0) # Path of Conflagration
+        await self.bot.switch_map(y_list=630/1080, world='the_xianzhou_luofu', scroll_down=False,
+                                    x=768/2400, y=696/1080, corner='topright', move_x=0, move_y=0) # Path of Conflagration
         await self.bot.movepi(1.7, 3300)
         await self.bot.movepi(1.9, 300)
-        await self.bot.attack_technique(1, wait=False)
+        await self.bot.attack_technique(1, wait=False) # -1TP
         await self.bot.movepi(0.4, 1800)
         await self.bot.attack() # +2TP
-    async def path_x(self): # roamer
+    async def path_1(self): # roamer
         logger_set_path(1)
-        # await self.bot.use_teleporter(1240/2400, 538/1080, move_x=0, move_y=0, corner='topright') # Astral Cottage
-        # exit() # check for kill all
-        # await self.bot.movepi(0.25, 2500)
-        # await self.bot.movepi(0.16, 6000)
-        # await self.bot.movepi(0.27, 700)
-        # await self.bot.movepi(0.52, 400)
-        # await self.bot.movepi(1.05, 2000)
-        # await self.bot.attack_technique(2, wait=False)
-        # await self.bot.movepi(0.25, 1500)
-        # await self.bot.position_fixing(0.25, 1000)
-        # await self.bot.movepi(1.3, 900)
-        # await self.bot.movepi(1.11, 5000)
-        # await self.bot.movepi(1.17, 2700)
-        # await self.bot.movepi(0.6, 2800)
-        # for _ in range(4):
-        #     await self.bot.movepi(0.1, 300)
-        #     await self.bot.attack_technique(3, wait=False)
-        await self.bot.movepi(1.0, 1000)
-        await self.bot.attack_technique(10)
-
-#     await self.bot.movepi(0.1, 1300)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger.info('### group 10 ###')
-#     await self.bot.use_teleporter(1237/2400, 367/1080, confirm=True) # Astral Cottage
-#     await self.bot.movepi(0.25, 2500)
-#     await self.bot.movepi(0.16, 6000)
-#     await self.bot.movepi(0.27, 700)
-#     await self.bot.movepi(0.52, 400)
-#     await self.bot.movepi(1.05, 2200)
-#     await self.bot.movepi(1.07, 5000)
-#     await self.bot.movepi(1.17, 2900)
-#     await self.bot.movepi(0.62, 6600)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger.info('### group 11 ###')
-#     await self.bot.movepi(1.2, 2400)
-#     await self.bot.movepi(0.9, 100)
-#     await self.bot.attack()
-#     await self.bot.sleep(1)
-#     await self.bot.movepi(0.6, 2100)
-#     await self.bot.movepi(0.2, 400)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
+        await self.bot.use_teleporter(1240/2400, 538/1080, move_x=0, move_y=0, corner='topright') # Astral Cottage
+        await self.bot.movepi(0.25, 2500)
+        await self.bot.movepi(0.16, 6000)
+        await self.bot.movepi(0.27, 700)
+        await self.bot.movepi(0.52, 400)
+        await self.bot.movepi(1.05, 2000)
+        await self.bot.attack_technique(2, wait=False)
+        await self.bot.movepi(0.25, 1500)
+        await self.bot.position_fixing(0.25, 1000)
+        await self.bot.movepi(1.3, 900)
+        await self.bot.movepi(1.11, 5000)
+        await self.bot.movepi(1.17, 2700)
+        await self.bot.movepi(0.6, 2800)
+        for _ in range(4): # -2TP
+            await self.bot.movepi(0.2, 300)
+            await self.bot.attack_technique(3, wait=False)
+        for _ in range(3):
+            await self.bot.movepi(0.95, 300)
+            await self.bot.attack_technique(3, wait=False)
+    async def path_2(self):
+        logger_set_path(2)
+        await self.bot.use_teleporter(1240/2400, 538/1080, move_x=0, move_y=0, corner='topright', confirm=True) # Astral Cottage
+        await self.bot.movepi(0.25, 2500)
+        await self.bot.movepi(0.16, 6000)
+        await self.bot.movepi(0.27, 700)
+        await self.bot.movepi(0.52, 400)
+        await self.bot.movepi(1.05, 2200)
+        await self.bot.movepi(1.07, 5000)
+        await self.bot.movepi(1.17, 2900)
+        await self.bot.movepi(0.62, 3000)
+        await self.bot.movepi(0.84, 4300)
+        await self.bot.movepi(0.9, 100)
+        await self.bot.attack() # +2TP
+        await self.bot.movepi(0.15, 3100)
+        await self.bot.attack_technique(2, wait=False) # -1TP
+        await self.bot.movepi(0.15, 1500)
+        await self.bot.movepi(0.4, 1500)
+        await self.bot.movepi(0.25, 2000)
+        await self.bot.position_fixing(0.25, 1000)
+        await self.bot.movepi(1.15, 4900)
+        await self.bot.movepi(1.25, 300)
+        await self.bot.attack_technique(2) # -1TP
+    async def path_3(self):
+        logger_set_path(3)
+        await self.bot.use_teleporter(1106/2400, 610/1080, move_x=0, move_y=0, corner='botright') # Shape of Doom
+        await self.bot.movepi(1.5, 700)
+        await self.bot.attack() # +2TP
+        await self.bot.position_fixing(1.5, 1000)
+        await self.bot.movepi(0.3, 500)
+        await self.bot.movepi(0.00, 5400)
+        await self.bot.movepi(1.7, 900)
+        await self.bot.movepi(0.00, 2400)
+        for _ in range(3): # -1TP
+            await self.bot.movepi(0.5, 300)
+            await self.bot.attack_technique(2, wait=False)
+        await self.bot.attack_technique(1) # +2TP
+        await self.bot.movepi(0.75, 2000)
+        await self.bot.position_fixing(0.75, 1000)
+        await self.bot.movepi(1.7, 1000)
+        await self.bot.movepi(0.0, 4000)
+        await self.bot.movepi(0.3, 300)
+        await self.bot.movepi(0.0, 4000)
+        await self.bot.movepi(0.1, 900)
+        await self.bot.attack() # items
+        await self.bot.movepi(0.1, 1500)
+        await self.bot.position_fixing(0.25, 1000)
+        await self.bot.movepi(1.25, 900)
+        for _ in range(6): # -2TP
+            await self.bot.movepi(1.5, 300)
+            await self.bot.attack_technique(2, wait=False)
+        await self.bot.movepi(1.75, 3000)
+        await self.bot.position_fixing(1.75, 1000)
+        await self.bot.movepi(0.7, 1700)
+        await self.bot.movepi(0.5, 4900)
+        await self.bot.movepi(0.0, 4200)
+        await self.bot.movepi(0.5, 1500)
+        await self.bot.movepi(1.0, 500)
+        await self.bot.attack_technique(2)
+        await self.bot.restore_tp(n=1) # +2 TP
+    async def path_x(self):
+        logger_set_path(4)
+        await self.bot.use_teleporter(855/2400, 184/1080, move_x=0, move_y=0, corner='botleft') # Ship Nursery - The Burgeoning
+        exit()
 
 
 #     logger.info('### group 1 ###')
 #     await self.bot.use_teleporter(1162/2400, 914/1080, open_map=False) # Stagnant Shadow
 #     await self.bot.movepi(1.75, 1000)
-#     await self.bot.movepi(0.00, 6000)
-#     await self.bot.movepi(1.75, 1000)
-#     await self.bot.movepi(0.00, 1000)
-#     await self.bot.movepi(0.5, 1500)
+
+
 #     await self.bot.attack()
 #     await self.bot.sleep(0.5)
 #     await self.bot.wait_for_onmap()
 #     logger.info('### group 2 ###')
-#     await self.bot.movepi(0.25, 1700)
-#     await self.bot.movepi(0.00, 4000)
-#     await self.bot.movepi(0.25, 250)
-#     await self.bot.movepi(0.00, 5500)
-#     await self.bot.movepi(1.5, 3000)
-#     await self.bot.movepi(0.00, 4300)
-#     await self.bot.movepi(0.5, 1300)
-#     await self.bot.movepi(1.0, 500)
+
 #     await self.bot.attack()
 #     await self.bot.wait_for_onmap()
 #     logger.info('### group 3 ###')

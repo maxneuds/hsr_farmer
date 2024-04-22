@@ -17,6 +17,7 @@ class Jarilo_VI:
         await self.outlying_snow_plains.teleport()
         await self.outlying_snow_plains.path_1()
         await self.outlying_snow_plains.path_2()
+        await self.outlying_snow_plains.path_3()
     
     async def farm_backwater_pass(self):
         await self.backwater_pass.teleport()
@@ -37,15 +38,16 @@ class Jarilo_VI:
         await self.corridor.path_5()
         await self.corridor.path_6()
         await self.corridor.path_7()
+        await self.corridor.path_8()
 
     async def farm_everwinter_hill(self):
         await self.everwinter_hill.teleport()
         await self.everwinter_hill.path_1()
     
     async def farm_great_mine(self):
-        await self.great_mine.teleport()
-        await self.great_mine.path_1()
-        await self.great_mine.path_2()
+        # await self.great_mine.teleport()
+        # await self.great_mine.path_1()
+        # await self.great_mine.path_2()
         await self.great_mine.path_3()
         await self.great_mine.path_4()
         await self.great_mine.path_5()
