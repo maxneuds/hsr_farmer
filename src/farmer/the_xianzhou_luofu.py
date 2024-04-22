@@ -25,7 +25,13 @@ class The_Xianzhou_Luofu:
         await self.cloudford.path_7() # TODO: could be better
     
     async def farm_stargazer_navalia(self):
-        # await self.stargazer_navalia.teleport()
+        await self.stargazer_navalia.teleport()
+        await self.stargazer_navalia.path_1()
+        await self.stargazer_navalia.path_2()
+        await self.stargazer_navalia.path_3()
+        await self.stargazer_navalia.path_4()
+        await self.stargazer_navalia.path_5()
+        await self.stargazer_navalia.path_6()
         await self.stargazer_navalia.path_x()
 
     async def farm_fyxestroll_garden(self):

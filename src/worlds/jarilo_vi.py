@@ -42,7 +42,7 @@ class Outlying_Snow_Plains:
         logger_set_path(3)
         await self.bot.use_teleporter(x=998/2400, y=338/1080, corner='botright', move_x=0, move_y=0, confirm=True) # Long Slope
         await self.bot.movepi(0.62, 2900)
-        await self.bot.attack() # +2 TP
+        await self.bot.attack() # +2TP
         await self.bot.movepi(0.55, 4000)
         await self.bot.movepi(0.8, 9000)
         await self.bot.movepi(0.9, 2000)
@@ -267,7 +267,7 @@ class Corridor:
         await self.bot.movepi(1.5, 500)
         await self.bot.movepi(1.6, 1500)
         await self.bot.movepi(1.47, 3600)
-        await self.bot.attack() # +2 TP
+        await self.bot.attack() # +2TP
         await self.bot.movepi(1.6, 700)
         await self.bot.movepi(1.4, 1000)
         await self.bot.attack() # items
@@ -560,7 +560,7 @@ class Rivet_Town:
             await self.bot.attack_technique(2, wait=False)
         await self.bot.movepi(0.1, 2500)
         await self.bot.movepi(0.0, 2900)
-        await self.bot.attack() # +2 TP
+        await self.bot.attack() # +2TP
     async def path_2(self):
         logger_set_path(2)
         await self.bot.use_teleporter(x=1017/2400, y=744/1080, corner='botright', move_x=0, move_y=0, confirm=True) # Entrance
@@ -584,7 +584,7 @@ class Rivet_Town:
         await self.bot.attack() # items
         await self.bot.movepi(0.4, 200)
         await self.bot.movepi(0.5, 1100)
-        await self.bot.attack() # +2 TP
+        await self.bot.attack() # +2TP
         
 
 class Robot_Settlement:

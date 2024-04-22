@@ -229,87 +229,65 @@ class Stargazer_Navalia:
         await self.bot.movepi(0.5, 1500)
         await self.bot.movepi(1.0, 500)
         await self.bot.attack_technique(2)
-        await self.bot.restore_tp(n=1) # +2 TP
-    async def path_x(self):
+        await self.bot.restore_tp(n=1) # +2TP
+    async def path_4(self): # roamer
         logger_set_path(4)
-        await self.bot.use_teleporter(855/2400, 184/1080, move_x=0, move_y=0, corner='botleft') # Ship Nursery - The Burgeoning
+        await self.bot.use_teleporter(855/2400, 184/1080, move_x=0, move_y=0, corner='botleft') # Ship Nursery - The Budding
+        await self.bot.movepi(0.7, 800)
+        await self.bot.movepi(0.5, 900)
+        await self.bot.movepi(0.00, 2500)
+        for _ in range(2): # -1TP
+            await self.bot.movepi(0.5, 300)
+            await self.bot.attack_technique(2, wait=False)
+        for _ in range(2):
+            await self.bot.movepi(1.0, 300)
+            await self.bot.attack_technique(2, wait=False)
+        await self.bot.movepi(1.5, 300)
+        await self.bot.attack_technique(2, wait=False)
+        for _ in range(2):
+            await self.bot.movepi(0.0, 300)
+            await self.bot.attack_technique(2, wait=False)
+        for _ in range(2):
+            await self.bot.movepi(0.5, 300)
+            await self.bot.attack_technique(2, wait=False)
+        await self.bot.attack_technique(1)
+    async def path_5(self): # roamer
+        logger_set_path(5)
+        await self.bot.use_teleporter(855/2400, 184/1080, move_x=0, move_y=0, corner='botleft') # Ship Nursery - The Budding
+        await self.bot.movepi(0.7, 800)
+        await self.bot.movepi(0.5, 900)
+        await self.bot.movepi(0.00, 2500)
+        await self.bot.movepi(0.5, 5000)
+        await self.bot.movepi(0.3, 1800)
+        await self.bot.attack() # +2TP
+        await self.bot.movepi(0.25, 1000)
+        await self.bot.position_fixing(0.25, 1000)
+        await self.bot.movepi(1.25, 1900)
+        await self.bot.movepi(1.0, 5500)
+        await self.bot.movepi(0.9, 1500)
+        await self.bot.attack() # items
+        await self.bot.movepi(1.5, 2000)
+        await self.bot.movepi(1.4, 1500)
+        await self.bot.attack_technique(4, wait=False) # -3TP
+        await self.bot.movepi(0.3, 300)
+        await self.bot.attack_technique(4)
+        await self.bot.restore_tp(n=1) # +2TP
+    async def path_6(self): # roamer
+        logger_set_path(6)
+        await self.bot.use_teleporter(855/2400, 184/1080, move_x=0, move_y=0, corner='botleft') # Ship Nursery - The Budding
+        await self.bot.movepi(1.5, 700)
+        await self.bot.movepi(0.00, 2300)
+        await self.bot.movepi(0.5, 800)
+        await self.bot.attack() # +2TP
+        await self.bot.movepi(1.5, 800)
+        await self.bot.movepi(1.9, 500)
+        await self.bot.movepi(0.00, 8300)
+        await self.bot.attack_technique(4, wait=False) # -2TP
+        await self.bot.movepi(0.25, 1000)
+        await self.bot.movepi(1.25, 1000)
+        await self.bot.movepi(1.5, 500)
+        await self.bot.attack_technique(10) # -1TP
         exit()
-
-
-#     logger.info('### group 1 ###')
-#     await self.bot.use_teleporter(1162/2400, 914/1080, open_map=False) # Stagnant Shadow
-#     await self.bot.movepi(1.75, 1000)
-
-
-#     await self.bot.attack()
-#     await self.bot.sleep(0.5)
-#     await self.bot.wait_for_onmap()
-#     logger.info('### group 2 ###')
-
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger.info('### group 3 ###')
-#     await self.bot.use_teleporter(955/2400, 366/1080) # Ship Nursery - The Burgeoning
-#     await self.bot.movepi(0.95, 2000)
-#     await self.bot.movepi(0.65, 1900)
-#     await self.bot.movepi(1.0, 1800)
-#     await self.bot.movepi(1.5, 1700)
-#     await self.bot.movepi(1.25, 1100)
-#     await self.bot.movepi(1.5, 1000)
-#     await self.bot.movepi(1.25, 1100)
-#     await self.bot.movepi(1.5, 2000)
-#     await self.bot.movepi(1.4, 2000)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger.info('### group 3, part 2 ###')
-#     await self.bot.movepi(1.25, 1000)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger.info('### group 4 ###')
-#     await self.bot.use_teleporter(957/2400, 421/1080) # Ship Nursery - The Burgeoning
-#     await self.bot.movepi(0.95, 2000)
-#     await self.bot.movepi(0.65, 1900)
-#     await self.bot.movepi(1.0, 1800)
-#     await self.bot.movepi(1.5, 1700)
-#     await self.bot.movepi(0.8, 1000)
-#     await self.bot.movepi(0.5, 2300)
-#     await self.bot.movepi(1.0, 2500)
-#     await self.bot.movepi(1.4, 1000)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger.info('### group 4, part 2 ###')
-#     await self.bot.movepi(1.7, 1500)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger.info('### group 5 ###')
-#     await self.bot.use_teleporter(855/2400, 407/1080) # Ship Nursery - The Budding
-#     await self.bot.movepi(0.75, 800)
-#     await self.bot.movepi(0.5, 800)
-#     await self.bot.movepi(0.3, 500)
-#     await self.bot.movepi(0.00, 2000)
-#     await self.bot.movepi(0.5, 2000)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap(
-#     logger.info('### group 7 ###')
-#     await self.bot.use_teleporter(856/2400, 710/1080) # Ship Nursery - The Budding
-#     await self.bot.movepi(1.5, 700)
-#     await self.bot.movepi(0.00, 2400)
-#     await self.bot.movepi(0.5, 800)
-#     await self.bot.attack()
-#     await self.bot.sleep(0.5)
-#     await self.bot.movepi(1.5, 800)
-#     await self.bot.movepi(1.9, 500)
-#     await self.bot.movepi(0.00, 8300)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger.info('### group 7, part 2 ###')
-#     await self.bot.movepi(1.5, 3900)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-
-
-
-
 
 
 class Fyxestroll_Garden:
@@ -330,11 +308,11 @@ class Fyxestroll_Garden:
         await self.bot.movepi(0.05, 2800)
         await self.bot.movepi(1.8, 2500)
         await self.bot.attack_technique(5)
-    async def path_2(self): # +2 TP
+    async def path_2(self): # +2TP
         logger_set_path(2)
         await self.bot.use_teleporter(510/2400, 423/1080, corner='botleft', move_x=0, move_y=0) # Shape of Perdition
         await self.bot.movepi(0.95, 2500)
-        await self.bot.attack() # +2 TP
+        await self.bot.attack() # +2TP
     async def path_3(self):
         logger_set_path(3)
         await self.bot.use_teleporter(697/2400, 153/1080, move_x=0, move_y=0) # Path of Darkness
@@ -348,14 +326,14 @@ class Fyxestroll_Garden:
         logger_set_path(4)
         await self.bot.use_teleporter(697/2400, 153/1080, move_x=0, move_y=0) # Path of Darkness
         await self.bot.movepi(1.8, 2000)
-        await self.bot.attack() # +2 TP
+        await self.bot.attack() # +2TP
         await self.bot.sleep(0.5)
         await self.bot.movepi(0.01, 2800)
         await self.bot.movepi(1.8, 2300)
         await self.bot.movepi(0.23, 6000)
         await self.bot.movepi(1.95, 700)
         await self.bot.attack_technique(5)
-        await self.bot.restore_tp(n=1) # +2 TP
+        await self.bot.restore_tp(n=1) # +2TP
     async def path_5(self): # roamer
         logger_set_path(5)
         await self.bot.use_teleporter(579/2400, 368/1080, move_x=1, move_y=2) # Locufox Forest Backdoor
@@ -378,7 +356,7 @@ class Fyxestroll_Garden:
         await self.bot.movepi(1.2, 2000)
         await self.bot.movepi(0.9, 1500)
         await self.bot.movepi(1.12, 2300)
-        await self.bot.attack() # +2 TP
+        await self.bot.attack() # +2TP
         await self.bot.sleep(0.5)
         await self.bot.movepi(1.2, 1500)
         await self.bot.movepi(0.7, 1000)

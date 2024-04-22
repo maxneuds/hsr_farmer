@@ -47,7 +47,7 @@ async def main():
     # await the_xianzhou_luofu.farm_starskiff_haven()
     # await the_xianzhou_luofu.farm_cloudford() # (4644/4644) TP:4->1
     # await herta_space_station.supply_zone.teleport(tp_restore=0) # TP:1->3
-    await the_xianzhou_luofu.farm_stargazer_navalia() # (6264/6264) TODO
+    await the_xianzhou_luofu.farm_stargazer_navalia() # (6264/6264) TP:3->2 TODO
     # await the_xianzhou_luofu.farm_fyxestroll_garden() # (4644/4644)
 
     # 5/5 Penacony (47176/50092)
