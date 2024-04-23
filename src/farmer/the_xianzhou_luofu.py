@@ -12,6 +12,7 @@ class The_Xianzhou_Luofu:
         self.artisanship_commission = the_xianzhou_luofu.Artisanship_Commission(bot)
         self.fyxestroll_garden = the_xianzhou_luofu.Fyxestroll_Garden(bot)
         self.alchemy_commission = the_xianzhou_luofu.Alchemy_Commission(bot)
+        self.scalegorge_waterscape = the_xianzhou_luofu.Scalegorge_Waterscape(bot)
 
     async def farm_starskiff_haven(self):
         await self.central_starskiff_haven.teleport()
@@ -69,4 +70,15 @@ class The_Xianzhou_Luofu:
     
     async def farm_alchemy_commission(self):
         await self.alchemy_commission.teleport()
-        # await self.alchemy_commission.path_x()
+        await self.alchemy_commission.path_1()
+        await self.alchemy_commission.path_2()
+        await self.alchemy_commission.path_3()
+        await self.alchemy_commission.path_4()
+        await self.alchemy_commission.path_5()
+        await self.alchemy_commission.path_6()
+        await self.alchemy_commission.path_7()
+        await self.alchemy_commission.path_8()
+    
+    async def farm_scalegorge_waterscape(self):
+        # await self.scalegorge_waterscape.teleport()
+        await self.scalegorge_waterscape.path_x()

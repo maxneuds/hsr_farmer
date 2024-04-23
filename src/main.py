@@ -54,12 +54,14 @@ async def main():
     # await herta_space_station.supply_zone.teleport(tp_restore=0) # TP:1->3 TODO taken
     # await the_xianzhou_luofu.farm_artisanship_commission() # (9548/9548) TP:4->2 TODO: check path5
     # await jarilo_vi.everwinter_hill.teleport(tp_restore=0) # TP:2->4
-    await the_xianzhou_luofu.farm_alchemy_commission() # (6912/6912) TP:4->
+    # await the_xianzhou_luofu.farm_alchemy_commission() # (6912/6912) TP:4->1
+    # await penacony.golden_hour.teleport(tp_restore=0) # TP:1->5
+    await the_xianzhou_luofu.farm_scalegorge_waterscape() # (4752/4752) TP:5->
 
     # 5/5 Penacony (47176/50092)
     # await penacony.farm_dreams_edge() # (7668/9612)
     # await penacony.farm_childs_dream() # (5832/5832)
-    # await penacony.golden_hour.teleport(tp_restore=0) # (+2TP)
+    # await penacony.golden_hour.teleport(tp_restore=1) # TP:
     # await penacony.farm_the_reverie_dreamscape() # (14580/15552) TODO: rework with position_fixing
     # await penacony.farm_dewlight_pavilion() # (11448/11448) check: path5
     # await penacony.farm_clock_studios_theme_park() # (7648/7648)
@@ -72,9 +74,7 @@ async def main():
 
     ### TODO
     
-    # await the_xianzhou_luofu.farm_scalegorge_waterscape() # verified (4752/4752)
     
-    # await penacony.golden_hour.teleport(tp_restore=1) # TP:2->4
 
 
 

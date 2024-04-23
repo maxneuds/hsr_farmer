@@ -16,12 +16,16 @@ class Golden_Hour:
             await self.bot.movepi(1.6, 5000)
             await self.bot.movepi(1.25, 3000)
             await self.bot.attack() # +2TP
-        elif tp_restore == 1:
-            await self.bot.switch_map(y_list=650/1080, world='penacony',
-                                        x=815/2400, y=245/1080, move_x=0, move_y=2) # Oti Mall
+            await self.bot.use_teleporter(815/2400, 245/1080, move_x=0, move_y=2) # Oti Mall
             await self.bot.movepi(0.7, 2000)
             await self.bot.movepi(0.9, 4400)
             await self.bot.attack() # +2TP
+        elif tp_restore == 1:
+            # await self.bot.switch_map(y_list=650/1080, world='penacony',
+            #                             x=330/2400, y=498/1080, corner='botright', move_x=0, move_y=0) # The Reverie Hotel Entrance
+            await self.bot.movepi(0.35, 9000)
+            await self.bot.movepi(0.8, 1000)
+            await self.bot.attack_technique(3) # +2TP
         else:
             logger.debug('bad parameter')
             exit()

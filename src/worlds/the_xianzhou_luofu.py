@@ -462,6 +462,7 @@ class Artisanship_Commission:
     def __init__(self, bot):
         self.bot = bot
     async def teleport(self):
+        logger_set_path('Teleport')
         logger.info('---')
         logger.info('--- Map: Artisanship Commission')
         logger.info('---')
@@ -649,6 +650,7 @@ class Fyxestroll_Garden:
     def __init__(self, bot):
         self.bot = bot
     async def teleport(self):
+        logger_set_path('Teleport')
         logger.info('---')
         logger.info('--- Map: Fyxestroll Garden')
         logger.info('---')
@@ -723,6 +725,7 @@ class Alchemy_Commission:
     def __init__(self, bot):
         self.bot = bot
     async def teleport(self):
+        logger_set_path('Teleport')
         logger.info('---')
         logger.info('--- Map: Alchemy Comission')
         logger.info('---')
@@ -735,173 +738,184 @@ class Alchemy_Commission:
         await self.bot.attack_technique(2) # -1TP
     async def path_1(self): # roamer
         logger_set_path(1)
-        await self.bot.use_teleporter(697/2400, 153/1080, move_x=0, move_y=0) # Path of Darkness
-
-
-#     await self.bot.use_teleporter(907/2400, 875/1080, open_map=False, move_y=-0.3) # Cavern of Corrosion
-#     await self.bot.movepi(1.5, 5700)
-#     await self.bot.movepi(1.25, 2000)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger.info('### group 2 ###')
-#     await self.bot.use_teleporter(921/2400, 701/1080) # Cavern of Corrosion
-#     await self.bot.movepi(1.5, 5700)
-#     await self.bot.movepi(1.25, 8200)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger.info('### group 3 ###')
-#     await self.bot.use_teleporter(753/2400, 345/1080) # Bud of Nihility
-#     await self.bot.movepi(1.0, 1500)
-#     await self.bot.movepi(0.5, 4100)
-#     await self.bot.movepi(1.0, 500)
-#     await self.bot.movepi(0.5, 500)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger.info('### group 4 ###') # roamer
-#     await self.bot.use_teleporter(914/2400, 439/1080) # Bud of Nihility
-#     await self.bot.movepi(1.0, 2500)
-#     await self.bot.movepi(0.5, 3100)
-#     await self.bot.movepi(1.0, 5200)
-#     await self.bot.movepi(1.5, 2200)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger.info('### group 4, part 2 ###') # roamer
-#     await self.bot.movepi(1.1, 1700)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger.info('### group 4, part 3 ###') # roamer
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap(min_duration=3)
-#     logger.info('### group 5 ###')
-#     await self.bot.use_teleporter(1025/2400, 220/1080, confirm=True)
-#     await self.bot.movepi(1.37, 14300)
-#     await self.bot.movepi(1.86, 5700)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger.info('### group 5, part 2 ###') # roamer
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger.info('### group 6 ###')
-#     await self.bot.use_teleporter(1280/2400, 426/1080, confirm=True) # Healer's Market
-#     await self.bot.movepi(0.5, 1500)
-#     await self.bot.movepi(0.75, 6700)
-#     await self.bot.movepi(1.0, 6200)
-#     await self.bot.movepi(1.25, 3100)
-#     await self.bot.movepi(1.0, 3100)
-#     await self.bot.movepi(1.25, 1500)
-#     await self.bot.movepi(1.0, 500)
-#     await self.bot.movepi(1.25, 500)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger.info('### group 6, part 2 ###')
-#     await self.bot.movepi(1.25, 700)
-#     await self.bot.movepi(1.5, 300)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger.info('### group 7 ###') # roamer
-#     await self.bot.use_teleporter(605/2400, 705/1080) # Elixir Research Terrace
-#     await self.bot.movepi(0.5, 10300)
-#     await self.bot.movepi(0.75, 2000)
-#     await self.bot.movepi(1.0, 2000)
-#     await self.bot.attack()
-#     await self.bot.sleep(0.5)
-#     await self.bot.movepi(0.0, 400)
-#     await self.bot.movepi(1.5, 4400)
-#     await self.bot.movepi(1.0, 1300)
-#     await self.bot.movepi(0.5, 1500)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger.info('### group 7, part 2 ###')
-#     await self.bot.movepi(1.25, 500)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger.info('### group 8 ###')
-
-#     logger.info('### group 9 ###')
-#     await self.bot.use_teleporter(1004/2400, 268/1080) # Aureate Elixir Furnace
-#     await self.bot.movepi(0.55, 2500)
-#     await self.bot.movepi(0.4, 2000)
-#     await self.bot.movepi(0.27, 1500)
-#     await self.bot.movepi(0.1, 500)
-#     await self.bot.movepi(0.45, 2500)
-#     await self.bot.movepi(0.3, 2000)
-#     await self.bot.movepi(0.00, 2400)
-#     await self.bot.movepi(1.5, 200)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger.info('### group 9, part 2 ###')
-#     await self.bot.movepi(0.35, 1000)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger.info('### group 10 ###')
-#     await self.bot.use_teleporter(1000/2400, 532/1080) # Aureate Elixir Furnace
-#     await self.bot.attack()
-#     await self.bot.sleep(0.5)
-#     await self.bot.movepi(0.55, 2500)
-#     await self.bot.movepi(0.4, 2000)
-#     await self.bot.movepi(0.27, 1500)
-#     await self.bot.movepi(0.1, 500)
-#     await self.bot.movepi(0.45, 2500)
-#     await self.bot.movepi(0.3, 2000)
-#     await self.bot.movepi(0.00, 2500)
-#     await self.bot.movepi(1.90, 1000)
-#     await self.bot.movepi(0.25, 2000)
-#     await self.bot.movepi(0.1, 2000)
-#     await self.bot.movepi(1.85, 3000)
-#     await self.bot.movepi(1.25, 1000)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger.info('### group 10, part 2 ###')
-#     await self.bot.movepi(0.35, 1000)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger.info('### group 11 ###')
-#     await self.bot.use_teleporter(999/2400, 667/1080) # Aureate Elixir Furnace
-#     await self.bot.movepi(0.55, 2500)
-#     await self.bot.movepi(0.4, 2000)
-#     await self.bot.movepi(0.27, 1500)
-#     await self.bot.movepi(0.1, 500)
-#     await self.bot.movepi(0.45, 2500)
-#     await self.bot.movepi(0.3, 2000)
-#     await self.bot.movepi(0.00, 2500)
-#     await self.bot.movepi(1.90, 1000)
-#     await self.bot.movepi(0.25, 2000)
-#     await self.bot.movepi(0.1, 2000)
-#     await self.bot.movepi(1.85, 3000)
-#     await self.bot.movepi(1.75, 1800)
-#     await self.bot.movepi(1.27, 4000)
-#     await self.bot.movepi(1.51, 7000)
-#     await self.bot.movepi(1.05, 4000)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-
+        await self.bot.use_teleporter(659/2400, 363/1080, corner='botright', move_x=0, move_y=0) # Cavern of Corrosion
+        await self.bot.movepi(1.5, 2800)
+        await self.bot.movepi(1.2, 1600)
+        await self.bot.attack() # +2TP
+        await self.bot.movepi(1.75, 2000)
+        for _ in range(3): # -1TP
+            await self.bot.movepi(1.25, 300)
+            await self.bot.attack_technique(2, wait=False)
+        await self.bot.movepi(0.25, 1000)
+        await self.bot.movepi(1.5, 1000)
+        await self.bot.movepi(1.25, 1000)
+        await self.bot.posfix(1.25, 1000)
+        await self.bot.movepi(0.5, 600)
+        await self.bot.movepi(1.25, 3500)
+        await self.bot.attack_technique(6) # -1TP
+    async def path_2(self):
+        logger_set_path(2)
+        await self.bot.use_teleporter(583/2400, 241/1080, corner='botright', move_x=0, move_y=3) # Bud of Nihility
+        await self.bot.movepi(1.0, 1500)
+        await self.bot.movepi(0.5, 4200)
+        await self.bot.movepi(0.7, 1800)
+        await self.bot.attack_technique(1, wait=False) # -1TP
+        await self.bot.movepi(0.8, 1900)
+        await self.bot.posfix(0.75, 1000)
+        await self.bot.movepi(0.0, 1000)
+        await self.bot.movepi(1.9, 2000)
+        await self.bot.movepi(1.4, 1000)
+        await self.bot.movepi(1.5, 6900)
+        await self.bot.movepi(0.0, 4800)
+        await self.bot.movepi(1.8, 700)
+        await self.bot.attack() # +2TP
+    async def path_3(self):
+        logger_set_path(3)
+        await self.bot.use_teleporter(583/2400, 241/1080, corner='botright', move_x=0, move_y=3) # Bud of Nihility
+        exit() # check for kill
+        await self.bot.movepi(1.0, 2500)
+        await self.bot.movepi(0.5, 3100)
+        await self.bot.movepi(1.0, 5200)
+        await self.bot.movepi(1.5, 2200)
+        await self.bot.attack_technique(1, wait=False) # -1TP
+        await self.bot.movepi(1.2, 2500)
+        await self.bot.attack_technique(1, wait=False) # -1TP
+        await self.bot.movepi(0.75, 500) # -1TP
+        await self.bot.movepi(1.0, 300)
+        await self.bot.attack_technique(2, wait=False)
+        await self.bot.movepi(0.0, 300)
+        await self.bot.attack_technique(3, wait=False)
+        await self.bot.movepi(0.5, 300)
+        await self.bot.attack_technique(4, wait=False)
+        await self.bot.movepi(1.7, 300)
+        await self.bot.attack_technique(1, wait=False)
+        await self.bot.movepi(1.5, 300)
+        await self.bot.attack_technique(12)
+    async def path_4(self):
+        logger_set_path(4)
+        await self.bot.use_teleporter(854/2400, 689/1080, corner='topright', move_x=0, move_y=6, confirm=True) # Healer's Market
+        await self.bot.movepi(1.4, 4600)
+        await self.bot.movepi(1.9, 2100)
+        await self.bot.attack() # +2TP
+        await self.bot.movepi(0.25, 1000)
+        await self.bot.posfix(0.25, 1000)
+        await self.bot.movepi(1.2, 1000)
+        await self.bot.movepi(0.9, 2800)
+        await self.bot.movepi(1.4, 9300)
+        await self.bot.movepi(1.9, 4700)
+        await self.bot.attack_technique(8) # -2TP
+    async def path_5(self):
+        logger_set_path(5)
+        await self.bot.use_teleporter(1355/2400, 694/1080, corner='topright', move_x=0, move_y=8) # Shape of Celestial
+        await self.bot.movepi(1.66, 2500)
+        await self.bot.attack() # +2TP
+        await self.bot.restore_tp(n=1) # +2TP
+    async def path_6(self):
+        logger_set_path(6)
+        await self.bot.use_teleporter(854/2400, 689/1080, corner='topright', move_x=0, move_y=6, confirm=True) # Healer's Market
+        await self.bot.movepi(0.5, 1500)
+        await self.bot.movepi(0.75, 6700)
+        await self.bot.movepi(0.98, 6000)
+        await self.bot.attack() # items
+        await self.bot.movepi(1.2, 4000)
+        await self.bot.movepi(1.1, 4500)
+        await self.bot.attack_technique(5, wait=False) # -2TP
+        await self.bot.movepi(1.6, 300)
+        await self.bot.attack_technique(8) # -1TP
+    async def path_7(self):
+        logger_set_path(7)
+        await self.bot.use_teleporter(866/2400, 517/1080, corner='topleft', move_x=0, move_y=5) # Elixir Research Terrace
+        await self.bot.movepi(0.5, 10300)
+        await self.bot.movepi(0.75, 2000)
+        await self.bot.movepi(1.1, 2200)
+        await self.bot.attack() # +2TP
+        await self.bot.movepi(0.0, 600)
+        await self.bot.movepi(1.5, 4400)
+        await self.bot.movepi(1.0, 1300)
+        await self.bot.attack_technique(1, wait=False) # -1TP
+        await self.bot.movepi(0.5, 300)
+        await self.bot.attack_technique(3, wait=False)
+        await self.bot.movepi(0.25, 300)
+        await self.bot.attack_technique(4) # -1TP
+    async def path_8(self):
+        logger_set_path(8)
+        await self.bot.use_teleporter(1003/2400, 595/1080, corner='topleft', move_x=0, move_y=3) # Aureate Elixir Furnace
+        await self.bot.movepi(0.8, 700)
+        await self.bot.attack() # +2TP
+        await self.bot.movepi(0.1, 500)
+        await self.bot.movepi(0.55, 2200)
+        await self.bot.movepi(0.34, 2300)
+        await self.bot.movepi(0.2, 1300)
+        await self.bot.movepi(0.5, 1200)
+        await self.bot.movepi(0.35, 2000)
+        await self.bot.movepi(0.14, 2800)
+        await self.bot.movepi(1.6, 900)
+        await self.bot.attack_technique(1, wait=False) # -1TP
+        for _ in range(2): # -1TP
+            await self.bot.movepi(0.5, 300)
+            await self.bot.attack_technique(2, wait=False)
+        for _ in range(2):
+            await self.bot.movepi(0.25, 300)
+            await self.bot.attack_technique(2, wait=False)
+        await self.bot.movepi(1.25, 1000)
+        await self.bot.movepi(0.5, 1000)
+        await self.bot.movepi(0.25, 2000)
+        await self.bot.restore_tp(n=1) # +2TP
+        await self.bot.posfix(0.25, 1000)
+        await self.bot.movepi(1.6, 1900)
+        await self.bot.movepi(0.1, 2500)
+        await self.bot.movepi(1.8, 2100)
+        await self.bot.movepi(1.4, 800)
+        await self.bot.attack_technique(1, wait=False) # -1TP
+        for _ in range(2): # -1TP
+            await self.bot.movepi(0.4, 300)
+            await self.bot.attack_technique(2, wait=False)
+        for _ in range(2):
+            await self.bot.movepi(1.9, 300)
+            await self.bot.attack_technique(3, wait=False)
+        for _ in range(2):
+            await self.bot.movepi(1.4, 300)
+            await self.bot.attack_technique(2, wait=False)
+        await self.bot.movepi(0.25, 5000)
+        await self.bot.restore_tp(n=1) # +2TP
+        await self.bot.posfix(0.25, 1000)
+        await self.bot.movepi(1.15, 3400)
+        await self.bot.movepi(1.35, 3000)
+        await self.bot.movepi(1.55, 5000)
+        await self.bot.movepi(1.25, 3000)
+        await self.bot.movepi(1.1, 2000)
+        await self.bot.attack_technique(2, wait=False)
+        await self.bot.movepi(1.6, 300)
+        await self.bot.attack_technique(2, wait=False)
+        await self.bot.movepi(0.6, 300)
+        await self.bot.attack_technique(8)
 
 
 class Scalegorge_Waterscape:
     def __init__(self, bot):
         self.bot = bot
     async def teleport(self):
+        logger_set_path('Teleport')
         logger.info('---')
         logger.info('--- Map: Scalegorge Waterscape')
         logger.info('---')
-        await self.bot.switch_map(y_list=810/1080, world='the_xianzhou_luofu', scroll_down=True,
-                                    x=412/2400, y=603/1080, move_x=0, move_y=0, corner='botright', debug=True) # Bud of Abundance
-        await self.bot.movepi(1.49, 3900)
-        await self.bot.attack_technique(2) # -1TP
-    async def path_1(self): # roamer
+        # await self.bot.switch_map(y_list=928/1080, world='the_xianzhou_luofu', scroll_down=True,
+        #                             x=966/2400, y=379/1080, corner='botright', move_x=0, move_y=0) # Dragonvista Rain Hall
+        await self.bot.movepi(1.5, 4500)
+        await self.bot.movepi(0.0, 2000)
+        await self.bot.movepi(0.5, 3300)
+        await self.bot.movepi(0.0, 3900)
+        await self.bot.attack_technique(3, wait=False) # -1TP
+        await self.bot.movepi(1.75, 300)
+        await self.bot.attack_technique(3, wait=False) # -1TP
+        await self.bot.movepi(1.0, 300)
+        await self.bot.attack_technique(6) # -1TP
+    async def path_x(self): # roamer
         logger_set_path(1)
-        await self.bot.use_teleporter(697/2400, 153/1080, move_x=0, move_y=0) # Path of Darkness
+        await self.bot.use_teleporter(357/2400, 354/1080, move_x=0, move_y=0) # Ancient Sea Palace Ruins
 
 
 
-# async def farm_scalegorge_waterscape(self):
-#     await self.bot.switch_map(0.85, open_map=False, scroll_down=True)
-#     logger.info('### group 1 ###')
-#     await self.bot.use_teleporter(1641/2400, 530/1080, open_map=False)
-#     await self.bot.movepi(1.5, 4500)
-#     await self.bot.movepi(0.00, 2000)
-#     await self.bot.movepi(0.5, 3300)
-#     await self.bot.movepi(0.00, 3900)
 #     await self.bot.attack()
 #     await self.bot.wait_for_onmap()
 #     logger.info('### group 2 ###')
