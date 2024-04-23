@@ -11,6 +11,7 @@ class The_Xianzhou_Luofu:
         self.divination_commission = the_xianzhou_luofu.Divination_Commission(bot)
         self.artisanship_commission = the_xianzhou_luofu.Artisanship_Commission(bot)
         self.fyxestroll_garden = the_xianzhou_luofu.Fyxestroll_Garden(bot)
+        self.alchemy_commission = the_xianzhou_luofu.Alchemy_Commission(bot)
 
     async def farm_starskiff_haven(self):
         await self.central_starskiff_haven.teleport()
@@ -25,6 +26,7 @@ class The_Xianzhou_Luofu:
         await self.cloudford.path_5()
         await self.cloudford.path_6()
         await self.cloudford.path_7()
+        await self.cloudford.path_8()
     
     async def farm_stargazer_navalia(self):
         await self.stargazer_navalia.teleport()
@@ -46,8 +48,14 @@ class The_Xianzhou_Luofu:
         await self.divination_commission.path_7()
     
     async def farm_artisanship_commission(self):
-        # await self.artisanship_commission.teleport()
-        await self.artisanship_commission.path_x()
+        await self.artisanship_commission.teleport()
+        await self.artisanship_commission.path_1()
+        await self.artisanship_commission.path_2()
+        await self.artisanship_commission.path_3()
+        await self.artisanship_commission.path_4()
+        await self.artisanship_commission.path_5()
+        await self.artisanship_commission.path_6()
+        await self.artisanship_commission.path_7()
 
     async def farm_fyxestroll_garden(self):
         await self.fyxestroll_garden.teleport()
@@ -58,3 +66,7 @@ class The_Xianzhou_Luofu:
         await self.fyxestroll_garden.path_5()
         await self.fyxestroll_garden.path_6()
         await self.fyxestroll_garden.path_7()
+    
+    async def farm_alchemy_commission(self):
+        await self.alchemy_commission.teleport()
+        # await self.alchemy_commission.path_x()

@@ -146,7 +146,7 @@ class Backwater_Pass:
 class Silvermane_Guard:
     def __init__(self, bot):
         self.bot = bot
-    async def teleport(self, tp_restore=False):
+    async def teleport(self, tp_restore=-1):
         logger.info('Teleport')
         logger.info('---')
         logger.info("--- Map: Silvermane Guard Restricted Zone")
@@ -186,9 +186,7 @@ class Silvermane_Guard:
             await self.bot.movepi(0.1, 3000)
             await self.bot.movepi(0.4, 1000)
             await self.bot.attack() # items
-        elif tp_restore == 2:
-            await self.bot.switch_map(y_list=750/1080, world='jarilo_vi', scroll_down=False,
-                                        x=896/2400, y=669/1080, corner='topleft', move_x=0, move_y=1) # Shape of 
+            await self.bot.use_teleporter(x=896/2400, y=669/1080, corner='topleft', move_x=0, move_y=1) # Shape of Blaze
             await self.bot.movepi(1.8, 600)
             await self.bot.attack() # items
             await self.bot.movepi(1.1, 800)
@@ -354,22 +352,31 @@ class Corridor:
 class Everwinter_Hill:
     def __init__(self, bot):
         self.bot = bot
-    async def teleport(self):
+    async def teleport(self, tp_restore=-1):
         logger_set_path('Teleport')
         logger.info('---')
         logger.info("--- Map: Everwinter Hill")
         logger.info('---')
-        await self.bot.switch_map(y_list=984/1080, world='jarilo_vi', scroll_down=False,
+        if tp_restore == 0:
+            await self.bot.switch_map(y_list=984/1080, world='jarilo_vi', scroll_down=False,
                                     x=1297/2400, y=394/1080, corner='botleft', move_x=0, move_y=3) # Deck of Creation
-        await self.bot.movepi(0.2, 6000)
-        await self.bot.movepi(0.1, 3100)
-        await self.bot.attack() # +2TP
-        await self.bot.movepi(1.5, 5000)
-        await self.bot.movepi(1.9, 1100)
-        await self.bot.attack_technique(2, wait=False) # -1TP
-        await self.bot.movepi(1.9, 1000)
-        await self.bot.movepi(0.0, 1500)
-        await self.bot.attack_technique(4) # -2TP
+            await self.bot.movepi(1.5, 4000)
+            await self.bot.movepi(0.0, 2000)
+            await self.bot.movepi(1.75, 2000)
+            await self.bot.movepi(1.4, 700)
+            await self.bot.attack() # +2TP
+        else:
+            await self.bot.switch_map(y_list=984/1080, world='jarilo_vi', scroll_down=False,
+                                        x=1297/2400, y=394/1080, corner='botleft', move_x=0, move_y=3) # Deck of Creation
+            await self.bot.movepi(0.2, 6000)
+            await self.bot.movepi(0.1, 3100)
+            await self.bot.attack() # +2TP
+            await self.bot.movepi(1.5, 5000)
+            await self.bot.movepi(1.9, 1100)
+            await self.bot.attack_technique(2, wait=False) # -1TP
+            await self.bot.movepi(1.9, 1000)
+            await self.bot.movepi(0.0, 1500)
+            await self.bot.attack_technique(4) # -2TP
     async def path_1(self):
         logger_set_path(1)
         await self.bot.use_teleporter(x=775/2400, y=653/1080, corner='botleft', move_x=0, move_y=3, confirm=True) # Ancient Battlefield: Snow Plains
@@ -488,16 +495,23 @@ class Great_Mine:
             await self.bot.movepi(0.49, 500)
             await self.bot.attack_technique(2, wait=False)
         await self.bot.attack_technique(1)
-        await self.bot.restore_tp(n=1) # +2TP
     async def path_6(self):
         logger_set_path(6)
         await self.bot.use_teleporter(x=951/2400, y=480/1080, corner='botright', move_x=0, move_y=0) # Shape of Spike
         await self.bot.movepi(0.8, 1500)
         await self.bot.movepi(0.9, 1000)
-        await self.bot.movepi(1.0, 3000)
-        await self.bot.movepi(1.05, 1500)
-        await self.bot.movepi(0.55, 3000)
-        await self.bot.movepi(0.25, 1900)
+        await self.bot.movepi(1.0, 5500)
+        await self.bot.movepi(1.05, 1000)
+        await self.bot.movepi(0.9, 1000)
+        await self.bot.movepi(0.5, 200)
+        await self.bot.attack() # +2TP
+        await self.bot.movepi(0.5, 1000)
+        await self.bot.movepi(0.0, 1500)
+        await self.bot.posfix(0.25, 1000)
+        await self.bot.movepi(1.5, 1000)
+        await self.bot.movepi(0.0, 1800)
+        await self.bot.movepi(0.55, 2200)
+        await self.bot.movepi(0.2, 1900)
         await self.bot.attack_technique(2) # -2TP
 
 
@@ -563,6 +577,14 @@ class Rivet_Town:
     async def path_2(self):
         logger_set_path(2)
         await self.bot.use_teleporter(x=1017/2400, y=744/1080, corner='botright', move_x=0, move_y=0, confirm=True) # Entrance
+        await self.bot.movepi(0.69, 1800)
+        await self.bot.attack() # items
+        await self.bot.movepi(0.4, 200)
+        await self.bot.movepi(0.5, 1100)
+        await self.bot.attack() # +2TP
+    async def path_3(self):
+        logger_set_path(3)
+        await self.bot.use_teleporter(x=1017/2400, y=744/1080, corner='botright', move_x=0, move_y=0, confirm=True) # Entrance
         await self.bot.movepi(0.5, 2500)
         await self.bot.movepi(0.0, 2400)
         await self.bot.movepi(0.25, 500)
@@ -576,15 +598,12 @@ class Rivet_Town:
             await self.bot.movepi(0.75, 300)
             await self.bot.attack_technique(2, wait=False)
         await self.bot.attack_technique(1)
-    async def path_3(self):
-        logger_set_path(3)
-        await self.bot.use_teleporter(x=1017/2400, y=744/1080, corner='botright', move_x=0, move_y=0, confirm=True) # Entrance
-        await self.bot.movepi(0.69, 1800)
-        await self.bot.attack() # items
-        await self.bot.movepi(0.4, 200)
-        await self.bot.movepi(0.5, 1100)
+    async def path_4(self):
+        logger_set_path(4)
+        await self.bot.use_teleporter(x=975/2400, y=599/1080, corner='topleft', move_x=0, move_y=0) # Shape of Gust
+        await self.bot.movepi(1.65, 4000)
         await self.bot.attack() # +2TP
-        
+
 
 class Robot_Settlement:
     def __init__(self, bot):

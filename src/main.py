@@ -40,19 +40,21 @@ async def main():
     # await jarilo_vi.farm_everwinter_hill() # (1404/1404) TP:3->1
     # await jarilo_vi.silvermane_guard.teleport(tp_restore=0) # TP:1->3
     # await jarilo_vi.farm_great_mine() # (4536/4536) TP:3->1
-    # await jarilo_vi.silvermane_guard.teleport(tp_restore=1) # TP:1->3
-    # await jarilo_vi.farm_rivet_town() # (2160/2160) TP:3->4
+    # await jarilo_vi.farm_rivet_town() # (2160/2160) TP:1->4
+    
 
     # 4/7 Xianzhou Luofu (42596/42596)
     # await the_xianzhou_luofu.farm_starskiff_haven()
-    # await the_xianzhou_luofu.farm_cloudford() # (4644/4644) TP:4->1
-    # await herta_space_station.supply_zone.teleport(tp_restore=0) # TP:1->3
-    # await the_xianzhou_luofu.farm_stargazer_navalia() # (6264/6264) TP:3->2
+    # await the_xianzhou_luofu.farm_cloudford() # (4644/4644) TP:4->5
+    # await the_xianzhou_luofu.farm_stargazer_navalia() # (6264/6264) TP:5->1
+    # await jarilo_vi.silvermane_guard.teleport(tp_restore=1) # TP:1->5
+    # await the_xianzhou_luofu.farm_divination_commission() # (6000/6000) TP:5->3 TODO: redo with TP restore points (kill right, tp item, kill right2), eat:4TP before 3 at middle (finish with 3TP)
     # await herta_space_station.storage_zone.teleport(tp_restore=0) # TP:2->4
-    # await the_xianzhou_luofu.farm_divination_commission() # (6000/6000) TP:4->2 TODO
-    # await jarilo_vi.silvermane_guard.teleport(tp_restore=2) # TP:2->4
-    # await the_xianzhou_luofu.farm_fyxestroll_garden() # (4644/4644) TP:4->2
-    await the_xianzhou_luofu.farm_artisanship_commission() # verified (9548/9548) TP:2->2 TODO: check path5
+    # await the_xianzhou_luofu.farm_fyxestroll_garden() # (4644/4644) TP:5->2 TODO: +2 TP möglich
+    # await herta_space_station.supply_zone.teleport(tp_restore=0) # TP:1->3 TODO taken
+    # await the_xianzhou_luofu.farm_artisanship_commission() # (9548/9548) TP:4->2 TODO: check path5
+    # await jarilo_vi.everwinter_hill.teleport(tp_restore=0) # TP:2->4
+    await the_xianzhou_luofu.farm_alchemy_commission() # (6912/6912) TP:4->
 
     # 5/5 Penacony (47176/50092)
     # await penacony.farm_dreams_edge() # (7668/9612)
@@ -69,11 +71,12 @@ async def main():
     # TOTAL TIME: 
 
     ### TODO
-
+    
     # await the_xianzhou_luofu.farm_scalegorge_waterscape() # verified (4752/4752)
-    # await the_xianzhou_luofu.farm_alchemy_commission() # verified (6912/6912)
-
+    
     # await penacony.golden_hour.teleport(tp_restore=1) # TP:2->4
+
+
 
 
 if __name__ == '__main__':
