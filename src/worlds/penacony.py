@@ -48,13 +48,13 @@ class Dreams_Edge:
         await self.bot.movepi(0.5, 8500)
         await self.bot.attack() # +2TP
         await self.bot.movepi(1.05, 5800)
-        await self.bot.attack_technique(5)
+        await self.bot.attack_technique(5) # -2TP
         await self.bot.restore_tp(n=1) # +2TP
     async def path_2(self):
         logger_set_path(2)
         await self.bot.use_teleporter(933/2400, 535/1080, move_x=0, move_y=5, corner='topright') # Dreamweaver Plaza
         await self.bot.movepi(1.97, 4000)
-        await self.bot.attack_technique(2)
+        await self.bot.attack_technique(2) # -1TP
     async def path_3(self):
         logger_set_path(3)
         await self.bot.use_teleporter(933/2400, 535/1080, move_x=0, move_y=5, corner='topright') # Dreamweaver Plaza
@@ -62,16 +62,20 @@ class Dreams_Edge:
         await self.bot.movepi(0.5, 4500)
         await self.bot.movepi(0.00, 3700)
         await self.bot.movepi(0.49, 5500)
-        await self.bot.attack_technique(4)
+        await self.bot.attack_technique(4) # -2TP
         await self.bot.restore_tp(n=1) # +2TP
-    async def path_4(self):
+    async def path_4(self): # roamer
         logger_set_path(4)
         await self.bot.use_teleporter(933/2400, 535/1080, move_x=0, move_y=5, corner='topright') # Dreamweaver Plaza
         await self.bot.movepi(0.25, 1500)
         await self.bot.movepi(0.5, 4500)
         await self.bot.movepi(0.00, 3700)
         await self.bot.movepi(0.5, 11000)
-        await self.bot.attack_technique(8)
+        await self.bot.attack_technique(8, wait=False) # -3TP
+        await self.bot.movepi(1.2, 300)
+        await self.bot.attack_technique(8) # stability
+        await self.bot.restore_tp(n=1) # +2TP
+        exit()
     async def path_5(self):
         logger_set_path(5)
         await self.bot.use_teleporter(764/2400, 253/1080, move_x=2, move_y=3, corner='botright') # Rooftop Garden
@@ -80,7 +84,7 @@ class Dreams_Edge:
         await self.bot.movepi(1.0, 1600)
         await self.bot.movepi(0.5, 2400)
         await self.bot.movepi(0.9, 900)
-        await self.bot.attack_technique(1, wait=False)
+        await self.bot.attack_technique(1, wait=False) # -3TP
         await self.bot.movepi(0.05, 400)
         await self.bot.attack_technique(8)
         await self.bot.restore_tp(n=1) # +2TP
@@ -90,10 +94,10 @@ class Dreams_Edge:
         await self.bot.movepi(0.5, 3500)
         await self.bot.movepi(0.00, 2500)
         await self.bot.movepi(1.90, 1400)
-        await self.bot.attack_technique(3, wait=False)
+        await self.bot.attack_technique(3, wait=False) # -1TP
         await self.bot.movepi(0.9, 1100)
         await self.bot.movepi(0.5, 1500)
-        await self.bot.attack_technique(4)
+        await self.bot.attack_technique(4) # -1TP
         await self.bot.restore_tp(n=1) # +2TP
     async def path_7(self):
         logger_set_path(7)
@@ -117,13 +121,15 @@ class Dreams_Edge:
         await self.bot.movepi(1.0, 1500)
         await self.bot.attack_technique(4)
         await self.bot.restore_tp(n=1) # +2TP
-    async def path_10(self):
+    async def path_10(self): # roamer
         logger_set_path(10)
         await self.bot.use_teleporter(909/2400, 345/1080, move_x=0, move_y=7, corner='botleft') # Shape of Roast
         await self.bot.movepi(1.5, 3000)
         await self.bot.movepi(0.05, 1300)
         await self.bot.attack() # +2TP
-        await self.bot.movepi(1.3, 500)
+        await self.bot.movepi(1.3, 300)
+        await self.bot.attack_technique(8, wait=False)
+        await self.bot.movepi(1.7, 300)
         await self.bot.attack_technique(8)
 
 

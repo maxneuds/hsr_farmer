@@ -43,7 +43,7 @@ async def main():
     # await jarilo_vi.farm_rivet_town() # (2160/2160) TP:1->4
     
 
-    # 4/7 Xianzhou Luofu (42596/42596)
+    # 7/7 Xianzhou Luofu (42596/42596)
     # await the_xianzhou_luofu.farm_starskiff_haven()
     # await the_xianzhou_luofu.farm_cloudford() # (4644/4644) TP:4->5
     # await the_xianzhou_luofu.farm_stargazer_navalia() # (6264/6264) TP:5->1
@@ -56,11 +56,11 @@ async def main():
     # await jarilo_vi.everwinter_hill.teleport(tp_restore=0) # TP:2->4
     # await the_xianzhou_luofu.farm_alchemy_commission() # (6912/6912) TP:4->1
     # await penacony.golden_hour.teleport(tp_restore=0) # TP:1->5
-    await the_xianzhou_luofu.farm_scalegorge_waterscape() # (4752/4752) TP:5->
+    # await the_xianzhou_luofu.farm_scalegorge_waterscape() # (4752/4752) TP:5->3
 
     # 5/5 Penacony (47176/50092)
-    # await penacony.farm_dreams_edge() # (7668/9612)
-    # await penacony.farm_childs_dream() # (5832/5832)
+    # await penacony.farm_dreams_edge() # (7668/9612) TP:5->2
+    # await penacony.farm_childs_dream() # (5832/5832) TP:2->
     # await penacony.golden_hour.teleport(tp_restore=1) # TP:
     # await penacony.farm_the_reverie_dreamscape() # (14580/15552) TODO: rework with position_fixing
     # await penacony.farm_dewlight_pavilion() # (11448/11448) check: path5
