@@ -43,18 +43,22 @@ async def main():
     # await jarilo_vi.silvermane_guard.teleport(tp_restore=1) # TP:1->3
     # await jarilo_vi.farm_rivet_town() # (2160/2160) TP:3->4
 
-    # 2/7 Xianzhou Luofu (42596/42596)
+    # 4/7 Xianzhou Luofu (42596/42596)
     # await the_xianzhou_luofu.farm_starskiff_haven()
     # await the_xianzhou_luofu.farm_cloudford() # (4644/4644) TP:4->1
     # await herta_space_station.supply_zone.teleport(tp_restore=0) # TP:1->3
-    await the_xianzhou_luofu.farm_stargazer_navalia() # (6264/6264) TP:3->2 TODO
-    # await the_xianzhou_luofu.farm_fyxestroll_garden() # (4644/4644)
+    # await the_xianzhou_luofu.farm_stargazer_navalia() # (6264/6264) TP:3->2
+    # await herta_space_station.storage_zone.teleport(tp_restore=0) # TP:2->4
+    # await the_xianzhou_luofu.farm_divination_commission() # (6000/6000) TP:4->2 TODO
+    # await jarilo_vi.silvermane_guard.teleport(tp_restore=2) # TP:2->4
+    # await the_xianzhou_luofu.farm_fyxestroll_garden() # (4644/4644) TP:4->2
+    await the_xianzhou_luofu.farm_artisanship_commission() # verified (9548/9548) TP:2->2 TODO: check path5
 
     # 5/5 Penacony (47176/50092)
     # await penacony.farm_dreams_edge() # (7668/9612)
     # await penacony.farm_childs_dream() # (5832/5832)
     # await penacony.golden_hour.teleport(tp_restore=0) # (+2TP)
-    # await penacony.farm_the_reverie_dreamscape() # (14580/15552) TODO: rework with position_fixing [Start:+2, Total:]
+    # await penacony.farm_the_reverie_dreamscape() # (14580/15552) TODO: rework with position_fixing
     # await penacony.farm_dewlight_pavilion() # (11448/11448) check: path5
     # await penacony.farm_clock_studios_theme_park() # (7648/7648)
 
@@ -68,12 +72,8 @@ async def main():
 
     # await the_xianzhou_luofu.farm_scalegorge_waterscape() # verified (4752/4752)
     # await the_xianzhou_luofu.farm_alchemy_commission() # verified (6912/6912)
-    # await the_xianzhou_luofu.farm_artisanship_commission() # verified (9548/9548)
-    # await the_xianzhou_luofu.farm_divination_commission() # verified (6000/6000)
 
-    # await jarilo_vi.silvermane_guard.teleport(tp_restore=2) # TP:[Start:1, End:3]
-    # await self.storage_zone.teleport(tp_restore=0) # (+2TP)
-    # await penacony.golden_hour.teleport(tp_restore=1) # (+2TP)
+    # await penacony.golden_hour.teleport(tp_restore=1) # TP:2->4
 
 
 if __name__ == '__main__':

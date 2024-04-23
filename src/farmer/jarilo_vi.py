@@ -45,9 +45,9 @@ class Jarilo_VI:
         await self.everwinter_hill.path_1()
     
     async def farm_great_mine(self):
-        # await self.great_mine.teleport()
-        # await self.great_mine.path_1()
-        # await self.great_mine.path_2()
+        await self.great_mine.teleport()
+        await self.great_mine.path_1()
+        await self.great_mine.path_2()
         await self.great_mine.path_3()
         await self.great_mine.path_4()
         await self.great_mine.path_5()

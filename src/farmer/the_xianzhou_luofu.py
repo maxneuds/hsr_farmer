@@ -8,6 +8,8 @@ class The_Xianzhou_Luofu:
         self.central_starskiff_haven = the_xianzhou_luofu.Central_Starskiff_Haven(bot)
         self.cloudford = the_xianzhou_luofu.Cloudford(bot)
         self.stargazer_navalia = the_xianzhou_luofu.Stargazer_Navalia(bot)
+        self.divination_commission = the_xianzhou_luofu.Divination_Commission(bot)
+        self.artisanship_commission = the_xianzhou_luofu.Artisanship_Commission(bot)
         self.fyxestroll_garden = the_xianzhou_luofu.Fyxestroll_Garden(bot)
 
     async def farm_starskiff_haven(self):
@@ -22,7 +24,7 @@ class The_Xianzhou_Luofu:
         await self.cloudford.path_4()
         await self.cloudford.path_5()
         await self.cloudford.path_6()
-        await self.cloudford.path_7() # TODO: could be better
+        await self.cloudford.path_7()
     
     async def farm_stargazer_navalia(self):
         await self.stargazer_navalia.teleport()
@@ -32,7 +34,20 @@ class The_Xianzhou_Luofu:
         await self.stargazer_navalia.path_4()
         await self.stargazer_navalia.path_5()
         await self.stargazer_navalia.path_6()
-        await self.stargazer_navalia.path_x()
+    
+    async def farm_divination_commission(self):
+        await self.divination_commission.teleport()
+        await self.divination_commission.path_1()
+        await self.divination_commission.path_2()
+        await self.divination_commission.path_3()
+        await self.divination_commission.path_4()
+        await self.divination_commission.path_5()
+        await self.divination_commission.path_6()
+        await self.divination_commission.path_7()
+    
+    async def farm_artisanship_commission(self):
+        # await self.artisanship_commission.teleport()
+        await self.artisanship_commission.path_x()
 
     async def farm_fyxestroll_garden(self):
         await self.fyxestroll_garden.teleport()

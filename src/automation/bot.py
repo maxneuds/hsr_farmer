@@ -33,7 +33,7 @@ class Bot:
         await aio.sleep(0.1)
         await self.dev.shell(f'input tap {self.xy.sprint[0]} {self.xy.sprint[1]}')
 
-    async def position_fixing(self, direction, duration):
+    async def posfix(self, direction, duration):
         logger.info(f'position fixing: move {direction} pi for {duration/1000} seconds')
         await self.movepi(direction=direction, duration=duration)
         await self.sleep(0.5)

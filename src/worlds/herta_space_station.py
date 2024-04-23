@@ -15,7 +15,7 @@ class Base_Zone:
         await self.bot.movepi(1.0, 1600)
         await self.bot.attack() # +2TP
         await self.bot.movepi(1.25, 2000)
-        await self.bot.position_fixing(1.25, 1500)
+        await self.bot.posfix(1.25, 1500)
         await self.bot.movepi(0.25, 1000)
         await self.bot.movepi(0.0, 1000)
         await self.bot.movepi(1.5, 2500)
@@ -55,28 +55,30 @@ class Storage_Zone:
             await self.bot.movepi(1.0, 4500)
             await self.bot.movepi(0.61, 6500)
             await self.bot.movepi(0.1, 200)
-            await self.bot.attack_technique(8)
+            await self.bot.attack_technique(8) # -1TP
     async def path_1(self):
         logger_set_path(1)
         await self.bot.use_teleporter(576/2400, 569/1080, move_x=0, move_y=0, corner='botright') # Outside the Control Center
         await self.bot.movepi(1.3, 400)
         await self.bot.attack() # items
         await self.bot.movepi(1.6, 500)
-        await self.bot.attack_technique(3)
+        await self.bot.attack_technique(3) # -1TP
     async def path_2(self):
         logger_set_path(2)
         await self.bot.use_teleporter(510/2400, 507/1080, move_x=0, move_y=0, corner='botright') # Bud of Destruction
-        await self.bot.movepi(1.7, 500)
-        exit() # combine old
+        await self.bot.movepi(1.6, 700)
         await self.bot.attack() # +2TP
-        await self.bot.movepi(1.5, 5200)
-        await self.bot.attack_technique(3)
-        exit()
-        await self.bot.movepi(1.0, 3000)
-        await self.bot.movepi(0.5, 6300)
-        await self.bot.movepi(1.0, 2300)
+        await self.bot.movepi(1.4, 1200)
+        await self.bot.movepi(1.5, 4000)
+        await self.bot.attack_technique(2, wait=False)
+        await self.bot.movepi(1.75, 2000)
+        await self.bot.posfix(1.75, 1000)
+        await self.bot.movepi(0.8, 1000)
+        await self.bot.movepi(1.0, 2800)
+        await self.bot.movepi(0.5, 6400)
+        await self.bot.movepi(1.0, 2200)
         await self.bot.movepi(1.5, 1500)
-        for _ in range(2):
+        for _ in range(2): # -1TP
             await self.bot.movepi(1.5, 300)
             await self.bot.attack_technique(2, wait=False)
         for _ in range(2):
@@ -90,13 +92,13 @@ class Storage_Zone:
         await self.bot.attack() # +2TP
         await self.bot.movepi(0.68, 2200)
         await self.bot.movepi(1.0, 1700)
-        await self.bot.attack_technique(4)
+        await self.bot.attack_technique(4) # -1TP
     async def path_4(self):
         logger_set_path(4)
         await self.bot.use_teleporter(895/2400, 530/1080, move_x=0, move_y=0, corner='botright', confirm=True) # Courtyard
         await self.bot.movepi(1.5, 1500)
         await self.bot.movepi(1.75, 500)
-        await self.bot.attack_technique(8)
+        await self.bot.attack_technique(8) # -1TP
     async def path_5(self):
         logger_set_path(5)
         await self.bot.use_teleporter(895/2400, 530/1080, move_x=0, move_y=0, corner='botright', confirm=True) # Courtyard
@@ -109,7 +111,7 @@ class Storage_Zone:
         await self.bot.movepi(0.7, 1500)
         await self.bot.attack()
         await self.bot.movepi(1.05, 3000)
-        await self.bot.attack_technique(8)
+        await self.bot.attack_technique(8) # -2TP
 
 class Supply_Zone:
     def __init__(self, bot):
@@ -131,7 +133,7 @@ class Supply_Zone:
             await self.bot.movepi(0.25, 2800)
             await self.bot.attack() # +2TP
             await self.bot.movepi(0.25, 1000)
-            await self.bot.position_fixing(0.25, 1000)
+            await self.bot.posfix(0.25, 1000)
             await self.bot.movepi(1.0, 2100)
             await self.bot.movepi(0.5, 1000)
             await self.bot.movepi(0.4, 500)
