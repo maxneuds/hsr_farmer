@@ -899,8 +899,8 @@ class Scalegorge_Waterscape:
         logger.info('---')
         logger.info('--- Map: Scalegorge Waterscape')
         logger.info('---')
-        # await self.bot.switch_map(y_list=928/1080, world='the_xianzhou_luofu', scroll_down=True,
-        #                             x=966/2400, y=379/1080, corner='botright', move_x=0, move_y=0) # Dragonvista Rain Hall
+        await self.bot.switch_map(y_list=928/1080, world='the_xianzhou_luofu', scroll_down=True,
+                                    x=966/2400, y=379/1080, corner='botright', move_x=0, move_y=0) # Dragonvista Rain Hall
         await self.bot.movepi(1.5, 4500)
         await self.bot.movepi(0.0, 2000)
         await self.bot.movepi(0.5, 3300)
@@ -910,80 +910,132 @@ class Scalegorge_Waterscape:
         await self.bot.attack_technique(3, wait=False) # -1TP
         await self.bot.movepi(1.0, 300)
         await self.bot.attack_technique(6) # -1TP
-    async def path_x(self): # roamer
+    async def path_x(self):
         logger_set_path(1)
         await self.bot.use_teleporter(357/2400, 354/1080, move_x=0, move_y=0) # Ancient Sea Palace Ruins
+        await self.bot.movepi(0.75, 900)
+        await self.bot.attack() # items
+        await self.bot.movepi(1.75, 1200)
+        await self.bot.movepi(1.5, 8000)
+        await self.bot.movepi(0.0, 1000)
+        await self.bot.attack() # +2TP
+    async def path_x(self): # roamer
+        logger_set_path(2)
+        await self.bot.use_teleporter(357/2400, 354/1080, move_x=0, move_y=0) # Ancient Sea Palace Ruins
+        await self.bot.movepi(1.0, 5600)
+        await self.bot.movepi(1.5, 1300)
+        await self.bot.movepi(1.0, 6400)
+        await self.bot.attack_technique(1, wait=False) # -1TP
+        await self.bot.movepi(0.75, 300)
+        await self.bot.attack_technique(6, wait=False) # -1TP
+        await self.bot.movepi(1.75, 300)
+        await self.bot.attack_technique(8) # -1TP
+    async def path_x(self):
+        logger_set_path(3)
+        await self.bot.use_teleporter(1433/2400, 659/1080, corner='topleft', move_x=0, move_y=0) # Palace Ruin Depths
+        await self.bot.movepi(1.5, 6000)
+        await self.bot.movepi(1.6, 300)
+        await self.bot.attack() # +2TP
+        await self.bot.movepi(0.5, 3900)
+        await self.bot.movepi(1.0, 2500)
+        await self.bot.movepi(1.5, 2900)
+        await self.bot.movepi(1.13, 2800)
+        await self.bot.attack() # +2TP
+        await self.bot.movepi(0.75, 2000)
+        await self.bot.posfix(0.75, 1000)
+        await self.bot.movepi(1.75, 600)
+        await self.bot.movepi(0.0, 2100)
+        await self.bot.movepi(0.5, 2400)
+        await self.bot.movepi(1.0, 6500)
+        await self.bot.movepi(0.7, 1300)
+        await self.bot.attack_technique(2, wait=False) # -1TP
+        await self.bot.movepi(0.75, 1000)
+        await self.bot.movepi(1.0, 2000)
+        await self.bot.posfix(0.75, 1000)
+        await self.bot.movepi(1.6, 1000)
+        await self.bot.movepi(1.5, 1000)
+        await self.bot.movepi(1.0, 2100)
+        await self.bot.movepi(1.5, 3000)
+        for _ in range(3): # -1TP
+            await self.bot.movepi(1.5, 300)
+            await self.bot.attack_technique(3, wait=False)
+        await self.bot.attack_technique(4)
+        await self.bot.restore_tp(n=1) # +2TP
+    async def path_x(self):
+        logger_set_path(4)
+        await self.bot.use_teleporter(1433/2400, 659/1080, corner='topleft', move_x=0, move_y=0) # Palace Ruin Depths
+        await self.bot.movepi(1.5, 3000)
+        await self.bot.movepi(0.0, 6500)
+        await self.bot.attack_technique(2, wait=False) # -1TP
+        await self.bot.movepi(1.5, 300)
+        await self.bot.attack_technique(4) # -1TP
+    async def path_x(self):
+        logger_set_path(5)
+        await self.bot.use_teleporter(1433/2400, 659/1080, corner='topleft', move_x=0, move_y=0) # Palace Ruin Depths
+        await self.bot.movepi(1.5, 3000)
+        await self.bot.movepi(0.00, 3600)
+        await self.bot.movepi(1.5, 6000)
+        await self.bot.movepi(1.25, 500)
+        for _ in range(3): # -1TP
+            await self.bot.movepi(1.5, 300)
+            await self.bot.attack_technique(2, wait=False)
+        await self.bot.movepi(0.5, 300)
+        await self.bot.attack_technique(4) # -1TP
+    async def path_x(self):
+        logger_set_path(6)
+        await self.bot.use_teleporter(1465/2400, 341/1080, corner='topleft', move_x=0, move_y=0) # Shape of Abomination
+        await self.bot.movepi(1.5, 4000)
+        await self.bot.movepi(1.0, 1000)
+        await self.bot.attack() # +2TP
+        await self.bot.movepi(0.7, 1000)
+        await self.bot.movepi(0.5, 1000)
+        await self.bot.movepi(0.7, 5000)
+        await self.bot.movepi(0.5, 500)
+        await self.bot.movepi(0.75, 1000)
+        await self.bot.posfix(0.75, 1000)
+        await self.bot.movepi(1.5, 1900)
+        await self.bot.movepi(1.0, 4500)
+        await self.bot.movepi(1.1, 900)
+        await self.bot.attack_technique(2, wait=False) # -1TP
+        await self.bot.movepi(1.6, 300)
+        await self.bot.attack_technique(1, wait=False) # -1TP
+        await self.bot.movepi(1.5, 300)
+        await self.bot.attack_technique(4, wait=False)
+        await self.bot.movepi(0.75, 5000)
+        await self.bot.posfix(0.75, 1000)
+        await self.bot.movepi(1.75, 1000)
+        await self.bot.movepi(1.5, 4000)
+        await self.bot.movepi(1.4, 1700)
+        await self.bot.movepi(1.6, 1200)
+        await self.bot.movepi(1.92, 500)
+        await self.bot.attack() # +2TP
+    async def path_x(self): # roamer
+        logger_set_path(7)
+        await self.bot.use_teleporter(909/2400, 690/1080, corner='topleft', move_x=0, move_y=0) # Divine Seed
+        await self.bot.movepi(1.0, 2000)
+        await self.bot.movepi(1.1, 2500)
+        await self.bot.movepi(1.5, 1500)
+        await self.bot.movepi(1.0, 2000)
+        await self.bot.attack() # +2TP
+        await self.bot.movepi(0.0, 2100)
+        await self.bot.movepi(0.5, 1500)
+        await self.bot.movepi(1.0, 8500)
+        await self.bot.movepi(1.25, 2300)
+        await self.bot.movepi(1.0, 1600)
+        await self.bot.movepi(0.75, 3000)
+        await self.bot.posfix(0.75, 1000)
+        await self.bot.movepi(1.75, 1000)
+        await self.bot.movepi(0.5, 3000)
+        await self.bot.movepi(0.6, 2000)
+        await self.bot.movepi(0.5, 4100)
+        await self.bot.attack_technique(2, wait=False)
+        await self.bot.movepi(0.75, 300)
+        await self.bot.attack_technique(3, wait=False)
+        await self.bot.movepi(0.9, 300)
+        await self.bot.attack_technique(5, wait=False)
+        await self.bot.movepi(0.5, 300)
+        await self.bot.attack_technique(5, wait=False)
+        await self.bot.movepi(0.0, 300)
+        await self.bot.attack_technique(5)
+        exit()
 
-
-
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger.info('### group 2 ###')
-#     await self.bot.use_teleporter(357/2400, 612/1080)
-#     await self.bot.movepi(1.0, 5600)
-#     await self.bot.movepi(1.5, 1300)
-#     await self.bot.movepi(1.0, 6700)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger.info('### group 2, part 2 ###') # roamer, can be improved
-#     await self.bot.movepi(1.0, 1500)
-#     await self.bot.movepi(0.75, 2500)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger.info('### group 2, part 3 ###') # roamer, can be improved
-#     await self.bot.movepi(1.4, 1500)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger.info('### group 3 ###') # move changed, not sure if teleport still works
-#     await self.bot.use_teleporter(693/2400, 695/1080) # Bud of Destruction
-#     await self.bot.movepi(1.5, 10800)
-#     await self.bot.movepi(0.00, 333)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger.info('### group 4 ###')
-#     await self.bot.use_teleporter(962/2400, 692/1080) # Bud of Destruction
-#     await self.bot.movepi(1.5, 7300)
-#     await self.bot.movepi(1.0, 9300)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger.info('### group 5 ###')
-#     await self.bot.use_teleporter(816/2400, 695/1080) # Bud of Destruction
-#     await self.bot.movepi(1.5, 1600)
-#     await self.bot.movepi(0.00, 3100)
-#     for _ in range(12):
-#         await self.bot.movepi(1.5, 650)
-#         await self.bot.movepi(0.00, 650)
-#     await self.bot.movepi(0.00, 6200)
-#     await self.bot.movepi(1.5, 2000)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger.info('### group 6 ###') # attack misses
-#     await self.bot.movepi(0.0, 1500)
-#     await self.bot.movepi(1.5, 500)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger.info('### group 7 ###')
-#     await self.bot.use_teleporter(1196/2400, 361/1080) # Palace Ruin Depths
-#     await self.bot.movepi(1.5, 3000)
-#     await self.bot.movepi(0.00, 6500)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger.info('### group 8 ###')
-#     await self.bot.use_teleporter(926/2400, 618/1080) # Palace Ruin Depths
-#     await self.bot.movepi(1.5, 3000)
-#     await self.bot.movepi(0.00, 3600)
-#     await self.bot.movepi(1.5, 7100)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
-#     logger.info('### group 9 ###')
-#     await self.bot.use_teleporter(848/2400, 257/1080) # Stagnant Shadow
-#     await self.bot.movepi(1.0, 3000)
-#     await self.bot.movepi(0.5, 750)
-#     await self.bot.movepi(1.0, 6700)
-#     await self.bot.attack()
-#     await self.bot.sleep(1)
-#     await self.bot.wait_for_onmap()
-#     logger.info('### group 10 ###')
-#     await self.bot.movepi(1.25, 250)
-#     await self.bot.attack()
-#     await self.bot.wait_for_onmap()
