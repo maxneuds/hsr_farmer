@@ -55,10 +55,11 @@ class Jarilo_VI:
         # TODO: get items along the bridge path
     
     async def farm_rivet_town(self):
-        await self.rivet_town.teleport()
-        await self.rivet_town.path_1()
-        await self.rivet_town.path_2()
-        await self.rivet_town.path_3()
+        # await self.rivet_town.teleport()
+        # await self.rivet_town.path_1()
+        # await self.rivet_town.path_2()
+        # await self.rivet_town.path_3()
+        await self.rivet_town.path_4()
 
     async def farm_robot_settlement(self):
         await self.robot_settlement.teleport()

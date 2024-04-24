@@ -26,37 +26,46 @@ async def main():
     the_xianzhou_luofu = The_Xianzhou_Luofu(bot=bot)
     penacony = Penacony(bot=bot)
 
-    # 4/4 Herta Space Station (7128/7128)
+    from time import time
+
+    # 4/4 Herta Space Station XP:7128/7128 Time:840s~14m TP:2->5
     # await herta_space_station.farm_seclusion_zone() # (1620/1620) TP:x>=2->2
     # await herta_space_station.farm_base_zone() # (432/432) TP:2->5
     # await herta_space_station.farm_storage_zone() # (2592/2592) TP:5->3
     # await herta_space_station.farm_supply_zone() # (2484/2484) TP:3->5
 
-    # 7/7 Jarilo-VI (19440/19440)
-    # await jarilo_vi.farm_outlying_snow_plains() # (2052/2052) TP:5->4
-    # await jarilo_vi.farm_backwater_pass() # (3024/3024) TP:4->4
-    # await jarilo_vi.farm_robot_settlement() # (2592/2592) TP:4->5
-    # await jarilo_vi.farm_corridor() # (3672/3672) TP:5->3
-    # await jarilo_vi.farm_everwinter_hill() # (1404/1404) TP:3->1
-    # await jarilo_vi.silvermane_guard.teleport(tp_restore=0) # TP:1->3
-    # await jarilo_vi.farm_great_mine() # (4536/4536) TP:3->1
-    # await jarilo_vi.farm_rivet_town() # (2160/2160) TP:1->4
+    # 7/7 Jarilo-VI XP:19440/19440 Time:1895s~32m TP:5->4
+    # await jarilo_vi.farm_outlying_snow_plains() # XP:2052/2052 Time:188s~3min TP:5->4
+    # await jarilo_vi.farm_backwater_pass() # XP:3024/3024 Time:240s~4min TP:4->4
+    # await jarilo_vi.farm_robot_settlement() # XP:2592/2592 Time:237s~4min TP:4->5
+    # await jarilo_vi.farm_corridor() # XP:3672/3672 Time:432s~7m TP:5->3
+    # await jarilo_vi.farm_everwinter_hill() # XP:1404/1404 Time:119s~2m TP:3->1
+    # await jarilo_vi.silvermane_guard.teleport(tp_restore=0) # Time:91s~1.5m TP:1->3
+    # await jarilo_vi.farm_great_mine() # XP:4536/4536 Time:326s~5.5m TP:3->1
+    # await jarilo_vi.farm_rivet_town() # XP:2160/2160 Time:262s~4.5min TP:1->4
     
 
-    # 7/7 Xianzhou Luofu (42596/42596)
-    # await the_xianzhou_luofu.farm_starskiff_haven()
-    # await the_xianzhou_luofu.farm_cloudford() # (4644/4644) TP:4->5
-    # await the_xianzhou_luofu.farm_stargazer_navalia() # (6264/6264) TP:5->1
-    # await jarilo_vi.silvermane_guard.teleport(tp_restore=1) # TP:1->5
-    # await the_xianzhou_luofu.farm_divination_commission() # (6000/6000) TP:5->3 TODO: redo with TP restore points (kill right, tp item, kill right2), eat:4TP before 3 at middle (finish with 3TP)
-    # await herta_space_station.storage_zone.teleport(tp_restore=0) # TP:2->4
-    # await the_xianzhou_luofu.farm_fyxestroll_garden() # (4644/4644) TP:5->2 TODO: +2 TP möglich
-    # await herta_space_station.supply_zone.teleport(tp_restore=0) # TP:1->3 TODO taken
-    # await the_xianzhou_luofu.farm_artisanship_commission() # (9548/9548) TP:4->2 TODO: check path5
-    # await jarilo_vi.everwinter_hill.teleport(tp_restore=0) # TP:2->4
+    # 7/7 Xianzhou Luofu XP:42596/42596 Time: TP:4->
+    # await the_xianzhou_luofu.farm_starskiff_haven() # Time:118s~2min
+    # await the_xianzhou_luofu.farm_cloudford() # XP:4644/4644 Time:? TP:4->5
+    # await the_xianzhou_luofu.farm_stargazer_navalia() # XP:6264/6264 Time:420s~7m TP:5->2
+    # await jarilo_vi.everwinter_hill.teleport(tp_restore=0) # Time:45s~0.75m TP:2->4
+    # await the_xianzhou_luofu.farm_divination_commission() # XP:6000/6000 Time: TP:4->1
+    # await jarilo_vi.silvermane_guard.teleport(tp_restore=1) # Time:83s~1.5m TP:1->5
+    # await the_xianzhou_luofu.farm_fyxestroll_garden() # XP:4644/4644 Time:? TP:5->1
+    # await penacony.golden_hour.teleport(tp_restore=0) # Time:70s~1.2m TP:1->5
+    # await the_xianzhou_luofu.farm_scalegorge_waterscape() # XP:4752/4752 Time:? TP:5->3
+    # await herta_space_station.storage_zone.teleport(tp_restore=0) # Time:33s~0.5m TP:3->5
+    await the_xianzhou_luofu.farm_artisanship_commission() # (9548/9548) TP:5->1
+    t0 = time()
+    t = time() - t0
+    print(t)
+    
     # await the_xianzhou_luofu.farm_alchemy_commission() # (6912/6912) TP:4->1
-    # await penacony.golden_hour.teleport(tp_restore=0) # TP:1->5
-    # await the_xianzhou_luofu.farm_scalegorge_waterscape() # (4752/4752) TP:5->3
+    
+    
+    # await herta_space_station.supply_zone.teleport(tp_restore=0) # TP:1->3 TODO taken
+    
 
     # 5/5 Penacony (47176/50092)
     # await penacony.farm_dreams_edge() # (7668/9612) TP:5->2
