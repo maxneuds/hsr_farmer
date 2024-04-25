@@ -1,6 +1,7 @@
-from logger import logger, logger_set_path
+from logger import log_runtime
 from worlds import the_xianzhou_luofu
 from sys import exit
+from datetime import datetime as dt
 
 class The_Xianzhou_Luofu:
     
@@ -52,15 +53,15 @@ class The_Xianzhou_Luofu:
         await self.divination_commission.path_9()
     
     async def farm_artisanship_commission(self):
-        # await self.artisanship_commission.teleport()
-        # await self.artisanship_commission.path_1()
-        # await self.artisanship_commission.path_2()
-        # await self.artisanship_commission.path_3()
-        # await self.artisanship_commission.path_4()
-        # await self.artisanship_commission.path_5()
-        # await self.artisanship_commission.path_6()
-        # await self.artisanship_commission.path_7()
-        await self.artisanship_commission.path_x()
+        await self.artisanship_commission.teleport()
+        await self.artisanship_commission.path_1()
+        await self.artisanship_commission.path_2()
+        await self.artisanship_commission.path_3()
+        await self.artisanship_commission.path_4()
+        await self.artisanship_commission.path_5()
+        await self.artisanship_commission.path_6()
+        await self.artisanship_commission.path_7()
+        await self.artisanship_commission.path_8()
 
     async def farm_fyxestroll_garden(self):
         await self.fyxestroll_garden.teleport()
@@ -83,6 +84,8 @@ class The_Xianzhou_Luofu:
         await self.alchemy_commission.path_6()
         await self.alchemy_commission.path_7()
         await self.alchemy_commission.path_8()
+        await self.alchemy_commission.path_9()
+        await self.alchemy_commission.path_10()
     
     async def farm_scalegorge_waterscape(self):
         await self.scalegorge_waterscape.teleport()
