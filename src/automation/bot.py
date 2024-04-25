@@ -283,7 +283,13 @@ class Bot:
             im_item = cv.imread(f'res/item_use_{name}.png', cv.IMREAD_COLOR)
             result_food = cv.matchTemplate(screen, im_item, cv.TM_CCOEFF_NORMED)
             _, max_val, _, max_loc = cv.minMaxLoc(result_food)
-            if max_val > 0.90: # recipe found
+            im_item_selected = cv.imread(f'res/item_use_selected_{name}.png', cv.IMREAD_COLOR)
+            result_food_selected = cv.matchTemplate(screen, im_item_selected, cv.TM_CCOEFF_NORMED)
+            _, max_val_selected, _, max_loc_selected = cv.minMaxLoc(result_food_selected)
+            if max_val_selected > max_val:
+                max_val = max_val_selected
+                max_loc = max_loc_selected
+            if max_val > 0.90: # item found
                 top_left = max_loc
                 await self.action_tap(top_left[0]+10, top_left[1]+10)
                 logger.info(f'eat food: {name}')

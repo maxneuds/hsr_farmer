@@ -29,11 +29,7 @@ class Penacony:
         # await self.childs_dream.path_2()
         # await self.childs_dream.path_3()
         # await self.childs_dream.path_4()
-        # await self.childs_dream.path_5()
-        # await self.childs_dream.path_6()
-        # await self.childs_dream.path_7()
-        # await self.childs_dream.path_8()
-        await self.childs_dream.path_x()
+        await self.childs_dream.path_5()
     
     async def farm_the_reverie_dreamscape(self):
         await self.the_reverie_dreamscape.teleport()

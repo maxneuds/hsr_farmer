@@ -155,7 +155,7 @@ class Childs_Dream:
         await self.bot.movepi(1.1, 1700)
         await self.bot.movepi(1.5, 2900)
         await self.bot.movepi(1.9, 700)
-        await self.bot.attack_technique(3)
+        await self.bot.attack_technique(3) # -2TP
     async def path_2(self):
         logger_set_path(2)
         await self.bot.use_teleporter(962/2400, 519/1080, move_x=0, move_y=0, corner='botright') # Bud of Aether
@@ -169,38 +169,39 @@ class Childs_Dream:
         await self.bot.movepi(1.25, 500)
         await self.bot.attack_technique(5)
         await self.bot.restore_tp(n=4) # +4TP
-    async def path_x(self):
+    async def path_3(self):
         logger_set_path(3)
         await self.bot.use_teleporter(1010/2400, 304/1080, move_x=0, move_y=4, corner='botright') # Corridor of Memories
         await self.bot.movepi(1.5, 9300)
         await self.bot.movepi(1.0, 7000)
         await self.bot.attack() # items
         await self.bot.movepi(1.5, 500)
-        await self.bot.attack_technique(6)
-        await self.bot.restore_tp(n=2) # +2TP
-        exit()
-        
-        
-        
-    async def path_3(self):
-        logger_set_path(3)
-        await self.bot.use_teleporter(1010/2400, 304/1080, move_x=0, move_y=4, corner='botright') # Corridor of Memories
-        await self.bot.movepi(1.5, 9300)
-        await self.bot.movepi(1.0, 5500)
-        await self.bot.movepi(1.2, 1100)
-        await self.bot.movepi(1.5, 6300)
-        await self.bot.attack_technique(10)
+        await self.bot.attack_technique(6) # -3TP
         await self.bot.restore_tp(n=2) # +2TP
     async def path_4(self):
         logger_set_path(4)
-        await self.bot.use_teleporter(1010/2400, 304/1080, move_x=0, move_y=4, corner='botright') # Corridor of Memories
-        await self.bot.movepi(1.5, 9300)
-        await self.bot.movepi(1.0, 5500)
-        await self.bot.movepi(1.2, 1300)
-        await self.bot.movepi(1.5, 7200)
+        await self.bot.use_teleporter(962/2400, 356/1080, move_x=0, move_y=0, corner='botright') # Eddying Dreamscape
+        exit() # check
+        await self.bot.movepi(0.5, 9000)
+        await self.bot.movepi(1.0, 3200)
+        await self.bot.movepi(0.6, 300)
+        await self.bot.movepi(0.5, 500)
+        await self.bot.attack() # items
+        await self.bot.movepi(1.5, 800)
+        await self.bot.movepi(1.0, 3000)
+        for _ in range(2): # -3TP
+            await self.bot.movepi(0.5, 300)
+            await self.bot.attack_technique(2, wait=False)
+        for _ in range(2):
+            await self.bot.movepi(1.5, 300)
+            await self.bot.attack_technique(2, wait=False)
+        await self.bot.movepi(0.7, 2200)
+        await self.bot.movepi(0.5, 1500)
+        await self.bot.movepi(0.0, 1500)
+        await self.bot.restore_tp(n=4) # +4TP
+        await self.bot.posfix(0.25, 1000)
         await self.bot.interact()
-        await self.bot.movepi(1.5, 1700)
-        await self.bot.movepi(1.0, 2000)
+        await self.bot.movepi(1.25, 2500)
         await self.bot.action_button()
         await self.bot.movepi(1.0, 2600)
         await self.bot.movepi(0.5, 2300)
@@ -215,53 +216,31 @@ class Childs_Dream:
         await self.bot.movepi(0.5, 5000)
         await self.bot.movepi(1.0, 1300)
         await self.bot.movepi(0.5, 3800)
-        await self.bot.attack_technique(5)
-        await self.bot.restore_tp(n=2) # +2TP
-    async def path_5(self):
-        logger_set_path(5)
-        await self.bot.use_teleporter(1010/2400, 304/1080, move_x=0, move_y=4, corner='botright') # Corridor of Memories
-        await self.bot.movepi(1.5, 9300)
-        await self.bot.movepi(1.0, 5500)
-        await self.bot.movepi(1.2, 1300)
-        await self.bot.movepi(1.5, 7200)
-        await self.bot.interact()
-        await self.bot.movepi(1.5, 1700)
-        await self.bot.movepi(1.0, 2000)
-        await self.bot.action_button()
-        await self.bot.movepi(1.0, 2600)
-        await self.bot.movepi(0.5, 2300)
-        await self.bot.movepi(1.0, 1400)
-        await self.bot.movepi(0.5, 2200)
-        await self.bot.action_button()
-        await self.bot.movepi(0.46, 4700)
-        await self.bot.movepi(0.0, 1600)
-        await self.bot.action_button()
-        await self.bot.movepi(0.0, 3000)
-        await self.bot.movepi(0.5, 5000)
-        await self.bot.movepi(1.0, 1300)
-        await self.bot.movepi(0.5, 3000)
-        await self.bot.movepi(0.8, 1200)
+        await self.bot.attack_technique(3, wait=False) # -2TP
+        await self.bot.movepi(0.25, 3000)
+        await self.bot.posfix(0.25, 1000)
+        await self.bot.movepi(1.4, 2500)
+        await self.bot.movepi(1.0, 700)
         await self.bot.interact()
         await self.bot.movepi(1.2, 1100)
         await self.bot.action_button()
-        await self.bot.movepi(1.0, 2800)
+        await self.bot.movepi(1.0, 2700)
         await self.bot.movepi(0.5, 3000)
         await self.bot.action_button()
         await self.bot.movepi(0.5, 2000)
         await self.bot.movepi(1.0, 1600)
         await self.bot.movepi(1.5, 3000)
-        await self.bot.attack_technique(6)
-    
-    
-    async def path_8(self):
-        logger_set_path(8)
+        await self.bot.attack_technique(3) # -1TP
+    async def path_5(self):
+        logger_set_path(5)
         await self.bot.use_teleporter(1122/2400, 617/1080, move_x=0, move_y=0, corner='botright') # Clock Factory
         await self.bot.movepi(0.5, 5000)
         await self.bot.movepi(1.0, 600)
         await self.bot.attack()
         await self.bot.movepi(1.3, 800)
-        await self.bot.movepi(1.0, 1500)
-        await self.bot.attack_technique(3)
+        await self.bot.movepi(1.0, 500)
+        await self.bot.attack_technique(5)
+        await self.bot.restore_tp(n=4) # +4TP
 
 
 class The_Reverie_Dreamscape:

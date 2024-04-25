@@ -45,7 +45,6 @@ async def main():
     # await jarilo_vi.farm_great_mine() # XP:4536/4536 Time:326s TP:3->1
     # await jarilo_vi.farm_rivet_town() # XP:2160/2160 Time:262sin TP:1->4
     
-
     # 7/7 Xianzhou Luofu XP:42596/42596 Time: TP:4->
     # await the_xianzhou_luofu.farm_starskiff_haven() # Time:118s
     # await the_xianzhou_luofu.farm_cloudford() # XP:4644/4644 Time:441s TP:4->5
@@ -61,7 +60,6 @@ async def main():
     # await herta_space_station.supply_zone.teleport(tp_restore=0) # TP:1->3
     # await the_xianzhou_luofu.farm_alchemy_commission() # XP:6912/6912 Time: TP:3->2
     
-
     # 5/5 Penacony (47176/50092)
     # await penacony.farm_dreams_edge() # (7668/9612) TP:2->4
     await penacony.farm_childs_dream() # (5832/5832) TP:4->
