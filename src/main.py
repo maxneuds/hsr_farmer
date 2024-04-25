@@ -61,14 +61,14 @@ async def main():
     # await the_xianzhou_luofu.farm_alchemy_commission() # XP:6912/6912 Time: TP:3->2
     
     # 5/5 Penacony (47176/50092)
-    # await penacony.farm_dreams_edge() # (7668/9612) TP:2->4
-    await penacony.farm_childs_dream() # (5832/5832) TP:4->
+    # await penacony.farm_dreams_edge() # XP:7668/9612 Time:? TP:2->4
+    # await penacony.farm_childs_dream() # XP:5832/5832 Time:? TP:4->5
+    # await penacony.farm_the_reverie_dreamscape() # XP:14580/15552 TIme:? TP: TODO: rework with position_fixing
     t0 = dt.now()
     log_runtime(t0=t0)
     # await penacony.golden_hour.teleport(tp_restore=1) # TP:
-    # await penacony.farm_the_reverie_dreamscape() # (14580/15552) TODO: rework with position_fixing
-    # await penacony.farm_dewlight_pavilion() # (11448/11448) check: path5
-    # await penacony.farm_clock_studios_theme_park() # (7648/7648)
+    await penacony.farm_dewlight_pavilion() # XP:11448/11448 Time: TP: check: path5
+    # await penacony.farm_clock_studios_theme_park() # XP:7648/7648 Time: TP:
 
     # 1/1 Astral Express
     # await astral_express.parlor_car()

@@ -251,10 +251,63 @@ class The_Reverie_Dreamscape:
         logger.info('---')
         logger.info("--- Map: The Reverie (Dreamscape)")
         logger.info('---')
-        await self.bot.switch_map(y_list=681/1080, world='penacony', scroll_down=True,
-                                    x=1164/2400, y=458/1080, move_x=0, move_y=5, corner='botright') # Path of Dreamdive
-        await self.bot.movepi(1.6, 800)
+        await self.bot.switch_map(y_list=681/1080, world='penacony', scroll_down=True, # Bud of Harmony
+                                    x=1344/2400, y=255/1080, move_x=0, move_y=8, corner='botleft')
+        await self.bot.movepi(1.0, 2500)
+        await self.bot.movepi(0.5, 500)
+        await self.bot.attack_technique(12) # -2TP
+    async def path_1(self):
+        logger_set_path(1)
+        await self.bot.use_teleporter(1100/2400, 680/1080, move_x=0, move_y=7, corner='topleft') # VIP Lounge Corridor
+        await self.bot.movepi(0.5, 1600)
+        await self.bot.movepi(1.0, 2300)
+        await self.bot.movepi(0.6, 1600)
+        await self.bot.attack_technique(1, wait=False) # -1TP
+        await self.bot.movepi(0.45, 2600)
+        await self.bot.movepi(0.0, 300)
+        await self.bot.attack_technique(10) # -1TP
+    async def path_x(self):
+        logger_set_path(2)
+        await self.bot.use_teleporter(864/2400, 506/1080, move_x=0, move_y=5, corner='botright') # Bud of Treasures
+        await self.bot.movepi(1.5, 800)
+        await self.bot.movepi(0.0, 4000)
+        await self.bot.movepi(0.5, 4300)
         await self.bot.attack() # +2TP
+        await self.bot.movepi(1.4, 1700)
+        await self.bot.movepi(1.5, 4300)
+        await self.bot.attack() # items
+        await self.bot.movepi(1.5, 6300)
+        await self.bot.movepi(1.4, 500)
+        await self.bot.attack() # +2TP
+        exit()
+        
+        
+        
+    async def path_19(self):
+        logger_set_path(19)
+        await self.bot.use_teleporter(659/2400, 697/1080, move_x=0, move_y=7, corner='topleft') # Shape of Nectar
+        await self.bot.movepi(1.5, 2600)
+        await self.bot.attack() # +2TP
+        
+        
+        
+    async def path_xxx(self): # roamer
+        logger_set_path(1)
+        await self.bot.use_teleporter(1100/2400, 680/1080, move_x=0, move_y=7, corner='topleft') # VIP Lounge Corridor
+        await self.bot.movepi(1.25, 1200)
+        await self.bot.movepi(1, 5500)
+        await self.bot.movepi(0.7, 4000)
+        await self.bot.movepi(0.5, 800)
+        await self.bot.attack_technique(1, wait=False) # -1TP
+        await self.bot.movepi(1.0, 500)
+        await self.bot.attack_technique(8) # -1TP
+        exit()
+        
+        
+        
+        
+        
+        
     async def path_1(self): # TODO: get all in path 1 (combine 1+2)
         logger_set_path(1)
         await self.bot.use_teleporter(1133/2400, 634/1080, move_x=0, move_y=7, corner='topright', confirm=True) # Platinum Guest Room
@@ -285,16 +338,7 @@ class The_Reverie_Dreamscape:
         await self.bot.movepi(0.25, 1500)
         await self.bot.movepi(0.56, 6500)
         await self.bot.attack_technique(3)
-    async def path_4(self): # TP restore
-        logger_set_path(4)
-        await self.bot.use_teleporter(864/2400, 506/1080, move_x=0, move_y=5, corner='botright') # Bud of Treasures
-        await self.bot.movepi(1.5, 500)
-        await self.bot.movepi(1.9, 1900)
-        await self.bot.movepi(0.0, 1800)
-        await self.bot.movepi(1.5, 1200)
-        await self.bot.attack()
-        await self.bot.movepi(0.48, 6300)
-        await self.bot.attack()
+  
     async def path_5(self):
         logger_set_path(5)
         await self.bot.use_teleporter(1133/2400, 634/1080, move_x=0, move_y=7, corner='topright', confirm=True) # Platinum Guest Room
@@ -372,13 +416,7 @@ class The_Reverie_Dreamscape:
         await self.bot.movepi(0.9, 2100)
         await self.bot.attack_technique(4)
         await self.bot.restore_tp(n=2) # +2TP
-    async def path_11(self):
-        logger_set_path(11)
-        await self.bot.use_teleporter(1344/2400, 255/1080, move_x=0, move_y=8, corner='botleft') # Bud of Harmony
-        await self.bot.movepi(1.0, 2500)
-        await self.bot.movepi(0.5, 4800)
-        await self.bot.attack_technique(4)
-        await self.bot.restore_tp(n=2) # +2TP
+        
     async def path_12(self): # roamer
         logger_set_path(12)
         await self.bot.use_teleporter(1100/2400, 680/1080, move_x=0, move_y=7, corner='topleft') # VIP Lounge Corridor
@@ -391,16 +429,7 @@ class The_Reverie_Dreamscape:
         await self.bot.movepi(0.65, 900)
         await self.bot.attack_technique(3)
         await self.bot.restore_tp(n=4) # +4 TP
-    async def path_13(self): # roamer
-        logger_set_path(13)
-        await self.bot.use_teleporter(1100/2400, 680/1080, move_x=0, move_y=7, corner='topleft') # VIP Lounge Corridor
-        await self.bot.movepi(1.25, 1200)
-        await self.bot.movepi(1, 5500)
-        await self.bot.movepi(0.7, 4000)
-        await self.bot.movepi(0.5, 800)
-        await self.bot.attack_technique(1, wait=False)
-        await self.bot.movepi(1.0, 1000)
-        await self.bot.attack_technique(6)
+    
     async def path_14(self):
         logger_set_path(14)
         await self.bot.use_teleporter(1100/2400, 680/1080, move_x=0, move_y=7, corner='topleft') # VIP Lounge Corridor
@@ -498,21 +527,8 @@ class The_Reverie_Dreamscape:
         await self.bot.attack_technique(4, wait=False)
         await self.bot.movepi(0.1, 1700)
         await self.bot.attack_technique(3)
-    async def path_18(self):
-        logger_set_path(18)
-        await self.bot.use_teleporter(1100/2400, 680/1080, move_x=0, move_y=7, corner='topleft') # VIP Lounge Corridor
-        await self.bot.movepi(0.5, 1600)
-        await self.bot.movepi(1.0, 2300)
-        await self.bot.movepi(0.6, 1600)
-        await self.bot.attack_technique(1, wait=False)
-        await self.bot.movepi(0.45, 2500)
-        await self.bot.movepi(0.0, 200)
-        await self.bot.attack_technique(10)
-    async def path_19(self):
-        logger_set_path(19)
-        await self.bot.use_teleporter(659/2400, 697/1080, move_x=0, move_y=7, corner='topleft') # Shape of Nectar
-        await self.bot.movepi(1.5, 2600)
-        await self.bot.attack() # +2TP
+    
+    
     async def path_20(self):
         logger_set_path(20)
         await self.bot.use_teleporter(1015/2400, 580/1080, move_x=0, move_y=0, corner='topleft') # Dreamjolt Hostelry
