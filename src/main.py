@@ -47,7 +47,7 @@ async def main():
     
 
     # 7/7 Xianzhou Luofu XP:42596/42596 Time: TP:4->
-    # await the_xianzhou_luofu.farm_starskiff_haven() # Time:118sin
+    # await the_xianzhou_luofu.farm_starskiff_haven() # Time:118s
     # await the_xianzhou_luofu.farm_cloudford() # XP:4644/4644 Time:441s TP:4->5
     # await the_xianzhou_luofu.farm_stargazer_navalia() # XP:6264/6264 Time:420s TP:5->2
     # await jarilo_vi.everwinter_hill.teleport(tp_restore=0) # Time:45s TP:2->4
@@ -61,12 +61,12 @@ async def main():
     # await herta_space_station.supply_zone.teleport(tp_restore=0) # TP:1->3
     # await the_xianzhou_luofu.farm_alchemy_commission() # XP:6912/6912 Time: TP:3->2
     
-    t0 = dt.now()
-    log_runtime(t0=t0)
 
     # 5/5 Penacony (47176/50092)
-    # await penacony.farm_dreams_edge() # (7668/9612) TP:5->2
-    # await penacony.farm_childs_dream() # (5832/5832) TP:2->
+    # await penacony.farm_dreams_edge() # (7668/9612) TP:2->4
+    await penacony.farm_childs_dream() # (5832/5832) TP:4->
+    t0 = dt.now()
+    log_runtime(t0=t0)
     # await penacony.golden_hour.teleport(tp_restore=1) # TP:
     # await penacony.farm_the_reverie_dreamscape() # (14580/15552) TODO: rework with position_fixing
     # await penacony.farm_dewlight_pavilion() # (11448/11448) check: path5

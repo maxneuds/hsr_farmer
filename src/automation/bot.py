@@ -250,7 +250,7 @@ class Bot:
             logger.warning('map change failed: retry')
             await self.switch_map(y_list=y_list, world=world, x=x, y=y, scroll_down=scroll_down, corner=corner, move_x=move_x, move_y=move_y, confirm=confirm, debug=debug)
     
-    async def restore_tp(self, n=1):
+    async def restore_tp(self, n=2):
         logger.info('action: restore TP using food, make sure it is faved first')
         await aio.sleep(0.05)
         logger.info('open inventory')
@@ -258,19 +258,50 @@ class Bot:
         await aio.sleep(2)
         logger.info('open food menu')
         await self.dev.shell(f'input tap {self.xy.food_menu[0]} {self.xy.food_menu[1]}')
-        await aio.sleep(1)
+        await aio.sleep(2)
         logger.info('select fav food')
-        await self.dev.shell(f'input tap {self.xy.food_fav[0]} {self.xy.food_fav[1]}')
-        await aio.sleep(0.5)
-        logger.info(f'eat food {n} times')
-        for _ in range(n):
-            await self.action_tap(int(self.xy.width*2008/2400), int(self.xy.height*990/1080))
-            await aio.sleep(1)
-            await self.action_tap(int(self.xy.width*1461/2400), int(self.xy.height*824/1080))
-            await aio.sleep(2)
-        logger.info(f'exit to map')
-        await self.action_back()
-        await self.wait_for_onmap(min_duration=3)
+        # select item
+        if n == 2:
+            name = 'trick_snack'
+        elif n == 4:
+            name = 'punitive_energy'
+        else:
+            logger.error(f'bad restore count: {n}')
+            exit()
+        count = 0
+        search_item = True
+        while search_item == True:
+            logger.info(f'looking for item: {name}')
+            # get screen
+            success = False
+            while not success:
+                try:
+                    screen = await self.adb.get_screen(dev=self.dev, custom_msg=None)
+                    success = True
+                except:
+                    pass
+            im_item = cv.imread(f'res/item_use_{name}.png', cv.IMREAD_COLOR)
+            result_food = cv.matchTemplate(screen, im_item, cv.TM_CCOEFF_NORMED)
+            _, max_val, _, max_loc = cv.minMaxLoc(result_food)
+            if max_val > 0.90: # recipe found
+                top_left = max_loc
+                await self.action_tap(top_left[0]+10, top_left[1]+10)
+                logger.info(f'eat food: {name}')
+                await self.action_tap(int(self.xy.width*2008/2400), int(self.xy.height*990/1080))
+                await aio.sleep(1)
+                await self.action_tap(int(self.xy.width*1461/2400), int(self.xy.height*824/1080))
+                await aio.sleep(2)
+                logger.info(f'exit to map')
+                await self.action_back()
+                await self.wait_for_onmap(min_duration=2)
+                search_item = False
+                return(True)
+            else:
+                count += 1
+                if count > 9:
+                    logger.error('item not found')
+                    search_item = False
+                    exit()
 
     async def interact(self, check_on_map=True):
         await aio.sleep(1)
@@ -373,7 +404,7 @@ class Bot:
         await self.action_tap(int(self.xy.phone[0]), int(self.xy.phone[1]))
         await aio.sleep(3)
             
-    async def craft_item(self, name, debug=False):
+    async def craft_item(self, name, all=True, debug=False):
         logger.info(f'craft: {name}')
         if debug == True:
             screen = await self.adb.get_screen(dev=self.dev, debug=True)
@@ -406,7 +437,10 @@ class Bot:
                 top_left = max_loc
                 await self.action_tap(top_left[0]+10, top_left[1]+10)
                 await aio.sleep(2)
-                await self.action_tap(int(self.xy.width*1863/2400), int(self.xy.height*869/1080)) # craft all
+                if all == True:
+                    await self.action_tap(int(self.xy.width*1863/2400), int(self.xy.height*869/1080)) # craft all
+                else:
+                    await self.action_tap(int(self.xy.width*1550/2400), int(self.xy.height*869/1080)) # craft half
                 await aio.sleep(2)
                 await self.action_tap(int(self.xy.width*1550/2400), int(self.xy.height*989/1080)) # Synthesize
                 await aio.sleep(3)

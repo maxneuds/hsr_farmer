@@ -463,7 +463,7 @@ class Great_Mine:
         await self.bot.movepi(1.5, 500)
         await self.bot.attack_technique(2, wait=False) # -1TP
         await self.bot.posfix(1.25, 4000)
-        await self.bot.restore_tp(n=1) # +2TP
+        await self.bot.restore_tp(n=2) # +2TP
         await self.bot.movepi(0.49, 800)
         await self.bot.movepi(0.85, 2300)
         await self.bot.attack_technique(1, wait=False) # -1TP

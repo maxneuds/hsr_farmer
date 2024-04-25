@@ -16,7 +16,7 @@ class The_Xianzhou_Luofu:
         self.scalegorge_waterscape = the_xianzhou_luofu.Scalegorge_Waterscape(bot)
 
     async def farm_starskiff_haven(self):
-        await self.central_starskiff_haven.teleport()
+        # await self.central_starskiff_haven.teleport()
         await self.central_starskiff_haven.shop_salesby()
 
     async def farm_cloudford(self):
