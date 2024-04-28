@@ -47,9 +47,10 @@ class Bot:
 
     async def open_map(self, special_exit=True, debug=False):
         logger.info('open map')
-        await aio.sleep(0.1)
+        await self.wait_for_onmap(min_duration=0)
+        await self.attack() # animation cancle
         await self.dev.shell(f'input tap {self.xy.map[0]} {self.xy.map[1]}')
-        logger.info('wait for map and check type (normal or special)')   
+        logger.info('wait for map and check type')   
         try: # catch KeyboardInterrupt
             img_back = cv.imread('res/bw_map_back.png', cv.IMREAD_GRAYSCALE)
             img_starrail = cv.imread('res/bw_map_starrail.png', cv.IMREAD_GRAYSCALE)
@@ -94,7 +95,9 @@ class Bot:
                 else:
                     time_running = timedelta(seconds=time.perf_counter() - time_start)
                     if time_running.seconds > 10:
-                        logger.error('open map not detected')
+                        logger.error('open map not detected, try again')
+                        await self.wait_for_onmap(min_duration=0)
+                        await self.open_map(special_exit=special_exit)
                         exit()
                     elif special_exit == False:
                         check_map = True
@@ -119,7 +122,6 @@ class Bot:
 
     async def use_teleporter(self, x, y, move_x=0, move_y=0, move_spd=500, corner='botright', open_map=True, confirm=False, special_exit=True, debug=False):
         logger.info(f'use teleporter: {int(self.xy.width*x)},{int(self.xy.height*y)}')
-        await aio.sleep(1)
         if open_map == True:
             await self.open_map(special_exit=special_exit)
         logger.info(f'move map to corner: {corner}')
@@ -127,7 +129,7 @@ class Bot:
             if corner == 'topright':
                 cmd = f'input swipe {int(self.xy.width*0.6)} {int(self.xy.height*0.1)} {int(self.xy.width*(0))} {int(self.xy.height*(0.9))} {500}'
             elif corner == 'topleft':
-                cmd = f'input swipe {int(self.xy.width*0.1)} {int(self.xy.height*0.2)} {int(self.xy.width*(0.7))} {int(self.xy.height*(0.9))} {500}'
+                cmd = f'input swipe {int(self.xy.width*0.1)} {int(self.xy.height*0.25)} {int(self.xy.width*(0.7))} {int(self.xy.height*(0.9))} {500}'
             elif corner == 'botleft':
                 cmd = f'input swipe {int(self.xy.width*0.1)} {int(self.xy.height*0.8)} {int(self.xy.width*(0.7))} {int(self.xy.height*(0))} {500}'
             elif corner == f'botright':
@@ -165,7 +167,7 @@ class Bot:
             await aio.sleep(1.5)
         # teleport
         await self.dev.shell(f'input tap {int(self.xy.width*0.83)} {int(self.xy.height*0.9)}')
-        check = await self.wait_for_onmap(min_duration=1, no_fight=True)
+        check = await self.wait_for_onmap(min_duration=2, no_fight=True)
         if check == 'stuck': # retry
             logger.error(f'telport failed. Try again')
             await self.action_back()
@@ -226,8 +228,6 @@ class Bot:
     
     async def switch_map(self, y_list, world, x, y, scroll_down=False, corner='botright', move_x=0, move_y=0, confirm=False, debug=False):
         logger.info('switch map')
-        if debug == False:
-            await self.sleep(3) # make sure character is ready for map switch
         await self.switch_world(world=world)
         logger.info('scroll location list')
         x_list = int(self.xy.width*0.8)
@@ -252,7 +252,8 @@ class Bot:
     
     async def restore_tp(self, n=2):
         logger.info('action: restore TP using food, make sure it is faved first')
-        await aio.sleep(0.05)
+        await self.wait_for_onmap(min_duration=0)
+        await self.attack() # animation cancle
         logger.info('open inventory')
         await self.dev.shell(f'input tap {self.xy.inventory[0]} {self.xy.inventory[1]}')
         await aio.sleep(2)
@@ -353,15 +354,10 @@ class Bot:
         await self.dev.shell(f'input tap {self.xy.technique[0]} {self.xy.technique[1]}')
         await aio.sleep(0.3)
 
-    async def attack_technique(self, count=2, wait=True):
+    async def attack_technique(self, count=1):
         logger.info(f'action: attack with technique {count} times')
         for _ in range(count):
             await self.action_technique()
-        if wait == True:
-            check = await self.wait_for_onmap(min_duration=5)
-            if check == 'food':
-                # had to eat food, repeat
-                await self.attack_technique(count=count)
                 
     async def buy_item(self, name, debug=False):
         logger.info(f'buy: {name}')

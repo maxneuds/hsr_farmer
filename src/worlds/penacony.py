@@ -10,9 +10,10 @@ class Golden_Hour:
         logger.info('---')
         logger.info('--- Map: Golden Hour')
         logger.info('---')
-        if tp_restore == 0:
+        if tp_restore == 4:
             await self.bot.switch_map(y_list=650/1080, world='penacony',
                                         x=588/2400, y=356/1080, move_x=4, move_y=3,) # Sweet Corner
+            exit() # also grab item
             await self.bot.movepi(1.6, 5000)
             await self.bot.movepi(1.25, 3000)
             await self.bot.attack() # +2TP
@@ -20,9 +21,9 @@ class Golden_Hour:
             await self.bot.movepi(0.7, 2000)
             await self.bot.movepi(0.9, 4400)
             await self.bot.attack() # +2TP
-        elif tp_restore == 1:
-            # await self.bot.switch_map(y_list=650/1080, world='penacony',
-            #                             x=330/2400, y=498/1080, corner='botright', move_x=0, move_y=0) # The Reverie Hotel Entrance
+        elif tp_restore == 2:
+            await self.bot.switch_map(y_list=650/1080, world='penacony',
+                                        x=330/2400, y=498/1080, corner='botright', move_x=0, move_y=0) # The Reverie Hotel Entrance
             await self.bot.movepi(0.35, 9000)
             await self.bot.movepi(0.8, 1000)
             await self.bot.attack_technique(3) # +2TP
@@ -54,7 +55,7 @@ class Dreams_Edge:
         await self.bot.movepi(1.0, 1600)
         await self.bot.movepi(0.5, 2400)
         await self.bot.movepi(0.9, 900)
-        await self.bot.attack_technique(1, wait=False) # -3TP
+        await self.bot.attack_technique(1) # -3TP
         await self.bot.movepi(0.05, 400)
         await self.bot.attack_technique(8)
         await self.bot.restore_tp(n=4) # +4TP
@@ -63,12 +64,12 @@ class Dreams_Edge:
         exit() # check
         await self.bot.use_teleporter(658/2400, 738/1080, move_x=0, move_y=7, corner='botleft') # Bud of Memories
         await self.bot.movepi(1.65, 2300)
-        await self.bot.attack_technique(3, wait=False)
+        await self.bot.attack_technique(3)
         await self.bot.movepi(1.2, 2000)
         await self.bot.movepi(1.7, 2000)
         await self.bot.posfix(1.65, 1000)
         await self.bot.movepi(0.8, 5900)
-        await self.bot.attack_technique(1, wait=False)
+        await self.bot.attack_technique(1)
         await self.bot.movepi(1.8, 1400)
         await self.bot.movepi(1.3, 300)
         await self.bot.attack_technique(8)
@@ -84,7 +85,7 @@ class Dreams_Edge:
         await self.bot.movepi(0.5, 3500)
         await self.bot.movepi(0.00, 2500)
         await self.bot.movepi(1.90, 1400)
-        await self.bot.attack_technique(3, wait=False) # -1TP
+        await self.bot.attack_technique(3) # -1TP
         await self.bot.movepi(0.9, 1100)
         await self.bot.movepi(0.5, 1500)
         await self.bot.attack_technique(3) # -1TP
@@ -104,7 +105,7 @@ class Dreams_Edge:
         await self.bot.movepi(0.5, 4500)
         await self.bot.movepi(0.00, 3700)
         await self.bot.movepi(0.5, 11000)
-        await self.bot.attack_technique(8, wait=False) # -3TP
+        await self.bot.attack_technique(8) # -3TP
         await self.bot.movepi(1.2, 300)
         await self.bot.attack_technique(8) # stability
     async def path_7(self): # roamer
@@ -114,7 +115,7 @@ class Dreams_Edge:
         await self.bot.movepi(0.05, 1300)
         await self.bot.attack() # +2TP
         await self.bot.movepi(1.3, 300)
-        await self.bot.attack_technique(5, wait=False)
+        await self.bot.attack_technique(5)
         await self.bot.movepi(1.7, 300)
         await self.bot.attack_technique(3)
         await self.bot.restore_tp(n=4) # +4TP
@@ -191,10 +192,10 @@ class Childs_Dream:
         await self.bot.movepi(1.0, 3000)
         for _ in range(2): # -3TP
             await self.bot.movepi(0.5, 300)
-            await self.bot.attack_technique(2, wait=False)
+            await self.bot.attack_technique(2)
         for _ in range(2):
             await self.bot.movepi(1.5, 300)
-            await self.bot.attack_technique(2, wait=False)
+            await self.bot.attack_technique(2)
         await self.bot.movepi(0.7, 2200)
         await self.bot.movepi(0.5, 1500)
         await self.bot.movepi(0.0, 1500)
@@ -216,7 +217,7 @@ class Childs_Dream:
         await self.bot.movepi(0.5, 5000)
         await self.bot.movepi(1.0, 1300)
         await self.bot.movepi(0.5, 3800)
-        await self.bot.attack_technique(3, wait=False) # -2TP
+        await self.bot.attack_technique(3) # -2TP
         await self.bot.movepi(0.25, 3000)
         await self.bot.posfix(0.25, 1000)
         await self.bot.movepi(1.4, 2500)
@@ -262,7 +263,7 @@ class The_Reverie_Dreamscape:
         await self.bot.movepi(0.5, 1600)
         await self.bot.movepi(1.0, 2300)
         await self.bot.movepi(0.6, 1600)
-        await self.bot.attack_technique(1, wait=False) # -1TP
+        await self.bot.attack_technique(1) # -1TP
         await self.bot.movepi(0.45, 2600)
         await self.bot.movepi(0.0, 300)
         await self.bot.attack_technique(10) # -1TP
@@ -298,7 +299,7 @@ class The_Reverie_Dreamscape:
         await self.bot.movepi(1, 5500)
         await self.bot.movepi(0.7, 4000)
         await self.bot.movepi(0.5, 800)
-        await self.bot.attack_technique(1, wait=False) # -1TP
+        await self.bot.attack_technique(1) # -1TP
         await self.bot.movepi(1.0, 500)
         await self.bot.attack_technique(8) # -1TP
         exit()
@@ -346,7 +347,7 @@ class The_Reverie_Dreamscape:
         await self.bot.movepi(1.0, 28000)
         await self.bot.movepi(1.25, 1200)
         await self.bot.movepi(1.5, 1000)
-        await self.bot.attack_technique(3, wait=False)
+        await self.bot.attack_technique(3)
         await self.bot.movepi(0.6, 1800)
         await self.bot.attack_technique(3)
         await self.bot.restore_tp(n=2) # +2TP
@@ -425,7 +426,7 @@ class The_Reverie_Dreamscape:
         await self.bot.movepi(0.3, 400)
         await self.bot.attack()
         await self.bot.movepi(1.05, 3000)
-        await self.bot.attack_technique(3, wait=False)
+        await self.bot.attack_technique(3)
         await self.bot.movepi(0.65, 900)
         await self.bot.attack_technique(3)
         await self.bot.restore_tp(n=4) # +4 TP
@@ -446,7 +447,7 @@ class The_Reverie_Dreamscape:
         await self.bot.movepi(1.1, 600)
         await self.bot.movepi(1.0, 6500)
         await self.bot.movepi(0.5, 300)
-        await self.bot.attack_technique(2, wait=False)
+        await self.bot.attack_technique(2)
         await self.bot.movepi(1.5, 1500)
         await self.bot.attack_technique(3)
     async def path_15(self):
@@ -495,7 +496,7 @@ class The_Reverie_Dreamscape:
         await self.bot.movepi(0.5, 2100)
         await self.bot.action_button()
         await self.bot.movepi(0.5, 2000)
-        await self.bot.attack_technique(2, wait=False)
+        await self.bot.attack_technique(2)
         await self.bot.movepi(0.45, 2200)
         await self.bot.attack_technique(3)
         await self.bot.restore_tp(n=2) # +2TP
@@ -524,7 +525,7 @@ class The_Reverie_Dreamscape:
         await self.bot.movepi(0.49, 3000)
         await self.bot.movepi(0.05, 200)
         await self.bot.movepi(1.0, 300)
-        await self.bot.attack_technique(4, wait=False)
+        await self.bot.attack_technique(4)
         await self.bot.movepi(0.1, 1700)
         await self.bot.attack_technique(3)
     
@@ -552,7 +553,7 @@ class The_Reverie_Dreamscape:
         await self.bot.sleep(2)
         await self.bot.movepi(0.5, 500)
         await self.bot.sleep(0.5)
-        await self.bot.attack_technique(2, wait=False)
+        await self.bot.attack_technique(2)
         await self.bot.movepi(0.1, 200)
         await self.bot.attack_technique(3)
     async def path_22(self):
@@ -583,9 +584,9 @@ class The_Reverie_Dreamscape:
         await self.bot.action_button()
         await self.bot.movepi(1.5, 4000)
         await self.bot.movepi(0.00, 2800)
-        await self.bot.attack_technique(3, wait=False)
+        await self.bot.attack_technique(3)
         await self.bot.movepi(0.5, 1300)
-        await self.bot.attack_technique(3, wait=False)
+        await self.bot.attack_technique(3)
         await self.bot.movepi(0.25, 3500)
         await self.bot.posfix(0.25, 1000)
         await self.bot.movepi(1.45, 3250)
@@ -593,9 +594,9 @@ class The_Reverie_Dreamscape:
         await self.bot.action_button()
         await self.bot.movepi(0.0, 2100)
         await self.bot.movepi(0.16, 1900)
-        await self.bot.attack_technique(4, wait=False)
+        await self.bot.attack_technique(4)
         await self.bot.movepi(0.5, 1000)
-        await self.bot.attack_technique(2, wait=False)
+        await self.bot.attack_technique(2)
         await self.bot.movepi(1.65, 3200)
         await self.bot.attack_technique(2)
         await self.bot.restore_tp(n=2) # +2TP
@@ -692,7 +693,7 @@ class Dewlight_Pavilion:
         await self.bot.movepi(1.0, 2300)
         await self.bot.attack() # items
         await self.bot.movepi(1.5, 1000)
-        await self.bot.attack_technique(2, wait=False)
+        await self.bot.attack_technique(2)
         await self.bot.movepi(0.8, 1200)
         await self.bot.movepi(0.5, 800)
         await self.bot.attack_technique(5)
@@ -732,7 +733,7 @@ class Dewlight_Pavilion:
         await self.bot.movepi(1.6, 3000)
         await self.bot.attack() # items
         await self.bot.movepi(1.4, 3300)
-        await self.bot.attack_technique(1, wait=False)
+        await self.bot.attack_technique(1)
         await self.bot.movepi(0.1, 1000)
         await self.bot.movepi(1.5, 3500)
         await self.bot.attack_technique(2) # items
@@ -763,7 +764,7 @@ class Dewlight_Pavilion:
         await self.bot.movepi(0.1, 200)
         await self.bot.action_button()
         await self.bot.movepi(0.0, 2000)
-        await self.bot.attack_technique(6, wait=False)
+        await self.bot.attack_technique(6)
         await self.bot.posfix(0.25, 5000)
         await self.bot.restore_tp(n=2) # +2TP
         await self.bot.movepi(1.04, 4200)
@@ -802,7 +803,7 @@ class Dewlight_Pavilion:
         await self.bot.movepi(0.25, 600)
         await self.bot.movepi(1.5, 600)
         await self.bot.movepi(1.4, 200)
-        await self.bot.attack_technique(6, wait=False)
+        await self.bot.attack_technique(6)
         await self.bot.movepi(1.75, 2000)
         await self.bot.posfix(1.75, 1000)
         await self.bot.movepi(0.7, 1000)
@@ -813,7 +814,7 @@ class Dewlight_Pavilion:
         await self.bot.attack() # items
         await self.bot.movepi(0.2, 1800)
         await self.bot.movepi(0.5, 300)
-        await self.bot.attack_technique(2, wait=False)
+        await self.bot.attack_technique(2)
         await self.bot.movepi(0.25, 5000) # position fixing
         await self.bot.restore_tp(n=2) # +2TP
         await self.bot.movepi(1.5, 2800)
@@ -834,7 +835,7 @@ class Dewlight_Pavilion:
         await self.bot.movepi(0.5, 3400)
         await self.bot.movepi(1.0, 800)
         await self.bot.movepi(1.5, 6000)
-        await self.bot.attack_technique(2, wait=False)
+        await self.bot.attack_technique(2)
         await self.bot.movepi(1.5, 3000)
         await self.bot.movepi(0.0, 300)
         await self.bot.attack_technique(2)
@@ -861,7 +862,7 @@ class Dewlight_Pavilion:
         await self.bot.movepi(0.0, 550)
         await self.bot.action_button()
         await self.bot.movepi(1.48, 2800)
-        await self.bot.attack_technique(2, wait=False)
+        await self.bot.attack_technique(2)
         await self.bot.posfix(1.75, 6000)
         await self.bot.restore_tp(n=2) # +2TP
         await self.bot.movepi(1.75, 5000)
@@ -893,7 +894,7 @@ class Dewlight_Pavilion:
         await self.bot.action_button()
         await self.bot.movepi(0.5, 1900)
         await self.bot.movepi(0.0, 2000)
-        await self.bot.attack_technique(1, wait=False)
+        await self.bot.attack_technique(1)
         await self.bot.movepi(0.55, 2800)
         await self.bot.attack() # items
         await self.bot.posfix(0.9, 5000)
@@ -929,7 +930,7 @@ class Dewlight_Pavilion:
         await self.bot.movepi(0.3, 2500)
         await self.bot.movepi(1.83, 6300)
         await self.bot.movepi(0.45, 700)
-        await self.bot.attack_technique(2, wait=False)
+        await self.bot.attack_technique(2)
         await self.bot.movepi(1.7, 1500)
         await self.bot.attack_technique(3)
         await self.bot.restore_tp(n=2) # +2TP
@@ -940,9 +941,9 @@ class Dewlight_Pavilion:
         await self.bot.movepi(1.83, 7000)
         await self.bot.movepi(0.3, 7000)
         await self.bot.movepi(0.5, 4200)
-        await self.bot.attack_technique(2, wait=False)
+        await self.bot.attack_technique(2)
         await self.bot.movepi(1.5, 1100)
-        await self.bot.attack_technique(3, wait=False)
+        await self.bot.attack_technique(3)
         await self.bot.movepi(0.0, 600)
         await self.bot.attack_technique(4)
         await self.bot.restore_tp(n=2) # +2TP
@@ -960,7 +961,7 @@ class Dewlight_Pavilion:
         await self.bot.movepi(0.47, 2200)
         await self.bot.attack() # items
         await self.bot.movepi(0.65, 2200)
-        await self.bot.attack_technique(1, wait=False)
+        await self.bot.attack_technique(1)
         await self.bot.movepi(0.1, 1600)
         await self.bot.attack_technique(2)
         await self.bot.restore_tp(n=4) # +2TP
@@ -980,7 +981,7 @@ class Dewlight_Pavilion:
         await self.bot.movepi(1.45, 3000)
         await self.bot.movepi(1.5, 3300)
         await self.bot.movepi(0.3, 800)
-        await self.bot.attack_technique(2, wait=False)
+        await self.bot.attack_technique(2)
         await self.bot.movepi(1.2, 500)
         await self.bot.movepi(1.0, 500)
         await self.bot.movepi(0.9, 100)
@@ -1082,7 +1083,7 @@ class Clock_Studios_Theme_Park:
         await self.bot.movepi(0.75, 4500)
         await self.bot.movepi(0.99, 2000)
         await self.bot.movepi(0.7, 2000)
-        await self.bot.attack_technique(2, wait=False)
+        await self.bot.attack_technique(2)
         await self.bot.movepi(1.45, 1000)
         await self.bot.attack_technique(4)
         await self.bot.restore_tp(n=2) # +2TP
@@ -1123,7 +1124,7 @@ class Clock_Studios_Theme_Park:
         await self.bot.attack()
         await self.bot.movepi(0.4, 1000)
         await self.bot.movepi(0.55, 1500)
-        await self.bot.attack_technique(2, wait=False)
+        await self.bot.attack_technique(2)
         await self.bot.movepi(0.5, 2000)
         await self.bot.attack_technique(2)
         await self.bot.restore_tp(n=2) # +2TP
@@ -1135,9 +1136,9 @@ class Clock_Studios_Theme_Park:
         await self.bot.movepi(0.57, 2100)
         await self.bot.attack()
         await self.bot.movepi(0.05, 2300)
-        await self.bot.attack_technique(4, wait=False)
+        await self.bot.attack_technique(4)
         await self.bot.movepi(0.0, 1000)
-        await self.bot.attack_technique(4, wait=False)
+        await self.bot.attack_technique(4)
         await self.bot.movepi(1.8, 2000)
     async def path_14(self): # TP regeneration
         logger_set_path(14)
@@ -1155,8 +1156,8 @@ class Clock_Studios_Theme_Park:
         await self.bot.movepi(0.6, 3100)
         await self.bot.movepi(0.57, 3100)
         await self.bot.movepi(0.1, 2000)
-        await self.bot.attack_technique(2, wait=False)
+        await self.bot.attack_technique(2)
         await self.bot.movepi(0.0, 500)
-        await self.bot.attack_technique(6, wait=False)
+        await self.bot.attack_technique(6)
 
     

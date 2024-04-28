@@ -61,13 +61,13 @@ class Penacony:
         # await self.the_reverie_dreamscape.path_x()
 
     async def farm_dewlight_pavilion(self):
-        await self.dewlight_pavilion.teleport()
-        await self.dewlight_pavilion.path_1()
-        await self.dewlight_pavilion.path_2()
-        await self.dewlight_pavilion.path_3()
-        await self.dewlight_pavilion.path_4()
-        exit() # check for kill
-        await self.dewlight_pavilion.path_5()
+        # await self.dewlight_pavilion.teleport()
+        # await self.dewlight_pavilion.path_1()
+        # await self.dewlight_pavilion.path_2()
+        # await self.dewlight_pavilion.path_3()
+        # await self.dewlight_pavilion.path_4()
+        # exit() # check for kill
+        # await self.dewlight_pavilion.path_5()
         await self.dewlight_pavilion.path_6()
         await self.dewlight_pavilion.path_7()
         await self.dewlight_pavilion.path_8()

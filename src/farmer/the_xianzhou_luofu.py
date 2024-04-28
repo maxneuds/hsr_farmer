@@ -16,7 +16,7 @@ class The_Xianzhou_Luofu:
         self.scalegorge_waterscape = the_xianzhou_luofu.Scalegorge_Waterscape(bot)
 
     async def farm_starskiff_haven(self):
-        # await self.central_starskiff_haven.teleport()
+        await self.central_starskiff_haven.teleport()
         await self.central_starskiff_haven.shop_salesby()
 
     async def farm_cloudford(self):
@@ -39,6 +39,7 @@ class The_Xianzhou_Luofu:
         await self.stargazer_navalia.path_4()
         await self.stargazer_navalia.path_5()
         await self.stargazer_navalia.path_6()
+        await self.stargazer_navalia.path_7()
     
     async def farm_divination_commission(self):
         await self.divination_commission.teleport()
@@ -88,14 +89,14 @@ class The_Xianzhou_Luofu:
         await self.alchemy_commission.path_10()
     
     async def farm_scalegorge_waterscape(self):
-        await self.scalegorge_waterscape.teleport()
+        # await self.scalegorge_waterscape.teleport()
         await self.scalegorge_waterscape.path_1()
-        await self.scalegorge_waterscape.path_2()
-        await self.scalegorge_waterscape.path_3()
-        await self.scalegorge_waterscape.path_4()
-        await self.scalegorge_waterscape.path_5()
-        await self.scalegorge_waterscape.path_6()
-        await self.scalegorge_waterscape.path_7()
-        await self.scalegorge_waterscape.path_8()
+        # await self.scalegorge_waterscape.path_2()
+        # await self.scalegorge_waterscape.path_3()
+        # await self.scalegorge_waterscape.path_4()
+        # await self.scalegorge_waterscape.path_5()
+        # await self.scalegorge_waterscape.path_6()
+        # await self.scalegorge_waterscape.path_7()
+        # await self.scalegorge_waterscape.path_8()
 
 

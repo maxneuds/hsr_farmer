@@ -43,11 +43,12 @@ class Jarilo_VI:
     async def farm_everwinter_hill(self):
         await self.everwinter_hill.teleport()
         await self.everwinter_hill.path_1()
+        await self.everwinter_hill.path_2()
     
     async def farm_great_mine(self):
         await self.great_mine.teleport()
         await self.great_mine.path_1()
-        await self.great_mine.path_2()
+        await self.great_mine.path_2() # TODO: path1+2 might be combined
         await self.great_mine.path_3()
         await self.great_mine.path_4()
         await self.great_mine.path_5()
@@ -55,10 +56,10 @@ class Jarilo_VI:
         # TODO: get items along the bridge path
     
     async def farm_rivet_town(self):
-        # await self.rivet_town.teleport()
-        # await self.rivet_town.path_1()
-        # await self.rivet_town.path_2()
-        # await self.rivet_town.path_3()
+        await self.rivet_town.teleport()
+        await self.rivet_town.path_1()
+        await self.rivet_town.path_2()
+        await self.rivet_town.path_3()
         await self.rivet_town.path_4()
 
     async def farm_robot_settlement(self):
