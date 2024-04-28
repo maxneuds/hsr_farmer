@@ -90,13 +90,13 @@ class The_Xianzhou_Luofu:
     
     async def farm_scalegorge_waterscape(self):
         # await self.scalegorge_waterscape.teleport()
-        await self.scalegorge_waterscape.path_1()
+        # await self.scalegorge_waterscape.path_1()
         # await self.scalegorge_waterscape.path_2()
         # await self.scalegorge_waterscape.path_3()
         # await self.scalegorge_waterscape.path_4()
         # await self.scalegorge_waterscape.path_5()
         # await self.scalegorge_waterscape.path_6()
-        # await self.scalegorge_waterscape.path_7()
+        await self.scalegorge_waterscape.path_7()
         # await self.scalegorge_waterscape.path_8()
 
 

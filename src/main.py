@@ -35,41 +35,40 @@ async def main():
     # await herta_space_station.farm_storage_zone() # XP:2592/2592 Time:250 TP:3->3
     # await herta_space_station.farm_supply_zone() # XP:2484/2484 Time:281 TP:3->5
 
-    # 7/7 Jarilo-VI XP:19440/19440 Time:1960 TP:5->5
+    # 7/7 Jarilo-VI XP:19440/19440 Time:1960 TP:5->5 R:1
     # await jarilo_vi.farm_outlying_snow_plains() # XP:2052/2052 Time:188 TP:5->4
     # await jarilo_vi.farm_backwater_pass() # XP:3024/3024 Time:240 TP:4->4
     # await jarilo_vi.farm_robot_settlement() # XP:2592/2592 Time:237 TP:4->5
     # await jarilo_vi.farm_corridor() # XP:3672/3672 Time:432 TP:5->3
     # await jarilo_vi.farm_everwinter_hill() # XP:1404/1404 Time:119 TP:3->3
-    # await jarilo_vi.farm_great_mine() # XP:4536/4536 Time:326 TP:3->3
+    # await jarilo_vi.farm_great_mine() # XP:4536/4536 Time:326 TP:3->3 R:1
     # await jarilo_vi.farm_rivet_town() # XP:2160/2160 Time:262 TP:3->5
     
-    # 7/7 Xianzhou Luofu XP:42596/42596 Time: TP:5->5
-    # await the_xianzhou_luofu.farm_starskiff_haven() # Time:118s
-    # await the_xianzhou_luofu.farm_fyxestroll_garden() # XP:4644/4644 Time:306s TP:5->1
-    # await jarilo_vi.silvermane_guard.teleport(tp_restore=4) # Time:83s TP:1->5
-    # await the_xianzhou_luofu.farm_artisanship_commission() # XP:9548/9548 Time: TP:5->1
+    # 7/7 Xianzhou Luofu XP:42596/42596 Time: TP:5->5 R:7
+    # await the_xianzhou_luofu.farm_starskiff_haven() # Time:118
+    # await the_xianzhou_luofu.farm_fyxestroll_garden() # XP:4644/4644 Time:306 TP:5->1
+    # await jarilo_vi.silvermane_guard.teleport(tp_restore=4) # Time:83 TP:1->5
+    # await the_xianzhou_luofu.farm_artisanship_commission() # XP:9548/9548 Time: TP:5->1 R:2
     # await penacony.golden_hour.teleport(tp_restore=4) # TP:1->5
-    # await the_xianzhou_luofu.farm_alchemy_commission() # XP:6912/6912 Time: TP:5->4
-    # await the_xianzhou_luofu.farm_cloudford() # XP:4644/4644 Time:441s TP:4->5
-    # await the_xianzhou_luofu.farm_stargazer_navalia() # XP:6264/6264 Time:420s TP:5->4
-    # await the_xianzhou_luofu.farm_divination_commission() # XP:6000/6000 Time: TP:4->2
+    # await the_xianzhou_luofu.farm_alchemy_commission() # XP:6912/6912 Time: TP:5->4 R:2
+    # await the_xianzhou_luofu.farm_cloudford() # XP:4644/4644 Time:441 TP:4->5
+    # await the_xianzhou_luofu.farm_stargazer_navalia() # XP:6264/6264 Time:420 TP:5->4 R:1
+    # await the_xianzhou_luofu.farm_divination_commission() # XP:6000/6000 Time: TP:4->2 R:1
     # await jarilo_vi.silvermane_guard.teleport(tp_restore=2) # Time:83s TP:2->4
-    await the_xianzhou_luofu.farm_scalegorge_waterscape() # XP:4752/4752 Time:503s TP:4->4
-    # await herta_space_station.supply_zone.teleport(tp_restore=2) # TP:1->3
+    # await the_xianzhou_luofu.farm_scalegorge_waterscape() # XP:4752/4752 Time:503 TP:4->4 R:1
+    # await herta_space_station.supply_zone.teleport(tp_restore=2) # TP:4->5
     
-    
-    # 5/5 Penacony (47176/50092)
-    # await penacony.farm_dreams_edge() # XP:7668/9612 Time:? TP:2->4
-    # await penacony.farm_childs_dream() # XP:5832/5832 Time:? TP:4->5
-    # await penacony.farm_the_reverie_dreamscape() # XP:14580/15552 TIme:? TP: TODO: rework with position_fixing
+    # 5/5 Penacony (47176/50092) TP:5->? R:
+    # await penacony.farm_dreams_edge() # XP:7668/9612 Time:? TP:5->3 R:3
+    # await penacony.golden_hour.teleport(tp_restore=2) # Time:70 TP:3->5
+    # await penacony.farm_childs_dream() # XP:5832/5832 Time:? TP:5->2 R4:1 R2:1
+    # await penacony.farm_the_reverie_dreamscape() # XP:14580/15552 TIme:? TP:4
+    await penacony.farm_clock_studios_theme_park() # XP:7648/7648 Time: TP:4->-8 R:
     # await penacony.farm_dewlight_pavilion() # XP:11448/11448 Time: TP: check: path5
-    # await penacony.farm_clock_studios_theme_park() # XP:7648/7648 Time: TP:
 
     # 1/1 Astral Express
     # await astral_express.parlor_car()
     
-    # await penacony.golden_hour.teleport(tp_restore=2) # Time:70s TP:1->5
     
     # t0 = dt.now()
     # log_runtime(t0=t0)
