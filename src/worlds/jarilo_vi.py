@@ -41,13 +41,14 @@ class Outlying_Snow_Plains:
     async def path_3(self):
         logger_set_path(3)
         await self.bot.use_teleporter(x=998/2400, y=338/1080, corner='botright', move_x=0, move_y=0, confirm=True) # Long Slope
+        exit() # check
         await self.bot.movepi(0.62, 2900)
         await self.bot.attack() # +2TP
         await self.bot.movepi(0.55, 4000)
         await self.bot.movepi(0.8, 9000)
         await self.bot.movepi(0.9, 2000)
-        await self.bot.attack_technique(3) # -3TP
-        await self.bot.movepi(1.2, 3000)
+        await self.bot.attack_technique(4) # -3TP
+        await self.bot.movepi(1.3, 3000)
         await self.bot.posfix(0.75, 1000)
         await self.bot.movepi(0.2, 1000)
         await self.bot.movepi(0.61, 4800)
@@ -60,6 +61,7 @@ class Backwater_Pass:
     def __init__(self, bot):
         self.bot = bot
     async def teleport(self):
+        logger_set_path('Teleport')
         logger.info('Teleport')
         logger.info('---')
         logger.info("--- Map: Backwater Pass")
@@ -130,7 +132,7 @@ class Backwater_Pass:
         await self.bot.movepi(1.0, 3100)
         await self.bot.movepi(1.29, 2400)
         await self.bot.attack_technique(3) # -2TP
-        await self.bot.movepi(1.3, 900)
+        await self.bot.movepi(1.3, 700)
         await self.bot.attack_technique(1) # -1TP
         for _ in range(4): # -1TP
             await self.bot.movepi(1.0, 300)
@@ -146,6 +148,7 @@ class Silvermane_Guard:
     def __init__(self, bot):
         self.bot = bot
     async def teleport(self, tp_restore=-1):
+        logger_set_path('Teleport')
         logger.info('Teleport')
         logger.info('---')
         logger.info("--- Map: Silvermane Guard Restricted Zone")
@@ -199,6 +202,7 @@ class Corridor:
     def __init__(self, bot):
         self.bot = bot
     async def teleport(self):
+        logger_set_path('Teleport')
         logger.info('Teleport')
         logger.info('---')
         logger.info("--- Map: Corridor of Fading Echoes")
@@ -330,8 +334,8 @@ class Corridor:
         await self.bot.attack_technique(2) # +2TP
         await self.bot.movepi(0.3, 500)
         await self.bot.attack_technique(4) # -1TP
-        await self.bot.movepi(1.7, 500)
-        await self.bot.attack_technique(4)
+        await self.bot.movepi(1.7, 300)
+        await self.bot.attack_technique(3)
         await self.bot.movepi(1.2, 500)
         await self.bot.attack_technique(4)
     async def path_8(self):
@@ -369,7 +373,7 @@ class Everwinter_Hill:
     async def path_1(self):
         logger_set_path(1)
         await self.bot.use_teleporter(x=775/2400, y=653/1080, corner='botleft', move_x=0, move_y=3, confirm=True) # Ancient Battlefield: Snow Plains
-        exit() # check
+        # exit() # check
         await self.bot.movepi(0.48, 3300)
         await self.bot.movepi(1.0, 200)
         await self.bot.attack() # +2TP
