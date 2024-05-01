@@ -44,7 +44,7 @@ async def main():
     # await jarilo_vi.farm_great_mine() # XP:4536/4536 Time:326 TP:3->3 R4:1
     # await jarilo_vi.farm_rivet_town() # XP:2160/2160 Time:262 TP:3->5
     
-    # 7/7 Xianzhou Luofu XP:42596/42596 Time: TP:5->5 R4:6 R2:1
+    # 7/7 Xianzhou Luofu XP:42596/42596 Time: TP:5->2 R4:6 R2:1
     # await the_xianzhou_luofu.farm_starskiff_haven() # Time:118
     # await the_xianzhou_luofu.farm_fyxestroll_garden() # XP:4644/4644 Time:306 TP:5->1
     # await jarilo_vi.silvermane_guard.teleport(tp_restore=4) # Time:83 TP:1->5
@@ -55,9 +55,10 @@ async def main():
     # await the_xianzhou_luofu.farm_cloudford() # XP:4644/4644 Time:441 TP:4->5
     # await the_xianzhou_luofu.farm_stargazer_navalia() # XP:6264/6264 Time:420 TP:5->4 R4:1
     # await the_xianzhou_luofu.farm_divination_commission() # XP:6000/6000 Time: TP:4->2 R4:1
-    await the_xianzhou_luofu.farm_scalegorge_waterscape() # XP:4752/4752 Time:503 TP:2->2 R4:1
+    # await the_xianzhou_luofu.farm_scalegorge_waterscape() # XP:4752/4752 Time:503 TP:2->2 R4:1
     
-    # 5/5 Penacony (47176/50092) TP:5->? R:
+    # 5/5 Penacony (47176/50092) TP:1->? R:
+    await penacony.golden_hour.teleport(tp_restore=4) # Time:? TP:1->5 # TODO: add destructible farm
     # await penacony.farm_dreams_edge() # XP:7668/9612 Time:? TP:5->3 R:3
     # await penacony.golden_hour.teleport(tp_restore=2) # Time:70 TP:3->5
     # await penacony.farm_childs_dream() # XP:5832/5832 Time:? TP:5->2 R4:1 R2:1
@@ -68,7 +69,6 @@ async def main():
     # 1/1 Astral Express
     # await astral_express.parlor_car()
     
-    # await penacony.golden_hour.teleport(tp_restore=4) # Time:? TP:
     # t0 = dt.now()
     # log_runtime(t0=t0)
     

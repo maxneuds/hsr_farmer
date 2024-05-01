@@ -13,9 +13,10 @@ class Golden_Hour:
         if tp_restore == 4:
             await self.bot.switch_map(y_list=650/1080, world='penacony',
                                         x=588/2400, y=356/1080, move_x=4, move_y=3,) # Sweet Corner
-            exit() # also grab item
-            await self.bot.movepi(1.6, 5000)
-            await self.bot.movepi(1.25, 3000)
+            await self.bot.movepi(1.5, 3300)
+            await self.bot.attack() # items
+            await self.bot.movepi(1.6, 1000)
+            await self.bot.movepi(1.4, 2800)
             await self.bot.attack() # +2TP
             await self.bot.use_teleporter(815/2400, 245/1080, move_x=0, move_y=2) # Oti Mall
             await self.bot.movepi(0.7, 2000)
