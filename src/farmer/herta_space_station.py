@@ -21,7 +21,6 @@ class Herta_Space_Station:
         await self.storage_zone.path_3()
         await self.storage_zone.path_4()
         await self.storage_zone.path_5()
-        await self.storage_zone.path_6()
     
     async def farm_supply_zone(self):
         await self.supply_zone.teleport()

@@ -22,12 +22,14 @@ class Golden_Hour:
             await self.bot.movepi(0.7, 2000)
             await self.bot.movepi(0.9, 4400)
             await self.bot.attack() # +2TP
-        elif tp_restore == 2:
+        elif tp_restore == 4.2:
             await self.bot.switch_map(y_list=650/1080, world='penacony',
                                         x=330/2400, y=498/1080, corner='botright', move_x=0, move_y=0) # The Reverie Hotel Entrance
             await self.bot.movepi(0.35, 9000)
             await self.bot.movepi(0.8, 1000)
             await self.bot.attack_technique(3) # +2TP
+            await self.bot.use_teleporter(1219/2400, 630/1080, corner='topleft', move_x=0, move_y=0) # Aideen Park
+            exit() # TODO: go east, grab items on way, grab TP
         else:
             logger.debug('bad parameter')
             exit()
@@ -99,8 +101,17 @@ class Dreams_Edge:
         await self.bot.movepi(1.97, 2000)
         await self.bot.attack_technique(8) # -1TP
         await self.bot.restore_tp(n=4) # +4TP
-    async def path_6(self): # roamer
+    async def path_6(self):
         logger_set_path(6)
+        await self.bot.use_teleporter(933/2400, 535/1080, move_x=0, move_y=5, corner='topright') # Dreamweaver Plaza
+        await self.bot.movepi(0.25, 1500)
+        await self.bot.movepi(0.5, 4500)
+        await self.bot.movepi(0.00, 3700)
+        await self.bot.movepi(0.49, 5500)
+        await self.bot.attack_technique(4) # -2TP
+        await self.bot.restore_tp(n=2) # +2TP
+    async def path_7(self): # roamer
+        logger_set_path(7)
         await self.bot.use_teleporter(933/2400, 535/1080, move_x=0, move_y=5, corner='topright') # Dreamweaver Plaza
         await self.bot.movepi(0.25, 1500)
         await self.bot.movepi(0.5, 4500)
@@ -109,28 +120,18 @@ class Dreams_Edge:
         await self.bot.attack_technique(8) # -3TP
         await self.bot.movepi(1.2, 300)
         await self.bot.attack_technique(4) # stability
-    async def path_7(self): # roamer
-        logger_set_path(7)
+    async def path_8(self): # roamer
+        logger_set_path(8)
         await self.bot.use_teleporter(909/2400, 345/1080, move_x=0, move_y=7, corner='botleft') # Shape of Roast
-        exit() # check
         await self.bot.movepi(1.5, 3000)
         await self.bot.movepi(0.05, 1300)
         await self.bot.attack() # +2TP
         await self.bot.movepi(1.3, 300)
-        await self.bot.attack_technique(5)
+        await self.bot.attack_technique(5) # -3TP
         await self.bot.movepi(0.75, 300)
         await self.bot.attack_technique(5)
         await self.bot.movepi(1.75, 300)
         await self.bot.attack_technique(5)
-        await self.bot.restore_tp(n=4) # +4TP
-    async def path_8(self):
-        logger_set_path(8)
-        await self.bot.use_teleporter(933/2400, 535/1080, move_x=0, move_y=5, corner='topright') # Dreamweaver Plaza
-        await self.bot.movepi(0.25, 1500)
-        await self.bot.movepi(0.5, 4500)
-        await self.bot.movepi(0.00, 3700)
-        await self.bot.movepi(0.49, 5500)
-        await self.bot.attack_technique(4) # -2TP
 
 
 class Childs_Dream:
@@ -183,7 +184,7 @@ class Childs_Dream:
     async def path_4(self):
         logger_set_path(4)
         await self.bot.use_teleporter(962/2400, 356/1080, move_x=0, move_y=0, corner='botright') # Eddying Dreamscape
-        # exit() # check
+        exit() # check
         await self.bot.movepi(0.5, 9000)
         await self.bot.movepi(1.0, 3200)
         await self.bot.movepi(0.6, 300)
@@ -302,6 +303,7 @@ class The_Reverie_Dreamscape:
     async def path_4(self):
         logger_set_path(4)
         await self.bot.use_teleporter(1133/2400, 634/1080, move_x=0, move_y=7, corner='topright', confirm=True) # Platinum Guest Room
+        exit() # broken
         await self.bot.movepi(0.5, 2600)
         await self.bot.movepi(1.0, 12900)
         await self.bot.movepi(0.5, 3000)
@@ -325,6 +327,7 @@ class The_Reverie_Dreamscape:
         await self.bot.movepi(1.0, 28000)
         await self.bot.movepi(1.25, 1200)
         await self.bot.movepi(1.5, 1000)
+        exit() # imrpove
         await self.bot.attack_technique(3) # -2TP
         await self.bot.movepi(0.6, 1800)
         await self.bot.attack_technique(3)
@@ -376,8 +379,8 @@ class The_Reverie_Dreamscape:
         await self.bot.attack_technique(12) # -2TP
     async def path_7(self): # roamer
         logger_set_path(7)
-        # await self.bot.use_teleporter(1100/2400, 680/1080, move_x=0, move_y=7, corner='topleft') # VIP Lounge Corridor
-        # exit() # redo
+        await self.bot.use_teleporter(1100/2400, 680/1080, move_x=0, move_y=7, corner='topleft') # VIP Lounge Corridor
+        exit() # redo
         await self.bot.movepi(1.25, 1200)
         await self.bot.movepi(1, 4700)
         await self.bot.movepi(0.5, 900)
@@ -815,6 +818,7 @@ class Dewlight_Pavilion:
     async def path_7(self):
         logger_set_path(7)
         await self.bot.use_teleporter(1080/2400, 285/1080, move_x=0, move_y=5, corner='botleft') # Dreammaster Hall
+        exit() # check: fight war triggered
         await self.bot.movepi(0.8, 2300)
         await self.bot.movepi(0.5, 4600)
         await self.bot.movepi(1.0, 900)
@@ -849,6 +853,7 @@ class Dewlight_Pavilion:
     async def path_8(self):
         logger_set_path(8)
         await self.bot.use_teleporter(1080/2400, 285/1080, move_x=0, move_y=5, corner='botleft') # Dreammaster Hall
+        exit() # check: fight triggered
         await self.bot.movepi(0.8, 2300)
         await self.bot.movepi(0.5, 4600)
         await self.bot.movepi(1.0, 900)

@@ -56,26 +56,36 @@ class Storage_Zone:
         await self.bot.attack() # items
         await self.bot.movepi(1.6, 300)
         await self.bot.attack_technique(3) # -1TP
-        await self.bot.movepi(0.0, 900)
-        await self.bot.movepi(1.9, 1000)
         await self.bot.posfix(1.75, 1000)
-        await self.bot.movepi(0.75, 400)
-        await self.bot.movepi(0.5, 4000)
-        await self.bot.movepi(0.4, 300)
+        await self.bot.movepi(1.0, 600)
+        await self.bot.movepi(1.4, 1500)
+        await self.bot.movepi(1.6, 500)
         await self.bot.attack() # +2TP
-        await self.bot.movepi(1.0, 400)
-        await self.bot.movepi(0.7, 2100)
-        await self.bot.movepi(0.9, 1000)
-        await self.bot.movepi(1.1, 300)
-        await self.bot.attack_technique(5) # -1TP
+        await self.bot.movepi(0.6, 800)
+        await self.bot.movepi(0.4, 1500)
+        await self.bot.movepi(0.5, 4000)
+        await self.bot.movepi(0.2, 500)
+        await self.bot.attack() # +2TP
+        await self.bot.movepi(0.25, 500)
+        await self.bot.posfix(0.25, 1000)
+        await self.bot.movepi(1.0, 600)
+        await self.bot.movepi(0.7, 2200)
+        await self.bot.movepi(1.1, 800)
+        await self.bot.attack_technique(4) # -1TP
     async def path_2(self):
         logger_set_path(2)
+        await self.bot.use_teleporter(895/2400, 530/1080, move_x=0, move_y=0, corner='botright', confirm=True) # Courtyard
+        await self.bot.movepi(1.5, 1500)
+        await self.bot.movepi(1.75, 500)
+        await self.bot.attack_technique(8) # -1TP, roamer
+    async def path_3(self):
+        logger_set_path(3)
         await self.bot.use_teleporter(510/2400, 507/1080, move_x=0, move_y=0, corner='botright') # Bud of Destruction
         await self.bot.movepi(1.6, 700)
         await self.bot.attack() # +2TP
         await self.bot.movepi(1.4, 1200)
-        await self.bot.movepi(1.5, 4000)
-        await self.bot.attack_technique(2)
+        await self.bot.movepi(1.5, 3800)
+        await self.bot.attack_technique(2) # -1TP
         await self.bot.movepi(1.75, 2000)
         await self.bot.posfix(1.75, 1000)
         await self.bot.movepi(0.8, 1000)
@@ -89,20 +99,9 @@ class Storage_Zone:
         for _ in range(2):
             await self.bot.movepi(1.25, 300)
             await self.bot.attack_technique(2)
-    async def path_3(self):
-        logger_set_path(3)
-        await self.bot.use_teleporter(1172/2400, 556/1080, move_x=0, move_y=0, corner='botright') # Path of Gelid Wind
-        await self.bot.movepi(1.2, 600)
-        await self.bot.attack() # +2TP
     async def path_4(self):
         logger_set_path(4)
-        await self.bot.use_teleporter(895/2400, 530/1080, move_x=0, move_y=0, corner='botright', confirm=True) # Courtyard
-        await self.bot.movepi(1.5, 1500)
-        await self.bot.movepi(1.75, 500)
-        await self.bot.attack_technique(8) # -1TP
-    async def path_5(self):
-        logger_set_path(5)
-        await self.bot.use_teleporter(895/2400, 530/1080, move_x=0, move_y=0, corner='botright', confirm=True) # Courtyard
+        await self.bot.use_teleporter(895/2400, 530/1080, move_x=0, move_y=0, corner='botright') # Courtyard
         await self.bot.movepi(0.35, 2000)
         await self.bot.attack() # +2TP
         await self.bot.movepi(1.35, 3100)
@@ -111,12 +110,10 @@ class Storage_Zone:
         await self.bot.attack() # items
         await self.bot.movepi(1.05, 3000)
         await self.bot.attack_technique(5) # -2TP
-    async def path_6(self):
-        logger_set_path(6)
-        await self.bot.use_teleporter(576/2400, 569/1080, move_x=0, move_y=0, corner='botright') # Outside the Control Center
-        await self.bot.movepi(1.5, 2200)
-        await self.bot.movepi(1.4, 2000)
-        await self.bot.movepi(1.6, 600)
+    async def path_5(self):
+        logger_set_path(5)
+        await self.bot.use_teleporter(1172/2400, 556/1080, move_x=0, move_y=0, corner='botright') # Path of Gelid Wind
+        await self.bot.movepi(1.2, 600)
         await self.bot.attack() # +2TP
         
 
