@@ -41,7 +41,7 @@ class Outlying_Snow_Plains:
     async def path_3(self):
         logger_set_path(3)
         await self.bot.use_teleporter(x=998/2400, y=338/1080, corner='botright', move_x=0, move_y=0, confirm=True) # Long Slope
-        exit() # check
+        exit() # check, should start with 3TP into 5 end 4
         await self.bot.movepi(0.62, 2900)
         await self.bot.attack() # +2TP
         await self.bot.movepi(0.55, 4000)

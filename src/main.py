@@ -32,7 +32,7 @@ async def main():
     # 4/4 Herta Space Station XP:7128/7128 Time:842 TP:0->5
     # await herta_space_station.farm_base_zone() # XP:432/432 Time:90 TP:0->3
     # await herta_space_station.farm_seclusion_zone() # XP:1620/1620 Time:220 TP:3->3
-    await herta_space_station.farm_storage_zone() # XP:2592/2592 Time:250 TP:3->5
+    # await herta_space_station.farm_storage_zone() # XP:2592/2592 Time:250 TP:3->5
     # await herta_space_station.farm_supply_zone() # XP:2484/2484 Time:281 TP:5->5
 
     # 7/7 Jarilo-VI XP:19440/19440 Time:1960 TP:5->5 R4:1
@@ -58,8 +58,8 @@ async def main():
     # await the_xianzhou_luofu.farm_scalegorge_waterscape() # XP:4752/4752 Time:503 TP:2->2 R4:1
     
     # 5/5 Penacony (47176/50092) TP:1->? R:
-    # await penacony.golden_hour.teleport(tp_restore=4) # Time:? TP:1->5
-    # await penacony.farm_dreams_edge() # XP:7668/9612 Time:? TP:5->1 R4:2 R2:1
+    await penacony.golden_hour.teleport(tp_restore=4) # Time:? TP:1->5
+    await penacony.farm_dreams_edge() # XP:7668/9612 Time:? TP:5->1 R4:2 R2:1
     # await penacony.golden_hour.teleport(tp_restore=4.2) # Time:? TP:
     # await penacony.farm_childs_dream() # XP:5832/5832 Time:? TP:5->2 R4:1 R2:1
     # await penacony.farm_the_reverie_dreamscape() # XP:14580/15552 TIme:? TP:4 TODO: rebuild

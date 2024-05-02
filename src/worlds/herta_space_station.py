@@ -170,8 +170,8 @@ class Supply_Zone:
         await self.bot.attack() # +2TP
         await self.bot.movepi(1.9, 900)
         await self.bot.attack() # items
-        await self.bot.movepi(1.1, 1100)
-        await self.bot.movepi(1.43, 2100)
+        await self.bot.movepi(1.0, 1200)
+        await self.bot.movepi(1.45, 2300)
         await self.bot.interact()
         await self.bot.wait_for_onmap(min_duration=2)
         await self.bot.movepi(0.5, 500)
