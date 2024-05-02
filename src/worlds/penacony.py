@@ -29,7 +29,15 @@ class Golden_Hour:
             await self.bot.movepi(0.8, 1000)
             await self.bot.attack_technique(3) # +2TP
             await self.bot.use_teleporter(1219/2400, 630/1080, corner='topleft', move_x=0, move_y=0) # Aideen Park
-            exit() # TODO: go east, grab items on way, grab TP
+            await self.bot.movepi(1.5, 3000)
+            await self.bot.movepi(1.6, 3100)
+            await self.bot.attack() # items
+            await self.bot.movepi(0.82, 2900)
+            await self.bot.attack() # items
+            await self.bot.movepi(1.4, 4000)
+            await self.bot.movepi(1.3, 2400)
+            await self.bot.movepi(0.8, 500)
+            await self.bot.attack() # +2TP
         else:
             logger.debug('bad parameter')
             exit()

@@ -58,9 +58,9 @@ async def main():
     # await the_xianzhou_luofu.farm_scalegorge_waterscape() # XP:4752/4752 Time:503 TP:2->2 R4:1
     
     # 5/5 Penacony (47176/50092) TP:1->? R:
-    await penacony.golden_hour.teleport(tp_restore=4) # Time:? TP:1->5
-    await penacony.farm_dreams_edge() # XP:7668/9612 Time:? TP:5->1 R4:2 R2:1
-    # await penacony.golden_hour.teleport(tp_restore=4.2) # Time:? TP:
+    # await penacony.golden_hour.teleport(tp_restore=4) # Time:? TP:1->5
+    # await penacony.farm_dreams_edge() # XP:7668/9612 Time:? TP:5->1 R4:2 R2:1
+    await penacony.golden_hour.teleport(tp_restore=4.2) # Time:? TP:
     # await penacony.farm_childs_dream() # XP:5832/5832 Time:? TP:5->2 R4:1 R2:1
     # await penacony.farm_the_reverie_dreamscape() # XP:14580/15552 TIme:? TP:4 TODO: rebuild
     # await penacony.farm_dewlight_pavilion() # XP:11448/11448 Time: TP: check: path5
