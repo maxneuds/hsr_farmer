@@ -61,10 +61,10 @@ async def main():
     # await penacony.golden_hour.teleport(tp_restore=4) # Time:70 TP:1->5
     # await penacony.farm_dreams_edge() # XP:7668/9612 Time:431 TP:5->1 R4:2 R2:1
     # await penacony.golden_hour.teleport(tp_restore=4.2) # Time:80 TP:1->5
-    # await penacony.farm_childs_dream() # XP:5832/5832 Time:? TP:5->2 R4:1 R2:3 TODO: optimize -15+12
-    # await penacony.farm_dewlight_pavilion() # XP:11448/11448 Time: TP: TODO: check path5, optimize
+    # await penacony.farm_childs_dream() # XP:5832/5832 Time:? TP:5->2 R4:1 R2:2
     # await penacony.farm_the_reverie_dreamscape() # XP:14580/15552 TIme:? TP:4 TODO: rebuild
-    # await penacony.farm_clock_studios_theme_park() # XP:7648/7648 Time: TP:4-> R: TODO: optimize
+    await penacony.farm_clock_studios_theme_park() # XP:7648/7648 Time: TP:1-> R: TODO: optimize
+    # await penacony.farm_dewlight_pavilion() # XP:11448/11448 Time: TP: TODO: check path5, optimize
 
     # ### 1/1 Astral Express
     # await astral_express.parlor_car()
