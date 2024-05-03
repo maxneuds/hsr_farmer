@@ -178,7 +178,7 @@ class Childs_Dream:
         await self.bot.movepi(0.00, 3000)
         await self.bot.movepi(1.5, 2000)
         await self.bot.movepi(1.25, 500)
-        await self.bot.attack_technique(5)
+        await self.bot.attack_technique(5) # -1TP
         await self.bot.restore_tp(n=2) # +2TP
     async def path_3(self):
         logger_set_path(3)
