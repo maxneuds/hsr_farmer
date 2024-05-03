@@ -41,7 +41,7 @@ class Jarilo_VI:
         await self.corridor.path_8()
 
     async def farm_everwinter_hill(self):
-        await self.everwinter_hill.teleport()
+        # await self.everwinter_hill.teleport()
         await self.everwinter_hill.path_1()
         await self.everwinter_hill.path_2()
     
