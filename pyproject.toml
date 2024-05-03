@@ -4,6 +4,8 @@ version = "1.1.0"
 description = ""
 authors = ["Maximilian Neudert <max@neuds.de>"]
 readme = "README.md"
+packages = [{include = "*", from="src"}]
+
 
 [tool.poetry.dependencies]
 python = "^3.12"
@@ -17,6 +19,7 @@ pure-python-adb = "^0.3.0.dev0"
 aiofiles = "^23.2.1"
 streamlit = "^1.32.0"
 scikit-image = "^0.22.0"
+pyyaml = "^6.0.1"
 
 
 [tool.poetry.group.dev.dependencies]

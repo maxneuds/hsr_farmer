@@ -9,6 +9,11 @@ class OnePlus7T():
         self.sprint = (int(w*2145/2400), int(h*925/1080))
         self.attack = (int(w*1965/2400), int(h*825/1080))
         self.skill = (int(w*1765/2400), int(h*925/1080))
+        self.technique = (int(w*1816/2400), int(h*926/1080))
+        self.inventory = (int(w*2033/2400), int(h*58/1080))
+        self.phone = (int(w*120/2400), int(h*80/1080))
+        self.food_menu = (int(w*155/2400), int(h*721/1080))
+        self.food_fav = (int(w*364/2400), int(h*209/1080))
         self.vjoy = {}
         self.vjoy['r'] = 150
         self.vjoy['center'] = (int(w*440/2400), int(h*839/1080))
