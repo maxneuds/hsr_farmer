@@ -570,6 +570,8 @@ class Artisanship_Commission:
     async def path_3(self): # roamer
         logger_set_path(3)
         await self.bot.use_teleporter(854/2400, 418/1080, corner='botright', move_x=0, move_y=4) # Creation Furnace
+        print('check')
+        exit() # check improve path, go in circle
         await self.bot.movepi(1.0, 1100)
         await self.bot.movepi(1.5, 900)
         await self.bot.movepi(0.0, 1900)
@@ -580,18 +582,19 @@ class Artisanship_Commission:
         await self.bot.movepi(0.0, 1400)
         await self.bot.movepi(1.5, 3000)
         await self.bot.movepi(1.69, 1400)
-        await self.bot.attack_technique(2) # -3TP
+        await self.bot.attack_technique(3) # -3TP
+        await self.bot.movepi(0.3, 1000)
         for _ in range(5):
-            await self.bot.movepi(0.24, 300)
-            await self.bot.attack_technique(1)
-        for _ in range(2):
             await self.bot.movepi(0.0, 300)
-            await self.bot.attack_technique(2)
-        for _ in range(3):
-            await self.bot.movepi(1.5, 300)
             await self.bot.attack_technique(1)
-        for _ in range(6):
+        for _ in range(3):
+            await self.bot.movepi(0.5, 300)
+            await self.bot.attack_technique(1)
+        for _ in range(5):
             await self.bot.movepi(1.0, 300)
+            await self.bot.attack_technique(1)
+        for _ in range(5):
+            await self.bot.movepi(1.75, 300)
             await self.bot.attack_technique(1)
         await self.bot.restore_tp(n=4) # +4TP
     async def path_4(self):
@@ -842,7 +845,7 @@ class Alchemy_Commission:
         await self.bot.movepi(1.8, 600)
         await self.bot.attack_technique(6) # -1TP
         await self.bot.movepi(1.7, 300)
-        await self.bot.attack_technique(3) # -2TP
+        await self.bot.attack_technique(4) # -1TP
     async def path_2(self):
         logger_set_path(2)
         await self.bot.use_teleporter(659/2400, 363/1080, corner='botright', move_x=0, move_y=0) # Cavern of Corrosion

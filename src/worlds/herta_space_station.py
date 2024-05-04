@@ -208,18 +208,20 @@ class Seclusion_Zone:
         await self.bot.switch_map(y_list=863/1080, world='herta_space_station', scroll_down=True, # Breeding Ground
                                     x=1097/2400, y=285/1080, corner='botright', move_x=0, move_y=3, confirm=False)
         print('check')
-        exit() # check
+        exit() # check, improve path to bugs
         await self.bot.movepi(0.06, 4000)
         await self.bot.movepi(1.95, 6000)
-        await self.bot.movepi(1.8, 4500)
-        await self.bot.movepi(1.75, 3100)
-        await self.bot.movepi(1.6, 400)
+        await self.bot.movepi(1.8, 6000)
+        await self.bot.movepi(1.7, 1500)
         exit()
-        await self.bot.attack_technique(4) # -2TP
+        await self.bot.attack_technique(2) # -1TP
+        await self.bot.movepi(0.0, 300)
+        await self.bot.attack_technique(1) # -1TP
         await self.bot.movepi(1.1, 1500)
         await self.bot.movepi(1.4, 3000)
         await self.bot.posfix(1.4, 1000)
         exit()
+        # grab energy
         await self.bot.movepi(0.25, 500)
         await self.bot.movepi(1.65, 5000)
         await self.bot.movepi(1.5, 1800)

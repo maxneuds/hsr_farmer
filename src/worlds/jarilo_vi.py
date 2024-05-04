@@ -371,7 +371,7 @@ class Everwinter_Hill:
         await self.bot.attack_technique(4) # -2TP
     async def path_1(self):
         logger_set_path(1)
-        # await self.bot.use_teleporter(x=775/2400, y=653/1080, corner='botleft', move_x=0, move_y=3, confirm=True) # Ancient Battlefield: Snow Plains
+        await self.bot.use_teleporter(x=775/2400, y=653/1080, corner='botleft', move_x=0, move_y=3, confirm=True) # Ancient Battlefield: Snow Plains
         await self.bot.movepi(0.48, 3300)
         await self.bot.movepi(1.0, 200)
         await self.bot.attack() # +2TP
