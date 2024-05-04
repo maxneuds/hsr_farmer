@@ -45,14 +45,16 @@ async def main():
     # await jarilo_vi.farm_rivet_town() # XP:2160/2160 Time:262 TP:3->5
     
     # ### 7/7 Xianzhou Luofu XP:42596/42596 Time: TP:5->2 R4:6 R2:1
-    # await the_xianzhou_luofu.farm_starskiff_haven() # Time:?
-    # await the_xianzhou_luofu.farm_fyxestroll_garden() # XP:4644/4644 Time:? TP:5->1
-    # await jarilo_vi.silvermane_guard.teleport(tp_restore=4) # Time:? TP:1->5
-    # await the_xianzhou_luofu.farm_artisanship_commission() # XP:9548/9548 Time:? TP:5->1 R4:2
-    # await herta_space_station.supply_zone.teleport(tp_restore=4) # Time:? TP:1->5
-    # await the_xianzhou_luofu.farm_alchemy_commission() # XP:6912/6912 Time: TP:5->2 R4:1 R2:1
-    # await jarilo_vi.silvermane_guard.teleport(tp_restore=2) # Time:? TP:2->4
-    # await the_xianzhou_luofu.farm_cloudford() # XP:4644/4644 Time:? TP:4->5
+    # await the_xianzhou_luofu.farm_starskiff_haven() # Time:160
+    # await the_xianzhou_luofu.farm_fyxestroll_garden() # XP:4644/4644 Time:265 TP:5->1
+    # await jarilo_vi.silvermane_guard.teleport(tp_restore=4) # Time:85 TP:1->5
+    # await the_xianzhou_luofu.farm_artisanship_commission() # XP:9548/9548 Time:610 TP:5->1 R4:2
+    # await herta_space_station.supply_zone.teleport(tp_restore=4) # Time:65 TP:1->5
+    # await the_xianzhou_luofu.farm_alchemy_commission() # XP:6912/6912 Time:610 TP:5->2 R4:1 R2:1
+    # await jarilo_vi.silvermane_guard.teleport(tp_restore=2) # Time:91 TP:2->4
+    t0 = dt.now()
+    await the_xianzhou_luofu.farm_cloudford() # XP:4644/4644 Time:395 TP:4->5
+    log_runtime(t0=t0)
     # await the_xianzhou_luofu.farm_stargazer_navalia() # XP:6264/6264 Time:? TP:5->4 R4:1
     # await the_xianzhou_luofu.farm_divination_commission() # XP:6000/6000 Time:? TP:4->2 R4:1
     # await the_xianzhou_luofu.farm_scalegorge_waterscape() # XP:4752/4752 Time:? TP:2->2 R4:1
@@ -69,8 +71,6 @@ async def main():
     # ### 1/1 Astral Express
     # await astral_express.parlor_car()
     
-    # t0 = dt.now()
-    # log_runtime(t0=t0)
     
     # TOTAL XP: 116.340 / 119.256
     # TOTAL TIME: 
