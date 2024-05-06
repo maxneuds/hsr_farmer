@@ -569,31 +569,31 @@ class Artisanship_Commission:
         await self.bot.attack_technique(5) # -1TP
     async def path_3(self): # roamer
         logger_set_path(3)
-        await self.bot.use_teleporter(854/2400, 418/1080, corner='botright', move_x=0, move_y=4) # Creation Furnace
-        print('check')
-        exit() # check improve path, go in circle
+        # await self.bot.use_teleporter(854/2400, 418/1080, corner='botright', move_x=0, move_y=4) # Creation Furnace
+        exit() # move directly to fixed creep, after TP go for posfix
         await self.bot.movepi(1.0, 1100)
         await self.bot.movepi(1.5, 900)
         await self.bot.movepi(0.0, 1900)
         await self.bot.movepi(0.5, 2300)
         await self.bot.movepi(0.23, 2400)
+        exit()
         await self.bot.attack() # +2TP
         await self.bot.movepi(1.5, 1600)
         await self.bot.movepi(0.0, 1400)
         await self.bot.movepi(1.5, 3000)
         await self.bot.movepi(1.69, 1400)
-        await self.bot.attack_technique(3) # -3TP
+        await self.bot.attack_technique(2) # -3TP
         await self.bot.movepi(0.3, 1000)
-        for _ in range(5):
+        for _ in range(6):
             await self.bot.movepi(0.0, 300)
             await self.bot.attack_technique(1)
-        for _ in range(3):
+        for _ in range(4):
             await self.bot.movepi(0.5, 300)
             await self.bot.attack_technique(1)
-        for _ in range(5):
+        for _ in range(6):
             await self.bot.movepi(1.0, 300)
             await self.bot.attack_technique(1)
-        for _ in range(5):
+        for _ in range(6):
             await self.bot.movepi(1.75, 300)
             await self.bot.attack_technique(1)
         await self.bot.restore_tp(n=4) # +4TP
@@ -630,6 +630,7 @@ class Artisanship_Commission:
     async def path_5(self):
         logger_set_path(5)
         await self.bot.use_teleporter(894/2400, 610/1080, corner='topleft', move_x=0, move_y=2) # Passage to the Sapientia Academe
+        exit() # check path, attack16?
         await self.bot.movepi(1.25, 3100)
         await self.bot.movepi(1.0, 8000)
         await self.bot.movepi(1.4, 1400)
@@ -638,7 +639,8 @@ class Artisanship_Commission:
         await self.bot.attack() # items
         await self.bot.movepi(1.4, 2100)
         await self.bot.movepi(1.0, 300)
-        await self.bot.attack_technique(16)
+        await self.bot.attack_technique(15)
+        exit()
         await self.bot.movepi(0.1, 1000)
         await self.bot.posfix(0.25, 1000)
         await self.bot.movepi(1.2, 1500)

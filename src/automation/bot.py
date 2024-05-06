@@ -543,14 +543,9 @@ class Bot:
                     await self.sleep(0.5)
                 elif max_val_food > 0.95: # food menu found, eat TP food
                     logger.info('food menu found: eat TP food')
-                    top_left = max_loc_food
-                    await self.action_tap(top_left[0]+5, top_left[1]+5)
-                    await self.action_tap(int(self.xy.width*1470/2400), int(self.xy.height*885/1080))
-                    await aio.sleep(2)
                     await self.action_back()
-                    for _ in range(4): # directly continue attacking
-                        await self.action_technique()
-                    return('food')
+                    await aio.sleep(2)
+                    await self.restore_tp(n=2)
                 elif check_return > 2: # back to map, continue
                     logger.info('character on map: continue')
                     await aio.sleep(0.5)

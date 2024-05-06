@@ -207,24 +207,21 @@ class Seclusion_Zone:
         logger.info('---')
         await self.bot.switch_map(y_list=863/1080, world='herta_space_station', scroll_down=True, # Breeding Ground
                                     x=1097/2400, y=285/1080, corner='botright', move_x=0, move_y=3, confirm=False)
-        print('check')
-        exit() # check, improve path to bugs
         await self.bot.movepi(0.06, 4000)
         await self.bot.movepi(1.95, 6000)
         await self.bot.movepi(1.8, 6000)
         await self.bot.movepi(1.7, 1500)
-        exit()
         await self.bot.attack_technique(2) # -1TP
         await self.bot.movepi(0.0, 300)
-        await self.bot.attack_technique(1) # -1TP
-        await self.bot.movepi(1.1, 1500)
-        await self.bot.movepi(1.4, 3000)
+        await self.bot.attack_technique(2) # -1TP
+        await self.bot.movepi(1.0, 2000)
+        await self.bot.movepi(1.4, 2500)
         await self.bot.posfix(1.4, 1000)
-        exit()
-        # grab energy
-        await self.bot.movepi(0.25, 500)
-        await self.bot.movepi(1.65, 5000)
-        await self.bot.movepi(1.5, 1800)
+        await self.bot.movepi(0.2, 600)
+        await self.bot.movepi(1.6, 3900)
+        await self.bot.movepi(1.5, 700)
+        await self.bot.attack_technique(1) # +2TP
+        await self.bot.movepi(1.6, 300)
         await self.bot.attack_technique(5) # -1TP
     async def path_1(self):
         logger_set_path(1)
