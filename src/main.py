@@ -28,13 +28,13 @@ async def main():
     the_xianzhou_luofu = The_Xianzhou_Luofu(bot=bot)
     penacony = Penacony(bot=bot)
 
-    ### 4/4 Herta Space Station XP:7128/7128 Time:842 TP:0->5
-    await herta_space_station.farm_base_zone() # XP:432/432 Time:90 TP:0->3
-    await herta_space_station.farm_seclusion_zone() # XP:1620/1620 Time:220 TP:3->3
-    await herta_space_station.farm_storage_zone() # XP:2592/2592 Time:250 TP:3->5
-    await herta_space_station.farm_supply_zone() # XP:2484/2484 Time:281 TP:5->5
+    ### 4/4 Herta Space Station XP:7128/7128 Time:600 TP:0->5
+    # await herta_space_station.farm_base_zone() # XP:432/432 Time:90 TP:0->3
+    # await herta_space_station.farm_seclusion_zone() # XP:1620/1620 Time:220 TP:3->3
+    # await herta_space_station.farm_storage_zone() # XP:2592/2592 Time:250 TP:3->5
+    # await herta_space_station.farm_supply_zone() # XP:2484/2484 Time:281 TP:5->5
 
-    # ### 7/7 Jarilo-VI XP:19440/19440 Time:1960 TP:5->5 R4:1
+    ### 7/7 Jarilo-VI XP:19440/19440 Time:1960 TP:5->5 R4:1
     # await jarilo_vi.farm_outlying_snow_plains() # XP:2052/2052 Time:188 TP:5->4
     # await jarilo_vi.farm_backwater_pass() # XP:3024/3024 Time:240 TP:4->4
     # await jarilo_vi.farm_robot_settlement() # XP:2592/2592 Time:237 TP:4->5
@@ -61,7 +61,7 @@ async def main():
     # await penacony.farm_dreams_edge() # XP:7668/9612 Time:431 TP:5->1 R4:2 R2:1
     # await penacony.golden_hour.teleport(tp_restore=4.2) # Time:80 TP:1->5
     # await penacony.farm_childs_dream() # XP:5832/5832 Time:? TP:5->4 R4:1 R2:2
-    # await penacony.farm_the_reverie_dreamscape() # XP:14580/15552 Time:? TP:4->1 R4:5 R2:2
+    await penacony.farm_the_reverie_dreamscape() # XP:14580/15552 Time:? TP:4->1 R4:5 R2:2
     # await penacony.farm_clock_studios_theme_park() # XP:7648/7648 Time: TP:1->1 R4:0 R2:4
     # await penacony.farm_dewlight_pavilion() # XP:11448/11448 Time: TP:1-> R4: R2:5
 
@@ -71,11 +71,11 @@ async def main():
     
     # TOTAL XP: 116.340 / 119.256
     # TOTAL TIME: 
+    # t0 = dt.now()
+    # log_runtime(t0=t0)
 
     ### TODO
     
-    # t0 = dt.now()
-    # log_runtime(t0=t0)
     
 
 

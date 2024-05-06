@@ -567,24 +567,24 @@ class Artisanship_Commission:
         await self.bot.movepi(1.1, 500)
         await self.bot.movepi(1.5, 100)
         await self.bot.attack_technique(5) # -1TP
-    async def path_3(self): # roamer
+    async def path_3(self):
         logger_set_path(3)
-        # await self.bot.use_teleporter(854/2400, 418/1080, corner='botright', move_x=0, move_y=4) # Creation Furnace
-        exit() # move directly to fixed creep, after TP go for posfix
+        await self.bot.use_teleporter(854/2400, 418/1080, corner='botright', move_x=0, move_y=4) # Creation Furnace
         await self.bot.movepi(1.0, 1100)
         await self.bot.movepi(1.5, 900)
         await self.bot.movepi(0.0, 1900)
-        await self.bot.movepi(0.5, 2300)
-        await self.bot.movepi(0.23, 2400)
-        exit()
+        await self.bot.movepi(0.5, 2800)
+        await self.bot.movepi(0.2, 2100)
         await self.bot.attack() # +2TP
         await self.bot.movepi(1.5, 1600)
         await self.bot.movepi(0.0, 1400)
-        await self.bot.movepi(1.5, 3000)
-        await self.bot.movepi(1.69, 1400)
-        await self.bot.attack_technique(2) # -3TP
-        await self.bot.movepi(0.3, 1000)
-        for _ in range(6):
+        await self.bot.movepi(0.25, 1000)
+        await self.bot.posfix(0.25, 1000)
+        await self.bot.movepi(1.3, 500)
+        await self.bot.movepi(1.5, 4600)
+        await self.bot.movepi(0.0, 500)
+        await self.bot.attack_technique(2) # -3TP, roamer
+        for _ in range(8):
             await self.bot.movepi(0.0, 300)
             await self.bot.attack_technique(1)
         for _ in range(4):
@@ -594,7 +594,7 @@ class Artisanship_Commission:
             await self.bot.movepi(1.0, 300)
             await self.bot.attack_technique(1)
         for _ in range(6):
-            await self.bot.movepi(1.75, 300)
+            await self.bot.movepi(1.8, 300)
             await self.bot.attack_technique(1)
         await self.bot.restore_tp(n=4) # +4TP
     async def path_4(self):
@@ -630,7 +630,8 @@ class Artisanship_Commission:
     async def path_5(self):
         logger_set_path(5)
         await self.bot.use_teleporter(894/2400, 610/1080, corner='topleft', move_x=0, move_y=2) # Passage to the Sapientia Academe
-        exit() # check path, attack16?
+        print('check')
+        exit() # check
         await self.bot.movepi(1.25, 3100)
         await self.bot.movepi(1.0, 8000)
         await self.bot.movepi(1.4, 1400)
@@ -639,9 +640,16 @@ class Artisanship_Commission:
         await self.bot.attack() # items
         await self.bot.movepi(1.4, 2100)
         await self.bot.movepi(1.0, 300)
-        await self.bot.attack_technique(15)
-        exit()
-        await self.bot.movepi(0.1, 1000)
+        await self.bot.attack_technique(12)
+        await self.bot.movepi(1.5, 1000)
+        await self.bot.movepi(1.2, 2000)
+        await self.bot.posfix(1.25, 1000)
+        await self.bot.movepi(0.5, 400)
+        await self.bot.movepi(0.8, 800)
+        await self.bot.movepi(0.5, 200)
+        await self.bot.attack() # items
+        await self.bot.movepi(0.2, 1000)
+        await self.bot.movepi(0.4, 1000)
         await self.bot.posfix(0.25, 1000)
         await self.bot.movepi(1.2, 1500)
         await self.bot.movepi(1.0, 3300)
@@ -732,7 +740,7 @@ class Fyxestroll_Garden:
         logger.info('--- Map: Fyxestroll Garden')
         logger.info('---')
         await self.bot.switch_map(y_list=688/1080, world='the_xianzhou_luofu', scroll_down=True, # Locufox Forest Backdoor
-                                    x=580/2400, y=174/1080, move_x=0, move_y=0, corner='botleft', confirm=False)
+                                    x=578/2400, y=284/1080, move_x=0, move_y=1, corner='botleft', confirm=False)
         await self.bot.movepi(1.5, 4400)
         await self.bot.movepi(1.95, 600)
         await self.bot.attack_technique(3) # -2TP
@@ -787,7 +795,7 @@ class Fyxestroll_Garden:
         await self.bot.attack() # +2TP
     async def path_7(self):
         logger_set_path(7)
-        await self.bot.use_teleporter(580/2400, 174/1080, corner='botleft', move_x=0, move_y=0) # Path of Darkness
+        await self.bot.use_teleporter(577/2400, 285/1080, corner='botleft', move_x=0, move_y=1) # Locufox Forest Backdoor
         await self.bot.movepi(0.5, 2500)
         await self.bot.movepi(0.25, 2000)
         await self.bot.movepi(0.75, 2000)
