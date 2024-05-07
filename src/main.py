@@ -61,9 +61,9 @@ async def main():
     # await penacony.farm_dreams_edge() # XP:7668/9612 Time:431 TP:5->1 R4:2 R2:1
     # await penacony.golden_hour.teleport(tp_restore=4.2) # Time:80 TP:1->5
     # await penacony.farm_childs_dream() # XP:5832/5832 Time:? TP:5->4 R4:1 R2:2
-    await penacony.farm_the_reverie_dreamscape() # XP:14580/15552 Time:? TP:4->1 R4:5 R2:2
+    # await penacony.farm_the_reverie_dreamscape() # XP:14580/15552 Time:? TP:4->1 R4:5 R2:2
     # await penacony.farm_clock_studios_theme_park() # XP:7648/7648 Time: TP:1->1 R4:0 R2:4
-    # await penacony.farm_dewlight_pavilion() # XP:11448/11448 Time: TP:1-> R4: R2:5
+    await penacony.farm_dewlight_pavilion() # XP:11448/11448 Time: TP:1-> R4: R2:5
 
     # ### 1/1 Astral Express
     # await astral_express.goto_pompom()

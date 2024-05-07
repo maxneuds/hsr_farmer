@@ -661,7 +661,6 @@ class Dewlight_Pavilion:
     async def path_2(self):
         logger_set_path(2)
         await self.bot.use_teleporter(801/2400, 569/1080, move_x=0, move_y=0, corner='botright') # Reception Counter
-        exit() # check
         await self.bot.movepi(0.5, 10350)
         await self.bot.movepi(0.0, 7000)
         await self.bot.movepi(1.5, 7000)
@@ -677,11 +676,11 @@ class Dewlight_Pavilion:
         await self.bot.attack_technique(2) # -1TP
         await self.bot.movepi(0.8, 1200)
         await self.bot.movepi(0.5, 800)
-        await self.bot.attack_technique(5) # -1TP
+        await self.bot.attack_technique(4) # -1TP
         await self.bot.restore_tp(n=2) # +2TP
         await self.bot.movepi(1.25, 3000)
         await self.bot.posfix(1.25, 1000)
-        await self.bot.movepi(1.6, 2600)
+        await self.bot.movepi(1.6, 2700)
         await self.bot.action_button()
         await self.bot.movepi(1.5, 1700)
         await self.bot.movepi(1.7, 500)
@@ -711,7 +710,7 @@ class Dewlight_Pavilion:
     async def path_4(self):
         logger_set_path(4)
         await self.bot.use_teleporter(1080/2400, 285/1080, move_x=0, move_y=5, corner='botleft') # Dreammaster Hall
-        exit() # check
+        # exit() # check
         await self.bot.movepi(0.2, 2300)
         await self.bot.movepi(0.5, 4200)
         await self.bot.movepi(0.0, 1000)
@@ -721,6 +720,7 @@ class Dewlight_Pavilion:
         await self.bot.movepi(0.0, 10200)
         await self.bot.movepi(0.5, 3600)
         await self.bot.movepi(0.0, 2600)
+        await self.bot.movepi(0.5, 300)
         await self.bot.movepi(0.7, 2200)
         await self.bot.interact()
         await self.bot.movepi(0.5, 1000)
@@ -728,9 +728,12 @@ class Dewlight_Pavilion:
         await self.bot.posfix(0.75, 1000)
         await self.bot.movepi(1.9, 2000)
         await self.bot.movepi(1.6, 4000)
-        await self.bot.movepi(1.5, 600)
-        await self.bot.attack() # items
+        # await self.bot.movepi(1.5, 600)
+        # await self.bot.attack() # items <- this one is a fucking problem
+        await self.bot.movepi(1.5, 300)
+        await self.bot.attack_technique() # items
         await self.bot.movepi(1.5, 1300)
+        exit() # check if near item
         await self.bot.attack() # items
         await self.bot.movepi(0.0, 3200)
         await self.bot.attack() # items
@@ -785,8 +788,10 @@ class Dewlight_Pavilion:
         await self.bot.movepi(0.7, 1000)
         await self.bot.movepi(0.4, 2500)
         await self.bot.posfix(0.25, 1000)
+        exit() # get the robot first, then the item, postfix and then the last one
         await self.bot.movepi(1.2, 2000)
-        await self.bot.movepi(1.5, 4600)
+        await self.bot.movepi(1.5, 4600) # less here, then robot
+        exit()
         await self.bot.attack() # items
         await self.bot.movepi(0.2, 1800)
         await self.bot.movepi(0.5, 300)
@@ -794,6 +799,7 @@ class Dewlight_Pavilion:
         await self.bot.movepi(0.25, 1000)
         await self.bot.restore_tp(n=2) # +2TP
         await self.bot.posfix(0.25, 1000)
+        exit()
         await self.bot.movepi(1.5, 2800)
         await self.bot.movepi(0.0, 2000)
         await self.bot.movepi(0.3, 300)
@@ -829,17 +835,19 @@ class Dewlight_Pavilion:
         await self.bot.movepi(1.0, 10100)
         await self.bot.movepi(0.49, 2700)
         await self.bot.attack() # items
-        await self.bot.movepi(1.51, 4900)
+        await self.bot.movepi(1.51, 4800)
         await self.bot.interact()
-        await self.bot.movepi(1.5, 500)
+        await self.bot.movepi(1.5, 600)
         await self.bot.movepi(1.1, 1100)
         await self.bot.attack() # items
-        await self.bot.posfix(1.25, 2000)
+        await self.bot.movepi(1.25, 1000)
+        exit() # improve kill + posfix (1.5 + direct to monster)
+        await self.bot.posfix(1.25, 1000)
         await self.bot.movepi(0.1, 1200)
         await self.bot.movepi(0.0, 550)
         await self.bot.action_button()
         await self.bot.movepi(1.48, 2800)
-        await self.bot.attack_technique(2) # -1TP
+        await self.bot.attack_technique(4) # -1TP
         await self.bot.posfix(1.75, 5000)
         await self.bot.restore_tp(n=2) # +2TP
         await self.bot.movepi(1.75, 5000)
@@ -902,6 +910,7 @@ class Dewlight_Pavilion:
     async def path_9(self): # roamer
         logger_set_path(9)
         await self.bot.use_teleporter(1333/2400, 502/1080, move_x=0, move_y=0, corner='botleft', special_exit=False) # City Sandpit
+        exit() # combine
         await self.bot.movepi(0.3, 2500)
         await self.bot.movepi(1.83, 6300)
         await self.bot.movepi(0.45, 700)
@@ -909,6 +918,7 @@ class Dewlight_Pavilion:
         await self.bot.movepi(1.7, 1500)
         await self.bot.attack_technique(3) # -1TP
         await self.bot.restore_tp(n=2) # +2TP
+        # TODO: combine 9+10 with posfix
     async def path_10(self):
         logger_set_path(10)
         await self.bot.use_teleporter(1333/2400, 502/1080, move_x=0, move_y=0, corner='botleft', special_exit=False) # City Sandpit
@@ -956,13 +966,14 @@ class Dewlight_Pavilion:
         await self.bot.attack() # items
         await self.bot.posfix(0.2, 1200)
         await self.bot.movepi(1.45, 3000)
-        await self.bot.movepi(1.5, 3300)
+        await self.bot.movepi(1.5, 3200)
         await self.bot.movepi(0.3, 800)
         await self.bot.attack_technique(2)
         await self.bot.movepi(1.2, 500)
         await self.bot.movepi(1.0, 500)
         await self.bot.movepi(0.9, 100)
         await self.bot.attack_technique(3)
+        await self.bot.wait_for_onmap(min_duration=0, no_fight=True) # eat food
 
 
 class Clock_Studios_Theme_Park:
@@ -1001,7 +1012,6 @@ class Clock_Studios_Theme_Park:
     async def path_2(self):
         logger_set_path(2)
         await self.bot.use_teleporter(1209/2400, 276/1080, move_x=1, move_y=6, confirm=True) # Theme Park Entrance
-        exit() # check
         await self.bot.movepi(0.36, 6000)
         await self.bot.movepi(0.2, 2600)
         await self.bot.movepi(0.5, 12900)
@@ -1016,7 +1026,7 @@ class Clock_Studios_Theme_Park:
         await self.bot.movepi(1.7, 2000)
         await self.bot.movepi(1.6, 900)
         await self.bot.attack_technique(2)
-        await self.bot.movepi(1.25, 2000)
+        await self.bot.movepi(1.25, 2500)
         await self.bot.posfix(1.25, 1000)
         await self.bot.movepi(0.3, 2500)
         await self.bot.movepi(0.5, 1500)
@@ -1034,7 +1044,6 @@ class Clock_Studios_Theme_Park:
     async def path_3(self):
         logger_set_path(3)
         await self.bot.use_teleporter(539/2400, 455/1080, move_x=1, move_y=1) # Hanu Gang Place
-        exit() # check
         await self.bot.movepi(0.8, 3300)
         for _ in range(4): # -1TP, roamer
             await self.bot.movepi(0.6, 300)
@@ -1049,7 +1058,7 @@ class Clock_Studios_Theme_Park:
         await self.bot.movepi(0.8, 1500)
         await self.bot.attack_technique(3) # -1TP
         await self.bot.movepi(1.45, 300)
-        await self.bot.attack_technique(4) # -1TP
+        await self.bot.attack_technique(5) # -1TP
         await self.bot.movepi(1.1, 1000)
         await self.bot.movepi(1.4, 2000)
         await self.bot.movepi(1.25, 1000)
@@ -1069,14 +1078,11 @@ class Clock_Studios_Theme_Park:
     async def path_5(self):
         logger_set_path(5)
         await self.bot.use_teleporter(1100/2400, 423/1080, corner='botright', move_x=3, move_y=3) # Bud of Preservation
-        exit() # check
         await self.bot.movepi(1.7, 2500)
-        # await self.bot.attack() # +2TP
-        await self.bot.sleep(0.5)
+        await self.bot.attack() # +2TP
         await self.bot.movepi(1.2, 4100)
         await self.bot.movepi(1.1, 1600)
-        await self.bot.sleep(0.5) # items
-        # await self.bot.attack() # items
+        await self.bot.attack() # items
         await self.bot.movepi(0.6, 2200)
         await self.bot.movepi(0.9, 500)
         await self.bot.attack_technique(7) # -1TP
@@ -1084,6 +1090,7 @@ class Clock_Studios_Theme_Park:
     async def path_6(self):
         logger_set_path(6)
         await self.bot.use_teleporter(490/2400, 633/1080, move_x=1, move_y=1, corner='topright') # Hamster Ball Park
+        exit() # check: catchall
         await self.bot.movepi(1.58, 7000)
         await self.bot.attack_technique(2) # -1TP
         await self.bot.movepi(0.0, 1500)
@@ -1092,13 +1099,12 @@ class Clock_Studios_Theme_Park:
         await self.bot.movepi(0.4, 1000)
         await self.bot.movepi(0.7, 2800)
         await self.bot.movepi(1.0, 300)
-        await self.bot.attack_technique(5) # -1TP
+        await self.bot.attack_technique(8) # -1TP
         await self.bot.movepi(1.9, 300)
-        await self.bot.attack_technique(4) # -1TP
+        await self.bot.attack_technique(6) # -1TP
     async def path_7(self):
         logger_set_path(7)
         await self.bot.use_teleporter(490/2400, 633/1080, move_x=1, move_y=1, corner='topright') # Hamster Ball Park
-        exit() # check
         await self.bot.movepi(0.2, 3000)
         await self.bot.movepi(1.98, 4500)
         await self.bot.attack() # +2TP
@@ -1121,21 +1127,29 @@ class Clock_Studios_Theme_Park:
         await self.bot.movepi(0.5, 300)
         await self.bot.attack_technique(4) # -1TP
         await self.bot.movepi(0.1, 1000)
-        await self.bot.movepi(0.5, 5000)
-        await self.bot.movepi(0.25, 2000)
+        await self.bot.movepi(0.5, 7000)
+        await self.bot.movepi(0.25, 1000)
         await self.bot.restore_tp(n=2) # +2TP
+        exit() # check: killall
         await self.bot.posfix(0.25, 1000)
         await self.bot.movepi(1.5, 1800)
         await self.bot.movepi(1.3, 1500)
         await self.bot.movepi(1.1, 300)
         await self.bot.attack_technique(1) # -1TP
-        for _ in range(3):
+        for _ in range(4): # -1TP
             await self.bot.movepi(0.9, 300)
             await self.bot.attack_technique(1)
-        for _ in range(3):
-            await self.bot.movepi(1.0, 300)
+        for _ in range(4): # -1TP
+            await self.bot.movepi(1.1, 300)
             await self.bot.attack_technique(1)
-        exit() # finish
+        await self.bot.movepi(0.6, 1000)
+        await self.bot.movepi(1.0, 3000)
+        await self.bot.movepi(0.6, 2000)
+        await self.bot.movepi(0.75, 1000)
+        await self.bot.posfix(0.75, 1000)
+        await self.bot.movepi(1.6, 2500)
+        for _ in range(4): # -1TP
+            await self.bot.movepi(0.0, 300)
+            await self.bot.attack_technique(2)
 
 
-    
