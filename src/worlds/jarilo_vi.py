@@ -430,7 +430,7 @@ class Great_Mine:
         await self.bot.attack_technique(1) # items
         await self.bot.movepi(0.5, 300)
         await self.bot.attack_technique(3) # -1TP
-        await self.bot.restore_tp(4) # +4TP
+        await self.bot.restore_tp(item='punitive_energy') # +4TP
     async def path_1(self): # roamer
         logger_set_path(1)
         await self.bot.use_teleporter(x=1220/2400, y=328/1080, corner='topright', move_x=0, move_y=3) # Vagrant Shelter
@@ -448,7 +448,7 @@ class Great_Mine:
         await self.bot.movepi(1.45, 2500)
         await self.bot.movepi(1.8, 1000)
         await self.bot.attack_technique(6) # -1TP
-        await self.bot.movepi(0.0, 5000) # stability move
+        await self.bot.movepi(0.25, 4000) # stability move
     async def path_2(self):
         logger_set_path(2)
         await self.bot.use_teleporter(x=956/2400, y=610/1080, corner='botright', move_x=0, move_y=0, confirm=True) # Overlook

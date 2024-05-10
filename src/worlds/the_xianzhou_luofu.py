@@ -265,7 +265,7 @@ class Stargazer_Navalia:
         await self.bot.attack_technique(4) # -3TP
         await self.bot.movepi(0.3, 300)
         await self.bot.attack_technique(4)
-        await self.bot.restore_tp(n=4) # +4TP
+        await self.bot.restore_tp(item='punitive_energy') # +4TP
     async def path_5(self): # roamer
         logger_set_path(5)
         await self.bot.use_teleporter(958/2400, 364/1080, move_x=0, move_y=0, corner='botleft') # Ship Nursery - The Burgeoning
@@ -352,7 +352,7 @@ class Divination_Commission:
         await self.bot.attack_technique(5) # -1TP
         await self.bot.movepi(1.5, 500)
         await self.bot.attack_technique(4) # -1TP
-        await self.bot.restore_tp(n=4) # +4TP
+        await self.bot.restore_tp(item='punitive_energy') # +4TP
     async def path_2(self):
         logger_set_path(2)
         await self.bot.use_teleporter(445/2400, 720/1080, move_x=0, move_y=0, corner='botright', confirm=True) # Fortuna Augurstead
@@ -420,7 +420,7 @@ class Divination_Commission:
         for _ in range(2):
             await self.bot.movepi(1.3, 300)
             await self.bot.attack_technique(2)
-        for _ in range(8):
+        for _ in range(9):
             await self.bot.movepi(0.4, 300)
             await self.bot.attack_technique(1)
         for _ in range(6):
@@ -596,7 +596,7 @@ class Artisanship_Commission:
         for _ in range(6):
             await self.bot.movepi(1.8, 300)
             await self.bot.attack_technique(1)
-        await self.bot.restore_tp(n=4) # +4TP
+        await self.bot.restore_tp(item='punitive_energy') # +4TP
     async def path_4(self):
         logger_set_path(4)
         await self.bot.use_teleporter(894/2400, 610/1080, corner='topleft', move_x=0, move_y=2) # Passage to the Sapientia Academe
@@ -630,8 +630,6 @@ class Artisanship_Commission:
     async def path_5(self):
         logger_set_path(5)
         await self.bot.use_teleporter(894/2400, 610/1080, corner='topleft', move_x=0, move_y=2) # Passage to the Sapientia Academe
-        print('check')
-        exit() # check
         await self.bot.movepi(1.25, 3100)
         await self.bot.movepi(1.0, 8000)
         await self.bot.movepi(1.4, 1400)
@@ -660,7 +658,7 @@ class Artisanship_Commission:
         await self.bot.movepi(1.0, 1500)
         await self.bot.movepi(0.4, 1500)
         await self.bot.movepi(0.25, 1000)
-        await self.bot.restore_tp(n=4) # +4TP
+        await self.bot.restore_tp(item='punitive_energy') # +4TP
         await self.bot.posfix(0.25, 1000)
         await self.bot.movepi(1.2, 3500)
         await self.bot.movepi(1.0, 600)
@@ -671,11 +669,11 @@ class Artisanship_Commission:
         for _ in range(3): # -1TP
             await self.bot.movepi(0.75, 300)
             await self.bot.attack_technique(2)
-        for _ in range(2): # -1TP
+        for _ in range(3): # -1TP
             await self.bot.movepi(1.5, 300)
             await self.bot.attack_technique(2)
         await self.bot.movepi(1.2, 1000)
-        await self.bot.movepi(1.4, 4000)
+        await self.bot.movepi(1.4, 1500)
         await self.bot.posfix(1.25, 1000)
         await self.bot.movepi(0.2, 3100)
         await self.bot.attack() # +2 TP
@@ -705,6 +703,7 @@ class Artisanship_Commission:
     async def path_8(self):
         logger_set_path(8)
         await self.bot.use_teleporter(894/2400, 610/1080, corner='topleft', move_x=0, move_y=2) # Passage to the Sapientia Academe
+        exit() # check
         await self.bot.movepi(0.5, 4400)
         await self.bot.movepi(0.75, 1700)
         await self.bot.attack() # +2TP
@@ -724,11 +723,14 @@ class Artisanship_Commission:
         await self.bot.movepi(1.5, 1500)
         await self.bot.movepi(1.0, 4100)
         await self.bot.movepi(1.5, 900)
-        await self.bot.movepi(0.0, 4000)
+        await self.bot.movepi(1.65, 2200)
+        for _ in range(3): # -1TP
+            await self.bot.movepi(0.0, 300)
+            await self.bot.attack_technique(1)
         await self.bot.movepi(1.5, 300)
-        await self.bot.attack_technique(5) # -1TP
-        await self.bot.movepi(0.8, 300)
-        await self.bot.attack_technique(5) # -1TP
+        await self.bot.attack_technique(2) # -1TP
+        await self.bot.movepi(0.5, 300)
+        await self.bot.attack_technique(6)
 
 
 class Fyxestroll_Garden:
@@ -927,7 +929,7 @@ class Alchemy_Commission:
         for _ in range(2):
             await self.bot.movepi(1.64, 300)
             await self.bot.attack_technique(1)
-        await self.bot.restore_tp(n=4) # +4TP
+        await self.bot.restore_tp(item='punitive_energy') # +4TP
     async def path_6(self):
         logger_set_path(6)
         await self.bot.use_teleporter(1003/2400, 595/1080, corner='topleft', move_x=0, move_y=3) # Aureate Elixir Furnace
@@ -1001,7 +1003,7 @@ class Alchemy_Commission:
         await self.bot.attack_technique(1)
         await self.bot.movepi(0.6, 300)
         await self.bot.attack_technique(6)
-        await self.bot.restore_tp(n=2) # +2TP
+        await self.bot.restore_tp(item='trick_snack') # +2TP
     async def path_9(self):
         logger_set_path(9)
         await self.bot.use_teleporter(1355/2400, 351/1080, corner='botright', move_x=0, move_y=5) # Shape of Celestial
@@ -1151,7 +1153,7 @@ class Scalegorge_Waterscape:
         await self.bot.attack_technique(4)
         await self.bot.movepi(0.5, 300)
         await self.bot.attack_technique(4)
-        await self.bot.restore_tp(n=4) # +4TP
+        await self.bot.restore_tp(item='punitive_energy') # +4TP
     async def path_6(self): # roamer
         logger_set_path(6)
         await self.bot.use_teleporter(1433/2400, 659/1080, corner='topleft', move_x=0, move_y=0) # Palace Ruin Depths

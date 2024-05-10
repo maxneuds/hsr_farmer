@@ -250,7 +250,7 @@ class Bot:
             logger.warning('map change failed: retry')
             await self.switch_map(y_list=y_list, world=world, x=x, y=y, scroll_down=scroll_down, corner=corner, move_x=move_x, move_y=move_y, confirm=confirm, debug=debug)
     
-    async def restore_tp(self, n=2):
+    async def restore_tp(self, item='trick_snack', n=1):
         logger.info('action: restore TP using food, make sure it is faved first')
         await self.wait_for_onmap(min_duration=0)
         await self.attack() # animation cancle
@@ -262,17 +262,10 @@ class Bot:
         await aio.sleep(2)
         logger.info('select fav food')
         # select item
-        if n == 2:
-            name = 'trick_snack'
-        elif n == 4:
-            name = 'punitive_energy'
-        else:
-            logger.error(f'bad restore count: {n}')
-            exit()
         count = 0
         search_item = True
         while search_item == True:
-            logger.info(f'looking for item: {name}')
+            logger.info(f'looking for item: {item}')
             # get screen
             success = False
             while not success:
@@ -281,10 +274,10 @@ class Bot:
                     success = True
                 except:
                     pass
-            im_item = cv.imread(f'res/item_use_{name}.png', cv.IMREAD_COLOR)
+            im_item = cv.imread(f'res/item_use_{item}.png', cv.IMREAD_COLOR)
             result_food = cv.matchTemplate(screen, im_item, cv.TM_CCOEFF_NORMED)
             _, max_val, _, max_loc = cv.minMaxLoc(result_food)
-            im_item_selected = cv.imread(f'res/item_use_selected_{name}.png', cv.IMREAD_COLOR)
+            im_item_selected = cv.imread(f'res/item_use_selected_{item}.png', cv.IMREAD_COLOR)
             result_food_selected = cv.matchTemplate(screen, im_item_selected, cv.TM_CCOEFF_NORMED)
             _, max_val_selected, _, max_loc_selected = cv.minMaxLoc(result_food_selected)
             if max_val_selected > max_val:
@@ -293,11 +286,12 @@ class Bot:
             if max_val > 0.90: # item found
                 top_left = max_loc
                 await self.action_tap(top_left[0]+10, top_left[1]+10)
-                logger.info(f'eat food: {name}')
-                await self.action_tap(int(self.xy.width*2008/2400), int(self.xy.height*990/1080))
-                await aio.sleep(1)
-                await self.action_tap(int(self.xy.width*1461/2400), int(self.xy.height*824/1080))
-                await aio.sleep(2)
+                logger.info(f'eat food: {item} x {n}')
+                for _ in range(n):
+                    await self.action_tap(int(self.xy.width*2008/2400), int(self.xy.height*990/1080))
+                    await aio.sleep(1)
+                    await self.action_tap(int(self.xy.width*1461/2400), int(self.xy.height*824/1080))
+                    await aio.sleep(2)
                 logger.info(f'exit to map')
                 await self.action_back()
                 await self.wait_for_onmap(min_duration=2)
@@ -306,7 +300,7 @@ class Bot:
             else:
                 count += 1
                 if count > 9:
-                    logger.error('item not found')
+                    logger.error(f'"{item}" not found')
                     search_item = False
                     exit()
 
@@ -545,7 +539,7 @@ class Bot:
                     logger.info('food menu found: eat TP food')
                     await self.action_back()
                     await aio.sleep(2)
-                    await self.restore_tp(n=2)
+                    await self.restore_tp(item='trick_snack')
                 elif check_return > 2: # back to map, continue
                     logger.info('character on map: continue')
                     await aio.sleep(0.5)
