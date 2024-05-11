@@ -116,7 +116,7 @@ class Backwater_Pass:
         await self.bot.movepi(1.7, 600)
         await self.bot.movepi(0.0, 5900)
         await self.bot.attack_technique(2) # -1TP
-    async def path_3(self): # roamer
+    async def path_3(self):
         logger_set_path(3)
         await self.bot.use_teleporter(x=830/2400, y=360/1080, corner='topright', move_x=0, move_y=1) # Bud of Aether
         await self.bot.movepi(0.68, 900)
@@ -132,8 +132,8 @@ class Backwater_Pass:
         await self.bot.movepi(1.29, 2400)
         await self.bot.attack_technique(3) # -2TP
         await self.bot.movepi(1.3, 700)
-        await self.bot.attack_technique(1) # -1TP
-        for _ in range(4): # -1TP
+        await self.bot.attack_technique(1)
+        for _ in range(4): # -1TP, roamer
             await self.bot.movepi(1.0, 300)
             await self.bot.attack_technique(3)
     async def path_4(self):
@@ -218,6 +218,8 @@ class Corridor:
         await self.bot.movepi(1.6, 500)
         await self.bot.attack_technique(3)
         await self.bot.movepi(0.7, 500)
+        await self.bot.attack_technique(3)
+        await self.bot.movepi(0.5, 300)
         await self.bot.attack_technique(3)
     async def path_1(self): # roamer
         logger_set_path(1)

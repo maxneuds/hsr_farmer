@@ -443,81 +443,78 @@ class The_Reverie_Dreamscape:
         await self.bot.restore_tp(item='trick_snack', n=2) # +4TP
     async def path_11(self):
         logger_set_path(11)
-        # await self.bot.use_teleporter(933/2400, 390/1080, move_x=0, move_y=7, corner='topleft') # VIP Lounge Corridor
-        # await self.bot.movepi(1.25, 1200)
-        # await self.bot.movepi(1, 5500)
-        # await self.bot.movepi(0.9, 2000)
-        # await self.bot.movepi(1.0, 3000)
-        # await self.bot.movepi(1.1, 2400)
-        # await self.bot.sleep(2)
-        # await self.bot.movepi(1.0, 6500)
-        # await self.bot.sleep(2)
-        # await self.bot.movepi(1.1, 600)
-        # await self.bot.movepi(1.0, 6400)
-        # await self.bot.movepi(0.5, 600)
-        # await self.bot.attack_technique(1) # -1TP
-        # await self.bot.movepi(1.5, 300)
-        # await self.bot.attack_technique(5) # -1TP
-        # await self.bot.movepi(1.4, 2000)
-        # await self.bot.movepi(1.25, 1000)
-        # await self.bot.posfix(1.25, 1000)
-        # await self.bot.movepi(0.4, 4000)
-        # await self.bot.movepi(0.0, 4800)
-        # await self.bot.movepi(0.5, 900)
-        # await self.bot.attack() # items
-        # await self.bot.movepi(1.55, 1800)
-        # await self.bot.interact()
-        # await self.bot.movepi(0.5, 4500)
-        # await self.bot.movepi(0.25, 1500)
-        # await self.bot.posfix(0.25, 1000)
-        # await self.bot.movepi(1.2, 1000)
-        # await self.bot.action_button()
-        # await self.bot.movepi(1.0, 3500)
-        # await self.bot.movepi(1.4, 1200)
-        # await self.bot.attack_technique(3) # -1TP
-        # await self.bot.movepi(1.1, 2000)
-        # await self.bot.restore_tp(item='trick_snack', n=1) # +2TP
-        # await self.bot.posfix(1.25, 1000)
-        # await self.bot.movepi(0.3, 3500)
-        # await self.bot.movepi(0.0, 3000)
-        # await self.bot.movepi(0.25, 1500)
-        # await self.bot.posfix(0.25, 1000)
-        # await self.bot.movepi(1.3, 1100)
-        # await self.bot.movepi(1.5, 4100)
-        # await self.bot.interact()
-        # await self.bot.movepi(1.52, 3000)
-        # await self.bot.action_button()
-        # await self.bot.movepi(1.5, 2100)
-        # await self.bot.movepi(1.0, 2500)
-        # await self.bot.movepi(0.5, 2100)
-        # exit() # check & optimize
-        # await self.bot.action_button()
-        # await self.bot.movepi(0.5, 1000)
-        # await self.bot.movepi(0.7, 1300)
-        # await self.bot.movepi(0.5, 300)
-        # await self.bot.attack_technique(3) # -1TP
-        # await self.bot.movepi(0.3, 300)
-        # await self.bot.attack_technique(4) # -1TP
-        # exit() # check for get item too, otherwise move to corner
-        # await self.bot.movepi(0.3, 1000)
-        # await self.bot.movepi(0.1, 2000) # move to top right corner
-        # await self.bot.restore_tp(item='trick_snack', n=1) # +2TP
+        await self.bot.use_teleporter(933/2400, 390/1080, move_x=0, move_y=7, corner='topleft') # VIP Lounge Corridor
+        await self.bot.movepi(1.25, 1200)
+        await self.bot.movepi(1, 5500)
+        await self.bot.movepi(0.9, 2000)
+        await self.bot.movepi(1.0, 3000)
+        await self.bot.movepi(1.1, 2400)
+        await self.bot.sleep(2)
+        await self.bot.movepi(1.0, 6500)
+        await self.bot.sleep(2)
+        await self.bot.movepi(1.1, 600)
+        await self.bot.movepi(1.0, 6400)
+        await self.bot.movepi(0.5, 600)
+        await self.bot.attack_technique(1) # -1TP
+        await self.bot.movepi(1.5, 300)
+        await self.bot.attack_technique(5) # -1TP
+        await self.bot.movepi(1.4, 2000)
+        await self.bot.movepi(1.25, 1000)
+        await self.bot.posfix(1.25, 1000)
+        await self.bot.movepi(0.4, 4000)
+        await self.bot.movepi(0.0, 4800)
+        await self.bot.movepi(0.5, 900)
+        await self.bot.attack() # items
+        await self.bot.movepi(1.55, 1800)
+        await self.bot.interact()
+        await self.bot.movepi(0.5, 4500)
+        await self.bot.movepi(0.25, 1500)
+        await self.bot.posfix(0.25, 1000)
+        await self.bot.movepi(1.2, 1000)
+        await self.bot.action_button()
+        await self.bot.movepi(1.0, 3500)
+        await self.bot.movepi(1.4, 1200)
+        await self.bot.attack_technique(3) # -1TP
+        await self.bot.movepi(1.1, 2000)
+        await self.bot.restore_tp(item='trick_snack', n=1) # +2TP
+        await self.bot.posfix(1.25, 1000)
+        await self.bot.movepi(0.3, 3500)
+        await self.bot.movepi(0.0, 3000)
+        await self.bot.movepi(0.25, 1500)
+        await self.bot.posfix(0.25, 1000)
+        await self.bot.movepi(1.3, 1100)
+        await self.bot.movepi(1.5, 4100)
+        await self.bot.interact()
+        await self.bot.movepi(1.52, 3000)
+        await self.bot.action_button()
+        await self.bot.movepi(1.5, 2100)
+        await self.bot.movepi(1.0, 2500)
+        await self.bot.movepi(0.5, 2100)
+        exit() # check
+        await self.bot.action_button()
+        await self.bot.movepi(0.5, 1000)
+        await self.bot.movepi(0.7, 1300)
+        await self.bot.movepi(0.5, 300)
+        await self.bot.attack_technique(3) # -1TP
+        await self.bot.movepi(0.3, 300)
+        await self.bot.attack_technique(4) # -1TP
+        await self.bot.movepi(0.7, 300)
+        await self.bot.attack_technique(1) # items
+        await self.bot.movepi(0.1, 3000) # move to top right corner
+        await self.bot.restore_tp(item='trick_snack', n=1) # +2TP
         await self.bot.posfix(0.25, 1000)
         await self.bot.movepi(1.1, 600)
         await self.bot.interact()
-        # await self.bot.movepi(1.0, 2500) # if item isnt taken yet
-        await self.bot.movepi(1.0, 1500)
-        await self.bot.attack() # items
-        await self.bot.movepi(1.0, 600)
+        await self.bot.movepi(1.0, 2500)
         await self.bot.movepi(0.5, 2300)
-        exit() # check & opti
         await self.bot.action_button()
         await self.bot.movepi(0.5, 1000)
         await self.bot.movepi(0.25, 300)
         await self.bot.attack_technique(4) # -1TP
         await self.bot.movepi(0.7, 500)
-        await self.bot.attack_technique(5) # -1TP
-        exit()
+        await self.bot.attack_technique(5) # items
+        await self.bot.movepi(1.4, 500)
+        await self.bot.attack_technique(3) # -1TP
     async def path_12(self):
         logger_set_path(12)
         await self.bot.use_teleporter(933/2400, 390/1080, move_x=0, move_y=7, corner='topleft') # VIP Lounge Corridor
@@ -566,9 +563,8 @@ class The_Reverie_Dreamscape:
         await self.bot.movepi(0.0, 2100)
         await self.bot.movepi(0.16, 1900)
         await self.bot.attack_technique(4) # -2TP
-        exit() # check
-        await self.bot.movepi(0.0, 300)
-        await self.bot.attack_technique(10) # items
+        await self.bot.movepi(1.8, 300)
+        await self.bot.attack_technique(8) # items
     async def path_14(self):
         logger_set_path(14)
         await self.bot.use_teleporter(748/2400, 533/1080, move_x=0, move_y=3, corner='topleft') # Monitoring Room
@@ -968,15 +964,9 @@ class Clock_Studios_Theme_Park:
         await self.bot.attack(3) # items
     async def path_1(self):
         logger_set_path(1)
-        exit() # new stagnant shadow
-        await self.bot.use_teleporter(1209/2400, 276/1080, move_x=1, move_y=6, confirm=True) # Theme Park Entrance
-        await self.bot.movepi(0.7, 8300)
-        await self.bot.movepi(0.5, 12800)
-        await self.bot.movepi(0.8, 1800)
+        await self.bot.use_teleporter(731/2400, 494/1080, corner='botright', move_x=1, move_y=6) # Shape of Duty
+        await self.bot.movepi(1.3, 700)
         await self.bot.attack() # +2TP
-        await self.bot.movepi(0.7, 800)
-        await self.bot.attack_technique(4) # -2TP
-        await self.bot.restore_tp(item='trick_snack', n=1) # +2TP
     async def path_2(self):
         logger_set_path(2)
         await self.bot.use_teleporter(1209/2400, 276/1080, move_x=1, move_y=6, confirm=True) # Theme Park Entrance
@@ -1059,7 +1049,6 @@ class Clock_Studios_Theme_Park:
         await self.bot.attack_technique(3) # -1TP
     async def path_6(self):
         logger_set_path(6)
-        exit() # check
         await self.bot.use_teleporter(490/2400, 633/1080, move_x=1, move_y=1, corner='topright') # Hamster Ball Park
         await self.bot.movepi(1.58, 7000)
         await self.bot.attack_technique(2) # -1TP

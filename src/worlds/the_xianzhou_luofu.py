@@ -703,7 +703,6 @@ class Artisanship_Commission:
     async def path_8(self):
         logger_set_path(8)
         await self.bot.use_teleporter(894/2400, 610/1080, corner='topleft', move_x=0, move_y=2) # Passage to the Sapientia Academe
-        exit() # check
         await self.bot.movepi(0.5, 4400)
         await self.bot.movepi(0.75, 1700)
         await self.bot.attack() # +2TP
