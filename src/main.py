@@ -56,7 +56,7 @@ async def main():
     # await the_xianzhou_luofu.farm_divination_commission() # XP:6000/6000 Time:540 TP:4->2 R4:1
     # await the_xianzhou_luofu.farm_scalegorge_waterscape() # XP:4752/4752 Time:450 TP:2->2 R4:1
     
-    # ### 5/6 Penacony (47176/50092) TP:1->? R2:
+    # ### 5/7 Penacony (47176/50092) TP:1->? R2:
     # await penacony.golden_hour.teleport(tp_restore=4) # Time:70 TP:1->5
     # await penacony.farm_dreams_edge() # XP:7668/9612 Time:431 TP:5->1 R4:2 R2:1
     # await penacony.golden_hour.teleport(tp_restore=4.2) # Time:80 TP:1->5
