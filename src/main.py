@@ -12,7 +12,9 @@ from farmer.the_xianzhou_luofu import The_Xianzhou_Luofu
 from farmer.herta_space_station import Herta_Space_Station
 from farmer.jarilo_vi import Jarilo_VI
 
-DEVICE = '10.1.11.3:5555'
+# DEVICE = 'usb'
+# DEVICE = '10.1.11.3:5555'
+DEVICE = '192.168.1.172:5555'
 
 async def main():
     # initialize bot
@@ -62,7 +64,7 @@ async def main():
     # await penacony.golden_hour.teleport(tp_restore=4.2) # Time:80 TP:1->5
     # await penacony.farm_childs_dream() # XP:5832/5832 Time:403 TP:5->2 R2:4
     # await penacony.farm_the_reverie_dreamscape() # XP:14580/15552 Time:? TP:2->2 R2:15
-    # await penacony.farm_dewlight_pavilion() # XP:11448/11448 Time: TP:2->1 R2:5
+    await penacony.farm_dewlight_pavilion() # XP:11448/11448 Time: TP:2->1 R2:5
     # await penacony.farm_clock_studios_theme_park() # XP:7648/7648 Time: TP:1->1 R4:0 R2:4
 
     # ### 1/1 Astral Express

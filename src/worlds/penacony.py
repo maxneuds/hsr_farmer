@@ -266,7 +266,7 @@ class The_Reverie_Dreamscape:
         logger.info('---')
         logger.info("--- Map: The Reverie (Dreamscape)")
         logger.info('---')
-        await self.bot.switch_map(y_list=567/1080, world='penacony', scroll_down=True, # Dreamjolt Hostelry
+        await self.bot.switch_map(y_list=1011/1080, world='penacony', scroll_down=False, # Dreamjolt Hostelry
                                     x=865/2400, y=461/1080, move_x=0, move_y=0, corner='topleft')
         await self.bot.movepi(0.5, 7500)
         await self.bot.movepi(1.0, 500)
@@ -319,9 +319,10 @@ class The_Reverie_Dreamscape:
     async def path_4(self):
         logger_set_path(4)
         await self.bot.use_teleporter(1132/2400, 660/1080, move_x=0, move_y=8, corner='botleft') # Bud of Harmony
+        exit() # check
         await self.bot.movepi(1.2, 1500)
-        await self.bot.movepi(1.5, 1300)
-        await self.bot.movepi(0.0, 150)
+        await self.bot.movepi(1.55, 1100)
+        await self.bot.movepi(1.75, 100)
         await self.bot.interact()
         await self.bot.movepi(1.1, 1000)
         await self.bot.movepi(1.3, 800)
@@ -381,7 +382,7 @@ class The_Reverie_Dreamscape:
         await self.bot.attack() # +2TP
     async def path_7(self):
         logger_set_path(7)
-        await self.bot.use_teleporter(933/2400, 390/1080, move_x=0, move_y=7, corner='topleft') # VIP Lounge Corridor
+        await self.bot.use_teleporter(935/2400, 587/1080, move_x=0, move_y=5, corner='topleft') # VIP Lounge Corridor
         await self.bot.movepi(1.25, 1300)
         await self.bot.movepi(1, 5000)
         await self.bot.movepi(0.45, 600)
@@ -415,7 +416,7 @@ class The_Reverie_Dreamscape:
         await self.bot.restore_tp(item='trick_snack', n=2) # +4TP
     async def path_9(self):
         logger_set_path(9)
-        await self.bot.use_teleporter(933/2400, 390/1080, move_x=0, move_y=7, corner='topleft') # VIP Lounge Corridor
+        await self.bot.use_teleporter(935/2400, 587/1080, move_x=0, move_y=5, corner='topleft') # VIP Lounge Corridor
         await self.bot.movepi(0.5, 1600)
         await self.bot.movepi(1.0, 2300)
         await self.bot.movepi(0.6, 1600)
@@ -443,7 +444,7 @@ class The_Reverie_Dreamscape:
         await self.bot.restore_tp(item='trick_snack', n=2) # +4TP
     async def path_11(self):
         logger_set_path(11)
-        await self.bot.use_teleporter(933/2400, 390/1080, move_x=0, move_y=7, corner='topleft') # VIP Lounge Corridor
+        await self.bot.use_teleporter(935/2400, 587/1080, move_x=0, move_y=5, corner='topleft') # VIP Lounge Corridor
         await self.bot.movepi(1.25, 1200)
         await self.bot.movepi(1, 5500)
         await self.bot.movepi(0.9, 2000)
@@ -490,12 +491,13 @@ class The_Reverie_Dreamscape:
         await self.bot.movepi(1.5, 2100)
         await self.bot.movepi(1.0, 2500)
         await self.bot.movepi(0.5, 2100)
-        exit() # check
+        exit() # fix: kill robot, posfix, then bird
         await self.bot.action_button()
         await self.bot.movepi(0.5, 1000)
-        await self.bot.movepi(0.7, 1300)
+        await self.bot.movepi(0.7, 900)
         await self.bot.movepi(0.5, 300)
-        await self.bot.attack_technique(3) # -1TP
+        await self.bot.attack_technique(2) # -1TP
+        exit() # posfix, then bird
         await self.bot.movepi(0.3, 300)
         await self.bot.attack_technique(4) # -1TP
         await self.bot.movepi(0.7, 300)
@@ -517,7 +519,7 @@ class The_Reverie_Dreamscape:
         await self.bot.attack_technique(3) # -1TP
     async def path_12(self):
         logger_set_path(12)
-        await self.bot.use_teleporter(933/2400, 390/1080, move_x=0, move_y=7, corner='topleft') # VIP Lounge Corridor
+        await self.bot.use_teleporter(935/2400, 587/1080, move_x=0, move_y=5, corner='topleft') # VIP Lounge Corridor
         await self.bot.movepi(1.25, 1200)
         await self.bot.movepi(1.0, 5100)
         await self.bot.movepi(0.5, 4800)
@@ -559,11 +561,14 @@ class The_Reverie_Dreamscape:
         await self.bot.posfix(0.25, 1000)
         await self.bot.movepi(1.45, 3250)
         await self.bot.movepi(0.0, 500)
+        exit() # check items
         await self.bot.action_button()
         await self.bot.movepi(0.0, 2100)
         await self.bot.movepi(0.16, 1900)
         await self.bot.attack_technique(4) # -2TP
-        await self.bot.movepi(1.8, 300)
+        await self.bot.movepi(0.4, 300)
+        await self.bot.attack_technique(4) # items
+        await self.bot.movepi(1.5, 300)
         await self.bot.attack_technique(8) # items
     async def path_14(self):
         logger_set_path(14)
@@ -587,6 +592,7 @@ class The_Reverie_Dreamscape:
     async def path_15(self):
         logger_set_path(15)
         await self.bot.use_teleporter(748/2400, 533/1080, move_x=0, move_y=3, corner='topleft') # Monitoring Room
+        exit() # check items
         await self.bot.movepi(0.7, 2400)
         await self.bot.movepi(1.0, 8500)
         await self.bot.attack() # items
@@ -613,7 +619,7 @@ class Dewlight_Pavilion:
         logger.info('---')
         logger.info("--- Map: Dewlight Pavilion")
         logger.info('---')
-        await self.bot.switch_map(y_list=686/1080, world='penacony', scroll_down=True, # Reception Counter
+        await self.bot.switch_map(y_list=450/1080, world='penacony', scroll_down=True, # Reception Counter
                                     x=981/2400, y=718/1080, corner='botright', move_x=0, move_y=0)
         await self.bot.movepi(0.67, 3900)
         await self.bot.attack() # items
@@ -947,7 +953,7 @@ class Clock_Studios_Theme_Park:
         logger.info('---')
         logger.info('--- Map: Clock Studios Theme Park')
         logger.info('---')
-        await self.bot.switch_map(y_list=807/1080, world='penacony', scroll_down=True, # Screening Area Entrance
+        await self.bot.switch_map(y_list=565/1080, world='penacony', scroll_down=True, # Screening Area Entrance
                                     x=929/2400, y=549/1080, corner='topleft', move_x=0, move_y=7)
         await self.bot.movepi(0.6, 2500)
         await self.bot.attack() # +2TP
@@ -1109,5 +1115,13 @@ class Clock_Studios_Theme_Park:
         for _ in range(4): # -1TP
             await self.bot.movepi(0.0, 300)
             await self.bot.attack_technique(2)
+
+
+# await self.bot.switch_map(y_list=808/1080, world='penacony', scroll_down=True, # ?
+#                                     x=929/2400, y=549/1080, corner='topleft', move_x=0, move_y=7)
+
+# await self.bot.switch_map(y_list=927/1080, world='penacony', scroll_down=True, # ?
+#                                     x=929/2400, y=549/1080, corner='topleft', move_x=0, move_y=7)
+
 
 

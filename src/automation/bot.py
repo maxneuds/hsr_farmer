@@ -230,7 +230,7 @@ class Bot:
         logger.info('switch map')
         await self.switch_world(world=world)
         logger.info('scroll location list')
-        x_list = int(self.xy.width*0.8)
+        x_list = int(self.xy.width*0.732)
         if scroll_down:
             y1 = int(self.xy.height*0.8)
             y2 = int(self.xy.height*0.2)
