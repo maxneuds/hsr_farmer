@@ -36,7 +36,7 @@ class ADB:
         h, w = hxw.split('x')
         return(int(h), int(w))
 
-    async def get_screen(self, dev, custom_msg=None, debug=False):
+    async def get_screen(self, dev, custom_msg=False, debug=False):
         if custom_msg == False:
             logger.info('get screenshot from device')
         elif custom_msg == None:
@@ -44,7 +44,16 @@ class ADB:
         else:
             logger.info(custom_msg)
         # get screen from device
-        im_byte_array = await dev.screencap()
+        success = False
+        while not success:
+            try:
+                im_byte_array = await dev.screencap()
+                success = True
+            except KeyboardInterrupt:
+                logger.debug('Ctrl+C detected. Exiting gracefully.')
+                exit()
+            except:
+                await aio.sleep(0.1)
         # convert to cv image
         screenshot = cv.imdecode(np.frombuffer(bytes(im_byte_array), np.uint8), cv.IMREAD_COLOR)
         if debug == True:

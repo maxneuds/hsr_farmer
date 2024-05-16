@@ -46,86 +46,99 @@ class Bot:
         await self.dev.shell(cmd)
 
     async def open_map(self, special_exit=True, debug=False):
-        logger.info('open map')
-        await self.wait_for_onmap(min_duration=0)
-        await self.attack() # animation cancle
-        await self.dev.shell(f'input tap {self.xy.map[0]} {self.xy.map[1]}')
-        logger.info('wait for map and check type')   
-        try: # catch KeyboardInterrupt
-            img_back = cv.imread('res/bw_map_back.png', cv.IMREAD_GRAYSCALE)
-            img_starrail = cv.imread('res/bw_map_starrail.png', cv.IMREAD_GRAYSCALE)
-            time_start = time.perf_counter()
-            check_map = False
-            while not check_map:
-                success = False
-                while not success:
-                    try:
-                        if debug:
-                            await aio.sleep(2.5)
-                            screen = await self.adb.get_screen(dev=self.dev, custom_msg='debug')
-                        else:
-                            screen = await self.adb.get_screen(dev=self.dev, custom_msg=None)
-                        screen = cv.cvtColor(screen, cv.COLOR_BGR2GRAY)
-                        # _, screen = cv.threshold(screen, 240, 255, cv.THRESH_OTSU | cv.THRESH_BINARY_INV)
-                        _, screen = cv.threshold(screen, 240, 255, cv.THRESH_BINARY)
-                        success = True
-                    except:
-                        pass
-                screen_map_button = screen[int(self.xy.height*0.1):int(self.xy.height*0.18), int(self.xy.width*0.75):int(self.xy.width*0.92)]
-                if debug == True:
-                    cv.imwrite('debug.png', screen_map_button)
-                    cv.imshow('debug', screen_map_button)
-                    cv.waitKey(0)
-                    cv.destroyAllWindows()
-                    exit()
-                # check for special map
-                result_button_starrail = cv.matchTemplate(screen, img_starrail, cv.TM_CCOEFF_NORMED)
-                _, max_val_starrail, _, _ = cv.minMaxLoc(result_button_starrail)
-                result_button_back = cv.matchTemplate(screen, img_back, cv.TM_CCOEFF_NORMED)
-                _, max_val_back, _, _ = cv.minMaxLoc(result_button_back)
-                if max_val_back > 0.95 and special_exit:
-                    logger.info('exit special map')
-                    await self.dev.shell(f'input tap {int(self.xy.width*2135/2400)} {int(self.xy.height*138/1080)}')
-                elif max_val_starrail > 0.95:
-                    logger.info('map is open')
-                    check_map = True
-                    if special_exit == True:
-                        await self.check_map_zoom_level()
-                    return(True)
+        if not debug: # open map for debugging
+            await self.wait_for_onmap(min_duration=0)
+            logger.info('open map')
+            await self.attack() # animation cancle
+            await self.dev.shell(f'input tap {self.xy.map[0]} {self.xy.map[1]}')
+        # wait for map
+        logger.info('wait for map')
+        im_mapx = cv.imread('res/map_x_bw.png', cv.IMREAD_GRAYSCALE)
+        check_map = True
+        check_map_iter = 1
+        while check_map:
+            screen = await self.adb.get_screen(dev=self.dev)
+            screen_topright = screen[0:int(self.xy.height*0.2), int(self.xy.width*0.7):int(self.xy.width)]
+            screen_topright_bw = cv.cvtColor(screen_topright, cv.COLOR_BGR2GRAY)
+            _, screen_topright_bw = cv.threshold(screen_topright_bw, 240, 255, cv.THRESH_BINARY)
+            if debug == True:
+                cv.imwrite('debug.png', screen_topright)
+                cv.imshow('debug', screen_topright)
+                cv.waitKey(0)
+                cv.destroyAllWindows()
+                exit()
+            result = cv.matchTemplate(screen_topright_bw, im_mapx, cv.TM_CCOEFF_NORMED)
+            _, max_val, _, _ = cv.minMaxLoc(result)
+            if max_val > 0.95:
+                logger.info('map detected')
+            else:
+                logger.info('iteration {check_map_iter}, map not detected: retry')
+                check_map_iter += 1
+                if check_map_iter > 10:
+                    logger.error('map not found: retry')
+                    check_map = False
+                    await self.action_back()
+                    await self.wait_for_onmap(min_duration=2, no_fight=True)
+                    check = await self.open_map(special_exit=special_exit)
+                    return(check)
                 else:
-                    time_running = timedelta(seconds=time.perf_counter() - time_start)
-                    if time_running.seconds > 10:
-                        logger.error('open map not detected, try again')
-                        await self.wait_for_onmap(min_duration=0)
-                        await self.open_map(special_exit=special_exit)
-                        exit()
-                    elif special_exit == False:
-                        check_map = True
-                    await aio.sleep(0.1)
-        except KeyboardInterrupt:
-            logger.debug('Ctrl+C detected. Exiting gracefully.')
-            exit()
+                    await aio.sleep(0.5)
+                    continue
+            # check map type
+            logger.info('check map type')
+            im_tbp = cv.imread('res/map_tbp.png', cv.IMREAD_COLOR)
+            result = cv.matchTemplate(screen_topright, im_tbp, cv.TM_CCOEFF_NORMED)
+            _, max_val, _, _ = cv.minMaxLoc(result)
+            if max_val > 0.95:
+                logger.info('map type: normal')
+            else:
+                logger.info('map type: special')
+                if special_exit:
+                    logger.info('exit special map to normal map')
+                    await self.dev.shell(f'input tap {int(self.xy.width*2135/2400)} {int(self.xy.height*138/1080)}')
+                    await aio.sleep(1)
+                    continue
+            check_map = False
+            await self.check_map_zoom_level()
+            return(True)
         
-    async def check_map_zoom_level(self):
+    async def check_map_zoom_level(self, debug=False):
         logger.info('check map zoom level')
-        screen = await self.adb.get_screen(dev=self.dev, custom_msg=None)
-        img_zoombar_min = cv.imread('res/zoombar_min.png', cv.IMREAD_COLOR)
-        screen_zoombar = screen[int(self.xy.height*965/1080):int(self.xy.height*1015/1080), int(self.xy.width*780/2400):int(self.xy.width*1250/2400)]
-        matches = cv.matchTemplate(screen_zoombar, img_zoombar_min, cv.TM_CCOEFF_NORMED)
-        min_val, max_val, min_loc, max_loc = cv.minMaxLoc(matches)
+        im_zoombar_min = cv.imread('res/map_zoombar_min.png', cv.IMREAD_GRAYSCALE)
+        im_zoom_minus_bw = cv.imread('res/map_zoom_minus_bw.png', cv.IMREAD_GRAYSCALE)
+        screen = await self.adb.get_screen(dev=self.dev)
+        screen_botmid = screen[int(self.xy.height*0.8):int(self.xy.height), int(self.xy.width*0.3):int(self.xy.width*0.7)]
+        screen_botmid_bw = cv.cvtColor(screen_botmid, cv.COLOR_BGR2GRAY)
+        _, screen_botmid_bw = cv.threshold(screen_botmid_bw, 240, 255, cv.THRESH_BINARY)
+        if debug == True:
+            cv.imwrite('debug.png', screen_zoombar)
+            cv.imshow('debug', screen_zoombar)
+            cv.waitKey(0)
+            cv.destroyAllWindows()
+            exit()
+        # locate min zoom button
+        logger.info('locate min zoom button')
+        matches = cv.matchTemplate(screen_botmid_bw, im_zoom_minus_bw, cv.TM_CCOEFF_NORMED)
+        _, max_val, _, max_loc = cv.minMaxLoc(matches)
+        btn_zoom_minus = (max_loc[0]+int(self.xy.width*0.3), max_loc[1]+int(self.xy.height*0.8))
+        # check zoom level
+        logger.info('check zoom level')
+        screen_zoombar = screen_botmid_bw[max_loc[1]-8:max_loc[1]+32, max_loc[0]:max_loc[0]+96]
+        matches = cv.matchTemplate(screen_botmid_bw, im_zoombar_min, cv.TM_CCOEFF_NORMED)
+        _, max_val, _, _ = cv.minMaxLoc(matches)
         if max_val < 0.95: # map isn't on min zoom, change zoom level
             logger.info('zoom map to min')
             for _ in range(20):
-                await self.dev.shell(f'input tap {self.xy.width*783/2400} {self.xy.height*993/1080}')
-                await aio.sleep(0.075)
+                await self.dev.shell(f'input tap {btn_zoom_minus[0]} {btn_zoom_minus[1]}')
+                await aio.sleep(0.05)
             await aio.sleep(0.1)
 
-    async def use_teleporter(self, x, y, move_x=0, move_y=0, move_spd=500, corner='botright', open_map=True, confirm=False, special_exit=True, debug=False):
+    async def use_teleporter(self, x, y, move_x=0, move_y=0, swipe=1, move_spd=500, corner='botright', open_map=True, confirm=False, special_exit=True, debug=False):
         logger.info(f'use teleporter: {int(self.xy.width*x)},{int(self.xy.height*y)}')
         if open_map == True:
             await self.open_map(special_exit=special_exit)
         logger.info(f'move map to corner: {corner}')
-        for _ in range(3):
+        for _ in range(2+swipe):
             if corner == 'topright':
                 cmd = f'input swipe {int(self.xy.width*0.6)} {int(self.xy.height*0.1)} {int(self.xy.width*(0))} {int(self.xy.height*(0.9))} {500}'
             elif corner == 'topleft':
@@ -141,17 +154,18 @@ class Bot:
             await aio.sleep(1)
         await aio.sleep(1)
         if move_x != 0 or move_y != 0:
-            logger.info(f'move map by {move_x},{move_y}')
-            if corner == 'topright':
-                cmd = f'input swipe {int(self.xy.width*0.3)} {int(self.xy.height*0.9)} {int(self.xy.width*(0.3+0.65*(move_x/10)))} {int(self.xy.height*(0.9-0.85*(move_y/10)))} {move_spd}'
-            if corner == 'topleft':
-                cmd = f'input swipe {int(self.xy.width*0.65)} {int(self.xy.height*0.9)} {int(self.xy.width*(0.65-0.6*(move_x/10)))} {int(self.xy.height*(0.9-0.85*(move_y/10)))} {move_spd}'
-            elif corner == 'botleft':
-                cmd = f'input swipe {int(self.xy.width*0.65)} {int(self.xy.height*0.1)} {int(self.xy.width*(0.65-0.6*(move_x/10)))} {int(self.xy.height*(0.1+0.85*(move_y/10)))} {move_spd}'
-            elif corner == f'botright':
-                cmd = f'input swipe {int(self.xy.width*0.3)} {int(self.xy.height*0.1)} {int(self.xy.width*(0.3+0.65*(move_x/10)))} {int(self.xy.height*(0.1+0.85*(move_y/10)))} {move_spd}'
-            await self.dev.shell(cmd)
-            await aio.sleep(2)
+            logger.info(f'move map by {move_x},{move_y}: {swipe}x')
+            for _ in range(swipe):
+                if corner == 'topright':
+                    cmd = f'input swipe {int(self.xy.width*0.3)} {int(self.xy.height*0.9)} {int(self.xy.width*(0.3+0.65*(move_x/10)))} {int(self.xy.height*(0.9-0.85*(move_y/10)))} {move_spd}'
+                if corner == 'topleft':
+                    cmd = f'input swipe {int(self.xy.width*0.65)} {int(self.xy.height*0.9)} {int(self.xy.width*(0.65-0.6*(move_x/10)))} {int(self.xy.height*(0.9-0.85*(move_y/10)))} {move_spd}'
+                elif corner == 'botleft':
+                    cmd = f'input swipe {int(self.xy.width*0.65)} {int(self.xy.height*0.1)} {int(self.xy.width*(0.65-0.6*(move_x/10)))} {int(self.xy.height*(0.1+0.85*(move_y/10)))} {move_spd}'
+                elif corner == f'botright':
+                    cmd = f'input swipe {int(self.xy.width*0.3)} {int(self.xy.height*0.1)} {int(self.xy.width*(0.3+0.65*(move_x/10)))} {int(self.xy.height*(0.1+0.85*(move_y/10)))} {move_spd}'
+                await self.dev.shell(cmd)
+                await aio.sleep(2)
         # debug: send screenshot
         if debug:
             await self.adb.get_screen(dev=self.dev, debug=True)
@@ -174,7 +188,7 @@ class Bot:
             await self.wait_for_onmap(min_duration=2, no_fight=True)
             # retry
             if open_map == True:
-                await self.use_teleporter(x, y, move_x=move_x, move_y=move_y, move_spd=move_spd, corner=corner, open_map=open_map, confirm=confirm, special_exit=special_exit, debug=False)
+                await self.use_teleporter(x, y, move_x=move_x, move_y=move_y, swipe=swipe, move_spd=move_spd, corner=corner, open_map=open_map, confirm=confirm, special_exit=special_exit, debug=False)
             else:
                 return(False)
         else:

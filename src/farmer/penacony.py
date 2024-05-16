@@ -11,6 +11,7 @@ class Penacony:
         self.the_reverie_dreamscape = penacony.The_Reverie_Dreamscape(bot)
         self.dewlight_pavilion = penacony.Dewlight_Pavilion(bot)
         self.clock_studios_theme_park = penacony.Clock_Studios_Theme_Park(bot)
+        self.penacony_grand_theater = penacony.Penacony_Grand_Theater(bot)
     
     async def farm_dreams_edge(self):
         await self.dreams_edge.teleport()
@@ -50,17 +51,17 @@ class Penacony:
         await self.the_reverie_dreamscape.path_15()
 
     async def farm_dewlight_pavilion(self):
-        await self.dewlight_pavilion.teleport()
-        await self.dewlight_pavilion.path_1()
-        await self.dewlight_pavilion.path_2()
-        await self.dewlight_pavilion.path_3()
-        await self.dewlight_pavilion.path_4()
-        await self.dewlight_pavilion.path_5()
-        await self.dewlight_pavilion.path_6()
-        await self.dewlight_pavilion.path_7()
-        await self.dewlight_pavilion.path_8()
-        await self.dewlight_pavilion.path_9()
-        await self.dewlight_pavilion.path_10()
+        # await self.dewlight_pavilion.teleport()
+        # await self.dewlight_pavilion.path_1()
+        # await self.dewlight_pavilion.path_2()
+        # await self.dewlight_pavilion.path_3()
+        # await self.dewlight_pavilion.path_4()
+        # await self.dewlight_pavilion.path_5()
+        # await self.dewlight_pavilion.path_6()
+        # await self.dewlight_pavilion.path_7()
+        # await self.dewlight_pavilion.path_8()
+        # await self.dewlight_pavilion.path_9()
+        # await self.dewlight_pavilion.path_10()
         await self.dewlight_pavilion.path_11()
 
     async def farm_clock_studios_theme_park(self):
@@ -74,4 +75,10 @@ class Penacony:
         await self.clock_studios_theme_park.path_6()
         await self.clock_studios_theme_park.path_7()
         await self.clock_studios_theme_park.path_8()
+    
+    async def farm_penacony_grand_theater(self):
+        await self.penacony_grand_theater.teleport()
+        await self.penacony_grand_theater.path_1()
+        await self.penacony_grand_theater.path_x()
+        await self.penacony_grand_theater.path_99()
 
