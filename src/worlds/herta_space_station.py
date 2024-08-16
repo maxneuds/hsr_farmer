@@ -1,10 +1,11 @@
 from logger import logger, logger_set_path
+from automation.bot import Bot
 from sys import exit
 
 
 class Base_Zone:
-    def __init__(self, bot):
-        self.bot = bot
+    def __init__(self, device):
+        self.bot = Bot(device)
     async def teleport(self):
         logger_set_path('Teleport')
         logger.info('---')
@@ -34,8 +35,8 @@ class Base_Zone:
         await self.bot.attack() # items
 
 class Storage_Zone:
-    def __init__(self, bot):
-        self.bot = bot
+    def __init__(self, device):
+        self.bot = Bot(device)
     async def teleport(self):
         logger_set_path('Teleport')
         logger.info('---')
@@ -118,8 +119,8 @@ class Storage_Zone:
         
 
 class Supply_Zone:
-    def __init__(self, bot):
-        self.bot = bot
+    def __init__(self, device):
+        self.bot = Bot(device)
     async def teleport(self, tp_restore=-1):
         logger_set_path('Teleport')
         logger.info('---')
@@ -198,8 +199,8 @@ class Supply_Zone:
     
 
 class Seclusion_Zone:
-    def __init__(self, bot):
-        self.bot = bot
+    def __init__(self, device):
+        self.bot = Bot(device)
     async def teleport(self):
         logger_set_path('Teleport')
         logger.info('---')

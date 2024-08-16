@@ -1,10 +1,11 @@
 from logger import logger, logger_set_path
+from automation.bot import Bot
 from sys import exit
 
 
 class Parlor_Car:
-    def __init__(self, bot):
-        self.bot = bot
+    def __init__(self, device):
+        self.bot = Bot(device)
     async def teleport(self):
         logger_set_path('Teleport')
         logger.info('---')

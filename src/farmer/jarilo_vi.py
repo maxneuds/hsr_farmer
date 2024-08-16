@@ -3,15 +3,15 @@ from sys import exit
 
 class Jarilo_VI:
     
-    def __init__(self, bot):
-        self.outlying_snow_plains = jarilo_vi.Outlying_Snow_Plains(bot)
-        self.backwater_pass = jarilo_vi.Backwater_Pass(bot)
-        self.silvermane_guard = jarilo_vi.Silvermane_Guard(bot)
-        self.corridor = jarilo_vi.Corridor(bot)
-        self.everwinter_hill = jarilo_vi.Everwinter_Hill(bot)
-        self.great_mine = jarilo_vi.Great_Mine(bot)
-        self.rivet_town = jarilo_vi.Rivet_Town(bot)
-        self.robot_settlement = jarilo_vi.Robot_Settlement(bot)
+    def __init__(self, device):
+        self.outlying_snow_plains = jarilo_vi.Outlying_Snow_Plains(device)
+        self.backwater_pass = jarilo_vi.Backwater_Pass(device)
+        self.silvermane_guard = jarilo_vi.Silvermane_Guard(device)
+        self.corridor = jarilo_vi.Corridor(device)
+        self.everwinter_hill = jarilo_vi.Everwinter_Hill(device)
+        self.great_mine = jarilo_vi.Great_Mine(device)
+        self.rivet_town = jarilo_vi.Rivet_Town(device)
+        self.robot_settlement = jarilo_vi.Robot_Settlement(device)
 
     async def farm_outlying_snow_plains(self):
         await self.outlying_snow_plains.teleport()

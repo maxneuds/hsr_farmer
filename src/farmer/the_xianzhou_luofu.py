@@ -5,15 +5,15 @@ from datetime import datetime as dt
 
 class The_Xianzhou_Luofu:
     
-    def __init__(self, bot):
-        self.central_starskiff_haven = the_xianzhou_luofu.Central_Starskiff_Haven(bot)
-        self.cloudford = the_xianzhou_luofu.Cloudford(bot)
-        self.stargazer_navalia = the_xianzhou_luofu.Stargazer_Navalia(bot)
-        self.divination_commission = the_xianzhou_luofu.Divination_Commission(bot)
-        self.artisanship_commission = the_xianzhou_luofu.Artisanship_Commission(bot)
-        self.fyxestroll_garden = the_xianzhou_luofu.Fyxestroll_Garden(bot)
-        self.alchemy_commission = the_xianzhou_luofu.Alchemy_Commission(bot)
-        self.scalegorge_waterscape = the_xianzhou_luofu.Scalegorge_Waterscape(bot)
+    def __init__(self, device):
+        self.central_starskiff_haven = the_xianzhou_luofu.Central_Starskiff_Haven(device)
+        self.cloudford = the_xianzhou_luofu.Cloudford(device)
+        self.stargazer_navalia = the_xianzhou_luofu.Stargazer_Navalia(device)
+        self.divination_commission = the_xianzhou_luofu.Divination_Commission(device)
+        self.artisanship_commission = the_xianzhou_luofu.Artisanship_Commission(device)
+        self.fyxestroll_garden = the_xianzhou_luofu.Fyxestroll_Garden(device)
+        self.alchemy_commission = the_xianzhou_luofu.Alchemy_Commission(device)
+        self.scalegorge_waterscape = the_xianzhou_luofu.Scalegorge_Waterscape(device)
 
     async def farm_starskiff_haven(self):
         await self.central_starskiff_haven.teleport()

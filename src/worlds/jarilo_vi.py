@@ -1,10 +1,11 @@
 from logger import logger, logger_set_path
+from automation.bot import Bot
 from sys import exit
 
 
 class Outlying_Snow_Plains:
-    def __init__(self, bot):
-        self.bot = bot
+    def __init__(self, device):
+        self.bot = Bot(device)
     async def teleport(self):
         logger.info('Teleport')
         logger.info('---')
@@ -57,8 +58,8 @@ class Outlying_Snow_Plains:
 
 
 class Backwater_Pass:
-    def __init__(self, bot):
-        self.bot = bot
+    def __init__(self, device):
+        self.bot = Bot(device)
     async def teleport(self):
         logger_set_path('Teleport')
         logger.info('Teleport')
@@ -144,8 +145,8 @@ class Backwater_Pass:
 
 
 class Silvermane_Guard:
-    def __init__(self, bot):
-        self.bot = bot
+    def __init__(self, device):
+        self.bot = Bot(device)
     async def teleport(self, tp_restore=-1):
         logger_set_path('Teleport')
         logger.info('Teleport')
@@ -198,8 +199,8 @@ class Silvermane_Guard:
 
 
 class Corridor:
-    def __init__(self, bot):
-        self.bot = bot
+    def __init__(self, device):
+        self.bot = Bot(device)
     async def teleport(self):
         logger_set_path('Teleport')
         logger.info('Teleport')
@@ -353,8 +354,8 @@ class Corridor:
 
 
 class Everwinter_Hill:
-    def __init__(self, bot):
-        self.bot = bot
+    def __init__(self, device):
+        self.bot = Bot(device)
     async def teleport(self):
         logger_set_path('Teleport')
         logger.info('---')
@@ -398,8 +399,8 @@ class Everwinter_Hill:
 
 
 class Great_Mine:
-    def __init__(self, bot):
-        self.bot = bot
+    def __init__(self, device):
+        self.bot = Bot(device)
     async def teleport(self):
         logger_set_path('Teleport')
         logger.info('---')
@@ -519,8 +520,8 @@ class Great_Mine:
 
 
 class Rivet_Town:
-    def __init__(self, bot):
-        self.bot = bot
+    def __init__(self, device):
+        self.bot = Bot(device)
     async def teleport(self):
         logger_set_path('Teleport')
         logger.info('---')
@@ -608,8 +609,8 @@ class Rivet_Town:
 
 
 class Robot_Settlement:
-    def __init__(self, bot):
-        self.bot = bot
+    def __init__(self, device):
+        self.bot = Bot(device)
     async def teleport(self):
         logger_set_path('Teleport')
         logger.info('---')
@@ -678,10 +679,10 @@ class Robot_Settlement:
         await self.bot.movepi(0.0, 400)
         await self.bot.movepi(1.6, 2300)
         await self.bot.movepi(1.3, 900)
-        await self.bot.movepi(1.2, 2200)
-        await self.bot.movepi(1.5, 300)
+        await self.bot.movepi(1.1, 2500)
+        await self.bot.movepi(1.6, 300)
         await self.bot.attack_technique(4) # -1TP
-        await self.bot.movepi(0.0, 2000)
+        await self.bot.movepi(0.0, 1000)
         await self.bot.posfix(1.75, 1000)
         await self.bot.movepi(0.55, 1500)
         await self.bot.movepi(0.2, 2500)

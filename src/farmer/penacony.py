@@ -4,14 +4,14 @@ from sys import exit
 
 class Penacony:
 
-    def __init__(self, bot):
-        self.golden_hour = penacony.Golden_Hour(bot)
-        self.dreams_edge = penacony.Dreams_Edge(bot)
-        self.childs_dream = penacony.Childs_Dream(bot)
-        self.the_reverie_dreamscape = penacony.The_Reverie_Dreamscape(bot)
-        self.dewlight_pavilion = penacony.Dewlight_Pavilion(bot)
-        self.clock_studios_theme_park = penacony.Clock_Studios_Theme_Park(bot)
-        self.penacony_grand_theater = penacony.Penacony_Grand_Theater(bot)
+    def __init__(self, device):
+        self.golden_hour = penacony.Golden_Hour(device)
+        self.dreams_edge = penacony.Dreams_Edge(device)
+        self.childs_dream = penacony.Childs_Dream(device)
+        self.the_reverie_dreamscape = penacony.The_Reverie_Dreamscape(device)
+        self.dewlight_pavilion = penacony.Dewlight_Pavilion(device)
+        self.clock_studios_theme_park = penacony.Clock_Studios_Theme_Park(device)
+        self.penacony_grand_theater = penacony.Penacony_Grand_Theater(device)
     
     async def farm_dreams_edge(self):
         await self.dreams_edge.teleport()
@@ -51,17 +51,17 @@ class Penacony:
         await self.the_reverie_dreamscape.path_15()
 
     async def farm_dewlight_pavilion(self):
-        # await self.dewlight_pavilion.teleport()
-        # await self.dewlight_pavilion.path_1()
-        # await self.dewlight_pavilion.path_2()
-        # await self.dewlight_pavilion.path_3()
-        # await self.dewlight_pavilion.path_4()
-        # await self.dewlight_pavilion.path_5()
-        # await self.dewlight_pavilion.path_6()
-        # await self.dewlight_pavilion.path_7()
-        # await self.dewlight_pavilion.path_8()
-        # await self.dewlight_pavilion.path_9()
-        # await self.dewlight_pavilion.path_10()
+        await self.dewlight_pavilion.teleport()
+        await self.dewlight_pavilion.path_1()
+        await self.dewlight_pavilion.path_2()
+        await self.dewlight_pavilion.path_3()
+        await self.dewlight_pavilion.path_4()
+        await self.dewlight_pavilion.path_5()
+        await self.dewlight_pavilion.path_6()
+        await self.dewlight_pavilion.path_7()
+        await self.dewlight_pavilion.path_8()
+        await self.dewlight_pavilion.path_9()
+        await self.dewlight_pavilion.path_10()
         await self.dewlight_pavilion.path_11()
 
     async def farm_clock_studios_theme_park(self):
@@ -79,6 +79,12 @@ class Penacony:
     async def farm_penacony_grand_theater(self):
         await self.penacony_grand_theater.teleport()
         await self.penacony_grand_theater.path_1()
+        await self.penacony_grand_theater.path_2()
+        await self.penacony_grand_theater.path_3()
+        await self.penacony_grand_theater.path_4()
+        await self.penacony_grand_theater.path_5()
+        await self.penacony_grand_theater.path_6()
+        await self.penacony_grand_theater.path_7()
+        await self.penacony_grand_theater.path_8()
         await self.penacony_grand_theater.path_x()
-        await self.penacony_grand_theater.path_99()
 

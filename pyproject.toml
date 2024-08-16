@@ -14,18 +14,19 @@ numpy = "^1.26.3"
 opencv-python = "^4.9.0.80"
 pytesseract = "^0.3.10"
 mss = "^9.0.1"
-pyautogui = "^0.9.54"
 pure-python-adb = "^0.3.0.dev0"
 aiofiles = "^23.2.1"
-streamlit = "^1.32.0"
 scikit-image = "^0.22.0"
-pyyaml = "^6.0.1"
+nicegui = "^1.4.25"
 
 
 [tool.poetry.group.dev.dependencies]
 autopep8 = "^2.0.4"
 flake8 = "^7.0.0"
 
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+

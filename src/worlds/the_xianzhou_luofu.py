@@ -1,10 +1,11 @@
 from logger import logger, logger_set_path
+from automation.bot import Bot
 from sys import exit
 
 
 class Central_Starskiff_Haven:
-    def __init__(self, bot):
-        self.bot = bot
+    def __init__(self, device):
+        self.bot = Bot(device)
     async def teleport(self):
         logger_set_path('Teleport')
         logger.info('---')
@@ -17,23 +18,28 @@ class Central_Starskiff_Haven:
         await self.bot.movepi(1.7, 1000)
     async def shop_salesby(self):
         logger_set_path('Shop Salesby')
-        await self.bot.chat_initiate()
-        for _ in range(2):
-            await self.bot.chat_advance()
-        await self.bot.action_tap(int(self.bot.xy.width*1654/2400), int(self.bot.xy.height*484/1080))
-        await self.bot.sleep(1)
-        await self.bot.chat_advance()
-        await self.bot.buy_item('gaseous_liquid')
-        await self.bot.buy_item('seed')
-        await self.bot.buy_item('virtual_particle')
-        await self.bot.shop_exit()
+        # await self.bot.chat_initiate()
+        # for _ in range(2):
+        #     await self.bot.chat_advance()
+        # await self.bot.action_tap(int(self.bot.xy.width*1654/2400), int(self.bot.xy.height*484/1080))
+        # await self.bot.sleep(1)
+        # await self.bot.chat_advance()
+        # await self.bot.buy_item('gaseous_liquid')
+        # await self.bot.buy_item('seed')
+        # await self.bot.buy_item('virtual_particle')
+        # await self.bot.shop_exit()
+        # 2028: 4 -> 2036
+        # 15786: 2 -> 15843
+        # TODO: do crafting in a separate step
+        # TODO: shop before doing anything else
+        # TODO: shop with slider setting
         await self.bot.craft_item('trick_snack')
         await self.bot.craft_item('punitive_energy', all=True)
 
 
 class Cloudford:
-    def __init__(self, bot):
-        self.bot = bot
+    def __init__(self, device):
+        self.bot = Bot(device)
     async def teleport(self):
         logger_set_path('Teleport')
         logger.info('---')
@@ -161,8 +167,8 @@ class Cloudford:
        
  
 class Stargazer_Navalia:
-    def __init__(self, bot):
-        self.bot = bot
+    def __init__(self, device):
+        self.bot = Bot(device)
     async def teleport(self):
         logger_set_path('Teleport')
         logger.info('---')
@@ -330,14 +336,14 @@ class Stargazer_Navalia:
 
 
 class Divination_Commission:
-    def __init__(self, bot):
-        self.bot = bot
+    def __init__(self, device):
+        self.bot = Bot(device)
     async def teleport(self):
         logger_set_path('Teleport')
         logger.info('---')
         logger.info('--- Map: Divination Commission')
         logger.info('---')
-        await self.bot.switch_map(y_list=447/1080, world='the_xianzhou_luofu', scroll_down=True,
+        await self.bot.switch_map(y_list=328/1080, world='the_xianzhou_luofu', scroll_down=True,
                                     x=848/2400, y=524/1080, corner='botright', move_x=0, move_y=0) # Bud of Aether
         await self.bot.movepi(1.25, 2600)
         await self.bot.attack_technique(6) # -1TP
@@ -521,14 +527,14 @@ class Divination_Commission:
 
 
 class Artisanship_Commission:
-    def __init__(self, bot):
-        self.bot = bot
+    def __init__(self, device):
+        self.bot = Bot(device)
     async def teleport(self):
         logger_set_path('Teleport')
         logger.info('---')
         logger.info('--- Map: Artisanship Commission')
         logger.info('---')
-        await self.bot.switch_map(y_list=567/1080, world='the_xianzhou_luofu', scroll_down=True,
+        await self.bot.switch_map(y_list=446/1080, world='the_xianzhou_luofu', scroll_down=True,
                                     x=933/2400, y=530/1080, corner='topright', move_x=0, move_y=4) # Passage of the Finery Foundry
         await self.bot.movepi(0.5, 5200)
         await self.bot.movepi(0.0, 6200)
@@ -587,14 +593,14 @@ class Artisanship_Commission:
         for _ in range(8):
             await self.bot.movepi(0.0, 300)
             await self.bot.attack_technique(1)
-        for _ in range(4):
+        for _ in range(3):
             await self.bot.movepi(0.5, 300)
             await self.bot.attack_technique(1)
         for _ in range(6):
-            await self.bot.movepi(1.0, 300)
+            await self.bot.movepi(0.9, 300)
             await self.bot.attack_technique(1)
         for _ in range(6):
-            await self.bot.movepi(1.8, 300)
+            await self.bot.movepi(1.9, 300)
             await self.bot.attack_technique(1)
         await self.bot.restore_tp(item='punitive_energy') # +4TP
     async def path_4(self):
@@ -733,14 +739,14 @@ class Artisanship_Commission:
 
 
 class Fyxestroll_Garden:
-    def __init__(self, bot):
-        self.bot = bot
+    def __init__(self, device):
+        self.bot = Bot(device)
     async def teleport(self):
         logger_set_path('Teleport')
         logger.info('---')
         logger.info('--- Map: Fyxestroll Garden')
         logger.info('---')
-        await self.bot.switch_map(y_list=688/1080, world='the_xianzhou_luofu', scroll_down=True, # Locufox Forest Backdoor
+        await self.bot.switch_map(y_list=568/1080, world='the_xianzhou_luofu', scroll_down=True, # Locufox Forest Backdoor
                                     x=578/2400, y=284/1080, move_x=0, move_y=1, corner='botleft', confirm=False)
         await self.bot.movepi(1.5, 4400)
         await self.bot.movepi(1.95, 600)
@@ -818,14 +824,14 @@ class Fyxestroll_Garden:
 
 
 class Alchemy_Commission:
-    def __init__(self, bot):
-        self.bot = bot
+    def __init__(self, device):
+        self.bot = Bot(device)
     async def teleport(self):
         logger_set_path('Teleport')
         logger.info('---')
         logger.info('--- Map: Alchemy Comission')
         logger.info('---')
-        await self.bot.switch_map(y_list=810/1080, world='the_xianzhou_luofu', scroll_down=True, # Healer's Market
+        await self.bot.switch_map(y_list=685/1080, world='the_xianzhou_luofu', scroll_down=True, # Healer's Market
                                     x=854/2400, y=689/1080, corner='topright', move_x=0, move_y=6, confirm=True)
         await self.bot.movepi(0.5, 1500)
         await self.bot.movepi(0.75, 6700)
@@ -1029,14 +1035,14 @@ class Alchemy_Commission:
 
 
 class Scalegorge_Waterscape:
-    def __init__(self, bot):
-        self.bot = bot
+    def __init__(self, device):
+        self.bot = Bot(device)
     async def teleport(self):
         logger_set_path('Teleport')
         logger.info('---')
         logger.info('--- Map: Scalegorge Waterscape')
         logger.info('---')
-        await self.bot.switch_map(y_list=928/1080, world='the_xianzhou_luofu', scroll_down=True,
+        await self.bot.switch_map(y_list=807/1080, world='the_xianzhou_luofu', scroll_down=True,
                                     x=1433/2400, y=659/1080, corner='topleft', move_x=0, move_y=0) # Palace Ruin Depths
         await self.bot.movepi(1.5, 6000)
         await self.bot.movepi(1.6, 300)
@@ -1196,3 +1202,24 @@ class Scalegorge_Waterscape:
         await self.bot.attack_technique(7)
     
 
+class The_Shackling_Prison:
+    def __init__(self, device):
+        self.bot = Bot(device)
+    async def teleport(self):
+        logger_set_path('Teleport')
+        logger.info('---')
+        logger.info('--- Map: The Shackling Prison')
+        logger.info('---')
+        await self.bot.switch_map(y_list=928/1080, world='the_xianzhou_luofu', scroll_down=True, # ???
+                                    x=578/2400, y=284/1080, move_x=0, move_y=1, corner='botleft', confirm=False)
+        # await self.bot.movepi(1.5, 4400)
+        # await self.bot.movepi(1.95, 600)
+        # await self.bot.attack_technique(3) # -2TP
+        # await self.bot.movepi(1.0, 1000)
+        # await self.bot.movepi(1.2, 500)
+        # await self.bot.attack_technique(4) # -1TP
+    async def path_1(self): # roamer
+        logger_set_path(1)
+        # await self.bot.use_teleporter(697/2400, 153/1080, move_x=0, move_y=0) # ???
+        # await self.bot.movepi(1.8, 1800)
+        # await self.bot.attack() # +2TP

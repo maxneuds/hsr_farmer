@@ -6,32 +6,100 @@ from logger import logger
 from datetime import datetime as dt, timedelta
 import time
 from skimage.metrics import structural_similarity as compare_ssim
+from automation.adb import ADB
+from automation.xy import OnePlus7T
+
 
 class PathError(Exception): pass
 
 class Bot:
-    def __init__(self, adb, dev, xy):
-        self.adb = adb
-        self.dev = dev
-        self.xy = xy
+    def __init__(self, device):
+        self.device = device
+        # initialize bot
+        self.xy = OnePlus7T()
+        self.adb = ADB()
+        self.dev = None
+
+    async def shell_failsafe(self, cmd, n_try=0):
+        try:
+            if self.dev is None:
+                self.dev = await self.adb.connect_dev(device=self.device)
+            await self.dev.shell(cmd)
+        except RuntimeError as e:
+            if n_try < 9:
+                logger.info(f"ADB connection closed: reconnect trial {n_try+1}")
+                await aio.sleep(0.5)
+                self.dev = await self.adb.connect_dev(device=self.device)
+                await self.shell_failsafe(cmd, n_try=n_try+1)
+            else:
+                logger.error(f"Reconnecting to ADB failed with error:\n{e}")
+    
+    async def screen_failsafe(self, n_try=0):
+        try:
+            if self.dev is None:
+                self.dev = await self.adb.connect_dev(device=self.device)
+            im_byte_array = await self.dev.screencap()
+            return(im_byte_array)
+        except RuntimeError as e:
+            if n_try < 9:
+                logger.info(f"ADB connection closed: reconnect trial {n_try+1}")
+                self.dev = await self.adb.connect_dev(device=self.device)
+                await self.screen_failsafe(n_try=n_try+1)
+            else:
+                logger.error(f"Reconnecting to ADB failed with error:\n{e}")
+
+    # unused
+    # async def get_screensize(self, dev):
+    #     result = await dev.shell('wm size')
+    #     hxw = result.strip().split()[2]
+    #     h, w = hxw.split('x')
+    #     return(int(h), int(w))
+    
+    def click_event(self, event, x, y, flags, params):
+        # function to display the coordinates of
+        # of the points clicked on the image
+        # checking for left mouse clicks
+        if event == cv.EVENT_LBUTTONDOWN:
+            logger.debug(f'{x},{y}')
+    
+    async def get_screen(self, custom_msg=False, debug=False):
+        if custom_msg == False:
+            logger.info('get screenshot from device')
+        elif custom_msg == None:
+            pass
+        else:
+            logger.info(custom_msg)
+        # get screen from device
+        im_byte_array = await self.screen_failsafe()
+        # convert to cv image
+        screenshot = cv.imdecode(np.frombuffer(bytes(im_byte_array), np.uint8), cv.IMREAD_COLOR)
+        if debug == True:
+            cv.imshow('debug', screenshot)
+            cv.imwrite('debug.png', screenshot)
+            cv.setMouseCallback('debug', self.click_event)
+            cv.waitKey(0)
+            cv.destroyAllWindows()
+        return(screenshot)
 
     async def sleep(self, duration):
         logger.info(f'sleep for {duration} seconds...')
         await aio.sleep(duration)
     
-    async def action_back(self):
+    async def action_back(self, n=1):
         logger.info('send back button')
-        await self.dev.shell(f'input keyevent 4')
+        for _ in range(n):
+            await self.shell_failsafe(f'input keyevent 4')
+            await aio.sleep(1.5)
 
     async def action_tap(self, x, y):
         logger.info(f'action: tap {x},{y}')
         await aio.sleep(0.1)
-        await self.dev.shell(f'input tap {x} {y}')
+        await self.shell_failsafe(f'input tap {x} {y}')
         await aio.sleep(0.1)
 
     async def sprint_on(self):
         await aio.sleep(0.1)
-        await self.dev.shell(f'input tap {self.xy.sprint[0]} {self.xy.sprint[1]}')
+        await self.shell_failsafe(f'input tap {self.xy.sprint[0]} {self.xy.sprint[1]}')
 
     async def posfix(self, direction, duration):
         logger.info(f'position fixing: move {direction} pi for {duration/1000} seconds')
@@ -43,21 +111,21 @@ class Bot:
         x = self.xy.vjoy['center'][0] + self.xy.vjoy['r'] * np.cos(direction*np.pi)
         y = self.xy.vjoy['center'][1] - self.xy.vjoy['r'] * np.sin(direction*np.pi)
         cmd = f'input swipe {x} {y} {x} {y} {int(duration)}'
-        await self.dev.shell(cmd)
+        await self.shell_failsafe(cmd)
 
     async def open_map(self, special_exit=True, debug=False):
         if not debug: # open map for debugging
             await self.wait_for_onmap(min_duration=0)
             logger.info('open map')
             await self.attack() # animation cancle
-            await self.dev.shell(f'input tap {self.xy.map[0]} {self.xy.map[1]}')
+            await self.shell_failsafe(f'input tap {self.xy.map[0]} {self.xy.map[1]}')
         # wait for map
         logger.info('wait for map')
         im_mapx = cv.imread('res/map_x_bw.png', cv.IMREAD_GRAYSCALE)
         check_map = True
         check_map_iter = 1
         while check_map:
-            screen = await self.adb.get_screen(dev=self.dev)
+            screen = await self.get_screen()
             screen_topright = screen[0:int(self.xy.height*0.2), int(self.xy.width*0.7):int(self.xy.width)]
             screen_topright_bw = cv.cvtColor(screen_topright, cv.COLOR_BGR2GRAY)
             _, screen_topright_bw = cv.threshold(screen_topright_bw, 240, 255, cv.THRESH_BINARY)
@@ -72,13 +140,13 @@ class Bot:
             if max_val > 0.95:
                 logger.info('map detected')
             else:
-                logger.info('iteration {check_map_iter}, map not detected: retry')
+                logger.info(f'iteration {check_map_iter}, map not detected: retry')
                 check_map_iter += 1
                 if check_map_iter > 10:
                     logger.error('map not found: retry')
                     check_map = False
                     await self.action_back()
-                    await self.wait_for_onmap(min_duration=2, no_fight=True)
+                    await self.wait_for_onmap(min_duration=0)
                     check = await self.open_map(special_exit=special_exit)
                     return(check)
                 else:
@@ -95,7 +163,7 @@ class Bot:
                 logger.info('map type: special')
                 if special_exit:
                     logger.info('exit special map to normal map')
-                    await self.dev.shell(f'input tap {int(self.xy.width*2135/2400)} {int(self.xy.height*138/1080)}')
+                    await self.shell_failsafe(f'input tap {int(self.xy.width*2135/2400)} {int(self.xy.height*138/1080)}')
                     await aio.sleep(1)
                     continue
             check_map = False
@@ -106,7 +174,7 @@ class Bot:
         logger.info('check map zoom level')
         im_zoombar_min = cv.imread('res/map_zoombar_min.png', cv.IMREAD_GRAYSCALE)
         im_zoom_minus_bw = cv.imread('res/map_zoom_minus_bw.png', cv.IMREAD_GRAYSCALE)
-        screen = await self.adb.get_screen(dev=self.dev)
+        screen = await self.get_screen()
         screen_botmid = screen[int(self.xy.height*0.8):int(self.xy.height), int(self.xy.width*0.3):int(self.xy.width*0.7)]
         screen_botmid_bw = cv.cvtColor(screen_botmid, cv.COLOR_BGR2GRAY)
         _, screen_botmid_bw = cv.threshold(screen_botmid_bw, 240, 255, cv.THRESH_BINARY)
@@ -129,11 +197,11 @@ class Bot:
         if max_val < 0.95: # map isn't on min zoom, change zoom level
             logger.info('zoom map to min')
             for _ in range(20):
-                await self.dev.shell(f'input tap {btn_zoom_minus[0]} {btn_zoom_minus[1]}')
+                await self.shell_failsafe(f'input tap {btn_zoom_minus[0]} {btn_zoom_minus[1]}')
                 await aio.sleep(0.05)
             await aio.sleep(0.1)
 
-    async def use_teleporter(self, x, y, move_x=0, move_y=0, swipe=1, move_spd=500, corner='botright', open_map=True, confirm=False, special_exit=True, debug=False):
+    async def use_teleporter(self, x, y, move_x=0, move_y=0, swipe=1, move_spd=500, corner='botright', open_map=True, confirm=False, special_exit=True, switch_world=False, n_try=0, debug=False):
         logger.info(f'use teleporter: {int(self.xy.width*x)},{int(self.xy.height*y)}')
         if open_map == True:
             await self.open_map(special_exit=special_exit)
@@ -150,7 +218,7 @@ class Bot:
             else:
                 logger.debug('bad corner given')
                 exit()
-            await self.dev.shell(cmd)
+            await self.shell_failsafe(cmd)
             await aio.sleep(1)
         await aio.sleep(1)
         if move_x != 0 or move_y != 0:
@@ -164,32 +232,36 @@ class Bot:
                     cmd = f'input swipe {int(self.xy.width*0.65)} {int(self.xy.height*0.1)} {int(self.xy.width*(0.65-0.6*(move_x/10)))} {int(self.xy.height*(0.1+0.85*(move_y/10)))} {move_spd}'
                 elif corner == f'botright':
                     cmd = f'input swipe {int(self.xy.width*0.3)} {int(self.xy.height*0.1)} {int(self.xy.width*(0.3+0.65*(move_x/10)))} {int(self.xy.height*(0.1+0.85*(move_y/10)))} {move_spd}'
-                await self.dev.shell(cmd)
+                await self.shell_failsafe(cmd)
                 await aio.sleep(2)
         # debug: send screenshot
         if debug:
-            await self.adb.get_screen(dev=self.dev, debug=True)
+            await self.get_screen(debug=True)
             sys.exit()
         # tap teleporter
         logger.info(f'tap teleporter: {int(self.xy.width*x)},{int(self.xy.height*y)}')
-        await self.dev.shell(f'input tap {int(self.xy.width*x)} {int(self.xy.height*y)}')
+        await self.shell_failsafe(f'input tap {int(self.xy.width*x)} {int(self.xy.height*y)}')
         await aio.sleep(1.25)
         # confirm teleporter if other landmark is close
         if confirm == True:
             logger.info(f'confirm teleporter selection')
-            await self.dev.shell(f'input tap {int(self.xy.width*1200/2400)} {int(self.xy.height*700/1080)}')
+            await self.shell_failsafe(f'input tap {int(self.xy.width*1200/2400)} {int(self.xy.height*700/1080)}')
             await aio.sleep(1.5)
         # teleport
-        await self.dev.shell(f'input tap {int(self.xy.width*0.83)} {int(self.xy.height*0.9)}')
-        check = await self.wait_for_onmap(min_duration=2, no_fight=True)
-        if check == 'stuck': # retry
-            logger.error(f'telport failed. Try again')
-            await self.action_back()
-            await self.wait_for_onmap(min_duration=2, no_fight=True)
-            # retry
+        await self.shell_failsafe(f'input tap {int(self.xy.width*0.83)} {int(self.xy.height*0.9)}')
+        check = await self.wait_for_onmap(min_duration=2, reason='teleport')
+        if check != True: # retry
+            n_try += 1
+            if n_try > 10: # retry at most 10 times
+                logger.error(f"Failed to teleport {n_try} times. Please fix!")
+                sys.exit()
+            logger.debug(f'telport failed. Try again [{n_try}]')
+            await self.action_back(n=2)
+            await self.wait_for_onmap(min_duration=0, reason='teleport')
             if open_map == True:
-                await self.use_teleporter(x, y, move_x=move_x, move_y=move_y, swipe=swipe, move_spd=move_spd, corner=corner, open_map=open_map, confirm=confirm, special_exit=special_exit, debug=False)
+                await self.use_teleporter(x, y, move_x=move_x, move_y=move_y, swipe=swipe, move_spd=move_spd, corner=corner, open_map=open_map, confirm=confirm, special_exit=special_exit, switch_world=switch_world, n_try=n_try, debug=False)
             else:
+                logger.error(f"Failed to teleport. Return False.")
                 return(False)
         else:
             return(True)
@@ -198,14 +270,14 @@ class Bot:
         logger.info('swipe locations up')
         await aio.sleep(0.1)
         cmd = f'input swipe {int(self.xy.width*0.8)} {self.xy.height-200} {int(self.xy.width*0.8)} {self.xy.height-700} 150'
-        await self.dev.shell(cmd)
+        await self.shell_failsafe(cmd)
         await aio.sleep(1.5)
 
     async def open_star_rail_map(self):
         await self.open_map()
         logger.info('open star rail map')
         await aio.sleep(0.1)
-        await self.dev.shell(f'input tap {self.xy.star_rail_map[0]} {self.xy.star_rail_map[1]}')
+        await self.shell_failsafe(f'input tap {self.xy.star_rail_map[0]} {self.xy.star_rail_map[1]}')
         await aio.sleep(1.5)
 
     async def switch_world(self, world):
@@ -228,7 +300,7 @@ class Bot:
         # open star rail map
         await self.open_star_rail_map()
         # get screenshot
-        screen = await self.adb.get_screen(dev=self.dev)
+        screen = await self.get_screen()
         # find match
         result = cv.matchTemplate(screen, target, cv.TM_CCOEFF_NORMED)
         min_val, max_val, min_loc, max_loc = cv.minMaxLoc(result)
@@ -237,7 +309,7 @@ class Bot:
         # Get the dimensions of the template image
         h, w, _ = target.shape
         # tap planet
-        await self.dev.shell(f'input swipe {top_left[0] + int(w/2)} {top_left[1] + int(h/2)} {top_left[0] + int(w/2)} {top_left[1] + int(h/2)} 200')
+        await self.shell_failsafe(f'input swipe {top_left[0] + int(w/2)} {top_left[1] + int(h/2)} {top_left[0] + int(w/2)} {top_left[1] + int(h/2)} 200')
         await aio.sleep(2)
     
     async def switch_map(self, y_list, world, x, y, scroll_down=False, corner='botright', move_x=0, move_y=0, confirm=False, debug=False):
@@ -252,10 +324,10 @@ class Bot:
             y1 = int(self.xy.height*0.3)
             y2 = int(self.xy.height*0.8)
         cmd = f'input swipe {x_list} {y1} {x_list} {y2} 250'
-        await self.dev.shell(cmd)
+        await self.shell_failsafe(cmd)
         await aio.sleep(3)
         if debug:
-            await self.adb.get_screen(dev=self.dev, debug=debug)
+            await self.get_screen(debug=debug)
         logger.info('tap location')
         await self.action_tap(x_list, int(self.xy.height*y_list))
         await aio.sleep(2)
@@ -264,15 +336,17 @@ class Bot:
             logger.warning('map change failed: retry')
             await self.switch_map(y_list=y_list, world=world, x=x, y=y, scroll_down=scroll_down, corner=corner, move_x=move_x, move_y=move_y, confirm=confirm, debug=debug)
     
-    async def restore_tp(self, item='trick_snack', n=1):
+    async def restore_tp(self, item='trick_snack', n=1, n_try=0):
         logger.info('action: restore TP using food, make sure it is faved first')
-        await self.wait_for_onmap(min_duration=0)
+        ready = False
+        while not ready:
+            ready = await self.wait_for_onmap(min_duration=0)
         await self.attack() # animation cancle
         logger.info('open inventory')
-        await self.dev.shell(f'input tap {self.xy.inventory[0]} {self.xy.inventory[1]}')
+        await self.shell_failsafe(f'input tap {self.xy.inventory[0]} {self.xy.inventory[1]}')
         await aio.sleep(2)
         logger.info('open food menu')
-        await self.dev.shell(f'input tap {self.xy.food_menu[0]} {self.xy.food_menu[1]}')
+        await self.shell_failsafe(f'input tap {self.xy.food_menu[0]} {self.xy.food_menu[1]}')
         await aio.sleep(2)
         logger.info('select fav food')
         # select item
@@ -284,7 +358,7 @@ class Bot:
             success = False
             while not success:
                 try:
-                    screen = await self.adb.get_screen(dev=self.dev, custom_msg=None)
+                    screen = await self.get_screen(custom_msg=None)
                     success = True
                 except:
                     pass
@@ -307,16 +381,21 @@ class Bot:
                     await self.action_tap(int(self.xy.width*1461/2400), int(self.xy.height*824/1080))
                     await aio.sleep(2)
                 logger.info(f'exit to map')
-                await self.action_back()
-                await self.wait_for_onmap(min_duration=2)
+                await self.action_back(n=3)
+                await self.wait_for_onmap(min_duration=0)
                 search_item = False
                 return(True)
             else:
                 count += 1
                 if count > 9:
-                    logger.error(f'"{item}" not found')
-                    search_item = False
-                    exit()
+                    logger.error(f'"{item}" not found. Maybe in fight. Retry {n_try+1}.')
+                    if n_try < 2:
+                        search_item = False
+                        await self.restore_tp(item=item, n=n, n_try=n_try+1)
+                    else:
+                        search_item = False
+                        logger.error(f'"{item}" not found. Exit.')
+                        exit()
 
     async def interact(self, check_on_map=True):
         await aio.sleep(1)
@@ -340,7 +419,7 @@ class Bot:
     async def shop_exit(self):
         logger.info(f'shop: exit')
         await self.action_back()
-        await self.wait_for_onmap(min_duration=2, no_fight=True)
+        await self.wait_for_onmap(min_duration=0)
         
     async def chat_advance(self):
         logger.info(f'chat: advance')
@@ -353,13 +432,13 @@ class Bot:
         logger.info('action: attack')
         await aio.sleep(0.05)
         for _ in range(count):
-            await self.dev.shell(f'input tap {self.xy.attack[0]} {self.xy.attack[1]}')
+            await self.shell_failsafe(f'input tap {self.xy.attack[0]} {self.xy.attack[1]}')
             await aio.sleep(0.6)
 
     async def action_technique(self):
         logger.info('action: technique')
         await aio.sleep(0.05)
-        await self.dev.shell(f'input tap {self.xy.technique[0]} {self.xy.technique[1]}')
+        await self.shell_failsafe(f'input tap {self.xy.technique[0]} {self.xy.technique[1]}')
         await aio.sleep(0.3)
 
     async def attack_technique(self, count=1):
@@ -376,7 +455,7 @@ class Bot:
                 success = False
                 while not success:
                     try:
-                        screen = await self.adb.get_screen(dev=self.dev, custom_msg=None)
+                        screen = await self.get_screen(custom_msg=None)
                         success = True
                         if debug == True:
                             cv.imwrite('debug.png', screen)
@@ -399,12 +478,11 @@ class Bot:
                     await self.action_tap(int(self.xy.width*1393/2400), int(self.xy.height*787/1080)) # confirm
                     await aio.sleep(2)
                     await self.action_back()
-                    await aio.sleep(2)
                     return(True)
                 else:
                     time_running = timedelta(seconds=time.perf_counter() - time_start)
                     if time_running.seconds > 10:
-                        logger.error('item: {name} not found')
+                        logger.error(f'item: {name} not found')
                         exit()
         except KeyboardInterrupt:
             logger.debug('Ctrl+C detected. Exiting gracefully.')
@@ -417,7 +495,7 @@ class Bot:
     async def craft_item(self, name, all=True, debug=False):
         logger.info(f'craft: {name}')
         if debug == True:
-            screen = await self.adb.get_screen(dev=self.dev, debug=True)
+            screen = await self.get_screen(debug=True)
         im_item = cv.imread(f'res/item_{name}.png', cv.IMREAD_COLOR)
         # open phone
         await self.open_phone()
@@ -436,7 +514,7 @@ class Bot:
             success = False
             while not success:
                 try:
-                    screen = await self.adb.get_screen(dev=self.dev, custom_msg=None)
+                    screen = await self.get_screen(custom_msg=None)
                     success = True
                 except:
                     pass
@@ -459,7 +537,6 @@ class Bot:
                 logger.info('return to map')
                 for _ in range(3):
                     await self.action_back()
-                    await aio.sleep(3)
                 search_recipe = False
                 return(True)
             else:
@@ -471,12 +548,13 @@ class Bot:
                 # swipe up
                 x = int(self.xy.width*492/2400)
                 cmd = f'input swipe {x} {int(self.xy.height*600/1080)} {x} {int(self.xy.height*300/1080)} {500}'
-                await self.dev.shell(cmd)
+                await self.shell_failsafe(cmd)
                 await aio.sleep(0.5)
 
-    async def wait_for_onmap(self, min_duration=5, no_fight=False, debug=False):
-        logger.info('wait/check for character on map')
-        if not debug:
+    async def wait_for_onmap(self, min_duration=0, reason='default', debug=False):
+        logger.info(f'wait/check for character on map. reason: {reason}')
+        if not debug and min_duration > 0:
+            logger.info(f'wait for {min_duration}s')
             await aio.sleep(min_duration)
         img_warp= cv.imread('res/bw_warp.png', cv.IMREAD_GRAYSCALE)
         img_party= cv.imread('res/bw_party.png', cv.IMREAD_GRAYSCALE)
@@ -490,19 +568,22 @@ class Bot:
         try: # catch KeyboardInterrupt
             while True:
                 time_running = timedelta(seconds=time.perf_counter() - time_start)
-                if no_fight == True and (time_running.seconds > 10):
-                    logger.debug('character stuck returning to map')
-                    return('stuck')
+                if reason == 'default' and (time_running.seconds > 10):
+                    logger.debug('character stuck returning to map. maybe in fight?')
+                    reason = 'unknown'
+                    continue
+                elif reason == 'teleport' and (time_running.seconds > 7):
+                    return(False)
                 elif time_running.seconds > 300:
-                    logger.debug('character stuck returning to map')
-                    return('stuck')
+                    logger.debug('character stuck: send back button')
+                    await self.action_back()
                 success = False
                 while not success:
                     try:
                         if debug:
-                            screen = await self.adb.get_screen(dev=self.dev, custom_msg='still in fight')
+                            screen = await self.get_screen(custom_msg='still in fight')
                         else:
-                            screen = await self.adb.get_screen(dev=self.dev, custom_msg=None)
+                            screen = await self.get_screen(custom_msg=None)
                         screen_bw = cv.cvtColor(screen, cv.COLOR_BGR2GRAY)
                         # screen_edges = cv.Canny(screen, 400, 500)
                         _, screen_bw = cv.threshold(screen_bw, 200, 255, cv.THRESH_BINARY)
@@ -548,12 +629,12 @@ class Bot:
                 if max_val_exit > 0.95:
                     logger.info('exit window found: cancel')
                     await self.action_back()
-                    await self.sleep(0.5)
+                    return(True)
                 elif max_val_food > 0.95: # food menu found, eat TP food
                     logger.info('food menu found: eat TP food')
                     await self.action_back()
-                    await aio.sleep(2)
                     await self.restore_tp(item='trick_snack')
+                    return(True)
                 elif check_return > 2: # back to map, continue
                     logger.info('character on map: continue')
                     await aio.sleep(0.5)
