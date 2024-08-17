@@ -1129,6 +1129,19 @@ class Clock_Studios_Theme_Park:
             await self.bot.attack_technique(2)
 
 
+# Soulgrad: y=686
+# class Penacony_Grand_Theater:
+#     def __init__(self, device):
+#         self.bot = Bot(device)
+#     async def teleport(self): # 1->3
+#         logger_set_path('Teleport')
+#         logger.info('---')
+#         logger.info('--- Map: Penacony Grand Theater')
+#         logger.info('---')
+#         await self.bot.switch_map(y_list=807/1080, world='penacony', scroll_down=True,
+#                                     x=787/2400, y=717/1080, corner='topleft', move_x=3, move_y=7)
+
+        
 class Penacony_Grand_Theater:
     def __init__(self, device):
         self.bot = Bot(device)
@@ -1263,3 +1276,18 @@ class Penacony_Grand_Theater:
         await self.bot.attack_technique(2) # +2TP
         await self.bot.movepi(0.6, 1500)
         await self.bot.posfix(0.75, 1000)
+
+
+class The_Soaring_Clock_Hand:
+    def __init__(self, device):
+        self.bot = Bot(device)
+    async def teleport(self):
+        logger_set_path('Teleport')
+        logger.info('---')
+        logger.info('--- Map: The Soaring Clock Hand')
+        logger.info('---')
+        await self.bot.switch_map(y_list=927/1080, world='penacony', scroll_down=True,
+                                    x=974/2400, y=417/1080, corner='topright', move_x=0, move_y=0, confirm=True)
+        await self.bot.movepi(0.12, 1800)
+
+

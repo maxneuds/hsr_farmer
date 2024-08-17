@@ -23,44 +23,47 @@ async def main():
     penacony = Penacony(DEVICE)
 
     # TODO: check for TP full message on restore and return to map directly
+    
+    # 1/1 Preperation
+    # await the_xianzhou_luofu.farm_starskiff_haven() # Time:160
 
     ### 4/4 Herta Space Station XP:7128/7128 Time:630 TP:0->5
-    await herta_space_station.farm_base_zone() # XP:432/432 Time:90 TP:0->3
-    await herta_space_station.farm_seclusion_zone() # XP:1620/1620 Time:220 TP:3->3
-    await herta_space_station.farm_storage_zone() # XP:2592/2592 Time:250 TP:3->5
-    await herta_space_station.farm_supply_zone() # XP:2484/2484 Time:281 TP:5->5
+    # await herta_space_station.farm_base_zone() # XP:432/432 Time:90 TP:0->3
+    # await herta_space_station.farm_seclusion_zone() # XP:1620/1620 Time:220 TP:3->3
+    # await herta_space_station.farm_storage_zone() # XP:2592/2592 Time:250 TP:3->5
+    # await herta_space_station.farm_supply_zone() # XP:2484/2484 Time:281 TP:5->5
 
     ### 7/7 Jarilo-VI XP:19440/19440 Time:1750 TP:5->5 R4:1
-    await jarilo_vi.farm_outlying_snow_plains() # XP:2052/2052 Time:188 TP:5->4
-    await jarilo_vi.farm_backwater_pass() # XP:3024/3024 Time:240 TP:4->4
-    await jarilo_vi.farm_robot_settlement() # XP:2592/2592 Time:237 TP:4->5
-    await jarilo_vi.farm_corridor() # XP:3672/3672 Time:432 TP:5->3
-    await jarilo_vi.farm_everwinter_hill() # XP:1404/1404 Time:119 TP:3->3
-    await jarilo_vi.farm_great_mine() # XP:4536/4536 Time:326 TP:3->3 R4:1
-    await jarilo_vi.farm_rivet_town() # XP:2160/2160 Time:262 TP:3->5
+    # await jarilo_vi.farm_outlying_snow_plains() # XP:2052/2052 Time:188 TP:5->4
+    # await jarilo_vi.farm_backwater_pass() # XP:3024/3024 Time:240 TP:4->4
+    # await jarilo_vi.farm_robot_settlement() # XP:2592/2592 Time:237 TP:4->5
+    # await jarilo_vi.farm_corridor() # XP:3672/3672 Time:432 TP:5->3
+    # await jarilo_vi.farm_everwinter_hill() # XP:1404/1404 Time:119 TP:3->3
+    # await jarilo_vi.farm_great_mine() # XP:4536/4536 Time:326 TP:3->3 R4:1
+    # await jarilo_vi.farm_rivet_town() # XP:2160/2160 Time:262 TP:3->5
     
-    ### 7/7 Xianzhou Luofu XP:42596/42596 Time:3900 TP:5->2 R4:6 R2:1
-    await the_xianzhou_luofu.farm_starskiff_haven() # Time:160
-    await the_xianzhou_luofu.farm_fyxestroll_garden() # XP:4644/4644 Time:265 TP:5->1
-    await jarilo_vi.silvermane_guard.teleport(tp_restore=4) # Time:85 TP:1->5
-    await the_xianzhou_luofu.farm_artisanship_commission() # XP:9548/9548 Time:610 TP:5->1 R4:2
-    await herta_space_station.supply_zone.teleport(tp_restore=4) # Time:65 TP:1->5
-    await the_xianzhou_luofu.farm_alchemy_commission() # XP:6912/6912 Time:610 TP:5->2 R4:1 R2:1
-    await jarilo_vi.silvermane_guard.teleport(tp_restore=2) # Time:91 TP:2->4
-    await the_xianzhou_luofu.farm_cloudford() # XP:4644/4644 Time:395 TP:4->5
-    await the_xianzhou_luofu.farm_stargazer_navalia() # XP:6264/6264 Time:425 TP:5->4 R4:1
-    await the_xianzhou_luofu.farm_divination_commission() # XP:6000/6000 Time:540 TP:4->2 R4:1
-    await the_xianzhou_luofu.farm_scalegorge_waterscape() # XP:4752/4752 Time:450 TP:2->2 R4:1
+    ### 7/8 Xianzhou Luofu XP:42596/42596 Time:3900 TP:5->2 R4:6 R2:1
+    # await the_xianzhou_luofu.farm_fyxestroll_garden() # XP:4644/4644 Time:265 TP:5->1
+    # await jarilo_vi.silvermane_guard.teleport(tp_restore=4) # Time:85 TP:1->5
+    # await the_xianzhou_luofu.farm_artisanship_commission() # XP:9548/9548 Time:610 TP:5->1 R4:2
+    # await herta_space_station.supply_zone.teleport(tp_restore=4) # Time:65 TP:1->5
+    # await the_xianzhou_luofu.farm_alchemy_commission() # XP:6912/6912 Time:610 TP:5->2 R4:1 R2:1
+    # await jarilo_vi.silvermane_guard.teleport(tp_restore=2) # Time:91 TP:2->4
+    # await the_xianzhou_luofu.farm_cloudford() # XP:4644/4644 Time:395 TP:4->5
+    # await the_xianzhou_luofu.farm_stargazer_navalia() # XP:6264/6264 Time:425 TP:5->4 R4:1
+    # await the_xianzhou_luofu.farm_divination_commission() # XP:6000/6000 Time:540 TP:4->2 R4:1
+    # await the_xianzhou_luofu.farm_scalegorge_waterscape() # XP:4752/4752 Time:450 TP:2->2 R4:1
     
     ### 5/7 Penacony (47176/50092) Time:? TP:1->? R2:
-    await penacony.golden_hour.teleport(tp_restore=4) # Time:70 TP:1->5
-    await penacony.farm_dreams_edge() # XP:7668/9612 Time:431 TP:5->1 R4:2 R2:1
-    await penacony.golden_hour.teleport(tp_restore=4.2) # Time:80 TP:1->5
-    await penacony.farm_childs_dream() # XP:5832/5832 Time:403 TP:5->2 R2:4
-    # await penacony.farm_the_reverie_dreamscape() # XP:14580/15552 Time:? TP:2->2 R2:15
-    await penacony.farm_dewlight_pavilion() # XP:11448/11448 Time: TP:2->1 R2:5
-    await penacony.farm_clock_studios_theme_park() # XP:7648/7648 Time: TP:1->1 R4:0 R2:4
-    await penacony.farm_penacony_grand_theater() # XP:?/? Time: TP:1->? R4:0 R2:?
+    # await penacony.golden_hour.teleport(tp_restore=4) # Time:70 TP:1->5
+    # await penacony.farm_dreams_edge() # XP:7668/9612 Time:431 TP:5->1 R4:2 R2:1
+    # await penacony.golden_hour.teleport(tp_restore=4.2) # Time:80 TP:1->5
+    # await penacony.farm_childs_dream() # XP:5832/5832 Time:403 TP:5->2 R2:4
+    # # await penacony.farm_the_reverie_dreamscape() # XP:14580/15552 Time:? TP:2->2 R2:15
+    # await penacony.farm_dewlight_pavilion() # XP:11448/11448 Time: TP:2->1 R2:5
+    await penacony.the_soaring_clock_hand.teleport() # Time:? TP:1->5
+    # await penacony.farm_clock_studios_theme_park() # XP:7648/7648 Time: TP:1->1 R4:4
+    # await penacony.farm_penacony_grand_theater() # XP:?/? Time: TP:1->? R4:0 R2:?
 
     # ### 1/1 Astral Express
     # await astral_express.goto_pompom()

@@ -12,6 +12,7 @@ class Penacony:
         self.dewlight_pavilion = penacony.Dewlight_Pavilion(device)
         self.clock_studios_theme_park = penacony.Clock_Studios_Theme_Park(device)
         self.penacony_grand_theater = penacony.Penacony_Grand_Theater(device)
+        self.the_soaring_clock_hand = penacony.The_Soaring_Clock_Hand(device)
     
     async def farm_dreams_edge(self):
         await self.dreams_edge.teleport()
