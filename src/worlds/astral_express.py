@@ -1,7 +1,21 @@
 from logger import logger, logger_set_path
 from automation.bot import Bot
-from sys import exit
 
+
+class Astral_Express:
+    '''
+    Status: 1/1
+    '''
+    def __init__(self, device):
+        self.parlor_car = Parlor_Car(device)
+    async def checkout(self):
+        '''
+        Time:630
+        '''
+        await self.base_zone.farm() # XP:432/432 Time:90 TP:0->3
+        await self.seclusion_zone.farm() # XP:1620/1620 Time:220 TP:3->3
+        await self.storage_zone.farm() # XP:2592/2592 Time:250 TP:3->5
+        await self.supply_zone.farm() # XP:2484/2484 Time:281 TP:5->5
 
 class Parlor_Car:
     def __init__(self, device):

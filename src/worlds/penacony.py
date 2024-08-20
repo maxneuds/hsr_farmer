@@ -1,17 +1,61 @@
 from logger import logger, logger_set_path
 from automation.bot import Bot
-from sys import exit
+
+
+class Penacony:
+    '''
+    Status: 7/9
+    '''
+    def __init__(self, device):
+        self.golden_hour = Golden_Hour(device)
+        self.dreams_edge = Dreams_Edge(device)
+        self.childs_dream = Childs_Dream(device)
+        self.the_reverie_dreamscape = The_Reverie_Dreamscape(device)
+        self.dewlight_pavilion = Dewlight_Pavilion(device)
+        self.clock_studios_theme_park = Clock_Studios_Theme_Park(device)
+        self.penacony_grand_theater = Penacony_Grand_Theater(device)
+        self.the_soaring_clock_hand = The_Soaring_Clock_Hand(device)
+    async def farm(self, mode='credits'):
+        '''
+        ### Mode: credits (default)
+        XP:???
+        Time:???
+        TP:???
+        
+        ### Mode: XP
+        XP:???
+        Time:???
+        TP:???
+        '''
+        if mode == 'xp':
+            await self.golden_hour.restore_tp(tp=4.1) # Time:70 TP:1->5
+            await self.dreams_edge.farm() # XP:7668/9612 Time:431 TP:5->1 R4:2 R2:1
+            await self.golden_hour.restore_tp(tp=4.2) # Time:80 TP:1->5
+            await self.childs_dream.farm() # XP:5832/5832 Time:403 TP:5->2 R2:4
+            await self.the_reverie_dreamscape.farm() # XP:14580/15552 Time:? TP:2->2 R2:15
+            await self.dewlight_pavilion.farm() # XP:11448/11448 Time: TP:2->1 R2:5
+            await self.clock_studios_theme_park.farm() # XP:7648/7648 Time: TP:1->1 R4:4
+            await self.penacony_grand_theater.farm() # XP:?/? Time: TP:1->? R4:0 R2:?
+    async def dev(self):
+        await self.the_soaring_clock_hand.restore_tp(tp=2.1)
 
 
 class Golden_Hour:
     def __init__(self, device):
         self.bot = Bot(device)
+    async def restore_tp(self, tp):
+        if tp == 4.1:
+            self.teleport(tp=tp)
+        elif tp == 4.2:
+            self.teleport(tp=tp)
+        else:
+            raise SystemExit(f'no {tp} TP restore available')
     async def teleport(self, tp_restore=False):
         logger_set_path('Teleport')
         logger.info('---')
         logger.info('--- Map: Golden Hour')
         logger.info('---')
-        if tp_restore == 4:
+        if tp_restore == 4.1:
             await self.bot.switch_map(y_list=650/1080, world='penacony',
                                         x=588/2400, y=356/1080, move_x=4, move_y=3,) # Sweet Corner
             await self.bot.movepi(1.5, 3300)
@@ -47,6 +91,16 @@ class Golden_Hour:
 class Dreams_Edge:
     def __init__(self, device):
         self.bot = Bot(device)
+    async def farm(self):
+        await self.teleport()
+        await self.path_1()
+        await self.path_2()
+        await self.path_3()
+        await self.path_4()
+        await self.path_5()
+        await self.path_6()
+        await self.path_7()
+        await self.path_8()
     async def teleport(self):
         logger_set_path('Teleport')
         logger.info('---')
@@ -146,6 +200,13 @@ class Dreams_Edge:
 class Childs_Dream:
     def __init__(self, device):
         self.bot = Bot(device)
+    async def farm(self):
+        await self.teleport()
+        await self.path_1()
+        await self.path_2()
+        await self.path_3()
+        await self.path_4()
+        await self.path_5()
     async def teleport(self):
         logger_set_path('Teleport')
         logger.info('---')
@@ -262,6 +323,23 @@ class Childs_Dream:
 class The_Reverie_Dreamscape:
     def __init__(self, device):
         self.bot = Bot(device)
+    async def farm(self):
+        await self.teleport()
+        await self.path_1()
+        await self.path_2()
+        await self.path_3()
+        await self.path_4()
+        await self.path_5()
+        await self.path_6()
+        await self.path_7()
+        await self.path_8()
+        await self.path_9()
+        await self.path_10()
+        await self.path_11()
+        await self.path_12()
+        await self.path_13()
+        await self.path_14()
+        await self.path_15()
     async def teleport(self):
         logger_set_path('Teleport')
         logger.info('---')
@@ -626,6 +704,19 @@ class The_Reverie_Dreamscape:
 class Dewlight_Pavilion:
     def __init__(self, device):
         self.bot = Bot(device)
+    async def farm(self):
+        await self.teleport()
+        await self.path_1()
+        await self.path_2()
+        await self.path_3()
+        await self.path_4()
+        await self.path_5()
+        await self.path_6()
+        await self.path_7()
+        await self.path_8()
+        await self.path_9()
+        await self.path_10()
+        await self.path_11()
     async def teleport(self):
         logger_set_path('Teleport')
         logger.info('---')
@@ -960,6 +1051,17 @@ class Dewlight_Pavilion:
 class Clock_Studios_Theme_Park:
     def __init__(self, device):
         self.bot = Bot(device)
+    async def farm(self):
+        await self.teleport()
+        await self.path_0()
+        await self.path_1()
+        await self.path_2()
+        await self.path_3()
+        await self.path_4()
+        await self.path_5()
+        await self.path_6()
+        await self.path_7()
+        await self.path_8()
     async def teleport(self):
         logger_set_path('Teleport')
         logger.info('---')
@@ -1145,6 +1247,17 @@ class Clock_Studios_Theme_Park:
 class Penacony_Grand_Theater:
     def __init__(self, device):
         self.bot = Bot(device)
+    async def farm(self):
+        await self.teleport()
+        await self.path_1()
+        await self.path_2()
+        await self.path_3()
+        await self.path_4()
+        await self.path_5()
+        await self.path_6()
+        await self.path_7()
+        await self.path_8()
+        await self.path_x()
     async def teleport(self): # 1->3
         logger_set_path('Teleport')
         logger.info('---')
@@ -1281,13 +1394,26 @@ class Penacony_Grand_Theater:
 class The_Soaring_Clock_Hand:
     def __init__(self, device):
         self.bot = Bot(device)
-    async def teleport(self):
+    async def restore_tp(self, tp):
+        if tp == 2.1:
+            await self.teleport(tp=tp)
+        elif tp == 2.2:
+            await self.teleport(tp=tp)
+        else:
+            raise SystemExit(f'no {tp} TP restore available')
+    async def teleport(self, tp):
         logger_set_path('Teleport')
         logger.info('---')
         logger.info('--- Map: The Soaring Clock Hand')
         logger.info('---')
-        await self.bot.switch_map(y_list=927/1080, world='penacony', scroll_down=True,
-                                    x=974/2400, y=417/1080, corner='topright', move_x=0, move_y=0, confirm=True)
-        await self.bot.movepi(0.12, 1800)
+        if tp == 2.1:
+            # await self.bot.switch_map(y_list=927/1080, world='penacony', scroll_down=True,
+            #                             x=974/2400, y=417/1080, corner='topright', move_x=0, move_y=0, confirm=True)
+            await self.bot.movepi(0.35, 3000)
+            await self.bot.movepi(0.5, 2000)
+            await self.bot.movepi(0.86, 2000)
+            await self.bot.attack_technique(2) # +2TP
+        elif tp == 2.2:
+            pass
 
 

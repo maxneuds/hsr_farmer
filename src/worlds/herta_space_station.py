@@ -1,11 +1,34 @@
 from logger import logger, logger_set_path
 from automation.bot import Bot
-from sys import exit
+
+
+class Herta_Space_Station:
+    '''
+    Status: 4/4
+    '''
+    def __init__(self, device):
+        self.base_zone = Base_Zone(device)
+        self.storage_zone = Storage_Zone(device)
+        self.supply_zone = Supply_Zone(device)
+        self.seclusion_zone = Seclusion_Zone(device)
+    async def farm(self, mode='credits'):
+        '''
+        XP:7128/7128
+        Time:630
+        TP:0->5
+        '''
+        await self.base_zone.farm() # XP:432/432 Time:90 TP:0->3
+        await self.seclusion_zone.farm() # XP:1620/1620 Time:220 TP:3->3
+        await self.storage_zone.farm() # XP:2592/2592 Time:250 TP:3->5
+        await self.supply_zone.farm() # XP:2484/2484 Time:281 TP:5->5
 
 
 class Base_Zone:
     def __init__(self, device):
         self.bot = Bot(device)
+    async def farm(self):
+        await self.teleport()
+        await self.path_1()
     async def teleport(self):
         logger_set_path('Teleport')
         logger.info('---')
@@ -34,15 +57,22 @@ class Base_Zone:
         await self.bot.movepi(1.4, 1500)
         await self.bot.attack() # items
 
+
 class Storage_Zone:
     def __init__(self, device):
         self.bot = Bot(device)
+    async def farm(self):
+        await self.teleport()
+        await self.path_1()
+        await self.path_2()
+        await self.path_3()
+        await self.path_4()
+        await self.path_5()
     async def teleport(self):
         logger_set_path('Teleport')
         logger.info('---')
         logger.info("--- Map: Storage Zone")
         logger.info('---')
-        logger.info('path: restore TP')
         await self.bot.switch_map(y_list=630/1080, world='herta_space_station', scroll_down=False,
                                 x=1068/2400, y=647/1080, corner='botright', move_x=0, move_y=0) # Special Purpose Lab
         await self.bot.movepi(1.3, 1900)
@@ -121,6 +151,16 @@ class Storage_Zone:
 class Supply_Zone:
     def __init__(self, device):
         self.bot = Bot(device)
+    async def farm(self):
+        await self.teleport()
+        await self.path_1()
+        await self.path_2()
+        await self.path_3()
+    async def restore_tp(self, mode):
+        if mode == 4:
+            self.teleport(tp_restore=mode)
+        else:
+            raise SystemExit(f'no {mode} TP restore available')
     async def teleport(self, tp_restore=-1):
         logger_set_path('Teleport')
         logger.info('---')
@@ -201,6 +241,10 @@ class Supply_Zone:
 class Seclusion_Zone:
     def __init__(self, device):
         self.bot = Bot(device)
+    async def farm(self):
+        await self.teleport()
+        await self.path_1()
+        await self.path_2()
     async def teleport(self):
         logger_set_path('Teleport')
         logger.info('---')
