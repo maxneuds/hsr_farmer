@@ -2,7 +2,7 @@ from logger import logger, logger_set_path
 from automation.bot import Bot
 
 
-class Penacony:
+class Init:
     '''
     Status: 7/9
     '''

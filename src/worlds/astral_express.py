@@ -2,7 +2,7 @@ from logger import logger, logger_set_path
 from automation.bot import Bot
 
 
-class Astral_Express:
+class Init:
     '''
     Status: 1/1
     '''

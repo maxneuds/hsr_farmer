@@ -1,11 +1,46 @@
 from logger import logger, logger_set_path
 from automation.bot import Bot
-from sys import exit
 
+
+class Init:
+    def __init__(self, device):
+        self.outlying_snow_plains = Outlying_Snow_Plains(device)
+        self.backwater_pass = Backwater_Pass(device)
+        self.silvermane_guard = Silvermane_Guard(device)
+        self.corridor = Corridor(device)
+        self.everwinter_hill = Everwinter_Hill(device)
+        self.great_mine = Great_Mine(device)
+        self.rivet_town = Rivet_Town(device)
+        self.robot_settlement = Robot_Settlement(device)
+    async def farm(self):
+        '''
+        Status: 7/7
+        XP:     19440/19440
+        Time:   1750
+        TP:     5 -> 5
+        Items:  R2: 0, R4: 0
+        '''
+        await self.outlying_snow_plains.farm() # XP:2052/2052 Time:188 TP:5->4
+        await self.backwater_pass.farm() # XP:3024/3024 Time:240 TP:4->4
+        await self.robot_settlement.farm() # XP:2592/2592 Time:237 TP:4->5
+        await self.corridor.farm() # XP:3672/3672 Time:432 TP:5->3
+        await self.everwinter_hill.farm() # XP:1404/1404 Time:119 TP:3->3
+        await self.silvermane_guard.restore_tp(tp=2.1) # Time:??? TP:3->5
+        await self.great_mine.farm() # XP:4536/4536 Time:326 TP:5->1
+        await self.rivet_town.farm() # XP:2160/2160 Time:262 TP:1->5
+    async def dev(self):
+        await self.robot_settlement.teleport(tp_restore=2)
+        raise SystemExit('get +2 TP in Robot')
+        
 
 class Outlying_Snow_Plains:
     def __init__(self, device):
         self.bot = Bot(device)
+    async def farm(self):
+        await self.teleport()
+        await self.path_1()
+        await self.path_2()
+        await self.path_3()
     async def teleport(self):
         logger.info('Teleport')
         logger.info('---')
@@ -60,6 +95,12 @@ class Outlying_Snow_Plains:
 class Backwater_Pass:
     def __init__(self, device):
         self.bot = Bot(device)
+    async def farm(self):
+        await self.teleport()
+        await self.path_1()
+        await self.path_2()
+        await self.path_3()
+        await self.path_4()
     async def teleport(self):
         logger_set_path('Teleport')
         logger.info('Teleport')
@@ -147,15 +188,24 @@ class Backwater_Pass:
 class Silvermane_Guard:
     def __init__(self, device):
         self.bot = Bot(device)
+    async def restore_tp(self, tp):
+        if tp == 2.1:
+            await self.teleport(tp_restore=tp)
+        elif tp == 2.2:
+            await self.teleport(tp_restore=tp)
+        elif tp == 4:
+            await self.teleport(tp_restore=tp)
+        else:
+            raise SystemExit(f'no {tp} TP restore available')
     async def teleport(self, tp_restore=-1):
         logger_set_path('Teleport')
         logger.info('Teleport')
         logger.info('---')
         logger.info("--- Map: Silvermane Guard Restricted Zone")
         logger.info('---')
-        if tp_restore == 2:
-            await self.bot.switch_map(y_list=750/1080, world='jarilo_vi', scroll_down=False,
-                                        x=659/2400, y=648/1080, corner='botright', move_x=0, move_y=0, confirm=True) # Energy Hub
+        if tp_restore == 2.1:
+            await self.bot.switch_map(y_list=750/1080, world='jarilo_vi', scroll_down=False, # Energy Hub
+                                        x=659/2400, y=648/1080, corner='botright', move_x=0, move_y=0, confirm=True)
             await self.bot.movepi(0.5, 2500)
             await self.bot.movepi(0.72, 5200)
             await self.bot.attack() # items
@@ -165,7 +215,7 @@ class Silvermane_Guard:
             await self.bot.movepi(0.6, 3300)
             await self.bot.movepi(0.3, 2500)
             await self.bot.movepi(0.0, 1100)
-            await self.bot.attack() # TP
+            await self.bot.attack() # +2TP
             await self.bot.movepi(1.2, 1000)
             await self.bot.movepi(0.75, 7000)
             await self.bot.attack() # items
@@ -173,12 +223,19 @@ class Silvermane_Guard:
             await self.bot.movepi(1.5, 1200)
             await self.bot.movepi(1.05, 1200)
             await self.bot.attack() # items
+        if tp_restore == 2.2:
+            await self.bot.switch_map(y_list=750/1080, world='jarilo_vi', scroll_down=False, # Frontline
+                                        x=991/2400, y=521/1080, corner='topleft', move_x=0, move_y=4)
+            await self.bot.movepi(1.5, 4600)
+            await self.bot.movepi(0.0, 1100)
+            await self.bot.movepi(0.4, 300)
+            await self.bot.attack_technique(2) # +2TP
         elif tp_restore == 4:
-            await self.bot.switch_map(y_list=750/1080, world='jarilo_vi', scroll_down=False,
-                                        x=1176/2400, y=738/1080, corner='topright', move_x=0, move_y=2, confirm=True) # Outpost
+            await self.bot.switch_map(y_list=750/1080, world='jarilo_vi', scroll_down=False, # Outpost
+                                        x=1176/2400, y=738/1080, corner='topright', move_x=0, move_y=2, confirm=True)
             await self.bot.movepi(0.5, 3000)
             await self.bot.movepi(0.9, 2000)
-            await self.bot.attack() # TP
+            await self.bot.attack() # +2TP
             await self.bot.movepi(0.1, 2000)
             await self.bot.movepi(0.5, 7800)
             await self.bot.movepi(0.4, 1000)
@@ -201,6 +258,16 @@ class Silvermane_Guard:
 class Corridor:
     def __init__(self, device):
         self.bot = Bot(device)
+    async def farm(self):
+        await self.teleport()
+        await self.path_1()
+        await self.path_2()
+        await self.path_3()
+        await self.path_4()
+        await self.path_5()
+        await self.path_6()
+        await self.path_7()
+        await self.path_8()
     async def teleport(self):
         logger_set_path('Teleport')
         logger.info('Teleport')
@@ -356,6 +423,10 @@ class Corridor:
 class Everwinter_Hill:
     def __init__(self, device):
         self.bot = Bot(device)
+    async def farm(self):
+        await self.teleport()
+        await self.path_1()
+        await self.path_2()
     async def teleport(self):
         logger_set_path('Teleport')
         logger.info('---')
@@ -401,13 +472,47 @@ class Everwinter_Hill:
 class Great_Mine:
     def __init__(self, device):
         self.bot = Bot(device)
+    async def farm(self):
+        await self.teleport()
+        await self.path_1()
+        await self.path_2() # TODO: path1+2 might be combined
+        await self.path_3()
+        await self.path_4()
+        await self.path_5()
+        await self.path_6()
+        # TODO: get items along the bridge path
     async def teleport(self):
         logger_set_path('Teleport')
         logger.info('---')
         logger.info("--- Map: Great Mine")
         logger.info('---')
-        await self.bot.switch_map(y_list=687/1080, world='jarilo_vi', scroll_down=True,
-                                    x=912/2400, y=755/1080, corner='botright', move_x=0, move_y=0) # Main Mine Shaft
+        await self.bot.switch_map(y_list=687/1080, world='jarilo_vi', scroll_down=True, # Vagrant Shelter
+                                    x=1220/2400, y=328/1080, corner='topright', move_x=0, move_y=3)
+        await self.bot.movepi(0.9, 2000)
+        await self.bot.movepi(1.2, 900)
+        await self.bot.attack() # items
+        await self.bot.movepi(1.1, 500)
+        await self.bot.movepi(0.9, 1000)
+        await self.bot.movepi(1.0, 1000)
+        await self.bot.movepi(1.2, 1700)
+        await self.bot.movepi(1.07, 4000)
+        await self.bot.attack() # items
+        await self.bot.movepi(0.5, 900)
+        await self.bot.movepi(1.0, 2700)
+        await self.bot.movepi(1.45, 2500)
+        await self.bot.movepi(1.8, 1000)
+        await self.bot.attack_technique(6) # -1TP
+        await self.bot.movepi(0.25, 4000) # stability move
+    async def path_1(self):
+        logger_set_path(1)
+        await self.bot.use_teleporter(x=956/2400, y=610/1080, corner='botright', move_x=0, move_y=0, confirm=True) # Overlook
+        await self.bot.movepi(1.8, 2000)
+        await self.bot.movepi(0.1, 4600)
+        await self.bot.movepi(0.2, 900)
+        await self.bot.attack_technique(3) # -1TP
+    async def path_2(self): # roamer
+        logger_set_path(2)
+        await self.bot.use_teleporter(x=912/2400, y=755/1080, corner='botright', move_x=0, move_y=0) # Main Mine Shaft
         await self.bot.movepi(1.02, 2700)
         await self.bot.attack() # +2TP
         await self.bot.movepi(1.1, 4000)
@@ -433,34 +538,13 @@ class Great_Mine:
         await self.bot.attack_technique(1) # items
         await self.bot.movepi(0.5, 300)
         await self.bot.attack_technique(3) # -1TP
-        await self.bot.restore_tp(item='punitive_energy') # +4TP
-    async def path_1(self): # roamer
-        logger_set_path(1)
-        await self.bot.use_teleporter(x=1220/2400, y=328/1080, corner='topright', move_x=0, move_y=3) # Vagrant Shelter
-        await self.bot.movepi(0.9, 2000)
-        await self.bot.movepi(1.2, 900)
-        await self.bot.attack() # items
-        await self.bot.movepi(1.1, 500)
-        await self.bot.movepi(0.9, 1000)
-        await self.bot.movepi(1.0, 1000)
-        await self.bot.movepi(1.2, 1700)
-        await self.bot.movepi(1.07, 4000)
-        await self.bot.attack() # items
-        await self.bot.movepi(0.5, 900)
-        await self.bot.movepi(1.0, 2700)
-        await self.bot.movepi(1.45, 2500)
-        await self.bot.movepi(1.8, 1000)
-        await self.bot.attack_technique(6) # -1TP
-        await self.bot.movepi(0.25, 4000) # stability move
-    async def path_2(self):
-        logger_set_path(2)
-        await self.bot.use_teleporter(x=956/2400, y=610/1080, corner='botright', move_x=0, move_y=0, confirm=True) # Overlook
-        await self.bot.movepi(1.8, 2000)
-        await self.bot.movepi(0.1, 4600)
-        await self.bot.movepi(0.2, 900)
-        await self.bot.attack_technique(3) # -1TP
-    async def path_3(self): # roamer
+    async def path_3(self):
         logger_set_path(3)
+        await self.bot.use_teleporter(x=665/2400, y=435/1080, corner='topleft', move_x=0, move_y=0, confirm=True) # Entrance
+        await self.bot.movepi(0.2, 1500)
+        await self.bot.attack() # +2TP
+    async def path_4(self): # roamer
+        logger_set_path(4)
         await self.bot.use_teleporter(x=1296/2400, y=600/1080, corner='botright', move_x=0, move_y=0) # Shape of Scorch
         await self.bot.movepi(1.23, 1700)
         await self.bot.attack() # items
@@ -481,8 +565,8 @@ class Great_Mine:
         await self.bot.attack_technique(2)
         await self.bot.movepi(1.0, 500)
         await self.bot.attack_technique(5)
-    async def path_4(self): # roamer
-        logger_set_path(4)
+    async def path_5(self): # roamer
+        logger_set_path(5)
         await self.bot.use_teleporter(x=951/2400, y=480/1080, corner='botright', move_x=0, move_y=0) # Shape of Spike
         await self.bot.movepi(1.8, 1500)
         await self.bot.attack() # +2TP
@@ -494,8 +578,8 @@ class Great_Mine:
         for _ in range(2): # -1TP
             await self.bot.movepi(0.49, 500)
             await self.bot.attack_technique(2)
-    async def path_5(self):
-        logger_set_path(5)
+    async def path_6(self):
+        logger_set_path(6)
         await self.bot.use_teleporter(x=951/2400, y=480/1080, corner='botright', move_x=0, move_y=0) # Shape of Spike
         await self.bot.movepi(0.8, 1500)
         await self.bot.movepi(0.9, 1000)
@@ -512,16 +596,18 @@ class Great_Mine:
         await self.bot.movepi(0.55, 2200)
         await self.bot.movepi(0.2, 1900)
         await self.bot.attack_technique(2) # -2TP
-    async def path_6(self): # roamer
-        logger_set_path(6)
-        await self.bot.use_teleporter(x=665/2400, y=435/1080, corner='topleft', move_x=0, move_y=0, confirm=True) # Entrance
-        await self.bot.movepi(0.2, 1500)
-        await self.bot.attack() # +2TP
 
 
 class Rivet_Town:
     def __init__(self, device):
         self.bot = Bot(device)
+    async def farm(self):
+        await self.teleport()
+        await self.path_1()
+        await self.path_2()
+        await self.path_3()
+        await self.path_4()
+        await self.path_5()
     async def teleport(self):
         logger_set_path('Teleport')
         logger.info('---')
@@ -581,6 +667,14 @@ class Rivet_Town:
     async def path_2(self):
         logger_set_path(2)
         await self.bot.use_teleporter(x=1017/2400, y=744/1080, corner='botright', move_x=0, move_y=0, confirm=True) # Entrance
+        await self.bot.movepi(0.69, 1800)
+        await self.bot.attack() # items
+        await self.bot.movepi(0.4, 200)
+        await self.bot.movepi(0.5, 1100)
+        await self.bot.attack() # +2TP
+    async def path_3(self):
+        logger_set_path(3)
+        await self.bot.use_teleporter(x=1017/2400, y=744/1080, corner='botright', move_x=0, move_y=0, confirm=True) # Entrance
         await self.bot.movepi(0.5, 2500)
         await self.bot.movepi(0.0, 2400)
         await self.bot.movepi(0.25, 500)
@@ -593,49 +687,69 @@ class Rivet_Town:
         for _ in range(5): # -1TP
             await self.bot.movepi(0.75, 300)
             await self.bot.attack_technique(2)
-    async def path_3(self):
-        logger_set_path(3)
-        await self.bot.use_teleporter(x=1017/2400, y=744/1080, corner='botright', move_x=0, move_y=0, confirm=True) # Entrance
-        await self.bot.movepi(0.69, 1800)
-        await self.bot.attack() # items
-        await self.bot.movepi(0.4, 200)
-        await self.bot.movepi(0.5, 1100)
-        await self.bot.attack() # +2TP
     async def path_4(self):
         logger_set_path(4)
         await self.bot.use_teleporter(x=975/2400, y=599/1080, corner='topleft', move_x=0, move_y=0) # Shape of Gust
         await self.bot.movepi(1.65, 4000)
         await self.bot.attack() # +2TP
+    async def path_5(self):
+        logger_set_path(5)
+        await self.bot.use_teleporter(x=975/2400, y=599/1080, corner='topleft', move_x=0, move_y=0) # Shape of Gust
+        await self.bot.movepi(1.0, 2500)
+        await self.bot.movepi(0.8, 500)
+        await self.bot.attack() # items
+        await self.bot.movepi(1.5, 1000)
+        await self.bot.movepi(1.2, 1300)
+        await self.bot.movepi(1.5, 1000)
+        await self.bot.movepi(1.4, 2000)
+        await self.bot.attack_technique(2) # +2TP
 
 
 class Robot_Settlement:
     def __init__(self, device):
         self.bot = Bot(device)
-    async def teleport(self):
+    async def restore_tp(self, tp):
+        if tp == 2:
+            await self.teleport(tp_restore=tp)
+        else:
+            raise SystemExit(f'no {tp} TP restore available')
+    async def farm(self):
+        await self.teleport()
+        await self.path_1()
+        await self.path_2()
+        await self.path_3()
+        await self.path_4()
+    async def teleport(self, tp_restore=None):
         logger_set_path('Teleport')
         logger.info('---')
         logger.info("--- Map: Robot Settlement")
         logger.info('---')
-        await self.bot.switch_map(y_list=927/1080, world='jarilo_vi', scroll_down=True,
-                                    x=944/2400, y=268/1080, corner='botleft', move_x=0, move_y=3) # Vagrant Camp
-        await self.bot.movepi(0.5, 1500)
-        await self.bot.movepi(0.72, 3450)
-        await self.bot.attack() # items
-        await self.bot.movepi(0.33, 5450)
-        await self.bot.attack() # items
-        await self.bot.movepi(1.6, 900)
-        await self.bot.movepi(0.2, 600)
-        await self.bot.movepi(0.0, 3600)
-        await self.bot.movepi(0.4, 500)
-        await self.bot.attack() # items
-        await self.bot.movepi(0.5, 1000)
-        await self.bot.posfix(0.75, 1500)
-        await self.bot.movepi(1.6, 3000)
-        await self.bot.attack() # items
-        await self.bot.movepi(1.4, 3900)
-        await self.bot.movepi(1.05, 2000)
-        await self.bot.movepi(1.0, 100)
-        await self.bot.attack() # items
+        if tp_restore == 2:
+            await self.bot.switch_map(y_list=927/1080, world='jarilo_vi', scroll_down=True, # Svarog's Base
+                                        x=944/2400, y=343/1080, corner='botright', move_x=0, move_y=0, debug=True)
+            # TODO
+            pass
+        else:
+            await self.bot.switch_map(y_list=927/1080, world='jarilo_vi', scroll_down=True, # Vagrant Camp
+                                        x=944/2400, y=268/1080, corner='botleft', move_x=0, move_y=3)
+            await self.bot.movepi(0.5, 1500)
+            await self.bot.movepi(0.72, 3450)
+            await self.bot.attack() # items
+            await self.bot.movepi(0.33, 5450)
+            await self.bot.attack() # items
+            await self.bot.movepi(1.6, 900)
+            await self.bot.movepi(0.2, 600)
+            await self.bot.movepi(0.0, 3600)
+            await self.bot.movepi(0.4, 500)
+            await self.bot.attack() # items
+            await self.bot.movepi(0.5, 1000)
+            await self.bot.posfix(0.75, 1500)
+            await self.bot.movepi(1.6, 3000)
+            await self.bot.attack() # items
+            await self.bot.movepi(1.4, 3900)
+            await self.bot.movepi(1.05, 2000)
+            await self.bot.movepi(1.0, 100)
+            await self.bot.attack() # items
     async def path_1(self):
         logger_set_path(1)
         await self.bot.use_teleporter(x=625/2400, y=757/1080, corner='botright', move_x=0, move_y=3) # Bud of Harmony
@@ -703,5 +817,6 @@ class Robot_Settlement:
         await self.bot.use_teleporter(x=942/2400, y=346/1080, corner='botright', move_x=0, move_y=0) # Svarog's Base
         await self.bot.movepi(1.6, 2300)
         await self.bot.attack() # +2TP
+
 
 

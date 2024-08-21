@@ -446,7 +446,7 @@ class Bot:
         for _ in range(count):
             await self.action_technique()
                 
-    async def buy_item(self, name, debug=False):
+    async def buy_item(self, name, amount_percentage = 100, debug=False):
         logger.info(f'buy: {name}')
         try: # catch KeyboardInterrupt
             time_start = time.perf_counter()
@@ -473,7 +473,12 @@ class Bot:
                     top_left = max_loc
                     await self.action_tap(top_left[0]+10, top_left[1]+10)
                     await aio.sleep(2)
-                    await self.action_tap(int(self.xy.width*1808/2400), int(self.xy.height*657/1080)) # buy all
+                    if amount_percentage == 100:
+                        # buy all
+                        await self.action_tap(int(self.xy.width*1808/2400), int(self.xy.height*657/1080))
+                    else:
+                        pos_x = int(self.xy.width*1070/2400 + 500*amount_percentage/100) 
+                        await self.action_tap(pos_x, int(self.xy.height*657/1080))
                     await aio.sleep(2)
                     await self.action_tap(int(self.xy.width*1393/2400), int(self.xy.height*787/1080)) # confirm
                     await aio.sleep(2)
