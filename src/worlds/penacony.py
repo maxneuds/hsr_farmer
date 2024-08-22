@@ -1,12 +1,13 @@
 from logger import logger, logger_set_path
 from automation.bot import Bot
+from worlds.herta_space_station import Storage_Zone
 
 
 class Init:
     '''
     Status: 7/9
     '''
-    def __init__(self, device):
+    def __init__(self, device, mode='credits'):
         self.golden_hour = Golden_Hour(device)
         self.dreams_edge = Dreams_Edge(device)
         self.childs_dream = Childs_Dream(device)
@@ -15,7 +16,7 @@ class Init:
         self.clock_studios_theme_park = Clock_Studios_Theme_Park(device)
         self.penacony_grand_theater = Penacony_Grand_Theater(device)
         self.the_soaring_clock_hand = The_Soaring_Clock_Hand(device)
-    async def farm(self, mode='credits'):
+    async def farm(self):
         '''
         ### Mode: credits (default)
         XP:???
@@ -27,27 +28,29 @@ class Init:
         Time:???
         TP:???
         '''
-        if mode == 'xp':
-            await self.golden_hour.restore_tp(tp=4.1) # Time:70 TP:1->5
-            await self.dreams_edge.farm() # XP:7668/9612 Time:431 TP:5->1 R4:2
-            await self.golden_hour.restore_tp(tp=4.2) # Time:80 TP:1->5
-            await self.childs_dream.farm() # XP:5832/5832 Time:403 TP:5->2 R2:4
-            await self.the_reverie_dreamscape.farm() # XP:14580/15552 Time:? TP:2->2 R2:15
-            await self.dewlight_pavilion.farm() # XP:11448/11448 Time: TP:2->1 R2:5
-            await self.the_soaring_clock_hand.restore_tp(tp=4)
-            await self.clock_studios_theme_park.farm() # XP:7648/7648 Time: TP:5->1 R2:2
+        if self.mode == 'credits':
+            pass
     async def dev(self):
+        await self.dreams_edge.farm() # XP:7668/9612 Time:431 TP:5->1 R4:2
+        await self.golden_hour.restore_tp(tp=4.1) # Time:70 TP:1->5
+        await self.childs_dream.farm() # XP:5832/5832 Time:403 TP:5->2 R2:4
+        await self.the_reverie_dreamscape.farm() # XP:14580/15552 Time:? TP:2->2 R2:15
+        await self.dewlight_pavilion.farm() # XP:11448/11448 Time: TP:2->1 R2:5
+        await self.the_soaring_clock_hand.restore_tp(tp=4)
+        await self.clock_studios_theme_park.farm() # XP:7648/7648 Time: TP:5->1 R2:2
+        await self.golden_hour.restore_tp(tp=4.2) # Time:80 TP:1->5
         await self.penacony_grand_theater.farm() # XP:?/? Time: TP:1->? R4:0 R2:?            
         pass
+        # await herta_space_station.storage_zone.teleport(tp_restore=4) # TP:??? Time:???
 
 class Golden_Hour:
     def __init__(self, device):
         self.bot = Bot(device)
     async def restore_tp(self, tp):
         if tp == 4.1:
-            self.teleport(tp=tp)
+            self.teleport(tp_restore=tp)
         elif tp == 4.2:
-            self.teleport(tp=tp)
+            self.teleport(tp_restore=tp)
         else:
             raise SystemExit(f'no {tp} TP restore available')
     async def teleport(self, tp_restore=False):
@@ -96,11 +99,9 @@ class Dreams_Edge:
     def __init__(self, device):
         self.bot = Bot(device)
     async def farm(self):
-        raise SystemExit()
         await self.teleport()
         await self.path_1()
         await self.path_2()
-        raise SystemExit()
         await self.path_3()
         await self.path_4()
         await self.path_5()
@@ -153,8 +154,8 @@ class Dreams_Edge:
         await self.bot.movepi(0.5, 8500)
         await self.bot.attack() # +2TP
         await self.bot.movepi(1.05, 5000)
-        await self.bot.attack_technique(12) # -2TP
-        await self.bot.movepi(1.25, 1000)
+        await self.bot.attack_technique(11) # -2TP
+        await self.bot.movepi(1.25, 2000)
         await self.bot.posfix(1.25, 1000)
         await self.bot.movepi(0.5, 3000)
         await self.bot.movepi(0.9, 2000)
@@ -1491,6 +1492,6 @@ class The_Soaring_Clock_Hand:
             await self.bot.movepi(0.3, 3000)
             await self.bot.movepi(0.2, 1000)
             await self.bot.movepi(0.5, 300)
-            await self.bot.attack_technique(6) # +2 TP
+            await self.bot.attack_technique(6) # +2TP
 
 

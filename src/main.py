@@ -3,23 +3,7 @@ from nicegui import ui
 from sys import exit
 from datetime import datetime as dt
 from logger import logger, log_runtime
-# from worlds.tglolb import Global
-# from worlds.astral_express import Astral_Express
-# from worlds.herta_space_station import Herta_Space_Station
-# from worlds.jarilo_vi import Jarilo_VI
-# from worlds.the_xianzhou_luofu import The_Xianzhou_Luofu
-# from worlds.penacony import Penacony
-# import worlds import (
-#     astral_express,
-#     herta_space_station,
-#     jarilo_vi,
-#     the_xianzhou_luofu,
-#     penacony,
-
-# )
-# from worlds import universal, astral_express, herta_space_station, jarilo_vi, the_xianzhou_luofu, penacony
 import worlds
-
 
 
 # DEVICE = 'usb'
@@ -35,14 +19,13 @@ async def main():
     herta_space_station = worlds.herta_space_station.Init(DEVICE)
     jarilo_vi = worlds.jarilo_vi.Init(DEVICE)
     xianzhou_luofu = worlds.xianzhou_luofu.Init(DEVICE, mode=MODE)
-    penacony = worlds.penacony.Init(DEVICE)
+    penacony = worlds.penacony.Init(DEVICE, mode=MODE)
     
+
 
     # TODO: check for TP full message on restore and return to map directly
     # dev
-    # await penacony.dev()
-    # await jarilo_vi.dev()
-    await xianzhou_luofu.dev()
+    await penacony.dev()
     raise SystemExit()
     
     # preperations
@@ -50,9 +33,10 @@ async def main():
     await universal.crafting()
 
     # farm worlds
-    # await herta_space_station.farm()
-    # await jarilo_vi.farm()
-    await penacony.farm(mode=MODE)
+    await herta_space_station.farm()
+    await jarilo_vi.farm()
+    await xianzhou_luofu.farm()
+    await penacony.farm()
     
     # checkout
     # await astral_express.checkout()

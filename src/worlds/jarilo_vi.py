@@ -14,23 +14,22 @@ class Init:
         self.robot_settlement = Robot_Settlement(device)
     async def farm(self):
         '''
-        Status: 7/7
-        XP:     19440/19440
-        Time:   1750
-        TP:     5 -> 5
-        Items:  R2: 0, R4: 0
+        Status  7/7
+        TP      5 -> 5
+        Items   R2: 0, R4: 0
+        XP      19440/19440
+        Time    1750
         '''
-        await self.outlying_snow_plains.farm() # XP:2052/2052 Time:188 TP:5->4
-        await self.backwater_pass.farm() # XP:3024/3024 Time:240 TP:4->4
-        await self.robot_settlement.farm() # XP:2592/2592 Time:237 TP:4->5
-        await self.corridor.farm() # XP:3672/3672 Time:432 TP:5->3
-        await self.everwinter_hill.farm() # XP:1404/1404 Time:119 TP:3->3
-        await self.silvermane_guard.restore_tp(tp=2.1) # Time:??? TP:3->5
-        await self.great_mine.farm() # XP:4536/4536 Time:326 TP:5->1
-        await self.rivet_town.farm() # XP:2160/2160 Time:262 TP:1->5
+        await self.outlying_snow_plains.farm()              # TP:-1->4 XP:2052/2052 Time:188
+        await self.backwater_pass.farm()                    # TP:+0->4 XP:3024/3024 Time:240
+        await self.robot_settlement.farm()                  # TP:+1->5 XP:2592/2592 Time:237
+        await self.corridor.farm()                          # TP:-2->3 XP:3672/3672 Time:432
+        await self.everwinter_hill.farm()                   # TP:+0->3 XP:1404/1404 Time:119
+        await self.robot_settlement.teleport(tp_restore=2)  # TP:+2->5 Time:???
+        await self.great_mine.farm()                        # TP:-4->1 XP:4536/4536 Time:326
+        await self.rivet_town.farm()                        # TP:+5->5 XP:2160/2160 Time:262
     async def dev(self):
-        await self.robot_settlement.teleport(tp_restore=2)
-        raise SystemExit('get +2 TP in Robot')
+        pass
         
 
 class Outlying_Snow_Plains:
@@ -189,11 +188,9 @@ class Silvermane_Guard:
     def __init__(self, device):
         self.bot = Bot(device)
     async def restore_tp(self, tp):
-        if tp == 2.1:
+        if tp == 4.1:
             await self.teleport(tp_restore=tp)
-        elif tp == 2.2:
-            await self.teleport(tp_restore=tp)
-        elif tp == 4:
+        elif tp == 4.2:
             await self.teleport(tp_restore=tp)
         else:
             raise SystemExit(f'no {tp} TP restore available')
@@ -203,9 +200,17 @@ class Silvermane_Guard:
         logger.info('---')
         logger.info("--- Map: Silvermane Guard Restricted Zone")
         logger.info('---')
-        if tp_restore == 2.1:
+        if tp_restore == 4.1:
             await self.bot.switch_map(y_list=750/1080, world='jarilo_vi', scroll_down=False, # Energy Hub
                                         x=659/2400, y=648/1080, corner='botright', move_x=0, move_y=0, confirm=True)
+            
+            raise SystemExit("improve: grab items first, then continue")
+            await self.bot.movepi(1.5, 1200)
+            await self.bot.movepi(1.05, 1200)
+            await self.bot.attack() # items
+            raise SystemExit()
+            
+            
             await self.bot.movepi(0.5, 2500)
             await self.bot.movepi(0.72, 5200)
             await self.bot.attack() # items
@@ -219,18 +224,12 @@ class Silvermane_Guard:
             await self.bot.movepi(1.2, 1000)
             await self.bot.movepi(0.75, 7000)
             await self.bot.attack() # items
-            await self.bot.use_teleporter(x=659/2400, y=648/1080, corner='botright', move_x=0, move_y=0, confirm=True) # Energy Hub
-            await self.bot.movepi(1.5, 1200)
-            await self.bot.movepi(1.05, 1200)
-            await self.bot.attack() # items
-        if tp_restore == 2.2:
-            await self.bot.switch_map(y_list=750/1080, world='jarilo_vi', scroll_down=False, # Frontline
-                                        x=991/2400, y=521/1080, corner='topleft', move_x=0, move_y=4)
+            await self.bot.use_teleporter(x=991/2400, y=521/1080, corner='topleft', move_x=0, move_y=4) # Frontline
             await self.bot.movepi(1.5, 4600)
             await self.bot.movepi(0.0, 1100)
             await self.bot.movepi(0.4, 300)
             await self.bot.attack_technique(2) # +2TP
-        elif tp_restore == 4:
+        elif tp_restore == 4.2:
             await self.bot.switch_map(y_list=750/1080, world='jarilo_vi', scroll_down=False, # Outpost
                                         x=1176/2400, y=738/1080, corner='topright', move_x=0, move_y=2, confirm=True)
             await self.bot.movepi(0.5, 3000)
@@ -726,9 +725,18 @@ class Robot_Settlement:
         logger.info('---')
         if tp_restore == 2:
             await self.bot.switch_map(y_list=927/1080, world='jarilo_vi', scroll_down=True, # Svarog's Base
-                                        x=944/2400, y=343/1080, corner='botright', move_x=0, move_y=0, debug=True)
-            # TODO
-            pass
+                                        x=944/2400, y=343/1080, corner='botright', move_x=0, move_y=0)
+            await self.bot.movepi(0.5, 300)
+            await self.bot.attack_technique(12)
+            await self.bot.movepi(0.6, 300)
+            await self.bot.attack_technique(8) # +2TP
+            await self.bot.movepi(0.45, 300)
+            await self.bot.attack_technique(7) # items
+            raise SystemExit("check")
+            await self.bot.movepi(0.25, 300)
+            await self.bot.attack_technique(4)
+            await self.bot.movepi(0.0, 300)
+            await self.bot.attack_technique(6) # items
         else:
             await self.bot.switch_map(y_list=927/1080, world='jarilo_vi', scroll_down=True, # Vagrant Camp
                                         x=944/2400, y=268/1080, corner='botleft', move_x=0, move_y=3)
