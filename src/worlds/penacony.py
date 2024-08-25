@@ -8,6 +8,7 @@ class Init:
     Status: 7/9
     '''
     def __init__(self, device, mode='credits'):
+        self.mode = mode
         self.golden_hour = Golden_Hour(device)
         self.dreams_edge = Dreams_Edge(device)
         self.childs_dream = Childs_Dream(device)
@@ -16,6 +17,7 @@ class Init:
         self.clock_studios_theme_park = Clock_Studios_Theme_Park(device)
         self.penacony_grand_theater = Penacony_Grand_Theater(device)
         self.the_soaring_clock_hand = The_Soaring_Clock_Hand(device)
+        self.storage_zone = Storage_Zone(device)
     async def farm(self):
         '''
         ### Mode: credits (default)
@@ -26,31 +28,35 @@ class Init:
         ### Mode: XP
         XP:???
         Time:???
-        TP:???
+        TP: 5 -> ???
+        R2: 3
+        R4: 2
         '''
         if self.mode == 'credits':
             pass
+        else:
+            await self.dreams_edge.farm() # TP:-12->1 R4:2 XP:7668/9612 Time:431    
+            await self.storage_zone.teleport(tp_restore=4) # TP:+4->5 Time:???
+            await self.clock_studios_theme_park.farm() # TP:-10->1 R2:3 XP:7648/7648 Time:???
+            await self.golden_hour.restore_tp(tp=4.1) # TP:+4->5 Time:???
     async def dev(self):
-        await self.dreams_edge.farm() # XP:7668/9612 Time:431 TP:5->1 R4:2
-        await self.golden_hour.restore_tp(tp=4.1) # Time:70 TP:1->5
-        await self.childs_dream.farm() # XP:5832/5832 Time:403 TP:5->2 R2:4
-        await self.the_reverie_dreamscape.farm() # XP:14580/15552 Time:? TP:2->2 R2:15
-        await self.dewlight_pavilion.farm() # XP:11448/11448 Time: TP:2->1 R2:5
+        await self.the_reverie_dreamscape.farm() # TP:-22->1 XP:14580/15552 Time:?
+        raise SystemExit()
+        await self.dewlight_pavilion.farm() # TP:-21->1 XP:11448/11448 Time: TP:2->1 R2:5
+        await self.childs_dream.farm() # TP:-9->2 R2:4 XP:5832/5832 Time:???
         await self.the_soaring_clock_hand.restore_tp(tp=4)
-        await self.clock_studios_theme_park.farm() # XP:7648/7648 Time: TP:5->1 R2:2
-        await self.golden_hour.restore_tp(tp=4.2) # Time:80 TP:1->5
         await self.penacony_grand_theater.farm() # XP:?/? Time: TP:1->? R4:0 R2:?            
+        await self.golden_hour.restore_tp(tp=4.2) # Time:80 TP:1->5
         pass
-        # await herta_space_station.storage_zone.teleport(tp_restore=4) # TP:??? Time:???
 
 class Golden_Hour:
     def __init__(self, device):
         self.bot = Bot(device)
     async def restore_tp(self, tp):
         if tp == 4.1:
-            self.teleport(tp_restore=tp)
+            await self.teleport(tp_restore=tp)
         elif tp == 4.2:
-            self.teleport(tp_restore=tp)
+            await self.teleport(tp_restore=tp)
         else:
             raise SystemExit(f'no {tp} TP restore available')
     async def teleport(self, tp_restore=False):
@@ -93,7 +99,7 @@ class Golden_Hour:
 
 class Dreams_Edge:
     '''
-    TP: 5 -> 1
+    TP: -12
     R4: 2 
     '''
     def __init__(self, device):
@@ -232,6 +238,10 @@ class Dreams_Edge:
 
 
 class Childs_Dream:
+    '''
+    TP: -9
+    
+    '''
     def __init__(self, device):
         self.bot = Bot(device)
     async def farm(self):
@@ -355,25 +365,32 @@ class Childs_Dream:
 
 
 class The_Reverie_Dreamscape:
+    '''
+    7/8 tp objects
+    37/39 fights
+    R2:
+    R4:
+    # TP:-22->1 XP:14580/15552 Time:?
+    '''
     def __init__(self, device):
         self.bot = Bot(device)
     async def farm(self):
-        await self.teleport()
-        await self.path_1()
-        await self.path_2()
-        await self.path_3()
-        await self.path_4()
-        await self.path_5()
-        await self.path_6()
-        await self.path_7()
-        await self.path_8()
-        await self.path_9()
-        await self.path_10()
-        await self.path_11()
+        # await self.teleport()
+        # await self.path_1()
+        # await self.path_2()
+        # await self.path_3()
+        # await self.path_4()
+        # await self.path_5()
+        # await self.path_6()
+        # await self.path_7()
+        # await self.path_8()
+        # await self.path_9()
+        # await self.path_10()
+        # await self.path_11()
         await self.path_12()
-        await self.path_13()
-        await self.path_14()
-        await self.path_15()
+        # await self.path_13()
+        # await self.path_14()
+        # await self.path_15()
     async def teleport(self):
         logger_set_path('Teleport')
         logger.info('---')
@@ -390,6 +407,19 @@ class The_Reverie_Dreamscape:
         await self.bot.attack_technique(2) # -1TP
     async def path_1(self):
         logger_set_path(1)
+        await self.bot.use_teleporter(935/2400, 587/1080, move_x=0, move_y=5, corner='topleft') # VIP Lounge Corridor
+        await self.bot.movepi(1.25, 1300)
+        await self.bot.movepi(1, 5000)
+        await self.bot.movepi(0.45, 600)
+        await self.bot.attack() # items
+        await self.bot.movepi(1.4, 500)
+        for _ in range(10):
+            await self.bot.movepi(1.0, 300)
+            await self.bot.attack_technique(1) # -1TP
+        await self.bot.movepi(1.9, 300)
+        await self.bot.attack_technique(8) # -2TP
+    async def path_2(self):
+        logger_set_path(2)
         await self.bot.use_teleporter(1021/2400, 546/1080, move_x=0, move_y=3, corner='botright') # Bud of Treasures
         await self.bot.movepi(1.5, 800)
         await self.bot.movepi(0.0, 4000)
@@ -401,14 +431,14 @@ class The_Reverie_Dreamscape:
         await self.bot.movepi(1.5, 6300)
         await self.bot.movepi(1.4, 500)
         await self.bot.attack() # +2TP
-    async def path_2(self):
-        logger_set_path(2)
+    async def path_3(self):
+        logger_set_path(3)
         await self.bot.use_teleporter(1132/2400, 660/1080, move_x=0, move_y=8, corner='botleft') # Bud of Harmony
         await self.bot.movepi(1.0, 2500)
         await self.bot.movepi(0.5, 500)
         await self.bot.attack_technique(12) # -2TP, roamer
-    async def path_3(self):
-        logger_set_path(3)
+    async def path_4(self):
+        logger_set_path(4)
         await self.bot.use_teleporter(1241/2400, 520/1080, move_x=0, move_y=5, corner='topright', confirm=True) # Platinum Guest Room
         await self.bot.movepi(0.5, 2700)
         await self.bot.movepi(0.9, 1400)
@@ -429,8 +459,8 @@ class The_Reverie_Dreamscape:
         for _ in range(6):
             await self.bot.movepi(1.8, 300)
             await self.bot.attack_technique(2)
-    async def path_4(self):
-        logger_set_path(4)
+    async def path_5(self):
+        logger_set_path(5)
         await self.bot.use_teleporter(850/2400, 296/1080, move_x=0, move_y=4, corner='botright') # Dreamscape Lobby
         await self.bot.movepi(0.5, 300)
         await self.bot.attack_technique(19)
@@ -443,7 +473,173 @@ class The_Reverie_Dreamscape:
         await self.bot.attack_technique(2)
         await self.bot.movepi(0.0, 300)
         await self.bot.attack_technique(4) # +2TP
-    async def path_5(self):
+    async def path_6(self):
+        logger_set_path(6)
+        await self.bot.use_teleporter(935/2400, 587/1080, move_x=0, move_y=5, corner='topleft') # VIP Lounge Corridor
+        await self.bot.movepi(1.25, 1200)
+        await self.bot.movepi(1.0, 5100)
+        await self.bot.movepi(0.5, 4800)
+        await self.bot.movepi(1.0, 500)
+        await self.bot.attack_technique(10) # -1TP
+    async def path_7(self):
+        logger_set_path(7)
+        await self.bot.use_teleporter(935/2400, 587/1080, move_x=0, move_y=5, corner='topleft') # VIP Lounge Corridor
+        await self.bot.movepi(0.5, 1600)
+        await self.bot.movepi(1.0, 2300)
+        await self.bot.movepi(0.6, 1600)
+        await self.bot.attack_technique(1) # -1TP
+        await self.bot.movepi(0.45, 2600)
+        await self.bot.movepi(0.0, 300)
+        await self.bot.attack_technique(10) # -1TP
+    async def path_8(self):
+        logger_set_path(8)
+        await self.bot.use_teleporter(574/2400, 482/1080, move_x=0, move_y=6, corner='topleft') # Shape of Nectar
+        await self.bot.movepi(1.5, 2600)
+        await self.bot.attack() # +2TP
+    async def path_9(self):
+        logger_set_path(9)
+        await self.bot.use_teleporter(865/2400, 461/1080, move_x=0, move_y=0, corner='topleft') # Dreamjolt Hostelry
+        await self.bot.movepi(0.1, 2300)
+        await self.bot.movepi(0.5, 4500)
+        await self.bot.movepi(0.0, 700)
+        await self.bot.attack() # items
+        await self.bot.movepi(0.6, 2500)
+        await self.bot.movepi(0.5, 4000)
+        await self.bot.sleep(2)
+        await self.bot.movepi(0.5, 500)
+        await self.bot.sleep(2)
+        await self.bot.attack_technique(2) # -1TP
+        await self.bot.movepi(0.1, 300)
+        await self.bot.attack_technique(3) # -1TP
+        await self.bot.movepi(0.3, 300)
+        await self.bot.attack_technique(9) # items
+    async def path_10(self):
+        logger_set_path(10)
+        await self.bot.use_teleporter(865/2400, 461/1080, move_x=0, move_y=0, corner='topleft') # Dreamjolt Hostelry
+        await self.bot.movepi(1.95, 500)
+        await self.bot.attack_technique(8) # items
+        await self.bot.posfix(0.25, 1000)
+        await self.bot.movepi(1.5, 1000)
+        await self.bot.movepi(0.0, 500)
+        await self.bot.attack_technique(11) # items
+        await self.bot.posfix(1.75, 1000)
+        await self.bot.movepi(0.75, 700)
+        await self.bot.movepi(0.5, 700)
+        await self.bot.attack_technique(20) # move
+        await self.bot.movepi(1.8, 500)
+        await self.bot.attack_technique(6) # +2TP
+        await self.bot.posfix(1.75, 1000)
+        await self.bot.movepi(0.55, 500)
+        await self.bot.attack_technique(6) # move
+        await self.bot.movepi(1.0, 500)
+        await self.bot.attack_technique(3) # items
+    async def path_11(self):
+        logger_set_path(11)
+        await self.bot.use_teleporter(865/2400, 461/1080, move_x=0, move_y=0, corner='topleft') # Dreamjolt Hostelry
+        await self.bot.movepi(0.1, 2300)
+        await self.bot.movepi(0.5, 13100)
+        await self.bot.movepi(1.0, 1900)
+        await self.bot.movepi(0.5, 600)
+        await self.bot.attack() # items
+        await self.bot.movepi(1.0, 1300)
+        await self.bot.interact()
+        await self.bot.movepi(0.5, 3000)
+        await self.bot.attack() # +2TP
+        await self.bot.movepi(0.5, 1500)
+        await self.bot.action_button()
+        await self.bot.movepi(1.0, 1800)
+        await self.bot.movepi(1.1, 1000)
+        await self.bot.interact()
+        await self.bot.movepi(0.7, 700)
+        await self.bot.attack() # items
+        await self.bot.movepi(0.0, 2500)
+        await self.bot.action_button()
+        await self.bot.movepi(0.00, 1000)
+        await self.bot.movepi(1.7, 800)
+        await self.bot.movepi(1.5, 4200)
+        await self.bot.movepi(1.7, 1200)
+        await self.bot.action_button()
+        await self.bot.movepi(1.5, 4000)
+        await self.bot.movepi(0.00, 2800)
+        await self.bot.attack_technique(3) # -1TP
+        await self.bot.movepi(0.5, 1300)
+        await self.bot.attack_technique(3) # items
+        await self.bot.movepi(0.25, 3500)
+        await self.bot.posfix(0.25, 1000)
+        await self.bot.movepi(1.45, 3250)
+        await self.bot.movepi(0.0, 500)
+        await self.bot.action_button()
+        await self.bot.movepi(0.0, 2100)
+        await self.bot.movepi(0.16, 1900)
+        await self.bot.attack_technique(4) # -2TP
+        await self.bot.movepi(0.4, 300)
+        await self.bot.attack_technique(4) # items
+        await self.bot.movepi(1.6, 300)
+        await self.bot.attack_technique(6) # items
+    async def path_12(self):
+        logger_set_path(12)
+        raise SystemExit('check,reverie,path12')
+        await self.bot.use_teleporter(1241/2400, 520/1080, move_x=0, move_y=5, corner='topright', confirm=True) # Platinum Guest Room
+        await self.bot.movepi(0.5, 500)
+        await self.bot.attack_technique(4) # move
+        await self.bot.movepi(1.0, 500)
+        await self.bot.attack_technique(21) # move
+        await self.bot.movepi(0.55, 500)
+        await self.bot.attack_technique(8) # move
+        await self.bot.movepi(0.825, 500)
+        await self.bot.attack_technique(6) # move
+        await self.bot.movepi(1.0, 500)
+        await self.bot.attack_technique(15) # move
+        await self.bot.attack()
+        await self.bot.movepi(1.0, 300)
+        await self.bot.interact(wait_for_ready=True)
+        await self.bot.movepi(0.5, 500)
+        await self.bot.attack_technique(10) # move
+        await self.bot.movepi(1.0, 500)
+        await self.bot.attack_technique(11) # move
+        await self.bot.attack()
+        await self.bot.movepi(1.0, 300)
+        await self.bot.interact(wait_for_ready=True)
+        await self.bot.movepi(0.5, 500)
+        await self.bot.attack_technique(3) # move
+        await self.bot.movepi(1.0, 500)
+        await self.bot.attack_technique(6) # move
+        await self.bot.movepi(1.25, 1000)
+        await self.bot.posfix(1.25, 1000)
+        await self.bot.movepi(0.2, 800)
+        await self.bot.movepi(0.5, 2300)
+        await self.bot.movepi(1.85, 1500)
+        await self.bot.interact()
+        await self.bot.movepi(1.25, 1000)
+        await self.bot.posfix(1.25, 1000)
+        await self.bot.movepi(0.5, 1500)
+        await self.bot.movepi(0.75, 2700)
+        await self.bot.movepi(1.0, 1100)
+        await self.bot.action_button()
+        await self.bot.movepi(1.0, 1500)
+        await self.bot.attack_technique(4) # move
+        await self.bot.movepi(1.5, 500)
+        await self.bot.attack_technique(9) # move
+        await self.bot.posfix(1.25, 1000)
+        await self.bot.movepi(0.5, 600)
+        await self.bot.movepi(0.0, 400)
+        await self.bot.movepi(1.5, 300)
+        await self.bot.action_button()
+        await self.bot.movepi(1.5, 1500)
+        await self.bot.attack_technique(1) # +2TP
+        await self.bot.movepi(1.7, 1500)
+        await self.bot.attack_technique(4) # items
+
+        
+    
+
+
+
+
+
+
+
+    async def path_x(self):
         logger_set_path(5)
         await self.bot.use_teleporter(1241/2400, 520/1080, move_x=0, move_y=5, corner='topright') # Platinum Guest Room
         await self.bot.movepi(0.5, 2800)
@@ -491,26 +687,9 @@ class The_Reverie_Dreamscape:
         await self.bot.movepi(1.5, 1200)
         await self.bot.movepi(0.0, 300)
         await self.bot.attack_technique(8) # -1TP
-    async def path_6(self):
-        logger_set_path(6)
-        await self.bot.use_teleporter(574/2400, 482/1080, move_x=0, move_y=6, corner='topleft') # Shape of Nectar
-        await self.bot.movepi(1.5, 2600)
-        await self.bot.attack() # +2TP
-    async def path_7(self):
-        logger_set_path(7)
-        await self.bot.use_teleporter(935/2400, 587/1080, move_x=0, move_y=5, corner='topleft') # VIP Lounge Corridor
-        await self.bot.movepi(1.25, 1300)
-        await self.bot.movepi(1, 5000)
-        await self.bot.movepi(0.45, 600)
-        await self.bot.attack() # items
-        await self.bot.movepi(1.4, 500)
-        for _ in range(10):
-            await self.bot.movepi(1.0, 300)
-            await self.bot.attack_technique(1) # -1TP
-        await self.bot.movepi(1.9, 300)
-        await self.bot.attack_technique(8) # -2TP
-        await self.bot.restore_tp(item='trick_snack', n=2) # +4TP
-    async def path_8(self):
+        
+
+    async def path_x(self):
         logger_set_path(8)
         await self.bot.use_teleporter(1241/2400, 520/1080, move_x=0, move_y=5, corner='topright', confirm=True) # Platinum Guest Room
         await self.bot.movepi(0.5, 2600)
@@ -530,35 +709,9 @@ class The_Reverie_Dreamscape:
         await self.bot.movepi(0.9, 300)
         await self.bot.attack_technique(10) # -2TP
         await self.bot.restore_tp(item='trick_snack', n=2) # +4TP
-    async def path_9(self):
-        logger_set_path(9)
-        await self.bot.use_teleporter(935/2400, 587/1080, move_x=0, move_y=5, corner='topleft') # VIP Lounge Corridor
-        await self.bot.movepi(0.5, 1600)
-        await self.bot.movepi(1.0, 2300)
-        await self.bot.movepi(0.6, 1600)
-        await self.bot.attack_technique(1) # -1TP
-        await self.bot.movepi(0.45, 2600)
-        await self.bot.movepi(0.0, 300)
-        await self.bot.attack_technique(10) # -1TP
-    async def path_10(self):
-        logger_set_path(10)
-        await self.bot.use_teleporter(865/2400, 461/1080, move_x=0, move_y=0, corner='topleft') # Dreamjolt Hostelry
-        await self.bot.movepi(0.1, 2300)
-        await self.bot.movepi(0.5, 4500)
-        await self.bot.movepi(0.0, 700)
-        await self.bot.attack() # items
-        await self.bot.movepi(0.6, 2500)
-        await self.bot.movepi(0.5, 4000)
-        await self.bot.sleep(2)
-        await self.bot.movepi(0.5, 500)
-        await self.bot.sleep(2)
-        await self.bot.attack_technique(2) # -1TP
-        await self.bot.movepi(0.1, 300)
-        await self.bot.attack_technique(3) # -1TP
-        await self.bot.movepi(0.3, 300)
-        await self.bot.attack_technique(9) # items
-        await self.bot.restore_tp(item='trick_snack', n=2) # +4TP
-    async def path_11(self):
+    
+    
+    async def path_x(self):
         logger_set_path(11)
         await self.bot.use_teleporter(935/2400, 587/1080, move_x=0, move_y=5, corner='topleft') # VIP Lounge Corridor
         await self.bot.movepi(1.25, 1200)
@@ -635,58 +788,8 @@ class The_Reverie_Dreamscape:
         await self.bot.attack_technique(5) # items
         await self.bot.movepi(1.4, 500)
         await self.bot.attack_technique(3) # -1TP
-    async def path_12(self):
-        logger_set_path(12)
-        await self.bot.use_teleporter(935/2400, 587/1080, move_x=0, move_y=5, corner='topleft') # VIP Lounge Corridor
-        await self.bot.movepi(1.25, 1200)
-        await self.bot.movepi(1.0, 5100)
-        await self.bot.movepi(0.5, 4800)
-        await self.bot.movepi(1.0, 500)
-        await self.bot.attack_technique(10) # -1TP
-        await self.bot.restore_tp(item='trick_snack', n=1) # +2TP
-    async def path_13(self):
-        logger_set_path(13)
-        await self.bot.use_teleporter(865/2400, 461/1080, move_x=0, move_y=0, corner='topleft') # Dreamjolt Hostelry
-        await self.bot.movepi(0.1, 2300)
-        await self.bot.movepi(0.5, 13100)
-        await self.bot.movepi(1.0, 1900)
-        await self.bot.movepi(0.5, 600)
-        await self.bot.attack() # items
-        await self.bot.movepi(1.0, 1300)
-        await self.bot.interact()
-        await self.bot.movepi(0.5, 3000)
-        await self.bot.attack() # +2TP
-        await self.bot.movepi(0.5, 1500)
-        await self.bot.action_button()
-        await self.bot.movepi(1.0, 1800)
-        await self.bot.movepi(1.1, 1000)
-        await self.bot.interact()
-        await self.bot.movepi(0.7, 700)
-        await self.bot.attack() # items
-        await self.bot.movepi(0.0, 2500)
-        await self.bot.action_button()
-        await self.bot.movepi(0.00, 1000)
-        await self.bot.movepi(1.7, 800)
-        await self.bot.movepi(1.5, 4200)
-        await self.bot.movepi(1.7, 1200)
-        await self.bot.action_button()
-        await self.bot.movepi(1.5, 4000)
-        await self.bot.movepi(0.00, 2800)
-        await self.bot.attack_technique(3) # -1TP
-        await self.bot.movepi(0.5, 1300)
-        await self.bot.attack_technique(3) # items
-        await self.bot.movepi(0.25, 3500)
-        await self.bot.posfix(0.25, 1000)
-        await self.bot.movepi(1.45, 3250)
-        await self.bot.movepi(0.0, 500)
-        await self.bot.action_button()
-        await self.bot.movepi(0.0, 2100)
-        await self.bot.movepi(0.16, 1900)
-        await self.bot.attack_technique(4) # -2TP
-        await self.bot.movepi(0.4, 300)
-        await self.bot.attack_technique(4) # items
-        await self.bot.movepi(1.6, 300)
-        await self.bot.attack_technique(6) # items
+    
+    
     async def path_14(self):
         logger_set_path(14)
         await self.bot.use_teleporter(748/2400, 533/1080, move_x=0, move_y=3, corner='topleft') # Monitoring Room
@@ -1051,11 +1154,11 @@ class Dewlight_Pavilion:
         logger_set_path(10)
         await self.bot.use_teleporter(1333/2400, 502/1080, move_x=0, move_y=0, corner='botleft', special_exit=False) # City Sandpit
         await self.bot.movepi(0.5, 11500)
-        await self.bot.interact(check_on_map=False)
+        await self.bot.interact(wait_for_ready=False)
         await self.bot.action_tap(1535, 960)
         await self.bot.wait_for_onmap(min_duration=5)
         await self.bot.movepi(0.51, 5500)
-        await self.bot.interact(check_on_map=False)
+        await self.bot.interact(wait_for_ready=False)
         await self.bot.action_tap(1535, 960)
         await self.bot.wait_for_onmap(min_duration=5)
         await self.bot.movepi(0.47, 2200)
@@ -1083,6 +1186,12 @@ class Dewlight_Pavilion:
 
 
 class Clock_Studios_Theme_Park:
+    '''
+    TP:-10->1
+    R2:3
+    XP:7648/7648
+    Time:???
+    '''
     def __init__(self, device):
         self.bot = Bot(device)
     async def farm(self):
@@ -1102,7 +1211,7 @@ class Clock_Studios_Theme_Park:
         logger.info('--- Map: Clock Studios Theme Park')
         logger.info('---')
         await self.bot.switch_map(y_list=446/1080, world='penacony', scroll_down=True, # Theme Park Entrance
-                                    x=1216/2400, y=299/1080, corner='botright', move_x=1, move_y=6)
+                                    x=1216/2400, y=299/1080, corner='botright', move_x=1, move_y=6, confirm=True)
         await self.bot.movepi(0.45, 6300)
         await self.bot.attack(2) # items
         await self.bot.movepi(1.0, 2500)
@@ -1472,7 +1581,7 @@ class The_Soaring_Clock_Hand:
             await self.bot.movepi(0.5, 2000)
             await self.bot.movepi(0.86, 2000)
             await self.bot.attack_technique(2) # +2TP
-            await self.bot.use_teleporter(913/2400, 646/1080, move_x=0, move_y=0, swipe=0, corner='botright', confirm=True) # Aft Pool
+            await self.bot.use_teleporter(917/2400, 648/1080, move_x=0, move_y=0, swipe=0, corner='botright') # Aft Pool
             await self.bot.movepi(0.75, 3200)
             await self.bot.movepi(0.5, 3200)
             await self.bot.movepi(1.0, 300)
@@ -1492,6 +1601,6 @@ class The_Soaring_Clock_Hand:
             await self.bot.movepi(0.3, 3000)
             await self.bot.movepi(0.2, 1000)
             await self.bot.movepi(0.5, 300)
-            await self.bot.attack_technique(6) # +2TP
+            await self.bot.attack_technique(4) # +2TP
 
 

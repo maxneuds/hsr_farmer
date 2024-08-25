@@ -96,7 +96,6 @@ class Storage_Zone:
         if tp_restore == 4:
             await self.bot.switch_map(y_list=630/1080, world='herta_space_station', scroll_down=False, # Bud of Destruction
                                     x=510/2400, y=507/1080, corner='botright', move_x=0, move_y=0)
-            raise SystemExit('check')
             await self.bot.movepi(1.6, 700)
             await self.bot.attack() # +2TP
             await self.bot.use_teleporter(1068/2400, 647/1080, corner='botright', move_x=0, move_y=0) # Special Purpose Lab
@@ -122,7 +121,6 @@ class Storage_Zone:
     async def path_1(self):
         logger_set_path(1)
         await self.bot.use_teleporter(510/2400, 507/1080, move_x=0, move_y=0, corner='botright') # Bud of Destruction
-        raise SystemExit("check")
         await self.bot.movepi(1.5, 4000)
         await self.bot.attack_technique(4) # -1TP
         await self.bot.movepi(1.75, 2000)
@@ -169,7 +167,7 @@ class Storage_Zone:
         await self.bot.attack_technique(8) # -1TP, roamer
     async def path_4(self):
         logger_set_path(4)
-        await self.bot.use_teleporter(895/2400, 530/1080, move_x=0, move_y=0, corner='botright') # Courtyard
+        await self.bot.use_teleporter(895/2400, 530/1080, move_x=0, move_y=0, corner='botright', confirm=True) # Courtyard
         await self.bot.movepi(0.35, 2000)
         await self.bot.attack() # +2TP
         await self.bot.movepi(1.35, 3100)

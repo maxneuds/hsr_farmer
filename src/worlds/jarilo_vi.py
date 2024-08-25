@@ -203,16 +203,16 @@ class Silvermane_Guard:
         if tp_restore == 4.1:
             await self.bot.switch_map(y_list=750/1080, world='jarilo_vi', scroll_down=False, # Energy Hub
                                         x=659/2400, y=648/1080, corner='botright', move_x=0, move_y=0, confirm=True)
-            
-            raise SystemExit("improve: grab items first, then continue")
             await self.bot.movepi(1.5, 1200)
             await self.bot.movepi(1.05, 1200)
+            await self.bot.movepi(0.5, 500)
             await self.bot.attack() # items
-            raise SystemExit()
-            
-            
-            await self.bot.movepi(0.5, 2500)
-            await self.bot.movepi(0.72, 5200)
+            await self.bot.movepi(0.5, 500)
+            await self.bot.posfix(0.25, 1000)
+            await self.bot.movepi(1.5, 800)
+            await self.bot.movepi(0.0, 1200)
+            await self.bot.movepi(0.5, 3500)
+            await self.bot.movepi(0.72, 5100)
             await self.bot.attack() # items
             await self.bot.movepi(0.75, 3900)
             await self.bot.movepi(1.24, 6300)
@@ -732,11 +732,10 @@ class Robot_Settlement:
             await self.bot.attack_technique(8) # +2TP
             await self.bot.movepi(0.45, 300)
             await self.bot.attack_technique(7) # items
-            raise SystemExit("check")
-            await self.bot.movepi(0.25, 300)
+            await self.bot.movepi(0.2, 300)
             await self.bot.attack_technique(4)
-            await self.bot.movepi(0.0, 300)
-            await self.bot.attack_technique(6) # items
+            await self.bot.movepi(1.8, 300)
+            await self.bot.attack_technique(7) # items
         else:
             await self.bot.switch_map(y_list=927/1080, world='jarilo_vi', scroll_down=True, # Vagrant Camp
                                         x=944/2400, y=268/1080, corner='botleft', move_x=0, move_y=3)

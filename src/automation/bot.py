@@ -397,10 +397,10 @@ class Bot:
                         logger.error(f'"{item}" not found. Exit.')
                         exit()
 
-    async def interact(self, check_on_map=True):
+    async def interact(self, wait_for_ready=True):
         await aio.sleep(1)
         await self.action_tap(int(self.xy.width*1600/2400), int(self.xy.height*650/1080))
-        if check_on_map == True:
+        if wait_for_ready == True:
             await self.wait_for_onmap(min_duration=2)
         else:
             await self.sleep(5)
