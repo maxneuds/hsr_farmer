@@ -21,11 +21,23 @@ async def main():
     penacony = worlds.penacony.Init(DEVICE, mode=MODE)
     
     # dev
+    # daily for free (guranteed): R2: 25, R4: 5
     # await penacony.dev()
-    # await xianzhou_luofu.the_shackling_prison.teleport(tp_restore=2.1)
-    # await xianzhou_luofu.stargazer_navalia.farm()
-    # await xianzhou_luofu.dev()
-    await penacony.dev()
+    # await penacony.farm()
+    # await xianzhou_luofu.the_shackling_prison.farm()
+    # await xianzhou_luofu.the_shackling_prison.path_2()
+    # await xianzhou_luofu.the_shackling_prison.path_3()
+    # await penacony.dreams_edge.path_6()
+    # await penacony.dreams_edge.path_7()
+    # await penacony.dreams_edge.path_8()
+    # await penacony.the_reverie_dreamscape.path_12()
+    # await penacony.the_reverie_dreamscape.path_13()
+    # await penacony.the_reverie_dreamscape.path_14()
+    # await penacony.the_reverie_dreamscape.path_15()
+    # await penacony.the_reverie_dreamscape.rest_tp4()
+    # await penacony.the_reverie_dreamscape.path_16()
+    # await penacony.the_reverie_dreamscape.rest_tp2()
+    # await penacony.the_reverie_dreamscape.path_17()
     raise SystemExit()
     
     # preperations
@@ -33,9 +45,9 @@ async def main():
     await universal.crafting()
 
     # farm worlds
-    await herta_space_station.farm()
-    await jarilo_vi.farm()
-    await xianzhou_luofu.farm()
+    await herta_space_station.farm() # TP:+5->5
+    await jarilo_vi.farm() # TP:+0->5
+    await xianzhou_luofu.farm() # TP:+0->5 R2:2 R4:3
     # await penacony.farm()
     
     # checkout

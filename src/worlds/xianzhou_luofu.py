@@ -46,6 +46,7 @@ class Init:
         await self.cloudford.farm()                                 # TP:+1->3 XP:4644/4644 Time:395
         await self.the_shackling_prison.teleport(tp_restore=2.1)    # TP:+2->5 Time:???
         await self.stargazer_navalia.farm()                         # TP:-5->2 R2:1 XP:6264/6264 Time:425
+        await self.the_shackling_prison.farm()                      # TP:+3->5 Time:???
     async def dev(self):
         # await self.the_shackling_prison.teleport()
         # await self.the_shackling_prison.path_1()
@@ -1342,12 +1343,12 @@ class The_Shackling_Prison:
         else:
             raise SystemExit(f'no {tp} TP restore available')
     async def farm(self):
-        # await self.teleport()
+        await self.teleport()
         await self.path_1()
-        # await self.path_2()
-        # await self.path_3()
-        # await self.path_4()
-        # await self.path_5()
+        await self.path_2()
+        await self.path_3()
+        await self.path_4()
+        await self.path_5()
     async def teleport(self, tp_restore=None):
         logger_set_path('Teleport')
         logger.info('---')
@@ -1356,7 +1357,6 @@ class The_Shackling_Prison:
         if tp_restore == 2.1:
             await self.bot.switch_map(y_list=928/1080, world='the_xianzhou_luofu', scroll_down=True, # Plankway Front
                                         x=575/2400, y=615/1080, move_x=5, move_y=4, corner='topright')
-            raise SystemExit('check,shackling,2.1')
             await self.bot.movepi(0.4, 2600)
             await self.bot.attack_technique(1) # items
             await self.bot.movepi(0.75, 500)
@@ -1372,12 +1372,9 @@ class The_Shackling_Prison:
             await self.bot.attack_technique(7) # items
             await self.bot.movepi(1.0, 500)
             await self.bot.attack_technique(10) # items
-            await self.bot.movepi(1.9, 2000)
-            await self.bot.posfix(1.75, 1000)
         else:
             await self.bot.switch_map(y_list=928/1080, world='the_xianzhou_luofu', scroll_down=True, # Grimfrost Hold (II)
                                         x=551/2400, y=358/1080, move_x=4, move_y=3, corner='botright')
-            raise SystemExit('check,shackling,teleport')
             await self.bot.movepi(0.35, 900)
             await self.bot.attack() # +2TP
             await self.bot.movepi(1.5, 2000)
@@ -1445,29 +1442,43 @@ class The_Shackling_Prison:
     async def path_2(self):
         logger_set_path(2)
         await self.bot.use_teleporter(x=1287/2400, y=411/1080, corner='botleft', move_x=3, move_y=3) # Grimfrost Hold (I)
-        await self.bot.movepi(0.85, 1200)
-        await self.bot.attack_technique(1) # items
-        await self.bot.movepi(0.0, 500)
-        await self.bot.attack_technique(2) # +2TP
-        await self.bot.movepi(0.5, 2000)
-        await self.bot.posfix(0.25, 500)
-        await self.bot.movepi(1.2, 800)
+        raise SystemExit('check,prision,path2')
+        await self.bot.movepi(0.4, 500)
+        await self.bot.attack_technique(1) # +2TP
+        await self.bot.movepi(0.9, 500)
+        await self.bot.attack_technique(2) # items
+        await self.bot.movepi(0.4, 2000)
+        await self.bot.posfix(0.25, 1000)
+        await self.bot.movepi(1.7, 500)
+        await self.bot.movepi(0.1, 300)
         await self.bot.movepi(0.6, 500)
         await self.bot.attack_technique(6) # move
-        for _ in range(12): # -1TP, roamer
+        for _ in range(11): # -1TP, roamer
             await self.bot.movepi(0.45, 300)
             await self.bot.attack_technique(2)
-        await self.bot.movepi(1.0, 1000)
+        await self.bot.movepi(0.6, 2000)
         await self.bot.movepi(0.75, 1000)
-        await self.bot.posfix(0.75, 1000)
+        await self.bot.posfix(0.75, 500)
         await self.bot.movepi(1.45, 3000)
         await self.bot.movepi(1.0, 300)
-        await self.bot.attack_technique(7) # -1TP
-        await self.bot.movepi(1.55, 300)
-        await self.bot.attack_technique(7) # +2TP
+        await self.bot.attack_technique(6) # -1TP
+        await self.bot.movepi(1.6, 800)
+        await self.bot.movepi(1.5, 300)
+        await self.bot.attack_technique(4) # items
+        await self.bot.movepi(1.6, 800)
+        await self.bot.movepi(1.5, 300)
+        await self.bot.attack_technique(4) # +2TP
+        await self.bot.movepi(0.15, 300)
+        await self.bot.attack_technique(10) # items
+        await self.bot.movepi(0.25, 1000)
+        await self.bot.posfix(0.25, 500)
+        await self.bot.movepi(1.0, 1000)
+        await self.bot.movepi(0.85, 300)
+        await self.bot.attack_technique(8) # items
     async def path_3(self):
         logger_set_path(3)
         await self.bot.use_teleporter(x=605/2400, y=289/1080, corner='botright', move_x=3, move_y=4) # Pyroscape Hold
+        raise SystemExit('check,prision,path3')
         await self.bot.movepi(0.9, 500)
         await self.bot.attack_technique(6) # items
         await self.bot.movepi(0.8, 1000)
@@ -1477,11 +1488,12 @@ class The_Shackling_Prison:
         await self.bot.movepi(0.75, 500)
         await self.bot.attack_technique(12) # +2TP
         await self.bot.movepi(0.6, 500)
-        await self.bot.attack_technique(3) # -1TP
-        await self.bot.movepi(0.5, 500)
-        await self.bot.attack_technique(3)
-        await self.bot.movepi(1.0, 300)
-        await self.bot.attack_technique(6) # -1TP, roamer
+        await self.bot.attack_technique(5) # -1TP
+        await self.bot.movepi(1.5, 500)
+        await self.bot.movepi(1.1, 300)
+        await self.bot.attack_technique(5) # -1TP, roamer
+        await self.bot.movepi(0.0, 300)
+        await self.bot.attack_technique(5)
         await self.bot.use_teleporter(x=605/2400, y=289/1080, corner='botright', move_x=3, move_y=4) # Pyroscape Hold
         await self.bot.movepi(0.65, 500)
         await self.bot.attack_technique(4) # move

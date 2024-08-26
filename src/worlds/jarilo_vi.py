@@ -618,7 +618,7 @@ class Rivet_Town:
         await self.bot.attack() # +2TP
     async def path_1(self):
         logger_set_path(1)
-        await self.bot.use_teleporter(x=998/2400, y=393/1080, corner='topright', move_x=0, move_y=0) # Orphanage
+        await self.bot.use_teleporter(x=998/2400, y=393/1080, corner='topright', move_x=0, move_y=0, confirm=True) # Orphanage
         await self.bot.movepi(1.6, 1500)
         await self.bot.movepi(1.25, 1000)
         await self.bot.movepi(1.1, 1000)
