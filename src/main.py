@@ -38,6 +38,7 @@ async def main():
     # await penacony.the_reverie_dreamscape.path_16()
     # await penacony.the_reverie_dreamscape.rest_tp2()
     # await penacony.the_reverie_dreamscape.path_17()
+    await penacony.penacony_grand_theater.farm()
     raise SystemExit()
     
     # preperations
@@ -46,7 +47,7 @@ async def main():
 
     # farm worlds
     await herta_space_station.farm() # TP:+5->5
-    await jarilo_vi.farm() # TP:+0->5
+    await jarilo_vi.farm() # TP:+0->5 R2/4:0
     await xianzhou_luofu.farm() # TP:+0->5 R2:2 R4:3
     # await penacony.farm()
     
