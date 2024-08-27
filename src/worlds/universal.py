@@ -15,16 +15,17 @@ class Init:
         await self.bot.craft_item('trick_snack', all=True)
         await self.bot.craft_item('punitive_energy', all=True)
     
-    async def restore_tp(self, n=2):
+    async def restore_tp(self, tp=4):
         logger_set_path('Teleport: TP Restore')
         logger.info('---')
-        logger.info("--- Map: Storage Zone [TP Restore]")
+        logger.info("--- Map: Storage Zone")
         logger.info('---')
         await self.bot.switch_map(y_list=630/1080, world='herta_space_station', scroll_down=False, # Outside the Control Center
                                 x=576/2400, y=569/1080, corner='botright', move_x=0, move_y=0)
         await self.bot.move(1.0, 500)
         await self.bot.attack_technique(5) # move
         await self.bot.move(1.35, 1600)
+        n = int(tp/2)
         for i in range(n):
             logger.info(f'[{i+1}/{n}] Restore TP in Signs of Fragmentum')
             await self.bot.chat_initiate()
@@ -55,4 +56,5 @@ class Init:
             await self.bot.sleep(2)
             await self.bot.action_tap(int(self.bot.xy.width*1396/2400), int(self.bot.xy.height*705/1080))
             await self.bot.wait_for_onmap()
+
 

@@ -1,5 +1,6 @@
 from logger import logger, logger_set_path
 from automation.bot import Bot
+from worlds.universal import Init as Universal
 from worlds.herta_space_station import Storage_Zone
 
 
@@ -17,7 +18,6 @@ class Init:
         self.clock_studios_theme_park = Clock_Studios_Theme_Park(device)
         self.penacony_grand_theater = Penacony_Grand_Theater(device)
         self.the_soaring_clock_hand = The_Soaring_Clock_Hand(device)
-        self.storage_zone = Storage_Zone(device)
     async def farm(self):
         '''
         ### Mode: credits (default)
@@ -47,25 +47,17 @@ class Init:
     async def dev(self):
         await self.penacony_grand_theater.farm() # XP:?/? Time: TP:1->? R4:0 R2:?            
         raise SystemExit()
-        pass
 
 
 class Golden_Hour:
     def __init__(self, device):
         self.bot = Bot(device)
     async def restore_tp(self, tp):
-        if tp == 4.1:
-            await self.teleport(tp_restore=tp)
-        elif tp == 4.2:
-            await self.teleport(tp_restore=tp)
-        else:
-            raise SystemExit(f'no {tp} TP restore available')
-    async def teleport(self, tp_restore=False):
-        logger_set_path('Teleport')
+        logger_set_path('Teleport: TP Restore')
         logger.info('---')
         logger.info('--- Map: Golden Hour')
         logger.info('---')
-        if tp_restore == 4.1:
+        if tp == 4.1:
             await self.bot.switch_map(y_list=650/1080, world='penacony',
                                         x=588/2400, y=356/1080, move_x=4, move_y=3,) # Sweet Corner
             await self.bot.move(1.5, 3300)
@@ -77,7 +69,7 @@ class Golden_Hour:
             await self.bot.move(0.7, 2000)
             await self.bot.move(0.9, 4400)
             await self.bot.attack() # +2TP
-        elif tp_restore == 4.2:
+        elif tp == 4.2:
             await self.bot.switch_map(y_list=650/1080, world='penacony',
                                         x=330/2400, y=498/1080, corner='botright', move_x=0, move_y=0) # The Reverie Hotel Entrance
             await self.bot.move(0.35, 9000)
@@ -94,8 +86,7 @@ class Golden_Hour:
             await self.bot.move(0.8, 500)
             await self.bot.attack() # +2TP
         else:
-            logger.debug('bad parameter')
-            exit()
+            raise SystemExit(f'no {tp} TP restore available')
 
 
 class Dreams_Edge:
@@ -1678,12 +1669,7 @@ class The_Soaring_Clock_Hand:
     def __init__(self, device):
         self.bot = Bot(device)
     async def restore_tp(self, tp):
-        if tp == 4:
-            await self.teleport(tp=tp)
-        else:
-            raise SystemExit(f'no {tp} TP restore available')
-    async def teleport(self, tp):
-        logger_set_path('Teleport')
+        logger_set_path('Teleport: Restore TP')
         logger.info('---')
         logger.info('--- Map: The Soaring Clock Hand')
         logger.info('---')
@@ -1715,5 +1701,7 @@ class The_Soaring_Clock_Hand:
             await self.bot.move(0.2, 1000)
             await self.bot.move(0.5, 300)
             await self.bot.attack_technique(4) # +2TP
+        else:
+            raise SystemExit(f'no {tp} TP restore available')
 
 

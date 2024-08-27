@@ -1,6 +1,7 @@
 from logger import logger, logger_set_path
 from automation.bot import Bot
-from worlds.herta_space_station import Base_Zone, Supply_Zone
+from worlds.universal import Init as Universal
+from worlds.herta_space_station import Base_Zone, Supply_Zone, Storage_Zone
 from worlds.jarilo_vi import Silvermane_Guard, Robot_Settlement
 
 
@@ -17,6 +18,7 @@ class Init:
         self.scalegorge_waterscape = Scalegorge_Waterscape(device)
         self.the_shackling_prison = The_Shackling_Prison(device)
         self.base_zone = Base_Zone(device)
+        self.storage_zone = Storage_Zone(device)
         self.supply_zone = Supply_Zone(device)
         self.silvermane_guard = Silvermane_Guard(device)
         self.robot_settlement = Robot_Settlement(device)
@@ -30,28 +32,29 @@ class Init:
         '''
         Status  7/8 (new: shackling prison)
         TP      5 -> ???
-        Items   R2: 2, R4: 3
+        Items   R2:2, R4:0
         XP      42596/???
         Time    ???
         '''
-        await self.fyxestroll_garden.farm()                         # TP:-4->1 XP:4644/4644 Time:???
+        # await self.fyxestroll_garden.farm()                         # TP:-4->1 XP:4644/4644 Time:???
         # await self.base_zone.restore_tp(tp=4.1)                     # TP:+4->5 Time:???
-        # await self.artisanship_commission.farm()                    # TP:-4->1 R4:2 XP:9548/9548 Time:???
-        # await self.supply_zone.teleport(tp_restore=4)               # TP:+4->5 Time:65
+        # await self.artisanship_commission.farm()                    # TP:-4->1 XP:9548/9548 Time:???
+        # await self.base_zone.restore_tp(tp=4.2)                     # TP:+4->5 Time:???
         # await self.scalegorge_waterscape.farm()                     # TP:-4->1 XP:4752/4752 Time:450
-        # await self.silvermane_guard.teleport(tp_restore=4.1)        # TP:+4->5 Time:85  
+        # await self.storage_zone.restore_tp(tp=4)               # TP:+4->5 Time:???
         # await self.divination_commission.farm()                     # TP:-6->1 R2:1 XP:6000/6000 Time:540
-        # await self.silvermane_guard.teleport(tp_restore=4.2)        # TP:+4->5 Time:???
-        # await self.alchemy_commission.farm()                        # TP:-7->2 R4:1 XP:6912/6912 Time:???
+        # await self.supply_zone.restore_tp(tp=4)               # TP:+4->5 Time:???
+        # await self.alchemy_commission.farm()                        # TP:-3->2 XP:6912/6912 Time:???
         # await self.cloudford.farm()                                 # TP:+1->3 XP:4644/4644 Time:395
-        # await self.stargazer_navalia.farm()                         # TP:-5->2 R2:1 XP:6264/6264 Time:425
+        await self.stargazer_navalia.farm()                         # TP:-1->2 XP:6264/6264 Time:425
         # await self.the_shackling_prison.farm()                      # TP:+3->5 Time:???
     async def dev(self):
         # await self.the_shackling_prison.teleport()
         # await self.the_shackling_prison.path_1()
         # await self.the_shackling_prison.path_2()
         # await self.the_shackling_prison.path_3()
-        # await self.base_zone.restore_tp(tp=4.2)                     # TP:+4->5 Time:???
+        # await self.silvermane_guard.teleport(tp_restore=4.1)        # TP:+4->5 Time:85
+        # await self.silvermane_guard.teleport(tp_restore=4.2)        # TP:+4->5 Time:???
         # await self.the_shackling_prison.teleport(tp_restore=2.1)    # TP:+2->5 Time:???
         raise SystemExit()
 
@@ -227,6 +230,7 @@ class Cloudford:
 class Stargazer_Navalia:
     def __init__(self, device):
         self.bot = Bot(device)
+        self.universal = Universal(device)
     async def farm(self):
         await self.teleport()
         await self.path_1()
@@ -235,14 +239,80 @@ class Stargazer_Navalia:
         await self.path_4()
         await self.path_5()
         await self.path_6()
+        await self.universal.restore_tp(tp=4)
         await self.path_7()
     async def teleport(self):
         logger_set_path('Teleport')
         logger.info('---')
         logger.info('--- Map: Stargazer Navalia')
         logger.info('---')
-        await self.bot.switch_map(y_list=630/1080, world='the_xianzhou_luofu', scroll_down=False,
-                                    x=1240/2400, y=538/1080, corner='topright', move_x=0, move_y=0, confirm=True) # Astral Cottage
+        await self.bot.switch_map(y_list=630/1080, world='the_xianzhou_luofu', scroll_down=False, # Path of Conflagration
+                                    x=768/2400, y=696/1080, corner='topright', move_x=0, move_y=0)
+        await self.bot.move(1.7, 3300)
+        await self.bot.move(1.9, 300)
+        await self.bot.attack_technique(1) # -1TP
+        await self.bot.move(0.4, 1800)
+        await self.bot.attack() # +2TP
+    async def path_1(self):
+        logger_set_path(1)
+        await self.bot.use_teleporter(855/2400, 405/1080, move_x=0, move_y=2, corner='botleft') # Ship Nursery - The Budding
+        await self.bot.move(0.7, 800)
+        await self.bot.move(0.5, 900)
+        await self.bot.move(0.00, 2500)
+        for _ in range(2): # -1TP, roamer
+            await self.bot.move(0.5, 300)
+            await self.bot.attack_technique(2)
+        for _ in range(2):
+            await self.bot.move(1.0, 300)
+            await self.bot.attack_technique(2)
+        await self.bot.move(1.5, 300)
+        await self.bot.attack_technique(2)
+        for _ in range(2):
+            await self.bot.move(0.0, 300)
+            await self.bot.attack_technique(2)
+        for _ in range(2):
+            await self.bot.move(0.5, 300)
+            await self.bot.attack_technique(2)
+    async def path_2(self):
+        logger_set_path(2)
+        await self.bot.use_teleporter(855/2400, 184/1080, move_x=0, move_y=0, corner='botleft') # Ship Nursery - The Budding
+        await self.bot.move(1.5, 700)
+        await self.bot.move(0.0, 2300)
+        await self.bot.move(0.5, 800)
+        await self.bot.attack() # +2TP
+        await self.bot.move(1.5, 800)
+        await self.bot.move(1.9, 500)
+        await self.bot.move(0.00, 8300)
+        await self.bot.attack_technique(4) # -2TP
+        await self.bot.move(0.25, 1000)
+        await self.bot.move(1.25, 1000)
+        await self.bot.move(1.5, 300)
+        await self.bot.attack_technique(10) # -1TP
+    async def path_3(self):
+        logger_set_path(3)
+        await self.bot.use_teleporter(1106/2400, 610/1080, move_x=0, move_y=0, corner='botright') # Shape of Doom
+        await self.bot.move(1.5, 700)
+        await self.bot.attack() # +2TP
+        await self.bot.posfix(1.5, 1000)
+        await self.bot.move(0.3, 500)
+        await self.bot.move(0.00, 5400)
+        await self.bot.move(1.7, 600)
+        await self.bot.move(0.0, 2550)
+        for _ in range(3): # -1TP, roamer, +2TP
+            await self.bot.move(0.5, 300)
+            await self.bot.attack_technique(2)
+        await self.bot.move(0.75, 2000)
+        await self.bot.posfix(0.75, 1000)
+        await self.bot.move(1.5, 1000)
+        await self.bot.move(1.3, 1100)
+        await self.bot.attack() # items
+        await self.bot.move(0.3, 1600)
+        await self.bot.move(0.0, 3100)
+        await self.bot.move(1.7, 1300)
+        await self.bot.attack() # items
+    async def path_4(self):
+        logger_set_path(4)
+        await self.bot.use_teleporter(1240/2400, 538/1080, corner='topright', move_x=0, move_y=0, confirm=True) # Astral Cottage
         await self.bot.move(0.25, 2500)
         await self.bot.move(0.16, 6000)
         await self.bot.move(0.27, 700)
@@ -262,8 +332,8 @@ class Stargazer_Navalia:
             await self.bot.move(1.2, 300)
             await self.bot.attack_technique(3)
         await self.bot.attack_technique(1)
-    async def path_1(self):
-        logger_set_path(1)
+    async def path_5(self):
+        logger_set_path(5)
         await self.bot.use_teleporter(1240/2400, 538/1080, move_x=0, move_y=0, corner='topright', confirm=True) # Astral Cottage
         await self.bot.move(0.25, 2500)
         await self.bot.move(0.16, 6000)
@@ -285,36 +355,8 @@ class Stargazer_Navalia:
         await self.bot.move(1.15, 4900)
         await self.bot.move(1.25, 300)
         await self.bot.attack_technique(2) # -1TP
-    async def path_2(self):
-        logger_set_path(2)
-        await self.bot.use_teleporter(768/2400, 696/1080, move_x=0, move_y=0, corner='topright') # Path of Conflagration
-        await self.bot.move(1.7, 3300)
-        await self.bot.move(1.9, 300)
-        await self.bot.attack_technique(1) # -1TP
-        await self.bot.move(0.4, 1800)
-        await self.bot.attack() # +2TP
-    async def path_3(self):
-        logger_set_path(3)
-        await self.bot.use_teleporter(855/2400, 405/1080, move_x=0, move_y=2, corner='botleft') # Ship Nursery - The Budding
-        await self.bot.move(0.7, 800)
-        await self.bot.move(0.5, 900)
-        await self.bot.move(0.00, 2500)
-        for _ in range(2): # -1TP, roamer
-            await self.bot.move(0.5, 300)
-            await self.bot.attack_technique(2)
-        for _ in range(2):
-            await self.bot.move(1.0, 300)
-            await self.bot.attack_technique(2)
-        await self.bot.move(1.5, 300)
-        await self.bot.attack_technique(2)
-        for _ in range(2):
-            await self.bot.move(0.0, 300)
-            await self.bot.attack_technique(2)
-        for _ in range(2):
-            await self.bot.move(0.5, 300)
-            await self.bot.attack_technique(2)
-    async def path_4(self):
-        logger_set_path(4)
+    async def path_6(self):
+        logger_set_path(6)
         await self.bot.use_teleporter(855/2400, 405/1080, move_x=0, move_y=2, corner='botleft') # Ship Nursery - The Budding
         await self.bot.move(0.7, 800)
         await self.bot.move(0.5, 900)
@@ -338,47 +380,10 @@ class Stargazer_Navalia:
         await self.bot.attack_technique(4) # -3TP
         await self.bot.move(0.3, 300)
         await self.bot.attack_technique(4)
-        await self.bot.restore_tp(item='trick_snack') # +2TP
-    async def path_5(self):
-        logger_set_path(5)
-        await self.bot.use_teleporter(855/2400, 184/1080, move_x=0, move_y=0, corner='botleft') # Ship Nursery - The Budding
-        await self.bot.move(1.5, 700)
-        await self.bot.move(0.0, 2300)
-        await self.bot.move(0.5, 800)
-        await self.bot.attack() # +2TP
-        await self.bot.move(1.5, 800)
-        await self.bot.move(1.9, 500)
-        await self.bot.move(0.00, 8300)
-        await self.bot.attack_technique(4) # -2TP
-        await self.bot.move(0.25, 1000)
-        await self.bot.move(1.25, 1000)
-        await self.bot.move(1.5, 300)
-        await self.bot.attack_technique(10) # -1TP
-    async def path_6(self):
-        logger_set_path(6)
-        await self.bot.use_teleporter(1106/2400, 610/1080, move_x=0, move_y=0, corner='botright') # Shape of Doom
-        await self.bot.move(1.5, 700)
-        await self.bot.attack() # +2TP
-        await self.bot.posfix(1.5, 1000)
-        await self.bot.move(0.3, 500)
-        await self.bot.move(0.00, 5400)
-        await self.bot.move(1.7, 600)
-        await self.bot.move(0.0, 2550)
-        for _ in range(3): # -1TP, roamer, +2TP
-            await self.bot.move(0.5, 300)
-            await self.bot.attack_technique(2)
-        await self.bot.move(0.75, 2000)
-        await self.bot.posfix(0.75, 1000)
-        await self.bot.move(1.5, 1000)
-        await self.bot.move(1.3, 1100)
-        await self.bot.attack() # items
-        await self.bot.move(0.3, 1600)
-        await self.bot.move(0.0, 3100)
-        await self.bot.move(1.7, 1300)
-        await self.bot.attack() # items
     async def path_7(self):
         logger_set_path(7)
-        await self.bot.use_teleporter(958/2400, 364/1080, move_x=0, move_y=0, corner='botleft') # Ship Nursery - The Burgeoning
+        await self.bot.switch_map(y_list=630/1080, world='the_xianzhou_luofu', scroll_down=False, # Ship Nursery - The Burgeoning
+                                    x=958/2400, y=364/1080, corner='botleft', move_x=0, move_y=0)
         await self.bot.move(0.95, 1700)
         await self.bot.move(0.65, 1900)
         await self.bot.move(1.0, 1900)
@@ -607,14 +612,17 @@ class Divination_Commission:
 class Artisanship_Commission:
     def __init__(self, device):
         self.bot = Bot(device)
+        self.universal = Universal(device)
     async def farm(self):
         await self.teleport()
         await self.path_1()
         await self.path_2()
         await self.path_3()
+        await self.universal.restore_tp(tp=4)
         await self.path_4()
         await self.path_5()
         await self.path_6()
+        await self.universal.restore_tp(tp=4)
         await self.path_7()
         await self.path_8()
     async def teleport(self):
@@ -622,8 +630,8 @@ class Artisanship_Commission:
         logger.info('---')
         logger.info('--- Map: Artisanship Commission')
         logger.info('---')
-        await self.bot.switch_map(y_list=446/1080, world='the_xianzhou_luofu', scroll_down=True,
-                                    x=933/2400, y=530/1080, corner='topright', move_x=0, move_y=4) # Passage of the Finery Foundry
+        await self.bot.switch_map(y_list=446/1080, world='the_xianzhou_luofu', scroll_down=True, # Passage of the Finery Foundry
+                                    x=933/2400, y=530/1080, corner='topright', move_x=0, move_y=4)
         await self.bot.move(0.5, 5200)
         await self.bot.move(0.0, 6200)
         await self.bot.move(0.25, 700)
@@ -690,10 +698,10 @@ class Artisanship_Commission:
         for _ in range(6):
             await self.bot.move(1.9, 300)
             await self.bot.attack_technique(1)
-        await self.bot.restore_tp(item='punitive_energy') # +4TP
     async def path_4(self):
         logger_set_path(4)
-        await self.bot.use_teleporter(894/2400, 610/1080, corner='topleft', move_x=0, move_y=2) # Passage to the Sapientia Academe
+        await self.bot.switch_map(y_list=446/1080, world='the_xianzhou_luofu', scroll_down=True, # Passage to the Sapientia Academe
+                                    x=894/2400, y=610/1080, corner='topleft', move_x=0, move_y=2)
         await self.bot.move(1.25, 3100)
         await self.bot.move(1.0, 8000)
         await self.bot.move(0.75, 200)
@@ -723,55 +731,10 @@ class Artisanship_Commission:
             await self.bot.attack_technique(1)
     async def path_5(self):
         logger_set_path(5)
-        await self.bot.use_teleporter(894/2400, 610/1080, corner='topleft', move_x=0, move_y=2) # Passage to the Sapientia Academe
-        await self.bot.move(1.25, 3100)
-        await self.bot.move(1.0, 8000)
-        await self.bot.move(1.4, 1400)
-        await self.bot.move(1.0, 4700)
-        await self.bot.move(0.57, 3800)
-        await self.bot.attack() # items
-        await self.bot.move(1.4, 2100)
-        await self.bot.move(1.0, 300)
-        await self.bot.attack_technique(12)
-        await self.bot.move(1.5, 1000)
-        await self.bot.move(1.2, 2000)
-        await self.bot.posfix(1.25, 1000)
-        await self.bot.move(0.5, 400)
-        await self.bot.move(0.8, 800)
-        await self.bot.move(0.5, 200)
-        await self.bot.attack() # items
-        await self.bot.move(0.2, 1000)
-        await self.bot.move(0.4, 1000)
-        await self.bot.posfix(0.25, 1000)
-        await self.bot.move(1.2, 1500)
-        await self.bot.move(1.0, 3300)
-        await self.bot.move(0.5, 2500)
-        await self.bot.move(0.83, 900)
-        await self.bot.attack() # items
-        await self.bot.move(0.5, 900)
-        await self.bot.move(1.0, 1500)
-        await self.bot.move(0.4, 1500)
-        await self.bot.move(0.25, 1000)
-        await self.bot.restore_tp(item='punitive_energy') # +4TP
-        await self.bot.posfix(0.25, 1000)
-        await self.bot.move(1.2, 3500)
-        await self.bot.move(1.0, 600)
-        await self.bot.attack_technique(3) # items
-        for _ in range(4): # -3TP
-            await self.bot.move(1.0, 300)
-            await self.bot.attack_technique(2)
-        for _ in range(3): # -1TP
-            await self.bot.move(0.75, 300)
-            await self.bot.attack_technique(2)
-        for _ in range(3): # -1TP
-            await self.bot.move(1.5, 300)
-            await self.bot.attack_technique(2)
-        await self.bot.move(1.2, 1000)
-        await self.bot.move(1.4, 1500)
-        await self.bot.posfix(1.25, 1000)
-        await self.bot.move(0.2, 3100)
+        await self.bot.use_teleporter(804/2400, 487/1080, corner='topleft', move_x=0, move_y=5) # Shape of Puppetry
+        await self.bot.move(1.22, 2100)
         await self.bot.attack() # +2TP
-    async def path_6(self): # roamer
+    async def path_6(self):
         logger_set_path(6)
         await self.bot.use_teleporter(854/2400, 418/1080, corner='botright', move_x=0, move_y=4) # Creation Furnace
         await self.bot.move(1.0, 1100)
@@ -791,8 +754,53 @@ class Artisanship_Commission:
         await self.bot.attack_technique(6) # -1TP
     async def path_7(self):
         logger_set_path(7)
-        await self.bot.use_teleporter(804/2400, 487/1080, corner='topleft', move_x=0, move_y=5) # Shape of Puppetry
-        await self.bot.move(1.22, 2100)
+        await self.bot.switch_map(y_list=446/1080, world='the_xianzhou_luofu', scroll_down=True, # Passage to the Sapientia Academe
+                                    x=894/2400, y=610/1080, corner='topleft', move_x=0, move_y=2)
+        await self.bot.move(1.25, 3100)
+        await self.bot.move(1.0, 8000)
+        await self.bot.move(1.4, 1400)
+        await self.bot.move(1.0, 4700)
+        await self.bot.move(0.57, 3800)
+        await self.bot.attack() # items
+        await self.bot.move(1.4, 2100)
+        await self.bot.move(1.0, 300)
+        await self.bot.attack_technique(12) # -1TP
+        await self.bot.move(1.5, 1000)
+        await self.bot.move(1.2, 2000)
+        await self.bot.posfix(1.25, 1000)
+        await self.bot.move(0.5, 400)
+        await self.bot.move(0.8, 800)
+        await self.bot.move(0.5, 200)
+        await self.bot.attack() # items
+        await self.bot.move(0.2, 1000)
+        await self.bot.move(0.4, 1000)
+        await self.bot.posfix(0.25, 1000)
+        await self.bot.move(1.2, 1500)
+        await self.bot.move(1.0, 3300)
+        await self.bot.move(0.5, 2500)
+        await self.bot.move(0.83, 900)
+        await self.bot.attack() # items
+        await self.bot.move(0.5, 900)
+        await self.bot.move(1.0, 1500)
+        await self.bot.move(0.4, 1500)
+        await self.bot.move(0.25, 1000)
+        await self.bot.posfix(0.25, 1000)
+        await self.bot.move(1.2, 3500)
+        await self.bot.move(1.0, 600)
+        await self.bot.attack_technique(3) # items
+        for _ in range(4): # -3TP, roamer
+            await self.bot.move(1.0, 300)
+            await self.bot.attack_technique(2)
+        for _ in range(3):
+            await self.bot.move(0.75, 300)
+            await self.bot.attack_technique(2)
+        for _ in range(3):
+            await self.bot.move(1.5, 300)
+            await self.bot.attack_technique(2)
+        await self.bot.move(1.2, 1000)
+        await self.bot.move(1.4, 1500)
+        await self.bot.posfix(1.25, 1000)
+        await self.bot.move(0.2, 3100)
         await self.bot.attack() # +2TP
     async def path_8(self):
         logger_set_path(8)
@@ -924,6 +932,7 @@ class Fyxestroll_Garden:
 class Alchemy_Commission:
     def __init__(self, device):
         self.bot = Bot(device)
+        self.universal = Universal(device)
     async def farm(self):
         await self.teleport()
         await self.path_1()
@@ -931,6 +940,7 @@ class Alchemy_Commission:
         await self.path_3()
         await self.path_4()
         await self.path_5()
+        await self.universal.restore_tp(tp=4)
         await self.path_6()
         await self.path_7()
         await self.path_8()
@@ -1045,10 +1055,10 @@ class Alchemy_Commission:
         for _ in range(2):
             await self.bot.move(1.64, 300)
             await self.bot.attack_technique(1)
-        await self.bot.restore_tp(item='punitive_energy') # +4TP
     async def path_6(self):
         logger_set_path(6)
-        await self.bot.use_teleporter(1003/2400, 595/1080, corner='topleft', move_x=0, move_y=3) # Aureate Elixir Furnace
+        await self.bot.switch_map(y_list=685/1080, world='the_xianzhou_luofu', scroll_down=True, # Aureate Elixir Furnace
+                                    x=1003/2400, y=595/1080, corner='topleft', move_x=0, move_y=3)
         await self.bot.move(0.54, 3200)
         await self.bot.move(0.33, 2500)
         await self.bot.move(0.1, 1000)

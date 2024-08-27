@@ -188,19 +188,11 @@ class Silvermane_Guard:
     def __init__(self, device):
         self.bot = Bot(device)
     async def restore_tp(self, tp):
-        if tp == 4.1:
-            await self.teleport(tp_restore=tp)
-        elif tp == 4.2:
-            await self.teleport(tp_restore=tp)
-        else:
-            raise SystemExit(f'no {tp} TP restore available')
-    async def teleport(self, tp_restore=-1):
-        logger_set_path('Teleport')
-        logger.info('Teleport')
+        logger_set_path('Teleport: TP Restore')
         logger.info('---')
         logger.info("--- Map: Silvermane Guard Restricted Zone")
         logger.info('---')
-        if tp_restore == 4.1:
+        if tp == 4.1:
             await self.bot.switch_map(y_list=750/1080, world='jarilo_vi', scroll_down=False, # Energy Hub
                                         x=659/2400, y=648/1080, corner='botright', move_x=0, move_y=0, confirm=True)
             await self.bot.move(1.5, 1200)
@@ -229,7 +221,7 @@ class Silvermane_Guard:
             await self.bot.move(0.0, 1100)
             await self.bot.move(0.4, 300)
             await self.bot.attack_technique(2) # +2TP
-        elif tp_restore == 4.2:
+        elif tp == 4.2:
             await self.bot.switch_map(y_list=750/1080, world='jarilo_vi', scroll_down=False, # Outpost
                                         x=1176/2400, y=738/1080, corner='topright', move_x=0, move_y=2, confirm=True)
             await self.bot.move(0.5, 3000)
@@ -250,8 +242,7 @@ class Silvermane_Guard:
             await self.bot.move(1.1, 800)
             await self.bot.attack() # +2TP
         else:
-            logger.debug('bad parameter')
-            exit()
+            raise SystemExit(f'no {tp} TP restore available')
 
 
 class Corridor:
@@ -707,56 +698,37 @@ class Rivet_Town:
 class Robot_Settlement:
     def __init__(self, device):
         self.bot = Bot(device)
-    async def restore_tp(self, tp):
-        if tp == 2:
-            await self.teleport(tp_restore=tp)
-        else:
-            raise SystemExit(f'no {tp} TP restore available')
     async def farm(self):
         await self.teleport()
         await self.path_1()
         await self.path_2()
         await self.path_3()
         await self.path_4()
-    async def teleport(self, tp_restore=None):
+    async def teleport(self):
         logger_set_path('Teleport')
         logger.info('---')
         logger.info("--- Map: Robot Settlement")
         logger.info('---')
-        if tp_restore == 2:
-            await self.bot.switch_map(y_list=927/1080, world='jarilo_vi', scroll_down=True, # Svarog's Base
-                                        x=944/2400, y=343/1080, corner='botright', move_x=0, move_y=0)
-            await self.bot.move(0.5, 300)
-            await self.bot.attack_technique(12)
-            await self.bot.move(0.6, 300)
-            await self.bot.attack_technique(8) # +2TP
-            await self.bot.move(0.45, 300)
-            await self.bot.attack_technique(7) # items
-            await self.bot.move(0.2, 300)
-            await self.bot.attack_technique(4)
-            await self.bot.move(1.8, 300)
-            await self.bot.attack_technique(7) # items
-        else:
-            await self.bot.switch_map(y_list=927/1080, world='jarilo_vi', scroll_down=True, # Vagrant Camp
-                                        x=944/2400, y=268/1080, corner='botleft', move_x=0, move_y=3)
-            await self.bot.move(0.5, 1500)
-            await self.bot.move(0.72, 3450)
-            await self.bot.attack() # items
-            await self.bot.move(0.33, 5450)
-            await self.bot.attack() # items
-            await self.bot.move(1.6, 900)
-            await self.bot.move(0.2, 600)
-            await self.bot.move(0.0, 3600)
-            await self.bot.move(0.4, 500)
-            await self.bot.attack() # items
-            await self.bot.move(0.5, 1000)
-            await self.bot.posfix(0.75, 1500)
-            await self.bot.move(1.6, 3000)
-            await self.bot.attack() # items
-            await self.bot.move(1.4, 3900)
-            await self.bot.move(1.05, 2000)
-            await self.bot.move(1.0, 100)
-            await self.bot.attack() # items
+        await self.bot.switch_map(y_list=927/1080, world='jarilo_vi', scroll_down=True, # Vagrant Camp
+                                    x=944/2400, y=268/1080, corner='botleft', move_x=0, move_y=3)
+        await self.bot.move(0.5, 1500)
+        await self.bot.move(0.72, 3450)
+        await self.bot.attack() # items
+        await self.bot.move(0.33, 5450)
+        await self.bot.attack() # items
+        await self.bot.move(1.6, 900)
+        await self.bot.move(0.2, 600)
+        await self.bot.move(0.0, 3600)
+        await self.bot.move(0.4, 500)
+        await self.bot.attack() # items
+        await self.bot.move(0.5, 1000)
+        await self.bot.posfix(0.75, 1500)
+        await self.bot.move(1.6, 3000)
+        await self.bot.attack() # items
+        await self.bot.move(1.4, 3900)
+        await self.bot.move(1.05, 2000)
+        await self.bot.move(1.0, 100)
+        await self.bot.attack() # items
     async def path_1(self):
         logger_set_path(1)
         await self.bot.use_teleporter(x=625/2400, y=757/1080, corner='botright', move_x=0, move_y=3) # Bud of Harmony
@@ -824,6 +796,26 @@ class Robot_Settlement:
         await self.bot.use_teleporter(x=942/2400, y=346/1080, corner='botright', move_x=0, move_y=0) # Svarog's Base
         await self.bot.move(1.6, 2300)
         await self.bot.attack() # +2TP
+    async def restore_tp(self, tp):
+        logger_set_path('Teleport: TP Restore')
+        logger.info('---')
+        logger.info("--- Map: Robot Settlement")
+        logger.info('---')
+        if tp == 2:
+            await self.bot.switch_map(y_list=927/1080, world='jarilo_vi', scroll_down=True, # Svarog's Base
+                                        x=944/2400, y=343/1080, corner='botright', move_x=0, move_y=0)
+            await self.bot.move(0.5, 300)
+            await self.bot.attack_technique(12)
+            await self.bot.move(0.6, 300)
+            await self.bot.attack_technique(8) # +2TP
+            await self.bot.move(0.45, 300)
+            await self.bot.attack_technique(7) # items
+            await self.bot.move(0.2, 300)
+            await self.bot.attack_technique(4)
+            await self.bot.move(1.8, 300)
+            await self.bot.attack_technique(7) # items
+        else:
+            raise SystemExit(f'no {tp} TP restore available')
 
 
 

@@ -17,13 +17,13 @@ async def main():
     astral_express = worlds.astral_express.Init(DEVICE)
     herta_space_station = worlds.herta_space_station.Init(DEVICE)
     jarilo_vi = worlds.jarilo_vi.Init(DEVICE)
-    xianzhou_luofu = worlds.xianzhou_luofu.Init(DEVICE, mode=MODE)
+    xianzhou_luofu = worlds.xianzhou_luofu.Init(DEVICE)
     penacony = worlds.penacony.Init(DEVICE, mode=MODE)
     
     # dev
     # daily for free (guranteed): R2: 25, R4: 5
-    await universal.restore_tp(n=2)
-    # await xianzhou_luofu.farm()
+    # await universal.restore_tp(n=2)
+    await xianzhou_luofu.farm()
     # await penacony.dev()
     # await penacony.farm()
     # await xianzhou_luofu.the_shackling_prison.farm()
