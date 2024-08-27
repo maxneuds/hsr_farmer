@@ -22,6 +22,8 @@ async def main():
     
     # dev
     # daily for free (guranteed): R2: 25, R4: 5
+    await universal.restore_tp(n=2)
+    # await xianzhou_luofu.farm()
     # await penacony.dev()
     # await penacony.farm()
     # await xianzhou_luofu.the_shackling_prison.farm()
@@ -38,7 +40,7 @@ async def main():
     # await penacony.the_reverie_dreamscape.path_16()
     # await penacony.the_reverie_dreamscape.rest_tp2()
     # await penacony.the_reverie_dreamscape.path_17()
-    await penacony.penacony_grand_theater.farm()
+    # await penacony.penacony_grand_theater.farm()
     raise SystemExit()
     
     # preperations
@@ -46,8 +48,8 @@ async def main():
     await universal.crafting()
 
     # farm worlds
-    await herta_space_station.farm() # TP:+5->5
-    await jarilo_vi.farm() # TP:+0->5 R2/4:0
+    await herta_space_station.farm() # TP:+5->5 ✓
+    await jarilo_vi.farm() # TP:+0->5 R2/4:0 ✓
     await xianzhou_luofu.farm() # TP:+0->5 R2:2 R4:3
     # await penacony.farm()
     

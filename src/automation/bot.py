@@ -103,10 +103,10 @@ class Bot:
 
     async def posfix(self, direction, duration):
         logger.info(f'position fixing: move {direction} pi for {duration/1000} seconds')
-        await self.movepi(direction=direction, duration=duration)
+        await self.move(direction=direction, duration=duration)
         await self.sleep(0.5)
 
-    async def movepi(self, direction, duration):
+    async def move(self, direction, duration):
         logger.info(f'move {direction} pi for {duration/1000} seconds')
         x = self.xy.vjoy['center'][0] + self.xy.vjoy['r'] * np.cos(direction*np.pi)
         y = self.xy.vjoy['center'][1] - self.xy.vjoy['r'] * np.sin(direction*np.pi)
@@ -421,12 +421,13 @@ class Bot:
         await self.action_back()
         await self.wait_for_onmap(min_duration=0)
         
-    async def chat_advance(self):
+    async def chat_advance(self, n=1):
         logger.info(f'chat: advance')
-        await self.action_tap(int(self.xy.width*1200/2400), int(self.xy.height*1000/1080))
-        await aio.sleep(0.2)
-        await self.action_tap(int(self.xy.width*1200/2400), int(self.xy.height*1000/1080))
-        await aio.sleep(1)
+        for _ in range(n):
+            await self.action_tap(int(self.xy.width*1200/2400), int(self.xy.height*1000/1080))
+            await aio.sleep(0.2)
+            await self.action_tap(int(self.xy.width*1200/2400), int(self.xy.height*1000/1080))
+            await aio.sleep(1)
 
     async def attack(self, count=1):
         logger.info('action: attack')
