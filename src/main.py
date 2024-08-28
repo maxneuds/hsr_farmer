@@ -22,13 +22,11 @@ async def main():
     
     # dev
     # daily for free (guranteed): R2: 25, R4: 5
-    # await universal.restore_tp(n=2)
-    await xianzhou_luofu.farm()
+    # await universal.restore_tp(tp=4)
+    # await xianzhou_luofu.farm()
     # await penacony.dev()
-    # await penacony.farm()
+    await penacony.farm()
     # await xianzhou_luofu.the_shackling_prison.farm()
-    # await xianzhou_luofu.the_shackling_prison.path_2()
-    # await xianzhou_luofu.the_shackling_prison.path_3()
     # await penacony.dreams_edge.path_6()
     # await penacony.dreams_edge.path_7()
     # await penacony.dreams_edge.path_8()
