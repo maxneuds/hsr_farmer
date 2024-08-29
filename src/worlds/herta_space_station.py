@@ -1,11 +1,11 @@
 from logger import logger, logger_set_path
 from automation.bot import Bot
-from worlds.universal import Init as Universal
+from worlds.extra import Extra
 
 
 class Init:
     def __init__(self, device):
-        self.universal = Universal(device)
+        self.extra = Extra(device)
         self.base_zone = Base_Zone(device)
         self.storage_zone = Storage_Zone(device)
         self.supply_zone = Supply_Zone(device)
@@ -18,7 +18,7 @@ class Init:
         XP      7128/7128   \n
         Time    ???
         '''
-        await self.universal.restore_tp(tp=4)    # TP:+4->4
+        await self.extra.restore_tp(tp=4)    # TP:+4->4
         await self.base_zone.farm()             # TP:-1->3 XP:432/432 Time:90
         await self.seclusion_zone.farm()        # TP:+2->5 XP:1620/1620 Time:220
         await self.storage_zone.farm()          # TP:+0->5 XP:2592/2592 Time:250

@@ -1,5 +1,5 @@
 from worlds import (
-    universal,
+    extra,
     astral_express,
     herta_space_station,
     jarilo_vi,

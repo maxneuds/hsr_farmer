@@ -1,12 +1,12 @@
 from logger import logger, logger_set_path
 from automation.bot import Bot
-from worlds.universal import Init as Universal
+from worlds.extra import Extra
 
 
 class Stargazer_Navalia:
     def __init__(self, device):
         self.bot = Bot(device)
-        self.universal = Universal(device)
+        self.extra = Extra(device)
     async def farm(self):
         await self.teleport()
         await self.path_1()
@@ -15,7 +15,7 @@ class Stargazer_Navalia:
         await self.path_4()
         await self.path_5()
         await self.path_6()
-        await self.universal.restore_tp(tp=4)
+        await self.extra.restore_tp(tp=4)
         await self.path_7()
     async def teleport(self):
         logger_set_path('Teleport')

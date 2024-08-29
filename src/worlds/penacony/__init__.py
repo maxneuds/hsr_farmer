@@ -1,0 +1,12 @@
+from worlds.penacony.golden_hour import Golden_Hour
+from worlds.penacony.dreams_edge import Dreams_Edge
+from worlds.penacony.childs_dream import Childs_Dream
+from worlds.penacony.the_reverie_dreamscape import The_Reverie_Dreamscape
+from worlds.penacony.dewlight_pavilion import Dewlight_Pavilion
+from worlds.penacony.clock_studio_theme_park import Clock_Studios_Theme_Park
+from worlds.penacony.audition_venue import Audition_Venue
+from worlds.penacony.penacony_grand_theater import Penacony_Grand_Theater
+from worlds.penacony.the_soaring_clock_hand import The_Soaring_Clock_Hand
+from worlds.penacony.penacony import Penacony
+
+

@@ -1,6 +1,6 @@
 from logger import logger, logger_set_path
 from automation.bot import Bot
-from worlds.universal import Init as Universal
+from worlds.extra import Extra
 
 
 class Fyxestroll_Garden:

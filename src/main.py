@@ -13,12 +13,12 @@ MODE = 'xp' # options: credits, xp
 
 async def main():
     # load worlds
-    universal = worlds.universal.Init(DEVICE)
+    extra = worlds.extra.Extra(DEVICE)
     astral_express = worlds.astral_express.Init(DEVICE)
     herta_space_station = worlds.herta_space_station.Init(DEVICE)
     jarilo_vi = worlds.jarilo_vi.Init(DEVICE)
     xianzhou_luofu = worlds.xianzhou_luofu.Farmer(device=DEVICE, mode=MODE)
-    penacony = worlds.penacony.Init(DEVICE, mode=MODE)
+    penacony = worlds.penacony.Penacony(DEVICE, mode=MODE)
     
     
     # dev
@@ -40,8 +40,8 @@ async def main():
     # await xianzhou_luofu.the_shackling_prison.path_9()
     # await xianzhou_luofu.the_shackling_prison.path_10()
     # await xianzhou_luofu.the_shackling_prison.path_11()
-    await xianzhou_luofu.the_shackling_prison.path_12()
-    # await penacony.farm()
+    # await xianzhou_luofu.the_shackling_prison.path_12()
+    await penacony.farm()
     # await penacony.the_reverie_dreamscape.path_14()
     # await penacony.the_reverie_dreamscape.path_15()
     # await universal.restore_tp(tp=4)

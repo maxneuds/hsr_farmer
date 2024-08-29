@@ -8,7 +8,7 @@ from .fyxestroll_garden import Fyxestroll_Garden
 from .alchemy_commission import Alchemy_Commission
 from .scalegorge_waterscape import Scalegorge_Waterscape
 from .the_shackling_prison import The_Shackling_Prison
-from ..universal import Init as Universal
+from worlds.extra import Extra
 from ..herta_space_station import Base_Zone
 from ..herta_space_station import Storage_Zone
 from ..herta_space_station import Supply_Zone
@@ -26,7 +26,7 @@ class Farmer:
         self.alchemy_commission = Alchemy_Commission(device)
         self.scalegorge_waterscape = Scalegorge_Waterscape(device)
         self.the_shackling_prison = The_Shackling_Prison(device)
-        self.universal = Universal(device)
+        self.extra = Extra(device)
         self.base_zone = Base_Zone(device)
         self.storage_zone = Storage_Zone(device)
         self.supply_zone = Supply_Zone(device)
@@ -55,7 +55,7 @@ class Farmer:
         await self.alchemy_commission.farm()        # TP:-3->2 XP:6912/6912 Time:???
         await self.cloudford.farm()                 # TP:+1->3 XP:4644/4644 Time:???
         await self.stargazer_navalia.farm()         # TP:-1->2 XP:6264/6264 Time:???
-        await self.universal.restore_tp(tp=4)         # TP:+4->5 Time:???
+        await self.extra.restore_tp(tp=4)         # TP:+4->5 Time:???
     async def dev(self):
         await self.the_shackling_prison.farm()        # TP:???->??? Time:???
         raise SystemExit()
