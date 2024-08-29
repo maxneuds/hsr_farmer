@@ -398,7 +398,7 @@ class Bot:
                         exit()
 
     async def interact(self, wait_for_ready=True):
-        await aio.sleep(1)
+        await aio.sleep(1.5)
         await self.action_tap(int(self.xy.width*1600/2400), int(self.xy.height*650/1080))
         if wait_for_ready == True:
             await self.wait_for_onmap(min_duration=2)

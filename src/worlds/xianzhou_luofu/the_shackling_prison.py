@@ -5,20 +5,22 @@ from worlds.universal import Init as Universal
 class The_Shackling_Prison:
     def __init__(self, device):
         self.bot = Bot(device)
+        self.universal = Universal(device)
     async def farm(self):
         await self.teleport() # review
-        await self.path_1() # bad
-        await self.path_2() # bad
-        await self.path_3() # bad
-        await self.path_4() # bad
-        await self.path_5() # good
-        await self.path_6() # good
-        await self.path_7()
-        # await self.path_8()
-        # await self.path_9()
-        # await self.path_10()
-        # await self.path_11()
-        # await self.path_12()
+        await self.path_1() # review
+        await self.path_2() # review
+        await self.path_3() # review
+        await self.path_4() # stable
+        await self.path_5() # stable
+        await self.path_6() # stable
+        await self.path_7() # stable
+        await self.path_8() # check
+        await self.path_9()
+        await self.path_10()
+        await self.path_11()
+        await self.universal.restore_tp(tp=4)
+        await self.path_12()
     async def teleport(self):
         logger_set_path('Teleport')
         logger.info('---')
@@ -75,7 +77,7 @@ class The_Shackling_Prison:
     async def path_2(self):
         logger_set_path(2)
         await self.bot.use_teleporter(x=1287/2400, y=411/1080, corner='botleft', move_x=3, move_y=3) # Grimfrost Hold (I)
-        raise SystemExit('check step by step (broken)')
+        raise SystemExit('check')
         await self.bot.move(1.5, 2000)
         await self.bot.attack_technique(3) # items
         await self.bot.move(1.75, 1000)
@@ -88,20 +90,17 @@ class The_Shackling_Prison:
         await self.bot.move(1.25, 2000)
         await self.bot.move(1.5, 500)
         await self.bot.attack_technique(3) # items
-        await self.bot.move(0.1, 1500)
-        await self.bot.posfix(0.25, 500)
-        await self.bot.move(1.0, 900)
-        await self.bot.move(0.5, 900)
+        await self.bot.move(0.5, 600)
         await self.bot.move(0.0, 500)
         await self.bot.attack_technique(5) # -1TP
     async def path_3(self):
         logger_set_path(3)
         await self.bot.use_teleporter(x=1287/2400, y=411/1080, corner='botleft', move_x=3, move_y=3) # Grimfrost Hold (I)
-        raise SystemExit('check step by step to enter bridge(broken)')
+        raise SystemExit('check')
         await self.bot.move(0.4, 500)
         await self.bot.attack_technique(1) # +2TP
         await self.bot.move(1.1, 500)
-        await self.bot.attack_technique(2) # items
+        await self.bot.attack_technique(3) # items
         await self.bot.move(0.4, 2000)
         await self.bot.posfix(0.25, 1000)
         await self.bot.move(1.7, 500)
@@ -133,7 +132,6 @@ class The_Shackling_Prison:
     async def path_4(self):
         logger_set_path(4)
         await self.bot.use_teleporter(x=1287/2400, y=411/1080, corner='botleft', move_x=3, move_y=3) # Grimfrost Hold (I)
-        raise SystemExit('check')
         await self.bot.move(0.6, 500)
         await self.bot.attack_technique(10) # move
         await self.bot.move(0.625, 900)
@@ -239,6 +237,7 @@ class The_Shackling_Prison:
     async def path_8(self):
         logger_set_path(8)
         await self.bot.use_teleporter(x=575/2400, y=615/1080, corner='topright', move_x=5, move_y=4) # Plankway Front
+        raise SystemExit('check')
         await self.bot.move(1.5, 500)
         await self.bot.attack_technique(16) # items
         await self.bot.move(1.6, 1500)
@@ -251,10 +250,15 @@ class The_Shackling_Prison:
         await self.bot.posfix(1.25, 500)
         await self.bot.move(0.5, 500)
         await self.bot.move(0.9, 500)
-        await self.bot.attack_technique(7) # move
+        await self.bot.attack_technique(6) # move
         await self.bot.move(0.5, 500)
         await self.bot.attack_technique(7) # -1TP
-        raise SystemExit('can grab one more item here')
+        await self.bot.move(0.5, 1000)
+        await self.bot.move(0.25, 1000)
+        await self.bot.posfix(0.25, 500)
+        await self.bot.move(1.55, 4000)
+        await self.bot.move(1.1, 500)
+        await self.bot.attack_technique(4) # items
     async def path_9(self):
         logger_set_path(9)
         await self.bot.use_teleporter(x=605/2400, y=289/1080, corner='botright', move_x=3, move_y=4) # Pyroscape Hold
@@ -290,8 +294,130 @@ class The_Shackling_Prison:
         await self.bot.move(0.65, 500)
         await self.bot.attack_technique(4) # move
         await self.bot.move(0.7, 600)
-        await self.bot.interact(wait_for_ready=True) # move bridge to TP object
-    # 5TP
+        await self.bot.interact(wait_for_ready=True) # move bridge back to default
+        # TODO: bridge move can be done in 10
+    async def path_10(self):
+        logger_set_path(10)
+        await self.bot.use_teleporter(x=605/2400, y=289/1080, corner='botright', move_x=3, move_y=4) # Pyroscape Hold
+        raise SystemExit('check')
+        await self.bot.move(0.725, 500)
+        await self.bot.attack_technique(15) # move
+        await self.bot.move(1.1, 500)
+        await self.bot.attack_technique(7) # items
+        await self.bot.move(1.0, 1000)
+        await self.bot.posfix(1.0, 500)
+        await self.bot.move(1.9, 900)
+        await self.bot.interact(wait_for_ready=True) # teleport to other side
+        await self.bot.move(1.75, 2300)
+        await self.bot.attack_technique(2) # items
+        await self.bot.move(0.0, 2000)
+        await self.bot.posfix(1.9, 500)
+        await self.bot.move(0.8, 2200)
+        await self.bot.move(1.5, 300)
+        await self.bot.attack_technique(4) # -1TP
+        await self.bot.move(0.9, 800)
+        await self.bot.move(1.1, 300)
+        await self.bot.attack_technique(4) # -1TP
+        await self.bot.move(1.9, 300)
+        await self.bot.attack_technique(4) # items
+    async def path_11(self):
+        logger_set_path(11)
+        await self.bot.use_teleporter(x=605/2400, y=289/1080, corner='botright', move_x=3, move_y=4) # Pyroscape Hold
+        raise SystemExit('check')
+        await self.bot.move(1.0, 1400)
+        await self.bot.move(1.5, 500)
+        await self.bot.attack_technique(10) # move
+        await self.bot.posfix(1.75, 1000)
+        await self.bot.interact(wait_for_ready=True) # lift bridge
+        await self.bot.posfix(1.75, 500)
+        await self.bot.move(0.6, 1400)
+        await self.bot.move(0.4, 500)
+        await self.bot.attack_technique(8) # move
+        for _ in range(2): # -2TP, invisible
+            await self.bot.move(0.3, 300)
+            await self.bot.attack_technique(4)
+            await self.bot.move(1.3, 300)
+            await self.bot.attack_technique(4)
+    async def path_12(self):
+        logger_set_path(12)
+        await self.bot.switch_map(y_list=928/1080, world='the_xianzhou_luofu', scroll_down=True, # Pyroscape Hold
+                                    x=605/2400, y=289/1080, corner='botright', move_x=3, move_y=4)
+        raise SystemExit('check')
+        await self.bot.move(1.0, 2000)
+        await self.bot.move(1.1, 500)
+        await self.bot.interact(wait_for_ready=True) # lower bridge (default)
+        await self.bot.move(0.9, 700)
+        await self.bot.move(0.44, 500)
+        await self.bot.attack_technique(14)
+        await self.bot.move(1.1, 300)
+        await self.bot.attack_technique(3)
+        await self.bot.move(1.3, 1000)
+        await self.bot.posfix(1.3, 500)
+        await self.bot.move(0.0, 500)
+        await self.bot.attack_technique(4)
+        await self.bot.move(0.4, 500)
+        await self.bot.attack_technique(5)
+        await self.bot.move(0.55, 2100)
+        await self.bot.move(0.75, 500)
+        await self.bot.move(1.6, 900)
+        await self.bot.move(0.35, 300)
+        await self.bot.interact(wait_for_ready=True) # take the lift
+        await self.bot.move(1.5, 500)
+        await self.bot.attack_technique(2) # items
+        await self.bot.move(0.5, 1000)
+        await self.bot.move(0.25, 500)
+        await self.bot.posfix(0.25, 500)
+        await self.bot.move(1.7, 1500)
+        await self.bot.move(1.5, 1500)
+        await self.bot.move(1.25, 1100)
+        await self.bot.move(1.0, 500)
+        await self.bot.attack_technique(1) # items
+        await self.bot.move(1.75, 2000)
+        await self.bot.posfix(1.75, 500)
+        await self.bot.move(0.35, 2500)
+        await self.bot.move(0.0, 400)
+        await self.bot.interact(wait_for_ready=True) # teleport
+        await self.bot.move(0.6, 500)
+        await self.bot.attack_technique(2) # items
+        await self.bot.move(0.4, 500)
+        await self.bot.attack_technique(8) # items
+        await self.bot.attack_technique(2) # move
+        await self.bot.move(0.5, 1000)
+        await self.bot.posfix(0.5, 500)
+        await self.bot.move(1.2, 700)
+        await self.bot.move(0.75, 500)
+        await self.bot.attack_technique(12) # move
+        await self.bot.move(0.5, 500)
+        await self.bot.attack_technique(2) # items
+        await self.bot.move(0.1, 1100)
+        await self.bot.move(0.6, 1500)
+        await self.bot.posfix(0.6, 500)
+        await self.bot.move(1.9, 1500)
+        await self.bot.attack_technique(2) # -1TP
+        await self.bot.move(0.6, 1500)
+        await self.bot.posfix(0.6, 500)
+        await self.bot.move(1.7, 500)
+        await self.bot.attack_technique(7) # -1TP
+        await self.bot.move(1.0, 1500)
+        await self.bot.posfix(1.0, 500)
+        await self.bot.move(0.4, 600)
+        await self.bot.move(0.7, 1600)
+        await self.bot.move(1.1, 500)
+        await self.bot.attack_technique(4) # move
+        await self.bot.move(1.5, 500)
+        await self.bot.attack_technique(4) # +2TP
+        await self.bot.move(1.3, 1500)
+        await self.bot.posfix(1.25, 500)
+        await self.bot.move(0.5, 1200)
+        await self.bot.move(1.0, 2000)
+        await self.bot.move(1.2, 500)
+        await self.bot.attack_technique(3) # -1TP
+        await self.bot.move(0.0, 1200)
+        for _ in range(3): # -2TP, invisible
+            await self.bot.move(1.75, 300)
+            await self.bot.attack_technique(5)
+            await self.bot.move(0.75, 300)
+            await self.bot.attack_technique(4)
 
 
 
