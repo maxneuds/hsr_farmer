@@ -12,11 +12,11 @@ class Init:
         self.seclusion_zone = Seclusion_Zone(device)
     async def farm(self):
         '''
-        Status  4/4
-        TP      0 -> 5
-        Items   /
-        XP      7128/7128
-        Time    630
+        Status  4/4         \n
+        TP      0 -> 5      \n
+        R2/R4   0 / 0       \n
+        XP      7128/7128   \n
+        Time    ???
         '''
         await self.universal.restore_tp(tp=4)    # TP:+4->4
         await self.base_zone.farm()             # TP:-1->3 XP:432/432 Time:90
@@ -30,7 +30,6 @@ class Base_Zone:
         self.bot = Bot(device)
     async def farm(self):
         await self.teleport()
-        await self.path_1()
     async def teleport(self):
         logger_set_path('Teleport')
         logger.info('---')
@@ -38,30 +37,32 @@ class Base_Zone:
         logger.info('---')
         await self.bot.switch_map(y_list=508/1080, world='herta_space_station', scroll_down=True, # Monitoring Room
                                     x=1044/2400, y=405/1080, corner='topright', move_x=0, move_y=0)
-        SystemExit('redo, adjust n')
         await self.bot.move(1.5, 500)
-        await self.bot.attack_technique(4)
-    async def path_1(self):
-        logger_set_path(1)
-        await self.bot.use_teleporter(x=1044/2400, y=405/1080, corner='topright', move_x=0, move_y=0) # Monitoring Room
-        await self.bot.move(1.48, 6300)
-        await self.bot.attack() # items
-        await self.bot.move(1.65, 1800)
-        await self.bot.attack() # +2TP
-        await self.bot.move(1.33, 2400)
-        await self.bot.attack() # items
-        await self.bot.move(1.2, 2000)
-        await self.bot.move(1.4, 1500)
-        await self.bot.attack() # items
+        await self.bot.attack_technique(8)
+        raise SystemExit()
     async def restore_tp(self, tp):
-        logger.set_path('Teleport: TP Restore')
+        logger_set_path('Teleport: TP Restore')
         logger.info('---')
         logger.info("--- Map: Base Zone")
         logger.info('---')
         if tp == 4.1:
             await self.bot.switch_map(y_list=508/1080, world='herta_space_station', scroll_down=True, # Monitoring Room
                                         x=1044/2400, y=405/1080, corner='topright', move_x=0, move_y=0)
-            SystemExit('redo')
+            await self.bot.move(1.1, 500)
+            await self.bot.attack_technique(3) # +2TP
+            await self.bot.move(1.9, 1900)
+            raise SystemExit('check')
+            await self.bot.move(1.48, 500)
+            await self.bot.attack_technique(10) # items
+            raise SystemExit('should be fine if first one hits')
+            await self.bot.move(1.65, 500)
+            await self.bot.attack_technique(4) # +2TP
+            await self.bot.move(1.25, 500)
+            await self.bot.attack_technique(4) # items
+            await self.bot.move(1.2, 500)
+            await self.bot.attack_technique(3) # move
+            await self.bot.move(1.4, 500)
+            await self.bot.attack_technique(4) # items
         elif tp == 4.2:
             await self.bot.switch_map(y_list=508/1080, world='herta_space_station', scroll_down=True, # Stagnant Shadow
                                         x=924/2400, y=726/1080, corner='botleft', move_x=0, move_y=0, confirm=True)

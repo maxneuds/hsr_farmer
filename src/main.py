@@ -17,42 +17,55 @@ async def main():
     astral_express = worlds.astral_express.Init(DEVICE)
     herta_space_station = worlds.herta_space_station.Init(DEVICE)
     jarilo_vi = worlds.jarilo_vi.Init(DEVICE)
-    xianzhou_luofu = worlds.xianzhou_luofu.Init(DEVICE)
+    xianzhou_luofu = worlds.xianzhou_luofu.Farmer(device=DEVICE, mode=MODE)
     penacony = worlds.penacony.Init(DEVICE, mode=MODE)
     
+    
     # dev
-    # daily for free (guranteed): R2: 25, R4: 5
     # await universal.restore_tp(tp=4)
+    # await herta_space_station.farm()
+    # await jarilo_vi.farm() # ✓✓
     # await xianzhou_luofu.farm()
-    # await penacony.dev()
-    await penacony.farm()
+    # await xianzhou_luofu.dev()
     # await xianzhou_luofu.the_shackling_prison.farm()
-    # await penacony.dreams_edge.path_6()
-    # await penacony.dreams_edge.path_7()
-    # await penacony.dreams_edge.path_8()
-    # await penacony.the_reverie_dreamscape.path_12()
-    # await penacony.the_reverie_dreamscape.path_13()
+    # await xianzhou_luofu.the_shackling_prison.teleport()
+    await xianzhou_luofu.the_shackling_prison.path_1()
+    # await xianzhou_luofu.the_shackling_prison.path_2()
+    # await xianzhou_luofu.the_shackling_prison.path_3()
+    # await xianzhou_luofu.the_shackling_prison.path_4()
+    # await xianzhou_luofu.the_shackling_prison.path_5()
+    # await xianzhou_luofu.the_shackling_prison.path_6()
+    # await xianzhou_luofu.the_shackling_prison.path_7()
+    # await xianzhou_luofu.the_shackling_prison.path_8()
+    # await xianzhou_luofu.the_shackling_prison.path_9()
+    # await xianzhou_luofu.the_shackling_prison.path_10()
+    # await xianzhou_luofu.the_shackling_prison.path_11()
+    # await xianzhou_luofu.the_shackling_prison.path_12()
+    # await penacony.farm()
     # await penacony.the_reverie_dreamscape.path_14()
     # await penacony.the_reverie_dreamscape.path_15()
-    # await penacony.the_reverie_dreamscape.rest_tp4()
+    # await universal.restore_tp(tp=4)
     # await penacony.the_reverie_dreamscape.path_16()
-    # await penacony.the_reverie_dreamscape.rest_tp2()
+    # await universal.restore_tp(tp=4)
     # await penacony.the_reverie_dreamscape.path_17()
     # await penacony.penacony_grand_theater.farm()
+    # await penacony.dev()
     raise SystemExit()
-    
+
+
     # preperations
-    await xianzhou_luofu.stockup()
+    # daily for free (guranteed): R2: 25, R4: 5
+    # await xianzhou_luofu.stockup() # disabled, got enough
     await universal.crafting()
 
     # farm worlds
     await herta_space_station.farm() # TP:+5->5 ✓
-    await jarilo_vi.farm() # TP:+0->5 R2/4:0 ✓
+    await jarilo_vi.farm() # TP:+0->5 R2/4:0 ✓✓
     await xianzhou_luofu.farm() # TP:+0->5 R2:2 R4:3
     # await penacony.farm()
     
     # checkout
-    await astral_express.checkout()
+    # await astral_express.checkout()
     
     
     # TOTAL XP: 116.340 / 119.256

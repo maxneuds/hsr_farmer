@@ -21,29 +21,25 @@ class Init:
         self.silvermane_guard = Silvermane_Guard(device)
     async def farm(self):
         '''
-        ### Mode: credits (default)
-        XP:???
-        Time:???
-        TP:???
-        
-        ### Mode: XP
-        XP:???
-        Time:???
-        TP: 5 -> ???
-        R2: 10 (credits) 15 (xp)
-        R4: 0
+        Status  7/9 (new: theater, audition) /n
+        TP      5 -> ???                    /n
+        R2/R4   2 / 4                       /n
+        XP      ???/???                   /n
+        Time    ???
         '''
-        # await self.dreams_edge.farm()                       # TP:-4->1 XP:7668/9612 Time:431    
-        # await self.silvermane_guard.restore_tp(tp=4.1)      # TP:+4->5 Time:85
-        # await self.clock_studios_theme_park.farm()          # TP:-10->1 R2:3 XP:7648/7648 Time:???
+        await self.dreams_edge.farm()                       # TP:-4->1 XP:7668/9612 Time:431    
+        await self.silvermane_guard.restore_tp(tp=4.1)      # TP:+4->5 Time:85
+        # await self.childs_dream.farm()                      # TP:-3->2 R2:4 XP:5832/5832 Time:???
+        # await self.universal.restore_tp(tp=4)                # TP:+4->5 Time:???
+        # raise SystemExit('check studios step by step')
+        # await self.clock_studios_theme_park.farm()          # TP:-4->1 XP:7648/7648 Time:???
         # await self.silvermane_guard.restore_tp(tp=4.2)      # TP:+4->5 Time:???         
-        # await self.the_reverie_dreamscape.farm()            # TP:-???->1 R2:5(credits)8(xp) XP:14580/15552 Time:?
+        # await self.the_reverie_dreamscape.farm()            # TP:-???->1 XP:14580/15552 Time:? R2/4:1/2
         # await self.golden_hour.restore_tp(tp=4.1)           # TP:+4->5 Time:???
-        # await self.dewlight_pavilion.farm()                 # TP:-22->1 R2:5(credits)7(xp) XP:11448/11448 Time:
+        # await self.dewlight_pavilion.farm()                 # TP:-14->1 XP:11448/11448 Time: R2/4:1/2
         # await self.golden_hour.restore_tp(tp=4.2)           # TP:+4->5 Time:80
-        await self.childs_dream.farm()                      # TP:-9->2 R2:4 XP:5832/5832 Time:???
-        await self.the_soaring_clock_hand.restore_tp(tp=4)  # TP:+4->5 Time:???
-        await self.penacony_grand_theater.farm()            # XP:?/? Time: TP:1->? R4:0 R2:?
+        # await self.penacony_grand_theater.farm()            # XP:?/? Time: TP:1->? R4:0 R2:? # unoptimized/unfinished
+        # await self.the_soaring_clock_hand.restore_tp(tp=4)  # TP:+4->5 Time:???
     async def dev(self):
         raise SystemExit()
 
@@ -248,16 +244,19 @@ class Dreams_Edge:
 
 class Childs_Dream:
     '''
-    data here
+    TP:-3
     '''
     def __init__(self, device):
         self.bot = Bot(device)
+        self.universal = Universal(device)
     async def farm(self):
-        await self.teleport()
-        await self.path_1()
-        await self.path_2()
-        await self.path_3()
+        # await self.teleport()
+        # await self.path_1()
+        # await self.path_2()
+        # await self.path_3()
+        # await self.universal.restore_tp(tp=4)
         await self.path_4()
+        await self.universal.restore_tp(tp=4)
         await self.path_5()
     async def teleport(self):
         logger_set_path('Teleport')
@@ -265,7 +264,7 @@ class Childs_Dream:
         logger.info("--- Map: Childs's Dream")
         logger.info('---')
         await self.bot.switch_map(y_list=893/1080, world='penacony', scroll_down=False, # Corridor of Memories
-                                    x=1010/2400, y=304/1080, move_x=0, move_y=4, corner='botright')
+                                    x=1010/2400, y=304/1080, corner='botright', move_x=0, move_y=4)
         await self.bot.move(0.25, 2000)
         await self.bot.move(0.0, 1900)
         await self.bot.move(0.5, 3300)
@@ -293,19 +292,19 @@ class Childs_Dream:
         await self.bot.move(1.5, 2000)
         await self.bot.move(1.25, 500)
         await self.bot.attack_technique(5) # -1TP
-        await self.bot.restore_tp(item='trick_snack') # +2TP
     async def path_3(self):
         logger_set_path(3)
-        await self.bot.use_teleporter(1010/2400, 304/1080, move_x=0, move_y=4, corner='botright') # Corridor of Memories
-        await self.bot.move(1.5, 9300)
-        await self.bot.move(1.0, 7000)
+        await self.bot.use_teleporter(1122/2400, 617/1080, move_x=0, move_y=0, corner='botright') # Clock Factory
+        await self.bot.move(0.5, 5000)
+        await self.bot.move(1.0, 600)
         await self.bot.attack() # items
-        await self.bot.move(1.5, 500)
-        await self.bot.attack_technique(6) # -3TP
-        await self.bot.restore_tp(item='trick_snack', n=2) # +4TP
+        await self.bot.move(1.3, 800)
+        await self.bot.move(1.0, 500)
+        await self.bot.attack_technique(5) # -1TP
     async def path_4(self):
         logger_set_path(4)
-        await self.bot.use_teleporter(962/2400, 356/1080, move_x=0, move_y=0, corner='botright') # Eddying Dreamscape
+        await self.bot.switch_map(y_list=893/1080, world='penacony', scroll_down=False, # Eddying Dreamscape
+                                    x=962/2400, y=356/1080, corner='botright', move_x=0, move_y=0)
         await self.bot.move(0.5, 9000)
         await self.bot.move(1.0, 3200)
         await self.bot.move(0.6, 300)
@@ -360,27 +359,27 @@ class Childs_Dream:
         await self.bot.move(1.0, 1600)
         await self.bot.move(1.5, 3000)
         await self.bot.attack_technique(3) # -1TP
-        await self.bot.restore_tp(item='trick_snack') # +2TP
     async def path_5(self):
         logger_set_path(5)
-        await self.bot.use_teleporter(1122/2400, 617/1080, move_x=0, move_y=0, corner='botright') # Clock Factory
-        await self.bot.move(0.5, 5000)
-        await self.bot.move(1.0, 600)
+        await self.bot.switch_map(y_list=893/1080, world='penacony', scroll_down=False, # Corridor of Memories
+                                    x=1010/2400, y=304/1080, corner='botright', move_x=0, move_y=4)
+        await self.bot.move(1.5, 9300)
+        await self.bot.move(1.0, 7000)
         await self.bot.attack() # items
-        await self.bot.move(1.3, 800)
-        await self.bot.move(1.0, 500)
-        await self.bot.attack_technique(5) # -1TP
+        await self.bot.move(1.5, 500)
+        await self.bot.attack_technique(6) # -3TP
 
 
 class The_Reverie_Dreamscape:
     '''
     TODO: there is one more 3D room
     37/??? fights
-    R2: 5 (credits), 8 (xp)
+    R2/4: 1 / 2 
     # TP:-22->1 XP:14580/15552 Time:?
     '''
     def __init__(self, device):
         self.bot = Bot(device)
+        self.universal = Universal(device)
     async def farm(self, mode='credits'):
         await self.teleport()
         await self.path_1()
@@ -398,9 +397,9 @@ class The_Reverie_Dreamscape:
         await self.path_13()
         await self.path_14()
         await self.path_15()
-        await self.rest_tp4()
+        await self.universal.restore_tp(tp=4)
         await self.path_16()
-        await self.rest_tp4()
+        await self.universal.restore_tp(tp=4)
         await self.path_17()
     async def teleport(self):
         logger_set_path('Teleport')
@@ -416,10 +415,6 @@ class The_Reverie_Dreamscape:
         await self.bot.sleep(2)
         await self.bot.move(1.0, 500)
         await self.bot.attack_technique(2) # -1TP
-    async def rest_tp2(self):
-        await self.bot.restore_tp(item='trick_snack', n=1) # +2TP
-    async def rest_tp4(self):
-        await self.bot.restore_tp(item='trick_snack', n=2) # +4TP
     async def path_1(self):
         logger_set_path(1)
         await self.bot.use_teleporter(935/2400, 587/1080, move_x=0, move_y=5, corner='topleft') # VIP Lounge Corridor
@@ -674,7 +669,7 @@ class The_Reverie_Dreamscape:
         await self.bot.attack_technique(3) # -1TP
         await self.bot.move(0.75, 4000)
         await self.bot.posfix(0.75, 1000)
-        await self.bot.restore_tp(item='trick_snack', n=2) # +4TP
+        await self.bot.restore_tp(item='punitive_energy', n=1) # +4TP
         await self.bot.move(1.8, 3600)
         await self.bot.move(1.5, 1900)
         await self.bot.interact()
@@ -704,7 +699,6 @@ class The_Reverie_Dreamscape:
             await self.bot.move(0.0, 300)
             await self.bot.attack_technique(2)
         await self.bot.move(1.75, 3000)
-        raise SystemExit('check,path13,reverie')
         await self.bot.posfix(1.75, 1000)
         await self.bot.move(0.7, 1000)
         await self.bot.move(1.0, 500)
@@ -791,7 +785,7 @@ class The_Reverie_Dreamscape:
         await self.bot.move(1.4, 1200)
         await self.bot.attack_technique(3) # -1TP
         await self.bot.move(1.1, 2000)
-        await self.bot.restore_tp(item='trick_snack', n=2) # +4TP
+        await self.bot.restore_tp(item='punitive_energy', n=1) # +4TP
         await self.bot.posfix(1.25, 1000)
         await self.bot.move(0.3, 3500)
         await self.bot.move(0.0, 3000)
@@ -834,7 +828,8 @@ class The_Reverie_Dreamscape:
         await self.bot.attack_technique(3) # -1TP
     async def path_16(self):
         logger_set_path(16)
-        await self.bot.use_teleporter(1241/2400, 520/1080, move_x=0, move_y=5, corner='topright', confirm=True) # Platinum Guest Room
+        await self.bot.switch_map(y_list=1011/1080, world='penacony', scroll_down=False, # Platinum Guest Room
+                                    x=1241/2400, y=520/1080, corner='topright', move_x=0, move_y=5, confirm=True)
         await self.bot.move(0.5, 2600)
         await self.bot.move(1.0, 12900)
         await self.bot.move(0.5, 3000)
@@ -853,7 +848,8 @@ class The_Reverie_Dreamscape:
         await self.bot.attack_technique(10) # -2TP
     async def path_17(self):
         logger_set_path(17)
-        await self.bot.use_teleporter(748/2400, 533/1080, move_x=0, move_y=3, corner='topleft') # Monitoring Room
+        await self.bot.switch_map(y_list=1011/1080, world='penacony', scroll_down=False, # Monitoring Room
+                                    x=748/2400, y=533/1080, corner='topleft', move_x=0, move_y=3)
         await self.bot.move(1.5, 6300)
         await self.bot.interact()
         await self.bot.move(0.5, 2000)
@@ -908,17 +904,18 @@ class The_Reverie_Dreamscape:
 
 class Dewlight_Pavilion:
     '''
-    R2: 5 (credits), 7 (xp)
+    R2/4: 1 / 2
     '''
     def __init__(self, device):
         self.bot = Bot(device)
         self.universal = Universal(device)
-    async def farm(self, mode='credits'):
+    async def farm(self):
         await self.teleport()
         await self.path_1()
         await self.path_2()
         await self.path_3()
         await self.path_4()
+        await self.bot.restore_tp(item='punitive_energy', n=1) # +4TP
         await self.universal.restore_tp(tp=4)
         await self.path_5()
         await self.path_6()
@@ -1049,9 +1046,15 @@ class Dewlight_Pavilion:
         await self.bot.move(0.1, 200)
         await self.bot.action_button()
         await self.bot.move(0.0, 2000)
-        await self.bot.attack_technique(6) # -3TP
-        await self.bot.posfix(0.25, 5000)
-        await self.bot.restore_tp(item='trick_snack', n=2) # +4TP
+        await self.bot.attack_technique(6) # -3TP, roamer
+        await self.bot.move(1.5, 300)
+        await self.bot.attack_technique(3)
+        await self.bot.move(0.5, 300)
+        await self.bot.attack_technique(3)
+        await self.bot.move(0.1, 1000)
+        await self.bot.move(0.25, 4000)
+        await self.bot.posfix(0.25, 500)
+        await self.bot.restore_tp(item='punitive_energy', n=1) # +4TP
         await self.bot.move(1.04, 4200)
         await self.bot.attack() # items
         await self.bot.move(0.29, 1300)
@@ -1193,17 +1196,18 @@ class Dewlight_Pavilion:
         await self.bot.attack() # +2TP
     async def path_8(self):
         logger_set_path(8)
-        # await self.bot.use_teleporter(1333/2400, 502/1080, move_x=0, move_y=0, corner='botleft', special_exit=False) # City Sandpit
+        await self.bot.use_teleporter(1333/2400, 502/1080, move_x=0, move_y=0, corner='botleft', special_exit=False) # City Sandpit
+        raise SystemExit('check')
         await self.bot.move(0.35, 500)
         await self.bot.attack_technique(14) # move
         await self.bot.move(0.3, 500)
         await self.bot.attack_technique(8) # items
-        raise SystemExit('improve get into corner')
-        await self.bot.move(0.25, 500)
-        await self.bot.attack_technique(2) # move
-        await self.bot.move(1.85, 500)
-        await self.bot.attack_technique(3) # items
-        await self.bot.move(0.9, 2000)   
+        await self.bot.move(0.3, 1000)
+        await self.bot.move(0.1, 500)
+        await self.bot.move(0.0, 1500)
+        await self.bot.move(0.7, 300)
+        await self.bot.attack_technique(2) # items
+        await self.bot.move(0.75, 1500)
         await self.bot.posfix(0.75, 500)
         await self.bot.move(1.75, 500)
         await self.bot.attack_technique(8) # move
@@ -1287,19 +1291,20 @@ class Dewlight_Pavilion:
 
 class Clock_Studios_Theme_Park:
     '''
-    TP:-10->1
-    R2:3
+    TP:-4->1
     XP:7648/7648
     Time:???
     '''
     def __init__(self, device):
         self.bot = Bot(device)
+        self.universal = Universal(device)
     async def farm(self):
         await self.teleport()
         await self.path_1()
         await self.path_2()
         await self.path_3()
         await self.path_4()
+        await self.universal.restore_tp(tp=4)
         await self.path_5()
         await self.path_6()
         await self.path_7()
@@ -1392,9 +1397,19 @@ class Clock_Studios_Theme_Park:
         await self.bot.attack_technique(3) # -2TP
     async def path_5(self):
         logger_set_path(5)
-        await self.bot.use_teleporter(929/2400, 549/1080, corner='topleft', move_x=0, move_y=7) # Screening Area Entrance
-        await self.bot.move(0.6, 2500)
-        await self.bot.attack() # +2TP
+        await self.bot.switch_map(y_list=446/1080, world='penacony', scroll_down=True, # Hamster Ball Park
+                                    x=490/2400, y=633/1080, corner='topright', move_x=1, move_y=1, confirm=True)
+        await self.bot.move(1.58, 7000)
+        await self.bot.attack_technique(2) # -1TP
+        await self.bot.move(0.0, 1500)
+        await self.bot.move(1.3, 3000)
+        await self.bot.posfix(1.25, 1000)
+        await self.bot.move(0.4, 1000)
+        await self.bot.move(0.7, 2800)
+        await self.bot.move(1.0, 300)
+        await self.bot.attack_technique(8) # -1TP
+        await self.bot.move(1.9, 300)
+        await self.bot.attack_technique(6) # -1TP
     async def path_6(self):
         logger_set_path(6)
         await self.bot.use_teleporter(1100/2400, 423/1080, corner='botright', move_x=3, move_y=3) # Bud of Preservation
@@ -1411,21 +1426,6 @@ class Clock_Studios_Theme_Park:
     async def path_7(self):
         logger_set_path(7)
         await self.bot.use_teleporter(490/2400, 633/1080, move_x=1, move_y=1, corner='topright', confirm=True) # Hamster Ball Park
-        await self.bot.move(1.58, 7000)
-        await self.bot.attack_technique(2) # -1TP
-        await self.bot.move(0.0, 1500)
-        await self.bot.move(1.3, 3000)
-        await self.bot.restore_tp(item='trick_snack', n=1) # +2TP
-        await self.bot.posfix(1.25, 1000)
-        await self.bot.move(0.4, 1000)
-        await self.bot.move(0.7, 2800)
-        await self.bot.move(1.0, 300)
-        await self.bot.attack_technique(8) # -1TP
-        await self.bot.move(1.9, 300)
-        await self.bot.attack_technique(6) # -1TP
-    async def path_8(self):
-        logger_set_path(8)
-        await self.bot.use_teleporter(490/2400, 633/1080, move_x=1, move_y=1, corner='topright', confirm=True) # Hamster Ball Park
         await self.bot.move(0.2, 3000)
         await self.bot.move(1.98, 4500)
         await self.bot.attack() # +2TP
@@ -1436,8 +1436,8 @@ class Clock_Studios_Theme_Park:
         await self.bot.move(1.55, 6000)
         await self.bot.move(1.9, 700)
         await self.bot.attack() # +2TP
-    async def path_9(self):
-        logger_set_path(9)
+    async def path_8(self):
+        logger_set_path(8)
         await self.bot.use_teleporter(490/2400, 633/1080, move_x=1, move_y=1, corner='topright', confirm=True) # Hamster Ball Park
         await self.bot.move(0.2, 3000)
         await self.bot.move(0.0, 4700)
@@ -1449,11 +1449,15 @@ class Clock_Studios_Theme_Park:
         await self.bot.move(0.1, 1000)
         await self.bot.move(0.5, 7000)
         await self.bot.move(0.25, 1000)
-        await self.bot.restore_tp(item='trick_snack', n=1) # +2TP
-        await self.bot.posfix(0.25, 1000)
-        await self.bot.move(1.5, 1800)
-        await self.bot.move(1.3, 1500)
-        await self.bot.move(1.1, 300)
+    async def path_9(self):
+        logger_set_path(9)
+        await self.bot.use_teleporter(929/2400, 549/1080, corner='topleft', move_x=0, move_y=7) # Screening Area Entrance
+        await self.bot.move(0.6, 2500)
+        await self.bot.attack() # +2TP
+    async def path_10(self):
+        logger_set_path(10)
+        await self.bot.use_teleporter(490/2400, 633/1080, move_x=1, move_y=1, corner='topright', confirm=True) # Hamster Ball Park
+        raise SystemExit('rework: kill rest of monsters')
         await self.bot.attack_technique(1) # -1TP
         for _ in range(4): # -1TP
             await self.bot.move(0.9, 300)

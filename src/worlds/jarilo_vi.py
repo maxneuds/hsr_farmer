@@ -14,20 +14,20 @@ class Init:
         self.robot_settlement = Robot_Settlement(device)
     async def farm(self):
         '''
-        Status  7/7
-        TP      5 -> 5
-        Items   R2: 0, R4: 0
-        XP      19440/19440
-        Time    1750
+        Status  7/7             /n
+        TP      5 -> 5          /n
+        R2/R4   0 / 0           /n
+        XP      19440/19440     /n
+        Time    ???
         '''
-        await self.outlying_snow_plains.farm()              # TP:-1->4 XP:2052/2052 Time:188
-        await self.backwater_pass.farm()                    # TP:+0->4 XP:3024/3024 Time:240
-        await self.robot_settlement.farm()                  # TP:+1->5 XP:2592/2592 Time:237
-        await self.corridor.farm()                          # TP:-2->3 XP:3672/3672 Time:432
-        await self.everwinter_hill.farm()                   # TP:+0->3 XP:1404/1404 Time:119
-        await self.robot_settlement.teleport(tp_restore=2)  # TP:+2->5 Time:???
-        await self.great_mine.farm()                        # TP:-4->1 XP:4536/4536 Time:326
-        await self.rivet_town.farm()                        # TP:+5->5 XP:2160/2160 Time:262
+        await self.outlying_snow_plains.farm()        # TP:-1->4 XP:2052/2052 Time:188
+        await self.backwater_pass.farm()              # TP:+0->4 XP:3024/3024 Time:240
+        await self.robot_settlement.farm()            # TP:+1->5 XP:2592/2592 Time:237
+        await self.corridor.farm()                    # TP:-2->3 XP:3672/3672 Time:432
+        await self.everwinter_hill.farm()             # TP:+0->3 XP:1404/1404 Time:119
+        await self.robot_settlement.restore_tp(tp=2)    # TP:+2->5 Time:???
+        await self.great_mine.farm()                    # TP:-4->1 XP:4536/4536 Time:326
+        await self.rivet_town.farm()                    # TP:+5->5 XP:2160/2160 Time:262
     async def dev(self):
         pass
         
