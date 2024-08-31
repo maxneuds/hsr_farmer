@@ -11,7 +11,7 @@ class The_Reverie_Dreamscape:
     # TP:-22->1 XP:14580/15552 Time:?
     '''
     def __init__(self, device):
-        self.bot = 'The Reverie Dreamscape'
+        self.map = 'The Reverie Dreamscape'
         self.bot = Bot(device)
         self.extra = Extra(device)
     async def farm(self, mode='credits'):

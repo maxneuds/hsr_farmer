@@ -119,6 +119,7 @@ class Dreams_Edge:
     async def path_6(self):
         logger_set_path(self.map, 6)
         await self.bot.use_teleporter(933/2400, 535/1080, move_x=0, move_y=5, corner='topright') # Dreamweaver Plaza
+        raise SystemExit('check')
         await self.bot.move(0.25, 1500)
         await self.bot.move(0.5, 500)
         await self.bot.attack_technique(7) # move
@@ -126,10 +127,11 @@ class Dreams_Edge:
         await self.bot.attack_technique(6) # move
         await self.bot.move(0.5, 500)
         await self.bot.attack_technique(5) # move
-        await self.bot.move(0.0, 1300)
+        await self.bot.move(0.5, 500)
+        await self.bot.move(1.9, 1300)
         await self.bot.attack_technique(1) # items
         await self.bot.move(0.5, 500)
-        await self.bot.attack_technique(3) # -1TP
+        await self.bot.attack_technique(4) # -1TP
         await self.bot.move(1.0, 300)
         await self.bot.attack_technique(5) # -1TP
     async def path_7(self):

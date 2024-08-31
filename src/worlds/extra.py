@@ -34,9 +34,9 @@ class Extra:
             await self.bot.chat_initiate()
             await self.bot.chat_advance(n=3)
             await self.bot.action_tap(int(self.bot.xy.width*1750/2400), int(self.bot.xy.height*600/1080))
-            await self.bot.sleep(2)
+            await self.bot.sleep(2.5)
             await self.bot.action_tap(int(self.bot.xy.width*1900/2400), int(self.bot.xy.height*970/1080))
-            await self.bot.sleep(2)
+            await self.bot.sleep(2.5)
             await self.bot.action_tap(int(self.bot.xy.width*2000/2400), int(self.bot.xy.height*988/1080))
             await self.bot.wait_for_onmap()
             await self.bot.action_tap(int(self.bot.xy.width*1000/2400), int(self.bot.xy.height*250/1080))
@@ -54,9 +54,9 @@ class Extra:
             await self.bot.attack_technique(10) # +2TP
             await self.bot.attack()
             await self.bot.action_tap(int(self.bot.xy.width*118/2400), int(self.bot.xy.height*88/1080))
-            await self.bot.sleep(2)
+            await self.bot.sleep(2.5)
             await self.bot.action_tap(int(self.bot.xy.width*820/2400), int(self.bot.xy.height*791/1080))
-            await self.bot.sleep(2)
+            await self.bot.sleep(2.5)
             await self.bot.action_tap(int(self.bot.xy.width*1396/2400), int(self.bot.xy.height*705/1080))
             await self.bot.wait_for_onmap()
 

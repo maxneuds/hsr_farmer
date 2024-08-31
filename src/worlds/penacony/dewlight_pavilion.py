@@ -5,7 +5,7 @@ from worlds.extra import Extra
 
 class Dewlight_Pavilion:
     '''
-    R2/4: 1 / 2
+    R2/4: 2 / 1
     '''
     def __init__(self, device):
         self.map = 'Dewlight Pavilion'
@@ -15,11 +15,11 @@ class Dewlight_Pavilion:
         await self.teleport()
         await self.path_1()
         await self.path_2()
+        await self.extra.restore_tp(tp=4)
         await self.path_3()
         await self.path_4()
-        await self.bot.restore_tp(item='punitive_energy', n=1) # +4TP
-        await self.extra.restore_tp(tp=4)
         await self.path_5()
+        await self.extra.restore_tp(tp=4)
         await self.path_6()
         await self.path_7()
         await self.path_8()
@@ -45,51 +45,6 @@ class Dewlight_Pavilion:
         await self.bot.attack() # items
     async def path_1(self):
         logger_set_path(self.map, 1)
-        await self.bot.use_teleporter(981/2400, 718/1080, move_x=0, move_y=0, corner='botright') # Reception Counter
-        await self.bot.move(0.5, 10350)
-        await self.bot.move(0.0, 7000)
-        await self.bot.move(1.5, 7000)
-        await self.bot.move(1.7, 2100)
-        await self.bot.move(1.3, 1900)
-        await self.bot.interact()
-        await self.bot.move(0.75, 2000)
-        await self.bot.move(0.6, 1800)
-        await self.bot.action_button()
-        await self.bot.move(1.0, 2300)
-        await self.bot.attack() # items
-        await self.bot.move(1.5, 1000)
-        await self.bot.attack_technique(2) # -1TP
-        await self.bot.move(0.8, 1200)
-        await self.bot.move(0.5, 800)
-        await self.bot.attack_technique(4) # -1TP
-        await self.bot.move(1.25, 3000)
-        await self.bot.posfix(1.25, 1000)
-        await self.bot.move(1.6, 2800)
-        await self.bot.action_button()
-        await self.bot.move(1.5, 1700)
-        await self.bot.move(1.7, 500)
-        await self.bot.attack_technique(3) # -1TP
-    async def path_2(self):
-        logger_set_path(self.map, 2)
-        await self.bot.use_teleporter(981/2400, 718/1080, move_x=0, move_y=0, corner='botright') # Reception Counter
-        await self.bot.move(0.5, 10350)
-        await self.bot.move(0.0, 7000)
-        await self.bot.move(1.5, 7000)
-        await self.bot.move(1.7, 2100)
-        await self.bot.move(1.3, 1900)
-        await self.bot.interact()
-        await self.bot.move(0.3, 2000)
-        await self.bot.move(0.4, 1600)
-        await self.bot.action_button()
-        await self.bot.move(0.0, 1900)
-        await self.bot.move(1.9, 400)
-        await self.bot.attack() # +2TP
-        await self.bot.move(1.5, 1300)
-        await self.bot.move(0.1, 900)
-        await self.bot.move(0.5, 500)
-        await self.bot.attack_technique(2) # items
-    async def path_3(self):
-        logger_set_path(self.map, 3)
         await self.bot.use_teleporter(912/2400, 485/1080, move_x=0, move_y=2, corner='topleft') # Dreammaster Hall
         await self.bot.move(0.8, 2300)
         await self.bot.move(0.5, 4600)
@@ -103,8 +58,8 @@ class Dewlight_Pavilion:
         await self.bot.move(1.5, 3000)
         await self.bot.move(0.0, 300)
         await self.bot.attack_technique(2) # -1TP
-    async def path_4(self):
-        logger_set_path(self.map, 4)
+    async def path_2(self):
+        logger_set_path(self.map, 2)
         await self.bot.use_teleporter(912/2400, 485/1080, move_x=0, move_y=2, corner='topleft') # Dreammaster Hall
         await self.bot.move(1.1, 1000)
         await self.bot.attack() # +2TP
@@ -147,14 +102,18 @@ class Dewlight_Pavilion:
         await self.bot.move(0.6, 2800)
         await self.bot.move(0.1, 200)
         await self.bot.action_button()
+        raise SystemExit('check improve')
         await self.bot.move(0.0, 2000)
         await self.bot.attack_technique(6) # -3TP, roamer
         await self.bot.move(1.5, 300)
         await self.bot.attack_technique(3)
         await self.bot.move(0.5, 300)
         await self.bot.attack_technique(3)
-        await self.bot.move(0.1, 1000)
-        await self.bot.move(0.25, 4000)
+        await self.bot.move(0.1, 300)
+        await self.bot.attack_technique(2)
+        for _ in range(3):
+            await self.bot.move(0.25, 300)
+            await self.bot.attack_technique(2)
         await self.bot.posfix(0.25, 500)
         await self.bot.restore_tp(item='punitive_energy', n=1) # +4TP
         await self.bot.move(1.04, 4200)
@@ -212,8 +171,8 @@ class Dewlight_Pavilion:
         await self.bot.move(0.1, 1000)
         await self.bot.move(0.0, 300)
         await self.bot.attack_technique(3) # -1TP
-    async def path_5(self):
-        logger_set_path(self.map, 5)
+    async def path_3(self):
+        logger_set_path(self.map, 3)
         await self.bot.switch_map(y_list=328/1080, world='penacony', scroll_down=True, # Dreammaster Hall
                                     x=912/2400, y=485/1080, corner='topleft', move_x=0, move_y=2)
         await self.bot.move(0.8, 2300)
@@ -278,9 +237,55 @@ class Dewlight_Pavilion:
         await self.bot.attack() # +2TP
         await self.bot.move(1.7, 1700)
         await self.bot.attack_technique(3) # -2TP
+    async def path_4(self):
+        logger_set_path(self.map, 4)
+        await self.bot.use_teleporter(981/2400, 718/1080, move_x=0, move_y=0, corner='botright') # Reception Counter
+        await self.bot.move(0.5, 10350)
+        await self.bot.move(0.0, 7000)
+        await self.bot.move(1.5, 7000)
+        await self.bot.move(1.7, 2100)
+        await self.bot.move(1.3, 1900)
+        await self.bot.interact()
+        await self.bot.move(0.3, 2000)
+        await self.bot.move(0.4, 1600)
+        await self.bot.action_button()
+        await self.bot.move(0.0, 1900)
+        await self.bot.move(1.9, 400)
+        await self.bot.attack() # +2TP
+        await self.bot.move(1.5, 1300)
+        await self.bot.move(0.1, 900)
+        await self.bot.move(0.5, 500)
+        await self.bot.attack_technique(2) # items
+    async def path_5(self):
+        logger_set_path(self.map, 5)
+        await self.bot.use_teleporter(981/2400, 718/1080, move_x=0, move_y=0, corner='botright') # Reception Counter
+        await self.bot.move(0.5, 10350)
+        await self.bot.move(0.0, 7000)
+        await self.bot.move(1.5, 7000)
+        await self.bot.move(1.7, 2100)
+        await self.bot.move(1.3, 1900)
+        await self.bot.interact()
+        await self.bot.move(0.75, 2000)
+        await self.bot.move(0.6, 1800)
+        await self.bot.action_button()
+        await self.bot.move(1.0, 2300)
+        await self.bot.attack() # items
+        await self.bot.move(1.5, 1000)
+        await self.bot.attack_technique(2) # -1TP
+        await self.bot.move(0.8, 1200)
+        await self.bot.move(0.5, 800)
+        await self.bot.attack_technique(4) # -1TP
+        await self.bot.move(1.25, 3000)
+        await self.bot.posfix(1.25, 1000)
+        await self.bot.move(1.6, 2800)
+        await self.bot.action_button()
+        await self.bot.move(1.5, 1700)
+        await self.bot.move(1.7, 500)
+        await self.bot.attack_technique(3) # -1TP
     async def path_6(self):
         logger_set_path(self.map, 6)
-        await self.bot.use_teleporter(912/2400, 485/1080, move_x=0, move_y=2, corner='topleft') # Dreammaster Hall
+        await self.bot.switch_map(y_list=328/1080, world='penacony', scroll_down=True, # Dreammaster Hall
+                                    x=912/2400, y=485/1080, corner='topleft', move_x=0, move_y=2)
         await self.bot.move(0.5, 1000)
         await self.bot.interact()
         await self.bot.wait_for_onmap(min_duration=3)
@@ -290,14 +295,28 @@ class Dewlight_Pavilion:
         await self.bot.attack() # items
     async def path_7(self):
         logger_set_path(self.map, 7)
+        await self.bot.use_teleporter(1333/2400, 502/1080, move_x=0, move_y=0, corner='botleft', special_exit=False) # City Sandpit
+        await self.bot.move(0.3, 2500)
+        await self.bot.move(1.83, 6300)
+        await self.bot.move(0.45, 700)
+        await self.bot.attack_technique(2) # -1TP
+        await self.bot.move(1.8, 300)
+        await self.bot.attack_technique(5) # -1TP, roamer
+        await self.bot.move(1.0, 300)
+        await self.bot.attack_technique(5)
+        await self.bot.move(1.7, 300)
+        await self.bot.attack_technique(5) # items
+    async def path_8(self):
+        logger_set_path(self.map, 8)
         await self.bot.use_teleporter(1093/2400, 629/1080, move_x=0, move_y=0, corner='botleft', special_exit=False) # Shape of Ire
         await self.bot.move(1.2, 1600)
         await self.bot.attack() # items
         await self.bot.move(1.5, 3300)
         await self.bot.move(0.0, 600)
-        await self.bot.attack() # +2TP
-    async def path_8(self):
-        logger_set_path(self.map, 8)
+        await self.bot.attack_technique(1) # +2TP
+        raise SystemExit('check: one more item? unten rechts')
+    async def path_9(self):
+        logger_set_path(self.map, 9)
         await self.bot.use_teleporter(1333/2400, 502/1080, move_x=0, move_y=0, corner='botleft', special_exit=False) # City Sandpit
         raise SystemExit('check')
         await self.bot.move(0.35, 500)
@@ -306,7 +325,7 @@ class Dewlight_Pavilion:
         await self.bot.attack_technique(8) # items
         await self.bot.move(0.3, 1000)
         await self.bot.move(0.1, 500)
-        await self.bot.move(0.0, 1500)
+        await self.bot.move(0.0, 1700)
         await self.bot.move(0.7, 300)
         await self.bot.attack_technique(2) # items
         await self.bot.move(0.75, 1500)
@@ -328,9 +347,9 @@ class Dewlight_Pavilion:
         await self.bot.attack_technique(2)
         await self.bot.move(1.3, 300)
         await self.bot.attack_technique(8)
-        await self.bot.restore_tp('punitive_energy', n=1) # +4TP
-    async def path_9(self):
-        logger_set_path(self.map, 9)
+        await self.bot.restore_tp('trick_snack', n=1) # +2TP
+    async def path_10(self):
+        logger_set_path(self.map, 10)
         await self.bot.use_teleporter(1333/2400, 502/1080, move_x=0, move_y=0, corner='botleft', special_exit=False) # City Sandpit
         await self.bot.move(0.5, 11500)
         await self.bot.interact(wait_for_ready=False)
@@ -346,19 +365,6 @@ class Dewlight_Pavilion:
         await self.bot.attack_technique(1) # -1TP
         await self.bot.move(0.1, 1600)
         await self.bot.attack_technique(2) # -1TP
-    async def path_10(self):
-        logger_set_path(self.map, 10)
-        await self.bot.use_teleporter(1333/2400, 502/1080, move_x=0, move_y=0, corner='botleft', special_exit=False) # City Sandpit
-        await self.bot.move(0.3, 2500)
-        await self.bot.move(1.83, 6300)
-        await self.bot.move(0.45, 700)
-        await self.bot.attack_technique(2) # -1TP
-        await self.bot.move(1.8, 300)
-        await self.bot.attack_technique(5) # -1TP, roamer
-        await self.bot.move(1.0, 300)
-        await self.bot.attack_technique(5)
-        await self.bot.move(1.7, 300)
-        await self.bot.attack_technique(5) # items
     async def path_11(self):
         logger_set_path(self.map, 11)
         await self.bot.switch_map(y_list=328/1080, world='penacony', scroll_down=True, # Dreammaster Hall
