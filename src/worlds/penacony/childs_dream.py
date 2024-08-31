@@ -8,6 +8,7 @@ class Childs_Dream:
     TP:-3
     '''
     def __init__(self, device):
+        self.map = 'Childs Dream'
         self.bot = Bot(device)
         self.extra = Extra(device)
     async def farm(self):
@@ -20,7 +21,7 @@ class Childs_Dream:
         await self.extra.restore_tp(tp=4)
         await self.path_5()
     async def teleport(self):
-        logger_set_path('Teleport')
+        logger_set_path(self.map, 'Teleport')
         logger.info('---')
         logger.info("--- Map: Childs's Dream")
         logger.info('---')
@@ -33,7 +34,7 @@ class Childs_Dream:
         await self.bot.move(1.8, 300)
         await self.bot.attack_technique(8) # -2TP
     async def path_1(self):
-        logger_set_path(1)
+        logger_set_path(self.map, 1)
         await self.bot.use_teleporter(962/2400, 356/1080, move_x=0, move_y=0, corner='botright') # Eddying Dreamscape
         await self.bot.move(1.9, 1600)
         await self.bot.attack() # +2TP
@@ -42,7 +43,7 @@ class Childs_Dream:
         await self.bot.move(1.9, 700)
         await self.bot.attack_technique(3) # -2TP
     async def path_2(self):
-        logger_set_path(2)
+        logger_set_path(self.map, 2)
         await self.bot.use_teleporter(962/2400, 519/1080, move_x=0, move_y=0, corner='botright') # Bud of Aether
         await self.bot.move(1.45, 2200)
         await self.bot.move(1.88, 9400)
@@ -54,7 +55,7 @@ class Childs_Dream:
         await self.bot.move(1.25, 500)
         await self.bot.attack_technique(5) # -1TP
     async def path_3(self):
-        logger_set_path(3)
+        logger_set_path(self.map, 3)
         await self.bot.use_teleporter(1122/2400, 617/1080, move_x=0, move_y=0, corner='botright') # Clock Factory
         await self.bot.move(0.5, 5000)
         await self.bot.move(1.0, 600)
@@ -63,7 +64,7 @@ class Childs_Dream:
         await self.bot.move(1.0, 500)
         await self.bot.attack_technique(5) # -1TP
     async def path_4(self):
-        logger_set_path(4)
+        logger_set_path(self.map, 4)
         await self.bot.switch_map(y_list=893/1080, world='penacony', scroll_down=False, # Eddying Dreamscape
                                     x=962/2400, y=356/1080, corner='botright', move_x=0, move_y=0)
         await self.bot.move(0.5, 9000)
@@ -121,7 +122,7 @@ class Childs_Dream:
         await self.bot.move(1.5, 3000)
         await self.bot.attack_technique(3) # -1TP
     async def path_5(self):
-        logger_set_path(5)
+        logger_set_path(self.map, 5)
         await self.bot.switch_map(y_list=893/1080, world='penacony', scroll_down=False, # Corridor of Memories
                                     x=1010/2400, y=304/1080, corner='botright', move_x=0, move_y=4)
         await self.bot.move(1.5, 9300)

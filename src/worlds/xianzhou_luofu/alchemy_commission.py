@@ -5,6 +5,7 @@ from worlds.extra import Extra
 
 class Alchemy_Commission:
     def __init__(self, device):
+        self.map = 'Alchemy Comission'
         self.bot = Bot(device)
         self.extra = Extra(device)
     async def farm(self):
@@ -22,7 +23,7 @@ class Alchemy_Commission:
         await self.path_10()
         await self.path_11()
     async def teleport(self):
-        logger_set_path('Teleport')
+        logger_set_path(self.map, 'Teleport')
         logger.info('---')
         logger.info('--- Map: Alchemy Comission')
         logger.info('---')
@@ -38,7 +39,7 @@ class Alchemy_Commission:
         await self.bot.move(1.6, 300)
         await self.bot.attack_technique(8) # -1TP
     async def path_1(self):
-        logger_set_path(1)
+        logger_set_path(self.map, 1)
         await self.bot.use_teleporter(854/2400, 689/1080, corner='topright', move_x=0, move_y=6, confirm=True) # Healer's Market
         await self.bot.move(1.4, 4600)
         await self.bot.move(1.9, 2100)
@@ -59,7 +60,7 @@ class Alchemy_Commission:
         await self.bot.move(1.7, 300)
         await self.bot.attack_technique(4) # -1TP
     async def path_2(self):
-        logger_set_path(2)
+        logger_set_path(self.map, 2)
         await self.bot.use_teleporter(659/2400, 363/1080, corner='botright', move_x=0, move_y=0) # Cavern of Corrosion
         await self.bot.move(1.5, 2800)
         await self.bot.move(1.2, 1600)
@@ -79,7 +80,7 @@ class Alchemy_Commission:
         await self.bot.move(1.25, 300)
         await self.bot.attack_technique(12) # -1TP
     async def path_3(self):
-        logger_set_path(3)
+        logger_set_path(self.map, 3)
         await self.bot.use_teleporter(867/2400, 646/1080, corner='topleft', move_x=0, move_y=4) # Elixir Research Terrace
         await self.bot.move(0.5, 10300)
         await self.bot.move(0.75, 2000)
@@ -94,7 +95,7 @@ class Alchemy_Commission:
         await self.bot.move(0.25, 300)
         await self.bot.attack_technique(4) # -1TP
     async def path_4(self):
-        logger_set_path(4)
+        logger_set_path(self.map, 4)
         await self.bot.use_teleporter(867/2400, 646/1080, corner='topleft', move_x=0, move_y=4) # Elixir Research Terrace
         await self.bot.move(0.5, 6900)
         await self.bot.move(0.0, 3600)
@@ -102,7 +103,7 @@ class Alchemy_Commission:
         await self.bot.move(0.0, 4200)
         await self.bot.attack_technique(2) # -1TP
     async def path_5(self):
-        logger_set_path(5)
+        logger_set_path(self.map, 5)
         await self.bot.use_teleporter(1003/2400, 595/1080, corner='topleft', move_x=0, move_y=3) # Aureate Elixir Furnace
         await self.bot.move(0.8, 700)
         await self.bot.attack() # +2TP
@@ -130,7 +131,7 @@ class Alchemy_Commission:
             await self.bot.move(1.64, 300)
             await self.bot.attack_technique(1)
     async def path_6(self):
-        logger_set_path(6)
+        logger_set_path(self.map, 6)
         await self.bot.switch_map(y_list=685/1080, world='the_xianzhou_luofu', scroll_down=True, # Aureate Elixir Furnace
                                     x=1003/2400, y=595/1080, corner='topleft', move_x=0, move_y=3)
         await self.bot.move(0.54, 3200)
@@ -162,7 +163,7 @@ class Alchemy_Commission:
             await self.bot.move(1.82, 300)
             await self.bot.attack_technique(1)
     async def path_7(self):
-        logger_set_path(7)
+        logger_set_path(self.map, 7)
         await self.bot.use_teleporter(583/2400, 241/1080, corner='botright', move_x=0, move_y=3) # Bud of Nihility
         await self.bot.move(1.0, 1500)
         await self.bot.move(0.5, 4200)
@@ -181,7 +182,7 @@ class Alchemy_Commission:
         await self.bot.move(1.8, 600)
         await self.bot.attack() # +2TP
     async def path_8(self):
-        logger_set_path(8)
+        logger_set_path(self.map, 8)
         await self.bot.use_teleporter(583/2400, 241/1080, corner='botright', move_x=0, move_y=3) # Bud of Nihility
         await self.bot.move(1.0, 2600)
         await self.bot.move(0.5, 3100)
@@ -199,12 +200,12 @@ class Alchemy_Commission:
         await self.bot.move(1.5, 300)
         await self.bot.attack_technique(16)
     async def path_9(self):
-        logger_set_path(9)
+        logger_set_path(self.map, 9)
         await self.bot.use_teleporter(1355/2400, 351/1080, corner='botright', move_x=0, move_y=5) # Shape of Celestial
         await self.bot.move(1.66, 2500)
         await self.bot.attack() # +2TP
     async def path_10(self):
-        logger_set_path(10)
+        logger_set_path(self.map, 10)
         await self.bot.use_teleporter(583/2400, 241/1080, corner='botright', move_x=0, move_y=3) # Bud of Nihility
         await self.bot.move(1.0, 2600)
         await self.bot.move(0.5, 3100)
@@ -217,7 +218,7 @@ class Alchemy_Commission:
         await self.bot.move(1.0, 500)
         await self.bot.attack_technique(3) # +2TP
     async def path_11(self):
-        logger_set_path(11)
+        logger_set_path(self.map, 11)
         await self.bot.use_teleporter(1003/2400, 595/1080, corner='topleft', move_x=0, move_y=3) # Aureate Elixir Furnace
         await self.bot.move(0.54, 3200)
         await self.bot.move(0.33, 2500)

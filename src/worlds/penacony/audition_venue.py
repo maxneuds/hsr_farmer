@@ -5,9 +5,10 @@ from worlds.extra import Extra
 
 class Audition_Venue:
     def __init__(self, device):
+        self.map = 'Audition Venue'
         self.bot = Bot(device)
     async def teleport(self):
-        logger_set_path('Teleport')
+        logger_set_path(self.map, 'Teleport')
         logger.info('---')
         logger.info('--- Map: Audition Venue')
         logger.info('---')

@@ -26,8 +26,8 @@ formatter = CustomFormatter('[%(asctime)-s] [%(levelname)-5s] [%(function_name)s
 handler.setFormatter(formatter)
 
 # Enable to set path in logger
-def logger_set_path(path_num):
-    formatter = CustomFormatter(f'[%(asctime)-s] [%(levelname)-5s] [Path: {path_num}] [%(function_name)s]  %(message)-s', datefmt='%H:%M:%S')
+def logger_set_path(map, path_num):
+    formatter = CustomFormatter(f'[%(asctime)-s] [%(levelname)-5s] [{map}: {path_num}] [%(function_name)s]  %(message)-s', datefmt='%H:%M:%S')
     handler.setFormatter(formatter)
 
 def log_runtime(t0):

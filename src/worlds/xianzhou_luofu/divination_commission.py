@@ -5,6 +5,7 @@ from worlds.extra import Extra
 
 class Divination_Commission:
     def __init__(self, device):
+        self.map = 'Divination Commission'
         self.bot = Bot(device)
     async def farm(self):
         await self.teleport()
@@ -18,7 +19,7 @@ class Divination_Commission:
         await self.path_8()
         await self.path_9()
     async def teleport(self):
-        logger_set_path('Teleport')
+        logger_set_path(self.map, 'Teleport')
         logger.info('---')
         logger.info('--- Map: Divination Commission')
         logger.info('---')
@@ -27,7 +28,7 @@ class Divination_Commission:
         await self.bot.move(1.25, 2600)
         await self.bot.attack_technique(6) # -1TP
     async def path_1(self):
-        logger_set_path(1)
+        logger_set_path(self.map, 1)
         await self.bot.use_teleporter(445/2400, 720/1080, move_x=0, move_y=0, corner='botright', confirm=True) # Fortuna Augurstead
         await self.bot.move(0.5, 4000)
         await self.bot.move(0.7, 1500)
@@ -39,7 +40,7 @@ class Divination_Commission:
         await self.bot.attack_technique(4) # -1TP
         await self.bot.restore_tp(item='trick_snack') # +2TP
     async def path_2(self):
-        logger_set_path(2)
+        logger_set_path(self.map, 2)
         await self.bot.use_teleporter(445/2400, 720/1080, move_x=0, move_y=0, corner='botright', confirm=True) # Fortuna Augurstead
         await self.bot.move(0.5, 4000)
         await self.bot.move(0.7, 1000)
@@ -59,7 +60,7 @@ class Divination_Commission:
             await self.bot.attack_technique(1)
         await self.bot.attack_technique(1)
     async def path_3(self):
-        logger_set_path(3)
+        logger_set_path(self.map, 3)
         await self.bot.use_teleporter(445/2400, 720/1080, move_x=0, move_y=0, corner='botright', confirm=True) # Fortuna Augurstead
         await self.bot.move(0.5, 4000)
         await self.bot.move(0.7, 1000)
@@ -78,12 +79,12 @@ class Divination_Commission:
         await self.bot.move(1.5, 300)
         await self.bot.attack_technique(14) # -1TP
     async def path_4(self):
-        logger_set_path(4)
+        logger_set_path(self.map, 4)
         await self.bot.use_teleporter(627/2400, 308/1080, corner='botright', move_x=0, move_y=3) # Matrix of Prescience Ultima
         await self.bot.move(0.75, 800)
         await self.bot.attack() # +2TP
     async def path_5(self): # roamer
-        logger_set_path(5)
+        logger_set_path(self.map, 5)
         await self.bot.use_teleporter(1089/2400, 284/1080, corner='botright', move_x=0, move_y=0) # Conclave Hall
         await self.bot.move(1.5, 22900)
         await self.bot.move(1.25, 2200)
@@ -112,7 +113,7 @@ class Divination_Commission:
             await self.bot.move(1.5, 300)
             await self.bot.attack_technique(1)
     async def path_6(self):
-        logger_set_path(6)
+        logger_set_path(self.map, 6)
         await self.bot.use_teleporter(1089/2400, 284/1080, corner='botright', move_x=0, move_y=0) # Conclave Hall
         await self.bot.move(1.0, 1100)
         await self.bot.move(0.7, 2100)
@@ -150,7 +151,7 @@ class Divination_Commission:
         await self.bot.move(1.75, 300)
         await self.bot.attack_technique(2) # -1TP
     async def path_7(self): # roamer
-        logger_set_path(7)
+        logger_set_path(self.map, 7)
         await self.bot.use_teleporter(743/2400, 586/1080, corner='topleft', move_x=0, move_y=0) # Spatial Terminal
         await self.bot.move(0.4, 1500)
         await self.bot.move(0.5, 1500)
@@ -170,7 +171,7 @@ class Divination_Commission:
         await self.bot.move(0.6, 500)
         await self.bot.attack_technique(6)    
     async def path_8(self): # roamer
-        logger_set_path(8)
+        logger_set_path(self.map, 8)
         await self.bot.use_teleporter(743/2400, 586/1080, corner='topleft', move_x=0, move_y=0) # Spatial Terminal
         await self.bot.move(1.5, 3700)
         await self.bot.move(1.75, 5800)
@@ -187,7 +188,7 @@ class Divination_Commission:
             await self.bot.move(1.75, 300)
             await self.bot.attack_technique(1)
     async def path_9(self):
-        logger_set_path(9)
+        logger_set_path(self.map, 9)
         await self.bot.use_teleporter(743/2400, 586/1080, corner='topleft', move_x=0, move_y=0) # Spatial Terminal
         await self.bot.move(1.5, 3700)
         await self.bot.move(1.75, 11300)

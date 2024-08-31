@@ -5,6 +5,7 @@ from worlds.extra import Extra
 
 class Stargazer_Navalia:
     def __init__(self, device):
+        self.map = 'Stargazer Navalia'
         self.bot = Bot(device)
         self.extra = Extra(device)
     async def farm(self):
@@ -18,7 +19,7 @@ class Stargazer_Navalia:
         await self.extra.restore_tp(tp=4)
         await self.path_7()
     async def teleport(self):
-        logger_set_path('Teleport')
+        logger_set_path(self.map, 'Teleport')
         logger.info('---')
         logger.info('--- Map: Stargazer Navalia')
         logger.info('---')
@@ -30,7 +31,7 @@ class Stargazer_Navalia:
         await self.bot.move(0.4, 1800)
         await self.bot.attack() # +2TP
     async def path_1(self):
-        logger_set_path(1)
+        logger_set_path(self.map, 1)
         await self.bot.use_teleporter(855/2400, 405/1080, move_x=0, move_y=2, corner='botleft') # Ship Nursery - The Budding
         await self.bot.move(0.7, 800)
         await self.bot.move(0.5, 900)
@@ -50,7 +51,7 @@ class Stargazer_Navalia:
             await self.bot.move(0.5, 300)
             await self.bot.attack_technique(2)
     async def path_2(self):
-        logger_set_path(2)
+        logger_set_path(self.map, 2)
         await self.bot.use_teleporter(855/2400, 184/1080, move_x=0, move_y=0, corner='botleft') # Ship Nursery - The Budding
         await self.bot.move(1.5, 700)
         await self.bot.move(0.0, 2300)
@@ -65,7 +66,7 @@ class Stargazer_Navalia:
         await self.bot.move(1.5, 300)
         await self.bot.attack_technique(10) # -1TP
     async def path_3(self):
-        logger_set_path(3)
+        logger_set_path(self.map, 3)
         await self.bot.use_teleporter(1106/2400, 610/1080, move_x=0, move_y=0, corner='botright') # Shape of Doom
         await self.bot.move(1.5, 700)
         await self.bot.attack() # +2TP
@@ -87,7 +88,7 @@ class Stargazer_Navalia:
         await self.bot.move(1.7, 1300)
         await self.bot.attack() # items
     async def path_4(self):
-        logger_set_path(4)
+        logger_set_path(self.map, 4)
         await self.bot.use_teleporter(1240/2400, 538/1080, corner='topright', move_x=0, move_y=0) # Astral Cottage
         await self.bot.move(0.25, 2500)
         await self.bot.move(0.16, 6000)
@@ -109,7 +110,7 @@ class Stargazer_Navalia:
             await self.bot.attack_technique(3)
         await self.bot.attack_technique(1)
     async def path_5(self):
-        logger_set_path(5)
+        logger_set_path(self.map, 5)
         await self.bot.use_teleporter(1240/2400, 538/1080, move_x=0, move_y=0, corner='topright', confirm=True) # Astral Cottage
         await self.bot.move(0.25, 2500)
         await self.bot.move(0.16, 6000)
@@ -132,7 +133,7 @@ class Stargazer_Navalia:
         await self.bot.move(1.25, 300)
         await self.bot.attack_technique(2) # -1TP
     async def path_6(self):
-        logger_set_path(6)
+        logger_set_path(self.map, 6)
         await self.bot.use_teleporter(855/2400, 405/1080, move_x=0, move_y=2, corner='botleft') # Ship Nursery - The Budding
         await self.bot.move(0.7, 800)
         await self.bot.move(0.5, 900)
@@ -157,7 +158,7 @@ class Stargazer_Navalia:
         await self.bot.move(0.3, 300)
         await self.bot.attack_technique(4)
     async def path_7(self):
-        logger_set_path(7)
+        logger_set_path(self.map, 7)
         await self.bot.switch_map(y_list=630/1080, world='the_xianzhou_luofu', scroll_down=False, # Ship Nursery - The Burgeoning
                                     x=958/2400, y=364/1080, corner='botleft', move_x=0, move_y=0)
         await self.bot.move(0.95, 1700)

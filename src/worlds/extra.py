@@ -10,13 +10,16 @@ class Extra:
     def __init__(self, device):
         self.bot = Bot(device)
     
-    async def craft_items(self):
-        logger_set_path('craft tp restore items')
-        await self.bot.craft_item('trick_snack', all=True)
-        await self.bot.craft_item('punitive_energy', all=True)
+    async def craft_items(self, items=[]):
+        '''
+        available: trick_snack , punitive_energy
+        '''
+        logger_set_path('craft items')
+        for item in items:
+            await self.bot.craft_item(item, all=True)
     
-    async def restore_tp(self, tp=4):
-        logger_set_path('Teleport: TP Restore')
+    async def restore_tp(self, tp=4, info='Undefined'):
+        logger_set_path(info, 'TP Restore')
         logger.info('---')
         logger.info("--- Map: Storage Zone")
         logger.info('---')

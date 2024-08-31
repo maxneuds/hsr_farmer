@@ -5,7 +5,6 @@ from datetime import datetime as dt
 from logger import logger, log_runtime
 import worlds
 
-
 # DEVICE = 'usb'
 DEVICE = '10.1.11.3:5555'
 MODE = 'xp' # options: credits, xp
@@ -13,33 +12,21 @@ MODE = 'xp' # options: credits, xp
 
 async def main():
     # load worlds
-    extra = worlds.extra.Extra(DEVICE)
-    astral_express = worlds.astral_express.Init(DEVICE)
-    herta_space_station = worlds.herta_space_station.Init(DEVICE)
-    jarilo_vi = worlds.jarilo_vi.Init(DEVICE)
-    xianzhou_luofu = worlds.xianzhou_luofu.Farmer(device=DEVICE, mode=MODE)
-    penacony = worlds.penacony.Penacony(DEVICE, mode=MODE)
+    extra = worlds.Extra(DEVICE)
+    astral_express = worlds.Astral_Express(DEVICE)
+    herta_space_station = worlds.Herta_Space_Station(DEVICE)
+    jarilo_vi = worlds.Jarilo_VI(DEVICE)
+    xianzhou_luofu = worlds.Xianzhou_Luofu(DEVICE)
+    penacony = worlds.Penacony(DEVICE, mode=MODE)
     
     
     # dev
-    # await universal.restore_tp(tp=4)
+    # await extra.restore_tp(tp=4)
     # await herta_space_station.farm()
     # await jarilo_vi.farm() # ✓✓
     # await xianzhou_luofu.farm()
-    # await xianzhou_luofu.dev()
     # await xianzhou_luofu.the_shackling_prison.farm()
-    # await xianzhou_luofu.the_shackling_prison.teleport()
-    # await xianzhou_luofu.the_shackling_prison.path_1()
-    # await xianzhou_luofu.the_shackling_prison.path_2()
-    # await xianzhou_luofu.the_shackling_prison.path_3()
-    # await xianzhou_luofu.the_shackling_prison.path_4()
-    # await xianzhou_luofu.the_shackling_prison.path_5()
-    # await xianzhou_luofu.the_shackling_prison.path_6()
-    # await xianzhou_luofu.the_shackling_prison.path_7()
-    # await xianzhou_luofu.the_shackling_prison.path_8()
-    # await xianzhou_luofu.the_shackling_prison.path_9()
-    # await xianzhou_luofu.the_shackling_prison.path_10()
-    # await xianzhou_luofu.the_shackling_prison.path_11()
+    # await extra.restore_tp(tp=4)
     # await xianzhou_luofu.the_shackling_prison.path_12()
     await penacony.farm()
     # await penacony.the_reverie_dreamscape.path_14()
@@ -56,12 +43,12 @@ async def main():
     # preperations
     # daily for free (guranteed): R2: 25, R4: 5
     # await xianzhou_luofu.stockup() # disabled, got enough
-    await universal.crafting()
+    await extra.craft_items(['trick_snack', 'punitive_energy'])
 
     # farm worlds
     await herta_space_station.farm() # TP:+5->5 ✓
     await jarilo_vi.farm() # TP:+0->5 R2/4:0 ✓✓
-    await xianzhou_luofu.farm() # TP:+0->5 R2:2 R4:3
+    # await xianzhou_luofu.farm() # TP:+0->5 R2:2 R4:3
     # await penacony.farm()
     
     # checkout

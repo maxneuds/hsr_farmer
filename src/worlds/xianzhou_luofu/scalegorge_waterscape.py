@@ -5,6 +5,7 @@ from worlds.extra import Extra
 
 class Scalegorge_Waterscape:
     def __init__(self, device):
+        self.map = 'Scalegorge Waterscape'
         self.bot = Bot(device)
     async def farm(self):
         await self.teleport()
@@ -17,7 +18,7 @@ class Scalegorge_Waterscape:
         await self.path_7()
         await self.path_8()
     async def teleport(self):
-        logger_set_path('Teleport')
+        logger_set_path(self.map, 'Teleport')
         logger.info('---')
         logger.info('--- Map: Scalegorge Waterscape')
         logger.info('---')
@@ -34,7 +35,7 @@ class Scalegorge_Waterscape:
         await self.bot.move(0.5, 300)
         await self.bot.attack_technique(4)
     async def path_1(self):
-        logger_set_path(1)
+        logger_set_path(self.map, 1)
         await self.bot.use_teleporter(357/2400, 354/1080, move_x=0, move_y=0) # Ancient Sea Palace Ruins
         await self.bot.move(0.75, 900)
         await self.bot.attack() # items
@@ -45,7 +46,7 @@ class Scalegorge_Waterscape:
         await self.bot.posfix(1.70, 1300)
         await self.bot.attack() # items
     async def path_2(self):
-        logger_set_path(2)
+        logger_set_path(self.map, 2)
         await self.bot.use_teleporter(357/2400, 354/1080, move_x=0, move_y=0) # Ancient Sea Palace Ruins
         await self.bot.move(1.0, 4900)
         await self.bot.move(1.3, 2100)
@@ -60,7 +61,7 @@ class Scalegorge_Waterscape:
             await self.bot.attack_technique(1)
         await self.bot.move(1.7, 300)
     async def path_3(self):
-        logger_set_path(3)
+        logger_set_path(self.map, 3)
         await self.bot.use_teleporter(1433/2400, 659/1080, corner='topleft', move_x=0, move_y=0) # Palace Ruin Depthsck
         await self.bot.move(1.3, 1200)
         await self.bot.attack() # items
@@ -91,7 +92,7 @@ class Scalegorge_Waterscape:
         await self.bot.move(1.5, 300)
         await self.bot.attack_technique(21) # -1TP, roamer
     async def path_4(self):
-        logger_set_path(4)
+        logger_set_path(self.map, 4)
         await self.bot.use_teleporter(1465/2400, 341/1080, corner='topleft', move_x=0, move_y=0) # Shape of Abomination
         await self.bot.move(1.5, 4000)
         await self.bot.move(1.0, 1000)
@@ -111,7 +112,7 @@ class Scalegorge_Waterscape:
         await self.bot.move(1.5, 300)
         await self.bot.attack_technique(4) # -1TP
     async def path_5(self):
-        logger_set_path(5)
+        logger_set_path(self.map, 5)
         await self.bot.use_teleporter(909/2400, 690/1080, corner='topleft', move_x=0, move_y=0) # Divine Seed
         await self.bot.move(1.0, 2000)
         await self.bot.move(1.1, 2500)
@@ -140,7 +141,7 @@ class Scalegorge_Waterscape:
             await self.bot.attack_technique(1)
         await self.bot.attack_technique(7)
     async def path_6(self):
-        logger_set_path(6)
+        logger_set_path(self.map, 6)
         await self.bot.use_teleporter(1433/2400, 659/1080, corner='topleft', move_x=0, move_y=0) # Palace Ruin Depths
         await self.bot.move(1.5, 6000)
         await self.bot.move(1.6, 300)
@@ -152,7 +153,7 @@ class Scalegorge_Waterscape:
         await self.bot.move(1.5, 300)
         await self.bot.attack_technique(4) # -1TP
     async def path_7(self):
-        logger_set_path(7)
+        logger_set_path(self.map, 7)
         await self.bot.use_teleporter(1465/2400, 341/1080, corner='topleft', move_x=0, move_y=0) # Shape of Abomination
         await self.bot.move(1.0, 1600)
         await self.bot.move(0.75, 1600)
@@ -165,7 +166,7 @@ class Scalegorge_Waterscape:
         await self.bot.move(1.8, 800)
         await self.bot.attack() # +2TP
     async def path_8(self):
-        logger_set_path(8)
+        logger_set_path(self.map, 8)
         await self.bot.use_teleporter(1433/2400, 659/1080, corner='topleft', move_x=0, move_y=0) # Palace Ruin Depths
         await self.bot.move(1.5, 3000)
         await self.bot.move(0.0, 3600)

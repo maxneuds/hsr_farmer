@@ -5,6 +5,7 @@ from worlds.extra import Extra
 
 class Cloudford:
     def __init__(self, device):
+        self.map = 'Cloudford'
         self.bot = Bot(device)
     async def farm(self):
         await self.teleport()
@@ -18,7 +19,7 @@ class Cloudford:
         await self.path_8()
         await self.path_9()
     async def teleport(self):
-        logger_set_path('Teleport')
+        logger_set_path(self.map, 'Teleport')
         logger.info('---')
         logger.info('--- Map: Cloudford')
         logger.info('---')
@@ -29,7 +30,7 @@ class Cloudford:
         await self.bot.move(0.37, 2300)
         await self.bot.attack() # +2TP
     async def path_1(self):
-        logger_set_path(1)
+        logger_set_path(self.map, 1)
         await self.bot.use_teleporter(925/2400, 663/1080, move_x=0, move_y=5, corner='topleft') # Trove of Verdure
         await self.bot.move(1.75, 2300)
         await self.bot.move(1.5, 4000)
@@ -41,7 +42,7 @@ class Cloudford:
         await self.bot.move(0.62, 300)
         await self.bot.attack_technique(6) # -1TP
     async def path_2(self): # roamer
-        logger_set_path(2)
+        logger_set_path(self.map, 2)
         await self.bot.use_teleporter(925/2400, 663/1080, move_x=0, move_y=5, corner='topleft') # Trove of Verdure
         await self.bot.move(1.75, 2300)
         await self.bot.move(1.5, 4000)
@@ -53,7 +54,7 @@ class Cloudford:
         await self.bot.move(1.4, 1100)
         await self.bot.attack() # +2TP
     async def path_3(self):
-        logger_set_path(3)
+        logger_set_path(self.map, 3)
         await self.bot.use_teleporter(925/2400, 663/1080, move_x=0, move_y=5, corner='topleft') # Trove of Verdure
         await self.bot.move(0.75, 2100)
         await self.bot.move(1.0, 7500)
@@ -70,7 +71,7 @@ class Cloudford:
         await self.bot.move(0.7, 300)
         await self.bot.attack_technique(3) # +2TP
     async def path_4(self):
-        logger_set_path(4)
+        logger_set_path(self.map, 4)
         await self.bot.use_teleporter(973/2400, 532/1080, move_x=0, move_y=0, corner='botright') # Skiff Boarding Area
         await self.bot.move(0, 9900)
         await self.bot.move(1.5, 1900)
@@ -87,7 +88,7 @@ class Cloudford:
         await self.bot.move(0, 2900)
         await self.bot.attack() # +2TP
     async def path_5(self):
-        logger_set_path(5)
+        logger_set_path(self.map, 5)
         await self.bot.use_teleporter(813/2400, 349/1080, move_x=0, move_y=0, corner='botright') # Bud of Memories
         await self.bot.move(1.65, 2900)
         await self.bot.move(1.8, 400)
@@ -97,7 +98,7 @@ class Cloudford:
         await self.bot.move(0.5, 300)
         await self.bot.attack_technique(2)
     async def path_6(self):
-        logger_set_path(6)
+        logger_set_path(self.map, 6)
         await self.bot.use_teleporter(1129/2400, 642/1080, move_x=0, move_y=1, corner='topright') # Cargo Lane
         await self.bot.move(0.54, 5300)
         await self.bot.attack() # items
@@ -117,14 +118,14 @@ class Cloudford:
         await self.bot.move(1.1, 300)
         await self.bot.attack_technique(6)
     async def path_7(self):
-        logger_set_path(7)
+        logger_set_path(self.map, 7)
         await self.bot.use_teleporter(1163/2400, 530/1080, move_x=0, move_y=0, corner='botright') # Shape of Icicle
         await self.bot.move(0.0, 1300)
         await self.bot.attack() # +2TP
         await self.bot.move(1.5, 1000)
         await self.bot.attack() # items
     async def path_8(self):
-        logger_set_path(8)
+        logger_set_path(self.map, 8)
         await self.bot.use_teleporter(813/2400, 349/1080, move_x=0, move_y=0, corner='botright') # Bud of Memories
         await self.bot.move(1.65, 1700)
         await self.bot.move(0.14, 3100)
@@ -139,7 +140,7 @@ class Cloudford:
             await self.bot.move(1.7, 300)
             await self.bot.attack_technique(3)
     async def path_9(self):
-        logger_set_path(9)
+        logger_set_path(self.map, 9)
         await self.bot.use_teleporter(930/2400, 259/1080, move_x=0, move_y=0, corner='botright') # Cavern of Corrosion
         await self.bot.move(1.25, 1000)
         await self.bot.attack() # +2TP

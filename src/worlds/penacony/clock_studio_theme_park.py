@@ -10,23 +10,24 @@ class Clock_Studios_Theme_Park:
     Time:???
     '''
     def __init__(self, device):
+        self.map = 'Clock Studios Theme Park'
         self.bot = Bot(device)
         self.extra = Extra(device)
     async def farm(self):
-        # await self.teleport()
-        # await self.path_1()
-        # await self.path_2()
-        # await self.path_3()
-        # await self.path_4()
-        # await self.extra.restore_tp(tp=4)
-        # await self.path_5()
-        # await self.path_6()
-        # await self.path_7()
-        # await self.path_8()
-        # await self.path_9()
+        await self.teleport()
+        await self.path_1()
+        await self.path_2()
+        await self.path_3()
+        await self.path_4()
+        await self.extra.restore_tp(tp=4)
+        await self.path_5()
+        await self.path_6()
+        await self.path_7()
+        await self.path_8()
+        await self.path_9()
         await self.path_10()
     async def teleport(self):
-        logger_set_path('Teleport')
+        logger_set_path(self.map, 'Teleport')
         logger.info('---')
         logger.info('--- Map: Clock Studios Theme Park')
         logger.info('---')
@@ -41,7 +42,7 @@ class Clock_Studios_Theme_Park:
         await self.bot.move(1.0, 5800)
         await self.bot.attack(3) # items
     async def path_1(self):
-        logger_set_path(1)
+        logger_set_path(self.map, 1)
         await self.bot.use_teleporter(1209/2400, 276/1080, move_x=1, move_y=6, confirm=True) # Theme Park Entrance
         await self.bot.move(0.36, 6000)
         await self.bot.move(0.2, 2700)
@@ -72,12 +73,12 @@ class Clock_Studios_Theme_Park:
         await self.bot.move(0.4, 500)
         await self.bot.attack_technique(3) # -1TP
     async def path_2(self):
-        logger_set_path(2)
+        logger_set_path(self.map, 2)
         await self.bot.use_teleporter(731/2400, 494/1080, corner='botright', move_x=1, move_y=6) # Shape of Duty
         await self.bot.move(1.3, 700)
         await self.bot.attack() # +2TP
     async def path_3(self):
-        logger_set_path(3)
+        logger_set_path(self.map, 3)
         await self.bot.use_teleporter(539/2400, 455/1080, move_x=1, move_y=1) # Hanu Gang Place
         await self.bot.move(0.8, 3300)
         for _ in range(4): # -1TP, roamer
@@ -102,7 +103,7 @@ class Clock_Studios_Theme_Park:
         await self.bot.move(1.0, 900)
         await self.bot.attack() # +2TP
     async def path_4(self):
-        logger_set_path(4)
+        logger_set_path(self.map, 4)
         await self.bot.use_teleporter(539/2400, 455/1080, move_x=1, move_y=1, confirm=True) # Hanu Gang Place
         await self.bot.move(0.49, 7000)
         await self.bot.move(0.01, 5500)
@@ -111,7 +112,7 @@ class Clock_Studios_Theme_Park:
         await self.bot.move(0.52, 4500)
         await self.bot.attack_technique(3) # -2TP
     async def path_5(self):
-        logger_set_path(5)
+        logger_set_path(self.map, 5)
         await self.bot.switch_map(y_list=446/1080, world='penacony', scroll_down=True, # Hamster Ball Park
                                     x=490/2400, y=633/1080, corner='topright', move_x=1, move_y=1)
         await self.bot.move(1.58, 7000)
@@ -126,7 +127,7 @@ class Clock_Studios_Theme_Park:
         await self.bot.move(1.9, 300)
         await self.bot.attack_technique(6) # -1TP
     async def path_6(self):
-        logger_set_path(6)
+        logger_set_path(self.map, 6)
         await self.bot.use_teleporter(1100/2400, 423/1080, corner='botright', move_x=3, move_y=3) # Bud of Preservation
         await self.bot.move(1.69, 2500)
         await self.bot.attack() # +2TP
@@ -139,7 +140,7 @@ class Clock_Studios_Theme_Park:
         await self.bot.move(1.5, 300)
         await self.bot.attack_technique(3) # -1TP
     async def path_7(self):
-        logger_set_path(7)
+        logger_set_path(self.map, 7)
         await self.bot.use_teleporter(490/2400, 633/1080, move_x=1, move_y=1, corner='topright', confirm=True) # Hamster Ball Park
         await self.bot.move(0.2, 3000)
         await self.bot.move(1.98, 4500)
@@ -152,7 +153,7 @@ class Clock_Studios_Theme_Park:
         await self.bot.move(1.9, 700)
         await self.bot.attack() # +2TP
     async def path_8(self):
-        logger_set_path(8)
+        logger_set_path(self.map, 8)
         await self.bot.use_teleporter(490/2400, 633/1080, move_x=1, move_y=1, corner='topright', confirm=True) # Hamster Ball Park
         await self.bot.move(0.2, 3000)
         await self.bot.move(0.0, 4700)
@@ -162,12 +163,12 @@ class Clock_Studios_Theme_Park:
         await self.bot.move(0.5, 300)
         await self.bot.attack_technique(4) # -1TP
     async def path_9(self):
-        logger_set_path(9)
+        logger_set_path(self.map, 9)
         await self.bot.use_teleporter(929/2400, 549/1080, corner='topleft', move_x=0, move_y=7) # Screening Area Entrance
         await self.bot.move(0.6, 2400)
         await self.bot.attack_technique(1) # +2TP
     async def path_10(self):
-        logger_set_path(10)
+        logger_set_path(self.map, 10)
         await self.bot.use_teleporter(490/2400, 633/1080, move_x=1, move_y=1, corner='topright', confirm=True) # Hamster Ball Park
         raise SystemExit('check')
         await self.bot.move(0.4, 1000)

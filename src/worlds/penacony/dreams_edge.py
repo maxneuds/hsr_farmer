@@ -9,6 +9,7 @@ class Dreams_Edge:
     R4: 2 
     '''
     def __init__(self, device):
+        self.map = 'Dream\'s Edge'
         self.bot = Bot(device)
         self.extra = Extra(device)
     async def farm(self):
@@ -24,7 +25,7 @@ class Dreams_Edge:
         await self.path_7()
         await self.path_8()
     async def teleport(self):
-        logger_set_path('Teleport')
+        logger_set_path(self.map, 'Teleport')
         logger.info('---')
         logger.info("--- Map: Dream's Edge")
         logger.info('---')
@@ -41,7 +42,7 @@ class Dreams_Edge:
         await self.bot.move(1.3, 300)
         await self.bot.attack_technique(8) # -1TP
     async def path_1(self):
-        logger_set_path(1)
+        logger_set_path(self.map, 1)
         await self.bot.use_teleporter(764/2400, 253/1080, move_x=2, move_y=3, corner='botright') # Rooftop Garden
         await self.bot.move(0.9, 1000)
         await self.bot.attack() # +2TP
@@ -52,7 +53,7 @@ class Dreams_Edge:
         await self.bot.move(0.05, 400)
         await self.bot.attack_technique(8) # -2TP
     async def path_2(self):
-        logger_set_path(2)
+        logger_set_path(self.map, 2)
         await self.bot.switch_map(y_list=771/1080, world='penacony', scroll_down=False, # Rooftop Garden
                                     x=764/2400, y=253/1080, corner='botright', move_x=2, move_y=3)
         await self.bot.move(0.5, 3500)
@@ -63,7 +64,7 @@ class Dreams_Edge:
         await self.bot.move(0.5, 300)
         await self.bot.attack_technique(6) # -1TP
     async def path_3(self):
-        logger_set_path(3)
+        logger_set_path(self.map, 3)
         await self.bot.use_teleporter(543/2400, 503/1080, move_x=3, move_y=1, corner='topright', confirm=True) # The Family's Construction Authority
         await self.bot.move(0.25, 3000)
         await self.bot.move(0.5, 8500)
@@ -101,7 +102,7 @@ class Dreams_Edge:
         await self.bot.move(0.2, 700)
         await self.bot.attack_technique(2) # items
     async def path_4(self):
-        logger_set_path(4)
+        logger_set_path(self.map, 4)
         await self.bot.use_teleporter(764/2400, 253/1080, move_x=2, move_y=3, corner='botright') # Rooftop Garden
         await self.bot.move(0.5, 5000)
         await self.bot.move(0.75, 1500)
@@ -111,12 +112,12 @@ class Dreams_Edge:
         await self.bot.move(1.0, 500)
         await self.bot.attack_technique(8) # -1TP
     async def path_5(self):
-        logger_set_path(5)
+        logger_set_path(self.map, 5)
         await self.bot.use_teleporter(933/2400, 535/1080, move_x=0, move_y=5, corner='topright') # Dreamweaver Plaza
         await self.bot.move(1.97, 2000)
         await self.bot.attack_technique(8) # -1TP
     async def path_6(self):
-        logger_set_path(6)
+        logger_set_path(self.map, 6)
         await self.bot.use_teleporter(933/2400, 535/1080, move_x=0, move_y=5, corner='topright') # Dreamweaver Plaza
         await self.bot.move(0.25, 1500)
         await self.bot.move(0.5, 500)
@@ -132,7 +133,7 @@ class Dreams_Edge:
         await self.bot.move(1.0, 300)
         await self.bot.attack_technique(5) # -1TP
     async def path_7(self):
-        logger_set_path(7)
+        logger_set_path(self.map, 7)
         await self.bot.switch_map(y_list=771/1080, world='penacony', scroll_down=False, # Dreamweaver Plaza
                                     x=933/2400, y=535/1080, corner='topright', move_x=0, move_y=5)
         await self.bot.move(0.25, 1500)
@@ -148,7 +149,7 @@ class Dreams_Edge:
         await self.bot.move(0.2, 300)
         await self.bot.attack_technique(8) # items
     async def path_8(self):
-        logger_set_path(8)
+        logger_set_path(self.map, 8)
         await self.bot.use_teleporter(909/2400, 345/1080, move_x=0, move_y=7, corner='botleft') # Shape of Roast
         await self.bot.move(1.5, 3000)
         await self.bot.move(0.05, 1300)

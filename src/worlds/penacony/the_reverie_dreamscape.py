@@ -11,6 +11,7 @@ class The_Reverie_Dreamscape:
     # TP:-22->1 XP:14580/15552 Time:?
     '''
     def __init__(self, device):
+        self.bot = 'The Reverie Dreamscape'
         self.bot = Bot(device)
         self.extra = Extra(device)
     async def farm(self, mode='credits'):
@@ -35,7 +36,7 @@ class The_Reverie_Dreamscape:
         await self.extra.restore_tp(tp=4)
         await self.path_17()
     async def teleport(self):
-        logger_set_path('Teleport')
+        logger_set_path(self.map, 'Teleport')
         logger.info('---')
         logger.info("--- Map: The Reverie (Dreamscape)")
         logger.info('---')
@@ -49,7 +50,7 @@ class The_Reverie_Dreamscape:
         await self.bot.move(1.0, 500)
         await self.bot.attack_technique(2) # -1TP
     async def path_1(self):
-        logger_set_path(1)
+        logger_set_path(self.map, 1)
         await self.bot.use_teleporter(935/2400, 587/1080, move_x=0, move_y=5, corner='topleft') # VIP Lounge Corridor
         await self.bot.move(1.25, 1300)
         await self.bot.move(1, 5000)
@@ -62,7 +63,7 @@ class The_Reverie_Dreamscape:
         await self.bot.move(1.9, 300)
         await self.bot.attack_technique(8) # -2TP
     async def path_2(self):
-        logger_set_path(2)
+        logger_set_path(self.map, 2)
         await self.bot.use_teleporter(1021/2400, 546/1080, move_x=0, move_y=3, corner='botright') # Bud of Treasures
         await self.bot.move(1.5, 800)
         await self.bot.move(0.0, 4000)
@@ -75,13 +76,13 @@ class The_Reverie_Dreamscape:
         await self.bot.move(1.4, 500)
         await self.bot.attack() # +2TP
     async def path_3(self):
-        logger_set_path(3)
+        logger_set_path(self.map, 3)
         await self.bot.use_teleporter(1132/2400, 660/1080, move_x=0, move_y=8, corner='botleft') # Bud of Harmony
         await self.bot.move(1.0, 2500)
         await self.bot.move(0.5, 500)
         await self.bot.attack_technique(12) # -2TP, roamer
     async def path_4(self):
-        logger_set_path(4)
+        logger_set_path(self.map, 4)
         await self.bot.use_teleporter(1241/2400, 520/1080, move_x=0, move_y=5, corner='topright', confirm=True) # Platinum Guest Room
         await self.bot.move(0.5, 2700)
         await self.bot.move(0.9, 1400)
@@ -103,7 +104,7 @@ class The_Reverie_Dreamscape:
             await self.bot.move(1.8, 300)
             await self.bot.attack_technique(2)
     async def path_5(self):
-        logger_set_path(5)
+        logger_set_path(self.map, 5)
         await self.bot.use_teleporter(850/2400, 296/1080, move_x=0, move_y=4, corner='botright') # Dreamscape Lobby
         await self.bot.move(0.5, 300)
         await self.bot.attack_technique(19)
@@ -117,7 +118,7 @@ class The_Reverie_Dreamscape:
         await self.bot.move(0.0, 300)
         await self.bot.attack_technique(4) # +2TP
     async def path_6(self):
-        logger_set_path(6)
+        logger_set_path(self.map, 6)
         await self.bot.use_teleporter(935/2400, 587/1080, move_x=0, move_y=5, corner='topleft') # VIP Lounge Corridor
         await self.bot.move(1.25, 1200)
         await self.bot.move(1.0, 5100)
@@ -125,7 +126,7 @@ class The_Reverie_Dreamscape:
         await self.bot.move(1.0, 500)
         await self.bot.attack_technique(10) # -1TP
     async def path_7(self):
-        logger_set_path(7)
+        logger_set_path(self.map, 7)
         await self.bot.use_teleporter(935/2400, 587/1080, move_x=0, move_y=5, corner='topleft') # VIP Lounge Corridor
         await self.bot.move(0.5, 1600)
         await self.bot.move(1.0, 2300)
@@ -135,12 +136,12 @@ class The_Reverie_Dreamscape:
         await self.bot.move(0.0, 300)
         await self.bot.attack_technique(10) # -1TP
     async def path_8(self):
-        logger_set_path(8)
+        logger_set_path(self.map, 8)
         await self.bot.use_teleporter(574/2400, 482/1080, move_x=0, move_y=6, corner='topleft') # Shape of Nectar
         await self.bot.move(1.5, 2600)
         await self.bot.attack() # +2TP
     async def path_9(self):
-        logger_set_path(9)
+        logger_set_path(self.map, 9)
         await self.bot.use_teleporter(865/2400, 461/1080, move_x=0, move_y=0, corner='topleft') # Dreamjolt Hostelry
         await self.bot.move(0.1, 2300)
         await self.bot.move(0.5, 4500)
@@ -157,7 +158,7 @@ class The_Reverie_Dreamscape:
         await self.bot.move(0.3, 300)
         await self.bot.attack_technique(9) # items
     async def path_10(self):
-        logger_set_path(10)
+        logger_set_path(self.map, 10)
         await self.bot.use_teleporter(865/2400, 461/1080, move_x=0, move_y=0, corner='topleft') # Dreamjolt Hostelry
         await self.bot.move(1.95, 500)
         await self.bot.attack_technique(8) # items
@@ -177,7 +178,7 @@ class The_Reverie_Dreamscape:
         await self.bot.move(1.0, 500)
         await self.bot.attack_technique(3) # items
     async def path_11(self):
-        logger_set_path(11)
+        logger_set_path(self.map, 11)
         await self.bot.use_teleporter(865/2400, 461/1080, move_x=0, move_y=0, corner='topleft') # Dreamjolt Hostelry
         await self.bot.move(0.1, 2300)
         await self.bot.move(0.5, 13100)
@@ -220,7 +221,7 @@ class The_Reverie_Dreamscape:
         await self.bot.move(1.6, 300)
         await self.bot.attack_technique(6) # items
     async def path_12(self):
-        logger_set_path(12)
+        logger_set_path(self.map, 12)
         await self.bot.use_teleporter(1241/2400, 520/1080, move_x=0, move_y=5, corner='topright', confirm=True) # Platinum Guest Room
         await self.bot.move(0.5, 500)
         await self.bot.attack_technique(4) # move
@@ -277,7 +278,7 @@ class The_Reverie_Dreamscape:
         await self.bot.move(1.7, 1500)
         await self.bot.attack_technique(4) # items
     async def path_13(self):
-        logger_set_path(13)
+        logger_set_path(self.map, 13)
         await self.bot.use_teleporter(1241/2400, 520/1080, move_x=0, move_y=5, corner='topright', confirm=True) # Platinum Guest Room
         await self.bot.move(0.5, 500)
         await self.bot.attack_technique(4) # move
@@ -356,7 +357,7 @@ class The_Reverie_Dreamscape:
         await self.bot.move(1.1, 500)
         await self.bot.attack_technique(4) # +2TP
     async def path_14(self):
-        logger_set_path(14)
+        logger_set_path(self.map, 14)
         await self.bot.use_teleporter(748/2400, 533/1080, move_x=0, move_y=3, corner='topleft') # Monitoring Room
         await self.bot.move(0.7, 2400)
         await self.bot.move(1.0, 8500)
@@ -384,7 +385,7 @@ class The_Reverie_Dreamscape:
         await self.bot.attack_technique(3) # items
         await self.bot.restore_tp(item='trick_snack', n=1) # +2TP
     async def path_15(self):
-        logger_set_path(15)
+        logger_set_path(self.map, 15)
         await self.bot.use_teleporter(935/2400, 587/1080, move_x=0, move_y=5, corner='topleft') # VIP Lounge Corridor
         await self.bot.move(1.25, 1200)
         await self.bot.move(1, 5500)
@@ -460,7 +461,7 @@ class The_Reverie_Dreamscape:
         await self.bot.move(1.4, 500)
         await self.bot.attack_technique(3) # -1TP
     async def path_16(self):
-        logger_set_path(16)
+        logger_set_path(self.map, 16)
         await self.bot.switch_map(y_list=1011/1080, world='penacony', scroll_down=False, # Platinum Guest Room
                                     x=1241/2400, y=520/1080, corner='topright', move_x=0, move_y=5, confirm=True)
         await self.bot.move(0.5, 2600)
@@ -480,7 +481,7 @@ class The_Reverie_Dreamscape:
         await self.bot.move(0.9, 300)
         await self.bot.attack_technique(10) # -2TP
     async def path_17(self):
-        logger_set_path(17)
+        logger_set_path(self.map, 17)
         await self.bot.switch_map(y_list=1011/1080, world='penacony', scroll_down=False, # Monitoring Room
                                     x=748/2400, y=533/1080, corner='topleft', move_x=0, move_y=3)
         await self.bot.move(1.5, 6300)
@@ -531,7 +532,7 @@ class The_Reverie_Dreamscape:
         await self.bot.move(0.5, 300)
         await self.bot.attack_technique(8)
     async def path_18(self):
-        logger_set_path(18)
+        logger_set_path(self.map, 18)
         # TODO: one more room
 
 

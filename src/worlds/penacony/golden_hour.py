@@ -5,9 +5,10 @@ from worlds.extra import Extra
 
 class Golden_Hour:
     def __init__(self, device):
+        self.map = 'Golden Hour'
         self.bot = Bot(device)
     async def restore_tp(self, tp):
-        logger_set_path('Teleport: TP Restore')
+        logger_set_path(self.map, 'TP Restore')
         logger.info('---')
         logger.info('--- Map: Golden Hour')
         logger.info('---')

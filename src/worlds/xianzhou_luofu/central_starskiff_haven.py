@@ -5,9 +5,10 @@ from worlds.extra import Extra
 
 class Central_Starskiff_Haven:
     def __init__(self, device):
+        self.map = 'Central Starskiff Haven'
         self.bot = Bot(device)
     async def teleport(self):
-        logger_set_path('Teleport')
+        logger_set_path(self.map, 'Teleport')
         logger.info('---')
         logger.info('--- Map: Central Starskiff Haven')
         logger.info('---')
@@ -17,7 +18,7 @@ class Central_Starskiff_Haven:
         await self.bot.move(1.5, 7200)
         await self.bot.move(1.7, 1000)
     async def shop_salesby(self):
-        logger_set_path('Shop Salesby')
+        logger_set_path(self.map, 'Shop Salesby')
         await self.bot.chat_initiate()
         await self.bot.chat_advance(n=2)
         await self.bot.action_tap(int(self.bot.xy.width*1654/2400), int(self.bot.xy.height*484/1080))

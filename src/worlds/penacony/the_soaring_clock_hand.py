@@ -5,9 +5,10 @@ from worlds.extra import Extra
 
 class The_Soaring_Clock_Hand:
     def __init__(self, device):
+        self.map = 'The Soaring Clock Hand'
         self.bot = Bot(device)
     async def restore_tp(self, tp):
-        logger_set_path('Teleport: Restore TP')
+        logger_set_path(self.map, 'Teleport: Restore TP')
         logger.info('---')
         logger.info('--- Map: The Soaring Clock Hand')
         logger.info('---')

@@ -5,6 +5,7 @@ from worlds.extra import Extra
 
 class Artisanship_Commission:
     def __init__(self, device):
+        self.map = 'Artisanship Commission'
         self.bot = Bot(device)
         self.extra = Extra(device)
     async def farm(self):
@@ -20,7 +21,7 @@ class Artisanship_Commission:
         await self.path_7()
         await self.path_8()
     async def teleport(self):
-        logger_set_path('Teleport')
+        logger_set_path(self.map, 'Teleport')
         logger.info('---')
         logger.info('--- Map: Artisanship Commission')
         logger.info('---')
@@ -38,7 +39,7 @@ class Artisanship_Commission:
         await self.bot.move(1.25, 300)
         await self.bot.attack_technique(4) # +2TP
     async def path_1(self):
-        logger_set_path(1)
+        logger_set_path(self.map, 1)
         await self.bot.use_teleporter(933/2400, 530/1080, corner='topright', move_x=0, move_y=4) # Passage of the Finery Foundry
         await self.bot.move(0.5, 4100)
         await self.bot.move(0.25, 2500)
@@ -49,7 +50,7 @@ class Artisanship_Commission:
         await self.bot.move(1.5, 300)
         await self.bot.attack_technique(5) # -1TP
     async def path_2(self):
-        logger_set_path(2)
+        logger_set_path(self.map, 2)
         await self.bot.use_teleporter(933/2400, 530/1080, corner='topright', move_x=0, move_y=4) # Passage of the Finery Foundry
         await self.bot.move(0.5, 10900)
         await self.bot.move(0.0, 3900)
@@ -64,7 +65,7 @@ class Artisanship_Commission:
         await self.bot.move(1.5, 100)
         await self.bot.attack_technique(5) # -1TP
     async def path_3(self):
-        logger_set_path(3)
+        logger_set_path(self.map, 3)
         await self.bot.use_teleporter(854/2400, 418/1080, corner='botright', move_x=0, move_y=4) # Creation Furnace
         await self.bot.move(1.0, 1100)
         await self.bot.move(1.5, 900)
@@ -93,7 +94,7 @@ class Artisanship_Commission:
             await self.bot.move(1.9, 300)
             await self.bot.attack_technique(1)
     async def path_4(self):
-        logger_set_path(4)
+        logger_set_path(self.map, 4)
         await self.bot.switch_map(y_list=446/1080, world='the_xianzhou_luofu', scroll_down=True, # Passage to the Sapientia Academe
                                     x=894/2400, y=610/1080, corner='topleft', move_x=0, move_y=2)
         await self.bot.move(1.25, 3100)
@@ -124,12 +125,12 @@ class Artisanship_Commission:
             await self.bot.move(0.25, 300)
             await self.bot.attack_technique(1)
     async def path_5(self):
-        logger_set_path(5)
+        logger_set_path(self.map, 5)
         await self.bot.use_teleporter(804/2400, 487/1080, corner='topleft', move_x=0, move_y=5) # Shape of Puppetry
         await self.bot.move(1.22, 2100)
         await self.bot.attack() # +2TP
     async def path_6(self):
-        logger_set_path(6)
+        logger_set_path(self.map, 6)
         await self.bot.use_teleporter(854/2400, 418/1080, corner='botright', move_x=0, move_y=4) # Creation Furnace
         await self.bot.move(1.0, 1100)
         await self.bot.move(1.5, 900)
@@ -147,7 +148,7 @@ class Artisanship_Commission:
         await self.bot.move(0.5, 300)
         await self.bot.attack_technique(6) # -1TP
     async def path_7(self):
-        logger_set_path(7)
+        logger_set_path(self.map, 7)
         await self.bot.switch_map(y_list=446/1080, world='the_xianzhou_luofu', scroll_down=True, # Passage to the Sapientia Academe
                                     x=894/2400, y=610/1080, corner='topleft', move_x=0, move_y=2)
         await self.bot.move(1.25, 3100)
@@ -197,7 +198,7 @@ class Artisanship_Commission:
         await self.bot.move(0.2, 3100)
         await self.bot.attack() # +2TP
     async def path_8(self):
-        logger_set_path(8)
+        logger_set_path(self.map, 8)
         await self.bot.use_teleporter(894/2400, 610/1080, corner='topleft', move_x=0, move_y=2) # Passage to the Sapientia Academe
         await self.bot.move(0.5, 4400)
         await self.bot.move(0.75, 1700)
