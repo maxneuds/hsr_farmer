@@ -201,7 +201,7 @@ class Bot:
                 await aio.sleep(0.05)
             await aio.sleep(0.1)
 
-    async def use_teleporter(self, x, y, move_x=0, move_y=0, swipe=1, move_spd=500, corner='botright', open_map=True, confirm=False, special_exit=True, switch_world=False, n_try=0, debug=False):
+    async def use_teleporter(self, x, y, move_x=0, move_y=0, swipe=1, move_spd=500, corner='botright', x2=None, y2=None, open_map=True, confirm=False, special_exit=True, switch_world=False, n_try=0, debug=False):
         logger.info(f'use teleporter: {int(self.xy.width*x)},{int(self.xy.height*y)}')
         if open_map == True:
             await self.open_map(special_exit=special_exit)
@@ -234,11 +234,17 @@ class Bot:
                     cmd = f'input swipe {int(self.xy.width*0.3)} {int(self.xy.height*0.1)} {int(self.xy.width*(0.3+0.65*(move_x/10)))} {int(self.xy.height*(0.1+0.85*(move_y/10)))} {move_spd}'
                 await self.shell_failsafe(cmd)
                 await aio.sleep(2)
-        # debug: send screenshot
+        if x2 != None and y2 != None:
+            # in case area selection is needed before
+            if debug:
+                await self.get_screen(debug=True)
+            logger.info(f'tap area: {int(self.xy.width*x2)},{int(self.xy.height*y2)}')
+            await self.shell_failsafe(f'input tap {int(self.xy.width*x2)} {int(self.xy.height*y2)}')
+            await aio.sleep(2.5)
+        # tap teleporter
         if debug:
             await self.get_screen(debug=True)
-            sys.exit()
-        # tap teleporter
+            raise SystemExit('debug exit')
         logger.info(f'tap teleporter: {int(self.xy.width*x)},{int(self.xy.height*y)}')
         await self.shell_failsafe(f'input tap {int(self.xy.width*x)} {int(self.xy.height*y)}')
         await aio.sleep(1.25)
@@ -312,18 +318,18 @@ class Bot:
         await self.shell_failsafe(f'input swipe {top_left[0] + int(w/2)} {top_left[1] + int(h/2)} {top_left[0] + int(w/2)} {top_left[1] + int(h/2)} 200')
         await aio.sleep(2)
     
-    async def switch_map(self, y_list, world, x, y, scroll_down=False, corner='botright', move_x=0, move_y=0, confirm=False, debug=False):
+    async def switch_map(self, y_list, world, x, y, scroll_down=False, corner='botright', x2=None, y2=None, move_x=0, move_y=0, swipe=1, confirm=False, debug=False):
         logger.info('switch map')
         await self.switch_world(world=world)
         logger.info('scroll location list')
         x_list = int(self.xy.width*0.732)
         if scroll_down:
-            y1 = int(self.xy.height*0.8)
-            y2 = int(self.xy.height*0.2)
+            swipe_y1 = int(self.xy.height*0.8)
+            swipe_y2 = int(self.xy.height*0.2)
         else:
-            y1 = int(self.xy.height*0.3)
-            y2 = int(self.xy.height*0.8)
-        cmd = f'input swipe {x_list} {y1} {x_list} {y2} 250'
+            swipe_y1 = int(self.xy.height*0.3)
+            swipe_y2 = int(self.xy.height*0.8)
+        cmd = f'input swipe {x_list} {swipe_y1} {x_list} {swipe_y2} 250'
         await self.shell_failsafe(cmd)
         await aio.sleep(3)
         if debug:
@@ -331,10 +337,10 @@ class Bot:
         logger.info('tap location')
         await self.action_tap(x_list, int(self.xy.height*y_list))
         await aio.sleep(2)
-        check = await self.use_teleporter(x, y, corner=corner, move_x=move_x, move_y=move_y, confirm=confirm, open_map=False, debug=debug)
+        check = await self.use_teleporter(x, y, corner=corner, move_x=move_x, move_y=move_y, x2=x2, y2=y2, swipe=swipe, confirm=confirm, open_map=False, debug=debug)
         if check == False:
             logger.warning('map change failed: retry')
-            await self.switch_map(y_list=y_list, world=world, x=x, y=y, scroll_down=scroll_down, corner=corner, move_x=move_x, move_y=move_y, confirm=confirm, debug=debug)
+            await self.switch_map(y_list=y_list, world=world, x=x, y=y, scroll_down=scroll_down, corner=corner, x2=x2, y2=y2, move_x=move_x, move_y=move_y, swipe=swipe, confirm=confirm, debug=debug)
     
     async def restore_tp(self, item='trick_snack', n=1, n_try=0):
         logger.info('action: restore TP using food, make sure it is faved first')

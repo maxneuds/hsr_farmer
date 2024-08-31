@@ -4,25 +4,62 @@ from worlds.extra import Extra
 
 
 class Audition_Venue:
+    '''
+    R2: 2
+    '''
     def __init__(self, device):
         self.map = 'Audition Venue'
         self.bot = Bot(device)
+        self.extra = Extra(device)
+    async def farm(self):
+        await self.teleport()
     async def teleport(self):
         logger_set_path(self.map, 'Teleport')
         logger.info('---')
-        logger.info('--- Map: Audition Venue')
+        logger.info('--- Map: SoulGlad Scorchsand Audition Venue')
         logger.info('---')
+        await self.bot.switch_map(y_list=686/1080, world='penacony', scroll_down=True, # Dreamplay Fantasia: Action Challenge
+                                    x=1118/2400, y=632/1080, corner='botright', move_x=0, move_y=6, x2=751/2400, y2=310/1080)
+        await self.bot.move(0.275, 3100)
+        await self.bot.attack_technique(2) # -2TP
+        await self.bot.move(1.75, 3000)
+        await self.bot.posfix(1.75, 500)
+        await self.bot.move(1.05, 3000)
+        await self.bot.attack_technique(1) # +2TP
+        await self.bot.move(0.5, 500)
+        await self.bot.attack_technique(2) # move
+        await self.bot.move(0.75, 300)
+        await self.bot.attack_technique(4) # items
+        await self.bot.move(0.6, 500)
+        await self.bot.move(0.75, 1000)
+        await self.bot.posfix(0.75, 500)
+        await self.bot.move(1.75, 1200)
+        await self.bot.move(0.5, 700)
+        await self.bot.move(0.6, 500)
+        await self.bot.move(0.75, 1000)
+        await self.bot.move(1.0, 300)
+        await self.bot.attack_technique(4) # -2TP
+        await self.bot.move(1.4, 3000)
+        await self.bot.move(1.1, 1000)
+        await self.bot.restore_tp('trick_snack') # +2TP
+        await self.bot.posfix(1.25, 500)
+        await self.bot.move(0.25, 1500)
+        await self.bot.move(0.5, 300)
+        await self.bot.attack_technique(7) # move
+        await self.bot.move(0.2, 300)
+        await self.bot.attack_technique(4) # move
+        await self.bot.move(0.5, 300)
+        await self.bot.attack_technique(8) # -3TP
+        await self.bot.move(1.75, 300)
+        await self.bot.attack_technique(4) # items
+        await self.bot.move(0.0, 2000)
+        await self.bot.move(1.75, 1500)
+        await self.bot.restore_tp('trick_snack') # +2TP
+        await self.bot.posfix(0.75, 1000)
+        await self.bot.move(0.5, 300)
+        await self.bot.attack_technique(6) # -1TP
+        await self.bot.move(1.0, 300)
+        await self.bot.attack_technique(3) # -1TP
+        # TODO: continue
 
-    # Soulgrad: y=686
-    # class Penacony_Grand_Theater:
-    #     def __init__(self, device):
-    #         self.bot = Bot(device)
-    #     async def teleport(self): # 1->3
-    #         logger_set_path('Teleport')
-    #         logger.info('---')
-    #         logger.info('--- Map: Penacony Grand Theater')
-    #         logger.info('---')
-    #         await self.bot.switch_map(y_list=807/1080, world='penacony', scroll_down=True,
-    #                                     x=787/2400, y=717/1080, corner='topleft', move_x=3, move_y=7)
 
-            

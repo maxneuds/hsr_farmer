@@ -32,7 +32,7 @@ class Penacony:
         '''
         Status  7/9 (new: theater, audition) /n
         TP      5 -> ???                    /n
-        R2/R4   3 / 3                       /n
+        R2/R4   5 / 3                       /n
         XP      ???/???                   /n
         Time    ???
         '''
@@ -49,7 +49,7 @@ class Penacony:
         await self.dewlight_pavilion.farm()                     # TP:-14->1 XP:11448/11448 Time: R2/4:1/2
         await self.golden_hour.restore_tp(tp=4.2)               # TP:+4->5 Time:80
         await self.penacony_grand_theater.farm()                # XP:?/? Time: TP:1->? R4:0 R2:? # unoptimized/unfinished
-        # await self.the_soaring_clock_hand.restore_tp(tp=4)      # TP:+4->5 Time:???
+        await self.the_soaring_clock_hand.restore_tp(tp=4)      # TP:+4->5 Time:???
     async def dev(self):
         raise SystemExit()
 

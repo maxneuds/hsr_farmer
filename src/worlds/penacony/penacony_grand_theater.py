@@ -7,6 +7,7 @@ class Penacony_Grand_Theater:
     def __init__(self, device):
         self.map = 'Penacony Grand Theater'
         self.bot = Bot(device)
+        self.extra = Extra(device)
     async def farm(self):
         await self.teleport()
         await self.path_1()
@@ -19,8 +20,13 @@ class Penacony_Grand_Theater:
         await self.path_8()
         await self.path_9()
         await self.path_10()
-        await self.path_x()
-    async def teleport(self): # 1->3
+        await self.path_11()
+        await self.extra.restore_tp(tp=4)
+        await self.path_12()
+        await self.path_13()
+        await self.path_14()
+        await self.path_15()
+    async def teleport(self):
         logger_set_path(self.map, 'Teleport')
         logger.info('---')
         logger.info('--- Map: Penacony Grand Theater')
@@ -52,7 +58,7 @@ class Penacony_Grand_Theater:
         await self.bot.attack_technique(1) # -1TP
         await self.bot.move(0.8, 300)
         await self.bot.attack_technique(4) # -1TP
-    async def path_2(self): # 1->3
+    async def path_2(self):
         logger_set_path(self.map, 2)
         await self.bot.use_teleporter(1251/2400, 469/1080, move_x=0, move_y=8, swipe=2, corner='botright') # Communing Hall
         await self.bot.move(1.4, 3000)
@@ -71,7 +77,7 @@ class Penacony_Grand_Theater:
         await self.bot.move(0.7, 5000)
         await self.bot.move(0.5, 700)
         await self.bot.attack(2) # items
-    async def path_4(self): # 3->3
+    async def path_4(self):
         logger_set_path(self.map, 4)
         await self.bot.use_teleporter(1251/2400, 469/1080, move_x=0, move_y=8, swipe=2, corner='botright') # Communing Hall
         await self.bot.move(0.5, 6000)
@@ -171,14 +177,185 @@ class Penacony_Grand_Theater:
         await self.bot.move(1.5, 1000)
         await self.bot.move(1.85, 1500)
         await self.bot.attack_technique(2) # items
-        # END: 5TP
-    async def path_x(self):
+    async def path_11(self):
         logger_set_path(self.map, 11)
         await self.bot.use_teleporter(787/2400, 717/1080, corner='topleft', move_x=3, move_y=7) # Echo of War
-        # TODO: 4 to the left
-    async def path_z(self):
-        logger_set_path(self.map, 11)
-        await self.bot.use_teleporter(671/2400, 526/1080, move_x=0, move_y=8, swipe=2, corner='botleft') # Saloon of Gospels
-        # TODO: +2TP bot, teleport back, go into dream (1), -2TP
+        raise SystemExit('check')
+        await self.bot.move(1.1, 500)
+        await self.bot.attack_technique(13) # move
+        await self.bot.move(1.3, 300)
+        await self.bot.attack_technique(10) # move
+        await self.bot.move(1.4, 300)
+        await self.bot.attack_technique(5) # -1TP
+        await self.bot.move(1.0, 300)
+        await self.bot.attack_technique(6) # move
+        await self.bot.move(0.5, 300)
+        await self.bot.attack_technique(10) # -1TP, roamer
+        await self.bot.move(0.25, 300)
+        await self.bot.attack_technique(2) # move
+        await self.bot.move(0.25, 300)
+        await self.bot.attack_technique(20) # move
+        await self.bot.posfix(0.25, 500)
+        await self.bot.move(1.05, 300)
+        await self.bot.attack_technique(8) # move
+        await self.bot.move(1.25, 300)
+        await self.bot.attack_technique(10) # -2TP
+    async def path_12(self):
+        logger_set_path(self.map, 12)
+        await self.bot.switch_map(y_list=807/1080, world='penacony', scroll_down=True, # Saloon of Gospels
+                                    x=671/2400, y=526/1080, corner='botleft', move_x=0, move_y=8, swipe=2)
+        await self.bot.move(0.7, 2500)
+        await self.bot.move(1.0, 1600)
+        await self.bot.move(0.75, 300)
+        await self.bot.attack_technique(3) # items
+        await self.bot.move(0.75, 1500)
+        await self.bot.posfix(0.75, 500)
+        await self.bot.move(1.5, 1500)
+        await self.bot.move(1.6, 1200)
+        await self.bot.interact() # Enter Dreamscape
+        await self.bot.move(0.75, 2000)
+        await self.bot.posfix(0.75, 500)
+        await self.bot.move(1.9, 1300)
+        await self.bot.move(0.5, 300)
+        await self.bot.attack_technique(12) # move
+        await self.bot.move(0.75, 300)
+        await self.bot.attack_technique(3) # items
+        await self.bot.move(1.75, 1000)
+        await self.bot.move(0.0, 300)
+        await self.bot.attack_technique(10) # -2TP
+        await self.bot.move(0.25, 1500)
+        await self.bot.posfix(0.25, 500)
+        await self.bot.move(1.25, 1500)
+        await self.bot.move(1.5, 500)
+        await self.bot.attack_technique(5) # move
+        await self.bot.move(1.0, 300)
+        await self.bot.attack_technique(5) # move
+        await self.bot.move(0.75, 300)
+        await self.bot.attack_technique(2) # items
+        await self.bot.move(0.25, 1500)
+        raise SystemExit('check roamer')
+        await self.bot.posfix(0.25, 500)
+        await self.bot.move(1.25, 1700)
+        await self.bot.move(1.0, 300)
+        await self.bot.attack_technique(20) # -1TP
+        await self.bot.move(1.6, 300)
+        await self.bot.attack_technique(6) # -1TP, roamer
+        raise SystemExit('check: get to the next item')
+        await self.bot.move(0.5, 300)
+        await self.bot.attack_technique(8) # items
+        await self.bot.move(0.25, 1000)
+        await self.bot.move(0.5, 300)
+        await self.bot.attack_technique(12) # items
+        await self.bot.move(0.0, 300)
+        await self.bot.attack_technique(12) # +2TP
+    async def path_13(self):
+        logger_set_path(self.map, 13)
+        await self.bot.use_teleporter(1251/2400, 469/1080, move_x=0, move_y=8, swipe=2, corner='botright') # Communing Hall
+        raise SystemExit('check')
+        await self.bot.move(0.35, 3200)
+        await self.bot.move(0.0, 3900)
+        await self.bot.move(0.5, 1300)
+        await self.bot.interact() # Enter Dreamscape
+        await self.bot.move(0.5, 500)
+        await self.bot.attack_technique(5) # +2TP
+        await self.bot.move(0.0, 300)
+        await self.bot.attack_technique(4) # items
+        await self.bot.move(0.0, 300)
+        await self.bot.attack_technique(10) # -1TP, items
+        # TODO: more enemies, very hard to reach
+    async def path_14(self):
+        logger_set_path(self.map, 14)
+        await self.bot.use_teleporter(966/2400, 763/1080, move_x=1, move_y=6, swipe=2, corner='topleft') # Hall of Chords
+        raise SystemExit('check')
+        await self.bot.move(0.1, 500)
+        await self.bot.attack_technique(12) # move
+        await self.bot.move(0.45, 1500)
+        await self.bot.move(0.6, 900)
+        await self.bot.interact() # Enter Dreamscape
+        await self.bot.move(0.5, 500)
+        await self.bot.attack_technique(12) # move
+        await self.bot.move(0.5, 4100)
+        await self.bot.interact() # Obtain Bubble Charge
+        await self.bot.move(1.75, 500)
+        await self.bot.move(0.0, 300)
+        await self.bot.attack_technique(9) # items
+        await self.bot.move(1.75, 1500)
+        await self.bot.posfix(1.75, 500)
+        await self.bot.move(0.5, 1500)
+        await self.bot.move(0.0, 1700)
+        await self.bot.action_button()
+        await self.bot.move(0.0, 2000)
+        await self.bot.move(0.5, 1200)
+        await self.bot.move(0.25, 300)
+        await self.bot.attack_technique(2) # -1TP
+        await self.bot.move(0.1, 300)
+        await self.bot.attack_technique(1) # items
+        await self.bot.move(0.25, 1500)
+        await self.bot.posfix(0.25, 500)
+        await self.bot.move(1.0, 1500)
+        await self.bot.move(0.4, 300)
+        await self.bot.attack_technique(2) # items
+        await self.bot.move(0.25, 1500)
+        await self.bot.posfix(0.25, 500)
+        await self.bot.move(1.25, 900)
+        await self.bot.move(1.5, 3500)
+        await self.bot.move(1.0, 2500)
+        await self.bot.attack_technique(17) # move
+        await self.bot.move(0.5, 300)
+        await self.bot.attack_technique(3) # -1TP
+        await self.bot.move(0.25, 1500)
+        await self.bot.posfix(0.25, 500)
+        await self.bot.move(1.25, 300)
+        await self.bot.attack_technique(4) # items
+        await self.bot.move(0.0, 300)
+        await self.bot.attack_technique(8) # move
+        await self.bot.move(1.5, 300)
+        await self.bot.attack_technique(4) # +2TP
+        # TODO: more enemies, very hard to reach
+    async def path_15(self):
+        logger_set_path(self.map, 15)
+        await self.bot.use_teleporter(966/2400, 763/1080, move_x=1, move_y=6, swipe=2, corner='topleft') # Hall of Chords
+        raise SystemExit('check')
+        await self.bot.move(0.9, 500)
+        await self.bot.attack_technique(20) # move
+        await self.bot.move(0.6, 500)
+        await self.bot.attack_technique(11) # move
+        await self.bot.move(0.25, 1800)
+        await self.bot.move(0.1, 500)
+        await self.bot.interact() # Enter Dreamscape
+        await self.bot.move(1.25, 1500)
+        await self.bot.posfix(1.25, 500)
+        await self.bot.move(0.25, 500)
+        await self.bot.move(0.5, 300)
+        await self.bot.attack_technique(10) # move
+        await self.bot.move(1.0, 300)
+        await self.bot.attack_technique(6) # move
+        await self.bot.move(0.45, 300)
+        await self.bot.attack_technique(6) # items
+        await self.bot.move(0.0, 300)
+        await self.bot.attack_technique(8) # -1TP
+        await self.bot.move(0.75, 2500)
+        await self.bot.posfix(0.75, 500)
+        await self.bot.move(1.6, 2900)
+        await self.bot.move(0.0, 300)
+        await self.bot.attack_technique(3) # items
+        await self.bot.move(1.5, 500)
+        await self.bot.move(0.0, 300)
+        await self.bot.attack_technique(11) # move
+        await self.bot.move(0.5, 300)
+        await self.bot.attack_technique(3) # -1TP
+        await self.bot.move(0.75, 2500)
+        await self.bot.posfix(0.75, 500)
+        await self.bot.move(1.5, 500)
+        await self.bot.attack_technique(8) # +2TP
+        # # await self.bot.move(1.25, 1500)
+        # await self.bot.posfix(1.25, 500)
+        # await self.bot.move(0.5, 1500)
+        # await self.bot.move(0.6, 2900)
+        # await self.bot.interact() # Gain Bubble Charge
+        # await self.bot.move(1.7, 2500)
+        # await self.bot.interact() # 
+        # TODO: more enemies, very hard to reach
+    # TP: 4
 
 

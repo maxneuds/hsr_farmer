@@ -34,16 +34,16 @@ async def main():
     # await penacony.dreams_edge.path_7()
     # await penacony.dreams_edge.path_8()
     # await penacony.clock_studios_theme_park.path_10()
-    # await penacony.the_reverie_dreamscape.path_14()
-    # await penacony.the_reverie_dreamscape.path_15()
-    # await universal.restore_tp(tp=4)
-    # await penacony.the_reverie_dreamscape.path_16()
-    # await universal.restore_tp(tp=4)
-    # await penacony.the_reverie_dreamscape.path_17()
     # await penacony.dewlight_pavilion.farm()
-    await penacony.penacony_grand_theater.farm()
-    # await penacony.dev()
-    raise SystemExit()
+    # await penacony.penacony_grand_theater.farm()
+    # await penacony.penacony_grand_theater.farm()
+    # await penacony.penacony_grand_theater.path_11()
+    # await penacony.penacony_grand_theater.path_12()
+    # await penacony.penacony_grand_theater.path_13()
+    # await penacony.penacony_grand_theater.path_14()
+    # await penacony.penacony_grand_theater.path_15()
+    # await penacony.audition_venue.teleport()
+    # raise SystemExit()
 
 
     # preperations
@@ -54,11 +54,11 @@ async def main():
     # farm worlds
     await herta_space_station.farm() # TP:+5->5 ✓
     await jarilo_vi.farm() # TP:+0->5 R2/4:0 ✓✓
-    # await xianzhou_luofu.farm() # TP:+0->5 R2:2 R4:3
-    # await penacony.farm()
+    await xianzhou_luofu.farm() # TP:+0->5 R2:1 R4:0
+    await penacony.farm() # TP:??? R2:5 R4:3
     
     # checkout
-    # await astral_express.checkout()
+    await astral_express.checkout()
     
     
     # TOTAL XP: 116.340 / 119.256
