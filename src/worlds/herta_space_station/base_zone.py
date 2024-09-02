@@ -28,12 +28,11 @@ class Base_Zone:
         if tp == 4.1:
             await self.bot.switch_map(y_list=508/1080, world='herta_space_station', scroll_down=True, # Monitoring Room
                                         x=1044/2400, y=405/1080, corner='topright', move_x=0, move_y=0)
-            raise SystemExit('check')
             await self.bot.move(1.0, 500)
             await self.bot.attack_technique(3) # +2TP
             await self.bot.move(0.75, 1500)
             await self.bot.posfix(0.75, 500)
-            await self.bot.move(1.9, 2100)
+            await self.bot.move(1.9, 2050)
             await self.bot.move(1.5, 500)
             await self.bot.attack_technique(10) # move
             await self.bot.move(1.6, 500)

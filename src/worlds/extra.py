@@ -14,7 +14,6 @@ class Extra:
         '''
         available: trick_snack , punitive_energy
         '''
-        logger_set_path('craft items')
         for item in items:
             await self.bot.craft_item(item, all=True)
     

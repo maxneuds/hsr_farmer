@@ -20,10 +20,10 @@ class Herta_Space_Station:
         XP      7128/7128   \n
         Time    ???
         '''
-        await self.extra.restore_tp(tp=4)   # TP:+4->5
-        await self.base_zone.farm()         # TP:-1->3 XP:432/432 Time:90
-        await self.seclusion_zone.farm()    # TP:+2->5 XP:1620/1620 Time:220
-        await self.storage_zone.farm()      # TP:+0->5 XP:2592/2592 Time:250
-        await self.supply_zone.farm()       # TP:+0->5 XP:2484/2484 Time:281
+        await self.extra.restore_tp(tp=4, info='Herta 1')   # TP:+4->5
+        await self.base_zone.farm()                         # TP:-1->3 XP:432/432 Time:90
+        await self.seclusion_zone.farm()                    # TP:+2->5 XP:1620/1620 Time:220
+        await self.storage_zone.farm()                      # TP:+0->5 XP:2592/2592 Time:250
+        await self.supply_zone.farm()                       # TP:+0->5 XP:2484/2484 Time:281
 
 

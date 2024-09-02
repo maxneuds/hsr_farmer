@@ -339,7 +339,6 @@ class The_Shackling_Prison:
         logger_set_path(self.map, 12)
         await self.bot.switch_map(y_list=928/1080, world='the_xianzhou_luofu', scroll_down=True, # Pyroscape Hold
                                     x=605/2400, y=289/1080, corner='botright', move_x=3, move_y=4)
-        raise SystemExit('check')
         await self.bot.move(1.0, 2000)
         await self.bot.move(1.1, 500)
         await self.bot.interact(wait_for_ready=True) # lower bridge (default)
@@ -353,7 +352,7 @@ class The_Shackling_Prison:
         await self.bot.move(0.0, 500)
         await self.bot.attack_technique(4)
         await self.bot.move(0.4, 500)
-        await self.bot.attack_technique(5)
+        await self.bot.attack_technique(5) # items
         await self.bot.move(0.55, 2100)
         await self.bot.move(0.7, 1000)
         await self.bot.posfix(0.75, 500)
@@ -375,7 +374,6 @@ class The_Shackling_Prison:
         await self.bot.move(0.35, 2500)
         await self.bot.move(0.0, 400)
         await self.bot.interact(wait_for_ready=True) # teleport
-        raise SystemExit('check: get into corner')
         await self.bot.move(0.6, 500)
         await self.bot.attack_technique(4) # items
         await self.bot.move(0.0, 500)
