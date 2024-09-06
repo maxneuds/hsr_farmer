@@ -13,6 +13,7 @@ class Audition_Venue:
         self.extra = Extra(device)
     async def farm(self):
         await self.teleport()
+        await self.path_1()
     async def teleport(self):
         logger_set_path(self.map, 'Teleport')
         logger.info('---')
@@ -55,11 +56,46 @@ class Audition_Venue:
         await self.bot.move(0.0, 2000)
         await self.bot.move(1.75, 1500)
         await self.bot.restore_tp('trick_snack') # +2TP
+        raise SystemExit('check')
         await self.bot.posfix(0.75, 1000)
         await self.bot.move(0.5, 300)
         await self.bot.attack_technique(6) # -1TP
         await self.bot.move(1.0, 300)
-        await self.bot.attack_technique(3) # -1TP
-        # TODO: continue
+        await self.bot.attack_technique(3) # -1TP, roamer
+        await self.bot.move(0.5, 300)
+        await self.bot.attack_technique(6) # move
+        await self.bot.move(1.0, 300)
+        await self.bot.attack_technique(3) # items)
+        await self.bot.move(0.75, 1500)
+        await self.bot.posfix(0.75, 500)
+        await self.bot.move(1.75, 1600)
+        await self.bot.move(1.5, 300)
+        await self.bot.move(1.0, 300)
+        await self.bot.attack_technique(5) # move
+        await self.bot.move(1.0, 1000)
+        await self.bot.move(0.5, 800)
+        await self.bot.move(0.1, 300)
+        await self.bot.attack_technique(2) # items
+        await self.bot.move(0.25, 1500)
+        await self.bot.posfix(0.25, 500)
+        await self.bot.move(1.25, 1600)
+        await self.bot.move(1.5, 300)
+        await self.bot.attack_technique(3) # items
+    async def path_1(self):
+        logger_set_path(self.map, 1)
+        await self.bot.use_teleporter(x=1162/2400, y=741/1080, corner='botright', move_x=0, move_y=6, x2=609/2400, y2=326/1080) # Dreamplay Fantasia: Acting Challenge
+        await self.bot.move(0.5, 900)
+        await self.bot.move(1.0, 1600)
+        await self.bot.attack() # items
+        await self.bot.move(0.125, 2400)
+        await self.bot.attack() # +2TP
+        await self.bot.move(0.7, 1500)
+        await self.bot.move(0.5, 300)
+        await self.bot.attack() # items
+        await self.bot.move(0.75, 1000)
+        await self.bot.move(0.35, 300)
+        await self.bot.attack_technique(8) # items
+        await self.bot.move(0.0, 1500)
+        await self.bot.posfix(0.0, 500)
 
 

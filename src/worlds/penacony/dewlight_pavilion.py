@@ -97,23 +97,20 @@ class Dewlight_Pavilion:
         await self.bot.attack_technique(5) # items
         await self.bot.move(0.0, 3200)
         await self.bot.attack() # items
-        await self.bot.move(1.75, 1000)
-        await self.bot.posfix(1.75, 1000)
+        await self.bot.move(1.75, 1500)
+        await self.bot.posfix(1.75, 500)
         await self.bot.move(0.6, 2800)
-        await self.bot.move(0.1, 200)
+        await self.bot.move(0.2, 300)
         await self.bot.action_button()
-        raise SystemExit('check improve')
-        await self.bot.move(0.0, 2000)
-        await self.bot.attack_technique(6) # -3TP, roamer
-        await self.bot.move(1.5, 300)
-        await self.bot.attack_technique(3)
-        await self.bot.move(0.5, 300)
-        await self.bot.attack_technique(3)
+        await self.bot.move(0.0, 1200)
         await self.bot.move(0.1, 300)
-        await self.bot.attack_technique(2)
-        for _ in range(3):
+        await self.bot.attack_technique(4) # -1TP, roamer, spawner
+        await self.bot.move(0.5, 300)
+        await self.bot.attack_technique(3) # -2 TP, roamer
+        for _ in range(2): # stability & corner
             await self.bot.move(0.25, 300)
             await self.bot.attack_technique(2)
+        await self.bot.move(0.25, 1500)
         await self.bot.posfix(0.25, 500)
         await self.bot.restore_tp(item='punitive_energy', n=1) # +4TP
         await self.bot.move(1.04, 4200)
@@ -314,11 +311,9 @@ class Dewlight_Pavilion:
         await self.bot.move(1.5, 3300)
         await self.bot.move(0.0, 600)
         await self.bot.attack_technique(1) # +2TP
-        raise SystemExit('check: one more item? unten rechts')
     async def path_9(self):
         logger_set_path(self.map, 9)
         await self.bot.use_teleporter(1333/2400, 502/1080, move_x=0, move_y=0, corner='botleft', special_exit=False) # City Sandpit
-        raise SystemExit('check')
         await self.bot.move(0.35, 500)
         await self.bot.attack_technique(14) # move
         await self.bot.move(0.3, 500)

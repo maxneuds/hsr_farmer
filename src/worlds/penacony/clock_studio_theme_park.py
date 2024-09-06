@@ -170,14 +170,13 @@ class Clock_Studios_Theme_Park:
     async def path_10(self):
         logger_set_path(self.map, 10)
         await self.bot.use_teleporter(490/2400, 633/1080, move_x=1, move_y=1, corner='topright', confirm=True) # Hamster Ball Park
-        raise SystemExit('check')
         await self.bot.move(0.4, 1000)
         await self.bot.move(0.5, 2000)
         await self.bot.move(0.6, 2000)
         await self.bot.move(0.7, 1500)
         await self.bot.move(0.5, 2000)
         await self.bot.attack_technique(1) # items
-        for _ in range(7): # -2TP, roamer
+        for _ in range(6): # -2TP, roamer
             await self.bot.move(0.0, 300)
             await self.bot.attack_technique(2)
         await self.bot.move(0.6, 300)

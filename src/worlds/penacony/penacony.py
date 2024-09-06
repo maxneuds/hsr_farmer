@@ -45,12 +45,13 @@ class Penacony:
         await self.silvermane_guard.restore_tp(tp=4.2)          # TP:+4->5 Time:???
         await self.the_reverie_dreamscape.farm()                # TP:-???->1 XP:14580/15552 Time:? R2/4:1/2
         await self.golden_hour.restore_tp(tp=4.1)               # TP:+4->5 Time:???
-        raise SystemExit('check dewlight complete')
         await self.dewlight_pavilion.farm()                     # TP:-14->1 XP:11448/11448 Time: R2/4:1/2
         await self.golden_hour.restore_tp(tp=4.2)               # TP:+4->5 Time:80
         await self.penacony_grand_theater.farm()                # XP:?/? Time: TP:1->? R4:0 R2:? # unoptimized/unfinished
-        await self.the_soaring_clock_hand.restore_tp(tp=4)      # TP:+4->5 Time:???
+        await self.audition_venue.farm()
+        # await self.the_soaring_clock_hand.restore_tp(tp=4)      # TP:+4->5 Time:???
     async def dev(self):
+        await self.audition_venue.farm()
         raise SystemExit()
 
 

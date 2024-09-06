@@ -180,7 +180,6 @@ class Penacony_Grand_Theater:
     async def path_11(self):
         logger_set_path(self.map, 11)
         await self.bot.use_teleporter(787/2400, 717/1080, corner='topleft', move_x=3, move_y=7) # Echo of War
-        raise SystemExit('check')
         await self.bot.move(1.1, 500)
         await self.bot.attack_technique(13) # move
         await self.bot.move(1.3, 300)
@@ -202,56 +201,64 @@ class Penacony_Grand_Theater:
         await self.bot.attack_technique(10) # -2TP
     async def path_12(self):
         logger_set_path(self.map, 12)
-        await self.bot.switch_map(y_list=807/1080, world='penacony', scroll_down=True, # Saloon of Gospels
-                                    x=671/2400, y=526/1080, corner='botleft', move_x=0, move_y=8, swipe=2)
-        await self.bot.move(0.7, 2500)
-        await self.bot.move(1.0, 1600)
-        await self.bot.move(0.75, 300)
-        await self.bot.attack_technique(3) # items
-        await self.bot.move(0.75, 1500)
-        await self.bot.posfix(0.75, 500)
-        await self.bot.move(1.5, 1500)
-        await self.bot.move(1.6, 1200)
-        await self.bot.interact() # Enter Dreamscape
-        await self.bot.move(0.75, 2000)
-        await self.bot.posfix(0.75, 500)
-        await self.bot.move(1.9, 1300)
-        await self.bot.move(0.5, 300)
-        await self.bot.attack_technique(12) # move
-        await self.bot.move(0.75, 300)
-        await self.bot.attack_technique(3) # items
-        await self.bot.move(1.75, 1000)
-        await self.bot.move(0.0, 300)
-        await self.bot.attack_technique(10) # -2TP
-        await self.bot.move(0.25, 1500)
-        await self.bot.posfix(0.25, 500)
-        await self.bot.move(1.25, 1500)
-        await self.bot.move(1.5, 500)
-        await self.bot.attack_technique(5) # move
-        await self.bot.move(1.0, 300)
-        await self.bot.attack_technique(5) # move
-        await self.bot.move(0.75, 300)
-        await self.bot.attack_technique(2) # items
-        await self.bot.move(0.25, 1500)
-        raise SystemExit('check roamer')
-        await self.bot.posfix(0.25, 500)
-        await self.bot.move(1.25, 1700)
-        await self.bot.move(1.0, 300)
-        await self.bot.attack_technique(20) # -1TP
-        await self.bot.move(1.6, 300)
-        await self.bot.attack_technique(6) # -1TP, roamer
-        raise SystemExit('check: get to the next item')
-        await self.bot.move(0.5, 300)
-        await self.bot.attack_technique(8) # items
-        await self.bot.move(0.25, 1000)
-        await self.bot.move(0.5, 300)
-        await self.bot.attack_technique(12) # items
-        await self.bot.move(0.0, 300)
-        await self.bot.attack_technique(12) # +2TP
+        # await self.bot.switch_map(y_list=807/1080, world='penacony', scroll_down=True, # Saloon of Gospels
+        #                             x=671/2400, y=526/1080, corner='botleft', move_x=0, move_y=8, swipe=2)
+        # await self.bot.move(0.7, 2500)
+        # await self.bot.move(1.0, 1600)
+        # await self.bot.move(0.75, 300)
+        # await self.bot.attack_technique(3) # items
+        # await self.bot.move(0.75, 1500)
+        # await self.bot.posfix(0.75, 500)
+        # await self.bot.move(1.5, 1500)
+        # await self.bot.move(1.6, 1200)
+        # await self.bot.interact() # Enter Dreamscape
+        # await self.bot.move(0.75, 2000)
+        # await self.bot.posfix(0.75, 500)
+        # await self.bot.move(1.9, 1300)
+        # await self.bot.move(0.5, 300)
+        # await self.bot.attack_technique(12) # move
+        # await self.bot.move(0.75, 300)
+        # await self.bot.attack_technique(3) # items
+        # await self.bot.move(1.7, 1200)
+        # await self.bot.move(0.0, 300)
+        # await self.bot.attack_technique(10) # -2TP
+        # await self.bot.move(0.25, 1500)
+        # await self.bot.posfix(0.25, 500)
+        # await self.bot.move(1.25, 1500)
+        # await self.bot.move(1.5, 500)
+        # await self.bot.attack_technique(5) # move
+        # await self.bot.move(1.0, 300)
+        # await self.bot.attack_technique(5) # move
+        # await self.bot.move(0.75, 300)
+        # await self.bot.attack_technique(2) # items
+        # await self.bot.move(0.25, 1500)
+        # raise SystemExit('check: somehow stabilize this')
+        # await self.bot.posfix(0.25, 500)
+        # await self.bot.move(1.25, 1600)
+        # await self.bot.move(1.0, 300)
+        # await self.bot.attack_technique(18) # -1TP
+        # raise SystemExit()
+        # await self.bot.move(0.0, 300)
+        # await self.bot.attack_technique(2) # -1TP, roamer
+        # raise SystemExit('check: somehow stabilize this')
+        # await self.bot.move(0.0, 300)
+        # await self.bot.attack_technique(4) # items
+        # await self.bot.move(1.7, 1500)
+        # raise SystemExit('check: corner')
+        # await self.bot.posfix(1.75, 500)
+        # await self.bot.move(0.5, 700)
+        # await self.bot.move(0.7, 300)
+        # await self.bot.attack_technique(5) # move
+        # await self.bot.move(0.6, 300)
+        # await self.bot.attack_technique(2) # items
+        # await self.bot.move(0.25, 1200)
+        # await self.bot.move(0.5, 400)
+        # await self.bot.attack_technique(13) # items
+        # await self.bot.move(0.0, 300)
+        # await self.bot.attack_technique(12) # +2TP
     async def path_13(self):
         logger_set_path(self.map, 13)
         await self.bot.use_teleporter(1251/2400, 469/1080, move_x=0, move_y=8, swipe=2, corner='botright') # Communing Hall
-        raise SystemExit('check')
         await self.bot.move(0.35, 3200)
         await self.bot.move(0.0, 3900)
         await self.bot.move(0.5, 1300)
@@ -266,7 +273,6 @@ class Penacony_Grand_Theater:
     async def path_14(self):
         logger_set_path(self.map, 14)
         await self.bot.use_teleporter(966/2400, 763/1080, move_x=1, move_y=6, swipe=2, corner='topleft') # Hall of Chords
-        raise SystemExit('check')
         await self.bot.move(0.1, 500)
         await self.bot.attack_technique(12) # move
         await self.bot.move(0.45, 1500)
@@ -280,16 +286,19 @@ class Penacony_Grand_Theater:
         await self.bot.move(0.0, 300)
         await self.bot.attack_technique(9) # items
         await self.bot.move(1.75, 1500)
+        raise SystemExit('check kill')
         await self.bot.posfix(1.75, 500)
         await self.bot.move(0.5, 1500)
         await self.bot.move(0.0, 1700)
         await self.bot.action_button()
         await self.bot.move(0.0, 2000)
-        await self.bot.move(0.5, 1200)
+        await self.bot.move(0.5, 1000)
         await self.bot.move(0.25, 300)
-        await self.bot.attack_technique(2) # -1TP
-        await self.bot.move(0.1, 300)
-        await self.bot.attack_technique(1) # items
+        await self.bot.attack_technique(2) # items
+        await self.bot.move(1.5, 300)
+        await self.bot.attack_technique(2) # -1 TP
+        await self.bot.move(0.25, 300)
+        await self.bot.attack_technique(2) # stability
         await self.bot.move(0.25, 1500)
         await self.bot.posfix(0.25, 500)
         await self.bot.move(1.0, 1500)
@@ -299,8 +308,20 @@ class Penacony_Grand_Theater:
         await self.bot.posfix(0.25, 500)
         await self.bot.move(1.25, 900)
         await self.bot.move(1.5, 3500)
-        await self.bot.move(1.0, 2500)
-        await self.bot.attack_technique(17) # move
+        await self.bot.move(1.0, 2700)
+        await self.bot.attack_technique(4) # move
+        await self.bot.move(0.5, 300)
+        await self.bot.attack_technique(4) # move
+        await self.bot.move(0.38, 300)
+        await self.bot.attack_technique(4) # items
+        await self.bot.move(0.25, 1500)
+        await self.bot.posfix(0.25, 500)
+        await self.bot.move(1.35, 300)
+        await self.bot.attack_technique(4) # move
+        await self.bot.move(1.5, 300)
+        await self.bot.attack_technique(5) # move
+        await self.bot.move(1.0, 600)
+        await self.bot.attack_technique(12) # move
         await self.bot.move(0.5, 300)
         await self.bot.attack_technique(3) # -1TP
         await self.bot.move(0.25, 1500)
@@ -315,7 +336,6 @@ class Penacony_Grand_Theater:
     async def path_15(self):
         logger_set_path(self.map, 15)
         await self.bot.use_teleporter(966/2400, 763/1080, move_x=1, move_y=6, swipe=2, corner='topleft') # Hall of Chords
-        raise SystemExit('check')
         await self.bot.move(0.9, 500)
         await self.bot.attack_technique(20) # move
         await self.bot.move(0.6, 500)

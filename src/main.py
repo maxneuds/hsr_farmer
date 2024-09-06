@@ -21,29 +21,14 @@ async def main():
     
     
     # dev
-    # await extra.restore_tp(tp=4)
-    # await herta_space_station.farm()
-    # await jarilo_vi.farm() # ✓✓
-    # await xianzhou_luofu.farm()
-    # await xianzhou_luofu.the_shackling_prison.farm()
-    # await extra.restore_tp(tp=4)
-    # await xianzhou_luofu.the_shackling_prison.path_12()
+    # await astral_express.checkout()
     # await penacony.farm()
-    # await penacony.dreams_edge.path_6()
-    # await extra.restore_tp(tp=4)
-    # await penacony.dreams_edge.path_7()
-    # await penacony.dreams_edge.path_8()
-    # await penacony.clock_studios_theme_park.path_10()
-    # await penacony.dewlight_pavilion.farm()
-    # await penacony.penacony_grand_theater.farm()
-    # await penacony.penacony_grand_theater.farm()
-    # await penacony.penacony_grand_theater.path_11()
-    # await penacony.penacony_grand_theater.path_12()
+    # await penacony.dev()
+    await penacony.penacony_grand_theater.path_12()
     # await penacony.penacony_grand_theater.path_13()
     # await penacony.penacony_grand_theater.path_14()
     # await penacony.penacony_grand_theater.path_15()
-    # await penacony.audition_venue.teleport()
-    # raise SystemExit()
+    raise SystemExit()
 
 
     # preperations
@@ -52,9 +37,9 @@ async def main():
     await extra.craft_items(['trick_snack', 'punitive_energy'])
 
     # farm worlds
-    await herta_space_station.farm() # TP:+5->5 ✓
+    await herta_space_station.farm() # TP:+5->5 ✓✓
     await jarilo_vi.farm() # TP:+0->5 R2/4:0 ✓✓
-    await xianzhou_luofu.farm() # TP:+0->5 R2:1 R4:0
+    await xianzhou_luofu.farm() # TP:+0->5 R2:1 R4:0 ✓✓
     await penacony.farm() # TP:??? R2:5 R4:3
     
     # checkout
