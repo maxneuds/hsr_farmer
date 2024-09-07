@@ -12,12 +12,16 @@ class Audition_Venue:
         self.bot = Bot(device)
         self.extra = Extra(device)
     async def farm(self):
-        # await self.teleport()
-        # await self.path_1()
-        # await self.path_2()
-        await self.path_3() # TODO: top left
-        # await self.extra.restore_tp(tp=4)
-        # await self.path_99()
+        await self.teleport()
+        await self.path_1()
+        await self.path_2()
+        await self.path_3()
+        await self.path_4()
+        await self.path_5()
+        await self.path_6()
+        await self.path_7()
+        # await self.extra.restore_tp(tp=4) # not needed
+        await self.path_99()
     async def teleport(self):
         logger_set_path(self.map, 'Teleport')
         logger.info('---')
@@ -131,9 +135,70 @@ class Audition_Venue:
         await self.bot.attack_technique(3) # -2TP
         await self.bot.move(1.9, 300)
         await self.bot.attack_technique(2) # items
-    async def path_2(self):
-        logger_set_path(self.map, 2)
-        await self.bot.use_teleporter(x=1162/2400, y=741/1080, corner='botright', move_x=0, move_y=6, x2=609/2400, y2=326/1080, debug=True) # ???
+    # 1TP
+    async def path_3(self):
+        logger_set_path(self.map, 3)
+        await self.bot.use_teleporter(x=1163/2400, y=851/1080, corner='topleft', move_x=0, move_y=7, x2=661/2400, y2=750/1080) # Superstar Showdown: Arena I
+        raise SystemExit('check')
+        await self.bot.move(0.8, 300)
+        await self.bot.attack_technique(5) # items
+        await self.bot.move(0.0, 300)
+        await self.bot.attack_technique(9) # items
+        await self.bot.move(0.25, 500)
+        await self.bot.posfix(0.25, 500)
+        await self.bot.move(1.3, 1600)
+        await self.bot.attack_technique(1) # +2TP
+        await self.bot.move(0.8, 300)
+        await self.bot.attack_technique(3) # move
+        await self.bot.move(0.5, 300)
+        await self.bot.attack_technique(18) # move
+        await self.bot.move(0.3, 900)
+        await self.bot.move(0.5, 300)
+        await self.bot.attack_technique(2) # items
+        await self.bot.move(0.7, 300)
+        await self.bot.attack_technique(4) # items
+        await self.bot.move(0.3, 300)
+        await self.bot.attack_technique(4) # items
+    # 3TP
+    async def path_4(self):
+        logger_set_path(self.map, 4)
+        await self.bot.use_teleporter(x=1235/2400, y=690/1080, corner='topleft', move_x=0, move_y=7, x2=805/2400, y2=750/1080, confirm=True, confirm_x=1493/2400, confirm_y=763/1080) # Superstar Showdown: Arena II
+        raise SystemExit('check')
+        await self.bot.move(0.3, 300)
+        await self.bot.attack_technique(3) # items
+        await self.bot.move(0.95, 300)
+        await self.bot.attack_technique(4) # items
+        raise SystemExit('check: items done?')
+        await self.bot.move(1.75, 700)
+        await self.bot.move(1.5, 300)
+        await self.bot.attack_technique(1) # +2TP
+        raise SystemExit('check: keep to the left side')
+        await self.bot.move(0.2, 900)
+        await self.bot.move(0.5, 300)
+        await self.bot.attack_technique(16) # items
+        await self.bot.move(0.3, 300)
+        await self.bot.attack_technique(5) # items
+        await self.bot.move(0.6, 300)
+        await self.bot.attack_technique(6) # items
+    # 5TP
+    async def path_5(self):
+        logger_set_path(self.map, 5)
+        await self.bot.use_teleporter(x=746/2400, y=781/1080, corner='botright', move_x=0, move_y=8, x2=1316/2400, y2=270/1080) # Gunfire Time: Time Trial
+        raise SystemExit('check: todo')
+        await self.bot.move(0.3, 800)
+        await self.bot.move(0.0, 300)
+        await self.bot.attack_technique(5) # -2TP
+        await self.bot.move(1.75, 500)
+        await self.bot.posfix(1.75, 500)
+        raise SystemExit('todo: items, +2TP, monster right')
+    async def path_6(self):
+        logger_set_path(self.map, 6)
+        await self.bot.use_teleporter(x=1390/2400, y=332/1080, corner='botright', move_x=0, move_y=8, x2=1316/2400, y2=270/1080) # Gunfire Time: Time Trial (Posterior)
+        raise SystemExit('check: todo')
+    async def path_7(self):
+        logger_set_path(self.map, 7)
+        await self.bot.use_teleporter(x=1169/2400, y=756/1080, corner='botright', move_x=0, move_y=8, x2=1175/2400, y2=270/1080) # Gunfire Time: Gunfire Trial
+        raise SystemExit('check: todo')
     async def path_99(self):
         logger_set_path(self.map, 99)
         await self.bot.use_teleporter(x=974/2400, y=686/1080, corner='topleft', move_x=0, move_y=3) # Path of the Superstar

@@ -13,7 +13,7 @@ from worlds.penacony.the_soaring_clock_hand import The_Soaring_Clock_Hand
 
 class Penacony:
     '''
-    Status: 7/9
+    Status: 8/9
     '''
     def __init__(self, device, mode='credits'):
         self.mode = mode
@@ -49,12 +49,12 @@ class Penacony:
         await self.golden_hour.restore_tp(tp=4.2)               # TP:+4->5 Time:80
         await self.penacony_grand_theater.farm()                # XP:?/? Time: TP:1->? R4:0 R2:? # unoptimized/unfinished
         await self.audition_venue.farm()
-        # await self.the_soaring_clock_hand.restore_tp(tp=4)      # TP:+4->5 Time:???
+        await self.the_soaring_clock_hand.restore_tp(tp=4)      # TP:+4->5 Time:???
     async def dev(self):
-        # await self.penacony_grand_theater.path_12()
-        # await self.penacony_grand_theater.path_13()
-        # await self.penacony_grand_theater.path_14()
-        # await self.penacony_grand_theater.path_15()
+        await self.penacony_grand_theater.path_12()
+        await self.penacony_grand_theater.path_13()
+        await self.penacony_grand_theater.path_14()
+        await self.penacony_grand_theater.path_15()
         await self.audition_venue.farm()
         raise SystemExit()
 

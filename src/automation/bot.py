@@ -123,9 +123,6 @@ class Bot:
         await self.wait_for_ready(min_duration=0, reason='prepare open map')
         await self.attack() # animation cancle
         await self.shell_failsafe(f'input tap {self.xy.map[0]} {self.xy.map[1]}')
-        
-        
-        
         # wait for map
         logger.info('wait for map')
         im_mapx = cv.imread('res/map_x_bw.png', cv.IMREAD_GRAYSCALE)
@@ -205,7 +202,8 @@ class Bot:
                 await aio.sleep(0.05)
             await aio.sleep(0.1)
 
-    async def use_teleporter(self, x, y, move_x=0, move_y=0, swipe=1, move_spd=500, corner='botright', x2=None, y2=None, open_map=True, confirm=False, special_exit=True, switch_world=False, n_try=0, debug=False):
+    async def use_teleporter(self, x, y, move_x=0, move_y=0, swipe=1, move_spd=500, corner='botright', x2=None, y2=None,
+                             open_map=True, confirm=False, confirm_x=0.5, confirm_y=0.648, special_exit=True, switch_world=False, n_try=0, debug=False):
         logger.info(f'use teleporter: {int(self.xy.width*x)},{int(self.xy.height*y)}')
         if open_map == True:
             await self.open_map(special_exit=special_exit)
@@ -248,14 +246,18 @@ class Bot:
         # tap teleporter
         if debug:
             await self.get_screen(debug=True)
-            raise SystemExit('debug exit')
+            if confirm == False:
+                raise SystemExit('debug exit')
         logger.info(f'tap teleporter: {int(self.xy.width*x)},{int(self.xy.height*y)}')
         await self.shell_failsafe(f'input tap {int(self.xy.width*x)} {int(self.xy.height*y)}')
         await aio.sleep(1.25)
         # confirm teleporter if other landmark is close
         if confirm == True:
             logger.info(f'confirm teleporter selection')
-            await self.shell_failsafe(f'input tap {int(self.xy.width*1200/2400)} {int(self.xy.height*700/1080)}')
+            if debug:
+                await self.get_screen(debug=True)
+                raise SystemExit('debug exit')
+            await self.shell_failsafe(f'input tap {int(self.xy.width*confirm_x)} {int(self.xy.height*confirm_y)}')
             await aio.sleep(1.5)
         # teleport
         await self.shell_failsafe(f'input tap {int(self.xy.width*0.83)} {int(self.xy.height*0.9)}')
