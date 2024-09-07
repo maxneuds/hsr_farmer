@@ -51,6 +51,10 @@ class Penacony:
         await self.audition_venue.farm()
         # await self.the_soaring_clock_hand.restore_tp(tp=4)      # TP:+4->5 Time:???
     async def dev(self):
+        # await self.penacony_grand_theater.path_12()
+        # await self.penacony_grand_theater.path_13()
+        # await self.penacony_grand_theater.path_14()
+        # await self.penacony_grand_theater.path_15()
         await self.audition_venue.farm()
         raise SystemExit()
 

@@ -49,7 +49,6 @@ class Supply_Zone:
         await self.bot.move(1.0, 1200)
         await self.bot.move(1.45, 2300)
         await self.bot.interact()
-        await self.bot.wait_for_onmap(min_duration=2)
         await self.bot.move(0.5, 500)
         await self.bot.move(0.0, 5000)
         await self.bot.attack_technique(2) # -1TP

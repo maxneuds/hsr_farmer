@@ -23,11 +23,7 @@ async def main():
     # dev
     # await astral_express.checkout()
     # await penacony.farm()
-    # await penacony.dev()
-    await penacony.penacony_grand_theater.path_12()
-    # await penacony.penacony_grand_theater.path_13()
-    # await penacony.penacony_grand_theater.path_14()
-    # await penacony.penacony_grand_theater.path_15()
+    await penacony.dev()
     raise SystemExit()
 
 

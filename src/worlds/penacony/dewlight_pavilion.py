@@ -285,7 +285,6 @@ class Dewlight_Pavilion:
                                     x=912/2400, y=485/1080, corner='topleft', move_x=0, move_y=2)
         await self.bot.move(0.5, 1000)
         await self.bot.interact()
-        await self.bot.wait_for_onmap(min_duration=3)
         await self.bot.move(0.51, 2800)
         await self.bot.attack() # items
         await self.bot.move(0.69, 1500)
@@ -349,11 +348,11 @@ class Dewlight_Pavilion:
         await self.bot.move(0.5, 11500)
         await self.bot.interact(wait_for_ready=False)
         await self.bot.action_tap(1535, 960)
-        await self.bot.wait_for_onmap(min_duration=5)
+        await self.bot.wait_for_ready(min_duration=5, reason='use pinball teleporter')
         await self.bot.move(0.51, 5500)
         await self.bot.interact(wait_for_ready=False)
         await self.bot.action_tap(1535, 960)
-        await self.bot.wait_for_onmap(min_duration=5)
+        await self.bot.wait_for_ready(min_duration=5, reason='use pinball teleporter')
         await self.bot.move(0.47, 2200)
         await self.bot.attack() # items
         await self.bot.move(0.65, 2200)
@@ -383,11 +382,11 @@ class Dewlight_Pavilion:
         await self.bot.move(0.5, 11500)
         await self.bot.interact(wait_for_ready=False)
         await self.bot.action_tap(1535, 960)
-        await self.bot.wait_for_onmap(min_duration=5)
+        await self.bot.wait_for_ready(min_duration=5, reason='use pinball teleporter')
         await self.bot.move(0.51, 5500)
         await self.bot.interact(wait_for_ready=False)
         await self.bot.action_tap(1535, 960)
-        await self.bot.wait_for_onmap(min_duration=5)
+        await self.bot.wait_for_ready(min_duration=5, reason='use pinball teleporter')
         await self.bot.move(0.25, 300)
         await self.bot.attack_technique(2) # +2TP
 

@@ -113,18 +113,27 @@ class Bot:
         cmd = f'input swipe {x} {y} {x} {y} {int(duration)}'
         await self.shell_failsafe(cmd)
 
+    async def wait_for_map(self, special_exit=True, debug=False):
+        pass
+    
+    
+    # TODO: create wait for map function
     async def open_map(self, special_exit=True, debug=False):
-        if not debug: # open map for debugging
-            await self.wait_for_onmap(min_duration=0)
-            logger.info('open map')
-            await self.attack() # animation cancle
-            await self.shell_failsafe(f'input tap {self.xy.map[0]} {self.xy.map[1]}')
+        logger.info('open map')
+        await self.wait_for_ready(min_duration=0, reason='prepare open map')
+        await self.attack() # animation cancle
+        await self.shell_failsafe(f'input tap {self.xy.map[0]} {self.xy.map[1]}')
+        
+        
+        
         # wait for map
         logger.info('wait for map')
         im_mapx = cv.imread('res/map_x_bw.png', cv.IMREAD_GRAYSCALE)
-        check_map = True
-        check_map_iter = 1
-        while check_map:
+        dt_start = dt.now()
+        seconds_elapsed = 0
+        seconds_limit = 10
+        # check for open map for maximum of seconds_limit
+        while seconds_elapsed < seconds_limit:
             screen = await self.get_screen()
             screen_topright = screen[0:int(self.xy.height*0.2), int(self.xy.width*0.7):int(self.xy.width)]
             screen_topright_bw = cv.cvtColor(screen_topright, cv.COLOR_BGR2GRAY)
@@ -139,36 +148,31 @@ class Bot:
             _, max_val, _, _ = cv.minMaxLoc(result)
             if max_val > 0.95:
                 logger.info('map detected')
+                break # exit check loop
             else:
-                logger.info(f'iteration {check_map_iter}, map not detected: retry')
-                check_map_iter += 1
-                if check_map_iter > 10:
-                    logger.error('map not found: retry')
-                    check_map = False
-                    await self.action_back()
-                    await self.wait_for_onmap(min_duration=0)
-                    check = await self.open_map(special_exit=special_exit)
-                    return(check)
-                else:
-                    await aio.sleep(0.5)
-                    continue
-            # check map type
-            logger.info('check map type')
-            im_tbp = cv.imread('res/map_tbp.png', cv.IMREAD_COLOR)
-            result = cv.matchTemplate(screen_topright, im_tbp, cv.TM_CCOEFF_NORMED)
-            _, max_val, _, _ = cv.minMaxLoc(result)
-            if max_val > 0.95:
-                logger.info('map type: normal')
-            else:
-                logger.info('map type: special')
-                if special_exit:
-                    logger.info('exit special map to normal map')
-                    await self.shell_failsafe(f'input tap {int(self.xy.width*2135/2400)} {int(self.xy.height*138/1080)}')
-                    await aio.sleep(1)
-                    continue
-            check_map = False
-            await self.check_map_zoom_level()
-            return(True)
+                seconds_elapsed = (dt.now() - dt_start).total_seconds()
+                logger.info(f'map not detected after {seconds_elapsed}s: retry')
+                await aio.sleep(0.5)
+        if seconds_elapsed >= seconds_limit:
+            logger.error('Unexpected map not found. Send back button and retry.')
+            await self.action_back()
+            await self.wait_for_ready(reason='back button for stabilize')
+            await self.open_map(special_exit=special_exit)
+            return(False) # exit function
+        # check map type
+        logger.info('check map type')
+        im_tbp = cv.imread('res/map_tbp.png', cv.IMREAD_COLOR)
+        result = cv.matchTemplate(screen_topright, im_tbp, cv.TM_CCOEFF_NORMED)
+        _, max_val, _, _ = cv.minMaxLoc(result)
+        if max_val > 0.95:
+            logger.info('map type: normal')
+        else:
+            logger.info('map type: special')
+            if special_exit:
+                logger.info('exit special map to normal map')
+                await self.shell_failsafe(f'input tap {int(self.xy.width*2135/2400)} {int(self.xy.height*138/1080)}')
+                await aio.sleep(1)
+        await self.check_map_zoom_level()
         
     async def check_map_zoom_level(self, debug=False):
         logger.info('check map zoom level')
@@ -255,7 +259,7 @@ class Bot:
             await aio.sleep(1.5)
         # teleport
         await self.shell_failsafe(f'input tap {int(self.xy.width*0.83)} {int(self.xy.height*0.9)}')
-        check = await self.wait_for_onmap(min_duration=2, reason='teleport')
+        check = await self.wait_for_ready(reason='teleport')
         if check != True: # retry
             n_try += 1
             if n_try > 10: # retry at most 10 times
@@ -263,7 +267,7 @@ class Bot:
                 sys.exit()
             logger.debug(f'telport failed. Try again [{n_try}]')
             await self.action_back(n=2)
-            await self.wait_for_onmap(min_duration=0, reason='teleport')
+            await self.wait_for_ready(min_duration=0, reason='teleport')
             if open_map == True:
                 await self.use_teleporter(x, y, move_x=move_x, move_y=move_y, swipe=swipe, move_spd=move_spd, corner=corner, open_map=open_map, confirm=confirm, special_exit=special_exit, switch_world=switch_world, n_try=n_try, debug=False)
             else:
@@ -346,7 +350,7 @@ class Bot:
         logger.info('action: restore TP using food, make sure it is faved first')
         ready = False
         while not ready:
-            ready = await self.wait_for_onmap(min_duration=0)
+            ready = await self.wait_for_ready(min_duration=0, reason='open tp restore menu')
         await self.attack() # animation cancle
         logger.info('open inventory')
         await self.shell_failsafe(f'input tap {self.xy.inventory[0]} {self.xy.inventory[1]}')
@@ -388,7 +392,7 @@ class Bot:
                     await aio.sleep(2)
                 logger.info(f'exit to map')
                 await self.action_back(n=3)
-                await self.wait_for_onmap(min_duration=0)
+                await self.wait_for_ready(reason='exit tp restore menu')
                 search_item = False
                 return(True)
             else:
@@ -407,14 +411,16 @@ class Bot:
         await aio.sleep(1.5)
         await self.action_tap(int(self.xy.width*1600/2400), int(self.xy.height*650/1080))
         if wait_for_ready == True:
-            await self.wait_for_onmap(min_duration=2)
+            await self.wait_for_ready(min_duration=3, reason='interact')
         else:
             await self.sleep(5)
 
+    
     async def action_button(self):
         await aio.sleep(1)
         await self.action_tap(int(self.xy.width*1580/2400), int(self.xy.height*933/1080))
-        await self.wait_for_onmap(min_duration=2)
+        await self.wait_for_ready(reason='action button')
+    
     
     async def chat_initiate(self):
         logger.info(f'chat: initiate')
@@ -422,11 +428,13 @@ class Bot:
         await self.action_tap(int(self.xy.width*1458/2400), int(self.xy.height*640/1080))
         await aio.sleep(1)
     
+    
     async def shop_exit(self):
         logger.info(f'shop: exit')
         await self.action_back()
-        await self.wait_for_onmap(min_duration=0)
-        
+        await self.wait_for_ready(reason='shop exit')
+    
+    
     async def chat_advance(self, n=1):
         logger.info(f'chat: advance')
         for _ in range(n):
@@ -435,6 +443,7 @@ class Bot:
             await self.action_tap(int(self.xy.width*1200/2400), int(self.xy.height*1000/1080))
             await aio.sleep(1)
 
+    
     async def attack(self, count=1):
         logger.info('action: attack')
         await aio.sleep(0.05)
@@ -442,17 +451,20 @@ class Bot:
             await self.shell_failsafe(f'input tap {self.xy.attack[0]} {self.xy.attack[1]}')
             await aio.sleep(0.6)
 
+    
     async def action_technique(self):
         logger.info('action: technique')
         await aio.sleep(0.05)
         await self.shell_failsafe(f'input tap {self.xy.technique[0]} {self.xy.technique[1]}')
         await aio.sleep(0.3)
 
+    
     async def attack_technique(self, count=1):
         logger.info(f'action: attack with technique {count} times')
         for _ in range(count):
             await self.action_technique()
-                
+    
+         
     async def buy_item(self, name, amount_percentage = 100, debug=False):
         logger.info(f'buy: {name}')
         try: # catch KeyboardInterrupt
@@ -503,6 +515,7 @@ class Bot:
     async def open_phone(self):
         await self.action_tap(int(self.xy.phone[0]), int(self.xy.phone[1]))
         await aio.sleep(3)
+    
             
     async def craft_item(self, name, all=True, debug=False):
         logger.info(f'craft: {name}')
@@ -563,8 +576,9 @@ class Bot:
                 await self.shell_failsafe(cmd)
                 await aio.sleep(0.5)
 
-    async def wait_for_onmap(self, min_duration=0, reason='default', debug=False):
-        logger.info(f'wait/check for character on map. reason: {reason}')
+
+    async def wait_for_ready(self, reason, min_duration=0, debug=False):
+        logger.info(f'Wait for the character to be ready. Reason: {reason}')
         if not debug and min_duration > 0:
             logger.info(f'wait for {min_duration}s')
             await aio.sleep(min_duration)
@@ -576,81 +590,70 @@ class Bot:
         img_tpfood = cv.imread('res/food_tp.png', cv.IMREAD_COLOR)
         img_exit = cv.imread('res/exit.png', cv.IMREAD_COLOR)
         check_return = 0
-        time_start = time.perf_counter()
-        try: # catch KeyboardInterrupt
-            while True:
-                time_running = timedelta(seconds=time.perf_counter() - time_start)
-                if reason == 'default' and (time_running.seconds > 10):
-                    logger.debug('character stuck returning to map. maybe in fight?')
-                    reason = 'unknown'
-                    continue
-                elif reason == 'teleport' and (time_running.seconds > 7):
-                    return(False)
-                elif time_running.seconds > 300:
-                    logger.debug('character stuck: send back button')
-                    await self.action_back()
-                success = False
-                while not success:
-                    try:
-                        if debug:
-                            screen = await self.get_screen(custom_msg='still in fight')
-                        else:
-                            screen = await self.get_screen(custom_msg=None)
-                        screen_bw = cv.cvtColor(screen, cv.COLOR_BGR2GRAY)
-                        # screen_edges = cv.Canny(screen, 400, 500)
-                        _, screen_bw = cv.threshold(screen_bw, 200, 255, cv.THRESH_BINARY)
-                        success = True
-                    except:
-                        pass
-                screen_warp = screen_bw[int(self.xy.height*0.03):int(self.xy.height*0.08), int(self.xy.width*0.75):int(self.xy.width*0.773)]
-                screen_party = screen_bw[int(self.xy.height*0.03):int(self.xy.height*0.08), int(self.xy.width*0.88):int(self.xy.width*0.9)]
-                screen_mission = screen_bw[int(self.xy.height*0.248):int(self.xy.height*0.31), int(self.xy.width*0.04):int(self.xy.width*0.062)]
-                screen_chat = screen_bw[int(self.xy.height*0.868):int(self.xy.height*0.925), int(self.xy.width*0.04):int(self.xy.width*0.068)]
-                screen_sprint = screen_bw[int(self.xy.height*0.815):int(self.xy.height*0.885), int(self.xy.width*0.88):int(self.xy.width*0.915)]
-                screen_exit = screen[int(self.xy.height*0.34):int(self.xy.height*0.66), int(self.xy.width*0.33):int(self.xy.width*0.67)]
-                # debug = True
-                if debug:
-                    # sc = screen_exit
-                    # si = img_mission
-                    # print(si.shape)
-                    # print(sc.shape)
-                    # cv.imwrite('img.png', sc)
-                    # ssi = compare_ssim(sc, si)
-                    # print(ssi)
-                    # cv.imshow('debug', sc)
-                    # cv.waitKey(0)
-                    # cv.destroyAllWindows()
-                    exit()
-                check_images = [
-                    (screen_warp, img_warp),
-                    (screen_party, img_party),
-                    (screen_mission, img_mission),
-                    (screen_chat, img_chat),
-                    (screen_sprint, img_sprint)
-                ]
-                for i in check_images:
-                    ssi = compare_ssim(i[0], i[1])
-                    if ssi > 0.95:
-                        check_return += 1
-                # check for food window (not enough TP) and in case of 0 eat food
-                result_food = cv.matchTemplate(screen, img_tpfood, cv.TM_CCOEFF_NORMED)
-                _, max_val_food, _, max_loc_food = cv.minMaxLoc(result_food)
-                # check for mistake (exit window)
-                result_exit = cv.matchTemplate(screen_exit, img_exit, cv.TM_CCOEFF_NORMED)
-                _, max_val_exit, _, _ = cv.minMaxLoc(result_exit)
-                if max_val_exit > 0.95:
-                    logger.info('exit window found: cancel')
-                    await self.action_back()
-                    return(True)
-                elif max_val_food > 0.95: # food menu found, eat TP food
-                    logger.info('food menu found: eat TP food')
-                    await self.action_back()
-                    await self.restore_tp(item='trick_snack')
-                    return(True)
-                elif check_return > 2: # back to map, continue
-                    logger.info('character on map: continue')
+        time_start = dt.now()
+        seconds_limit = 10
+        while True:
+            seconds_elapsed = (dt.now() - time_start).total_seconds()
+            if seconds_elapsed > seconds_limit:
+                logger.error(f'Failed to return to map in {seconds_limit} minutes!')
+                return(False)
+            # get screen
+            success = False
+            while not success:
+                try:
+                    screen = await self.get_screen(custom_msg=None)
+                    screen_bw = cv.cvtColor(screen, cv.COLOR_BGR2GRAY)
+                    _, screen_bw = cv.threshold(screen_bw, 200, 255, cv.THRESH_BINARY)
+                    success = True
+                except:
                     await aio.sleep(0.5)
-                    return(True)
-        except KeyboardInterrupt:
-            logger.debug('Ctrl+C detected. Exiting gracefully.')
-            exit()
+                    pass
+            screen_warp = screen_bw[int(self.xy.height*0.03):int(self.xy.height*0.08), int(self.xy.width*0.75):int(self.xy.width*0.773)]
+            screen_party = screen_bw[int(self.xy.height*0.03):int(self.xy.height*0.08), int(self.xy.width*0.88):int(self.xy.width*0.9)]
+            screen_mission = screen_bw[int(self.xy.height*0.248):int(self.xy.height*0.31), int(self.xy.width*0.04):int(self.xy.width*0.062)]
+            screen_chat = screen_bw[int(self.xy.height*0.868):int(self.xy.height*0.925), int(self.xy.width*0.04):int(self.xy.width*0.068)]
+            screen_sprint = screen_bw[int(self.xy.height*0.815):int(self.xy.height*0.885), int(self.xy.width*0.88):int(self.xy.width*0.915)]
+            screen_exit = screen[int(self.xy.height*0.34):int(self.xy.height*0.66), int(self.xy.width*0.33):int(self.xy.width*0.67)]
+            # debug = True
+            if debug:
+                # sc = screen_exit
+                # si = img_mission
+                # print(si.shape)
+                # print(sc.shape)
+                # cv.imwrite('img.png', sc)
+                # ssi = compare_ssim(sc, si)
+                # print(ssi)
+                # cv.imshow('debug', sc)
+                # cv.waitKey(0)
+                # cv.destroyAllWindows()
+                raise SystemExit('debug')
+            check_images = [
+                (screen_warp, img_warp),
+                (screen_party, img_party),
+                (screen_mission, img_mission),
+                (screen_chat, img_chat),
+                (screen_sprint, img_sprint)
+            ]
+            for i in check_images:
+                ssi = compare_ssim(i[0], i[1])
+                if ssi > 0.95:
+                    check_return += 1
+            # check for food window (not enough TP) and in case of 0 eat food
+            result_food = cv.matchTemplate(screen, img_tpfood, cv.TM_CCOEFF_NORMED)
+            _, max_val_food, _, max_loc_food = cv.minMaxLoc(result_food)
+            # check for mistake (exit window)
+            result_exit = cv.matchTemplate(screen_exit, img_exit, cv.TM_CCOEFF_NORMED)
+            _, max_val_exit, _, _ = cv.minMaxLoc(result_exit)
+            if max_val_exit > 0.95:
+                logger.info('exit window found: send back button')
+                await self.action_back()
+            elif max_val_food > 0.95: # food menu found, eat TP food
+                logger.info('food menu found: eat TP food')
+                await self.action_back()
+                await self.restore_tp(item='trick_snack')
+            elif check_return > 2: # back to map, continue
+                logger.info('character ready: continue')
+                await aio.sleep(0.5)
+                return(True)
+
+
