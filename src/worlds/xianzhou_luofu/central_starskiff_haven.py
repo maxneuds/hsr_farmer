@@ -1,12 +1,19 @@
 from logger import logger, logger_set_path
 from automation.bot import Bot
 from worlds.extra import Extra
+from datetime import datetime as dt
 
 
 class Central_Starskiff_Haven:
     def __init__(self, device):
         self.map = 'Central Starskiff Haven'
         self.bot = Bot(device)
+        self.extra = Extra(device)
+    async def stockup(self):
+        t_start = dt.now()
+        await self.teleport()
+        await self.shop_salesby()
+        await self.extra.metrics(self.map, t_start)
     async def teleport(self):
         logger_set_path(self.map, 'Teleport')
         logger.info('---')

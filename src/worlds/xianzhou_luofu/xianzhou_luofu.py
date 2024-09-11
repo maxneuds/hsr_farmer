@@ -30,8 +30,7 @@ class Xianzhou_Luofu:
         self.scalegorge_waterscape = Scalegorge_Waterscape(device)
         self.the_shackling_prison = The_Shackling_Prison(device)
     async def stockup(self):
-        await self.central_starskiff_haven.teleport()
-        await self.central_starskiff_haven.shop_salesby()
+        await self.central_starskiff_haven.stockup()
     async def farm(self):
         '''
         Status  7/8 (new: shackling prison) /n

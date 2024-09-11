@@ -1,6 +1,7 @@
 from logger import logger, logger_set_path
 from automation.bot import Bot
 from worlds.extra import Extra
+from datetime import datetime as dt
 
 
 class Stargazer_Navalia:
@@ -9,6 +10,7 @@ class Stargazer_Navalia:
         self.bot = Bot(device)
         self.extra = Extra(device)
     async def farm(self):
+        t_start = dt.now()
         await self.teleport()
         await self.path_1()
         await self.path_2()
@@ -18,6 +20,7 @@ class Stargazer_Navalia:
         await self.path_6()
         await self.extra.restore_tp(tp=4)
         await self.path_7()
+        await self.extra.metrics(self.map, t_start)
     async def teleport(self):
         logger_set_path(self.map, 'Teleport')
         logger.info('---')

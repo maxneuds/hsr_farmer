@@ -25,9 +25,8 @@ async def main():
     # await extra.restore_tp(tp=2)
     # await xianzhou_luofu.farm() # TP:+0->5 R2:1 R4:0 ✓✓✓
     # await penacony.farm()
-    await penacony.audition_venue.farm()
-    raise SystemExit()
-
+    # await penacony.audition_venue.farm()
+    # raise SystemExit()
 
     # preperations
     # daily for free (guranteed): R2: 25, R4: 5
