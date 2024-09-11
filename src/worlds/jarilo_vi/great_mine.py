@@ -1,13 +1,16 @@
 from logger import logger, logger_set_path
 from automation.bot import Bot
 from worlds.extra import Extra
+from datetime import datetime as dt
 
 
 class Great_Mine:
     def __init__(self, device):
         self.map = 'Great Mine'
         self.bot = Bot(device)
+        self.extra = Extra(device)
     async def farm(self):
+        t_start = dt.now()
         await self.teleport()
         await self.path_1()
         await self.path_2() # TODO: path1+2 might be combined
@@ -15,7 +18,7 @@ class Great_Mine:
         await self.path_4()
         await self.path_5()
         await self.path_6()
-        # TODO: get items along the bridge path
+        # await self.extra.metrics(self.map, t_start)
     async def teleport(self):
         logger_set_path(self.map, 'Teleport')
         logger.info('---')
@@ -76,8 +79,25 @@ class Great_Mine:
     async def path_3(self):
         logger_set_path(self.map, 3)
         await self.bot.use_teleporter(x=665/2400, y=435/1080, corner='topleft', move_x=0, move_y=0, confirm=True) # Entrance
+        raise SystemExit('check')
         await self.bot.move(0.2, 1500)
-        await self.bot.attack() # +2TP
+        await self.bot.attack_technique(1) # +2TP
+        await self.bot.move(0.9, 300)
+        await self.bot.attack_technique(6) # move
+        await self.bot.move(0.6, 300)
+        await self.bot.attack_technique(4) # move
+        await self.bot.move(0.3, 300)
+        await self.bot.attack_technique(5) # items
+        await self.bot.move(0.5, 500)
+        await self.bot.posfix(0.5, 500)
+        await self.bot.move(1.7, 700)
+        await self.bot.move(0.0, 300)
+        await self.bot.attack_technique(7) # move
+        await self.bot.move(0.5, 300)
+        await self.bot.attack_technique(10) # items
+        await self.bot.move(1.0, 900)
+        await self.bot.move(0.75, 300)
+        await self.bot.attack_technique(16) # items
     async def path_4(self): # roamer
         logger_set_path(self.map, 4)
         await self.bot.use_teleporter(x=1296/2400, y=600/1080, corner='botright', move_x=0, move_y=0) # Shape of Scorch

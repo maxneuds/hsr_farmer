@@ -1,6 +1,7 @@
 from logger import logger, logger_set_path
 from automation.bot import Bot
 from worlds.extra import Extra
+from datetime import datetime as dt
 
 
 class Dreams_Edge:
@@ -13,6 +14,7 @@ class Dreams_Edge:
         self.bot = Bot(device)
         self.extra = Extra(device)
     async def farm(self):
+        t_start = dt.now()
         await self.teleport()
         await self.path_1()
         await self.extra.restore_tp(tp=4)
@@ -24,6 +26,7 @@ class Dreams_Edge:
         await self.extra.restore_tp(tp=4)
         await self.path_7()
         await self.path_8()
+        await self.extra.metrics(self.map, t_start)
     async def teleport(self):
         logger_set_path(self.map, 'Teleport')
         logger.info('---')

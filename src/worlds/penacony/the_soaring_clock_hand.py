@@ -1,17 +1,20 @@
 from logger import logger, logger_set_path
 from automation.bot import Bot
 from worlds.extra import Extra
+from datetime import datetime as dt
 
 
 class The_Soaring_Clock_Hand:
     def __init__(self, device):
         self.map = 'The Soaring Clock Hand'
         self.bot = Bot(device)
+        self.extra = Extra(device)
     async def restore_tp(self, tp):
         logger_set_path(self.map, 'Teleport: Restore TP')
         logger.info('---')
         logger.info('--- Map: The Soaring Clock Hand')
         logger.info('---')
+        t_start = dt.now()
         if tp == 4:
             await self.bot.switch_map(y_list=927/1080, world='penacony', scroll_down=True,
                                         x=974/2400, y=417/1080, corner='topright', move_x=0, move_y=0, confirm=True)
@@ -42,5 +45,6 @@ class The_Soaring_Clock_Hand:
             await self.bot.attack_technique(4) # +2TP
         else:
             raise SystemExit(f'no {tp} TP restore available')
+        await self.extra.metrics(f'{self.map} TP {tp}', t_start)
 
 

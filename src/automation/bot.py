@@ -303,7 +303,7 @@ class Bot:
             await self.action_back(n=2)
             await self.wait_for_ready(min_duration=0, reason='teleport')
             if open_map == True:
-                await self.use_teleporter(x, y, move_x=move_x, move_y=move_y, swipe=swipe, move_spd=move_spd, corner=corner, open_map=open_map, confirm=confirm, special_exit=special_exit, switch_world=switch_world, n_try=n_try, debug=False)
+                await self.use_teleporter(x, y, move_x=move_x, move_y=move_y, swipe=swipe, move_spd=move_spd, corner=corner, open_map=open_map, confirm=confirm, special_exit=special_exit, switch_world=switch_world, n_try=n_try, x2=x2, y2=y2, debug=False)
             else:
                 logger.error(f"Failed to teleport. Return False.")
                 return(False)

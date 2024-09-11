@@ -1,6 +1,7 @@
 from logger import logger, logger_set_path
 from automation.bot import Bot
 from worlds.extra import Extra
+from datetime import datetime as dt
 
 
 class Clock_Studios_Theme_Park:
@@ -14,18 +15,20 @@ class Clock_Studios_Theme_Park:
         self.bot = Bot(device)
         self.extra = Extra(device)
     async def farm(self):
-        # await self.teleport()
-        # await self.path_1()
-        # await self.path_2()
-        # await self.path_3()
-        # await self.path_4()
-        # await self.extra.restore_tp(tp=4)
-        # await self.path_5()
-        # await self.path_6()
-        # await self.path_7()
-        # await self.path_8()
-        # await self.path_9()
+        t_start = dt.now()
+        await self.teleport()
+        await self.path_1()
+        await self.path_2()
+        await self.path_3()
+        await self.path_4()
+        await self.extra.restore_tp(tp=4, info='Clock Studios Theme Park 1')
+        await self.path_5()
+        await self.path_6()
+        await self.path_7()
+        await self.path_8()
+        await self.path_9()
         await self.path_10()
+        # await self.extra.metrics(self.map, t_start)
     async def teleport(self):
         logger_set_path(self.map, 'Teleport')
         logger.info('---')
@@ -172,29 +175,20 @@ class Clock_Studios_Theme_Park:
     async def path_10(self):
         logger_set_path(self.map, 10)
         await self.bot.use_teleporter(490/2400, 633/1080, move_x=1, move_y=1, corner='topright', confirm=True) # Hamster Ball Park
-        raise SystemExit('check multiple times for complete clear and stabilize. Precise movement to first 2 enemies') # (✓)
+        raise SystemExit('check')
         await self.bot.move(0.4, 1000)
         await self.bot.move(0.5, 2000)
         await self.bot.move(0.6, 2000)
         await self.bot.move(0.7, 1500)
-        await self.bot.move(0.5, 2000)
-        await self.bot.attack_technique(1) # items
-        await self.bot.move(1.75, 1500)
-        for _ in range(7): # -4TP, roamer TODO: precise move
+        await self.bot.move(0.55, 3300)
+        for _ in range(10): # -2TP, 1 roamer
             await self.bot.move(0.05, 300)
-            await self.bot.attack_technique(2)
-        raise SystemExit() # TODO, see if first 2 are picked up here otherwise new logic needed
-        for _ in range(2):
-            await self.bot.move(0.45, 300)
-            await self.bot.attack_technique(2)
-        for _ in range(2):
-            await self.bot.move(1.1, 300)
-            await self.bot.attack_technique(2)
-        for _ in range(2):
-            await self.bot.move(1.3, 300)
-            await self.bot.attack_technique(2)
-        for _ in range(4):
-            await self.bot.move(1.1, 300)
-            await self.bot.attack_technique(2)
+            await self.bot.attack_technique(1)
+        for _ in range(3): # -1TP
+            await self.bot.move(1.55, 300)
+            await self.bot.attack_technique(1)
+        for _ in range(11): # -1TP, roamer, items
+            await self.bot.move(1.05, 300)
+            await self.bot.attack_technique(1)
 
 

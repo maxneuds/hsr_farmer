@@ -1,12 +1,14 @@
 from logger import logger, logger_set_path
 from automation.bot import Bot
 from worlds.extra import Extra
+from datetime import datetime as dt
 
 
 class Supply_Zone:
     def __init__(self, device):
         self.map = 'Supply Zone'
         self.bot = Bot(device)
+        self.extra = Extra(device)
     async def farm(self):
         await self.teleport()
         await self.path_1()
@@ -75,6 +77,7 @@ class Supply_Zone:
         logger.info('---')
         logger.info("--- Map: Supply Zone")
         logger.info('---')
+        t_start = dt.now()
         if tp == 4:
             await self.bot.switch_map(y_list=745/1080, world='herta_space_station', scroll_down=False,
                                     x=1315/2400, y=434/1080, corner='botright', move_x=0, move_y=0) # Destruction's Beginning
@@ -91,5 +94,6 @@ class Supply_Zone:
             await self.bot.attack() # items
         else:
             raise SystemExit(f'no {tp} TP restore available')
+        await self.extra.metrics(f'{self.map} TP {tp}', t_start)
     
 

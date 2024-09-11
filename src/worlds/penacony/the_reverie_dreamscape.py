@@ -1,6 +1,7 @@
 from logger import logger, logger_set_path
 from automation.bot import Bot
 from worlds.extra import Extra
+from datetime import datetime as dt
 
 
 class The_Reverie_Dreamscape:
@@ -15,6 +16,7 @@ class The_Reverie_Dreamscape:
         self.bot = Bot(device)
         self.extra = Extra(device)
     async def farm(self, mode='credits'):
+        t_start = dt.now()
         await self.teleport()
         await self.path_1()
         await self.path_2()
@@ -31,10 +33,11 @@ class The_Reverie_Dreamscape:
         await self.path_13()
         await self.path_14()
         await self.path_15()
-        await self.extra.restore_tp(tp=4)
+        await self.extra.restore_tp(tp=4, info='The Reverie Dreamscape 1')
         await self.path_16()
-        await self.extra.restore_tp(tp=4)
+        await self.extra.restore_tp(tp=4, info='The Reverie Dreamscape 2')
         await self.path_17()
+        await self.extra.metrics(self.map, t_start)
     async def teleport(self):
         logger_set_path(self.map, 'Teleport')
         logger.info('---')

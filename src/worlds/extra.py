@@ -1,5 +1,8 @@
 from logger import logger, logger_set_path
 from automation.bot import Bot
+from datetime import datetime as dt
+import pandas as pd
+import os
 
 
 class Extra:
@@ -9,6 +12,11 @@ class Extra:
     '''
     def __init__(self, device):
         self.bot = Bot(device)
+    
+    async def metrics(self, map_name, t_start):
+        row = {'map': [map_name], 'time': int((dt.now() - t_start).total_seconds())}
+        df_row = pd.DataFrame(row)
+        df_row.to_csv('data/metrics.csv', mode='a', index=False, header=False)
     
     async def craft_items(self, items=[]):
         '''
@@ -22,6 +30,7 @@ class Extra:
         logger.info('---')
         logger.info("--- Map: Storage Zone")
         logger.info('---')
+        t_start = dt.now()
         await self.bot.switch_map(y_list=630/1080, world='herta_space_station', scroll_down=False, # Outside the Control Center
                                 x=576/2400, y=569/1080, corner='botright', move_x=0, move_y=0)
         await self.bot.move(1.0, 3600)
@@ -57,5 +66,6 @@ class Extra:
             await self.bot.sleep(2.5)
             await self.bot.action_tap(int(self.bot.xy.width*1396/2400), int(self.bot.xy.height*705/1080))
             await self.bot.wait_for_ready(min_duration=3, reason='wait for mission exit')
+        await self.metrics(f'Extra TP {tp}', t_start)
 
 

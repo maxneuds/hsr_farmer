@@ -1,17 +1,20 @@
 from logger import logger, logger_set_path
 from automation.bot import Bot
 from worlds.extra import Extra
+from datetime import datetime as dt
 
 
 class Silvermane_Guard:
     def __init__(self, device):
         self.map = 'Silvermane Guard Restricted Zone'
         self.bot = Bot(device)
+        self.extra = Extra(device)
     async def restore_tp(self, tp):
         logger_set_path(self.map, f'TP Restore {tp}')
         logger.info('---')
         logger.info("--- Map: Silvermane Guard Restricted Zone")
         logger.info('---')
+        t_start = dt.now()
         if tp == 4.1:
             await self.bot.switch_map(y_list=750/1080, world='jarilo_vi', scroll_down=False, # Energy Hub
                                         x=659/2400, y=648/1080, corner='botright', move_x=0, move_y=0, confirm=True)
@@ -63,5 +66,6 @@ class Silvermane_Guard:
             await self.bot.attack() # +2TP
         else:
             raise SystemExit(f'no {tp} TP restore available')
+        await self.extra.metrics(f'{self.map} TP {tp}', t_start)
 
 

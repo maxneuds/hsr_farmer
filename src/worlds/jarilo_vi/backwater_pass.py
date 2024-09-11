@@ -1,18 +1,22 @@
 from logger import logger, logger_set_path
 from automation.bot import Bot
 from worlds.extra import Extra
+from datetime import datetime as dt
 
 
 class Backwater_Pass:
     def __init__(self, device):
         self.map = 'Backwater Pass'
         self.bot = Bot(device)
+        self.extra = Extra(device)
     async def farm(self):
+        t_start = dt.now()
         await self.teleport()
         await self.path_1()
         await self.path_2()
         await self.path_3()
         await self.path_4()
+        await self.extra.metrics(self.map, t_start)
     async def teleport(self):
         logger_set_path(self.map, 'Teleport')
         logger.info('Teleport')

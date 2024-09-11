@@ -1,17 +1,20 @@
 from logger import logger, logger_set_path
 from automation.bot import Bot
 from worlds.extra import Extra
+from datetime import datetime as dt
 
 
 class Golden_Hour:
     def __init__(self, device):
         self.map = 'Golden Hour'
         self.bot = Bot(device)
+        self.extra = Extra(device)
     async def restore_tp(self, tp):
         logger_set_path(self.map, 'TP Restore')
         logger.info('---')
         logger.info('--- Map: Golden Hour')
         logger.info('---')
+        t_start = dt.now()
         if tp == 4.1:
             await self.bot.switch_map(y_list=650/1080, world='penacony',
                                         x=588/2400, y=356/1080, move_x=4, move_y=3,) # Sweet Corner
@@ -42,5 +45,6 @@ class Golden_Hour:
             await self.bot.attack() # +2TP
         else:
             raise SystemExit(f'no {tp} TP restore available')
+        await self.extra.metrics(f'{self.map} TP {tp}', t_start)
 
 

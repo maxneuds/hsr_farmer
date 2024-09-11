@@ -1,12 +1,14 @@
 from logger import logger, logger_set_path
 from automation.bot import Bot
 from worlds.extra import Extra
+from datetime import datetime as dt
 
 
 class Storage_Zone:
     def __init__(self, device):
         self.map = 'Storage Zone'
         self.bot = Bot(device)
+        self.extra = Extra(device)
     async def farm(self):
         await self.teleport()
         await self.path_1()
@@ -94,6 +96,7 @@ class Storage_Zone:
         logger.info('---')
         logger.info("--- Map: Storage Zone")
         logger.info('---')
+        t_start = dt.now()
         if tp == 4:
             await self.bot.switch_map(y_list=630/1080, world='herta_space_station', scroll_down=False, # Bud of Destruction
                                     x=510/2400, y=507/1080, corner='botright', move_x=0, move_y=0)
@@ -113,5 +116,6 @@ class Storage_Zone:
             await self.bot.attack_technique(7) # +2TP
         else:
             raise SystemExit(f'no {tp} TP restore available')
+        await self.extra.metrics(f'{self.map} TP {tp}', t_start)
         
 
