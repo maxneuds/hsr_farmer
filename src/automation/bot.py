@@ -113,22 +113,13 @@ class Bot:
         cmd = f'input swipe {x} {y} {x} {y} {int(duration)}'
         await self.shell_failsafe(cmd)
 
-    async def wait_for_map(self, special_exit=True, debug=False):
-        pass
-    
-    
-    # TODO: create wait for map function
-    async def open_map(self, special_exit=True, debug=False):
-        logger.info('open map')
-        await self.wait_for_ready(min_duration=0, reason='prepare open map')
-        await self.attack() # animation cancle
-        await self.shell_failsafe(f'input tap {self.xy.map[0]} {self.xy.map[1]}')
-        # wait for map
+    async def wait_for_map(self, debug=False):
         logger.info('wait for map')
+        await aio.sleep(3) # 3 seconds to load map
         im_mapx = cv.imread('res/map_x_bw.png', cv.IMREAD_GRAYSCALE)
-        dt_start = dt.now()
         seconds_elapsed = 0
         seconds_limit = 10
+        dt_start = dt.now()
         # check for open map for maximum of seconds_limit
         while seconds_elapsed < seconds_limit:
             screen = await self.get_screen()
@@ -145,32 +136,39 @@ class Bot:
             _, max_val, _, _ = cv.minMaxLoc(result)
             if max_val > 0.95:
                 logger.info('map detected')
-                break # exit check loop
+                return(True)
             else:
                 seconds_elapsed = (dt.now() - dt_start).total_seconds()
                 logger.info(f'map not detected after {seconds_elapsed}s: retry')
                 await aio.sleep(0.5)
         if seconds_elapsed >= seconds_limit:
-            logger.error('Unexpected map not found. Send back button and retry.')
-            await self.action_back()
-            await self.wait_for_ready(reason='back button for stabilize')
-            await self.open_map(special_exit=special_exit)
-            return(False) # exit function
-        # check map type
+            logger.error('no open map found')
+            return(False)
+    
+    
+    async def check_map_type(self, debug=False):
         logger.info('check map type')
         im_tbp = cv.imread('res/map_tbp.png', cv.IMREAD_COLOR)
+        screen = await self.get_screen()
+        screen_topright = screen[0:int(self.xy.height*0.2), int(self.xy.width*0.7):int(self.xy.width)]
+        screen_topright_bw = cv.cvtColor(screen_topright, cv.COLOR_BGR2GRAY)
+        _, screen_topright_bw = cv.threshold(screen_topright_bw, 240, 255, cv.THRESH_BINARY)
+        if debug == True:
+            cv.imwrite('debug.png', screen_topright)
+            cv.imshow('debug', screen_topright)
+            cv.waitKey(0)
+            cv.destroyAllWindows()
+            exit()
         result = cv.matchTemplate(screen_topright, im_tbp, cv.TM_CCOEFF_NORMED)
         _, max_val, _, _ = cv.minMaxLoc(result)
         if max_val > 0.95:
             logger.info('map type: normal')
+            return('normal')
         else:
             logger.info('map type: special')
-            if special_exit:
-                logger.info('exit special map to normal map')
-                await self.shell_failsafe(f'input tap {int(self.xy.width*2135/2400)} {int(self.xy.height*138/1080)}')
-                await aio.sleep(1)
-        await self.check_map_zoom_level()
-        
+            return('special')
+    
+    
     async def check_map_zoom_level(self, debug=False):
         logger.info('check map zoom level')
         im_zoombar_min = cv.imread('res/map_zoombar_min.png', cv.IMREAD_GRAYSCALE)
@@ -201,7 +199,41 @@ class Bot:
                 await self.shell_failsafe(f'input tap {btn_zoom_minus[0]} {btn_zoom_minus[1]}')
                 await aio.sleep(0.05)
             await aio.sleep(0.1)
-
+    
+    
+    async def open_map(self, special_exit=True, debug=False):
+        logger.info('open map')
+        # open map by clicking minimap
+        await self.wait_for_ready(min_duration=0, reason='prepare open map')
+        await self.attack() # animation cancle
+        await self.shell_failsafe(f'input tap {self.xy.map[0]} {self.xy.map[1]}')
+        # wait for map
+        check_open = await self.wait_for_map(debug=debug)
+        if check_open == False:
+            logger.info('send back button and try to open map again')
+            await self.action_back()
+            await self.wait_for_ready(reason='back button to try open map again')
+            await self.open_map(special_exit=special_exit, debug=debug)
+            return(False)
+        # check map type
+        map_type = 'unknown'
+        if special_exit:
+            while map_type != 'normal':
+                map_type = await self.check_map_type(debug=debug)
+                if map_type == 'special' and special_exit == True:
+                    logger.info('exit special map to normal map')
+                    await self.shell_failsafe(f'input tap {int(self.xy.width*2135/2400)} {int(self.xy.height*138/1080)}')
+                    # wait for map
+                    check_open = await self.wait_for_map(debug=debug)
+                    if check_open == False:
+                        logger.info('send back button and try to open map again')
+                        await self.action_back()
+                        await self.wait_for_ready(reason='back button to try open map again')
+                        await self.open_map(special_exit=special_exit, debug=debug)
+        # standardize map zoom level
+        await self.check_map_zoom_level()
+    
+    
     async def use_teleporter(self, x, y, move_x=0, move_y=0, swipe=1, move_spd=500, corner='botright', x2=None, y2=None,
                              open_map=True, confirm=False, confirm_x=0.5, confirm_y=0.648, special_exit=True, switch_world=False, n_try=0, debug=False):
         logger.info(f'use teleporter: {int(self.xy.width*x)},{int(self.xy.height*y)}')
@@ -278,6 +310,7 @@ class Bot:
         else:
             return(True)
 
+    
     async def swipe_locations_up(self):
         logger.info('swipe locations up')
         await aio.sleep(0.1)
@@ -285,6 +318,7 @@ class Bot:
         await self.shell_failsafe(cmd)
         await aio.sleep(1.5)
 
+    
     async def open_star_rail_map(self):
         await self.open_map()
         logger.info('open star rail map')
@@ -292,6 +326,7 @@ class Bot:
         await self.shell_failsafe(f'input tap {self.xy.star_rail_map[0]} {self.xy.star_rail_map[1]}')
         await aio.sleep(1.5)
 
+    
     async def switch_world(self, world):
         # select correct matching template
         if world == 'herta_space_station':
@@ -324,6 +359,7 @@ class Bot:
         await self.shell_failsafe(f'input swipe {top_left[0] + int(w/2)} {top_left[1] + int(h/2)} {top_left[0] + int(w/2)} {top_left[1] + int(h/2)} 200')
         await aio.sleep(2)
     
+    
     async def switch_map(self, y_list, world, x, y, scroll_down=False, corner='botright', x2=None, y2=None, move_x=0, move_y=0, swipe=1, confirm=False, debug=False):
         logger.info('switch map')
         await self.switch_world(world=world)
@@ -347,6 +383,7 @@ class Bot:
         if check == False:
             logger.warning('map change failed: retry')
             await self.switch_map(y_list=y_list, world=world, x=x, y=y, scroll_down=scroll_down, corner=corner, x2=x2, y2=y2, move_x=move_x, move_y=move_y, swipe=swipe, confirm=confirm, debug=debug)
+    
     
     async def restore_tp(self, item='trick_snack', n=1, n_try=0):
         logger.info('action: restore TP using food, make sure it is faved first')
@@ -579,7 +616,7 @@ class Bot:
                 await aio.sleep(0.5)
 
 
-    async def wait_for_ready(self, reason, min_duration=0, debug=False):
+    async def wait_for_ready(self, reason, min_duration=0, max_duration=10, debug=False):
         logger.info(f'Wait for the character to be ready. Reason: {reason}')
         if not debug and min_duration > 0:
             logger.info(f'wait for {min_duration}s')
@@ -593,11 +630,13 @@ class Bot:
         img_exit = cv.imread('res/exit.png', cv.IMREAD_COLOR)
         check_return = 0
         time_start = dt.now()
-        seconds_limit = 10
+        seconds_limit = max_duration
         while True:
             seconds_elapsed = (dt.now() - time_start).total_seconds()
             if seconds_elapsed > seconds_limit:
-                logger.error(f'Failed to return to map in {seconds_limit} minutes!')
+                logger.error(f'Failed to be ready in {seconds_limit} seconds! Send Back and retry.')
+                await self.action_back()
+                await self.wait_for_ready(reason=reason, min_duration=min_duration, debug=debug)
                 return(False)
             # get screen
             success = False
@@ -618,16 +657,13 @@ class Bot:
             screen_exit = screen[int(self.xy.height*0.34):int(self.xy.height*0.66), int(self.xy.width*0.33):int(self.xy.width*0.67)]
             # debug = True
             if debug:
-                # sc = screen_exit
-                # si = img_mission
-                # print(si.shape)
-                # print(sc.shape)
-                # cv.imwrite('img.png', sc)
-                # ssi = compare_ssim(sc, si)
-                # print(ssi)
-                # cv.imshow('debug', sc)
-                # cv.waitKey(0)
-                # cv.destroyAllWindows()
+                sc = screen_exit
+                si = img_mission
+                cv.imwrite('img.png', sc)
+                ssi = compare_ssim(sc, si)
+                cv.imshow('debug', sc)
+                cv.waitKey(0)
+                cv.destroyAllWindows()
                 raise SystemExit('debug')
             check_images = [
                 (screen_warp, img_warp),

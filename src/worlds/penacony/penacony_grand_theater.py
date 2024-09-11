@@ -26,6 +26,7 @@ class Penacony_Grand_Theater:
         await self.path_13()
         await self.path_14()
         await self.path_15()
+        await self.path_16()
     async def teleport(self):
         logger_set_path(self.map, 'Teleport')
         logger.info('---')
@@ -91,9 +92,10 @@ class Penacony_Grand_Theater:
         for _ in range(2): # -1TP
             await self.bot.move(0.9, 300)
             await self.bot.attack_technique(4)
-    async def path_5(self): # 3 -> 
+    async def path_5(self):
         logger_set_path(self.map, 5)
         await self.bot.use_teleporter(635/2400, 388/1080, move_x=0, move_y=9, swipe=1, corner='botright') # Ascension Hallway
+        raise SystemExit('adjust to new map change')
         await self.bot.move(0.3, 900)
         await self.bot.move(0.0, 4200)
         await self.bot.move(1.9, 900)
@@ -235,22 +237,34 @@ class Penacony_Grand_Theater:
         await self.bot.move(1.25, 600)
         await self.bot.move(1.0, 300)
         await self.bot.attack_technique(14) # move
-        await self.bot.move(0.75, 1000)
-        raise SystemExit('check: somehow stabilize this, kill the fixed one first')
+        await self.bot.move(0.75, 1500)
+        raise SystemExit('check')
         await self.bot.posfix(0.75, 500)
         await self.bot.move(1.75, 700)
         await self.bot.move(1.5, 300)
         await self.bot.attack_technique(17) # move
-        raise SystemExit()
-        await self.bot.move(1.5, 300)
-        await self.bot.attack_technique(2) # -2TP, roamer
-        await self.bot.move(0.75, 300)
-        await self.bot.attack_technique(2)
+        await self.bot.move(1.6, 900)
+        await self.bot.attack_technique(1) # -1TP
+        for _ in range(2): # -1TP, roamer
+            await self.bot.move(1.5, 300)
+            await self.bot.attack_technique(1)
+        for _ in range(2):
+            await self.bot.move(0.5, 300)
+            await self.bot.attack_technique(1)
+        for _ in range(2):
+            await self.bot.move(1.0, 300)
+            await self.bot.attack_technique(1)
+        for _ in range(2):
+            await self.bot.move(0.0, 300)
+            await self.bot.attack_technique(1)
+        # this part doesn't always work
+        await self.bot.move(1.8, 300)
+        await self.bot.attack_technique(5)
+        await self.bot.move(1.75, 500)
+        await self.bot.posfix(1.75, 500)
+        await self.bot.move(0.4, 900)
         await self.bot.move(0.0, 300)
-        await self.bot.attack_technique(2)
-        raise SystemExit('still get the last items (right)')
-        await self.bot.move(0.0, 300)
-        await self.bot.attack_technique(2)
+        await self.bot.attack_technique(18) # items
     async def path_13(self):
         logger_set_path(self.map, 13)
         await self.bot.use_teleporter(1251/2400, 469/1080, move_x=0, move_y=8, swipe=2, corner='botright') # Communing Hall
@@ -370,6 +384,10 @@ class Penacony_Grand_Theater:
         # await self.bot.move(1.7, 2500)
         # await self.bot.interact() # 
         # TODO: more enemies, very hard to reach
-    # TP: 4
+    async def path_16(self):
+        logger_set_path(self.map, 16)
+        await self.bot.use_teleporter(635/2400, 388/1080, move_x=0, move_y=9, swipe=1, corner='botright') # Ascension Hallway
+        await self.bot.move(1.5, 300)
+        await self.bot.attack_technique(22) # -3TP
 
 

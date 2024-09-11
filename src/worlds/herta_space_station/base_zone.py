@@ -21,7 +21,7 @@ class Base_Zone:
         await self.bot.move(1.3, 500)
         await self.bot.attack_technique(3) # items
     async def restore_tp(self, tp):
-        logger_set_path(self.map, 'TP Restore')
+        logger_set_path(self.map, f'TP Restore {tp}')
         logger.info('---')
         logger.info("--- Map: Base Zone")
         logger.info('---')

@@ -12,7 +12,8 @@ class Audition_Venue:
         self.bot = Bot(device)
         self.extra = Extra(device)
     async def farm(self):
-        await self.teleport()
+        # await self.extra.restore_tp(tp=4, info='dev') # not needed
+        # await self.teleport()
         await self.path_1()
         await self.path_2()
         await self.path_3()
@@ -20,7 +21,6 @@ class Audition_Venue:
         await self.path_5()
         await self.path_6()
         await self.path_7()
-        # await self.extra.restore_tp(tp=4) # not needed
         await self.path_99()
     async def teleport(self):
         logger_set_path(self.map, 'Teleport')
@@ -34,7 +34,7 @@ class Audition_Venue:
         raise SystemExit('get items') 
     async def path_1(self):
         logger_set_path(self.map, 1)
-        await self.bot.use_teleporter(x=1118/2400, y=632/1080, corner='botright', move_x=0, move_y=6, x2=751/2400, y2=310/1080) # Dreamplay Fantasia: Action Challenge
+        await self.bot.use_teleporter(x=1120/2400, y=745/1080, corner='botright', move_x=0, move_y=6, x2=751/2400, y2=310/1080) # Dreamplay Fantasia: Action Challenge
         await self.bot.move(0.275, 3100)
         await self.bot.attack_technique(2) # -2TP
         await self.bot.move(1.75, 3000)

@@ -8,7 +8,7 @@ class Silvermane_Guard:
         self.map = 'Silvermane Guard Restricted Zone'
         self.bot = Bot(device)
     async def restore_tp(self, tp):
-        logger_set_path(self.map, 'TP Restore')
+        logger_set_path(self.map, f'TP Restore {tp}')
         logger.info('---')
         logger.info("--- Map: Silvermane Guard Restricted Zone")
         logger.info('---')

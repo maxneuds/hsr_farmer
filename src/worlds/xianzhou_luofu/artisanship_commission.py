@@ -49,6 +49,7 @@ class Artisanship_Commission:
         await self.bot.move(1.0, 1000)
         await self.bot.move(1.5, 300)
         await self.bot.attack_technique(5) # -1TP
+        await self.bot.wait_for_ready(min_duration=10, max_duration=120, reason='elite battle') # wait for elite battle end
     async def path_2(self):
         logger_set_path(self.map, 2)
         await self.bot.use_teleporter(933/2400, 530/1080, corner='topright', move_x=0, move_y=4) # Passage of the Finery Foundry
@@ -64,6 +65,7 @@ class Artisanship_Commission:
         await self.bot.move(1.1, 500)
         await self.bot.move(1.5, 100)
         await self.bot.attack_technique(5) # -1TP
+        await self.bot.wait_for_ready(min_duration=10, max_duration=120, reason='elite battle') # wait for elite battle end
     async def path_3(self):
         logger_set_path(self.map, 3)
         await self.bot.use_teleporter(854/2400, 418/1080, corner='botright', move_x=0, move_y=4) # Creation Furnace
@@ -147,6 +149,8 @@ class Artisanship_Commission:
         await self.bot.move(0.25, 700)
         await self.bot.move(0.5, 300)
         await self.bot.attack_technique(6) # -1TP
+        await self.bot.move(1.5, 300)
+        await self.bot.attack_technique(8) # stability
     async def path_7(self):
         logger_set_path(self.map, 7)
         await self.bot.switch_map(y_list=446/1080, world='the_xianzhou_luofu', scroll_down=True, # Passage to the Sapientia Academe

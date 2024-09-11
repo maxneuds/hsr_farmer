@@ -22,8 +22,14 @@ async def main():
     
     # dev
     # await astral_express.checkout()
-    # await penacony.farm()
-    await penacony.dev()
+    # await extra.restore_tp(tp=2)
+    # await xianzhou_luofu.farm() # TP:+0->5 R2:1 R4:0 ✓✓✓
+    await penacony.farm()
+    # await penacony.dev()
+    # await penacony.audition_venue.farm()
+    # await penacony.clock_studios_theme_park.farm()
+    # await penacony.clock_studios_theme_park.path_5()
+    # await penacony.clock_studios_theme_park.path_10()
     raise SystemExit()
 
 
