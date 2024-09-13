@@ -22,7 +22,7 @@ class Audition_Venue:
         await self.path_5()
         await self.path_6()
         await self.path_7()
-        await self.extra.restore_tp(tp=4, info='dev') # not needed
+        # await self.extra.restore_tp(tp=4, info='dev') # not needed
         # await self.extra.metrics(self.map, t_start)
     async def teleport(self):
         logger_set_path(self.map, 'Teleport')
@@ -31,7 +31,6 @@ class Audition_Venue:
         logger.info('---')
         await self.bot.switch_map(y_list=686/1080, world='penacony', scroll_down=True, # Audition Plaza
                                     x=940/2400, y=580/1080, corner='botright', move_x=0, move_y=0)
-        raise SystemExit('check')
         await self.bot.move(0.5, 500)
         await self.bot.attack_technique(5) # move
         await self.bot.move(0.75, 500)
@@ -40,7 +39,7 @@ class Audition_Venue:
         await self.bot.move(0.1, 300)
         await self.bot.attack_technique(3) # items
         await self.bot.move(0.9, 1500)
-        await self.bot.move(0.5, 300)
+        await self.bot.move(0.5, 500)
         await self.bot.attack_technique(11) # move
         await self.bot.move(0.0, 300)
         await self.bot.attack_technique(1) # items
@@ -193,7 +192,6 @@ class Audition_Venue:
         await self.bot.attack_technique(3) # items
         await self.bot.move(0.95, 300)
         await self.bot.attack_technique(5) # items
-        raise SystemExit('check')
         await self.bot.move(1.75, 700)
         await self.bot.move(1.5, 300)
         await self.bot.attack_technique(1) # +2TP
@@ -215,11 +213,14 @@ class Audition_Venue:
         await self.bot.posfix(1.75, 500)
         await self.bot.move(0.9, 300)
         await self.bot.attack_technique(6) # items
-        await self.bot.move(0.0, 1200)
+        await self.bot.move(0.75, 1500)
+        await self.bot.move(1.95, 1200)
         await self.bot.move(0.5, 300)
-        await self.bot.attack_technique(4) # move
+        await self.bot.attack_technique(6) # move
         await self.bot.move(1.0, 300)
-        await self.bot.attack_technique(9) # items
+        await self.bot.attack_technique(6) # move
+        await self.bot.move(1.25, 300)
+        await self.bot.attack_technique(3) # items
         await self.bot.move(1.25, 500)
         await self.bot.posfix(1.25, 500)
         await self.bot.move(0.3, 300)
@@ -252,7 +253,7 @@ class Audition_Venue:
     async def path_6(self):
         logger_set_path(self.map, 6)
         await self.bot.use_teleporter(x=1390/2400, y=332/1080, corner='botright', move_x=0, move_y=8, x2=1316/2400, y2=270/1080) # Gunfire Time: Time Trial (Posterior)
-        raise SystemExit('check')
+        raise SystemExit('check') # check1
         await self.bot.move(1.45, 3000)
         await self.bot.attack_technique(6) # items
         await self.bot.move(1.25, 500)
@@ -271,14 +272,12 @@ class Audition_Venue:
         await self.bot.move(0.0, 300)
         await self.bot.attack_technique(7) # move
         await self.bot.move(1.5, 300)
-        await self.bot.attack_technique(10) # -2TP
+        await self.bot.attack_technique(11) # -2TP
         await self.bot.move(0.25, 300)
         await self.bot.attack_technique(5) # items
-        raise SystemExit('check: todo')
     async def path_7(self):
         logger_set_path(self.map, 7)
         await self.bot.use_teleporter(x=974/2400, y=686/1080, corner='topleft', move_x=0, move_y=3) # Path of the Superstar
-        raise SystemExit('check')
         await self.bot.move(1.25, 1100)
         await self.bot.move(1.5, 300)
         await self.bot.attack_technique(8) # items

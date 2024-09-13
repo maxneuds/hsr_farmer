@@ -28,7 +28,7 @@ class Clock_Studios_Theme_Park:
         await self.path_8()
         await self.path_9()
         await self.path_10()
-        # await self.extra.metrics(self.map, t_start)
+        await self.extra.metrics(self.map, t_start)
     async def teleport(self):
         logger_set_path(self.map, 'Teleport')
         logger.info('---')
@@ -175,7 +175,6 @@ class Clock_Studios_Theme_Park:
     async def path_10(self):
         logger_set_path(self.map, 10)
         await self.bot.use_teleporter(490/2400, 633/1080, move_x=1, move_y=1, corner='topright', confirm=True) # Hamster Ball Park
-        raise SystemExit('check')
         await self.bot.move(0.4, 1000)
         await self.bot.move(0.5, 2000)
         await self.bot.move(0.6, 2000)

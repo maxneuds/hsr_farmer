@@ -11,17 +11,18 @@ class The_Shackling_Prison:
         self.extra = Extra(device)
     async def farm(self):
         t_start = dt.now()
-        await self.teleport() # TODO: can be better but works
-        await self.path_1()
-        await self.path_2()
-        await self.path_3()
-        await self.path_4()
-        await self.path_5()
-        await self.path_6()
-        await self.path_7()
-        await self.path_8()
-        await self.path_9() # TODO: optimize bridge lift
-        await self.path_10()
+        # await self.teleport() # TODO: can be better but works
+        # await self.path_1()
+        # await self.path_2()
+        # await self.path_3()
+        # await self.path_4()
+        # await self.path_5()
+        # await self.path_6()
+        # await self.path_7()
+        # await self.path_8()
+        # raise SystemExit('fix: monster relocation')
+        # await self.path_9() # TODO: optimize bridge lift
+        # await self.path_10()
         await self.path_11()
         await self.extra.restore_tp(tp=4)
         await self.path_12()

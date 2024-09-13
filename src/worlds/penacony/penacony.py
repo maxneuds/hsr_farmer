@@ -36,18 +36,18 @@ class Penacony:
         XP      ???/???                   /n
         Time    ???
         '''
-        # await self.extra.restore_tp(tp=4, info='Penacony 1')    # TP:+4->5 Time:???
-        # await self.dreams_edge.farm()                           # TP:-4->1 XP:7668/9612 Time:431    
-        # await self.silvermane_guard.restore_tp(tp=4.1)          # TP:+4->5 Time:85
-        # await self.childs_dream.farm()                          # TP:-3->2 R2:4 XP:5832/5832 Time:???
-        # await self.extra.restore_tp(tp=4, info='Penacony 2')    # TP:+4->5 Time:???
-        # await self.clock_studios_theme_park.farm()              # TP:-4->1 XP:7648/7648 Time:???
-        # await self.silvermane_guard.restore_tp(tp=4.2)          # TP:+4->5 Time:???
-        # await self.the_reverie_dreamscape.farm()                # TP:-???->1 XP:14580/15552 Time:? R2/4:1/2
-        # await self.golden_hour.restore_tp(tp=4.1)               # TP:+4->5 Time:???
-        # await self.dewlight_pavilion.farm()                     # TP:-14->1 XP:11448/11448 Time: R2/4:1/2
-        # await self.golden_hour.restore_tp(tp=4.2)               # TP:+4->5 Time:80
-        # await self.penacony_grand_theater.farm()                # XP:?/? Time: TP:1->3 R4:0 R2:0 # unoptimized/unfinished
+        await self.extra.restore_tp(tp=4, info='Penacony 1')    # TP:+4->5 Time:???
+        await self.dreams_edge.farm()                           # TP:-4->1 XP:7668/9612 Time:431    
+        await self.silvermane_guard.restore_tp(tp=4.1)          # TP:+4->5 Time:85
+        await self.childs_dream.farm()                          # TP:-3->2 R2:4 XP:5832/5832 Time:???
+        await self.extra.restore_tp(tp=4, info='Penacony 2')    # TP:+4->5 Time:???
+        await self.clock_studios_theme_park.farm()              # TP:-4->1 XP:7648/7648 Time:???
+        await self.silvermane_guard.restore_tp(tp=4.2)          # TP:+4->5 Time:???
+        await self.the_reverie_dreamscape.farm()                # TP:-???->1 XP:14580/15552 Time:? R2/4:1/2
+        await self.golden_hour.restore_tp(tp=4.1)               # TP:+4->5 Time:???
+        await self.dewlight_pavilion.farm()                     # TP:-14->1 XP:11448/11448 Time: R2/4:1/2
+        await self.golden_hour.restore_tp(tp=4.2)               # TP:+4->5 Time:80
+        await self.penacony_grand_theater.farm()                # XP:?/? Time: TP:1->3 R4:0 R2:0 # unoptimized/unfinished
         await self.audition_venue.farm()
         await self.the_soaring_clock_hand.restore_tp(tp=4)      # TP:+4->5 Time:???
     async def dev(self):

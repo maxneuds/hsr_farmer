@@ -156,7 +156,7 @@ class The_Reverie_Dreamscape:
         await self.bot.move(0.5, 500)
         await self.bot.sleep(2)
         await self.bot.attack_technique(2) # -1TP
-        await self.bot.move(0.1, 300)
+        await self.bot.move(0.15, 300)
         await self.bot.attack_technique(3) # -1TP
         await self.bot.move(0.3, 300)
         await self.bot.attack_technique(9) # items

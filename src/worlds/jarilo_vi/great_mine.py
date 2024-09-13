@@ -11,9 +11,9 @@ class Great_Mine:
         self.extra = Extra(device)
     async def farm(self):
         t_start = dt.now()
-        await self.teleport()
-        await self.path_1()
-        await self.path_2() # TODO: path1+2 might be combined
+        # await self.teleport()
+        # await self.path_1()
+        # await self.path_2() # TODO: path1+2 might be combined
         await self.path_3()
         await self.path_4()
         await self.path_5()
@@ -83,16 +83,18 @@ class Great_Mine:
         await self.bot.move(0.2, 1500)
         await self.bot.attack_technique(1) # +2TP
         await self.bot.move(0.9, 300)
-        await self.bot.attack_technique(6) # move
+        await self.bot.attack_technique(5) # move
         await self.bot.move(0.6, 300)
         await self.bot.attack_technique(4) # move
         await self.bot.move(0.3, 300)
         await self.bot.attack_technique(5) # items
-        await self.bot.move(0.5, 500)
+        await self.bot.move(0.4, 1500)
         await self.bot.posfix(0.5, 500)
         await self.bot.move(1.7, 700)
         await self.bot.move(0.0, 300)
-        await self.bot.attack_technique(7) # move
+        await self.bot.attack_technique(4) # move
+        await self.bot.move(0.2, 300)
+        await self.bot.attack_technique(3) # move
         await self.bot.move(0.5, 300)
         await self.bot.attack_technique(10) # items
         await self.bot.move(1.0, 900)

@@ -51,6 +51,7 @@ class Xianzhou_Luofu:
         await self.cloudford.farm()                             # TP:+1->3 XP:4644/4644 Time:???
         await self.stargazer_navalia.farm()                     # TP:-1->2 XP:6264/6264 Time:???
         await self.extra.restore_tp(tp=4, info='Xianzhou 1')    # TP:+4->5 Time:???
+        raise SystemExit('check shackling prison')
         await self.the_shackling_prison.farm()                  # TP:???->??? Time:???
     async def dev(self):
         raise SystemExit()
