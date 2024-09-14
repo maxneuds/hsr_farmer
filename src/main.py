@@ -22,25 +22,25 @@ async def main():
     
     # dev
     # await astral_express.checkout()
-    # await extra.restore_tp(tp=2)
+    # await extra.restore_tp(tp=4)
     # await xianzhou_luofu.farm()
-    await penacony.farm()
+    # await penacony.farm()
     # await penacony.audition_venue.farm()
     # await jarilo_vi.great_mine.farm()
     # await jarilo_vi.rivet_town.farm()
     # await xianzhou_luofu.the_shackling_prison.farm()
-    raise SystemExit()
+    # raise SystemExit()
 
     # preperations
     # daily for free (guranteed): R2: 25, R4: 5
     # await xianzhou_luofu.stockup() # disabled, got enough
-    await extra.craft_items(['trick_snack', 'punitive_energy'])
+    # await extra.craft_items(['trick_snack', 'punitive_energy'])
 
     # farm worlds
-    await herta_space_station.farm() # TP:+5->5 ✓✓
-    await jarilo_vi.farm() # TP:+0->5 R2/4:0 ✓✓
-    await xianzhou_luofu.farm() # TP:+0->5 R2:1 R4:0 ✓✓
-    await penacony.farm() # TP:??? R2:5 R4:3
+    # await herta_space_station.farm() # TP:+5->5 ✓✓
+    # await jarilo_vi.farm() # TP:+0->5 R2/4:0 ✓✓
+    await xianzhou_luofu.dev() # TP:+0->5 R2:1 R4:0 ✓✓
+    # await penacony.farm() # TP:??? R2:5 R4:3
     
     # checkout
     await astral_express.checkout()

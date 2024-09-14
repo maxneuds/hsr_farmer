@@ -11,18 +11,18 @@ class The_Shackling_Prison:
         self.extra = Extra(device)
     async def farm(self):
         t_start = dt.now()
-        # await self.teleport() # TODO: can be better but works
-        # await self.path_1()
-        # await self.path_2()
-        # await self.path_3()
-        # await self.path_4()
-        # await self.path_5()
-        # await self.path_6()
-        # await self.path_7()
-        # await self.path_8()
-        # raise SystemExit('fix: monster relocation')
-        # await self.path_9() # TODO: optimize bridge lift
-        # await self.path_10()
+        await self.teleport() # TODO: can be better but works
+        await self.path_1()
+        await self.path_2()
+        await self.path_3()
+        await self.path_4()
+        await self.path_5()
+        await self.path_6()
+        await self.path_7()
+        await self.path_8()
+        raise SystemExit('fix: monster relocation')
+        await self.path_9() # TODO: optimize bridge lift
+        await self.path_10()
         await self.path_11()
         await self.extra.restore_tp(tp=4)
         await self.path_12()
@@ -32,7 +32,7 @@ class The_Shackling_Prison:
         logger.info('---')
         logger.info('--- Map: The Shackling Prison')
         logger.info('---')
-        await self.bot.switch_map(y_list=928/1080, world='the_xianzhou_luofu', scroll_down=True, # Nether Key
+        await self.bot.switch_map(y_list=808/1080, world='the_xianzhou_luofu', scroll_down=True, # Nether Key
                                     x=862/2400, y=640/1080, corner='topright', move_x=6, move_y=6)
         await self.bot.move(1.53, 500)
         await self.bot.attack_technique(4) # items
@@ -342,7 +342,7 @@ class The_Shackling_Prison:
         await self.bot.attack_technique(3) # items, might not always work - it's fine
     async def path_12(self):
         logger_set_path(self.map, 12)
-        await self.bot.switch_map(y_list=928/1080, world='the_xianzhou_luofu', scroll_down=True, # Pyroscape Hold
+        await self.bot.switch_map(y_list=808/1080, world='the_xianzhou_luofu', scroll_down=True, # Pyroscape Hold
                                     x=605/2400, y=289/1080, corner='botright', move_x=3, move_y=4)
         await self.bot.move(1.0, 2000)
         await self.bot.move(1.1, 500)

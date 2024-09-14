@@ -28,7 +28,7 @@ class Alchemy_Commission:
         logger.info('---')
         logger.info('--- Map: Alchemy Comission')
         logger.info('---')
-        await self.bot.switch_map(y_list=685/1080, world='the_xianzhou_luofu', scroll_down=True, # Healer's Market
+        await self.bot.switch_map(y_list=568/1080, world='the_xianzhou_luofu', scroll_down=True, # Healer's Market
                                     x=854/2400, y=689/1080, corner='topright', move_x=0, move_y=6, confirm=True)
         await self.bot.move(0.5, 1500)
         await self.bot.move(0.75, 6700)
@@ -133,7 +133,7 @@ class Alchemy_Commission:
             await self.bot.attack_technique(1)
     async def path_6(self):
         logger_set_path(self.map, 6)
-        await self.bot.switch_map(y_list=685/1080, world='the_xianzhou_luofu', scroll_down=True, # Aureate Elixir Furnace
+        await self.bot.switch_map(y_list=568/1080, world='the_xianzhou_luofu', scroll_down=True, # Aureate Elixir Furnace
                                     x=1003/2400, y=595/1080, corner='topleft', move_x=0, move_y=3)
         await self.bot.move(0.54, 3200)
         await self.bot.move(0.33, 2500)

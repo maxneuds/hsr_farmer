@@ -75,7 +75,7 @@ class Bot:
         screenshot = cv.imdecode(np.frombuffer(bytes(im_byte_array), np.uint8), cv.IMREAD_COLOR)
         if debug == True:
             cv.imshow('debug', screenshot)
-            cv.imwrite('debug.png', screenshot)
+            cv.imwrite('data/debug.png', screenshot)
             cv.setMouseCallback('debug', self.click_event)
             cv.waitKey(0)
             cv.destroyAllWindows()
@@ -127,7 +127,7 @@ class Bot:
             screen_topright_bw = cv.cvtColor(screen_topright, cv.COLOR_BGR2GRAY)
             _, screen_topright_bw = cv.threshold(screen_topright_bw, 240, 255, cv.THRESH_BINARY)
             if debug == True:
-                cv.imwrite('debug.png', screen_topright)
+                cv.imwrite('data/debug.png', screen_topright)
                 cv.imshow('debug', screen_topright)
                 cv.waitKey(0)
                 cv.destroyAllWindows()
@@ -154,7 +154,7 @@ class Bot:
         screen_topright_bw = cv.cvtColor(screen_topright, cv.COLOR_BGR2GRAY)
         _, screen_topright_bw = cv.threshold(screen_topright_bw, 240, 255, cv.THRESH_BINARY)
         if debug == True:
-            cv.imwrite('debug.png', screen_topright)
+            cv.imwrite('data/debug.png', screen_topright)
             cv.imshow('debug', screen_topright)
             cv.waitKey(0)
             cv.destroyAllWindows()
@@ -178,7 +178,7 @@ class Bot:
         screen_botmid_bw = cv.cvtColor(screen_botmid, cv.COLOR_BGR2GRAY)
         _, screen_botmid_bw = cv.threshold(screen_botmid_bw, 240, 255, cv.THRESH_BINARY)
         if debug == True:
-            cv.imwrite('debug.png', screen_zoombar)
+            cv.imwrite('data/debug.png', screen_zoombar)
             cv.imshow('debug', screen_zoombar)
             cv.waitKey(0)
             cv.destroyAllWindows()
@@ -516,7 +516,7 @@ class Bot:
                         screen = await self.get_screen(custom_msg=None)
                         success = True
                         if debug == True:
-                            cv.imwrite('debug.png', screen)
+                            cv.imwrite('data/debug.png', screen)
                             cv.imshow('debug', screen)
                             cv.waitKey(0)
                             cv.destroyAllWindows()

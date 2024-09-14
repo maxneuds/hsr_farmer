@@ -11,14 +11,14 @@ class Great_Mine:
         self.extra = Extra(device)
     async def farm(self):
         t_start = dt.now()
-        # await self.teleport()
-        # await self.path_1()
-        # await self.path_2() # TODO: path1+2 might be combined
+        await self.teleport()
+        await self.path_1()
+        await self.path_2() # TODO: path1+2 might be combined
         await self.path_3()
         await self.path_4()
         await self.path_5()
         await self.path_6()
-        # await self.extra.metrics(self.map, t_start)
+        await self.extra.metrics(self.map, t_start)
     async def teleport(self):
         logger_set_path(self.map, 'Teleport')
         logger.info('---')
@@ -79,7 +79,6 @@ class Great_Mine:
     async def path_3(self):
         logger_set_path(self.map, 3)
         await self.bot.use_teleporter(x=665/2400, y=435/1080, corner='topleft', move_x=0, move_y=0, confirm=True) # Entrance
-        raise SystemExit('check')
         await self.bot.move(0.2, 1500)
         await self.bot.attack_technique(1) # +2TP
         await self.bot.move(0.9, 300)

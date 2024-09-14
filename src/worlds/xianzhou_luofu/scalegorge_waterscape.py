@@ -26,7 +26,7 @@ class Scalegorge_Waterscape:
         logger.info('---')
         logger.info('--- Map: Scalegorge Waterscape')
         logger.info('---')
-        await self.bot.switch_map(y_list=807/1080, world='the_xianzhou_luofu', scroll_down=True, # Dragonvista Rain Hall
+        await self.bot.switch_map(y_list=686/1080, world='the_xianzhou_luofu', scroll_down=True, # Dragonvista Rain Hall
                                     x=966/2400, y=379/1080, corner='botright', move_x=0, move_y=0)
         await self.bot.move(1.5, 4000)
         await self.bot.move(1.7, 2900)

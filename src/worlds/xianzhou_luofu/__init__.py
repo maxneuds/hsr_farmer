@@ -8,5 +8,6 @@ from worlds.xianzhou_luofu.fyxestroll_garden import Fyxestroll_Garden
 from worlds.xianzhou_luofu.alchemy_commission import Alchemy_Commission
 from worlds.xianzhou_luofu.scalegorge_waterscape import Scalegorge_Waterscape
 from worlds.xianzhou_luofu.the_shackling_prison import The_Shackling_Prison
+from worlds.xianzhou_luofu.skysplitter import Skysplitter
 
 

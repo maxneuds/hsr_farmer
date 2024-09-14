@@ -11,6 +11,7 @@ from worlds.xianzhou_luofu.fyxestroll_garden import Fyxestroll_Garden
 from worlds.xianzhou_luofu.alchemy_commission import Alchemy_Commission
 from worlds.xianzhou_luofu.scalegorge_waterscape import Scalegorge_Waterscape
 from worlds.xianzhou_luofu.the_shackling_prison import The_Shackling_Prison
+from worlds.xianzhou_luofu.skysplitter import Skysplitter
 
 
 class Xianzhou_Luofu:
@@ -29,31 +30,33 @@ class Xianzhou_Luofu:
         self.alchemy_commission = Alchemy_Commission(device)
         self.scalegorge_waterscape = Scalegorge_Waterscape(device)
         self.the_shackling_prison = The_Shackling_Prison(device)
+        self.skysplitter = Skysplitter(device)
     async def stockup(self):
         await self.central_starskiff_haven.stockup()
     async def farm(self):
         '''
-        Status  7/8 (new: shackling prison) /n
+        Status  7/9 (new: shackling prison, skysplitter) /n
         TP      5 -> ???                    /n
         R2/R4   1 / 0                       /n
         XP      42596/???                   /n
         Time    ???
         '''
-        await self.fyxestroll_garden.farm()                     # TP:-4->1 XP:4644/4644 Time:???
-        await self.base_zone.restore_tp(tp=4.1)                 # TP:+4->5 Time:???
-        await self.artisanship_commission.farm()                # TP:-4->1 XP:9548/9548 Time:???
-        await self.base_zone.restore_tp(tp=4.2)                 # TP:+4->5 Time:???
-        await self.scalegorge_waterscape.farm()                 # TP:-4->1 XP:4752/4752 Time:???
-        await self.storage_zone.restore_tp(tp=4)                # TP:+4->5 Time:???
-        await self.divination_commission.farm()                 # TP:-6->1 XP:6000/6000 Time:??? R2:1
-        await self.supply_zone.restore_tp(tp=4)                 # TP:+4->5 Time:???
-        await self.alchemy_commission.farm()                    # TP:-3->2 XP:6912/6912 Time:???
+        # await self.fyxestroll_garden.farm()                     # TP:-4->1 XP:4644/4644 Time:???
+        # await self.base_zone.restore_tp(tp=4.1)                 # TP:+4->5 Time:???
+        # await self.artisanship_commission.farm()                # TP:-4->1 XP:9548/9548 Time:???
+        # await self.base_zone.restore_tp(tp=4.2)                 # TP:+4->5 Time:???
+        # await self.scalegorge_waterscape.farm()                 # TP:-4->1 XP:4752/4752 Time:???
+        # await self.storage_zone.restore_tp(tp=4)                # TP:+4->5 Time:???
+        # await self.divination_commission.farm()                 # TP:-6->1 XP:6000/6000 Time:??? R2:1
+        # await self.supply_zone.restore_tp(tp=4)                 # TP:+4->5 Time:???
+        # await self.alchemy_commission.farm()                    # TP:-3->2 XP:6912/6912 Time:???
         await self.cloudford.farm()                             # TP:+1->3 XP:4644/4644 Time:???
         await self.stargazer_navalia.farm()                     # TP:-1->2 XP:6264/6264 Time:???
         await self.extra.restore_tp(tp=4, info='Xianzhou 1')    # TP:+4->5 Time:???
         raise SystemExit('check shackling prison')
         await self.the_shackling_prison.farm()                  # TP:???->??? Time:???
     async def dev(self):
+        await self.skysplitter.restore_tp(tp=4.2)
         raise SystemExit()
 
 

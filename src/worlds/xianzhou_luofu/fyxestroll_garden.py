@@ -26,7 +26,7 @@ class Fyxestroll_Garden:
         logger.info('---')
         logger.info('--- Map: Fyxestroll Garden')
         logger.info('---')
-        await self.bot.switch_map(y_list=568/1080, world='the_xianzhou_luofu', scroll_down=True, # Locufox Forest Backdoor
+        await self.bot.switch_map(y_list=446/1080, world='the_xianzhou_luofu', scroll_down=True, # Locufox Forest Backdoor
                                     x=578/2400, y=284/1080, move_x=0, move_y=1, corner='botleft', confirm=False)
         await self.bot.move(1.5, 4400)
         await self.bot.move(1.95, 600)

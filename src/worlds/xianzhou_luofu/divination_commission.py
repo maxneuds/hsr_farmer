@@ -27,7 +27,7 @@ class Divination_Commission:
         logger.info('---')
         logger.info('--- Map: Divination Commission')
         logger.info('---')
-        await self.bot.switch_map(y_list=328/1080, world='the_xianzhou_luofu', scroll_down=True,
+        await self.bot.switch_map(y_list=989/1080, world='the_xianzhou_luofu', scroll_down=False,
                                     x=848/2400, y=524/1080, corner='botright', move_x=0, move_y=0) # Bud of Aether
         await self.bot.move(1.25, 2600)
         await self.bot.attack_technique(6) # -1TP

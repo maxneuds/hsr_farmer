@@ -28,7 +28,7 @@ class Artisanship_Commission:
         logger.info('---')
         logger.info('--- Map: Artisanship Commission')
         logger.info('---')
-        await self.bot.switch_map(y_list=446/1080, world='the_xianzhou_luofu', scroll_down=True, # Passage of the Finery Foundry
+        await self.bot.switch_map(y_list=326/1080, world='the_xianzhou_luofu', scroll_down=True, # Passage of the Finery Foundry
                                     x=933/2400, y=530/1080, corner='topright', move_x=0, move_y=4)
         await self.bot.move(0.5, 5200)
         await self.bot.move(0.0, 6200)
@@ -100,7 +100,7 @@ class Artisanship_Commission:
             await self.bot.attack_technique(1)
     async def path_4(self):
         logger_set_path(self.map, 4)
-        await self.bot.switch_map(y_list=446/1080, world='the_xianzhou_luofu', scroll_down=True, # Passage to the Sapientia Academe
+        await self.bot.switch_map(y_list=326/1080, world='the_xianzhou_luofu', scroll_down=True, # Passage to the Sapientia Academe
                                     x=894/2400, y=610/1080, corner='topleft', move_x=0, move_y=2)
         await self.bot.move(1.25, 3100)
         await self.bot.move(1.0, 8000)
@@ -156,7 +156,7 @@ class Artisanship_Commission:
         await self.bot.attack_technique(8) # stability
     async def path_7(self):
         logger_set_path(self.map, 7)
-        await self.bot.switch_map(y_list=446/1080, world='the_xianzhou_luofu', scroll_down=True, # Passage to the Sapientia Academe
+        await self.bot.switch_map(y_list=326/1080, world='the_xianzhou_luofu', scroll_down=True, # Passage to the Sapientia Academe
                                     x=894/2400, y=610/1080, corner='topleft', move_x=0, move_y=2)
         await self.bot.move(1.25, 3100)
         await self.bot.move(1.0, 8000)
