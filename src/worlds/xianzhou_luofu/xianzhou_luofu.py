@@ -35,7 +35,7 @@ class Xianzhou_Luofu:
         await self.central_starskiff_haven.stockup()
     async def farm(self):
         '''
-        Status  7/9 (new: shackling prison, skysplitter) /n
+        Status  9/9                         /n
         TP      5 -> ???                    /n
         R2/R4   1 / 0                       /n
         XP      42596/???                   /n
@@ -50,10 +50,9 @@ class Xianzhou_Luofu:
         # await self.divination_commission.farm()                 # TP:-6->1 XP:6000/6000 Time:??? R2:1
         # await self.supply_zone.restore_tp(tp=4)                 # TP:+4->5 Time:???
         # await self.alchemy_commission.farm()                    # TP:-3->2 XP:6912/6912 Time:???
-        await self.cloudford.farm()                             # TP:+1->3 XP:4644/4644 Time:???
-        await self.stargazer_navalia.farm()                     # TP:-1->2 XP:6264/6264 Time:???
-        await self.extra.restore_tp(tp=4, info='Xianzhou 1')    # TP:+4->5 Time:???
-        raise SystemExit('check shackling prison')
+        # await self.cloudford.farm()                             # TP:+1->3 XP:4644/4644 Time:???
+        # await self.stargazer_navalia.farm()                     # TP:-1->2 XP:6264/6264 Time:???
+        # await self.skysplitter.restore_tp(tp=4.1)    # TP:+4->5 Time:???
         await self.the_shackling_prison.farm()                  # TP:???->??? Time:???
     async def dev(self):
         await self.skysplitter.restore_tp(tp=4.2)

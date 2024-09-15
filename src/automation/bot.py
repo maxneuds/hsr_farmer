@@ -446,11 +446,11 @@ class Bot:
                         logger.error(f'"{item}" not found. Exit.')
                         exit()
 
-    async def interact(self, wait_for_ready=True):
+    async def interact(self, wait_for_ready=True, max_duration=10):
         await aio.sleep(1.5)
         await self.action_tap(int(self.xy.width*1600/2400), int(self.xy.height*650/1080))
         if wait_for_ready == True:
-            await self.wait_for_ready(min_duration=3, reason='interact')
+            await self.wait_for_ready(min_duration=3, max_duration=max_duration, reason='interact')
         else:
             await self.sleep(5)
 

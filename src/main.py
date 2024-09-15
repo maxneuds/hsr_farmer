@@ -39,7 +39,7 @@ async def main():
     # farm worlds
     # await herta_space_station.farm() # TP:+5->5 ✓✓
     # await jarilo_vi.farm() # TP:+0->5 R2/4:0 ✓✓
-    await xianzhou_luofu.dev() # TP:+0->5 R2:1 R4:0 ✓✓
+    await xianzhou_luofu.farm() # TP:+0->5 R2:1 R4:0 ✓✓
     # await penacony.farm() # TP:??? R2:5 R4:3
     
     # checkout
