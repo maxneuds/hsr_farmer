@@ -18,9 +18,9 @@ class Childs_Dream:
         await self.path_1()
         await self.path_2()
         await self.path_3()
-        await self.extra.restore_tp(tp=4)
+        await self.extra.restore_tp(tp=4, info="Child's Dream 1")
         await self.path_4()
-        await self.extra.restore_tp(tp=4)
+        await self.extra.restore_tp(tp=4, info="Child's Dream 2")
         await self.path_5()
         await self.extra.metrics(self.map, t_start)
     async def teleport(self):

@@ -28,9 +28,8 @@ class The_Shackling_Prison:
         await self.path_13()
         # await self.extra.metrics(self.map, t_start)
     async def dev(self):
-        await self.teleport()
+        # await self.teleport()
         await self.path_1()
-        await self.path_2()
     async def teleport(self):
         logger_set_path(self.map, 'Teleport')
         logger.info('---')
@@ -88,8 +87,8 @@ class The_Shackling_Prison:
         await self.bot.attack_technique(12) # items
     async def path_2(self):
         logger_set_path(self.map, 2)
-        await self.bot.use_teleporter(x=1287/2400, y=411/1080, corner='botleft', move_x=3, move_y=3) # Grimfrost Hold (I)
-        raise SystemExit('check: monster gone?')
+        # await self.bot.use_teleporter(x=1287/2400, y=411/1080, corner='botleft', move_x=3, move_y=3) # Grimfrost Hold (I)
+        # raise SystemExit('check: monster gone?')
         await self.bot.move(1.5, 2000)
         await self.bot.attack_technique(3) # items
         await self.bot.move(1.75, 1000)

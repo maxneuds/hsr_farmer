@@ -22,8 +22,7 @@ class Audition_Venue:
         await self.path_5()
         await self.path_6()
         await self.path_7()
-        # await self.extra.restore_tp(tp=4, info='dev') # not needed
-        # await self.extra.metrics(self.map, t_start)
+        await self.extra.metrics(self.map, t_start)
     async def teleport(self):
         logger_set_path(self.map, 'Teleport')
         logger.info('---')
@@ -205,7 +204,6 @@ class Audition_Venue:
     async def path_5(self):
         logger_set_path(self.map, 5)
         await self.bot.use_teleporter(x=746/2400, y=781/1080, corner='botright', move_x=0, move_y=8, x2=1316/2400, y2=270/1080) # Gunfire Time: Time Trial
-        raise SystemExit('check')
         await self.bot.move(0.3, 800)
         await self.bot.move(0.0, 300)
         await self.bot.attack_technique(5) # -2TP
@@ -221,7 +219,7 @@ class Audition_Venue:
         await self.bot.attack_technique(6) # move
         await self.bot.move(1.25, 300)
         await self.bot.attack_technique(3) # items
-        await self.bot.move(1.25, 500)
+        await self.bot.move(1.25, 1000)
         await self.bot.posfix(1.25, 500)
         await self.bot.move(0.3, 300)
         await self.bot.attack_technique(9) # move
@@ -253,7 +251,6 @@ class Audition_Venue:
     async def path_6(self):
         logger_set_path(self.map, 6)
         await self.bot.use_teleporter(x=1390/2400, y=332/1080, corner='botright', move_x=0, move_y=8, x2=1316/2400, y2=270/1080) # Gunfire Time: Time Trial (Posterior)
-        raise SystemExit('check') # check1
         await self.bot.move(1.45, 3000)
         await self.bot.attack_technique(6) # items
         await self.bot.move(1.25, 500)

@@ -1,6 +1,7 @@
 from logger import logger, logger_set_path
 from automation.bot import Bot
 from worlds.extra import Extra
+from worlds.penacony.the_soaring_clock_hand import The_Soaring_Clock_Hand
 from datetime import datetime as dt
 
 
@@ -9,23 +10,24 @@ class Penacony_Grand_Theater:
         self.map = 'Penacony Grand Theater'
         self.bot = Bot(device)
         self.extra = Extra(device)
+        self.clock_hand = The_Soaring_Clock_Hand(device)
     async def farm(self):
         t_start = dt.now()
-        # await self.teleport()
-        # await self.path_1()
-        # await self.path_2()
-        # await self.path_3()
-        # await self.path_4()
-        # await self.path_5()
-        # await self.path_6()
-        # await self.path_7()
-        # await self.path_8()
-        # await self.path_9()
-        # await self.path_10()
-        # await self.path_11()
-        # await self.path_12()
-        # await self.path_13()
-        await self.extra.restore_tp(tp=4, info='Penacony Grand Theater 1')
+        await self.teleport()
+        await self.path_1()
+        await self.path_2()
+        await self.path_3()
+        await self.path_4()
+        await self.path_5()
+        await self.path_6()
+        await self.path_7()
+        await self.path_8()
+        await self.path_9()
+        await self.path_10()
+        await self.path_11()
+        await self.path_12()
+        await self.path_13()
+        await self.clock_hand.restore_tp(tp=4)
         await self.path_14()
         await self.path_15()
         await self.path_16()
