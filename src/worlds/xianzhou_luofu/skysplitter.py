@@ -15,7 +15,7 @@ class Skysplitter:
         await self.path_1()
         await self.extra.metrics(self.map, t_start)
     async def restore_tp(self, tp):
-        logger_set_path(self.map, 'Teleport: Restore TP')
+        logger_set_path(self.map, f'TP Restore {tp}')
         logger.info('---')
         logger.info(f'--- Map: {self.map}')
         logger.info('---')
@@ -23,7 +23,6 @@ class Skysplitter:
         if tp == 4.1:
             await self.bot.switch_map(y_list=925/1080, world='the_xianzhou_luofu', scroll_down=True, # Echo of War
                                         x=940/2400, y=201/1080, corner='botright', move_x=0, move_y=0)
-            raise SystemExit('check')
             await self.bot.move(1.9, 500)
             await self.bot.attack_technique(2) # +2TP
             await self.bot.use_teleporter(817/2400, 266/1080, move_x=0, move_y=0, swipe=0, corner='botright') # Wardance Arena Sub-Floor

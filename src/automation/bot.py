@@ -34,33 +34,37 @@ class Bot:
             else:
                 logger.error(f"Reconnecting to ADB failed with error:\n{e}")
     
+    
     async def screen_failsafe(self, n_try=0):
         try:
             if self.dev is None:
                 self.dev = await self.adb.connect_dev(device=self.device)
             im_byte_array = await self.dev.screencap()
-            return(im_byte_array)
+            im_array = np.frombuffer(bytes(im_byte_array), np.uint8)
+            return(im_array)
         except RuntimeError as e:
             if n_try < 9:
                 logger.info(f"ADB connection closed: reconnect trial {n_try+1}")
                 self.dev = await self.adb.connect_dev(device=self.device)
-                await self.screen_failsafe(n_try=n_try+1)
+                im_array = await self.screen_failsafe(n_try=n_try+1)
+                return(im_array)
             else:
-                logger.error(f"Reconnecting to ADB failed with error:\n{e}")
+                msg = f"Reconnecting to ADB failed with error:\n{e}"
+                logger.error(msg)
+                raise SystemExit(msg)
+        except TypeError as e:
+            logger.error(f"Getting screencap failed with error:\n{e}")
+            im_array = await self.screen_failsafe(n_try=n_try+1)
+            return(im_array)
 
-    # unused
-    # async def get_screensize(self, dev):
-    #     result = await dev.shell('wm size')
-    #     hxw = result.strip().split()[2]
-    #     h, w = hxw.split('x')
-    #     return(int(h), int(w))
-    
+
     def click_event(self, event, x, y, flags, params):
         # function to display the coordinates of
         # of the points clicked on the image
         # checking for left mouse clicks
         if event == cv.EVENT_LBUTTONDOWN:
             logger.debug(f'{x},{y}')
+    
     
     async def get_screen(self, custom_msg=False, debug=False):
         if custom_msg == False:
@@ -70,9 +74,9 @@ class Bot:
         else:
             logger.info(custom_msg)
         # get screen from device
-        im_byte_array = await self.screen_failsafe()
+        im_array = await self.screen_failsafe()
         # convert to cv image
-        screenshot = cv.imdecode(np.frombuffer(bytes(im_byte_array), np.uint8), cv.IMREAD_COLOR)
+        screenshot = cv.imdecode(im_array, cv.IMREAD_COLOR)
         if debug == True:
             cv.imshow('debug', screenshot)
             cv.imwrite('data/debug.png', screenshot)
@@ -81,6 +85,7 @@ class Bot:
             cv.destroyAllWindows()
         return(screenshot)
 
+    
     async def sleep(self, duration):
         logger.info(f'sleep for {duration} seconds...')
         await aio.sleep(duration)

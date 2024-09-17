@@ -60,6 +60,7 @@ class Cloudford:
     async def path_3(self):
         logger_set_path(self.map, 3)
         await self.bot.use_teleporter(925/2400, 663/1080, move_x=0, move_y=5, corner='topleft') # Trove of Verdure
+        raise SystemExit('check')
         await self.bot.move(0.75, 2100)
         await self.bot.move(1.0, 7500)
         await self.bot.attack_technique(2) # -1TP
@@ -67,13 +68,11 @@ class Cloudford:
         await self.bot.move(1.7, 1000)
         await self.bot.move(1.9, 1000)
         await self.bot.posfix(1.75, 1000)
-        await self.bot.move(0.75, 500)
-        await self.bot.move(1.0, 1000)
-        for _ in range(2): # -1TP, roamer
-            await self.bot.move(1.0, 300)
-            await self.bot.attack_technique(3)
-        await self.bot.move(0.7, 300)
-        await self.bot.attack_technique(3) # +2TP
+        for _ in range(8): # -1TP, roamer, +2TP
+            await self.bot.move(0.75, 300)
+            await self.bot.attack_technique(1)
+            await self.bot.move(1.25, 300)
+            await self.bot.attack_technique(1)
     async def path_4(self):
         logger_set_path(self.map, 4)
         await self.bot.use_teleporter(973/2400, 532/1080, move_x=0, move_y=0, corner='botright') # Skiff Boarding Area
