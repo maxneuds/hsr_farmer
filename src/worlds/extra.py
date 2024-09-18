@@ -25,8 +25,11 @@ class Extra:
         for item in items:
             await self.bot.craft_item(item, all=True)
     
-    async def restore_tp(self, tp=4, info='Undefined'):
-        logger_set_path(info, 'TP Restore')
+    async def restore_tp(self, tp=4, info=None):
+        if info is None:
+            logger_set_path(self.map, 'TP Restore')
+        else:
+            logger_set_path(info, 'TP Restore')
         logger.info('---')
         logger.info("--- Map: Storage Zone")
         logger.info('---')

@@ -1,7 +1,9 @@
 from logger import logger, logger_set_path
 from automation.bot import Bot
-from worlds.extra import Extra
 from datetime import datetime as dt
+from worlds.extra import Extra
+from worlds.herta_space_station.supply_zone import Supply_Zone
+from worlds.penacony.the_soaring_clock_hand import The_Soaring_Clock_Hand
 
 
 class The_Reverie_Dreamscape:
@@ -15,7 +17,9 @@ class The_Reverie_Dreamscape:
         self.map = 'The Reverie Dreamscape'
         self.bot = Bot(device)
         self.extra = Extra(device)
-    async def farm(self, mode='credits'):
+        self.supply_zone = Supply_Zone(device)
+        self.clock_hand = The_Soaring_Clock_Hand(device)
+    async def farm(self):
         t_start = dt.now()
         await self.teleport()
         await self.path_1()
@@ -33,9 +37,9 @@ class The_Reverie_Dreamscape:
         await self.path_13()
         await self.path_14()
         await self.path_15()
-        await self.extra.restore_tp(tp=4, info='The Reverie Dreamscape 1')
+        await self.supply_zone.restore_tp(tp=4)
         await self.path_16()
-        await self.extra.restore_tp(tp=4, info='The Reverie Dreamscape 2')
+        await self.clock_hand.restore_tp(tp=4, info='The Reverie Dreamscape')
         await self.path_17()
         await self.extra.metrics(self.map, t_start)
     async def teleport(self):

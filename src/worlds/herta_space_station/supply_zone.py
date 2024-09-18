@@ -72,8 +72,11 @@ class Supply_Zone:
         await self.bot.attack() # items
         await self.bot.move(0.0, 300)
         await self.bot.attack_technique(7) # +2TP
-    async def restore_tp(self, tp):
-        logger_set_path(self.map, 'TP Restore')
+    async def restore_tp(self, tp, info=None):
+        if info is None:
+            logger_set_path(self.map, 'TP Restore')
+        else:
+            logger_set_path(info, 'TP Restore')
         logger.info('---')
         logger.info("--- Map: Supply Zone")
         logger.info('---')

@@ -1,7 +1,5 @@
 from worlds.extra import Extra
-from worlds.herta_space_station.base_zone import Base_Zone
-from worlds.herta_space_station.storage_zone import Storage_Zone
-from worlds.herta_space_station.supply_zone import Supply_Zone
+from worlds.jarilo_vi import Silvermane_Guard
 from worlds.xianzhou_luofu.central_starskiff_haven import Central_Starskiff_Haven
 from worlds.xianzhou_luofu.cloudford import Cloudford
 from worlds.xianzhou_luofu.stargazer_navalia import Stargazer_Navalia
@@ -18,9 +16,7 @@ class Xianzhou_Luofu:
     def __init__(self, device, mode='credits'):
         self.mode = mode
         self.extra = Extra(device)
-        self.base_zone = Base_Zone(device)
-        self.storage_zone = Storage_Zone(device)
-        self.supply_zone = Supply_Zone(device)
+        self.silvermane_guard = Silvermane_Guard(device)
         self.central_starskiff_haven = Central_Starskiff_Haven(device)
         self.cloudford = Cloudford(device)
         self.stargazer_navalia = Stargazer_Navalia(device)
@@ -42,20 +38,22 @@ class Xianzhou_Luofu:
         Time    ???
         '''
         await self.fyxestroll_garden.farm()                     # TP:-4->1 XP:4644/4644 Time:???
-        await self.base_zone.restore_tp(tp=4.1)                 # TP:+4->5 Time:???
+        await self.silvermane_guard.restore_tp(tp=4.1)          # TP:+4->5 Time:85
         await self.artisanship_commission.farm()                # TP:-4->1 XP:9548/9548 Time:???
-        await self.base_zone.restore_tp(tp=4.2)                 # TP:+4->5 Time:???
+        await self.silvermane_guard.restore_tp(tp=4.2)          # TP:+4->5 Time:???
         await self.scalegorge_waterscape.farm()                 # TP:-4->1 XP:4752/4752 Time:???
-        await self.storage_zone.restore_tp(tp=4)                # TP:+4->5 Time:???
+        await self.skysplitter.restore_tp(tp=4.1)               # TP:+4->5 Time:???
         await self.divination_commission.farm()                 # TP:-6->1 XP:6000/6000 Time:??? R2:1
-        await self.supply_zone.restore_tp(tp=4)                 # TP:+4->5 Time:???
+        await self.skysplitter.restore_tp(tp=4.2)               # TP:+4->5 Time:???
         await self.alchemy_commission.farm()                    # TP:-3->2 XP:6912/6912 Time:???
         await self.cloudford.farm()                             # TP:+1->3 XP:4644/4644 Time:???
         await self.stargazer_navalia.farm()                     # TP:-1->2 XP:6264/6264 Time:???
-        await self.skysplitter.restore_tp(tp=4.1)               # TP:+4->5 Time:???
-        await self.the_shackling_prison.farm()                  # TP:???->??? Time:???
+        await self.the_shackling_prison.farm()                  # TP:+2->4 Time:???
+        await self.extra.restore_tp(tp=2, info='End of Xianzhou Luofu')
     async def dev(self):
-        await self.skysplitter.restore_tp(tp=4.2)
+        await self.stargazer_navalia.farm()                     # TP:-1->2 XP:6264/6264 Time:???
+        await self.the_shackling_prison.farm()                  # TP:???->??? Time:???
         raise SystemExit()
+        
 
 

@@ -9,8 +9,11 @@ class The_Soaring_Clock_Hand:
         self.map = 'The Soaring Clock Hand'
         self.bot = Bot(device)
         self.extra = Extra(device)
-    async def restore_tp(self, tp):
-        logger_set_path(self.map, 'Teleport: Restore TP')
+    async def restore_tp(self, tp, info=None):
+        if info is None:
+            logger_set_path(self.map, 'TP Restore')
+        else:
+            logger_set_path(info, 'TP Restore')
         logger.info('---')
         logger.info('--- Map: The Soaring Clock Hand')
         logger.info('---')

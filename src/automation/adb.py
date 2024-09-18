@@ -14,7 +14,7 @@ class ADB:
         try:
             logger.info('try to disconnect from all devices')
             subprocess.run('adb disconnect', shell=True, check=True)
-            await aio.sleep(1)
+            await aio.sleep(0.25)
             logger.info(f'try to connect to device: {device}')
             if device == 'usb':
                 subprocess.run('adb devices', shell=True, check=True)

@@ -6,20 +6,20 @@ from datetime import datetime as dt
 
 class Dewlight_Pavilion:
     '''
-    R2/4: 2 / 1
+    R2/4: 1 / 1
     '''
     def __init__(self, device):
         self.map = 'Dewlight Pavilion'
         self.bot = Bot(device)
         self.extra = Extra(device)
     async def farm(self):
-        # t_start = dt.now()
-        # await self.teleport()
-        # await self.path_1()
-        # await self.path_2()
-        # await self.extra.restore_tp(tp=4, info='Dewlight Pavilion 1')
-        # await self.path_3()
-        # await self.path_4()
+        t_start = dt.now()
+        await self.teleport()
+        await self.path_1()
+        await self.path_2()
+        await self.extra.restore_tp(tp=4, info='Dewlight Pavilion 1')
+        await self.path_3()
+        await self.path_4()
         await self.path_5()
         await self.extra.restore_tp(tp=4, info='Dewlight Pavilion 2')
         await self.path_6()
@@ -29,7 +29,7 @@ class Dewlight_Pavilion:
         await self.path_10()
         await self.extra.restore_tp(tp=4, info='Dewlight Pavilion 3')
         await self.path_11()
-        # await self.extra.metrics(self.map, t_start)
+        await self.extra.metrics(self.map, t_start)
     async def teleport(self):
         logger_set_path(self.map, 'Teleport')
         logger.info('---')

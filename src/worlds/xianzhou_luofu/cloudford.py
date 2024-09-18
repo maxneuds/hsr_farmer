@@ -60,7 +60,6 @@ class Cloudford:
     async def path_3(self):
         logger_set_path(self.map, 3)
         await self.bot.use_teleporter(925/2400, 663/1080, move_x=0, move_y=5, corner='topleft') # Trove of Verdure
-        raise SystemExit('check')
         await self.bot.move(0.75, 2100)
         await self.bot.move(1.0, 7500)
         await self.bot.attack_technique(2) # -1TP
