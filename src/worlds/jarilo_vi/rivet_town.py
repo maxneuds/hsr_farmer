@@ -30,6 +30,7 @@ class Rivet_Town:
     async def path_1(self):
         logger_set_path(self.map, 1)
         await self.bot.use_teleporter(x=998/2400, y=393/1080, corner='topright', move_x=0, move_y=0) # Orphanage
+        # TODO: improve posfix timings
         await self.bot.move(1.6, 1500)
         await self.bot.move(1.25, 1000)
         await self.bot.move(1.1, 1000)
@@ -38,7 +39,7 @@ class Rivet_Town:
         await self.bot.attack_technique(2) # -2TP
         await self.bot.move(0.9, 2000)
         await self.bot.move(1.25, 2000)
-        await self.bot.posfix(1.25, 1500)
+        await self.bot.posfix(1.25, 500)
         await self.bot.move(0.25, 2500)
         await self.bot.move(0.5, 2900)
         await self.bot.move(1.9, 600)

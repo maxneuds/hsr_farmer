@@ -16,7 +16,7 @@ class Alchemy_Commission:
         await self.path_3()
         await self.path_4()
         await self.path_5()
-        await self.extra.restore_tp(tp=4)
+        await self.extra.restore_tp(tp=4, info='Alchemy Comission')
         await self.path_6()
         await self.path_7()
         await self.path_8()

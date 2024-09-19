@@ -12,7 +12,6 @@ class Extra:
     '''
     def __init__(self, device):
         self.bot = Bot(device)
-    
     async def metrics(self, map_name, t_start):
         row = {'map': [map_name], 'time': int((dt.now() - t_start).total_seconds())}
         df_row = pd.DataFrame(row)
@@ -24,10 +23,9 @@ class Extra:
         '''
         for item in items:
             await self.bot.craft_item(item, all=True)
-    
     async def restore_tp(self, tp=4, info=None):
         if info is None:
-            logger_set_path(self.map, 'TP Restore')
+            logger_set_path('Storage Zone', 'TP Restore')
         else:
             logger_set_path(info, 'TP Restore')
         logger.info('---')

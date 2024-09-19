@@ -31,7 +31,6 @@ class Skysplitter:
         elif tp == 4.2:
             await self.bot.switch_map(y_list=925/1080, world='the_xianzhou_luofu', scroll_down=True, # Reception Hall
                                         x=1180/2400, y=496/1080, corner='botright', move_x=0, move_y=0)
-            raise SystemExit('check')
             await self.bot.move(1.05, 500)
             await self.bot.attack_technique(4) # items
             await self.bot.move(0.6, 1600)

@@ -18,7 +18,7 @@ class Stargazer_Navalia:
         await self.path_4()
         await self.path_5()
         await self.path_6()
-        await self.extra.restore_tp(tp=4)
+        await self.extra.restore_tp(tp=4, info='Stargazer Navalia')
         await self.path_7()
         await self.extra.metrics(self.map, t_start)
     async def teleport(self):
