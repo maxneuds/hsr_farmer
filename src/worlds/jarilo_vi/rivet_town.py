@@ -30,7 +30,6 @@ class Rivet_Town:
     async def path_1(self):
         logger_set_path(self.map, 1)
         await self.bot.use_teleporter(x=998/2400, y=393/1080, corner='topright', move_x=0, move_y=0) # Orphanage
-        # TODO: improve posfix timings
         await self.bot.move(1.6, 1500)
         await self.bot.move(1.25, 1000)
         await self.bot.move(1.1, 1000)
@@ -38,7 +37,7 @@ class Rivet_Town:
         await self.bot.move(0.88, 1000)
         await self.bot.attack_technique(2) # -2TP
         await self.bot.move(0.9, 2000)
-        await self.bot.move(1.25, 2000)
+        await self.bot.move(1.25, 1500)
         await self.bot.posfix(1.25, 500)
         await self.bot.move(0.25, 2500)
         await self.bot.move(0.5, 2900)
@@ -49,22 +48,23 @@ class Rivet_Town:
         await self.bot.move(0.25, 2300)
         await self.bot.move(0.5, 100)
         await self.bot.attack() # +2TP
-        await self.bot.move(1.75, 3000)
-        await self.bot.posfix(1.75, 1500)
+        await self.bot.move(1.75, 1500)
+        await self.bot.posfix(1.75, 500)
         await self.bot.move(0.75, 1000)
         await self.bot.move(1.1, 3000)
         await self.bot.move(1.0, 400)
         await self.bot.move(0.5, 4400)
         await self.bot.move(0.98, 1900)
         await self.bot.attack() # items
-        await self.bot.move(0.75, 1000)
-        await self.bot.posfix(0.75, 1500)
+        await self.bot.move(0.75, 1500)
+        await self.bot.posfix(0.75, 500)
         await self.bot.move(0.0, 2000)
         await self.bot.move(0.5, 1900)
         await self.bot.move(0.3, 2500)
         await self.bot.move(0.5, 500)
         await self.bot.attack() # items
-        await self.bot.posfix(0.5, 1500)
+        await self.bot.move(0.5, 1000)
+        await self.bot.posfix(0.5, 500)
         await self.bot.move(1.5, 700)
         await self.bot.move(1.3, 2500)
         await self.bot.move(0.9, 1300)

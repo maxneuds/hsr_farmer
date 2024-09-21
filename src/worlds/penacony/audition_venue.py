@@ -198,7 +198,7 @@ class Audition_Venue:
         await self.bot.move(0.5, 300)
         await self.bot.attack_technique(19) # items
         await self.bot.move(0.35, 300)
-        await self.bot.attack_technique(5) # items
+        await self.bot.attack_technique(6) # items
         await self.bot.move(0.6, 300)
         await self.bot.attack_technique(6) # items
     async def path_5(self):

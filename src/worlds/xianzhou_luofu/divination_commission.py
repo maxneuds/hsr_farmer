@@ -13,6 +13,7 @@ class Divination_Commission:
         t_start = dt.now()
         await self.teleport()
         await self.path_1()
+        await self.extra.restore_tp(tp=2, info="Divination Commission")
         await self.path_2()
         await self.path_3()
         await self.path_4()
@@ -33,7 +34,7 @@ class Divination_Commission:
         await self.bot.attack_technique(6) # -1TP
     async def path_1(self):
         logger_set_path(self.map, 1)
-        await self.bot.use_teleporter(445/2400, 720/1080, move_x=0, move_y=0, corner='botright', confirm=True) # Fortuna Augurstead
+        await self.bot.use_teleporter(445/2400, 720/1080, corner='botright', move_x=0, move_y=0, confirm=True) # Fortuna Augurstead
         await self.bot.move(0.5, 4000)
         await self.bot.move(0.7, 1500)
         await self.bot.attack() # items
@@ -42,10 +43,10 @@ class Divination_Commission:
         await self.bot.attack_technique(5) # -1TP
         await self.bot.move(1.5, 500)
         await self.bot.attack_technique(4) # -1TP
-        await self.bot.restore_tp(item='trick_snack') # +2TP
     async def path_2(self):
         logger_set_path(self.map, 2)
-        await self.bot.use_teleporter(445/2400, 720/1080, move_x=0, move_y=0, corner='botright', confirm=True) # Fortuna Augurstead
+        await self.bot.switch_map(y_list=989/1080, world='the_xianzhou_luofu', scroll_down=False, # Fortuna Augurstead
+                                    x=445/2400, y=720/1080, corner='botright', move_x=0, move_y=0, confirm=True)
         await self.bot.move(0.5, 4000)
         await self.bot.move(0.7, 1000)
         await self.bot.move(1.0, 2000)

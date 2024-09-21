@@ -33,7 +33,7 @@ class Xianzhou_Luofu:
         '''
         Status  9/9                         /n
         TP      5 -> ???                    /n
-        R2/R4   1 / 0                       /n
+        R2/R4   0 / 0                       /n
         XP      42596/???                   /n
         Time    ???
         '''
@@ -43,7 +43,7 @@ class Xianzhou_Luofu:
         await self.silvermane_guard.restore_tp(tp=4.2)          # TP:+4->5 Time:???
         await self.scalegorge_waterscape.farm()                 # TP:-4->1 XP:4752/4752 Time:???
         await self.skysplitter.restore_tp(tp=4.1)               # TP:+4->5 Time:???
-        await self.divination_commission.farm()                 # TP:-6->1 XP:6000/6000 Time:??? R2:1
+        await self.divination_commission.farm()                 # TP:-6->1 XP:6000/6000 Time:???
         await self.skysplitter.restore_tp(tp=4.2)               # TP:+4->5 Time:???
         await self.alchemy_commission.farm()                    # TP:-3->2 XP:6912/6912 Time:???
         await self.cloudford.farm()                             # TP:+1->3 XP:4644/4644 Time:???
@@ -51,8 +51,6 @@ class Xianzhou_Luofu:
         await self.the_shackling_prison.farm()                  # TP:+2->4 Time:???
         await self.extra.restore_tp(tp=2, info='End of Xianzhou Luofu')
     async def dev(self):
-        await self.the_shackling_prison.farm()                  # TP:???->??? Time:???
         raise SystemExit()
-        
 
 

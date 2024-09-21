@@ -21,13 +21,16 @@ async def main():
     
     
     # dev
-    # await astral_express.checkout()
+    # await extra.restore_tp(tp=2)
     # await extra.restore_tp(tp=4)
+    # await jarilo_vi.rivet_town.farm()
     # await xianzhou_luofu.farm()
-    await xianzhou_luofu.the_shackling_prison.dev()
+    # await xianzhou_luofu.the_shackling_prison.dev()
     # await penacony.farm()
     # await penacony.dev()
-    raise SystemExit()
+    # await penacony.penacony_grand_theater.path_15()
+    # await penacony.penacony_grand_theater.path_16()
+    # raise SystemExit()
 
     # preperations
     # daily for free (guranteed): R2: 25, R4: 5

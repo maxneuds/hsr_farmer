@@ -33,8 +33,8 @@ class Penacony:
     async def farm(self):
         '''
         Status  9/9         /n
-        TP      5 -> ???                    /n
-        R2/R4   2 / 3                       /n
+        TP      5 -> 3                    /n
+        R2/R4   4 / 3                       /n
         XP      ???/???                   /n
         Time    ???
         '''
@@ -48,10 +48,11 @@ class Penacony:
         await self.golden_hour.restore_tp(tp=4.1)               # TP:+4->5 Time:???
         await self.dewlight_pavilion.farm()                     # TP:-14->1 XP:11448/11448 Time: R2/4:1/1
         await self.golden_hour.restore_tp(tp=4.2)               # TP:+4->5 Time:80
-        raise SystemExit('optimize tp usage grand theater')
-        await self.penacony_grand_theater.farm()                # TP:???->??? R2:0
-        await self.audition_venue.farm()                        # TP:???->??? R2:0
+        await self.penacony_grand_theater.farm()                # TP:-2->3
+        await self.audition_venue.farm()                        # TP:+0->3 R2:2
     async def dev(self):
-        raise SystemExit()
+        await self.penacony_grand_theater.farm()                # TP:-2->3
+        await self.audition_venue.farm()                        # TP:???->??? R2:0
+        raise SystemExit('dev')
 
 
