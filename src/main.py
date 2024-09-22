@@ -28,8 +28,7 @@ async def main():
     # await xianzhou_luofu.the_shackling_prison.dev()
     # await penacony.farm()
     # await penacony.dev()
-    # await penacony.penacony_grand_theater.path_15()
-    # await penacony.penacony_grand_theater.path_16()
+    # await penacony.penacony_grand_theater.path_12()
     # raise SystemExit()
 
     # preperations
@@ -49,10 +48,6 @@ async def main():
     
     # TOTAL XP: 116.340 / 119.256
     # TOTAL TIME: 
-    # t0 = dt.now()
-    # log_runtime(t0=t0)
-
-    ### TODO
     
     
 if __name__ == '__main__':

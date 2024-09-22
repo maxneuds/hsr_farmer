@@ -2,8 +2,9 @@ class OnePlus7T():
     def __init__(self):
         w = 2400
         h = 1080
-        self.width = 2400
-        self.height = 1080
+        self.width = w
+        self.height = h
+        self.center = (int(w/2), int(h/2))
         self.map = (int(w*240/2400), int(h*190/1080))
         self.star_rail_map = (int(w*2000/2400), int(h*145/1080))
         self.sprint = (int(w*2145/2400), int(h*925/1080))

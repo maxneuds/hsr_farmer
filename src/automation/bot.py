@@ -112,11 +112,12 @@ class Bot:
         await self.sleep(0.5)
 
     async def move(self, direction, duration):
-        logger.info(f'move {direction} pi for {duration/1000} seconds')
+        logger.info(f'move {direction}π for {duration/1000}s')
         x = self.xy.vjoy['center'][0] + self.xy.vjoy['r'] * np.cos(direction*np.pi)
         y = self.xy.vjoy['center'][1] - self.xy.vjoy['r'] * np.sin(direction*np.pi)
         cmd = f'input swipe {x} {y} {x} {y} {int(duration)}'
         await self.shell_failsafe(cmd)
+
 
     async def wait_for_map(self, debug=False):
         logger.info('wait for map')
@@ -237,7 +238,83 @@ class Bot:
                         await self.open_map(special_exit=special_exit, debug=debug)
         # standardize map zoom level
         await self.check_map_zoom_level()
-    
+        # wait at the end to stabilize
+        await aio.sleep(0.5)
+
+
+    async def teleport(self, x, y, pi_start=0.75, pi=1.75, swipe=0, x2=None, y2=None, open_map=True, switch_world=False,
+                        confirm=False, confirm_x=0.5, confirm_y=0.648, special_exit=True, n_try=0, debug=False):
+        logger.info(f'use teleporter: {int(self.xy.width*x)},{int(self.xy.height*y)}')
+        if open_map == True:
+            await self.open_map(special_exit=special_exit)
+        # anchor map to corner
+        logger.info(f'start map at: {pi_start}π')
+        radius = 2/5 * self.xy.height
+        from_x = int(self.xy.center[0] + radius * np.cos(pi_start*np.pi))
+        from_y = int(self.xy.center[1] + radius * np.sin(pi_start+np.pi))
+        to_x = self.xy.center[0]
+        to_y = self.xy.center[1]
+        cmd = f'input swipe {from_x} {from_y} {to_x} {to_y} {250}'
+        for _ in range(6):
+            await self.shell_failsafe(cmd)
+            await aio.sleep(0.25)
+        await aio.sleep(0.5)
+        # move map
+        if swipe > 0:
+            logger.info(f'move map by {pi}π: {swipe}x')
+            radius = 0.33 * self.xy.height
+            from_x = self.xy.center[0]
+            from_y = self.xy.center[1]
+            to_x = int(self.xy.center[0] + radius * np.cos(pi*np.pi))
+            to_y = int(self.xy.center[1] + radius * np.sin(pi+np.pi))
+            cmd = f'input swipe {from_x} {from_y} {to_x} {to_y} {500}'
+            for _ in range(swipe):
+                await self.shell_failsafe(cmd)
+                await aio.sleep(0.25)
+            await aio.sleep(1.0)
+        if x2 != None and y2 != None:
+            # in case area selection is needed before
+            if debug:
+                await self.get_screen(debug=True)
+            logger.info(f'tap area: {int(self.xy.width*x2)},{int(self.xy.height*y2)}')
+            await self.shell_failsafe(f'input tap {int(self.xy.width*x2)} {int(self.xy.height*y2)}')
+            await aio.sleep(2.5)
+        # tap teleporter
+        if debug:
+            await self.get_screen(debug=True)
+            if confirm == False:
+                raise SystemExit('debug exit')
+        logger.info(f'tap teleporter: {int(self.xy.width*x)},{int(self.xy.height*y)}')
+        await self.shell_failsafe(f'input tap {int(self.xy.width*x)} {int(self.xy.height*y)}')
+        await aio.sleep(1.25)
+        # confirm teleporter if other landmark is close
+        if confirm == True:
+            logger.info(f'confirm teleporter selection')
+            if debug:
+                await self.get_screen(debug=True)
+                raise SystemExit('debug exit')
+            await self.shell_failsafe(f'input tap {int(self.xy.width*confirm_x)} {int(self.xy.height*confirm_y)}')
+            await aio.sleep(1.5)
+        # teleport
+        await self.shell_failsafe(f'input tap {int(self.xy.width*0.83)} {int(self.xy.height*0.9)}')
+        check = await self.wait_for_ready(reason='teleport')
+        if check != True: # retry
+            n_try += 1
+            if n_try > 10: # retry at most 10 times
+                logger.error(f"Failed to teleport {n_try} times. Please fix!")
+                sys.exit()
+            logger.debug(f'telport failed. Try again [{n_try}]')
+            await self.action_back(n=2)
+            await self.wait_for_ready(min_duration=0, reason='teleport')
+            if open_map == True:
+                await self.use_teleporter(x, y, pi_start=pi_start, pi=pi, swipe=swipe, x2=x2, y2=y2, open_map=open_map, switch_world=switch_world,
+                                          confirm=confirm, confirm_x=confirm_x, confirm_y=confirm_y, special_exit=special_exit, n_try=n_try, debug=False)
+            else:
+                logger.error(f"Failed to teleport. Return False.")
+                return(False)
+        else:
+            return(True)
+
     
     async def use_teleporter(self, x, y, move_x=0, move_y=0, swipe=1, move_spd=500, corner='botright', x2=None, y2=None,
                              open_map=True, confirm=False, confirm_x=0.5, confirm_y=0.648, special_exit=True, switch_world=False, n_try=0, debug=False):

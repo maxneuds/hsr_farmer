@@ -51,7 +51,6 @@ class Penacony:
         await self.penacony_grand_theater.farm()                # TP:-2->3
         await self.audition_venue.farm()                        # TP:+0->3 R2:2
     async def dev(self):
-        await self.penacony_grand_theater.farm()                # TP:-2->3
         await self.audition_venue.farm()                        # TP:???->??? R2:0
         raise SystemExit('dev')
 
