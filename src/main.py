@@ -25,11 +25,10 @@ async def main():
     # await extra.restore_tp(tp=4)
     # await jarilo_vi.rivet_town.farm()
     # await xianzhou_luofu.farm()
-    await xianzhou_luofu.the_shackling_prison.dev()
+    # await xianzhou_luofu.the_shackling_prison.dev()
     # await penacony.farm()
     # await penacony.dev()
-    # await penacony.penacony_grand_theater.path_12()
-    raise SystemExit()
+    # raise SystemExit()
 
     # preperations
     # daily for free (guranteed): R2: 25, R4: 5

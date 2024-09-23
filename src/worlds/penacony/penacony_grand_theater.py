@@ -25,7 +25,6 @@ class Penacony_Grand_Theater:
         await self.path_11()
         await self.path_12()
         await self.path_13()
-        await self.extra.restore_tp(tp=4, info='Penacony Grand Theater')
         await self.path_14()
         await self.path_15()
         await self.path_16()
@@ -37,8 +36,8 @@ class Penacony_Grand_Theater:
         logger.info('---')
         logger.info('--- Map: Penacony Grand Theater')
         logger.info('---')
-        await self.bot.switch_map(y_list=807/1080, world='penacony', scroll_down=True, # Communing Hall
-                                    x=1251/2400, y=469/1080, corner='botright', move_x=0, move_y=8, swipe=2)
+        await self.bot.switch_map_new(world='penacony', y_list=807/1080, scroll_down=True, # Communing Hall
+                                      x=1251/2400, y=383/1080, start=1.75, deg=0.5, n=4, confirm=False)
         await self.bot.move(0.62, 2400)
         await self.bot.attack(2) # items
         await self.bot.move(0.0, 2100)
@@ -48,14 +47,14 @@ class Penacony_Grand_Theater:
         await self.bot.attack(2) # items
     async def path_1(self):
         logger_set_path(self.map, 1)
-        await self.bot.use_teleporter(635/2400, 388/1080, move_x=0, move_y=9, swipe=1, corner='botright') # Ascension Hallway
+        await self.bot.teleport(x=636/2400, y=610/1080, start=1.75, deg=0.5, n=3) # Ascension Hallway
         await self.bot.move(1.5, 300)
         await self.bot.attack_technique(20) # -2TP
         await self.bot.move(0.0, 300)
         await self.bot.attack_technique(3) # -1TP
     async def path_2(self):
         logger_set_path(self.map, 2)
-        await self.bot.use_teleporter(1251/2400, 469/1080, move_x=0, move_y=8, swipe=2, corner='botright') # Communing Hall
+        await self.bot.teleport(x=1251/2400, y=383/1080, start=1.75, deg=0.5, n=4) # Communing Hall
         await self.bot.move(0.35, 3200)
         await self.bot.move(0.0, 3900)
         await self.bot.move(0.5, 1300)
@@ -69,12 +68,12 @@ class Penacony_Grand_Theater:
         # TODO: more enemies, very hard to reach
     async def path_3(self):
         logger_set_path(self.map, 3)
-        await self.bot.use_teleporter(787/2400, 717/1080, corner='topleft', move_x=3, move_y=7) # Echo of War
+        await self.bot.teleport(x=1312/2400, y=656/1080, start=0.75, deg=1.5, n=2) # Echo of War
         await self.bot.move(0.12, 1800)
         await self.bot.attack() # +2TP
     async def path_4(self):
         logger_set_path(self.map, 4)
-        await self.bot.use_teleporter(787/2400, 717/1080, corner='topleft', move_x=3, move_y=7) # Echo of War
+        await self.bot.teleport(x=1312/2400, y=656/1080, start=0.75, deg=1.5, n=2) # Echo of War
         await self.bot.move(1.1, 500)
         await self.bot.attack_technique(13) # move
         await self.bot.move(1.3, 300)
@@ -96,7 +95,7 @@ class Penacony_Grand_Theater:
         await self.bot.attack_technique(10) # -2TP
     async def path_5(self):
         logger_set_path(self.map, 5)
-        await self.bot.use_teleporter(1251/2400, 469/1080, move_x=0, move_y=8, swipe=2, corner='botright') # Communing Hall
+        await self.bot.teleport(x=1251/2400, y=383/1080, start=1.75, deg=0.5, n=4) # Communing Hall
         await self.bot.move(1.4, 3000)
         await self.bot.move(1.5, 1000)
         await self.bot.attack() # items
@@ -105,7 +104,7 @@ class Penacony_Grand_Theater:
         await self.bot.attack() # +2TP
     async def path_6(self):
         logger_set_path(self.map, 6)
-        await self.bot.use_teleporter(966/2400, 763/1080, move_x=1, move_y=6, swipe=2, corner='topleft') # Hall of Chords
+        await self.bot.teleport(x=613/2400, y=335/1080, start=1.75, deg=0.5, n=4) # Hall of Chords
         await self.bot.move(0.31, 2200)
         await self.bot.attack() # +2TP
         await self.bot.move(1.6, 1000)
@@ -128,7 +127,7 @@ class Penacony_Grand_Theater:
         await self.bot.attack_technique(4) # -1TP
     async def path_7(self):
         logger_set_path(self.map, 7)
-        await self.bot.use_teleporter(635/2400, 388/1080, move_x=0, move_y=9, swipe=1, corner='botright') # Ascension Hallway
+        await self.bot.teleport(x=636/2400, y=610/1080, start=1.75, deg=0.5, n=3) # Ascension Hallway
         await self.bot.move(0.62, 300)
         await self.bot.attack_technique(5) # items
         await self.bot.move(0.3, 500)
@@ -148,7 +147,7 @@ class Penacony_Grand_Theater:
         await self.bot.attack_technique(6) # items
     async def path_8(self):
         logger_set_path(self.map, 8)
-        await self.bot.use_teleporter(1251/2400, 469/1080, move_x=0, move_y=8, swipe=2, corner='botright') # Communing Hall
+        await self.bot.teleport(x=1251/2400, y=383/1080, start=1.75, deg=0.5, n=4) # Communing Hall
         await self.bot.move(0.5, 6000)
         await self.bot.move(0.4, 8000)
         for _ in range(3): # -1TP
@@ -162,7 +161,7 @@ class Penacony_Grand_Theater:
             await self.bot.attack_technique(4)
     async def path_9(self):
         logger_set_path(self.map, 9)
-        await self.bot.use_teleporter(1000/2400, 274/1080, move_x=1, move_y=7, swipe=2, corner='botright') # Hall of Chords
+        await self.bot.teleport(x=613/2400, y=335/1080, start=1.75, deg=0.5, n=4) # Hall of Chords
         await self.bot.move(0.9, 3500)
         await self.bot.move(0.7, 1000)
         await self.bot.attack_technique(1) # -1TP
@@ -180,7 +179,7 @@ class Penacony_Grand_Theater:
         await self.bot.attack_technique(3) # items
     async def path_10(self):
         logger_set_path(self.map, 10)
-        await self.bot.use_teleporter(900/2400, 184/1080, move_x=0, move_y=9, swipe=2, corner='botright') # Bud of Erdutition
+        await self.bot.teleport(x=897/2400, y=775/1080, start=0.25, deg=1.5, n=2) # Bud of Erdutition
         await self.bot.move(1.5, 1200)
         await self.bot.attack_technique(1) # items
         await self.bot.move(1, 1500)
@@ -190,7 +189,7 @@ class Penacony_Grand_Theater:
         await self.bot.attack_technique(9) # -1TP
     async def path_11(self):
         logger_set_path(self.map, 11)
-        await self.bot.use_teleporter(900/2400, 184/1080, move_x=0, move_y=9, swipe=2, corner='botright') # Bud of Erdutition
+        await self.bot.teleport(x=897/2400, y=775/1080, start=0.25, deg=1.5, n=2) # Bud of Erdutition
         await self.bot.move(1.37, 500)
         await self.bot.attack_technique(19) # -1TP
     async def path_12(self):
@@ -210,13 +209,12 @@ class Penacony_Grand_Theater:
         await self.bot.attack_technique(2) # items
     async def path_13(self):
         logger_set_path(self.map, 13)
-        await self.bot.use_teleporter(837/2400, 349/1080, move_x=0, move_y=9, swipe=1, corner='botright') # Stagnant Shadow
+        await self.bot.teleport(x=834/2400, y=592/1080, start=1.75, deg=0.5, n=3) # Stagnant Shadow
         await self.bot.move(1.5, 300)
         await self.bot.attack_technique(4) # +2TP
     async def path_14(self):
         logger_set_path(self.map, 14)
-        await self.bot.switch_map(y_list=807/1080, world='penacony', scroll_down=True, # Saloon of Gospels
-                                    x=671/2400, y=526/1080, corner='botleft', move_x=0, move_y=8, swipe=2)
+        await self.bot.teleport(x=670/2400, y=412/1080, start=1.25, deg=0.5, n=4) # Saloon of Gospels
         await self.bot.move(0.7, 2500)
         await self.bot.move(1.0, 1600)
         await self.bot.move(0.75, 300)
@@ -278,7 +276,7 @@ class Penacony_Grand_Theater:
         await self.bot.attack_technique(18) # items
     async def path_15(self):
         logger_set_path(self.map, 15)
-        await self.bot.teleport(x=1313/2400, y=816/1080, start=0.75, deg=1.5, n=3) # Hall of Chords
+        await self.bot.teleport(x=613/2400, y=335/1080, start=1.75, deg=0.5, n=4) # Hall of Chords
         await self.bot.move(0.1, 500)
         await self.bot.attack_technique(12) # move
         await self.bot.move(0.45, 1500)
@@ -339,7 +337,7 @@ class Penacony_Grand_Theater:
         # TODO: more enemies, very hard to reach
     async def path_16(self):
         logger_set_path(self.map, 16)
-        await self.bot.teleport(x=1313/2400, y=816/1080, start=0.75, pi=1.5, swipe=3) # Hall of Chords
+        await self.bot.teleport(x=613/2400, y=335/1080, start=1.75, deg=0.5, n=4) # Hall of Chords
         await self.bot.move(0.9, 500)
         await self.bot.attack_technique(20) # move
         await self.bot.move(0.6, 500)

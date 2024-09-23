@@ -242,8 +242,8 @@ class Bot:
         await aio.sleep(0.5)
 
 
-    async def teleport(self, x, y, start=0.75, deg=1.75, n=0, x2=None, y2=None, open_map=True, switch_world=False,
-                        confirm=False, confirm_x=0.5, confirm_y=0.648, special_exit=True, n_try=0, debug=False):
+    async def teleport(self, x, y, start=0.75, deg=1.75, n=0, x2=None, y2=None, special_exit=True, open_map=True,
+                        confirm=False, confirm_x=0.5, confirm_y=0.648, n_try=0, debug=False):
         logger.info(f'use teleporter: {int(self.xy.width*x)},{int(self.xy.height*y)}')
         if open_map == True:
             await self.open_map(special_exit=special_exit)
@@ -278,16 +278,19 @@ class Bot:
             # in case area selection is needed before
             if debug:
                 await self.get_screen(debug=True)
-            logger.info(f'tap area: {int(self.xy.width*x2)},{int(self.xy.height*y2)}')
-            await self.shell_failsafe(f'input tap {int(self.xy.width*x2)} {int(self.xy.height*y2)}')
+            logger.info(f'tap area: {int(self.xy.width*x)},{int(self.xy.height*y)}')
+            await self.shell_failsafe(f'input tap {int(self.xy.width*x)} {int(self.xy.height*y)}')
             await aio.sleep(2.5)
-        # tap teleporter
         if debug:
             await self.get_screen(debug=True)
             if confirm == False:
                 raise SystemExit('debug exit')
-        logger.info(f'tap teleporter: {int(self.xy.width*x)},{int(self.xy.height*y)}')
-        await self.shell_failsafe(f'input tap {int(self.xy.width*x)} {int(self.xy.height*y)}')
+        # tap teleporter
+        if x2 == None and y2 == None:
+            x2 = x
+            y2 = y
+        logger.info(f'tap teleporter: {int(self.xy.width*x2)},{int(self.xy.height*y2)}')
+        await self.shell_failsafe(f'input tap {int(self.xy.width*x2)} {int(self.xy.height*y2)}')
         await aio.sleep(1.25)
         # confirm teleporter if other landmark is close
         if confirm == True:
@@ -309,8 +312,8 @@ class Bot:
             await self.action_back(n=2)
             await self.wait_for_ready(min_duration=0, reason='teleport')
             if open_map == True:
-                await self.use_teleporter(x, y, start=start, deg=deg, n=n, x2=x2, y2=y2, open_map=open_map, switch_world=switch_world,
-                                          confirm=confirm, confirm_x=confirm_x, confirm_y=confirm_y, special_exit=special_exit, n_try=n_try, debug=False)
+                await self.teleport(x, y, start=start, deg=deg, n=n, x2=x2, y2=y2, open_map=open_map, special_exit=special_exit,
+                                          confirm=confirm, confirm_x=confirm_x, confirm_y=confirm_y, n_try=n_try, debug=debug)
             else:
                 logger.error(f"Failed to teleport. Return False.")
                 return(False)
@@ -442,6 +445,33 @@ class Bot:
         # tap planet
         await self.shell_failsafe(f'input swipe {top_left[0] + int(w/2)} {top_left[1] + int(h/2)} {top_left[0] + int(w/2)} {top_left[1] + int(h/2)} 200')
         await aio.sleep(2)
+    
+    
+    async def switch_map_new(self, world, y_list, scroll_down=False, x=0, y=0, start=0.75, deg=1.75, n=0, x2=None, y2=None, confirm=False, confirm_x=0.5, confirm_y=0.648, debug=False):
+        logger.info('switch map')
+        await self.switch_world(world=world)
+        logger.info('scroll location list')
+        x_list = int(self.xy.width*0.732)
+        if scroll_down:
+            swipe_y1 = int(self.xy.height*0.8)
+            swipe_y2 = int(self.xy.height*0.2)
+        else:
+            swipe_y1 = int(self.xy.height*0.3)
+            swipe_y2 = int(self.xy.height*0.8)
+        cmd = f'input swipe {x_list} {swipe_y1} {x_list} {swipe_y2} 250'
+        await self.shell_failsafe(cmd)
+        await aio.sleep(3)
+        if debug:
+            await self.get_screen(debug=debug)
+        logger.info('tap location')
+        await self.action_tap(x_list, int(self.xy.height*y_list))
+        await aio.sleep(2)
+        check = await self.teleport(x=x, y=y, start=start, deg=deg, n=n, x2=None, y2=None, open_map=False, special_exit=True,
+                                    confirm=confirm, confirm_x=confirm_x, confirm_y=confirm_y, n_try=0, debug=debug)
+        if check == False:
+            logger.warning('map change failed: retry')
+            await self.switch_map_new(world=world, y_list=y_list, scroll_down=scroll_down, x=x, y=y, start=start, deg=deg, confirm=confirm,
+                                        n=n, x2=x2, y2=y2, confirm_x=confirm_x, confirm_y=confirm_y, debug=debug)
     
     
     async def switch_map(self, y_list, world, x, y, scroll_down=False, corner='botright', x2=None, y2=None, move_x=0, move_y=0, swipe=1, confirm=False, debug=False):
