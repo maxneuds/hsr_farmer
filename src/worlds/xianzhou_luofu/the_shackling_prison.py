@@ -25,11 +25,9 @@ class The_Shackling_Prison:
         await self.path_11()
         await self.extra.metrics(self.map, t_start)
     async def dev(self):
-        # await self.path_6()
-        # await self.path_7()
-        # await self.path_8()
-        # await self.path_9()
-        # await self.path_10()
+        await self.path_8()
+        await self.path_9()
+        await self.path_10()
         await self.path_11()
     async def teleport(self):
         logger_set_path(self.map, 'Teleport')
@@ -42,7 +40,7 @@ class The_Shackling_Prison:
         await self.bot.attack_technique(16) # items
     async def path_1(self):
         logger_set_path(self.map, 1)
-        await self.bot.use_teleporter(x=575/2400, y=615/1080, corner='topright', move_x=5, move_y=4) # Plankway Front
+        await self.bot.teleport(x=1252/2400, y=455/1080, start=0.75, deg=1.75, n=2) # Plankway Front
         await self.bot.move(0.4, 2600)
         await self.bot.attack_technique(1) # items
         await self.bot.move(0.75, 500)
@@ -60,7 +58,7 @@ class The_Shackling_Prison:
         await self.bot.attack_technique(10) # items
     async def path_2(self):
         logger_set_path(self.map, 2)
-        await self.bot.use_teleporter(862/2400, 640/1080, corner='topright', move_x=6, move_y=6) # Nether Key
+        await self.bot.teleport(x=1485/2400, y=598/1080, start=0.75, deg=1.7, n=2) # Nether Key
         await self.bot.move(0.65, 300)
         await self.bot.attack_technique(5) # move
         await self.bot.move(0.40, 300)
@@ -85,7 +83,7 @@ class The_Shackling_Prison:
         await self.bot.attack_technique(10) # items
     async def path_3(self):
         logger_set_path(self.map, 3)
-        await self.bot.use_teleporter(x=726/2400, y=248/1080, corner='botright', move_x=2, move_y=5) # Stagnant Shadow
+        await self.bot.teleport(x=607/2400, y=611/1080, start=0.25, deg=1.4, n=2) # Stagnant Shadow
         await self.bot.move(1.6, 500)
         await self.bot.attack_technique(3) # +2TP
         await self.bot.move(1.5, 300)
@@ -115,16 +113,16 @@ class The_Shackling_Prison:
         await self.bot.attack_technique(2) # items
     async def path_4(self):
         logger_set_path(self.map, 4)
-        await self.bot.use_teleporter(x=605/2400, y=289/1080, corner='botright', move_x=3, move_y=4) # Pyroscape Hold
+        await self.bot.teleport(x=538/2400, y=536/1080, start=1.75, deg=0.7, n=2) # Pyroscape Hold
         await self.bot.move(0.8, 300)
         await self.bot.attack_technique(6) # move
-        await self.bot.move(0.425, 300)
+        await self.bot.move(0.43, 300)
         await self.bot.attack_technique(16) # +2TP
         await self.bot.move(1.7, 300)
         await self.bot.attack_technique(12) # items
     async def path_5(self):
         logger_set_path(self.map, 5)
-        await self.bot.use_teleporter(x=605/2400, y=289/1080, corner='botright', move_x=3, move_y=4) # Pyroscape Hold
+        await self.bot.teleport(x=538/2400, y=536/1080, start=1.75, deg=0.7, n=2) # Pyroscape Hold
         await self.bot.move(1.0, 1400)
         await self.bot.move(1.5, 500)
         await self.bot.attack_technique(10) # move
@@ -145,8 +143,7 @@ class The_Shackling_Prison:
         await self.bot.attack_technique(4) # items, might not always work - it's fine
     async def path_6(self):
         logger_set_path(self.map, 6)
-        await self.bot.use_teleporter(x=1287/2400, y=411/1080, corner='botleft', move_x=3, move_y=3) # Grimfrost Hold (I)
-        raise SystemExit('check')
+        await self.bot.teleport(x=1465/2400, y=328/1080, start=1.25, deg=0.2, n=1) # Grimfrost Hold (I)
         await self.bot.move(0.4, 500)
         await self.bot.attack_technique(1) # +2TP
         await self.bot.move(1.1, 500)
@@ -161,7 +158,7 @@ class The_Shackling_Prison:
         await self.bot.attack_technique(13)
         await self.bot.move(1.05, 300)
         await self.bot.attack_technique(7) # +2TP
-        await self.bot.move(0.45, 300)
+        await self.bot.move(0.47, 300)
         await self.bot.attack_technique(4) # items
         await self.bot.move(0.25, 300)
         await self.bot.attack_technique(5) # items
@@ -169,7 +166,7 @@ class The_Shackling_Prison:
         await self.bot.attack_technique(9) # items
     async def path_7(self):
         logger_set_path(self.map, 7)
-        await self.bot.use_teleporter(x=605/2400, y=289/1080, corner='botright', move_x=3, move_y=4) # Pyroscape Hold
+        await self.bot.teleport(x=538/2400, y=536/1080, start=1.75, deg=0.7, n=2) # Pyroscape Hold
         await self.bot.move(1.0, 2000)
         await self.bot.move(1.1, 500)
         await self.bot.interact(wait_for_ready=True) # lower bridge (default)
@@ -249,7 +246,7 @@ class The_Shackling_Prison:
             await self.bot.attack_technique(4)
     async def path_8(self):
         logger_set_path(self.map, 8)
-        await self.bot.use_teleporter(x=551/2400, y=358/1080, corner='botright', move_x=4, move_y=3) # Grimfrost Hold (II)
+        await self.bot.teleport(x=469/2400, y=514/1080, start=1.75, deg=0.8, n=2) # Grimfrost Hold (II)
         await self.bot.move(0.35, 900)
         await self.bot.attack() # +2TP
         await self.bot.move(0.9, 800)
@@ -279,7 +276,7 @@ class The_Shackling_Prison:
         await self.bot.attack_technique(9) # items
     async def path_9(self):
         logger_set_path(self.map, 9)
-        await self.bot.use_teleporter(x=1287/2400, y=411/1080, corner='botleft', move_x=3, move_y=3) # Grimfrost Hold (I)
+        await self.bot.teleport(x=1465/2400, y=328/1080, start=1.25, deg=0.2, n=1) # Grimfrost Hold (I)
         await self.bot.move(1.5, 2000)
         await self.bot.attack_technique(3) # items
         await self.bot.move(1.75, 1000)
@@ -294,7 +291,7 @@ class The_Shackling_Prison:
         await self.bot.attack_technique(3) # items
     async def path_10(self):
         logger_set_path(self.map, 10)
-        await self.bot.use_teleporter(x=551/2400, y=358/1080, corner='botright', move_x=4, move_y=3) # Grimfrost Hold (II)
+        await self.bot.teleport(x=469/2400, y=514/1080, start=1.75, deg=0.8, n=2) # Grimfrost Hold (II)
         await self.bot.move(1.5, 600)
         await self.bot.move(1.67, 3900)
         await self.bot.move(1.5, 300)
@@ -336,7 +333,7 @@ class The_Shackling_Prison:
         await self.bot.attack_technique(18) # items
     async def path_11(self):
         logger_set_path(self.map, 11)
-        await self.bot.use_teleporter(862/2400, 640/1080, corner='topright', move_x=6, move_y=6) # Nether Key
+        await self.bot.teleport(x=1485/2400, y=598/1080, start=0.75, deg=1.7, n=2) # Nether Key
         await self.bot.move(0.7, 300)
         await self.bot.attack_technique(8) # items
         await self.bot.move(0.35, 300)

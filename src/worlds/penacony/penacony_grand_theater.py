@@ -195,7 +195,7 @@ class Penacony_Grand_Theater:
         await self.bot.attack_technique(19) # -1TP
     async def path_12(self):
         logger_set_path(self.map, 12)
-        await self.bot.teleport(x=600/2400, y=682/1080, pi_start=0.75, pi=1.5, swipe=3) # Cavern of Corrosion
+        await self.bot.teleport(x=600/2400, y=682/1080, start=0.75, deg=1.5, n=3) # Cavern of Corrosion
         await self.bot.move(1.3, 1400)
         await self.bot.attack_technique(1) # +2TP
         await self.bot.move(0.1, 500)
@@ -278,7 +278,7 @@ class Penacony_Grand_Theater:
         await self.bot.attack_technique(18) # items
     async def path_15(self):
         logger_set_path(self.map, 15)
-        await self.bot.teleport(x=1313/2400, y=816/1080, pi_start=0.75, pi=1.5, swipe=3) # Hall of Chords
+        await self.bot.teleport(x=1313/2400, y=816/1080, start=0.75, deg=1.5, n=3) # Hall of Chords
         await self.bot.move(0.1, 500)
         await self.bot.attack_technique(12) # move
         await self.bot.move(0.45, 1500)
@@ -339,7 +339,7 @@ class Penacony_Grand_Theater:
         # TODO: more enemies, very hard to reach
     async def path_16(self):
         logger_set_path(self.map, 16)
-        await self.bot.teleport(x=1313/2400, y=816/1080, pi_start=0.75, pi=1.5, swipe=3) # Hall of Chords
+        await self.bot.teleport(x=1313/2400, y=816/1080, start=0.75, pi=1.5, swipe=3) # Hall of Chords
         await self.bot.move(0.9, 500)
         await self.bot.attack_technique(20) # move
         await self.bot.move(0.6, 500)

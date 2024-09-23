@@ -242,16 +242,17 @@ class Bot:
         await aio.sleep(0.5)
 
 
-    async def teleport(self, x, y, pi_start=0.75, pi=1.75, swipe=0, x2=None, y2=None, open_map=True, switch_world=False,
+    async def teleport(self, x, y, start=0.75, deg=1.75, n=0, x2=None, y2=None, open_map=True, switch_world=False,
                         confirm=False, confirm_x=0.5, confirm_y=0.648, special_exit=True, n_try=0, debug=False):
         logger.info(f'use teleporter: {int(self.xy.width*x)},{int(self.xy.height*y)}')
         if open_map == True:
             await self.open_map(special_exit=special_exit)
-        # anchor map to corner
-        logger.info(f'start map at: {pi_start}π')
+        # anchor map to start position
+        logger.info(f'start map at: {start}π')
         radius = 2/5 * self.xy.height
-        from_x = int(self.xy.center[0] + radius * np.cos(pi_start*np.pi))
-        from_y = int(self.xy.center[1] + radius * np.sin(pi_start+np.pi))
+        from_x = int(self.xy.center[0] + radius * np.cos(start*np.pi))
+        # y-axis goes from 0 top, to big bot. Plus is fine because we need to move into the opposite direction anyways
+        from_y = int(self.xy.center[1] - radius * np.sin(start*np.pi))
         to_x = self.xy.center[0]
         to_y = self.xy.center[1]
         cmd = f'input swipe {from_x} {from_y} {to_x} {to_y} {250}'
@@ -260,15 +261,16 @@ class Bot:
             await aio.sleep(0.25)
         await aio.sleep(0.5)
         # move map
-        if swipe > 0:
-            logger.info(f'move map by {pi}π: {swipe}x')
+        if n > 0:
+            logger.info(f'move map by {deg}π: {n}x')
             radius = 0.33 * self.xy.height
             from_x = self.xy.center[0]
             from_y = self.xy.center[1]
-            to_x = int(self.xy.center[0] + radius * np.cos(pi*np.pi))
-            to_y = int(self.xy.center[1] + radius * np.sin(pi+np.pi))
+            # here we need to as the opposite direction of the circle to n the map
+            to_x = int(self.xy.center[0] - radius * np.cos(deg*np.pi))
+            to_y = int(self.xy.center[1] + radius * np.sin(deg*np.pi)) # y-axis goes from 0 top, to big bot
             cmd = f'input swipe {from_x} {from_y} {to_x} {to_y} {500}'
-            for _ in range(swipe):
+            for _ in range(n):
                 await self.shell_failsafe(cmd)
                 await aio.sleep(0.25)
             await aio.sleep(1.0)
@@ -307,7 +309,7 @@ class Bot:
             await self.action_back(n=2)
             await self.wait_for_ready(min_duration=0, reason='teleport')
             if open_map == True:
-                await self.use_teleporter(x, y, pi_start=pi_start, pi=pi, swipe=swipe, x2=x2, y2=y2, open_map=open_map, switch_world=switch_world,
+                await self.use_teleporter(x, y, start=start, deg=deg, n=n, x2=x2, y2=y2, open_map=open_map, switch_world=switch_world,
                                           confirm=confirm, confirm_x=confirm_x, confirm_y=confirm_y, special_exit=special_exit, n_try=n_try, debug=False)
             else:
                 logger.error(f"Failed to teleport. Return False.")

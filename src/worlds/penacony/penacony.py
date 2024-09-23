@@ -48,9 +48,11 @@ class Penacony:
         await self.golden_hour.restore_tp(tp=4.1)               # TP:+4->5 Time:???
         await self.dewlight_pavilion.farm()                     # TP:-14->1 XP:11448/11448 Time: R2/4:1/1
         await self.golden_hour.restore_tp(tp=4.2)               # TP:+4->5 Time:80
+        raise SystemExit('switch to new teleport')
         await self.penacony_grand_theater.farm()                # TP:-2->3
         await self.audition_venue.farm()                        # TP:+0->3 R2:2
     async def dev(self):
+        await self.penacony_grand_theater.farm()                # TP:-2->3
         await self.audition_venue.farm()                        # TP:???->??? R2:0
         raise SystemExit('dev')
 
