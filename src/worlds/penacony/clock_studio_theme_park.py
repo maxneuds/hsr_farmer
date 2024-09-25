@@ -48,8 +48,10 @@ class Clock_Studios_Theme_Park:
         logger_set_path(self.map, 1)
         await self.bot.use_teleporter(1209/2400, 276/1080, move_x=1, move_y=6, confirm=True) # Theme Park Entrance
         await self.bot.move(0.36, 6000)
-        await self.bot.move(0.2, 2700)
-        await self.bot.move(0.5, 12900)
+        await self.bot.move(0.2, 2000)
+        await self.bot.move(0.5, 7000)
+        await self.bot.move(0.2, 700)
+        await self.bot.move(0.5, 7900)
         await self.bot.move(0.25, 3000)
         await self.bot.move(0.5, 2000)
         await self.bot.move(0.2, 1000)
