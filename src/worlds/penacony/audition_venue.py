@@ -14,15 +14,15 @@ class Audition_Venue:
         self.extra = Extra(device)
     async def farm(self):
         t_start = dt.now()
-        # await self.teleport()
-        # await self.path_1()
+        await self.teleport()
+        await self.path_1()
         await self.path_2()
         await self.path_3()
         await self.path_4()
         await self.path_5()
         await self.path_6()
         await self.path_7()
-        # await self.extra.metrics(self.map, t_start)
+        await self.extra.metrics(self.map, t_start)
     async def teleport(self):
         logger_set_path(self.map, 'Teleport')
         logger.info('---')
@@ -30,7 +30,6 @@ class Audition_Venue:
         logger.info('---')
         await self.bot.switch_map_new(world='penacony', y_list=686/1080, scroll_down=True, # Audition Plaza
                                       x=940/2400, y=580/1080, start=1.75, deg=0.5, n=0, confirm=False)
-        raise SystemExit('check')
         await self.bot.move(0.5, 500)
         await self.bot.attack_technique(5) # move
         await self.bot.move(0.75, 500)
@@ -41,18 +40,17 @@ class Audition_Venue:
         await self.bot.move(0.9, 1500)
         await self.bot.move(0.5, 300)
         await self.bot.attack_technique(11) # move
-        raise SystemExit('posfix into bot right corner, then straight line to top, etc')
-        await self.bot.move(0.2, 300)
-        await self.bot.attack_technique(1) # items
-        await self.bot.move(0.47, 300)
-        await self.bot.attack_technique(2) # items
-        await self.bot.move(1.0, 300)
-        await self.bot.attack_technique(2) # items
-        await self.bot.move(0.25, 300)
-        await self.bot.attack_technique(3) # items
-        await self.bot.move(0.97, 300)
-        await self.bot.attack_technique(2) # items
-        await self.bot.move(0.7, 2500)
+        await self.bot.move(1.8, 1000)
+        for _ in range(6): # items
+            await self.bot.move(0.5, 300)
+            await self.bot.attack_technique(1)
+        await self.bot.move(1.0, 1700)
+        for _ in range(4): # items
+            await self.bot.move(1.5, 300)
+            await self.bot.attack_technique(1)
+        await self.bot.move(0.55, 300)
+        await self.bot.attack_technique(6) # move
+        await self.bot.move(0.7, 500)
         await self.bot.posfix(0.75, 500)
         await self.bot.move(1.9, 1200)
         await self.bot.move(0.5, 2000)

@@ -28,9 +28,8 @@ async def main():
     # await xianzhou_luofu.the_shackling_prison.dev()
     # await penacony.farm()
     # await penacony.dev()
-    # await penacony.audition_venue.teleport()
-    await penacony.audition_venue.farm()
-    raise SystemExit()
+    # await penacony.audition_venue.farm()
+    # raise SystemExit()
 
     # preperations
     # daily for free (guranteed): R2: 25, R4: 5
