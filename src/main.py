@@ -27,8 +27,9 @@ async def main():
     # await xianzhou_luofu.farm()
     # await xianzhou_luofu.the_shackling_prison.dev()
     # await penacony.farm()
+    # await xianzhou_luofu.dev()
     # await penacony.dev()
-    # await penacony.audition_venue.farm()
+    # await astral_express.checkout()
     # raise SystemExit()
 
     # preperations

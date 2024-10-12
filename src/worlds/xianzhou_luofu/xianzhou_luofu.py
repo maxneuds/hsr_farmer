@@ -51,6 +51,12 @@ class Xianzhou_Luofu:
         await self.the_shackling_prison.farm()                  # TP:+2->4 Time:???
         await self.extra.restore_tp(tp=2, info='End of Xianzhou Luofu')
     async def dev(self):
+        # await self.skysplitter.restore_tp(tp=4.2)               # TP:+4->5 Time:???
+        # await self.alchemy_commission.farm()                    # TP:-3->2 XP:6912/6912 Time:???
+        # await self.cloudford.farm()                             # TP:+1->3 XP:4644/4644 Time:???
+        # await self.stargazer_navalia.farm()                     # TP:-1->2 XP:6264/6264 Time:???
+        # await self.the_shackling_prison.farm()                  # TP:+2->4 Time:???
+        # await self.extra.restore_tp(tp=2, info='End of Xianzhou Luofu')
         raise SystemExit()
 
 

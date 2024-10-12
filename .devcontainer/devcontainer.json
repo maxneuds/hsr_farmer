@@ -12,7 +12,10 @@
                 "continue.continue"
             ]
         }
-    }
-    // "runArgs": [
-    // ]
+    },
+    "runArgs": [
+        "--network", "host",
+        "--privileged",
+        "-v", "/dev/bus/usb:/dev/bus/usb"
+    ]
 }

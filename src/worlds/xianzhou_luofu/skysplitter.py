@@ -38,7 +38,7 @@ class Skysplitter:
             await self.bot.attack_technique(1) # items
             await self.bot.move(1.1, 300)
             await self.bot.attack_technique(5) # +2TP
-            await self.bot.use_teleporter(729/2400, 876/1080, move_x=0, move_y=0, swipe=0, corner='topleft') # Tactics Board
+            await self.bot.use_teleporter(729/2400, 876/1080, move_x=0, move_y=0, swipe=0, corner='topleft', confirm=True) # Tactics Board
             await self.bot.move(1.2, 1000)
             await self.bot.move(1.0, 1000)
             await self.bot.move(0.575, 300)
