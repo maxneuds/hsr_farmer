@@ -15,7 +15,7 @@
     },
     "mounts": [
         // "type=bind,source=${localWorkspaceFolder},target=/workspace",
-        "type=bind,source=/home/${localEnv:USER}/.ssh,target=/root/.ssh,readonly"
+        "type=bind,source=/home/${localEnv:USER}/.ssh,target=/home/vscode/.ssh,readonly"
     ],
     "runArgs": [
         "--network", "host",
