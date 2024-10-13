@@ -16,7 +16,7 @@ RUN pip install poetry
 ENV POETRY_VIRTUALENVS_IN_PROJECT=true
 
 RUN echo 'alias ll="ls -lah --color=auto"' >> /home/vscode/.zshrc
-RUN echo 'alias ll="ls -lah --color=auto"' >> /home/vscode/.zshrc
+RUN echo 'alias ll="ls -lah --color=auto"' >> /home/vscode/.bashrc
 
 EXPOSE 5037
 
