@@ -216,7 +216,7 @@ class Dewlight_Pavilion:
         await self.bot.move(0.6, 400)
         await self.bot.interact()
         await self.bot.move(0.5, 3000)
-        await self.bot.move(0.25, 2500)
+        await self.bot.move(0.26, 2600)
         await self.bot.restore_tp(item='trick_snack', n=1) # +2TP
         await self.bot.posfix(0.25, 1000)
         await self.bot.move(1.2, 2000)
@@ -228,7 +228,7 @@ class Dewlight_Pavilion:
         await self.bot.attack_technique(1) # -1TP
         await self.bot.move(0.55, 2800)
         await self.bot.attack() # items
-        await self.bot.posfix(0.9, 5000)
+        await self.bot.posfix(0.9, 4500)
         await self.bot.move(1.78, 5800)
         await self.bot.move(1.5, 100)
         await self.bot.attack() # items
@@ -247,7 +247,7 @@ class Dewlight_Pavilion:
         await self.bot.move(1.3, 1900)
         await self.bot.interact()
         await self.bot.move(0.3, 2000)
-        await self.bot.move(0.4, 1600)
+        await self.bot.move(0.4, 1650)
         await self.bot.action_button()
         await self.bot.move(0.0, 1900)
         await self.bot.move(1.9, 400)

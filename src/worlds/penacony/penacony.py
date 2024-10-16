@@ -63,6 +63,6 @@ class Penacony:
         await self.golden_hour.restore_tp(tp=4.2)               # TP:+4->5 Time:80
         await self.penacony_grand_theater.farm()                # TP:-2->3
         await self.audition_venue.farm()                        # TP:???->??? R2:0
-        # raise SystemExit('dev')
+        raise SystemExit('dev')
 
 
