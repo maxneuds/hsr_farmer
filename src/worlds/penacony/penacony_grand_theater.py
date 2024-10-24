@@ -11,6 +11,7 @@ class Penacony_Grand_Theater:
         self.extra = Extra(device)
     async def farm(self):
         t_start = dt.now()
+        raise SystemExit('2.6 map change')
         await self.teleport()
         await self.path_1()
         await self.path_2()
@@ -28,7 +29,7 @@ class Penacony_Grand_Theater:
         await self.path_14()
         await self.path_15()
         await self.path_16()
-        await self.extra.metrics(self.map, t_start)
+        # await self.extra.metrics(self.map, t_start)
     async def dev(self):
         pass
     async def teleport(self):

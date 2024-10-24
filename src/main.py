@@ -23,13 +23,11 @@ async def main():
     # dev
     # await extra.restore_tp(tp=2)
     # await extra.restore_tp(tp=4)
-    # await jarilo_vi.rivet_town.farm()
-    # await xianzhou_luofu.farm()
     # await xianzhou_luofu.the_shackling_prison.dev()
-    # await penacony.farm()
-    # await xianzhou_luofu.dev()
     # await penacony.dev()
+    # await penacony.penacony_grand_theater.dev()
     # await astral_express.checkout()
+    # await extra.bot.wait_for_ready(min_duration=3, reason='wait for mission start')
     # raise SystemExit()
 
     # preperations

@@ -730,16 +730,16 @@ class Bot:
                 await aio.sleep(0.5)
 
 
-    async def wait_for_ready(self, reason, min_duration=0, max_duration=10, debug=False):
+    async def wait_for_ready(self, reason, min_duration=0, max_duration=12, debug=False):
         logger.info(f'Wait for the character to be ready. Reason: {reason}')
         if not debug and min_duration > 0:
             logger.info(f'wait for {min_duration}s')
             await aio.sleep(min_duration)
-        img_warp= cv.imread('res/bw_warp.png', cv.IMREAD_GRAYSCALE)
-        img_party= cv.imread('res/bw_party.png', cv.IMREAD_GRAYSCALE)
-        img_mission= cv.imread('res/bw_mission.png', cv.IMREAD_GRAYSCALE)
-        img_chat = cv.imread('res/bw_chat.png', cv.IMREAD_GRAYSCALE)
-        img_sprint = cv.imread('res/bw_sprint.png', cv.IMREAD_GRAYSCALE)
+        img_chars= cv.imread('res/ready_chars.png', cv.IMREAD_GRAYSCALE)
+        img_mission= cv.imread('res/ready_mission.png', cv.IMREAD_GRAYSCALE)
+        img_bulb= cv.imread('res/ready_bulb.png', cv.IMREAD_GRAYSCALE)
+        img_phone = cv.imread('res/ready_phone.png', cv.IMREAD_GRAYSCALE)
+        img_mission_exit = cv.imread('res/ready_mission_exit.png', cv.IMREAD_GRAYSCALE)
         img_tpfood = cv.imread('res/food_tp.png', cv.IMREAD_COLOR)
         img_exit = cv.imread('res/exit.png', cv.IMREAD_COLOR)
         check_return = 0
@@ -753,38 +753,34 @@ class Bot:
                 await self.wait_for_ready(reason=reason, min_duration=min_duration, debug=debug)
                 return(False)
             # get screen
-            success = False
-            while not success:
-                try:
-                    screen = await self.get_screen(custom_msg=None)
-                    screen_bw = cv.cvtColor(screen, cv.COLOR_BGR2GRAY)
-                    _, screen_bw = cv.threshold(screen_bw, 200, 255, cv.THRESH_BINARY)
-                    success = True
-                except:
-                    await aio.sleep(0.5)
-                    pass
-            screen_warp = screen_bw[int(self.xy.height*0.03):int(self.xy.height*0.08), int(self.xy.width*0.75):int(self.xy.width*0.773)]
-            screen_party = screen_bw[int(self.xy.height*0.03):int(self.xy.height*0.08), int(self.xy.width*0.88):int(self.xy.width*0.9)]
-            screen_mission = screen_bw[int(self.xy.height*0.248):int(self.xy.height*0.31), int(self.xy.width*0.04):int(self.xy.width*0.062)]
-            screen_chat = screen_bw[int(self.xy.height*0.868):int(self.xy.height*0.925), int(self.xy.width*0.04):int(self.xy.width*0.068)]
-            screen_sprint = screen_bw[int(self.xy.height*0.815):int(self.xy.height*0.885), int(self.xy.width*0.88):int(self.xy.width*0.915)]
+            screen = await self.get_screen(custom_msg=None)
+            screen_bw = cv.cvtColor(screen, cv.COLOR_BGR2GRAY)
+            _, screen_bw = cv.threshold(screen_bw, 220, 255, cv.THRESH_BINARY)
+            # analyze screen
+            screen_chars = screen_bw[int(self.xy.height*0.03):int(self.xy.height*0.08), int(self.xy.width*0.92):int(self.xy.width*0.945)]
+            screen_mission = screen_bw[int(self.xy.height*0.268):int(self.xy.height*0.31), int(self.xy.width*0.04):int(self.xy.width*0.062)]
+            screen_bulb = screen_bw[int(self.xy.height*0.05):int(self.xy.height*0.12), int(self.xy.width*0.143):int(self.xy.width*0.165)]
+            screen_phone = screen_bw[int(self.xy.height*0.05):int(self.xy.height*0.115), int(self.xy.width*0.04):int(self.xy.width*0.062)]
+            screen_mission_exit = screen_bw[int(self.xy.height*0.05):int(self.xy.height*0.115), int(self.xy.width*0.038):int(self.xy.width*0.06)]
             screen_exit = screen[int(self.xy.height*0.34):int(self.xy.height*0.66), int(self.xy.width*0.33):int(self.xy.width*0.67)]
-            # debug = True
-            if debug:
-                sc = screen_exit
-                si = img_mission
-                cv.imwrite('img.png', sc)
-                ssi = compare_ssim(sc, si)
-                cv.imshow('debug', sc)
-                cv.waitKey(0)
-                cv.destroyAllWindows()
-                raise SystemExit('debug')
+            # debug = False
+            # if debug:
+            #     sc = screen_bw
+            #     # sc = screen_chars
+            #     # si = img_chars
+            #     # ssi = compare_ssim(sc, si)
+            #     # print(ssi)
+            #     # cv.imwrite('img.png', sc)
+            #     cv.imshow('debug', sc)
+            #     cv.waitKey(0)
+            #     cv.destroyAllWindows()
+            #     raise SystemExit('debug')
             check_images = [
-                (screen_warp, img_warp),
-                (screen_party, img_party),
+                (screen_chars, img_chars),
                 (screen_mission, img_mission),
-                (screen_chat, img_chat),
-                (screen_sprint, img_sprint)
+                (screen_bulb, img_bulb),
+                (screen_phone, img_phone),
+                (screen_mission_exit, img_mission_exit)
             ]
             for i in check_images:
                 ssi = compare_ssim(i[0], i[1])
