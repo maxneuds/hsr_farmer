@@ -34,7 +34,7 @@ class Clock_Studios_Theme_Park:
         logger.info('---')
         logger.info('--- Map: Clock Studios Theme Park')
         logger.info('---')
-        await self.bot.switch_map(y_list=446/1080, world='penacony', scroll_down=True, # Theme Park Entrance
+        await self.bot.switch_map(y_list=327/1080, world='penacony', scroll_down=True, # Theme Park Entrance
                                     x=1216/2400, y=299/1080, corner='botright', move_x=1, move_y=6, confirm=True)
         await self.bot.move(0.45, 6300)
         await self.bot.attack(2) # items
@@ -118,7 +118,7 @@ class Clock_Studios_Theme_Park:
         await self.bot.attack_technique(3) # -2TP
     async def path_5(self):
         logger_set_path(self.map, 5)
-        await self.bot.switch_map(y_list=446/1080, world='penacony', scroll_down=True, # Hamster Ball Park
+        await self.bot.switch_map(y_list=327/1080, world='penacony', scroll_down=True, # Hamster Ball Park
                                     x=490/2400, y=633/1080, corner='topright', move_x=1, move_y=1)
         await self.bot.move(1.58, 7000)
         await self.bot.attack_technique(2) # -1TP

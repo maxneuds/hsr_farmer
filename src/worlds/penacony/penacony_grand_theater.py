@@ -11,7 +11,6 @@ class Penacony_Grand_Theater:
         self.extra = Extra(device)
     async def farm(self):
         t_start = dt.now()
-        raise SystemExit('2.6 map change')
         await self.teleport()
         await self.path_1()
         await self.path_2()
@@ -31,13 +30,30 @@ class Penacony_Grand_Theater:
         await self.path_16()
         # await self.extra.metrics(self.map, t_start)
     async def dev(self):
-        pass
+        # await self.teleport()
+        # await self.path_1()
+        # await self.path_2()
+        # await self.path_3()
+        # await self.path_4()
+        # await self.path_5()
+        # await self.path_6()
+        # await self.path_7()
+        await self.path_8()
+        await self.path_9()
+        await self.path_10()
+        await self.path_11()
+        await self.path_12()
+        await self.path_13()
+        await self.path_14()
+        await self.path_15()
+        await self.path_16()
+        raise SystemExit('dev')
     async def teleport(self):
         logger_set_path(self.map, 'Teleport')
         logger.info('---')
         logger.info('--- Map: Penacony Grand Theater')
         logger.info('---')
-        await self.bot.switch_map_new(world='penacony', y_list=807/1080, scroll_down=True, # Communing Hall
+        await self.bot.switch_map_new(world='penacony', y_list=685/1080, scroll_down=True, # Communing Hall
                                       x=1251/2400, y=383/1080, start=1.75, deg=0.5, n=4, confirm=False)
         await self.bot.move(0.62, 2400)
         await self.bot.attack(2) # items
@@ -88,7 +104,7 @@ class Penacony_Grand_Theater:
         await self.bot.move(0.25, 300)
         await self.bot.attack_technique(2) # move
         await self.bot.move(0.25, 300)
-        await self.bot.attack_technique(20) # move
+        await self.bot.attack_technique(18) # move
         await self.bot.posfix(0.25, 500)
         await self.bot.move(1.05, 300)
         await self.bot.attack_technique(8) # move
@@ -148,20 +164,7 @@ class Penacony_Grand_Theater:
         await self.bot.attack_technique(6) # items
     async def path_8(self):
         logger_set_path(self.map, 8)
-        await self.bot.teleport(x=1251/2400, y=383/1080, start=1.75, deg=0.5, n=4) # Communing Hall
-        await self.bot.move(0.5, 6000)
-        await self.bot.move(0.4, 8000)
-        for _ in range(3): # -1TP
-            await self.bot.move(0.3, 300)
-            await self.bot.attack_technique(2)
-        for _ in range(2): # +2TP
-            await self.bot.move(1.9, 300)
-            await self.bot.attack_technique(2)
-        for _ in range(2): # -1TP
-            await self.bot.move(0.9, 300)
-            await self.bot.attack_technique(4)
-    async def path_9(self):
-        logger_set_path(self.map, 9)
+        raise SystemExit('check')
         await self.bot.teleport(x=613/2400, y=335/1080, start=1.75, deg=0.5, n=4) # Hall of Chords
         await self.bot.move(0.9, 3500)
         await self.bot.move(0.7, 1000)
@@ -174,12 +177,12 @@ class Penacony_Grand_Theater:
         await self.bot.posfix(0.75, 1000)
         await self.bot.move(1.4, 2000)
         await self.bot.move(0.9, 2000)
-        await self.bot.move(0.7, 1000)
+        await self.bot.move(0.65, 1000) # adjustment done here
         await self.bot.attack_technique(2) # -1TP
         await self.bot.move(0.6, 300)
         await self.bot.attack_technique(3) # items
-    async def path_10(self):
-        logger_set_path(self.map, 10)
+    async def path_9(self):
+        logger_set_path(self.map, 9)
         await self.bot.teleport(x=897/2400, y=775/1080, start=0.25, deg=1.5, n=2) # Bud of Erdutition
         await self.bot.move(1.5, 1200)
         await self.bot.attack_technique(1) # items
@@ -187,15 +190,15 @@ class Penacony_Grand_Theater:
         await self.bot.move(0.83, 2500)
         await self.bot.attack_technique(1) # items
         await self.bot.move(1.3, 300)
-        await self.bot.attack_technique(9) # -1TP
-    async def path_11(self):
-        logger_set_path(self.map, 11)
+        await self.bot.attack_technique(10) # -1TP
+    async def path_10(self):
+        logger_set_path(self.map, 10)
         await self.bot.teleport(x=897/2400, y=775/1080, start=0.25, deg=1.5, n=2) # Bud of Erdutition
         await self.bot.move(1.37, 500)
         await self.bot.attack_technique(19) # -1TP
-    async def path_12(self):
-        logger_set_path(self.map, 12)
-        await self.bot.teleport(x=600/2400, y=682/1080, start=0.75, deg=1.5, n=3) # Cavern of Corrosion
+    async def path_11(self):
+        logger_set_path(self.map, 11)
+        await self.bot.teleport(x=598/2400, y=620/1080, start=0.75, deg=1.5, n=3) # Cavern of Corrosion
         await self.bot.move(1.3, 1400)
         await self.bot.attack_technique(1) # +2TP
         await self.bot.move(0.1, 500)
@@ -208,9 +211,21 @@ class Penacony_Grand_Theater:
         await self.bot.move(1.5, 1000)
         await self.bot.move(1.85, 1500)
         await self.bot.attack_technique(2) # items
+    async def path_12(self):
+        logger_set_path(self.map, 12)
+        raise SystemExit('check')
+        await self.bot.teleport(x=1017/2400, y=660/1080, start=1.75, deg=0.5, n=4) # Stagnant Shadow: Shape of Timbre
+        await self.bot.move(1.95, 500)
+        await self.bot.attack_technique(4)
+        await self.bot.move(0.25, 1000)
+        await self.bot.posfix(0.5, 500)
+        await self.bot.move(1.45, 500)
+        await self.bot.attack_technique(6) # move
+        await self.bot.move(1.70, 300)
+        await self.bot.attack_technique(21) # -2TP
     async def path_13(self):
         logger_set_path(self.map, 13)
-        await self.bot.teleport(x=834/2400, y=592/1080, start=1.75, deg=0.5, n=3) # Stagnant Shadow
+        await self.bot.teleport(x=834/2400, y=592/1080, start=1.75, deg=0.5, n=3) # Stagnant Shadow: Shape of Gloam
         await self.bot.move(1.5, 300)
         await self.bot.attack_technique(4) # +2TP
     async def path_14(self):

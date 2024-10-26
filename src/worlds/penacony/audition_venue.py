@@ -28,7 +28,7 @@ class Audition_Venue:
         logger.info('---')
         logger.info('--- Map: SoulGlad Scorchsand Audition Venue')
         logger.info('---')
-        await self.bot.switch_map_new(world='penacony', y_list=686/1080, scroll_down=True, # Audition Plaza
+        await self.bot.switch_map_new(world='penacony', y_list=567/1080, scroll_down=True, # Audition Plaza
                                       x=940/2400, y=580/1080, start=1.75, deg=0.5, n=0, confirm=False)
         await self.bot.move(0.5, 500)
         await self.bot.attack_technique(5) # move

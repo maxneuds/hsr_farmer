@@ -26,6 +26,7 @@ async def main():
     # await xianzhou_luofu.the_shackling_prison.dev()
     # await penacony.dev()
     # await penacony.penacony_grand_theater.dev()
+    # await penacony.audition_venue.farm()
     # await astral_express.checkout()
     # await extra.bot.wait_for_ready(min_duration=3, reason='wait for mission start')
     # raise SystemExit()

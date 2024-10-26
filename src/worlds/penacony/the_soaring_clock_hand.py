@@ -19,7 +19,7 @@ class The_Soaring_Clock_Hand:
         logger.info('---')
         t_start = dt.now()
         if tp == 4:
-            await self.bot.switch_map(y_list=927/1080, world='penacony', scroll_down=True,
+            await self.bot.switch_map(y_list=807/1080, world='penacony', scroll_down=True,
                                         x=974/2400, y=417/1080, corner='topright', move_x=0, move_y=0, confirm=True)
             await self.bot.move(0.35, 3000)
             await self.bot.move(0.5, 2000)

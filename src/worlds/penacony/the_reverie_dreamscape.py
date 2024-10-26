@@ -39,7 +39,7 @@ class The_Reverie_Dreamscape:
         await self.path_15()
         await self.supply_zone.restore_tp(tp=4)
         await self.path_16()
-        await self.clock_hand.restore_tp(tp=4, info='The Reverie Dreamscape')
+        await self.clock_hand.restore_tp(tp=4)
         await self.path_17()
         await self.extra.metrics(self.map, t_start)
     async def teleport(self):

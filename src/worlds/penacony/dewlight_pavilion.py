@@ -35,7 +35,7 @@ class Dewlight_Pavilion:
         logger.info('---')
         logger.info("--- Map: Dewlight Pavilion")
         logger.info('---')
-        await self.bot.switch_map(y_list=328/1080, world='penacony', scroll_down=True, # Reception Counter
+        await self.bot.switch_map(y_list=227/1080, world='penacony', scroll_down=True, # Reception Counter
                                     x=981/2400, y=718/1080, corner='botright', move_x=0, move_y=0)
         await self.bot.move(0.67, 3900)
         await self.bot.attack() # items
@@ -173,7 +173,7 @@ class Dewlight_Pavilion:
         await self.bot.attack_technique(3) # -1TP
     async def path_3(self):
         logger_set_path(self.map, 3)
-        await self.bot.switch_map(y_list=328/1080, world='penacony', scroll_down=True, # Dreammaster Hall
+        await self.bot.switch_map(y_list=227/1080, world='penacony', scroll_down=True, # Dreammaster Hall
                                     x=912/2400, y=485/1080, corner='topleft', move_x=0, move_y=2)
         await self.bot.move(0.8, 2300)
         await self.bot.move(0.5, 4600)
@@ -284,7 +284,7 @@ class Dewlight_Pavilion:
         await self.bot.attack_technique(3) # -1TP
     async def path_6(self):
         logger_set_path(self.map, 6)
-        await self.bot.switch_map(y_list=328/1080, world='penacony', scroll_down=True, # Dreammaster Hall
+        await self.bot.switch_map(y_list=227/1080, world='penacony', scroll_down=True, # Dreammaster Hall
                                     x=912/2400, y=485/1080, corner='topleft', move_x=0, move_y=2)
         await self.bot.move(0.5, 1000)
         await self.bot.interact()
@@ -364,7 +364,7 @@ class Dewlight_Pavilion:
         await self.bot.attack_technique(2) # -1TP
     async def path_11(self):
         logger_set_path(self.map, 11)
-        await self.bot.switch_map(y_list=328/1080, world='penacony', scroll_down=True, # Dreammaster Hall
+        await self.bot.switch_map(y_list=227/1080, world='penacony', scroll_down=True, # Dreammaster Hall
                                     x=912/2400, y=485/1080, corner='topleft', move_x=0, move_y=2)
         await self.bot.move(0.2, 2300)
         await self.bot.move(0.5, 4300)
