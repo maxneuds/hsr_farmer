@@ -28,16 +28,16 @@ class Penacony_Grand_Theater:
         await self.path_14()
         await self.path_15()
         await self.path_16()
-        # await self.extra.metrics(self.map, t_start)
+        await self.extra.metrics(self.map, t_start)
     async def dev(self):
-        # await self.teleport()
-        # await self.path_1()
-        # await self.path_2()
-        # await self.path_3()
-        # await self.path_4()
-        # await self.path_5()
-        # await self.path_6()
-        # await self.path_7()
+        await self.teleport()
+        await self.path_1()
+        await self.path_2()
+        await self.path_3()
+        await self.path_4()
+        await self.path_5()
+        await self.path_6()
+        await self.path_7()
         await self.path_8()
         await self.path_9()
         await self.path_10()
@@ -164,7 +164,6 @@ class Penacony_Grand_Theater:
         await self.bot.attack_technique(6) # items
     async def path_8(self):
         logger_set_path(self.map, 8)
-        raise SystemExit('check')
         await self.bot.teleport(x=613/2400, y=335/1080, start=1.75, deg=0.5, n=4) # Hall of Chords
         await self.bot.move(0.9, 3500)
         await self.bot.move(0.7, 1000)
@@ -213,10 +212,9 @@ class Penacony_Grand_Theater:
         await self.bot.attack_technique(2) # items
     async def path_12(self):
         logger_set_path(self.map, 12)
-        raise SystemExit('check')
         await self.bot.teleport(x=1017/2400, y=660/1080, start=1.75, deg=0.5, n=4) # Stagnant Shadow: Shape of Timbre
         await self.bot.move(1.95, 500)
-        await self.bot.attack_technique(4)
+        await self.bot.attack_technique(4) # +2TP
         await self.bot.move(0.25, 1000)
         await self.bot.posfix(0.5, 500)
         await self.bot.move(1.45, 500)

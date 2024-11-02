@@ -20,7 +20,6 @@ class Cloudford:
         await self.path_6()
         await self.path_7()
         await self.path_8()
-        await self.path_9()
         await self.extra.metrics(self.map, t_start)
     async def teleport(self):
         logger_set_path(self.map, 'Teleport')
@@ -44,9 +43,33 @@ class Cloudford:
         await self.bot.move(1.7, 4000)
         await self.bot.attack_technique(1) # -1TP
         await self.bot.move(0.62, 300)
-        await self.bot.attack_technique(6) # -1TP
-    async def path_2(self): # roamer
+        await self.bot.attack_technique(6) # -1TP, roamer
+    async def path_2(self):
         logger_set_path(self.map, 2)
+        await self.bot.use_teleporter(930/2400, 259/1080, move_x=0, move_y=0, corner='botright') # Cavern of Corrosion
+        await self.bot.move(1.3, 500)
+        await self.bot.attack_technique(2) # +2TP
+        await self.bot.move(1.5, 300)
+        await self.bot.attack_technique(3) # move
+        await self.bot.move(1.9, 300)
+        await self.bot.attack_technique(7) # items
+        await self.bot.move(1.3, 700)
+        await self.bot.attack_technique(3) # move
+        for _ in range(4): # move, stabilized
+            await self.bot.move(1.5, 300)
+            await self.bot.attack_technique(1)
+        for _ in range(2): # +2TP, stabilized
+            await self.bot.move(0.25, 300)
+            await self.bot.attack_technique(1)
+        await self.bot.move(1.1, 500)
+        for _ in range(7): # -1TP, stabilized
+            await self.bot.move(1.5, 300)
+            await self.bot.attack_technique(1)
+        for _ in range(5): # -1TP, stabilized
+            await self.bot.move(0.35, 300)
+            await self.bot.attack_technique(1)
+    async def path_3(self):
+        logger_set_path(self.map, 3)
         await self.bot.use_teleporter(925/2400, 663/1080, move_x=0, move_y=5, corner='topleft') # Trove of Verdure
         await self.bot.move(1.75, 2300)
         await self.bot.move(1.5, 4000)
@@ -57,21 +80,6 @@ class Cloudford:
         await self.bot.move(1.5, 900)
         await self.bot.move(1.4, 1100)
         await self.bot.attack() # +2TP
-    async def path_3(self):
-        logger_set_path(self.map, 3)
-        await self.bot.use_teleporter(925/2400, 663/1080, move_x=0, move_y=5, corner='topleft') # Trove of Verdure
-        await self.bot.move(0.75, 2100)
-        await self.bot.move(1.0, 7500)
-        await self.bot.attack_technique(2) # -1TP
-        await self.bot.move(1.9, 2000)
-        await self.bot.move(1.7, 1000)
-        await self.bot.move(1.9, 1000)
-        await self.bot.posfix(1.75, 1000)
-        for _ in range(8): # -1TP, roamer, +2TP
-            await self.bot.move(0.75, 300)
-            await self.bot.attack_technique(1)
-            await self.bot.move(1.25, 300)
-            await self.bot.attack_technique(1)
     async def path_4(self):
         logger_set_path(self.map, 4)
         await self.bot.use_teleporter(973/2400, 532/1080, move_x=0, move_y=0, corner='botright') # Skiff Boarding Area
@@ -134,17 +142,12 @@ class Cloudford:
         await self.bot.move(1.5, 700)
         await self.bot.attack_technique(1) # items
         await self.bot.move(0.0, 400)
-        await self.bot.attack_technique(3) # -1TP, roamer
-        for _ in range(4): # -3TP, roamer
+        await self.bot.attack_technique(3) # -2TP, roamer
+        for _ in range(4): # -1TP, roamer
             await self.bot.move(0.7, 300)
             await self.bot.attack_technique(2)
         for _ in range(4):
             await self.bot.move(1.7, 300)
             await self.bot.attack_technique(3)
-    async def path_9(self):
-        logger_set_path(self.map, 9)
-        await self.bot.use_teleporter(930/2400, 259/1080, move_x=0, move_y=0, corner='botright') # Cavern of Corrosion
-        await self.bot.move(1.25, 1000)
-        await self.bot.attack() # +2TP
        
  

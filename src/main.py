@@ -23,17 +23,17 @@ async def main():
     # dev
     # await extra.restore_tp(tp=2)
     # await extra.restore_tp(tp=4)
-    # await xianzhou_luofu.the_shackling_prison.dev()
+    # await xianzhou_luofu.cloudford.path_2()
+    # await xianzhou_luofu.dev()
     # await penacony.dev()
-    # await penacony.penacony_grand_theater.dev()
+    # await penacony.paperfolg_univeristy.restore_tp(tp=4)
     # await penacony.audition_venue.farm()
     # await astral_express.checkout()
-    # await extra.bot.wait_for_ready(min_duration=3, reason='wait for mission start')
     # raise SystemExit()
 
     # preperations
     # daily for free (guranteed): R2: 25, R4: 5
-    # await xianzhou_luofu.stockup() # disabled, got enough
+    # await xianzhou_luofu.stockup() # disabled, got enoug:()
     await extra.craft_items(['trick_snack', 'punitive_energy'])
 
     # farm worlds

@@ -7,6 +7,7 @@ from worlds.penacony.clock_studio_theme_park import Clock_Studios_Theme_Park
 from worlds.penacony.audition_venue import Audition_Venue
 from worlds.penacony.penacony_grand_theater import Penacony_Grand_Theater
 from worlds.penacony.the_soaring_clock_hand import The_Soaring_Clock_Hand
+from worlds.penacony.paperfold_university import Paperfold_University
 from worlds.penacony.penacony import Penacony
 
 

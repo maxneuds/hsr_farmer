@@ -17,8 +17,8 @@ class Stargazer_Navalia:
         await self.path_3()
         await self.path_4()
         await self.path_5()
-        await self.path_6()
         await self.extra.restore_tp(tp=4, info='Stargazer Navalia')
+        await self.path_6()
         await self.path_7()
         await self.extra.metrics(self.map, t_start)
     async def teleport(self):
@@ -137,31 +137,6 @@ class Stargazer_Navalia:
         await self.bot.attack_technique(2) # -1TP
     async def path_6(self):
         logger_set_path(self.map, 6)
-        await self.bot.use_teleporter(855/2400, 405/1080, move_x=0, move_y=2, corner='botleft') # Ship Nursery - The Budding
-        await self.bot.move(0.7, 800)
-        await self.bot.move(0.5, 900)
-        await self.bot.move(0.0, 2000)
-        await self.bot.move(0.2, 3000)
-        await self.bot.move(0.3, 500)
-        await self.bot.attack() # items
-        await self.bot.move(1.1, 1200)
-        await self.bot.move(1.0, 700)
-        await self.bot.move(0.5, 3800)
-        await self.bot.move(0.3, 1000)
-        await self.bot.attack() # +2TP
-        await self.bot.move(0.25, 1000)
-        await self.bot.posfix(0.25, 1000)
-        await self.bot.move(1.25, 1900)
-        await self.bot.move(1.0, 5500)
-        await self.bot.move(0.9, 1500)
-        await self.bot.attack() # items
-        await self.bot.move(1.5, 2000)
-        await self.bot.move(1.4, 1500)
-        await self.bot.attack_technique(4) # -3TP
-        await self.bot.move(0.3, 300)
-        await self.bot.attack_technique(4)
-    async def path_7(self):
-        logger_set_path(self.map, 7)
         await self.bot.switch_map(y_list=630/1080, world='the_xianzhou_luofu', scroll_down=False, # Ship Nursery - The Burgeoning
                                     x=958/2400, y=364/1080, corner='botleft', move_x=0, move_y=0)
         await self.bot.move(0.95, 1700)
@@ -185,5 +160,30 @@ class Stargazer_Navalia:
         await self.bot.move(1.5, 1700)
         await self.bot.move(0.0, 300)
         await self.bot.attack_technique(3) # -1TP
+    async def path_7(self):
+        logger_set_path(self.map, 7)
+        await self.bot.use_teleporter(855/2400, 405/1080, move_x=0, move_y=2, corner='botleft') # Ship Nursery - The Budding
+        await self.bot.move(0.7, 800)
+        await self.bot.move(0.5, 900)
+        await self.bot.move(0.0, 2000)
+        await self.bot.move(0.2, 3000)
+        await self.bot.move(0.3, 500)
+        await self.bot.attack() # items
+        await self.bot.move(1.1, 1200)
+        await self.bot.move(1.0, 700)
+        await self.bot.move(0.5, 3800)
+        await self.bot.move(0.3, 1000)
+        await self.bot.attack() # +2TP
+        await self.bot.move(0.25, 1000)
+        await self.bot.posfix(0.25, 1000)
+        await self.bot.move(1.25, 1900)
+        await self.bot.move(1.0, 5500)
+        await self.bot.move(0.9, 1500)
+        await self.bot.attack() # items
+        await self.bot.move(1.5, 2000)
+        await self.bot.move(1.4, 1500)
+        await self.bot.attack_technique(4) # -3TP
+        await self.bot.move(0.3, 300)
+        await self.bot.attack_technique(4)
 
 
