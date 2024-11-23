@@ -121,7 +121,7 @@ class Penacony_Grand_Theater:
         await self.bot.attack() # +2TP
     async def path_6(self):
         logger_set_path(self.map, 6)
-        await self.bot.teleport(x=613/2400, y=335/1080, start=1.75, deg=0.5, n=4) # Hall of Chords
+        await self.bot.teleport(x=613/2400, y=350/1080, start=1.75, deg=0.5, n=4) # Hall of Chords
         await self.bot.move(0.31, 2200)
         await self.bot.attack() # +2TP
         await self.bot.move(1.6, 1000)

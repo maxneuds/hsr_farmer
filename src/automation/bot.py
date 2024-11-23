@@ -36,26 +36,35 @@ class Bot:
     
     
     async def screen_failsafe(self, n_try=0):
+        logger.info('get screenshot from device')
         try:
             if self.dev is None:
                 self.dev = await self.adb.connect_dev(device=self.device)
-            im_byte_array = await self.dev.screencap()
+            im_byte_array = None
+            while im_byte_array is None:
+                im_byte_array = await self.dev.screencap()
             im_array = np.frombuffer(bytes(im_byte_array), np.uint8)
-            return(im_array)
+            # convert to cv image
+            screenshot = cv.imdecode(im_array, cv.IMREAD_COLOR)
+            return(screenshot)
         except RuntimeError as e:
             if n_try < 9:
                 logger.info(f"ADB connection closed: reconnect trial {n_try+1}")
                 self.dev = await self.adb.connect_dev(device=self.device)
-                im_array = await self.screen_failsafe(n_try=n_try+1)
-                return(im_array)
+                screenshot = await self.screen_failsafe(n_try=n_try+1)
+                return(screenshot)
             else:
                 msg = f"Reconnecting to ADB failed with error:\n{e}"
                 logger.error(msg)
                 raise SystemExit(msg)
         except TypeError as e:
             logger.error(f"Getting screencap failed with error:\n{e}")
-            im_array = await self.screen_failsafe(n_try=n_try+1)
-            return(im_array)
+            screenshot = await self.screen_failsafe(n_try=n_try+1)
+            return(screenshot)
+        except Exception as e:
+            logger.error(f"Getting screencap failed with error:\n{e}")
+            screenshot = await self.screen_failsafe(n_try=n_try+1)
+            return(screenshot)
 
 
     def click_event(self, event, x, y, flags, params):
@@ -66,17 +75,9 @@ class Bot:
             logger.debug(f'{x},{y}')
     
     
-    async def get_screen(self, custom_msg=False, debug=False):
-        if custom_msg == False:
-            logger.info('get screenshot from device')
-        elif custom_msg == None:
-            pass
-        else:
-            logger.info(custom_msg)
+    async def get_screen(self, debug=False):
         # get screen from device
-        im_array = await self.screen_failsafe()
-        # convert to cv image
-        screenshot = cv.imdecode(im_array, cv.IMREAD_COLOR)
+        screenshot = await self.screen_failsafe()
         if debug == True:
             cv.imshow('debug', screenshot)
             cv.imwrite('data/debug.png', screenshot)
@@ -521,7 +522,7 @@ class Bot:
             success = False
             while not success:
                 try:
-                    screen = await self.get_screen(custom_msg=None)
+                    screen = await self.get_screen()
                     success = True
                 except:
                     pass
@@ -627,7 +628,7 @@ class Bot:
                 success = False
                 while not success:
                     try:
-                        screen = await self.get_screen(custom_msg=None)
+                        screen = await self.get_screen()
                         success = True
                         if debug == True:
                             cv.imwrite('data/debug.png', screen)
@@ -692,7 +693,7 @@ class Bot:
             success = False
             while not success:
                 try:
-                    screen = await self.get_screen(custom_msg=None)
+                    screen = await self.get_screen()
                     success = True
                 except:
                     pass
@@ -722,7 +723,6 @@ class Bot:
                 if count > 9:
                     logger.error('recipe not found')
                     search_recipe = False
-                    exit()
                 # swipe up
                 x = int(self.xy.width*492/2400)
                 cmd = f'input swipe {x} {int(self.xy.height*600/1080)} {x} {int(self.xy.height*300/1080)} {500}'
@@ -753,7 +753,7 @@ class Bot:
                 await self.wait_for_ready(reason=reason, min_duration=min_duration, debug=debug)
                 return(False)
             # get screen
-            screen = await self.get_screen(custom_msg=None)
+            screen = await self.get_screen()
             screen_bw = cv.cvtColor(screen, cv.COLOR_BGR2GRAY)
             _, screen_bw = cv.threshold(screen_bw, 220, 255, cv.THRESH_BINARY)
             # analyze screen

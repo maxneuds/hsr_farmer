@@ -19,35 +19,24 @@ async def main():
     xianzhou_luofu = worlds.Xianzhou_Luofu(DEVICE)
     penacony = worlds.Penacony(DEVICE, mode=MODE)
     
-    
     # dev
     # await extra.restore_tp(tp=2)
     # await extra.restore_tp(tp=4)
     # await xianzhou_luofu.cloudford.path_2()
     # await xianzhou_luofu.dev()
     # await penacony.dev()
+    # await penacony.penacony_grand_theatepath_16()
     # await penacony.paperfolg_univeristy.restore_tp(tp=4)
     # await penacony.audition_venue.farm()
     # await astral_express.checkout()
-    # raise SystemExit()
 
-    # preperations
-    # daily for free (guranteed): R2: 25, R4: 5
-    # await xianzhou_luofu.stockup() # disabled, got enoug:()
+    # daily grind
     await extra.craft_items(['trick_snack', 'punitive_energy'])
-
-    # farm worlds
     await herta_space_station.farm() # TP:+5->5 ✓✓
     await jarilo_vi.farm() # TP:+0->5 R2/4:0 ✓✓
     await xianzhou_luofu.farm() # TP:+0->5 R2:1 R4:0 ✓✓
     await penacony.farm() # TP:??? R2:5 R4:3
-    
-    # checkout
     await astral_express.checkout()
-    
-    
-    # TOTAL XP: 116.340 / 119.256
-    # TOTAL TIME: 
     
     
 if __name__ == '__main__':
