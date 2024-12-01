@@ -87,6 +87,12 @@ class Bot:
         return(screenshot)
 
     
+    async def switch_character(self, i=1):
+        logger.info(f'switch character: {i} from top')
+        y_pos = int(155+i*115)
+        await self.action_tap(x=int(self.xy.width*2200/2400), y=int(self.xy.height*y_pos/1080)) # tap on character
+
+    
     async def sleep(self, duration):
         logger.info(f'sleep for {duration} seconds...')
         await aio.sleep(duration)
@@ -306,7 +312,14 @@ class Bot:
         check = await self.wait_for_ready(reason='teleport')
         if check != True: # retry
             n_try += 1
-            if n_try > 10: # retry at most 10 times
+            if (n_try % 3) == 0:
+                # move a bit
+                self.move(0, 500)
+                self.move(0.5, 500)
+                self.move(1, 500)
+                self.move(1.5, 500)
+                self.attack()
+            if n_try > 100: # retry at most 100 times
                 logger.error(f"Failed to teleport {n_try} times. Please fix!")
                 sys.exit()
             logger.debug(f'telport failed. Try again [{n_try}]')
@@ -753,9 +766,16 @@ class Bot:
                 await self.wait_for_ready(reason=reason, min_duration=min_duration, debug=debug)
                 return(False)
             # get screen
-            screen = await self.get_screen()
-            screen_bw = cv.cvtColor(screen, cv.COLOR_BGR2GRAY)
-            _, screen_bw = cv.threshold(screen_bw, 220, 255, cv.THRESH_BINARY)
+            getscreen = True
+            while getscreen:
+                try:
+                    screen = await self.get_screen()
+                    screen_bw = cv.cvtColor(screen, cv.COLOR_BGR2GRAY)
+                    _, screen_bw = cv.threshold(screen_bw, 220, 255, cv.THRESH_BINARY)
+                    getscreen = False
+                except:
+                    logger.error('Failed to get the screen, retry.')
+                    await aio.sleep(1)
             # analyze screen
             screen_chars = screen_bw[int(self.xy.height*0.03):int(self.xy.height*0.08), int(self.xy.width*0.92):int(self.xy.width*0.945)]
             screen_mission = screen_bw[int(self.xy.height*0.268):int(self.xy.height*0.31), int(self.xy.width*0.04):int(self.xy.width*0.062)]

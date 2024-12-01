@@ -1,8 +1,8 @@
 import asyncio as aio
-from nicegui import ui
 from sys import exit
 from datetime import datetime as dt
 from logger import logger, log_runtime
+# from nicegui import ui
 import worlds
 
 # DEVICE = 'usb'
@@ -25,9 +25,9 @@ async def main():
     # await xianzhou_luofu.cloudford.path_2()
     # await xianzhou_luofu.dev()
     # await penacony.dev()
-    # await penacony.penacony_grand_theatepath_16()
-    # await penacony.paperfolg_univeristy.restore_tp(tp=4)
-    # await penacony.audition_venue.farm()
+    # await penacony.penacony_grand_theater.farm()
+    # await penacony.paperfold_univeristy.restore_tp(tp=4)
+    # raise SystemExit()
     # await astral_express.checkout()
 
     # daily grind
@@ -47,7 +47,7 @@ if __name__ == '__main__':
         exit()
 
 
-# names = {
+# names = {w
 #     'herta_space_station': 'Herta Space Station',
 #     'jarilo_vi': 'Jarilo VI',
 #     'the_xianzhou_luofu': 'The Xianzhou Luofu',

@@ -20,21 +20,35 @@ class Paperfold_University:
                                       x=785/2400, y=785/1080, start=1.75, deg=0.0, n=0, confirm=False)
             await self.bot.move(0.7, 500)
             await self.bot.attack_technique(3) # items
-            await self.bot.move(0.2, 1900)
+            await self.bot.move(0.2, 1600)
             await self.bot.move(0.5, 300)
-            await self.bot.attack_technique(9) # move
+            await self.bot.attack_technique(10) # move
             await self.bot.move(1.1, 300)
             await self.bot.attack_technique(6) # +2TP
-            # await self.bot.teleport(x=1163/2400, y=577/1080, start=0.25, deg=0.0, n=0) # Cultural Corridor
-            # await self.bot.move(0.55, 1000)
-            # await self.bot.attack_technique(7) # +2TP
-            # await self.bot.teleport(x=793/2400, y=550/1080, start=0.25, deg=0.0, n=0, debug=True) # Central Stage
-            # raise SystemExit()
-            # await self.bot.use_teleporter(817/2400, 266/1080, move_x=0, move_y=0, swipe=0, corner='botright') # Wardance Arena Sub-Floor
-            # await self.bot.move(1.5, 500)
-            # await self.bot.attack_technique(5) # +2TP
-            # await self.bot.move(0.5, 300)
-            # await self.bot.attack_technique(9) # items
+            await self.bot.teleport(x=1163/2400, y=577/1080, start=0.25, deg=0.0, n=0) # Cultural Corridor
+            await self.bot.move(0.55, 1000)
+            await self.bot.attack_technique(7) # +2TP
+            await self.bot.move(0.4, 500)
+            await self.bot.attack_technique(5) # items
+            await self.bot.teleport(x=795/2400, y=554/1080, start=0.25, deg=0.0, n=0) # Central Stage
+            raise SystemExit() # go next from here
+            # todo: optimize
+            await self.bot.move(1.9, 300)
+            await self.bot.attack_technique(6) # move
+            await self.bot.move(1.4, 300)
+            await self.bot.attack_technique(3) # items
+            await self.bot.move(1.25, 300)
+            await self.bot.attack_technique(3) # items
+            raise SystemExit() # make sure to hit the last item
+            await self.bot.move(0.72, 300)
+            await self.bot.attack_technique(6) # items
+            await self.bot.move(0.5, 1500)
+            await self.bot.posfix(0.5, 500)
+            await self.bot.move(1.5, 2000)
+            await self.bot.move(1.0, 300)
+            await self.bot.attack_technique(2) # items
+            await self.bot.move(0.75, 300)
+            await self.bot.attack_technique(6) # items
         else:
             raise SystemExit(f'no {tp} TP restore available')
         await self.extra.metrics(f'{self.map} TP {tp}', t_start)

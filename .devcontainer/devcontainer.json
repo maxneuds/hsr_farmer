@@ -1,6 +1,14 @@
 {
-    "name": "python",
+    "name": "ADB Python3.11",
     "build": { "dockerfile": "Dockerfile" },
+    "runArgs": [
+        "--network", "host",
+        "--privileged",
+        "-v", "/dev/bus/usb:/dev/bus/usb"
+    ],
+    "containerUser": "worker",
+    "workspaceFolder": "/workspace/dev",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspace/dev,type=bind",
     "customizations": {
         "vscode": {
             "extensions": [
@@ -11,15 +19,18 @@
                 "ms-azuretools.vscode-docker",
                 "continue.continue"
             ]
+        },
+        "settings": {
+            "terminal.integrated.defaultProfile.linux": "/bin/zsh"
         }
     },
+    "containerEnv": {
+        "DISPLAY": "${localEnv:DISPLAY}",
+        "QT_QPA_PLATFORM": "xcb" 
+    },
     "mounts": [
-        // "type=bind,source=${localWorkspaceFolder},target=/workspace",
-        "type=bind,source=/home/${localEnv:USER}/.ssh,target=/home/vscode/.ssh,readonly"
-    ],
-    "runArgs": [
-        "--network", "host",
-        "--privileged",
-        "-v", "/dev/bus/usb:/dev/bus/usb"
+        "type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock",
+        "type=bind,source=/home/${localEnv:USER}/.ssh,target=/home/vscode/.ssh,readonly",
+        "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind"
     ]
 }
