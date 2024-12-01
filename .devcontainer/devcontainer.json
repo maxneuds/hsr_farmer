@@ -30,7 +30,7 @@
     },
     "mounts": [
         "type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock",
-        "type=bind,source=/home/${localEnv:USER}/.ssh,target=/home/vscode/.ssh,readonly",
+        "type=bind,source=/home/${localEnv:USER}/.ssh,target=/home/worker/.ssh,readonly",
         "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind"
     ]
 }
