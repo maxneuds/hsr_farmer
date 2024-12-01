@@ -32,8 +32,8 @@ class Extra:
         logger.info("--- Map: Storage Zone")
         logger.info('---')
         t_start = dt.now()
-        # await self.bot.switch_map(y_list=630/1080, world='herta_space_station', scroll_down=False, # Outside the Control Center
-        #                         x=576/2400, y=569/1080, corner='botright', move_x=0, move_y=0)
+        await self.bot.switch_map(y_list=630/1080, world='herta_space_station', scroll_down=False, # Outside the Control Center
+                                x=576/2400, y=569/1080, corner='botright', move_x=0, move_y=0)
         await self.bot.switch_character(i=1)
         await self.bot.move(1.0, 3600)
         await self.bot.move(1.35, 1500)
