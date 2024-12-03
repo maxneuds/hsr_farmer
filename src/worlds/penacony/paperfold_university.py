@@ -31,18 +31,17 @@ class Paperfold_University:
             await self.bot.move(0.4, 500)
             await self.bot.attack_technique(5) # items
             await self.bot.teleport(x=795/2400, y=554/1080, start=0.25, deg=0.0, n=0) # Central Stage
-            # todo: optimize
             raise SystemExit() # make sure to hit the last item
             await self.bot.move(1.9, 300)
             await self.bot.attack_technique(6) # move
             await self.bot.move(1.4, 300)
             await self.bot.attack_technique(3) # items
-            await self.bot.move(1.0, 1000)
-            await self.bot.move(1.25, 300)
-            await self.bot.attack_technique(3) # items
+            await self.bot.move(1.0, 1500)
+            await self.bot.move(1.5, 300)
+            await self.bot.attack_technique(2) # items
             raise SystemExit() # make sure to hit the last item
-            await self.bot.move(0.72, 300)
-            await self.bot.attack_technique(6) # items
+            await self.bot.move(0.7, 300)
+            await self.bot.attack_technique(7) # items
             await self.bot.move(0.5, 1500)
             await self.bot.posfix(0.5, 500)
             await self.bot.move(1.5, 2000)
