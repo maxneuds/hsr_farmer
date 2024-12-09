@@ -5,6 +5,7 @@ import sys
 from logger import logger
 from datetime import datetime as dt, timedelta
 import time
+import os
 from skimage.metrics import structural_similarity as compare_ssim
 from automation.adb import ADB
 from automation.xy import OnePlus7T
@@ -33,6 +34,18 @@ class Bot:
                 await self.shell_failsafe(cmd, n_try=n_try+1)
             else:
                 logger.error(f"Reconnecting to ADB failed with error:\n{e}")
+    
+    
+    async def get_screen(self, debug=False):
+        # get screen from device
+        screenshot = await self.screen_failsafe()
+        if debug == True:
+            cv.imshow('debug', screenshot)
+            cv.imwrite('data/debug.png', screenshot)
+            cv.setMouseCallback('debug', self.click_event)
+            cv.waitKey(0)
+            cv.destroyAllWindows()
+        return(screenshot)
     
     
     async def screen_failsafe(self, n_try=0):
@@ -73,18 +86,6 @@ class Bot:
         # checking for left mouse clicks
         if event == cv.EVENT_LBUTTONDOWN:
             logger.debug(f'{x},{y}')
-    
-    
-    async def get_screen(self, debug=False):
-        # get screen from device
-        screenshot = await self.screen_failsafe()
-        if debug == True:
-            cv.imshow('debug', screenshot)
-            cv.imwrite('data/debug.png', screenshot)
-            cv.setMouseCallback('debug', self.click_event)
-            cv.waitKey(0)
-            cv.destroyAllWindows()
-        return(screenshot)
 
     
     async def switch_character(self, i=1):
@@ -184,26 +185,32 @@ class Bot:
     
     async def check_map_zoom_level(self, debug=False):
         logger.info('check map zoom level')
+        cut_offset_x = 0.2
         im_zoombar_min = cv.imread('res/map_zoombar_min.png', cv.IMREAD_GRAYSCALE)
         im_zoom_minus_bw = cv.imread('res/map_zoom_minus_bw.png', cv.IMREAD_GRAYSCALE)
         screen = await self.get_screen()
-        screen_botmid = screen[int(self.xy.height*0.8):int(self.xy.height), int(self.xy.width*0.3):int(self.xy.width*0.7)]
+        screen_botmid = screen[int(self.xy.height*0.8):int(self.xy.height), int(self.xy.width*cut_offset_x):int(self.xy.width*0.7)]
         screen_botmid_bw = cv.cvtColor(screen_botmid, cv.COLOR_BGR2GRAY)
         _, screen_botmid_bw = cv.threshold(screen_botmid_bw, 240, 255, cv.THRESH_BINARY)
-        if debug == True:
-            cv.imwrite('data/debug.png', screen_zoombar)
-            cv.imshow('debug', screen_zoombar)
-            cv.waitKey(0)
-            cv.destroyAllWindows()
-            exit()
         # locate min zoom button
         logger.info('locate min zoom button')
         matches = cv.matchTemplate(screen_botmid_bw, im_zoom_minus_bw, cv.TM_CCOEFF_NORMED)
         _, max_val, _, max_loc = cv.minMaxLoc(matches)
-        btn_zoom_minus = (max_loc[0]+int(self.xy.width*0.3), max_loc[1]+int(self.xy.height*0.8))
+        btn_zoom_minus = (max_loc[0]+int(self.xy.width*cut_offset_x), max_loc[1]+int(self.xy.height*0.8))
         # check zoom level
         logger.info('check zoom level')
-        screen_zoombar = screen_botmid_bw[max_loc[1]-8:max_loc[1]+32, max_loc[0]:max_loc[0]+96]
+        # if debug == True:
+        #     cv.imwrite('data/debug.png', screen)
+        #     cv.imshow('debug', screen)
+        #     cv.waitKey(0)
+        #     cv.destroyAllWindows()
+        #     exit()
+        # if debug == True:
+        #     cv.imwrite('data/debug.png', screen_botmid_bw)
+        #     cv.imshow('debug', screen_botmid_bw)
+        #     cv.waitKey(0)
+        #     cv.destroyAllWindows()
+        #     exit()
         matches = cv.matchTemplate(screen_botmid_bw, im_zoombar_min, cv.TM_CCOEFF_NORMED)
         _, max_val, _, _ = cv.minMaxLoc(matches)
         if max_val < 0.95: # map isn't on min zoom, change zoom level
@@ -244,9 +251,90 @@ class Bot:
                         await self.wait_for_ready(reason='back button to try open map again')
                         await self.open_map(special_exit=special_exit, debug=debug)
         # standardize map zoom level
-        await self.check_map_zoom_level()
+        await self.check_map_zoom_level(debug=True)
         # wait at the end to stabilize
         await aio.sleep(0.5)
+
+
+    # TODO: new teleport function using template matching for stable teleports
+    async def teleport2(self, targets, start=0.75, deg=1.75, n=0, debug=False,
+                        confirm=False, confirm_x=0.5, confirm_y=0.648, special_exit=True, open_map=True):
+        logger.info(f'use teleporter: {int(self.xy.width*x)},{int(self.xy.height*y)}')
+        if open_map == True:
+            await self.open_map(special_exit=special_exit)
+        # anchor map to start position
+        logger.info(f'start map at: {start}π')
+        radius = 2/5 * self.xy.height
+        from_x = int(self.xy.center[0] + radius * np.cos(start*np.pi))
+        # y-axis goes from 0 top, to big bot. Plus is fine because we need to move into the opposite direction anyways
+        from_y = int(self.xy.center[1] - radius * np.sin(start*np.pi))
+        to_x = self.xy.center[0]
+        to_y = self.xy.center[1]
+        cmd = f'input swipe {from_x} {from_y} {to_x} {to_y} {250}'
+        for _ in range(6):
+            await self.shell_failsafe(cmd)
+            await aio.sleep(0.150)
+        await aio.sleep(0.5)
+        # move map
+        if n > 0:
+            logger.info(f'move map by {deg}π: {n}x')
+            radius = 0.33 * self.xy.height
+            from_x = self.xy.center[0]
+            from_y = self.xy.center[1]
+            # here we need to as the opposite direction of the circle to n the map
+            to_x = int(self.xy.center[0] - radius * np.cos(deg*np.pi))
+            to_y = int(self.xy.center[1] + radius * np.sin(deg*np.pi)) # y-axis goes from 0 top, to big bot
+            cmd = f'input swipe {from_x} {from_y} {to_x} {to_y} {500}'
+            for _ in range(n):
+                await self.shell_failsafe(cmd)
+                await aio.sleep(0.25)
+            await aio.sleep(1.0)
+        # select target locations in given order
+        for target in targets:
+            # -> find target location on screen
+            target_path = os.path.join("..", "res", "teleport",  target + ".png")
+            target_im = cv.imread(target_path, cv.IMREAD_COLOR)
+            screen = await self.get_screen()
+            result = cv.matchTemplate(screen, target, cv.TM_CCOEFF_NORMED)
+            min_val, max_val, min_loc, max_loc = cv.minMaxLoc(result)
+            # screen_bw[int(self.xy.height*0.03):int(self.xy.height*0.08), int(self.xy.width*0.92):int(self.xy.width*0.945)]
+            # btn_zoom_minus = (max_loc[0]+int(self.xy.width*cut_offset_x), max_loc[1]+int(self.xy.height*0.8))
+            # screen_botmid = screen[int(self.xy.height*0.8):int(self.xy.height), int(self.xy.width*cut_offset_x):int(self.xy.width*0.7)]
+            # cut_offset_x = 0.2
+            # raise SystemExit()
+        # sub-area selection
+        # TODO: not implemented yet
+        # if x2 != None and y2 != None:
+        #     if debug:
+        #         await self.get_screen(debug=True)
+        #     logger.info(f'tap area: {int(self.xy.width*x)},{int(self.xy.height*y)}')
+        #     await self.shell_failsafe(f'input tap {int(self.xy.width*x)} {int(self.xy.height*y)}')
+        #     await aio.sleep(2.5)
+        # if debug:
+        #     await self.get_screen(debug=True)
+        #     if confirm == False:
+        #         raise SystemExit('debug exit')
+        # tap teleporter
+        # if x2 == None and y2 == None:
+        #     x2 = x
+        #     y2 = y
+        # logger.info(f'tap teleporter: {int(self.xy.width*x2)},{int(self.xy.height*y2)}')
+        # await self.shell_failsafe(f'input tap {int(self.xy.width*x2)} {int(self.xy.height*y2)}')
+        # await aio.sleep(1.25)
+        
+        
+        # confirm teleporter if other landmark is close
+        if confirm == True:
+            logger.info(f'confirm teleporter selection')
+            if debug:
+                await self.get_screen(debug=True)
+                raise SystemExit('debug exit')
+            await self.shell_failsafe(f'input tap {int(self.xy.width*confirm_x)} {int(self.xy.height*confirm_y)}')
+            await aio.sleep(1.5)
+        # teleport
+        await self.shell_failsafe(f'input tap {int(self.xy.width*0.83)} {int(self.xy.height*0.9)}')
+        check = await self.wait_for_ready(reason='teleport')
+        return(check)
 
 
     async def teleport(self, x, y, start=0.75, deg=1.75, n=0, x2=None, y2=None, special_exit=True, open_map=True,
@@ -265,7 +353,7 @@ class Bot:
         cmd = f'input swipe {from_x} {from_y} {to_x} {to_y} {250}'
         for _ in range(6):
             await self.shell_failsafe(cmd)
-            await aio.sleep(0.25)
+            await aio.sleep(0.150)
         await aio.sleep(0.5)
         # move map
         if n > 0:
@@ -816,7 +904,9 @@ class Bot:
                 logger.info('exit window found: send back button')
                 await self.action_back()
             elif max_val_food > 0.95: # food menu found, eat TP food
-                logger.info('food menu found: eat TP food')
+                logger.error('food menu found: something was missed')
+                raise SystemExit('TP Error')
+                # logger.info('food menu found: eat TP food')
                 await self.action_back()
                 await self.restore_tp(item='trick_snack')
             elif check_return > 2: # back to map, continue

@@ -90,7 +90,7 @@ class The_Reverie_Dreamscape:
         await self.bot.attack_technique(12) # -2TP, roamer
     async def path_4(self):
         logger_set_path(self.map, 4)
-        await self.bot.use_teleporter(1241/2400, 520/1080, move_x=0, move_y=5, corner='topright', confirm=True) # Platinum Guest Room
+        await self.bot.teleport(x=1240/2400, y=645/1080, start=0.25, deg=1.5, n=1, confirm=True) # Platinum Guest Room
         await self.bot.move(0.5, 2700)
         await self.bot.move(0.9, 1400)
         await self.bot.attack() # items
@@ -229,7 +229,7 @@ class The_Reverie_Dreamscape:
         await self.bot.attack_technique(6) # items
     async def path_12(self):
         logger_set_path(self.map, 12)
-        await self.bot.use_teleporter(1241/2400, 520/1080, move_x=0, move_y=5, corner='topright', confirm=True) # Platinum Guest Room
+        await self.bot.teleport(x=1240/2400, y=645/1080, start=0.25, deg=1.5, n=1, confirm=True) # Platinum Guest Room
         await self.bot.move(0.5, 500)
         await self.bot.attack_technique(4) # move
         await self.bot.move(1.0, 500)
@@ -286,7 +286,7 @@ class The_Reverie_Dreamscape:
         await self.bot.attack_technique(4) # items
     async def path_13(self):
         logger_set_path(self.map, 13)
-        await self.bot.use_teleporter(1241/2400, 520/1080, move_x=0, move_y=5, corner='topright', confirm=True) # Platinum Guest Room
+        await self.bot.teleport(x=1240/2400, y=645/1080, start=0.25, deg=1.5, n=1, confirm=True) # Platinum Guest Room
         await self.bot.move(0.5, 500)
         await self.bot.attack_technique(4) # move
         await self.bot.move(1.0, 500)
@@ -469,8 +469,8 @@ class The_Reverie_Dreamscape:
         await self.bot.attack_technique(3) # -1TP
     async def path_16(self):
         logger_set_path(self.map, 16)
-        await self.bot.switch_map(y_list=1011/1080, world='penacony', scroll_down=False, # Platinum Guest Room
-                                    x=1241/2400, y=520/1080, corner='topright', move_x=0, move_y=5, confirm=True)
+        await self.bot.switch_map_new(world='penacony', y_list=1011/1080, scroll_down=False, # Platinum Guest Room
+                                      x=1242/2400, y=655/1080, start=0.25, deg=1.5, n=1, confirm=True)
         await self.bot.move(0.5, 2600)
         await self.bot.move(1.0, 12900)
         await self.bot.move(0.5, 3000)

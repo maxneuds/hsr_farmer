@@ -25,7 +25,7 @@ class Great_Mine:
         logger.info("--- Map: Great Mine")
         logger.info('---')
         await self.bot.switch_map(y_list=687/1080, world='jarilo_vi', scroll_down=True, # Vagrant Shelter
-                                    x=1220/2400, y=328/1080, corner='topright', move_x=0, move_y=3)
+                                    x=1227/2400, y=665/1080, corner='topright', move_x=0, move_y=3)
         await self.bot.move(0.9, 2000)
         await self.bot.move(1.2, 900)
         await self.bot.attack() # items

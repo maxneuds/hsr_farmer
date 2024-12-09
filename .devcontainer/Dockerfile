@@ -1,18 +1,18 @@
 FROM python:3.11.10-bookworm
 
-ENV GID 1000
-ENV UID 1000
-ENV DOCKER_GID 965
-ENV USERNAME worker
-ENV HOME /home/${USERNAME}
+ENV USER_GID=1000
+ENV USER_UID=1000
+ENV DOCKER_GID=965
+ENV USERNAME=worker
+ENV HOME=/home/${USERNAME}
 
 # Setup container user, groups and home
-RUN groupadd -g $GID ${USERNAME} && \
-    useradd -m -u $UID -g $GID ${USERNAME} && \
+RUN groupadd -g ${USER_GID} ${USERNAME} && \
+    useradd -m -u ${USER_UID} -g ${USER_GID} ${USERNAME} && \
     mkdir /workspace && \
     chown ${USERNAME}:${USERNAME} /workspace
 
-# Install advances python dependencies
+# Install advanced python dependencies
 RUN apt-get update && apt-get install -y \
     build-essential libssl-dev libffi-dev python3-dev \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -29,15 +29,14 @@ RUN apt-get update && apt-get install -y \
 
 # <- DEVCONTAINER ->
 # Enable sudo permissions for container user
-RUN apt-get update && apt-get install -y sudo
-RUN echo "${USERNAME} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+RUN apt-get update && apt-get install -y sudo&& \
+    echo "${USERNAME} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 # Make sure locals are set
 RUN apt-get update && apt-get install -y locales locales-all \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 ENV LC_ALL en_US.UTF-8
 ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US.UTF-8
-# Install zsh and other necessary packages
+# Install zsh and other useful packages
 RUN apt-get update && apt-get install -y \
     git wget curl unzip rsync zsh htop vim neofetch \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -57,9 +56,8 @@ RUN apt-get update && apt-get install -y docker-ce docker-ce-cli containerd.io \
 # Set up the environment for the container user
 RUN chsh -s /bin/zsh ${USERNAME} && \
     usermod -aG docker ${USERNAME} && \
-    mkdir /workspace/dev && \
-    chown ${USERNAME}:${USERNAME} /workspace/dev
-# Switch to container user and set home directoryw
+    mkdir /workspace/dev && chown ${USERNAME}:${USERNAME} /workspace/dev
+# Switch to container user and set home directory
 USER ${USERNAME}
 # Install oh-my-zsh
 RUN sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" "" --unattended
@@ -79,11 +77,11 @@ USER root
 
 # Install poetry
 RUN pip install poetry
-ENV PATH "${HOME}/.local/bin:$PATH"
-ENV POETRY_VIRTUALENVS_IN_PROJECT true
-ENV POETRY_VIRTUALENVS_OPTIONS_ALWAYS_COPY true
+ENV PATH="${HOME}/.local/bin:$PATH"
+ENV POETRY_VIRTUALENVS_IN_PROJECT=true
+ENV POETRY_VIRTUALENVS_OPTIONS_ALWAYS_COPY=true
 
 # Entrypoint
 USER ${USERNAME}
 WORKDIR /workspace/dev
-CMD ["zsh"]
+CMD ["/bin/zsh"]

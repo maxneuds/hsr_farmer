@@ -28,6 +28,7 @@
         "DISPLAY": "${localEnv:DISPLAY}",
         "QT_QPA_PLATFORM": "xcb" 
     },
+    "initializeCommand": "xhost +si:localuser:$(whoami) && adb devices", // needed for qt windows
     "mounts": [
         "type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock",
         "type=bind,source=/home/${localEnv:USER}/.ssh,target=/home/worker/.ssh,readonly",

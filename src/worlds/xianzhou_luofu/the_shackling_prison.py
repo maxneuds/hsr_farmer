@@ -49,8 +49,8 @@ class The_Shackling_Prison:
         logger.info('---')
         logger.info('--- Map: The Shackling Prison')
         logger.info('---')
-        await self.bot.switch_map(y_list=808/1080, world='the_xianzhou_luofu', scroll_down=True, # Plankway Front
-                                    x=575/2400, y=615/1080, corner='topright', move_x=5, move_y=4)
+        await self.bot.switch_map_new(world='the_xianzhou_luofu', y_list=808/1080, scroll_down=True, # Plankway Front
+                                      x=313/2400, y=565/1080, start=0.25, deg=1.2, n=2, confirm=False)
         await self.bot.move(1.5, 500)
         await self.bot.attack_technique(16) # items
     async def path_1(self):

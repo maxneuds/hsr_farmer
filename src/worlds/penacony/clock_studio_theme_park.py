@@ -118,8 +118,8 @@ class Clock_Studios_Theme_Park:
         await self.bot.attack_technique(3) # -2TP
     async def path_5(self):
         logger_set_path(self.map, 5)
-        await self.bot.switch_map(y_list=327/1080, world='penacony', scroll_down=True, # Hamster Ball Park
-                                    x=490/2400, y=633/1080, corner='topright', move_x=1, move_y=1)
+        await self.bot.switch_map_new(world='penacony', y_list=327/1080, scroll_down=True, # Hamster Ball Park
+                                      x=301/2400, y=745/1080, start=0.25, deg=0.0, n=0, confirm=False)
         await self.bot.move(1.58, 7000)
         await self.bot.attack_technique(2) # -1TP
         await self.bot.move(0.0, 1500)
@@ -148,7 +148,7 @@ class Clock_Studios_Theme_Park:
         await self.bot.attack_technique(3) # -1TP
     async def path_7(self):
         logger_set_path(self.map, 7)
-        await self.bot.use_teleporter(490/2400, 633/1080, move_x=1, move_y=1, corner='topright', confirm=True) # Hamster Ball Park
+        await self.bot.teleport(x=301/2400, y=745/1080, start=0.25, deg=0.0, n=0, confirm=True) # Hamster Ball Park
         await self.bot.move(0.2, 3000)
         await self.bot.move(1.98, 4500)
         await self.bot.attack() # +2TP
@@ -161,7 +161,7 @@ class Clock_Studios_Theme_Park:
         await self.bot.attack() # +2TP
     async def path_8(self):
         logger_set_path(self.map, 8)
-        await self.bot.use_teleporter(490/2400, 633/1080, move_x=1, move_y=1, corner='topright', confirm=True) # Hamster Ball Park
+        await self.bot.teleport(x=301/2400, y=745/1080, start=0.25, deg=0.0, n=0, confirm=True) # Hamster Ball Park
         await self.bot.move(0.2, 3000)
         await self.bot.move(0.0, 4700)
         await self.bot.move(0.4, 800)
@@ -176,7 +176,7 @@ class Clock_Studios_Theme_Park:
         await self.bot.attack_technique(1) # +2TP
     async def path_10(self):
         logger_set_path(self.map, 10)
-        await self.bot.use_teleporter(490/2400, 633/1080, move_x=1, move_y=1, corner='topright', confirm=True) # Hamster Ball Park
+        await self.bot.teleport(x=301/2400, y=745/1080, start=0.25, deg=0.0, n=0, confirm=True) # Hamster Ball Park
         await self.bot.move(0.4, 1000)
         await self.bot.move(0.5, 2000)
         await self.bot.move(0.6, 2000)

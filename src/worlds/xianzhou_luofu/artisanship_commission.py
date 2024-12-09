@@ -28,8 +28,8 @@ class Artisanship_Commission:
         logger.info('---')
         logger.info('--- Map: Artisanship Commission')
         logger.info('---')
-        await self.bot.switch_map(y_list=326/1080, world='the_xianzhou_luofu', scroll_down=True, # Passage of the Finery Foundry
-                                    x=933/2400, y=530/1080, corner='topright', move_x=0, move_y=4)
+        await self.bot.switch_map_new(world='the_xianzhou_luofu', y_list=326/1080, scroll_down=True, # Passage of the Finery Foundry
+                                      x=939/2400, y=533/1080, start=0.25, deg=1.5, n=1, confirm=False)
         await self.bot.move(0.5, 5200)
         await self.bot.move(0.0, 6200)
         await self.bot.move(0.25, 700)
@@ -43,7 +43,7 @@ class Artisanship_Commission:
         await self.bot.attack_technique(4) # +2TP
     async def path_1(self):
         logger_set_path(self.map, 1)
-        await self.bot.use_teleporter(933/2400, 530/1080, corner='topright', move_x=0, move_y=4) # Passage of the Finery Foundry
+        await self.bot.teleport(x=939/2400, y=533/1080, start=0.25, deg=1.5, n=1) # Passage of the Finery Foundry
         await self.bot.move(0.5, 4100)
         await self.bot.move(0.25, 2500)
         await self.bot.attack() # items
@@ -55,7 +55,7 @@ class Artisanship_Commission:
         await self.bot.wait_for_ready(min_duration=10, max_duration=120, reason='elite battle') # wait for elite battle end
     async def path_2(self):
         logger_set_path(self.map, 2)
-        await self.bot.use_teleporter(933/2400, 530/1080, corner='topright', move_x=0, move_y=4) # Passage of the Finery Foundry
+        await self.bot.teleport(x=939/2400, y=533/1080, start=0.25, deg=1.5, n=1) # Passage of the Finery Foundry
         await self.bot.move(0.5, 10900)
         await self.bot.move(0.0, 3900)
         await self.bot.move(0.55, 2300)

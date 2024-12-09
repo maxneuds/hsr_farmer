@@ -68,7 +68,7 @@ class Dreams_Edge:
         await self.bot.attack_technique(6) # -1TP
     async def path_3(self):
         logger_set_path(self.map, 3)
-        await self.bot.use_teleporter(543/2400, 503/1080, move_x=3, move_y=1, corner='topright', confirm=True) # The Family's Construction Authority
+        await self.bot.teleport(x=1009/2400, y=614/1080, start=0.75, deg=0.0, n=0, confirm=True) # The Family's Construction Authority
         await self.bot.move(0.25, 3000)
         await self.bot.move(0.5, 8500)
         await self.bot.attack() # +2TP
@@ -116,12 +116,12 @@ class Dreams_Edge:
         await self.bot.attack_technique(8) # -1TP
     async def path_5(self):
         logger_set_path(self.map, 5)
-        await self.bot.use_teleporter(933/2400, 535/1080, move_x=0, move_y=5, corner='topright') # Dreamweaver Plaza
+        await self.bot.teleport(x=932/2400, y=660/1080, start=0.25, deg=1.5, n=1) # Dreamweaver Plaza
         await self.bot.move(1.97, 2000)
         await self.bot.attack_technique(8) # -1TP
     async def path_6(self):
         logger_set_path(self.map, 6)
-        await self.bot.use_teleporter(933/2400, 535/1080, move_x=0, move_y=5, corner='topright') # Dreamweaver Plaza
+        await self.bot.teleport(x=932/2400, y=660/1080, start=0.25, deg=1.5, n=1) # Dreamweaver Plaza
         await self.bot.move(0.25, 1500)
         await self.bot.move(0.5, 500)
         await self.bot.attack_technique(7) # move
@@ -138,8 +138,8 @@ class Dreams_Edge:
         await self.bot.attack_technique(5) # -1TP
     async def path_7(self):
         logger_set_path(self.map, 7)
-        await self.bot.switch_map(y_list=771/1080, world='penacony', scroll_down=False, # Dreamweaver Plaza
-                                    x=933/2400, y=535/1080, corner='topright', move_x=0, move_y=5)
+        await self.bot.switch_map_new(world='penacony', y_list=771/1080, scroll_down=False, # Dreamweaver Plaza
+                                      x=932/2400, y=660/1080, start=0.25, deg=1.5, n=1, confirm=False)
         await self.bot.move(0.25, 1500)
         await self.bot.move(0.5, 500)
         await self.bot.attack_technique(7) # move

@@ -57,7 +57,7 @@ class Backwater_Pass:
         await self.bot.attack_technique(2) # items
     async def path_2(self):
         logger_set_path(self.map, 2)
-        await self.bot.use_teleporter(x=945/2400, y=715/1080, corner='topright', move_x=0, move_y=1, confirm=True) # Leisure Plaza
+        await self.bot.use_teleporter(x=945/2400, y=832/1080, corner='topright', move_x=0, move_y=1, confirm=True) # Leisure Plaza
         await self.bot.move(1.15, 600)
         await self.bot.attack() # +2TP
         await self.bot.move(0.5, 1000)
@@ -76,7 +76,7 @@ class Backwater_Pass:
         await self.bot.attack_technique(2) # -1TP
     async def path_3(self):
         logger_set_path(self.map, 3)
-        await self.bot.use_teleporter(x=830/2400, y=360/1080, corner='topright', move_x=0, move_y=1) # Bud of Aether
+        await self.bot.teleport(x=1069/2400, y=473/1080, start=0.75, deg=0.0, n=0) # Bud of Aether
         await self.bot.move(0.68, 900)
         await self.bot.attack() # items
         await self.bot.move(1.5, 2700)
@@ -96,7 +96,7 @@ class Backwater_Pass:
             await self.bot.attack_technique(3)
     async def path_4(self):
         logger_set_path(self.map, 4)
-        await self.bot.use_teleporter(x=829/2400, y=273/1080, corner='botright', move_x=0, move_y=0) # Transport Hub
+        await self.bot.teleport(x=1067/2400, y=273/1080, start=1.25, deg=0.0, n=0) # Transport Hub
         await self.bot.move(0.8, 700)
         await self.bot.attack() # +2TP
 

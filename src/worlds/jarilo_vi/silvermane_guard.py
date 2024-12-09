@@ -45,8 +45,8 @@ class Silvermane_Guard:
             await self.bot.move(0.4, 300)
             await self.bot.attack_technique(2) # +2TP
         elif tp == 4.2:
-            await self.bot.switch_map(y_list=750/1080, world='jarilo_vi', scroll_down=False, # Outpost
-                                        x=1176/2400, y=738/1080, corner='topright', move_x=0, move_y=2, confirm=True)
+            await self.bot.switch_map_new(world='jarilo_vi', y_list=750/1080, scroll_down=False, # Outpost
+                                      x=1176/2400, y=535/1080, start=0.25, deg=1.5, n=1, confirm=True)
             await self.bot.move(0.5, 3000)
             await self.bot.move(0.9, 2000)
             await self.bot.attack() # +2TP

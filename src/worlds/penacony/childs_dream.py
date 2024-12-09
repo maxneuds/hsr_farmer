@@ -9,7 +9,7 @@ class Childs_Dream:
     TP:-3
     '''
     def __init__(self, device):
-        self.map = 'Childs Dream'
+        self.map = "Child's Dream"
         self.bot = Bot(device)
         self.extra = Extra(device)
     async def farm(self):

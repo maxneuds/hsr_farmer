@@ -28,8 +28,8 @@ class Alchemy_Commission:
         logger.info('---')
         logger.info('--- Map: Alchemy Comission')
         logger.info('---')
-        await self.bot.switch_map(y_list=568/1080, world='the_xianzhou_luofu', scroll_down=True, # Healer's Market
-                                    x=854/2400, y=689/1080, corner='topright', move_x=0, move_y=6, confirm=True)
+        await self.bot.switch_map_new(world='the_xianzhou_luofu', y_list=568/1080, scroll_down=True, # Healer's Market
+                                      x=854/2400, y=501/1080, start=0.25, deg=1.5, n=2, confirm=True)
         await self.bot.move(0.5, 1500)
         await self.bot.move(0.75, 6700)
         await self.bot.move(0.98, 6000)
@@ -41,7 +41,7 @@ class Alchemy_Commission:
         await self.bot.attack_technique(8) # -1TP
     async def path_1(self):
         logger_set_path(self.map, 1)
-        await self.bot.use_teleporter(854/2400, 689/1080, corner='topright', move_x=0, move_y=6, confirm=True) # Healer's Market
+        await self.bot.teleport(x=854/2400, y=501/1080, start=0.25, deg=1.5, n=2, confirm=True) # Healer's Market
         await self.bot.move(1.4, 4600)
         await self.bot.move(1.9, 2100)
         await self.bot.attack() # +2TP

@@ -109,7 +109,7 @@ class Cloudford:
         await self.bot.attack_technique(2)
     async def path_6(self):
         logger_set_path(self.map, 6)
-        await self.bot.use_teleporter(1129/2400, 642/1080, move_x=0, move_y=1, corner='topright') # Cargo Lane
+        await self.bot.teleport(x=1130/2400, y=751/1080, start=0.25, deg=0.0, n=0) # Cargo Lane
         await self.bot.move(0.54, 5300)
         await self.bot.attack() # items
         await self.bot.move(0.3, 3500)

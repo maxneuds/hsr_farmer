@@ -18,6 +18,7 @@ class Paperfold_University:
         if tp == 4:
             await self.bot.switch_map_new(world='penacony', y_list=928/1080, scroll_down=True, # Chromasweven Avenue
                                       x=785/2400, y=785/1080, start=1.75, deg=0.0, n=0, confirm=False)
+            raise SystemExit('check')
             await self.bot.move(0.7, 500)
             await self.bot.attack_technique(3) # items
             await self.bot.move(0.2, 1600)
@@ -31,15 +32,13 @@ class Paperfold_University:
             await self.bot.move(0.4, 500)
             await self.bot.attack_technique(5) # items
             await self.bot.teleport(x=795/2400, y=554/1080, start=0.25, deg=0.0, n=0) # Central Stage
-            raise SystemExit() # make sure to hit the last item
             await self.bot.move(1.9, 300)
             await self.bot.attack_technique(6) # move
             await self.bot.move(1.4, 300)
             await self.bot.attack_technique(3) # items
-            await self.bot.move(1.0, 1500)
+            await self.bot.move(0.9, 1500)
             await self.bot.move(1.5, 300)
             await self.bot.attack_technique(2) # items
-            raise SystemExit() # make sure to hit the last item
             await self.bot.move(0.7, 300)
             await self.bot.attack_technique(7) # items
             await self.bot.move(0.5, 1500)
