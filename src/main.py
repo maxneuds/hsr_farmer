@@ -3,7 +3,6 @@ from sys import exit
 from datetime import datetime as dt
 from logger import logger, log_runtime
 import worlds
-# from nicegui import ui
 
 # DEVICE = 'usb'
 DEVICE = '10.1.11.3:5555'

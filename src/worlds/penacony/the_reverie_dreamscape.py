@@ -320,8 +320,8 @@ class The_Reverie_Dreamscape:
         await self.bot.move(1.5, 2000)
         await self.bot.move(0.0, 1800)
         await self.bot.attack_technique(5) # -1TP
-        await self.bot.move(0.25, 1000)
-        await self.bot.posfix(0.25, 1000)
+        await self.bot.move(0.25, 1500)
+        await self.bot.posfix(0.25, 500)
         await self.bot.move(1.4, 1900)
         await self.bot.action_button()
         await self.bot.move(1.5, 1200)
@@ -339,8 +339,9 @@ class The_Reverie_Dreamscape:
         for _ in range(4): # -1TP, roamer
             await self.bot.move(0.0, 300)
             await self.bot.attack_technique(2)
-        await self.bot.move(1.75, 3000)
-        await self.bot.posfix(1.75, 1000)
+        await self.bot.move(1.0, 700)
+        await self.bot.move(1.8, 3500)
+        await self.bot.posfix(1.75, 500)
         await self.bot.move(0.7, 1000)
         await self.bot.move(1.0, 500)
         await self.bot.attack_technique(12) # move

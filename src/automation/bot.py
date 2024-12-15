@@ -59,6 +59,8 @@ class Bot:
             im_array = np.frombuffer(bytes(im_byte_array), np.uint8)
             # convert to cv image
             screenshot = cv.imdecode(im_array, cv.IMREAD_COLOR)
+            # test if image is valid
+            check = screenshot[0:int(self.xy.height), 0:int(self.xy.width)]
             return(screenshot)
         except RuntimeError as e:
             if n_try < 9:
@@ -905,7 +907,7 @@ class Bot:
                 await self.action_back()
             elif max_val_food > 0.95: # food menu found, eat TP food
                 logger.error('food menu found: something was missed')
-                raise SystemExit('TP Error')
+                # raise SystemExit('TP Error')
                 # logger.info('food menu found: eat TP food')
                 await self.action_back()
                 await self.restore_tp(item='trick_snack')

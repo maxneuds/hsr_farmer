@@ -18,7 +18,6 @@ class Paperfold_University:
         if tp == 4:
             await self.bot.switch_map_new(world='penacony', y_list=928/1080, scroll_down=True, # Chromasweven Avenue
                                       x=785/2400, y=785/1080, start=1.75, deg=0.0, n=0, confirm=False)
-            raise SystemExit('check')
             await self.bot.move(0.7, 500)
             await self.bot.attack_technique(3) # items
             await self.bot.move(0.2, 1600)

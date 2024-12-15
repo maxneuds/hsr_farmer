@@ -370,6 +370,8 @@ class Penacony_Grand_Theater:
         await self.bot.attack_technique(6) # items
         await self.bot.move(0.0, 300)
         await self.bot.attack_technique(8) # -1TP
+        await self.bot.move(0.5, 300)
+        await self.bot.attack_technique(1) # kill check
         await self.bot.move(0.75, 2500)
         await self.bot.posfix(0.75, 500)
         await self.bot.move(1.6, 2900)

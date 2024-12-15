@@ -16,22 +16,23 @@ class Dewlight_Pavilion:
         self.paperfold_university = Paperfold_University(device)
     async def farm(self):
         t_start = dt.now()
-        await self.teleport()
-        await self.path_1()
-        await self.path_2()
-        await self.extra.restore_tp(tp=4, info='Dewlight Pavilion 1')
+        # await self.teleport()
+        # await self.path_1()
+        # await self.extra.restore_tp(tp=4, info='Dewlight Pavilion 1')
+        # await self.path_2()
         await self.path_3()
+        await self.extra.restore_tp(tp=4, info='Dewlight Pavilion 2')
         await self.path_4()
         await self.path_5()
-        await self.extra.restore_tp(tp=4, info='Dewlight Pavilion 2')
+        await self.extra.restore_tp(tp=4, info='Dewlight Pavilion 3')
         await self.path_6()
         await self.path_7()
         await self.path_8()
         await self.path_9()
         await self.path_10()
-        await self.penacony.paperfold_univeristy.restore_tp(tp=4)
+        await self.paperfold_university.restore_tp(tp=4)
         await self.path_11()
-        await self.extra.metrics(self.map, t_start)
+        # await self.extra.metrics(self.map, t_start)
     async def teleport(self):
         logger_set_path(self.map, 'Teleport')
         logger.info('---')
@@ -50,7 +51,34 @@ class Dewlight_Pavilion:
         await self.bot.attack() # items
     async def path_1(self):
         logger_set_path(self.map, 1)
-        await self.bot.teleport(x=910/2400, y=707/1080, start=0.75, deg=0.0, n=0) # Dreammaster Hall
+        await self.bot.teleport(x=979/2400, y=718/1080, start=1.75, deg=0.0, n=0) # Reception Counter
+        await self.bot.move(0.5, 10350)
+        await self.bot.move(0.0, 7000)
+        await self.bot.move(1.5, 7000)
+        await self.bot.move(1.7, 2100)
+        await self.bot.move(1.3, 1900)
+        await self.bot.interact()
+        await self.bot.move(0.75, 2000)
+        await self.bot.move(0.6, 1800)
+        await self.bot.action_button()
+        await self.bot.move(1.0, 2300)
+        await self.bot.attack() # items
+        await self.bot.move(1.5, 1000)
+        await self.bot.attack_technique(2) # -1TP
+        await self.bot.move(0.8, 1200)
+        await self.bot.move(0.5, 800)
+        await self.bot.attack_technique(4) # -2TP
+        await self.bot.move(1.25, 3000)
+        await self.bot.posfix(1.25, 1000)
+        await self.bot.move(1.6, 2800)
+        await self.bot.action_button()
+        await self.bot.move(1.5, 1700)
+        await self.bot.move(1.7, 500)
+        await self.bot.attack_technique(3) # -1TP
+    async def path_2(self):
+        logger_set_path(self.map, 2)
+        await self.bot.switch_map_new(world='penacony', y_list=255/1080, scroll_down=True, # Dreammaster Hall
+                                      x=910/2400, y=707/1080, start=0.75, deg=0.0, n=0, confirm=False)
         await self.bot.move(0.8, 2300)
         await self.bot.move(0.5, 4600)
         await self.bot.move(1.0, 1600)
@@ -63,8 +91,8 @@ class Dewlight_Pavilion:
         await self.bot.move(1.5, 3000)
         await self.bot.move(0.0, 300)
         await self.bot.attack_technique(2) # -1TP
-    async def path_2(self):
-        logger_set_path(self.map, 2)
+    async def path_3(self):
+        logger_set_path(self.map, 3)
         await self.bot.teleport(x=910/2400, y=707/1080, start=0.75, deg=0.0, n=0) # Dreammaster Hall
         await self.bot.move(1.1, 1000)
         await self.bot.attack() # +2TP
@@ -173,8 +201,8 @@ class Dewlight_Pavilion:
         await self.bot.move(0.1, 1000)
         await self.bot.move(0.0, 300)
         await self.bot.attack_technique(3) # -1TP
-    async def path_3(self):
-        logger_set_path(self.map, 3)
+    async def path_4(self):
+        logger_set_path(self.map, 4)
         await self.bot.switch_map_new(world='penacony', y_list=255/1080, scroll_down=True, # Dreammaster Hall
                                       x=910/2400, y=707/1080, start=0.75, deg=0.0, n=0, confirm=False)
         await self.bot.move(0.8, 2300)
@@ -239,8 +267,8 @@ class Dewlight_Pavilion:
         await self.bot.attack() # +2TP
         await self.bot.move(1.7, 1700)
         await self.bot.attack_technique(3) # -2TP
-    async def path_4(self):
-        logger_set_path(self.map, 4)
+    async def path_5(self):
+        logger_set_path(self.map, 5)
         await self.bot.teleport(x=979/2400, y=718/1080, start=1.75, deg=0.0, n=0) # Reception Counter
         await self.bot.move(0.5, 10350)
         await self.bot.move(0.0, 7000)
@@ -258,36 +286,9 @@ class Dewlight_Pavilion:
         await self.bot.move(0.1, 900)
         await self.bot.move(0.5, 500)
         await self.bot.attack_technique(2) # items
-    async def path_5(self):
-        logger_set_path(self.map, 5)
-        await self.bot.teleport(x=979/2400, y=718/1080, start=1.75, deg=0.0, n=0) # Reception Counter
-        await self.bot.move(0.5, 10350)
-        await self.bot.move(0.0, 7000)
-        await self.bot.move(1.5, 7000)
-        await self.bot.move(1.7, 2100)
-        await self.bot.move(1.3, 1900)
-        await self.bot.interact()
-        await self.bot.move(0.75, 2000)
-        await self.bot.move(0.6, 1800)
-        await self.bot.action_button()
-        await self.bot.move(1.0, 2300)
-        await self.bot.attack() # items
-        await self.bot.move(1.5, 1000)
-        await self.bot.attack_technique(2) # -1TP
-        await self.bot.move(0.8, 1200)
-        await self.bot.move(0.5, 800)
-        await self.bot.attack_technique(4) # -1TP
-        await self.bot.move(1.25, 3000)
-        await self.bot.posfix(1.25, 1000)
-        await self.bot.move(1.6, 2800)
-        await self.bot.action_button()
-        await self.bot.move(1.5, 1700)
-        await self.bot.move(1.7, 500)
-        await self.bot.attack_technique(3) # -1TP
     async def path_6(self):
         logger_set_path(self.map, 6)
-        await self.bot.switch_map_new(world='penacony', y_list=255/1080, scroll_down=True, # Dreammaster Hall
-                                      x=910/2400, y=707/1080, start=0.75, deg=0.0, n=0, confirm=False)
+        await self.bot.teleport(x=910/2400, y=707/1080, start=0.75, deg=0.0, n=0) # Dreammaster Hall
         await self.bot.move(0.5, 1000)
         await self.bot.interact()
         await self.bot.move(0.51, 2800)
