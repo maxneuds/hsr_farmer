@@ -17,7 +17,8 @@
                 "ms-toolsai.jupyter",
                 "ms-toolsai.datawrangler",
                 "ms-azuretools.vscode-docker",
-                "continue.continue"
+                "continue.continue",
+                "GitHub.copilot"
             ]
         },
         "settings": {

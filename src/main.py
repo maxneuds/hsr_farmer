@@ -23,7 +23,8 @@ async def main():
     # await extra.restore_tp(tp=4)
     # await jarilo_vi.dev()
     # await xianzhou_luofu.dev()
-    # await penacony.dev()
+    # await penacony.penacony_grand_theater.dev()
+    # await penacony.audition_venue.farm()
     # raise SystemExit()
 
     # daily grind
@@ -32,9 +33,7 @@ async def main():
     await jarilo_vi.farm() # TP:+0->5 R2/4:0 ✓✓
     await xianzhou_luofu.farm() # TP:+0->5 R2:1 R4:0 ✓✓
     await penacony.farm() # TP:??? R2:5 R4:3
-    await extra.restore_tp(tp=2) # restore TP
-    
-    
+
 if __name__ == '__main__':
     try:
         aio.run(main())

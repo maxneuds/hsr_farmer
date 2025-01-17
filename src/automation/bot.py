@@ -259,9 +259,9 @@ class Bot:
 
 
     # TODO: new teleport function using template matching for stable teleports
-    async def teleport2(self, targets, start=0.75, deg=1.75, n=0, debug=False,
+    async def teleport_ss(self, anchor='anchor', start=0.75, deg=1.75, n=0, debug=False,
                         confirm=False, confirm_x=0.5, confirm_y=0.648, special_exit=True, open_map=True):
-        logger.info(f'use teleporter: {int(self.xy.width*x)},{int(self.xy.height*y)}')
+        logger.info(f'use teleporter: {anchor}')
         if open_map == True:
             await self.open_map(special_exit=special_exit)
         # anchor map to start position
@@ -288,17 +288,18 @@ class Bot:
             to_y = int(self.xy.center[1] + radius * np.sin(deg*np.pi)) # y-axis goes from 0 top, to big bot
             cmd = f'input swipe {from_x} {from_y} {to_x} {to_y} {500}'
             for _ in range(n):
+                print('move')
                 await self.shell_failsafe(cmd)
                 await aio.sleep(0.25)
             await aio.sleep(1.0)
-        # select target locations in given order
-        for target in targets:
-            # -> find target location on screen
-            target_path = os.path.join("..", "res", "teleport",  target + ".png")
-            target_im = cv.imread(target_path, cv.IMREAD_COLOR)
-            screen = await self.get_screen()
-            result = cv.matchTemplate(screen, target, cv.TM_CCOEFF_NORMED)
-            min_val, max_val, min_loc, max_loc = cv.minMaxLoc(result)
+        # select anchor
+        # -> find target location on screen
+        target_path = os.path.join("res", "teleport",  anchor + ".png")
+        target_im = cv.imread(target_path, cv.IMREAD_COLOR)
+        screen = await self.get_screen()
+        result = cv.matchTemplate(screen, target_im, cv.TM_CCOEFF_NORMED)
+        min_val, max_val, min_loc, max_loc = cv.minMaxLoc(result)
+        print(max_loc, max_val)
             # screen_bw[int(self.xy.height*0.03):int(self.xy.height*0.08), int(self.xy.width*0.92):int(self.xy.width*0.945)]
             # btn_zoom_minus = (max_loc[0]+int(self.xy.width*cut_offset_x), max_loc[1]+int(self.xy.height*0.8))
             # screen_botmid = screen[int(self.xy.height*0.8):int(self.xy.height), int(self.xy.width*cut_offset_x):int(self.xy.width*0.7)]
@@ -326,21 +327,21 @@ class Bot:
         
         
         # confirm teleporter if other landmark is close
-        if confirm == True:
-            logger.info(f'confirm teleporter selection')
-            if debug:
-                await self.get_screen(debug=True)
-                raise SystemExit('debug exit')
-            await self.shell_failsafe(f'input tap {int(self.xy.width*confirm_x)} {int(self.xy.height*confirm_y)}')
-            await aio.sleep(1.5)
-        # teleport
-        await self.shell_failsafe(f'input tap {int(self.xy.width*0.83)} {int(self.xy.height*0.9)}')
-        check = await self.wait_for_ready(reason='teleport')
-        return(check)
+        # if confirm == True:
+        #     logger.info(f'confirm teleporter selection')
+        #     if debug:
+        #         await self.get_screen(debug=True)
+        #         raise SystemExit('debug exit')
+        #     await self.shell_failsafe(f'input tap {int(self.xy.width*confirm_x)} {int(self.xy.height*confirm_y)}')
+        #     await aio.sleep(1.5)
+        # # teleport
+        # await self.shell_failsafe(f'input tap {int(self.xy.width*0.83)} {int(self.xy.height*0.9)}')
+        # check = await self.wait_for_ready(reason='teleport')
+        # return(check)
 
 
-    async def teleport(self, x, y, start=0.75, deg=1.75, n=0, x2=None, y2=None, special_exit=True, open_map=True,
-                        confirm=False, confirm_x=0.5, confirm_y=0.648, n_try=0, debug=False):
+    async def teleport(self, x, y, start=0.75, deg=1.75, n=0, special_exit=True, open_map=True,
+                        sub_select={}, confirm=False, confirm_x=0.5, confirm_y=0.648, n_try=0, debug=False):
         logger.info(f'use teleporter: {int(self.xy.width*x)},{int(self.xy.height*y)}')
         if open_map == True:
             await self.open_map(special_exit=special_exit)
@@ -371,32 +372,37 @@ class Bot:
                 await self.shell_failsafe(cmd)
                 await aio.sleep(0.25)
             await aio.sleep(1.0)
-        if x2 != None and y2 != None:
-            # in case area selection is needed before
-            if debug:
-                await self.get_screen(debug=True)
-            logger.info(f'tap area: {int(self.xy.width*x)},{int(self.xy.height*y)}')
-            await self.shell_failsafe(f'input tap {int(self.xy.width*x)} {int(self.xy.height*y)}')
-            await aio.sleep(2.5)
         if debug:
             await self.get_screen(debug=True)
             if confirm == False:
                 raise SystemExit('debug exit')
         # tap teleporter
-        if x2 == None and y2 == None:
-            x2 = x
-            y2 = y
-        logger.info(f'tap teleporter: {int(self.xy.width*x2)},{int(self.xy.height*y2)}')
-        await self.shell_failsafe(f'input tap {int(self.xy.width*x2)} {int(self.xy.height*y2)}')
-        await aio.sleep(1.25)
-        # confirm teleporter if other landmark is close
-        if confirm == True:
-            logger.info(f'confirm teleporter selection')
-            if debug:
-                await self.get_screen(debug=True)
-                raise SystemExit('debug exit')
-            await self.shell_failsafe(f'input tap {int(self.xy.width*confirm_x)} {int(self.xy.height*confirm_y)}')
-            await aio.sleep(1.5)
+        info_target = 'teleporter'
+        if len(sub_select) > 0:
+            info_target = 'area'
+        logger.info(f'tap {info_target}: {int(self.xy.width*x)},{int(self.xy.height*y)}')
+        await self.shell_failsafe(f'input tap {int(self.xy.width*x)} {int(self.xy.height*y)}')
+        if len(sub_select) > 0:
+            await aio.sleep(2.5)
+            if 'autoselect' in sub_select:
+                logger.info('teleporter autoselect')
+            else:
+                # in case area selection is needed before
+                if debug:
+                    await self.get_screen(debug=True)
+                logger.info(f"tap sub selection: {int(self.xy.width*sub_select['x'])},{int(self.xy.height*sub_select['y'])}")
+                await self.shell_failsafe(f"input tap {int(self.xy.width*sub_select['x'])} {int(self.xy.height*sub_select['y'])}")
+                await aio.sleep(1.25)
+        else:
+            await aio.sleep(1.25)
+            # confirm teleporter if other landmark is close
+            if confirm == True:
+                logger.info(f'confirm teleporter selection')
+                if debug:
+                    await self.get_screen(debug=True)
+                    raise SystemExit('debug exit')
+                await self.shell_failsafe(f'input tap {int(self.xy.width*confirm_x)} {int(self.xy.height*confirm_y)}')
+                await aio.sleep(1.5)
         # teleport
         await self.shell_failsafe(f'input tap {int(self.xy.width*0.83)} {int(self.xy.height*0.9)}')
         check = await self.wait_for_ready(reason='teleport')
@@ -404,11 +410,11 @@ class Bot:
             n_try += 1
             if (n_try % 3) == 0:
                 # move a bit
-                self.move(0, 500)
-                self.move(0.5, 500)
-                self.move(1, 500)
-                self.move(1.5, 500)
-                self.attack()
+                await self.move(0, 500)
+                await self.move(0.5, 500)
+                await self.move(1, 500)
+                await self.move(1.5, 500)
+                await self.attack()
             if n_try > 100: # retry at most 100 times
                 logger.error(f"Failed to teleport {n_try} times. Please fix!")
                 sys.exit()
@@ -416,8 +422,8 @@ class Bot:
             await self.action_back(n=2)
             await self.wait_for_ready(min_duration=0, reason='teleport')
             if open_map == True:
-                await self.teleport(x, y, start=start, deg=deg, n=n, x2=x2, y2=y2, open_map=open_map, special_exit=special_exit,
-                                          confirm=confirm, confirm_x=confirm_x, confirm_y=confirm_y, n_try=n_try, debug=debug)
+                await self.teleport(x, y, start=start, deg=deg, n=n, open_map=open_map, special_exit=special_exit,
+                                          sub_select=sub_select, confirm=confirm, confirm_x=confirm_x, confirm_y=confirm_y, n_try=n_try, debug=debug)
             else:
                 logger.error(f"Failed to teleport. Return False.")
                 return(False)

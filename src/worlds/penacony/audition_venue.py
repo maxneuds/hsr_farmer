@@ -14,15 +14,15 @@ class Audition_Venue:
         self.extra = Extra(device)
     async def farm(self):
         t_start = dt.now()
-        await self.teleport()
-        await self.path_1()
-        await self.path_2()
-        await self.path_3()
-        await self.path_4()
-        await self.path_5()
+        # await self.teleport()
+        # await self.path_1()
+        # await self.path_2()
+        # await self.path_3()
+        # await self.path_4()
+        # await self.path_5()
         await self.path_6()
         await self.path_7()
-        await self.extra.metrics(self.map, t_start)
+        # await self.extra.metrics(self.map, t_start)
     async def teleport(self):
         logger_set_path(self.map, 'Teleport')
         logger.info('---')
@@ -62,7 +62,7 @@ class Audition_Venue:
         await self.bot.attack_technique(7) # items
     async def path_1(self):
         logger_set_path(self.map, 1)
-        await self.bot.teleport(x=665/2400, y=225/1080, start=0.75, deg=1.5, n=3, x2=1163/2400, y2=681/1080) # Superstar Showdown: Arena I
+        await self.bot.teleport(x=665/2400, y=225/1080, start=0.75, deg=1.5, n=3, sub_select={'autoselect': True}) # Superstar Showdown: Arena I
         await self.bot.move(0.8, 300)
         await self.bot.attack_technique(5) # items
         await self.bot.move(0.0, 300)
@@ -84,7 +84,7 @@ class Audition_Venue:
         await self.bot.attack_technique(5) # items
     async def path_2(self):
         logger_set_path(self.map, 2)
-        await self.bot.teleport(x=749/2400, y=476/1080, start=1.25, deg=0.5, n=2, x2=1120/2400, y2=745/1080) # Dreamplay Fantasia: Action Challenge
+        await self.bot.teleport(x=749/2400, y=480/1080, start=1.25, deg=0.5, n=2, sub_select={'autoselect': True}) # Dreamplay Fantasia: Action Challenge
         await self.bot.move(0.275, 3100)
         await self.bot.attack_technique(2) # -2TP
         await self.bot.move(1.75, 3000)
@@ -148,7 +148,7 @@ class Audition_Venue:
         await self.bot.attack_technique(3) # items
     async def path_3(self):
         logger_set_path(self.map, 3)
-        await self.bot.teleport(x=612/2400, y=478/1080, start=1.25, deg=0.5, n=2, x2=1162/2400, y2=741/1080) # Dreamplay Fantasia: Acting Challenge
+        await self.bot.teleport(x=610/2400, y=485/1080, start=1.25, deg=0.5, n=2, sub_select={'autoselect': True}) # Dreamplay Fantasia: Acting Challenge
         await self.bot.move(0.5, 900)
         await self.bot.move(1.0, 1600)
         await self.bot.attack() # items
@@ -188,7 +188,7 @@ class Audition_Venue:
         await self.bot.attack_technique(2) # items
     async def path_4(self):
         logger_set_path(self.map, 4)
-        await self.bot.teleport(x=805/2400, y=225/1080, start=0.75, deg=1.5, n=3, x2=1235/2400, y2=690/1080, confirm=True, confirm_x=1259/2400, confirm_y=764/1080) # Superstar Showdown: Arena II
+        await self.bot.teleport(x=805/2400, y=225/1080, start=0.75, deg=1.5, n=3, sub_select={'autoselect': True}) # Superstar Showdown: Arena II
         await self.bot.move(0.3, 300)
         await self.bot.attack_technique(3) # items
         await self.bot.move(0.95, 300)
@@ -205,7 +205,7 @@ class Audition_Venue:
         await self.bot.attack_technique(6) # items
     async def path_5(self):
         logger_set_path(self.map, 5)
-        await self.bot.teleport(x=1316/2400, y=625/1080, start=1.75, deg=0.5, n=3, x2=746/2400, y2=781/1080) # Gunfire Time: Time Trial
+        await self.bot.teleport(x=1316/2400, y=625/1080, start=1.75, deg=0.5, n=3, sub_select={'autoselect': True}) # Gunfire Time: Time Trial
         await self.bot.move(0.3, 800)
         await self.bot.move(0.0, 300)
         await self.bot.attack_technique(5) # -2TP
@@ -252,7 +252,7 @@ class Audition_Venue:
         await self.bot.attack_technique(2) # items
     async def path_6(self):
         logger_set_path(self.map, 6)
-        await self.bot.teleport(x=1316/2400, y=625/1080, start=1.75, deg=0.5, n=3, x2=1390/2400, y2=332/1080) # Gunfire Time: Time Trial (Posterior)
+        await self.bot.teleport(x=1316/2400, y=625/1080, start=1.75, deg=0.5, n=3, sub_select={'x': 1390/2400, 'y': 332/1080}) # Gunfire Time: Time Trial (Posterior)
         await self.bot.move(1.45, 3000)
         await self.bot.attack_technique(6) # items
         await self.bot.move(1.25, 500)
@@ -284,8 +284,5 @@ class Audition_Venue:
         await self.bot.attack_technique(2) # items
         await self.bot.move(0.5, 300)
         await self.bot.attack_technique(8) # items
-    async def path_x(self): # no enemies here
-        logger_set_path(self.map, 0)
-        await self.bot.teleport(x=1178/2400, y=621/1080, start=1.75, deg=0.5, n=3, x2=1169/2400, y2=756/1080, debug=True) # Gunfire Time: Gunfire Trial
 
 
