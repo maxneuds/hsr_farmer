@@ -557,7 +557,7 @@ class Bot:
         await aio.sleep(2)
     
     
-    async def switch_map_new(self, world, y_list, scroll_down=False, x=0, y=0, start=0.75, deg=1.75, n=0, x2=None, y2=None, confirm=False, confirm_x=0.5, confirm_y=0.648, debug=False):
+    async def switch_map_new(self, world, y_list, scroll_down=False, x=0, y=0, start=0.75, deg=1.75, n=0, sub_select={}, confirm=False, confirm_x=0.5, confirm_y=0.648, debug=False):
         logger.info('switch map')
         await self.switch_world(world=world)
         logger.info('scroll location list')
@@ -576,12 +576,12 @@ class Bot:
         logger.info('tap location')
         await self.action_tap(x_list, int(self.xy.height*y_list))
         await aio.sleep(2)
-        check = await self.teleport(x=x, y=y, start=start, deg=deg, n=n, x2=None, y2=None, open_map=False, special_exit=True,
+        check = await self.teleport(x=x, y=y, start=start, deg=deg, n=n, sub_select={}, open_map=False, special_exit=True,
                                     confirm=confirm, confirm_x=confirm_x, confirm_y=confirm_y, n_try=0, debug=debug)
         if check == False:
             logger.warning('map change failed: retry')
             await self.switch_map_new(world=world, y_list=y_list, scroll_down=scroll_down, x=x, y=y, start=start, deg=deg, confirm=confirm,
-                                        n=n, x2=x2, y2=y2, confirm_x=confirm_x, confirm_y=confirm_y, debug=debug)
+                                        n=n, sub_select=sub_select, confirm_x=confirm_x, confirm_y=confirm_y, debug=debug)
     
     
     async def switch_map(self, y_list, world, x, y, scroll_down=False, corner='botright', x2=None, y2=None, move_x=0, move_y=0, swipe=1, confirm=False, debug=False):
