@@ -4,8 +4,8 @@ from datetime import datetime as dt
 from logger import logger, log_runtime
 import worlds
 
-# DEVICE = 'usb'
-DEVICE = '10.1.11.3:5555'
+DEVICE = 'usb'
+# DEVICE = '10.1.11.3:5555'
 MODE = 'xp' # options: credits, xp
 
 
@@ -20,18 +20,19 @@ async def main():
     
     # dev
     # await extra.restore_tp(tp=2)
-    # await extra.restore_tp(tp=4)
+    await extra.restore_tp(tp=4)
     # await jarilo_vi.dev()
     # await xianzhou_luofu.dev()
     # await penacony.penacony_grand_theater.dev()
-    # await penacony.audition_venue.farm()
-    # raise SystemExit()
+    # await penacony.penacony_grand_theater.path_16()
+    await penacony.audition_venue.farm()
+    raise SystemExit()
 
     # daily grind
     await extra.craft_items(['trick_snack', 'punitive_energy'])
-    await herta_space_station.farm() # TP:+5->5 ✓✓
-    await jarilo_vi.farm() # TP:+0->5 R2/4:0 ✓✓
-    await xianzhou_luofu.farm() # TP:+0->5 R2:1 R4:0 ✓✓
+    await herta_space_station.farm() # TP:+5->5
+    await jarilo_vi.farm() # TP:+0->5 R2/4:0
+    await xianzhou_luofu.farm() # TP:+0->5 R2:1 R4:0
     await penacony.farm() # TP:??? R2:5 R4:3
 
 if __name__ == '__main__':

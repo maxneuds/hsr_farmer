@@ -57,7 +57,7 @@ class Backwater_Pass:
         await self.bot.attack_technique(2) # items
     async def path_2(self):
         logger_set_path(self.map, 2)
-        await self.bot.use_teleporter(x=945/2400, y=832/1080, corner='topright', move_x=0, move_y=1, confirm=True) # Leisure Plaza
+        await self.bot.teleport(x=945/2400, y=370/1080, start=0.25, deg=1.5, n=1, confirm=True) # Leisure Plaza
         await self.bot.move(1.15, 600)
         await self.bot.attack() # +2TP
         await self.bot.move(0.5, 1000)

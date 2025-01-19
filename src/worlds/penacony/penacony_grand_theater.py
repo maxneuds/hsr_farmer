@@ -30,14 +30,14 @@ class Penacony_Grand_Theater:
         await self.path_16()
         await self.extra.metrics(self.map, t_start)
     async def dev(self):
-        # await self.teleport()
-        # await self.path_1()
-        # await self.path_2()
-        # await self.path_3()
-        # await self.path_4()
-        # await self.path_5()
-        # await self.path_6()
-        # await self.path_7()
+        await self.teleport()
+        await self.path_1()
+        await self.path_2()
+        await self.path_3()
+        await self.path_4()
+        await self.path_5()
+        await self.path_6()
+        await self.path_7()
         await self.path_8()
         await self.path_9()
         await self.path_10()
@@ -352,7 +352,8 @@ class Penacony_Grand_Theater:
         # TODO: more enemies, very hard to reach
     async def path_16(self):
         logger_set_path(self.map, 16)
-        await self.bot.teleport(x=613/2400, y=398/1080, start=1.75, deg=0.5, n=4) # Hall of Chords
+        # await self.bot.teleport(x=613/2400, y=398/1080, start=1.75, deg=0.5, n=4) # Hall of Chords
+        raise SystemExit('checkpoint') # Check TP! TP Problem here
         await self.bot.move(0.9, 500)
         await self.bot.attack_technique(20) # move
         await self.bot.move(0.6, 500)
@@ -387,6 +388,7 @@ class Penacony_Grand_Theater:
         await self.bot.posfix(0.75, 500)
         await self.bot.move(1.5, 500)
         await self.bot.attack_technique(8) # +2TP
+        # da geht noch mehr
         # # await self.bot.move(1.25, 1500)
         # await self.bot.posfix(1.25, 500)
         # await self.bot.move(0.5, 1500)
