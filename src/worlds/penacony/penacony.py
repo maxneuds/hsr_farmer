@@ -15,10 +15,9 @@ from worlds.penacony.paperfold_university import Paperfold_University
 
 class Penacony:
     '''
-    Status: 8/9
+    Status: 9/9
     '''
-    def __init__(self, device, mode='credits'):
-        self.mode = mode
+    def __init__(self, device):
         self.extra = Extra(device)
         self.base_zone = Base_Zone(device)
         self.storage_zone = Storage_Zone(device)
@@ -50,9 +49,9 @@ class Penacony:
         await self.golden_hour.restore_tp(tp=4.1)               # TP:+4->5 Time:???
         await self.dewlight_pavilion.farm()                     # TP:-14->1 XP:11448/11448 Time: R2/4:1/1
         await self.golden_hour.restore_tp(tp=4.2)               # TP:+4->5 Time:80
-        await self.penacony_grand_theater.farm()                # TP:-2->3
-        await self.audition_venue.farm()                        # TP:+0->3 R2:2
-        await self.extra.restore_tp(tp=2, info='End of Penacony')
+        await self.penacony_grand_theater.farm()                # TP:-4->1
+        await self.paperfold_university.restore_tp(tp=4)        # TP:+4->5 Time:???
+        await self.audition_venue.farm()                        # TP:+0->5 R2:2
     async def dev(self):
         await self.dreams_edge.farm()                           # TP:-4->1 XP:7668/9612 Time:431    
         await self.base_zone.restore_tp(tp=4.1)                 # TP:+4->5 Time:???
@@ -64,8 +63,9 @@ class Penacony:
         await self.golden_hour.restore_tp(tp=4.1)               # TP:+4->5 Time:???
         await self.dewlight_pavilion.farm()                     # TP:-14->1 XP:11448/11448 Time: R2/4:1/1
         await self.golden_hour.restore_tp(tp=4.2)               # TP:+4->5 Time:80
-        await self.penacony_grand_theater.farm()                # TP:-2->3
-        await self.audition_venue.farm()                        # TP:+0->3
+        await self.penacony_grand_theater.farm()                # TP:-4->1
+        await self.paperfold_university.restore_tp(tp=4)        # TP:+4->5 Time:???
+        await self.audition_venue.farm()                        # TP:+0->5
         raise SystemExit('dev')
 
 

@@ -4,8 +4,8 @@ from datetime import datetime as dt
 from logger import logger, log_runtime
 import worlds
 
-DEVICE = 'usb'
-# DEVICE = '10.1.11.3:5555'
+# DEVICE = 'usb'
+DEVICE = '10.1.11.3:5555'
 MODE = 'xp' # options: credits, xp
 
 
@@ -16,17 +16,19 @@ async def main():
     herta_space_station = worlds.Herta_Space_Station(DEVICE)
     jarilo_vi = worlds.Jarilo_VI(DEVICE)
     xianzhou_luofu = worlds.Xianzhou_Luofu(DEVICE)
-    penacony = worlds.Penacony(DEVICE, mode=MODE)
+    penacony = worlds.Penacony(DEVICE)
+    amphoreus = worlds.Amphoreus(DEVICE)
     
     # dev
     # await extra.restore_tp(tp=2)
-    await extra.restore_tp(tp=4)
+    # await extra.restore_tp(tp=4)
     # await jarilo_vi.dev()
     # await xianzhou_luofu.dev()
     # await penacony.penacony_grand_theater.dev()
     # await penacony.penacony_grand_theater.path_16()
-    await penacony.audition_venue.farm()
-    raise SystemExit()
+    # await penacony.paperfold_univeristy.restore_tp(tp=4)        # TP:+4->5 Time:???
+    # await amphoreus.okhema.restore_tp(tp=4.1)               # TP:+4->5 Time:???
+    # raise SystemExit()
 
     # daily grind
     await extra.craft_items(['trick_snack', 'punitive_energy'])

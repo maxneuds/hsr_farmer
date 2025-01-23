@@ -1,4 +1,4 @@
-FROM python:3.11.10-bookworm
+FROM python:3.11-bookworm
 
 ENV USER_GID=1000
 ENV USER_UID=1000

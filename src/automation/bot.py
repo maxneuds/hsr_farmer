@@ -340,7 +340,7 @@ class Bot:
         # return(check)
 
 
-    async def teleport(self, x, y, start=0.75, deg=1.75, n=0, special_exit=True, open_map=True,
+    async def teleport(self, x, y, start=0.75, deg=1.75, n=0, m=6, special_exit=True, open_map=True,
                         sub_select={}, confirm=False, confirm_x=0.5, confirm_y=0.648, n_try=0, debug=False):
         logger.info(f'use teleporter: {int(self.xy.width*x)},{int(self.xy.height*y)}')
         if open_map == True:
@@ -354,7 +354,7 @@ class Bot:
         to_x = self.xy.center[0]
         to_y = self.xy.center[1]
         cmd = f'input swipe {from_x} {from_y} {to_x} {to_y} {250}'
-        for _ in range(6):
+        for _ in range(m):
             await self.shell_failsafe(cmd)
             await aio.sleep(0.150)
         await aio.sleep(0.5)
@@ -538,6 +538,9 @@ class Bot:
         elif world == 'penacony':
             logger.info('switch world: Penacony')
             target = cv.imread('res/penacony.png', cv.IMREAD_COLOR)
+        elif world == 'amphoreus':
+            logger.info('switch world: Amphoreus')
+            target = cv.imread('res/amphoreus.png', cv.IMREAD_COLOR)
         else:
             logger.debug('Error: no world selected')
             exit()
@@ -557,7 +560,7 @@ class Bot:
         await aio.sleep(2)
     
     
-    async def switch_map_new(self, world, y_list, scroll_down=False, x=0, y=0, start=0.75, deg=1.75, n=0, sub_select={}, confirm=False, confirm_x=0.5, confirm_y=0.648, debug=False):
+    async def switch_map_new(self, world, y_list, scroll_down=False, x=0, y=0, start=0.75, deg=1.75, n=0, m=6, sub_select={}, confirm=False, confirm_x=0.5, confirm_y=0.648, debug=False):
         logger.info('switch map')
         await self.switch_world(world=world)
         logger.info('scroll location list')
@@ -576,12 +579,12 @@ class Bot:
         logger.info('tap location')
         await self.action_tap(x_list, int(self.xy.height*y_list))
         await aio.sleep(2)
-        check = await self.teleport(x=x, y=y, start=start, deg=deg, n=n, sub_select={}, open_map=False, special_exit=True,
+        check = await self.teleport(x=x, y=y, start=start, deg=deg, n=n, m=m, sub_select={}, open_map=False, special_exit=True,
                                     confirm=confirm, confirm_x=confirm_x, confirm_y=confirm_y, n_try=0, debug=debug)
         if check == False:
             logger.warning('map change failed: retry')
             await self.switch_map_new(world=world, y_list=y_list, scroll_down=scroll_down, x=x, y=y, start=start, deg=deg, confirm=confirm,
-                                        n=n, sub_select=sub_select, confirm_x=confirm_x, confirm_y=confirm_y, debug=debug)
+                                        n=n, m=m, sub_select=sub_select, confirm_x=confirm_x, confirm_y=confirm_y, debug=debug)
     
     
     async def switch_map(self, y_list, world, x, y, scroll_down=False, corner='botright', x2=None, y2=None, move_x=0, move_y=0, swipe=1, confirm=False, debug=False):
@@ -670,9 +673,20 @@ class Bot:
                         logger.error(f'"{item}" not found. Exit.')
                         exit()
 
-    async def interact(self, wait_for_ready=True, max_duration=10):
+    async def interact(self, wait_for_ready=True, confirm={}, max_duration=10, debug=False):
+        if debug == True:
+            screen = await self.get_screen()
+            cv.imwrite('data/debug.png', screen)
+            cv.imshow('debug', screen)
+            cv.waitKey(0)
+            cv.destroyAllWindows()
+            raise SystemExit('debug exit')
         await aio.sleep(1.5)
         await self.action_tap(int(self.xy.width*1600/2400), int(self.xy.height*650/1080))
+        if len(confirm) > 0:
+            await aio.sleep(3)
+            await self.action_tap(int(self.xy.width*confirm['x']), int(self.xy.height*confirm['y']))
+            await aio.sleep(confirm['wait'])
         if wait_for_ready == True:
             await self.wait_for_ready(min_duration=3, max_duration=max_duration, reason='interact')
         else:

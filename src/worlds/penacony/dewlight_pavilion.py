@@ -2,7 +2,6 @@ from logger import logger, logger_set_path
 from automation.bot import Bot
 from worlds.extra import Extra
 from datetime import datetime as dt
-from worlds.penacony.paperfold_university import Paperfold_University
 
 
 class Dewlight_Pavilion:
@@ -13,7 +12,6 @@ class Dewlight_Pavilion:
         self.map = 'Dewlight Pavilion'
         self.bot = Bot(device)
         self.extra = Extra(device)
-        self.paperfold_university = Paperfold_University(device)
     async def farm(self):
         t_start = dt.now()
         await self.teleport()
@@ -29,7 +27,7 @@ class Dewlight_Pavilion:
         await self.path_8()
         await self.path_9()
         await self.path_10()
-        await self.paperfold_university.restore_tp(tp=4)
+        await self.extra.restore_tp(tp=4, info='Dewlight Pavilion 3')
         await self.path_11()
         await self.extra.metrics(self.map, t_start)
     async def teleport(self):

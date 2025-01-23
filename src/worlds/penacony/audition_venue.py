@@ -62,28 +62,6 @@ class Audition_Venue:
         await self.bot.attack_technique(7) # items
     async def path_1(self):
         logger_set_path(self.map, 1)
-        await self.bot.teleport(x=665/2400, y=225/1080, start=0.75, deg=1.5, n=3, sub_select={'autoselect': True}) # Superstar Showdown: Arena I
-        await self.bot.move(0.8, 300)
-        await self.bot.attack_technique(5) # items
-        await self.bot.move(0.0, 300)
-        await self.bot.attack_technique(9) # items
-        await self.bot.move(0.25, 500)
-        await self.bot.posfix(0.25, 500)
-        await self.bot.move(1.3, 1600)
-        await self.bot.attack_technique(1) # +2TP
-        await self.bot.move(0.8, 300)
-        await self.bot.attack_technique(3) # move
-        await self.bot.move(0.5, 300)
-        await self.bot.attack_technique(18) # move
-        await self.bot.move(0.3, 900)
-        await self.bot.move(0.5, 300)
-        await self.bot.attack_technique(2) # items
-        await self.bot.move(0.7, 300)
-        await self.bot.attack_technique(5) # items
-        await self.bot.move(0.35, 300)
-        await self.bot.attack_technique(5) # items
-    async def path_2(self):
-        logger_set_path(self.map, 2)
         await self.bot.teleport(x=749/2400, y=480/1080, start=1.25, deg=0.5, n=2, sub_select={'autoselect': True}) # Dreamplay Fantasia: Action Challenge
         await self.bot.move(0.275, 3100)
         await self.bot.attack_technique(2) # -2TP
@@ -146,8 +124,8 @@ class Audition_Venue:
         await self.bot.move(1.25, 1600)
         await self.bot.move(1.5, 300)
         await self.bot.attack_technique(3) # items
-    async def path_3(self):
-        logger_set_path(self.map, 3)
+    async def path_2(self):
+        logger_set_path(self.map, 2)
         await self.bot.teleport(x=610/2400, y=485/1080, start=1.25, deg=0.5, n=2, sub_select={'autoselect': True}) # Dreamplay Fantasia: Acting Challenge
         await self.bot.move(0.5, 900)
         await self.bot.move(1.0, 1600)
@@ -186,8 +164,8 @@ class Audition_Venue:
         await self.bot.attack_technique(3) # -2TP
         await self.bot.move(1.9, 300)
         await self.bot.attack_technique(2) # items
-    async def path_4(self):
-        logger_set_path(self.map, 4)
+    async def path_3(self):
+        logger_set_path(self.map, 3)
         await self.bot.teleport(x=805/2400, y=225/1080, start=0.75, deg=1.5, n=3, sub_select={'autoselect': True}) # Superstar Showdown: Arena II
         await self.bot.move(0.3, 300)
         await self.bot.attack_technique(3) # items
@@ -203,8 +181,8 @@ class Audition_Venue:
         await self.bot.attack_technique(6) # items
         await self.bot.move(0.6, 300)
         await self.bot.attack_technique(6) # items
-    async def path_5(self):
-        logger_set_path(self.map, 5)
+    async def path_4(self):
+        logger_set_path(self.map, 4)
         await self.bot.teleport(x=1316/2400, y=625/1080, start=1.75, deg=0.5, n=3, sub_select={'autoselect': True}) # Gunfire Time: Time Trial
         await self.bot.move(0.3, 800)
         await self.bot.move(0.0, 300)
@@ -250,8 +228,8 @@ class Audition_Venue:
         await self.bot.attack_technique(6) # items
         await self.bot.move(1.0, 300)
         await self.bot.attack_technique(2) # items
-    async def path_6(self):
-        logger_set_path(self.map, 6)
+    async def path_5(self):
+        logger_set_path(self.map, 5)
         await self.bot.teleport(x=1316/2400, y=625/1080, start=1.75, deg=0.5, n=3, sub_select={'x': 1390/2400, 'y': 332/1080}) # Gunfire Time: Time Trial (Posterior)
         await self.bot.move(1.45, 3000)
         await self.bot.attack_technique(6) # items
@@ -273,6 +251,28 @@ class Audition_Venue:
         await self.bot.move(1.5, 300)
         await self.bot.attack_technique(11) # -2TP
         await self.bot.move(0.25, 300)
+        await self.bot.attack_technique(5) # items
+    async def path_6(self):
+        logger_set_path(self.map, 6)
+        await self.bot.teleport(x=665/2400, y=225/1080, start=0.75, deg=1.5, n=3, sub_select={'autoselect': True}) # Superstar Showdown: Arena I
+        await self.bot.move(0.8, 300)
+        await self.bot.attack_technique(5) # items
+        await self.bot.move(0.0, 300)
+        await self.bot.attack_technique(9) # items
+        await self.bot.move(0.25, 500)
+        await self.bot.posfix(0.25, 500)
+        await self.bot.move(1.3, 1600)
+        await self.bot.attack_technique(1) # +2TP
+        await self.bot.move(0.8, 300)
+        await self.bot.attack_technique(3) # move
+        await self.bot.move(0.5, 300)
+        await self.bot.attack_technique(18) # move
+        await self.bot.move(0.3, 900)
+        await self.bot.move(0.5, 300)
+        await self.bot.attack_technique(2) # items
+        await self.bot.move(0.7, 300)
+        await self.bot.attack_technique(5) # items
+        await self.bot.move(0.35, 300)
         await self.bot.attack_technique(5) # items
     async def path_7(self):
         logger_set_path(self.map, 7)
