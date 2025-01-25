@@ -90,11 +90,14 @@ class Alchemy_Commission:
         await self.bot.move(0.0, 600)
         await self.bot.move(1.5, 4400)
         await self.bot.move(1.0, 1300)
-        await self.bot.attack_technique(1) # -1TP
+        # roamers, loop around, -2TP
+        await self.bot.attack_technique(2)
         await self.bot.move(0.5, 300)
         await self.bot.attack_technique(3)
         await self.bot.move(0.25, 300)
-        await self.bot.attack_technique(4) # -1TP
+        await self.bot.attack_technique(6)
+        await self.bot.move(1.0, 300)
+        await self.bot.attack_technique(2)
     async def path_4(self):
         logger_set_path(self.map, 4)
         await self.bot.use_teleporter(867/2400, 646/1080, corner='topleft', move_x=0, move_y=4) # Elixir Research Terrace

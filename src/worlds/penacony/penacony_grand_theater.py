@@ -271,18 +271,21 @@ class Penacony_Grand_Theater:
         await self.bot.move(1.7, 1200)
         await self.bot.move(0.0, 300)
         await self.bot.attack_technique(10) # -2TP
-        await self.bot.move(0.25, 3000)
-        raise SystemExit('check if corner, improve if needed (long road up)') # continue from here
+        await self.bot.move(0.25, 4000)
         await self.bot.posfix(0.25, 500)
         await self.bot.move(1.25, 700)
-        await self.bot.move(1.0, 500)
+        await self.bot.move(1.0, 900)
         await self.bot.attack_technique(26) # move
         await self.bot.attack_technique(1) # items
-        await self.bot.move(0.25, 800)
+        await self.bot.move(0.25, 1000)
         await self.bot.move(0.5, 300)
-        await self.bot.attack_technique(14) # items
+        await self.bot.attack_technique(15) # items
+        await self.bot.move(0.25, 2000)
         await self.bot.move(0.0, 300)
-        await self.bot.attack_technique(12) # +2TP
+        await self.bot.attack_technique(4) # move
+        await self.bot.move(1.7, 600)
+        await self.bot.move(0.0, 300)
+        await self.bot.attack_technique(6) # +2TP
         await self.bot.move(1.25, 600)
         await self.bot.move(1.0, 300)
         await self.bot.attack_technique(14) # move
@@ -414,7 +417,6 @@ class Penacony_Grand_Theater:
         await self.bot.move(1.5, 500)
         await self.bot.attack_technique(8) # +2TP
         await self.bot.move(1.25, 2000)
-        raise SystemExit('checkpoint') # continue from here
         await self.bot.posfix(1.25, 500)
         await self.bot.move(0.5, 3000)
         await self.bot.interact() # Gain Bubble Charge
@@ -428,7 +430,7 @@ class Penacony_Grand_Theater:
         await self.bot.move(0.0, 2000)
         await self.bot.move(0.4, 300)
         await self.bot.attack_technique(3) # items
-        await self.bot.move(0.6, 700)
+        await self.bot.move(0.6, 800)
         await self.bot.move(0.5, 300)
         await self.bot.attack_technique(8) # items    
         await self.bot.move(0.4, 500)
