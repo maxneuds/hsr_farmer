@@ -30,7 +30,7 @@ class Penacony:
         self.audition_venue = Audition_Venue(device)
         self.penacony_grand_theater = Penacony_Grand_Theater(device)
         self.the_soaring_clock_hand = The_Soaring_Clock_Hand(device)
-        self.paperfold_univeristy = Paperfold_University(device)
+        self.paperfold_university = Paperfold_University(device)
     async def farm(self):
         '''
         Status  9/9         /n

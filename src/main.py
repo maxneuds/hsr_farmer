@@ -28,7 +28,7 @@ async def main():
     # await penacony.penacony_grand_theater.path_14()
     # await penacony.penacony_grand_theater.path_15()
     # await penacony.penacony_grand_theater.path_16()
-    # await penacony.paperfold_univeristy.restore_tp(tp=4)        # TP:+4->5 Time:???
+    # await penacony.paperfold_university.restore_tp(tp=4)        # TP:+4->5 Time:???
     # await penacony.audition_venue.farm()
     # await amphoreus.okhema.restore_tp(tp=4.1)               # TP:+4->5 Time:???
     # raise SystemExit()
