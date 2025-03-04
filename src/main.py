@@ -24,12 +24,10 @@ async def main():
     # await extra.restore_tp(tp=4)
     # await jarilo_vi.dev()
     # await xianzhou_luofu.dev()
-    # await penacony.penacony_grand_theater.dev()
-    # await penacony.penacony_grand_theater.path_14()
-    # await penacony.penacony_grand_theater.path_15()
-    # await penacony.penacony_grand_theater.path_16()
+    # await penacony.dev()
     # await penacony.paperfold_university.restore_tp(tp=4)        # TP:+4->5 Time:???
     # await penacony.audition_venue.farm()
+    # await penacony.farm() # TP:??? R2:5 R4:3
     # await amphoreus.okhema.restore_tp(tp=4.1)               # TP:+4->5 Time:???
     # raise SystemExit()
 

@@ -10,7 +10,7 @@ class ADB:
     def __init__(self):
         pass
 
-    async def connect_dev(self, device, n_try=0):
+    async def connect_dev(self, device, n_try=1):
         try:
             logger.info('try to disconnect from all devices')
             subprocess.run('adb disconnect', shell=True, check=True)
@@ -28,18 +28,17 @@ class ADB:
             await aio.sleep(1)
             return(dev)
         except subprocess.CalledProcessError as e:
-                if n_try < 9:
-                    logger.info(f"Executing system command failed: retry {n_try+1}")
-                    await aio.sleep(1)
-                    self.dev = await self.connect_dev(device=device, n_try=n_try+1)
-                else:
-                    logger.error(f"Executing system command with error:\n{e}")
+            logger.info(f"[#{n_try}] Executing system command failed:\n{e}\nRetry in 1s...")
+            await aio.sleep(1)
+            self.dev = await self.connect_dev(device=device, n_try=n_try+1)
         except RuntimeError as e:
-            if n_try < 9:
-                logger.info(f"ADB connection to {device} failed: retry {n_try+1}")
-                await aio.sleep(1)
-                self.dev = await self.connect_dev(device=device, n_try=n_try+1)
-            else:
-                logger.error(f"connecting to ADB failed with error:\n{e}")
+            logger.info(f"[#{n_try}] ADB connection to {device} failed:\n{e}\nRetry in 1s...")
+            await aio.sleep(1)
+            self.dev = await self.connect_dev(device=device, n_try=n_try+1)
+        except IndexError as e:
+            logger.info(f"[#{n_try}] ADB device {device} not found:\n{e}\nRetry in 1s...")
+            await aio.sleep(1)
+            self.dev = await self.connect_dev(device=device, n_try=n_try+1)
+            
 
 
