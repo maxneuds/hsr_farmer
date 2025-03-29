@@ -66,6 +66,7 @@ class Robot_Settlement:
     async def path_3(self):
         logger_set_path(self.map, 3)
         await self.bot.use_teleporter(x=765/2400, y=371/1080, corner='botright', move_x=0, move_y=0) # Energy Conversation Station
+        raise SystemExit("Stability Problem. More Posfix needed")
         await self.bot.move(1.75, 1900)
         await self.bot.move(1.95, 1400)
         await self.bot.move(1.4, 4900)

@@ -22,15 +22,21 @@ async def main():
     # dev
     # await extra.restore_tp(tp=2)
     # await extra.restore_tp(tp=4)
+    # await jarilo_vi.corridor.path_3()
+    # await jarilo_vi.corridor.path_4()
+    # await jarilo_vi.corridor.path_5()
+    # await jarilo_vi.corridor.path_6()
+    # await jarilo_vi.corridor.path_7()
+    # await jarilo_vi.corridor.path_8()
     # await jarilo_vi.dev()
-    # await xianzhou_luofu.dev()
-    # await penacony.dev()
+    await xianzhou_luofu.dev()
+    await penacony.dev()
     # await penacony.paperfold_university.restore_tp(tp=4)        # TP:+4->5 Time:???
     # await penacony.audition_venue.farm()
     # await penacony.farm() # TP:??? R2:5 R4:3
     # await amphoreus.okhema.restore_tp(tp=4.1)               # TP:+4->5 Time:???
-    # raise SystemExit()
-
+    raise SystemExit()
+    
     # daily grind
     await extra.craft_items(['trick_snack', 'punitive_energy'])
     await herta_space_station.farm() # TP:+5->5
