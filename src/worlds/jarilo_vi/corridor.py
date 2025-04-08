@@ -75,11 +75,10 @@ class Corridor:
     async def path_3(self):
         logger_set_path(self.map, 3)
         await self.bot.use_teleporter(x=962/2400, y=502/1080, corner='botright', move_x=0, move_y=0) # Ancient Battlefield: Frontline
-        raise SystemExit()
         await self.bot.move(1.5, 5000)
         await self.bot.move(1, 3500)
         await self.bot.move(1.51, 5000)
-        await self.bot.attack_technique(7) # -3TP # just changed
+        await self.bot.attack_technique(6) # -3TP
         await self.bot.move(0.35, 4000)
         await self.bot.attack() # items
         await self.bot.posfix(0.3, 1000)

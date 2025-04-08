@@ -66,6 +66,5 @@ class Xianzhou_Luofu:
         await self.extra.restore_tp(tp=2, info='Xianzhou Luofu 1')      # TP:+2->4 Time:???
         await self.the_shackling_prison.farm()                          # TP:??->?? Time:???
         await self.extra.restore_tp(tp=4, info='End of Xianzhou Luofu') # TP:+4->5 Time:???
-        raise SystemExit('dev')
 
 

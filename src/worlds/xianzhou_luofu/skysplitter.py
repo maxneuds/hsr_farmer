@@ -54,14 +54,18 @@ class Skysplitter:
             await self.bot.attack_technique(7) # items
             await self.bot.move(0.5, 300)
             await self.bot.attack_technique(3) # +2TP
-            await self.bot.move(1.6, 600)
-            await self.bot.move(0.0, 600)
+            await self.bot.move(1.6, 700)
+            await self.bot.move(0.0, 700)
             await self.bot.attack_technique(6) # items
             await self.bot.move(0.5, 300)
-            await self.bot.attack_technique(8) # items
-            await self.bot.move(0.25, 1500)
+            await self.bot.attack_technique(9) # items
+            await self.bot.move(0.75, 300)
+            await self.bot.attack_technique(2) # stability
+            await self.bot.move(0.1, 300)
+            await self.bot.attack_technique(3) # stability
+            await self.bot.move(0.1, 1000)
             await self.bot.posfix(0.25, 500)
-            await self.bot.move(1.4, 2000)
+            await self.bot.move(1.3, 1700)
             await self.bot.move(1.0, 300)
             await self.bot.attack_technique(11) # items
             await self.bot.move(1.25, 1000)

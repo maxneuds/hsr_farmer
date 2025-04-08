@@ -47,18 +47,22 @@ class Silvermane_Guard:
         elif tp == 4.2:
             await self.bot.switch_map_new(world='jarilo_vi', y_list=750/1080, scroll_down=False, # Outpost
                                       x=1176/2400, y=535/1080, start=0.25, deg=1.5, n=1, confirm=True)
-            await self.bot.move(0.5, 3000)
-            await self.bot.move(0.9, 2000)
-            await self.bot.attack() # +2TP
-            await self.bot.move(0.1, 2000)
-            await self.bot.move(0.5, 7800)
-            await self.bot.move(0.4, 1000)
-            await self.bot.attack() # items
-            await self.bot.move(0.5, 2800)
+            await self.bot.move(0.5, 500)
+            await self.bot.attack_technique(6) # move
+            await self.bot.move(1.1, 500)
+            await self.bot.attack_technique(3) # +2TP
+            await self.bot.move(1.25, 1000)
+            await self.bot.posfix(1.25, 500)
+            await self.bot.move(0.1, 2800)
+            await self.bot.move(0.5, 500)
+            await self.bot.attack_technique(17) # items
+            await self.bot.posfix(0.25, 500)
+            await self.bot.move(1.0, 500)
+            await self.bot.move(0.5, 700)
             await self.bot.move(0.0, 1000)
             await self.bot.move(0.1, 3000)
-            await self.bot.move(0.4, 1000)
-            await self.bot.attack() # items
+            await self.bot.move(0.4, 500)
+            await self.bot.attack_technique(2) # items
             await self.bot.use_teleporter(x=896/2400, y=669/1080, corner='topleft', move_x=0, move_y=1) # Shape of Blaze
             await self.bot.move(1.8, 600)
             await self.bot.attack() # items

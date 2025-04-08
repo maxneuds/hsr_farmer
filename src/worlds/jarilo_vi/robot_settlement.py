@@ -66,7 +66,6 @@ class Robot_Settlement:
     async def path_3(self):
         logger_set_path(self.map, 3)
         await self.bot.use_teleporter(x=765/2400, y=371/1080, corner='botright', move_x=0, move_y=0) # Energy Conversation Station
-        raise SystemExit("Stability Problem. More Posfix needed")
         await self.bot.move(1.75, 1900)
         await self.bot.move(1.95, 1400)
         await self.bot.move(1.4, 4900)
@@ -88,23 +87,27 @@ class Robot_Settlement:
         await self.bot.move(1.3, 900)
         await self.bot.move(1.1, 2500)
         await self.bot.move(1.6, 300)
-        await self.bot.attack_technique(4) # -1TP
-        await self.bot.move(0.0, 1000)
-        await self.bot.posfix(1.75, 1000)
+        await self.bot.attack_technique(5) # -1TP
+        await self.bot.move(0.1, 1000)
+        await self.bot.move(1.75, 2000)
+        await self.bot.posfix(1.75, 500)
         await self.bot.move(0.55, 1500)
         await self.bot.move(0.2, 2500)
-        await self.bot.move(0.2, 1400)
-        await self.bot.move(0.0, 200)
-        await self.bot.attack_technique(2) # -2TP
-        await self.bot.move(0.1, 1300)
+        await self.bot.move(0.1, 1000)
+        await self.bot.attack_technique(2) # -1TP
+        await self.bot.move(1.5, 300)
+        await self.bot.attack_technique(2) # -1TP
+        await self.bot.move(1.75, 500)
+        await self.bot.attack_technique(3) # +2TP
+        await self.bot.move(1.725, 500)
+        await self.bot.attack_technique(7) # move
+        await self.bot.move(0.2, 1500)
+        await self.bot.posfix(0.25, 500)
+        await self.bot.move(1.0, 700)
+        await self.bot.move(0.7, 500)
+        await self.bot.attack_technique(6) # move
         await self.bot.move(0.5, 500)
-        await self.bot.attack_technique(5) # -1TP
-        await self.bot.move(0.75, 1000)
-        await self.bot.posfix(0.75, 1000)
-        await self.bot.move(1.5, 2900)
-        await self.bot.attack_technique(2)
-        await self.bot.move(1.6, 1500)
-        await self.bot.attack_technique(2) # +2TP
+        await self.bot.attack_technique(8) # -1TP
     async def path_4(self):
         logger_set_path(self.map, 4)
         await self.bot.use_teleporter(x=942/2400, y=346/1080, corner='botright', move_x=0, move_y=0) # Svarog's Base
